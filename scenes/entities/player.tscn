@@ -889,5 +889,3 @@ shape = SubResource("CapsuleShape2D_kaamo")
 sprite_frames = SubResource("SpriteFrames_ycwij")
 animation = &"idle_front"
 autoplay = "idle_front"
-
-[node name="StateManaegr" type="Node" parent="."]
