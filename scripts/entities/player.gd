@@ -13,6 +13,8 @@ var can_move: bool          = true
 var can_dash: bool          = true
 var dash_velocity: Vector2  = Vector2.ZERO
 
+# TODO: Create stats manager component to entity stats
+# TODO: Create health system to handle entity health
 
 func _ready() -> void:
 
