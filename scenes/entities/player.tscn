@@ -1,10 +1,15 @@
-[gd_scene load_steps=120 format=3 uid="uid://dnn3582s4qka2"]
+[gd_scene load_steps=125 format=3 uid="uid://dnn3582s4qka2"]
 
-[ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_3vuej"]
+[ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_3vuej"]
 [ext_resource type="Texture2D" uid="uid://b0d83ejsel370" path="res://assets/entities/player/idle.png" id="1_blm78"]
 [ext_resource type="Texture2D" uid="uid://c06vx0003qp1a" path="res://assets/entities/player/attack.png" id="1_i44sk"]
 [ext_resource type="Texture2D" uid="uid://c681ubn1ym03q" path="res://assets/entities/player/hurt.png" id="1_oxvtw"]
 [ext_resource type="Texture2D" uid="uid://c8c7pr6uxjpd" path="res://assets/entities/player/walk.png" id="3_fx4x4"]
+[ext_resource type="Script" path="res://scripts/globals/states/state_machine.gd" id="6_djpq3"]
+[ext_resource type="Script" path="res://scripts/entities/player/states/idle.gd" id="7_ydo30"]
+[ext_resource type="Script" path="res://scripts/entities/player/states/walk.gd" id="8_0ab3a"]
+[ext_resource type="Script" path="res://scripts/entities/player/states/attack.gd" id="9_8vbrt"]
+[ext_resource type="Script" path="res://scripts/entities/player/states/dash.gd" id="10_y28fj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kaamo"]
 radius = 3.99948
@@ -782,7 +787,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle_right",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -886,6 +891,23 @@ rotation = 1.58684
 shape = SubResource("CapsuleShape2D_kaamo")
 
 [node name="Sprites" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_ycwij")
-animation = &"idle_front"
+animation = &"idle_right"
 autoplay = "idle_front"
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("6_djpq3")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("7_ydo30")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("8_0ab3a")
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("9_8vbrt")
+
+[node name="Dash" type="Node" parent="StateMachine"]
+script = ExtResource("10_y28fj")
