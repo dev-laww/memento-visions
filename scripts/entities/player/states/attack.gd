@@ -16,8 +16,8 @@ func update(_delta: float) -> void:
 		state_machine.change_state('walk')
 	else:
 		state_machine.change_state('idle')
-		
-		
+
+
 # TODO: Create attack physics update logic
 
 
