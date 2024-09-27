@@ -17,7 +17,7 @@ func add_states(normal: Callable, enter_state: Callable = Callable(), leave_stat
 func change_state(to_state_delegate: Callable) -> void:
 	var state_flows = states.get(to_state_delegate, null)
 	if state_flows:
-		call_deferred("set_state", state_flows)
+		call_deferred('set_state', state_flows)
 
 
 # Sets the initial state directly without deferral

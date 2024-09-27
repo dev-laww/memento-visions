@@ -27,8 +27,8 @@ func _ready() -> void:
 	if Engine.is_editor_hint(): return
 
 	if not initial_state:
-		printerr("No initial state set in state machine")
-		push_error("No initial state set in state machine")
+		printerr('No initial state set in state machine')
+		push_error('No initial state set in state machine')
 		return
 
 	current_state.enter()
@@ -44,8 +44,8 @@ func change_state(state: String) -> void:
 		break
 
 	if not to_state in states:
-		printerr("State not found in state machine")
-		push_error("State not found in state machine")
+		printerr('State not found in state machine')
+		push_error('State not found in state machine')
 		return
 
 	if current_state:
@@ -71,17 +71,17 @@ func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: PackedStringArray = PackedStringArray()
 
 	if not states:
-		warnings.append("No states found in state machine")
+		warnings.append('No states found in state machine')
 
 	if not initial_state:
-		warnings.append("No initial state set in state machine")
+		warnings.append('No initial state set in state machine')
 
 	for child in get_children():
 		if child is State: continue
 
-		warnings.append("Child node is not a state: %s" % child.name)
+		warnings.append('Child node is not a state: %s' % child.name)
 
 	if not get_parent() is CharacterBody2D:
-		warnings.append("State machine must be a child of a CharacterBody2D")
+		warnings.append('State machine must be a child of a CharacterBody2D')
 
 	return warnings

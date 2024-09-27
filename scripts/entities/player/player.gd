@@ -48,4 +48,4 @@ func get_direction() -> String:
 	if abs(last_direction.x) > abs(last_direction.y):
 		return 'right' if last_direction.x > 0 else 'left'
 	else:
-		return 'back' if last_direction.y < 0 else 'front'  # Corrected direction handling
+		return 'back' if last_direction.y < 0 else 'front'

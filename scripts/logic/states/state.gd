@@ -26,6 +26,6 @@ func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: PackedStringArray = []
 
 	if not get_parent() is StateMachine:
-		warnings.push_back("State must be a child of a StateMachine")
+		warnings.push_back('State must be a child of a StateMachine')
 
 	return warnings
