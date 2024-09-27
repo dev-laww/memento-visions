@@ -87,6 +87,7 @@ attack={
 2d_physics/layer_8="Triggers"
 2d_physics/layer_9="NPCs"
 2d_physics/layer_10="Sensors"
+2d_physics/layer_11="Hit Box"
 
 [rendering]
 
