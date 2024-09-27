@@ -4,15 +4,15 @@ extends State
 
 
 func enter() -> void:
-	state_owner.can_move = false
+	owner.can_move = false
 
 
 func update(_delta: float) -> void:
-	sprites.play('attack_%s' % state_owner.move_direction)
+	sprites.play('attack_%s' % owner.move_direction)
 
 	await sprites.animation_finished
 
-	if state_owner.velocity.length() > 0:
+	if owner.velocity.length() > 0:
 		state_machine.change_state('walk')
 	else:
 		state_machine.change_state('idle')
@@ -22,4 +22,4 @@ func update(_delta: float) -> void:
 
 
 func exit() -> void:
-	state_owner.can_move = true
+	owner.can_move = true

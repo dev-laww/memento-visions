@@ -3,7 +3,6 @@ class_name State
 extends Node
 
 @onready var state_machine: StateMachine = get_parent()
-@onready var state_owner: CharacterBody2D = state_machine.get_parent()
 
 
 func enter() -> void:
