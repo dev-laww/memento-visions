@@ -7,11 +7,12 @@ extends CharacterBody2D
 @onready var move_direction: String = get_direction()
 @onready var state_machine: StateMachine = $StateMachine
 
-var last_direction: Vector2 = Vector2.ZERO
+var last_direction: Vector2 = Vector2.DOWN
 var grid_size: int          = 8
 var can_move: bool          = true
 var can_dash: bool          = true
-var dash_velocity: Vector2  = Vector2.DOWN
+var dashing: bool           = false
+var dash_velocity: Vector2  = Vector2.ZERO
 
 
 # TODO: Create stats manager component to entity stats
@@ -19,15 +20,16 @@ var dash_velocity: Vector2  = Vector2.DOWN
 
 
 func _physics_process(_delta: float) -> void:
-	velocity = (Input.get_vector('move_left', 'move_right', 'move_up', 'move_down').normalized() * speed) + dash_velocity
-	velocity =  Vector2(round(velocity.x / grid_size) * grid_size, round(velocity.y / grid_size) * grid_size)
+	velocity = Input.get_vector('move_left', 'move_right', 'move_up', 'move_down').normalized() * speed
+	velocity = Vector2(round(velocity.x / grid_size) * grid_size, round(velocity.y / grid_size) * grid_size)
+	velocity = velocity if can_move else Vector2.ZERO
+
+	if dashing:
+		velocity = dash_velocity
 
 	if velocity.length() > 0 and can_move:
 		last_direction = velocity.normalized()
 		move_direction = get_direction()
-
-	if not can_move:
-		velocity = Vector2.ZERO
 
 	if Input.is_action_just_pressed('dash') and can_dash:
 		state_machine.change_state('dash')

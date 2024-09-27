@@ -5,7 +5,7 @@ extends State
 
 func enter() -> void:
 	state_owner.can_dash = false
-	state_owner.can_move = false
+	state_owner.dashing = true
 
 
 func physics_update(_delta: float) -> void:
@@ -13,8 +13,6 @@ func physics_update(_delta: float) -> void:
 
 	var tween: Tween = create_tween()
 	tween.set_parallel().tween_property(state_owner, 'dash_velocity', Vector2.ZERO, 0.1)
-	tween.set_parallel().tween_property(state_owner, 'can_move', true, 0.1)
+	tween.set_parallel().tween_property(state_owner, 'dashing', false, 0.1)
 
-	state_machine.change_state('idle')
-	
-		
+	tween.finished.connect(func (): state_machine.change_state('idle'))		
