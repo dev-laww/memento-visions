@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=3 uid="uid://dnn3582s4qka2"]
+[gd_scene load_steps=128 format=3 uid="uid://dnn3582s4qka2"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_3vuej"]
 [ext_resource type="Texture2D" uid="uid://b0d83ejsel370" path="res://assets/entities/player/idle.png" id="1_blm78"]
@@ -6,10 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://c681ubn1ym03q" path="res://assets/entities/player/hurt.png" id="1_oxvtw"]
 [ext_resource type="Texture2D" uid="uid://c8c7pr6uxjpd" path="res://assets/entities/player/walk.png" id="3_fx4x4"]
 [ext_resource type="Script" path="res://scripts/logic/states/state_machine.gd" id="6_djpq3"]
+[ext_resource type="Script" path="res://scripts/entities/player/states/hurt.gd" id="7_wvje6"]
 [ext_resource type="Script" path="res://scripts/entities/player/states/idle.gd" id="7_ydo30"]
 [ext_resource type="Script" path="res://scripts/entities/player/states/walk.gd" id="8_0ab3a"]
 [ext_resource type="Script" path="res://scripts/entities/player/states/attack.gd" id="9_8vbrt"]
 [ext_resource type="Script" path="res://scripts/entities/player/states/dash.gd" id="10_y28fj"]
+[ext_resource type="Script" path="res://scripts/nodes/HurtBox.gd" id="12_tao1j"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kaamo"]
 radius = 3.99948
@@ -882,19 +884,14 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dyvqy"]
+radius = 7.0
+height = 24.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 1019
 script = ExtResource("1_3vuej")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10)
-rotation = 1.58684
-shape = SubResource("CapsuleShape2D_kaamo")
-
-[node name="Sprites" type="AnimatedSprite2D" parent="."]
-unique_name_in_owner = true
-sprite_frames = SubResource("SpriteFrames_ycwij")
-animation = &"idle_right"
-autoplay = "idle_front"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_djpq3")
@@ -911,3 +908,29 @@ script = ExtResource("9_8vbrt")
 
 [node name="Dash" type="Node" parent="StateMachine"]
 script = ExtResource("10_y28fj")
+
+[node name="Hurt" type="Node" parent="StateMachine"]
+script = ExtResource("7_wvje6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+rotation = 1.58684
+shape = SubResource("CapsuleShape2D_kaamo")
+
+[node name="Sprites" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_ycwij")
+animation = &"idle_front"
+autoplay = "idle_front"
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 2048
+collision_mask = 1024
+script = ExtResource("12_tao1j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_dyvqy")
+debug_color = Color(0.996578, 0.311043, 0.384733, 0.42)
+
+[connection signal="damage_received" from="HurtBox" to="." method="_on_hurt_box_damage_received"]

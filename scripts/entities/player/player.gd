@@ -4,8 +4,10 @@ extends CharacterBody2D
 @export var dash_cooldown: float = 3.0
 
 @onready var sprites: AnimatedSprite2D = $Sprites
-@onready var move_direction: String = get_direction()
 @onready var state_machine: StateMachine = $StateMachine
+
+@onready var move_direction: String:
+	get = get_direction
 
 var last_direction: Vector2 = Vector2.DOWN
 var grid_size: int          = 8
@@ -29,7 +31,6 @@ func _physics_process(_delta: float) -> void:
 
 	if velocity.length() > 0 and can_move:
 		last_direction = velocity.normalized()
-		move_direction = get_direction()
 
 	if Input.is_action_just_pressed('dash') and can_dash:
 		state_machine.change_state('dash')
@@ -49,3 +50,8 @@ func get_direction() -> String:
 		return 'right' if last_direction.x > 0 else 'left'
 	else:
 		return 'back' if last_direction.y < 0 else 'front'
+
+
+func _on_hurt_box_damage_received(damage: float) -> void:
+	state_machine.change_state('hurt')
+	print('Player received %s damage' % damage)
