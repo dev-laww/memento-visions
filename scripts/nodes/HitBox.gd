@@ -4,6 +4,7 @@ extends Area2D
 
 @export var damage: float:
 	set(value):
+		update_configuration_warnings()
 		damage = value
 
 		if not damage:
@@ -20,6 +21,10 @@ signal damage_increased
 signal damage_decreased
 
 
-func _init() -> void:
-	collision_layer = 11
-	collision_mask = 0
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings: PackedStringArray = []
+
+	if not damage:
+		warnings.push_back('HitBox has no damage value')
+
+	return warnings

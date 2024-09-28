@@ -1,4 +1,3 @@
-@tool
 class_name HurtBox
 extends Area2D
 
@@ -6,6 +5,7 @@ signal damage_received(damage: float)
 
 
 func _ready() -> void:
+	add_to_group('HurtBox')
 	area_entered.connect(hurt_box_entered)
 
 
