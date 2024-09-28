@@ -888,7 +888,7 @@ animations = [{
 radius = 7.0
 height = 24.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 4
 collision_mask = 1019
 script = ExtResource("1_3vuej")

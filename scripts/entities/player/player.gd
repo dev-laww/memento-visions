@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 @export var speed: float = 50.0
@@ -19,6 +20,7 @@ var dash_velocity: Vector2  = Vector2.ZERO
 
 # TODO: Create stats manager component to entity stats
 # TODO: Create health system to handle entity health
+# TODO: Create a velocity component to handle entity velocity
 
 
 func _physics_process(_delta: float) -> void:
@@ -32,14 +34,14 @@ func _physics_process(_delta: float) -> void:
 	if velocity.length() > 0 and can_move:
 		last_direction = velocity.normalized()
 
+	move_and_slide()
+
 	if Input.is_action_just_pressed('dash') and can_dash:
 		state_machine.change_state('dash')
 
 		can_dash = false
 
 		get_tree().create_timer(dash_cooldown).timeout.connect(func (): can_dash = true)
-
-	move_and_slide()
 
 
 func get_direction() -> String:
