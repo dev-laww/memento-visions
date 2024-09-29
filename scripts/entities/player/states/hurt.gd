@@ -1,17 +1,18 @@
 extends State
 
 @onready var sprites: AnimatedSprite2D = %Sprites
+@onready var player := owner as Player
 
 
 func enter() -> void:
-	owner.can_move = false
+	player.can_move = false
 
 func update(_delta: float) -> void:
-	sprites.play('hurt_%s' % owner.move_direction)
+	sprites.play('hurt_%s' % player.move_direction)
 	
 	await sprites.animation_finished
 	
-	owner.state_machine.change_state('idle')
+	player.state_machine.change_state('idle')
 	
 
 func physics_update(_delta: float) -> void:
@@ -20,4 +21,4 @@ func physics_update(_delta: float) -> void:
 
 	
 func exit() -> void:
-	owner.can_move = true
+	player.can_move = true
