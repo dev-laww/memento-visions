@@ -1,11 +1,11 @@
 class_name Player
 extends CharacterBody2D
 
-@export var speed: float = 50.0
-@export var dash_cooldown: float = 3.0
+@export var dash_stamina_cost: float = 30.0
 
 @onready var sprites: AnimatedSprite2D = $Sprites
 @onready var state_machine: StateMachine = $StateMachine
+@onready var stats_manager: StatsManager = $StatsManager
 
 @onready var move_direction: String:
 	get = get_direction
@@ -18,13 +18,11 @@ var dashing: bool           = false
 var dash_velocity: Vector2  = Vector2.ZERO
 
 
-# TODO: Create stats manager component to entity stats
-# TODO: Create health system to handle entity health
 # TODO: Create a velocity component to handle entity velocity
 
 
 func _physics_process(_delta: float) -> void:
-	velocity = Input.get_vector('move_left', 'move_right', 'move_up', 'move_down').normalized() * speed
+	velocity = Input.get_vector('move_left', 'move_right', 'move_up', 'move_down').normalized() * stats_manager.speed
 	velocity = Vector2(round(velocity.x / grid_size) * grid_size, round(velocity.y / grid_size) * grid_size)
 	velocity = velocity if can_move else Vector2.ZERO
 
@@ -37,11 +35,8 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 	if Input.is_action_just_pressed('dash') and can_dash:
+		stats_manager.consume_stamina(dash_stamina_cost)
 		state_machine.change_state('dash')
-
-		can_dash = false
-
-		get_tree().create_timer(dash_cooldown).timeout.connect(func (): can_dash = true)
 
 
 func get_direction() -> String:
@@ -56,4 +51,13 @@ func get_direction() -> String:
 
 func _on_hurt_box_damage_received(damage: float) -> void:
 	state_machine.change_state('hurt')
+	stats_manager.take_damage(damage)
 	print('Player received %s damage' % damage)
+
+
+func _on_stats_manager_stamina_changed(stamina: float) -> void:
+	if stamina < dash_stamina_cost:
+		can_dash = false
+		return
+
+	can_dash = true

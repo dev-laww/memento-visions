@@ -1,9 +1,10 @@
-[gd_scene load_steps=128 format=3 uid="uid://dnn3582s4qka2"]
+[gd_scene load_steps=129 format=3 uid="uid://dnn3582s4qka2"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_3vuej"]
 [ext_resource type="Texture2D" uid="uid://b0d83ejsel370" path="res://assets/entities/player/idle.png" id="1_blm78"]
 [ext_resource type="Texture2D" uid="uid://c06vx0003qp1a" path="res://assets/entities/player/attack.png" id="1_i44sk"]
 [ext_resource type="Texture2D" uid="uid://c681ubn1ym03q" path="res://assets/entities/player/hurt.png" id="1_oxvtw"]
+[ext_resource type="PackedScene" uid="uid://bj1hab7o7k2l2" path="res://scenes/components/stats_manager.tscn" id="2_o8t3r"]
 [ext_resource type="Texture2D" uid="uid://c8c7pr6uxjpd" path="res://assets/entities/player/walk.png" id="3_fx4x4"]
 [ext_resource type="Script" path="res://scripts/logic/states/state_machine.gd" id="6_djpq3"]
 [ext_resource type="Script" path="res://scripts/entities/player/states/hurt.gd" id="7_wvje6"]
@@ -893,6 +894,9 @@ collision_layer = 4
 collision_mask = 1019
 script = ExtResource("1_3vuej")
 
+[node name="StatsManager" parent="." instance=ExtResource("2_o8t3r")]
+unique_name_in_owner = true
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_djpq3")
 initial_state = NodePath("Idle")
@@ -933,4 +937,5 @@ position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_dyvqy")
 debug_color = Color(0.996578, 0.311043, 0.384733, 0.42)
 
+[connection signal="stamina_changed" from="StatsManager" to="." method="_on_stats_manager_stamina_changed"]
 [connection signal="damage_received" from="HurtBox" to="." method="_on_hurt_box_damage_received"]
