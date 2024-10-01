@@ -1,8 +1,34 @@
-[gd_scene load_steps=2 format=3 uid="uid://8xieh4pqx0hg"]
+[gd_scene load_steps=5 format=3 uid="uid://8xieh4pqx0hg"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
+[ext_resource type="Script" path="res://Scripts/Components/HitBox.cs" id="2_cqdlw"]
+[ext_resource type="Script" path="res://Scripts/Components/ContinuousDamageHitBox.cs" id="3_mr0hr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5ivt"]
+size = Vector2(90, 84)
 
 [node name="Bar" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_28rab")]
 position = Vector2(320, 180)
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(173, 188)
+collision_layer = 1024
+collision_mask = 2048
+script = ExtResource("2_cqdlw")
+Damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_o5ivt")
+
+[node name="ContinuousDamageHitBox" type="Area2D" parent="."]
+position = Vector2(453, 187)
+collision_layer = 1024
+collision_mask = 2048
+script = ExtResource("3_mr0hr")
+Damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousDamageHitBox"]
+shape = SubResource("RectangleShape2D_o5ivt")
+debug_color = Color(0.732258, 0.454397, 0.353821, 0.42)

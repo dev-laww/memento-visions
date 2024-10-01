@@ -4,8 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be1544ac-4c3b-4642-9b5c-b92b5959496e" name="Changes" comment="refactor: conversion of the whole project to csharp">
+    <list default="true" id="be1544ac-4c3b-4642-9b5c-b92b5959496e" name="Changes" comment="fix: directory name fix">
+      <change afterPath="$PROJECT_DIR$/Scripts/Components/ContinuousDamageHitBox.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Scripts/Components/HitBox.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Scripts/Components/HurtBox.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.trese/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.trese/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scenes/Bar.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Scenes/Bar.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scenes/Entities/Player.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/Scenes/Entities/Player.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/Entities/Player/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/Entities/Player/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/Nodes/ContinuousDamageHitBox.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/Nodes/HitBox.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/Nodes/HurtBox.gd" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +114,7 @@
       <updated>1727169541702</updated>
       <workItem from="1727169541703" duration="27000" />
       <workItem from="1727778707655" duration="8714000" />
-      <workItem from="1727787680595" duration="3043000" />
+      <workItem from="1727787680595" duration="5280000" />
     </task>
     <task id="LOCAL-00001" summary="refactor: conversion of the whole project to csharp">
       <option name="closed" value="true" />
@@ -123,7 +132,23 @@
       <option name="project" value="LOCAL" />
       <updated>1727789887862</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fix: directory name fix">
+      <option name="closed" value="true" />
+      <created>1727790985818</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1727790985818</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix: directory name fix">
+      <option name="closed" value="true" />
+      <created>1727791025350</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1727791025350</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,6 +160,7 @@
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="refactor: conversion of the whole project to csharp" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: conversion of the whole project to csharp" />
+    <MESSAGE value="fix: directory name fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: directory name fix" />
   </component>
 </project>

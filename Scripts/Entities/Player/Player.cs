@@ -22,6 +22,9 @@ public partial class Player : CharacterBody2D
 
     [Node]
     private StatsManager statsManager;
+    
+    [Node]
+    private HurtBox hurtBox;
 
     public string MoveDirection => GetMoveDirection();
 
@@ -43,6 +46,7 @@ public partial class Player : CharacterBody2D
     public override void _Ready()
     {
         statsManager.StaminaChanged += (stamina) => CanDash = stamina > DashStaminaCost;
+        hurtBox.DamageReceived += (damage) => GD.Print($"Player received {damage} damage.");
     }
 
     public override void _PhysicsProcess(double delta)
