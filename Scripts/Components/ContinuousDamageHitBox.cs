@@ -16,10 +16,13 @@ public partial class ContinuousDamageHitBox : HitBox
         timer = new Timer
         {
             WaitTime = damageInterval,
-            Autostart = true
+            Autostart = false
         };
         timer.Timeout += DealDamage;
         AddChild(timer);
+        
+        AreaEntered += OnAreaEntered;
+        AreaExited += OnAreaExited;
     }
 
     private void DealDamage()
@@ -32,5 +35,19 @@ public partial class ContinuousDamageHitBox : HitBox
 
             hurtBox.ReceiveDamage(Damage);
         }
+    }
+    
+    private void OnAreaEntered(Area2D area)
+    {
+        if (!area.IsInGroup("HurtBox")) return;
+        
+        timer.Start();
+    }
+    
+    private void OnAreaExited(Area2D area)
+    {
+        if (!area.IsInGroup("HurtBox")) return;
+
+        timer.Stop();
     }
 }
