@@ -1,6 +1,5 @@
 using System;
 using Game.Components;
-using Game.Inventory;
 using Game.Logic.States;
 using Game.Utils.Extensions;
 using Godot;
@@ -13,84 +12,72 @@ namespace Game.Entities.Player;
 [GlobalClass]
 public partial class Player : CharacterBody2D
 {
-	[Export]
-	public float DashStaminaCost { get; set; } = 10f;
-	[Export]
-	public Inventory.Inventory inventory { get; private set; }
+    [Export]
+    public float DashStaminaCost { get; set; } = 10f;
 
-	[Node]
-	public AnimatedSprite2D sprites;
+    [Node]
+    public AnimatedSprite2D sprites;
 
-	[Node]
-	private StateMachine stateMachine;
+    [Node]
+    private StateMachine stateMachine;
 
-	[Node]
-	private StatsManager statsManager;
+    [Node]
+    private StatsManager statsManager;
 
-	[Node]
-	private HurtBox hurtBox;
+    [Node]
+    private HurtBox hurtBox;
 
-	[Node]
-	private CollectionArea collectionArea;
+    public string MoveDirection => GetMoveDirection();
 
-	private InventoryGui inventoryGui;
+    public Vector2 lastMoveDirection = Vector2.Down;
+    public Vector2 DashVelocity { get; set; }
+    public bool CanDash { get; set; } = true;
+    public bool Dashing { get; set; }
+    public bool CanMove { get; set; } = true;
 
-	public string MoveDirection => GetMoveDirection();
+    public override void _Notification(int what)
+    {
+        if (what != NotificationSceneInstantiated) return;
 
-	public Vector2 lastMoveDirection = Vector2.Down;
-	public Vector2 DashVelocity { get; set; }
-	public bool CanDash { get; set; } = true;
-	public bool Dashing { get; set; }
-	public bool CanMove { get; set; } = true;
+        WireNodes();
+    }
 
-	public override void _Notification(int what)
-	{
-		if (what != NotificationSceneInstantiated) return;
+    public override void _Ready()
+    {
+        statsManager.StaminaChanged += (stamina) => CanDash = stamina > DashStaminaCost;
+        hurtBox.DamageReceived += (damage) => GD.Print($"Player received {damage} damage.");
+    }
 
-		WireNodes();
-	}
+    public override void _PhysicsProcess(double delta)
+    {
+        Velocity = Input.GetVector("move_left", "move_right", "move_up", "move_down") * statsManager.Speed;
 
-	public override void _Ready()
-	{
-		
-		
+        if (Dashing)
+            Velocity = DashVelocity;
 
-		inventory = new Inventory.Inventory();
-		statsManager.StaminaChanged += (stamina) => CanDash = stamina > DashStaminaCost;
-		hurtBox.DamageReceived += (damage) => GD.Print($"Player received {damage} damage.");
-		collectionArea.AreaEntered += (itemname) => GD.Print(" ");
-	}
+        Velocity = Velocity.SnapToGrid();
+        Velocity = CanMove ? Velocity : Vector2.Zero;
 
-	public override void _PhysicsProcess(double delta)
-	{
-		Velocity = Input.GetVector("move_left", "move_right", "move_up", "move_down") * statsManager.Speed;
+        if (Velocity.Length() > 0 && CanMove)
+            lastMoveDirection = Velocity.Normalized();
 
-		if (Dashing)
-			Velocity = DashVelocity;
+        MoveAndSlide();
 
-		Velocity = Velocity.SnapToGrid();
-		Velocity = CanMove ? Velocity : Vector2.Zero;
+        if (Input.IsActionJustPressed("attack")) stateMachine.ChangeState("attack");
 
-		if (Velocity.Length() > 0 && CanMove)
-			lastMoveDirection = Velocity.Normalized();
+        if (!Input.IsActionJustPressed("dash") || !CanDash || !CanMove) return;
 
-		MoveAndSlide();
+        statsManager.ConsumeStamina(DashStaminaCost);
+        stateMachine.ChangeState("dash");
+    }
 
-		if (Input.IsActionJustPressed("attack")) stateMachine.ChangeState("attack");
+    private string GetMoveDirection()
+    {
+        if (lastMoveDirection == Vector2.Zero) return "front";
 
-		if (!Input.IsActionJustPressed("dash") || !CanDash || !CanMove) return;
+        if (Math.Abs(lastMoveDirection.X) > Math.Abs(lastMoveDirection.Y))
+            return lastMoveDirection.X > 0 ? "right" : "left";
 
-		statsManager.ConsumeStamina(DashStaminaCost);
-		stateMachine.ChangeState("dash");
-	}
-
-	private string GetMoveDirection()
-	{
-		if (lastMoveDirection == Vector2.Zero) return "front";
-
-		if (Math.Abs(lastMoveDirection.X) > Math.Abs(lastMoveDirection.Y))
-			return lastMoveDirection.X > 0 ? "right" : "left";
-
-		return lastMoveDirection.Y < 0 ? "back" : "front";
-	}
+        return lastMoveDirection.Y < 0 ? "back" : "front";
+    }
 }

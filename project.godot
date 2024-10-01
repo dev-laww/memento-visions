@@ -8,12 +8,6 @@
 
 config_version=5
 
-[MonoCustomResourceRegistry]
-
-ClassPrefix=""
-SearchType=0
-ResourceScriptDirectories=["res://"]
-
 [application]
 
 config/name="Trese: Chronicles of Underworld"
@@ -49,7 +43,7 @@ naming/scene_name_casing=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AS2P/plugin.cfg", "res://addons/MonoCustomResourceRegistry/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/AS2P/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 

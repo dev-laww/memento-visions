@@ -1,7 +1,0 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://m4me0l7bwypk"]
-
-[ext_resource type="Script" path="res://Scripts/Inventory/Inventory.cs" id="2_g48bx"]
-
-[resource]
-script = ExtResource("2_g48bx")
-Slots = [null, null, null, null, null, null, null, null, null, null, null, null, null, null]
