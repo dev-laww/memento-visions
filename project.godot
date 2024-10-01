@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Utils="*res://scripts/globals/general_utilities.gd"
-Scene="*res://scripts/globals/scene.gd"
+SceneManager="*res://scripts/globals/scene_manager.gd"
 
 [display]
 

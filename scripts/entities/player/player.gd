@@ -11,11 +11,11 @@ extends CharacterBody2D
 	get = get_direction
 
 var last_direction: Vector2 = Vector2.DOWN
-var grid_size: int          = 8
-var can_move: bool          = true
-var can_dash: bool          = true
-var dashing: bool           = false
-var dash_velocity: Vector2  = Vector2.ZERO
+var grid_size: int = 8
+var can_move: bool = true
+var can_dash: bool = true
+var dashing: bool = false
+var dash_velocity: Vector2 = Vector2.ZERO
 
 
 # TODO: Create a velocity component to handle entity velocity
