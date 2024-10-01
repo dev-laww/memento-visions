@@ -4,21 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be1544ac-4c3b-4642-9b5c-b92b5959496e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.trese/.idea/libraries/GdSdk_Master.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.trese/.idea/libraries/GdSdk_Master.xml" afterDir="false" />
+    <list default="true" id="be1544ac-4c3b-4642-9b5c-b92b5959496e" name="Changes" comment="refactor: conversion of the whole project to csharp">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.trese/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.trese/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.godot" beforeDir="false" afterPath="$PROJECT_DIR$/project.godot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenes/bar.tscn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenes/components/stats_manager.tscn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenes/entities/player.tscn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenes/screens/loading_screen.tscn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/components/stats_manager.gd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/entities/player/states/idle.gd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/entities/player/states/walk.gd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/globals/scene_manager.gd" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/globals/scene_manager.gd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/logic/delagate_state_machine.gd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/logic/states/state.gd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/logic/states/state_machine.gd" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,8 +105,25 @@
       <updated>1727169541702</updated>
       <workItem from="1727169541703" duration="27000" />
       <workItem from="1727778707655" duration="8714000" />
-      <workItem from="1727787680595" duration="1750000" />
+      <workItem from="1727787680595" duration="3043000" />
     </task>
+    <task id="LOCAL-00001" summary="refactor: conversion of the whole project to csharp">
+      <option name="closed" value="true" />
+      <created>1727789882416</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1727789882416</updated>
+    </task>
+    <task id="LOCAL-00002" summary="refactor: conversion of the whole project to csharp">
+      <option name="closed" value="true" />
+      <created>1727789887862</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1727789887862</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,5 +134,7 @@
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="refactor: conversion of the whole project to csharp" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: conversion of the whole project to csharp" />
   </component>
 </project>
