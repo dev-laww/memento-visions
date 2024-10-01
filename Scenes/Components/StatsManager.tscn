@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c756ga8nth1ks"]
+
+[ext_resource type="Script" path="res://Scripts/Components/StatsManager.cs" id="1_tunrt"]
+
+[node name="StatsManager" type="Node"]
+script = ExtResource("1_tunrt")
+
+[node name="ManaRegenetionTimer" type="Timer" parent="."]
+
+[node name="StaminaRecovery" type="Timer" parent="."]

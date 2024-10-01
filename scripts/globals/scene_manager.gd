@@ -10,7 +10,7 @@ signal _content_finished_loading(content)
 signal _content_invalid(content_path: String)
 signal _content_failed_to_load(content_path: String)
 
-var _loading_screen_scene: PackedScene = preload('res://scenes/screens/loading_screen.tscn')
+var _loading_screen_scene: PackedScene = preload('res://Scenes/Screens/LoadingScreen.tscn')
 var _loading_screen: LoadingScreen
 var _transition: String
 var _zelda_transition_direction: Vector2

@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Trese: Chronicles of Underworld"
-run/main_scene="res://scenes/bar.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+run/main_scene="res://Scenes/Bar.tscn"
+config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Utils="*res://scripts/globals/general_utilities.gd"
-SceneManager="*res://scripts/globals/scene_manager.gd"
+Utils="*res://Scripts/Globals/general_utilities.gd"
+SceneManager="*res://Scripts/Globals/scene_manager.gd"
 
 [display]
 
@@ -31,6 +31,10 @@ window/stretch/mode="viewport"
 [dotnet]
 
 project/assembly_name="Trese"
+
+[editor]
+
+naming/scene_name_casing=1
 
 [input]
 

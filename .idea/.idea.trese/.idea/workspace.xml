@@ -1,16 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="be1544ac-4c3b-4642-9b5c-b92b5959496e" name="Changes" comment="" />
+    <list default="true" id="be1544ac-4c3b-4642-9b5c-b92b5959496e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.trese/.idea/libraries/GdSdk_Master.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.trese/.idea/libraries/GdSdk_Master.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.trese/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.trese/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.godot" beforeDir="false" afterPath="$PROJECT_DIR$/project.godot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenes/bar.tscn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenes/components/stats_manager.tscn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenes/entities/player.tscn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenes/screens/loading_screen.tscn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/components/stats_manager.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/entities/player/states/idle.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/entities/player/states/walk.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/globals/scene_manager.gd" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/globals/scene_manager.gd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/logic/delagate_state_machine.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/logic/states/state.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/logic/states/state_machine.gd" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;dev-laww&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/dev-laww/trese.git&quot;,
+    &quot;accountId&quot;: &quot;cd45bc23-dc91-4f4a-b162-953d71b69c9b&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bb1b701f3c7411227a9d2e09f965d857ff3e771557650c4f513e427d77c/Node.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/script_templates/Node/Scene.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2mVlHmFPkS8RnEyDFt9PiC3q4KU" />
   <component name="ProjectViewState">
     <option name="autoscrollToSource" value="true" />
@@ -20,10 +58,56 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    ".NET Executable.Player.executor": "Run",
+    "GdScript Start and Debug.Run.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "csharp",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm"
   }
 }]]></component>
+  <component name="RunManager" selected=".NET Executable.Player">
+    <configuration name="Player GDScript" type="GDSCRIPT_DEBUG_RUN_CONFIGURATION" factoryName="GdScriptRunFactory" show_console_on_std_err="false" show_console_on_std_out="false" port="6006">
+      <option name="address" value="127.0.0.1" />
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Editor" type="RunExe" factoryName=".NET Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../../Program Files/Godot/Godot.exe" />
+      <option name="PROGRAM_PARAMETERS" value="--path &quot;./&quot; --editor" />
+      <option name="WORKING_DIRECTORY" value="D:\Projects\trese" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="RUNTIME_TYPE" value="coreclr" />
+      <method v="2">
+        <option name="Build Solution" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Player" type="RunExe" factoryName=".NET Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../../Program Files/Godot/Godot.exe" />
+      <option name="PROGRAM_PARAMETERS" value="--path &quot;./&quot;" />
+      <option name="WORKING_DIRECTORY" value="D:\Projects\trese" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="RUNTIME_TYPE" value="coreclr" />
+      <method v="2">
+        <option name="Build Solution" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -33,12 +117,15 @@
       <option name="presentableId" value="Default" />
       <updated>1727169541702</updated>
       <workItem from="1727169541703" duration="27000" />
+      <workItem from="1727778707655" duration="8714000" />
+      <workItem from="1727787680595" duration="1750000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
