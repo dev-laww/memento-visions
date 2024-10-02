@@ -3,7 +3,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net7.0</TargetFramework>
         <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'ios' ">net8.0</TargetFramework>
-        <EnableDynamicLoading>true</EnableDynamicLoading>
+        <EnableDynamicLoading>false</EnableDynamicLoading>
     </PropertyGroup>
     <ItemGroup>
         <Content Remove="script_templates\**" />
@@ -13,5 +13,10 @@
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Firebelley.GodotUtilities" Version="5.0.0" />
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Update="Scripts\**\*.cs">
+        <Namespace>Game</Namespace>
+      </Compile>
     </ItemGroup>
 </Project>
