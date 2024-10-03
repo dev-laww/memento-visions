@@ -23,7 +23,7 @@ public partial class Player : CharacterBody2D
 
     [Node]
     private StatsManager statsManager;
-    
+
     [Node]
     private HurtBox hurtBox;
 
@@ -31,7 +31,7 @@ public partial class Player : CharacterBody2D
 
     private const int GridSize = 8;
 
-    public Vector2 lastMoveDirection;
+    public Vector2 lastMoveDirection = Vector2.Down;
     public Vector2 DashVelocity { get; set; }
     public bool CanDash { get; set; } = true;
     public bool Dashing { get; set; }
@@ -67,7 +67,7 @@ public partial class Player : CharacterBody2D
             lastMoveDirection = Velocity.Normalized();
 
         MoveAndSlide();
-        
+
         if (Input.IsActionJustPressed("attack")) stateMachine.ChangeState("attack");
 
         if (!Input.IsActionJustPressed("dash") || !CanDash || !CanMove) return;
