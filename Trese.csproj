@@ -6,17 +6,20 @@
         <EnableDynamicLoading>true</EnableDynamicLoading>
     </PropertyGroup>
     <ItemGroup>
-        <Content Remove="script_templates\**" />
-        <Compile Remove="script_templates\**" />
-        <EmbeddedResource Remove="script_templates\**" />
-        <None Remove="script_templates\**" />
+        <Content Remove="script_templates\**"/>
+        <Compile Remove="script_templates\**"/>
+        <EmbeddedResource Remove="script_templates\**"/>
+        <None Remove="script_templates\**"/>
+        <Compile Update="addons\**">
+            <Visible>false</Visible>
+        </Compile>
+        <Compile Update="Scripts\**\*.cs">
+            <Namespace>Game</Namespace>
+        </Compile>
+        <Compile Remove="Scenes\**"/>
+        <EmbeddedResource Remove="Scenes\**"/>
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="Firebelley.GodotUtilities" Version="5.0.0" />
-    </ItemGroup>
-    <ItemGroup>
-      <Compile Update="Scripts\**\*.cs">
-        <Namespace>Game</Namespace>
-      </Compile>
+        <PackageReference Include="Firebelley.GodotUtilities" Version="5.0.0"/>
     </ItemGroup>
 </Project>
