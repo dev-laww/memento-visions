@@ -1,5 +1,6 @@
 using System;
 using Game.Components;
+using Game.Globals;
 using Game.Logic.States;
 using Godot;
 using GodotUtilities;
