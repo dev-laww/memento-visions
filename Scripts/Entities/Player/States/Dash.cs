@@ -22,6 +22,8 @@ public partial class Dash : State
 
     public override void _Ready()
     {
+        if (Engine.IsEditorHint()) return;
+         
         WireNodes();
         player = Owner as Player;
     }
