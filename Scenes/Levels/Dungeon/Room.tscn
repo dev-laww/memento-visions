@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b144dukqvv5ei"]
+
+[ext_resource type="Script" path="res://Scripts/Levels/Dungeon/Room.cs" id="1_bvw2s"]
+
+[node name="Room" type="Node2D"]
+script = ExtResource("1_bvw2s")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
