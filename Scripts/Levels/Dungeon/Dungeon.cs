@@ -10,10 +10,10 @@ namespace Game;
 public partial class Dungeon : Node2D
 {
     [Export]
-    private int minRooms = 4;
+    private int minRooms = 6;
 
     [Export]
-    private int maxRooms = 6;
+    private int maxRooms = 10;
 
     [Export]
     private int minRoomSize = 10;
@@ -28,13 +28,13 @@ public partial class Dungeon : Node2D
     private int roomSpawnRadius = 200;
 
     [Export]
-    private float separationDistance = 1000f; // Distance threshold for separation
+    private float separationStrength = 0.05f; // Force applied to move rooms apart
 
     [Export]
-    private float separationStrength = 5.0f; // Force applied to move rooms apart
+    private float damping = 1.2f; // Damping to reduce velocity over time
 
     [Export]
-    private float damping = 0.9f; // Damping to reduce velocity over time
+    private float separationDivisor = 0.4f; // Divisor to reduce separation distance
 
     [Node]
     private Node Rooms;
@@ -42,7 +42,11 @@ public partial class Dungeon : Node2D
     [Node]
     private Camera2D camera;
 
-    private bool apply;
+    [Node]
+    private Timer timer;
+
+    [Signal]
+    public delegate void InvalidRoomsEventHandler();
 
     public override void _Notification(int what)
     {
@@ -56,19 +60,14 @@ public partial class Dungeon : Node2D
         camera.Zoom = new Vector2(0.1f, 0.1f);
 
         CreateColliders();
+        InvalidRooms += CreateColliders;
+        timer.Timeout += CreateRooms;
     }
 
-    public override void _Process(double delta)
-    {
-        if (!apply) return;
-
-        ApplySeparationBehavior();
-    }
+    public override void _Process(double _delta) => ApplySeparationBehavior();
 
     public override void _Input(InputEvent @event)
     {
-        if (@event.IsActionPressed("interact")) apply = !apply;
-
         if (@event.IsActionPressed("open_inventory")) CreateRooms();
 
         if (!@event.IsActionPressed("ui_select")) return;
@@ -80,9 +79,27 @@ public partial class Dungeon : Node2D
     private void CreateColliders()
     {
         var roomsCount = MathUtil.RNG.RandiRange(minRooms, maxRooms);
+        var usedPositions = new HashSet<Vector2>();
 
         for (var i = 0; i < roomsCount; i++)
         {
+            Vector2 position;
+
+            do
+            {
+                position = new Vector2(
+                    MathUtil.RNG.RandfRange(-roomSpawnRadius, roomSpawnRadius),
+                    MathUtil.RNG.RandfRange(-roomSpawnRadius, roomSpawnRadius)
+                );
+
+                // Introduce randomness by adding an offset
+                var offsetX = MathUtil.RNG.RandfRange(-tileSize, tileSize);
+                var offsetY = MathUtil.RNG.RandfRange(-tileSize, tileSize);
+                position += new Vector2(offsetX, offsetY);
+            } while (IsPositionOccupied(position, usedPositions));
+
+            usedPositions.Add(position);
+
             var collider = new RigidBody2D
             {
                 GravityScale = 0,
@@ -94,35 +111,38 @@ public partial class Dungeon : Node2D
                 MathUtil.RNG.RandiRange(minRoomSize, maxRoomSize),
                 MathUtil.RNG.RandiRange(minRoomSize, maxRoomSize)
             ) * tileSize;
+
             var shape = new RectangleShape2D { Size = size };
             var collision = new CollisionShape2D { Shape = shape };
             collider.AddChild(collision);
             collider.SetMeta("size", size);
+            collider.Position = position; // Set the position here
             Rooms.AddChild(collider);
         }
+
+        timer.Start();
     }
+
+    private bool IsPositionOccupied(Vector2 position, HashSet<Vector2> usedPositions)
+    {
+        const float proximityThreshold = 50f; // Adjust as needed for proximity checks
+
+        // Check if the new position is too close to any used position
+        return usedPositions.Any(usedPos => position.DistanceTo(usedPos) < proximityThreshold);
+    }
+
 
     private void CreateRooms()
     {
-        // var roomsCount = MathUtil.RNG.RandiRange(minRooms, maxRooms);
-        //
-        // for (var i = 0; i < roomsCount; i++)
-        // {
-        //     var size = new Vector2(
-        //         MathUtil.RNG.RandiRange(minRoomSize, maxRoomSize),
-        //         MathUtil.RNG.RandiRange(minRoomSize, maxRoomSize)
-        //     ) * tileSize;
-        //     var position = new Vector2(
-        //         MathUtil.RNG.RandfRange(-roomSpawnRadius, roomSpawnRadius),
-        //         MathUtil.RNG.RandfRange(-roomSpawnRadius, roomSpawnRadius)
-        //     );
-        //
-        //     var room = Room.Create(position, size);
-        //     room.SetMeta("size", size); // Store the size in metadata for future reference
-        //     Rooms.AddChild(room);
-        // }
-
         var rooms = Rooms.GetChildren<RigidBody2D>();
+
+        if (!RoomsValid())
+        {
+            Rooms.GetChildren().ToList().ForEach(room => room.QueueFree());
+            CreateColliders();
+            return;
+        }
+
         var positions = new List<Tuple<Vector2, Vector2>>();
 
         foreach (var room in rooms)
@@ -138,35 +158,54 @@ public partial class Dungeon : Node2D
             room.SetMeta("size", position.Item2); // Store the size in metadata for future reference
             Rooms.AddChild(room);
         }
+
+        timer.Stop();
     }
 
-    // TODO: Implement Separation Steering Behavior
+    private bool RoomsValid()
+    {
+        var rooms = Rooms.GetChildren<RigidBody2D>();
+
+        var areas = (
+            from room in rooms
+            let size = (Vector2)room.GetMeta("size")
+            select new Rect2(room.Position - size / 2, size)
+        ).ToList();
+
+        if (!areas.Any(area => areas.Where(other => area != other).Any(other => area.Intersects(other))))
+            return true;
+
+        separationDivisor += 0.01f;
+        EmitSignal(SignalName.InvalidRooms);
+        return false;
+    }
+
     private void ApplySeparationBehavior()
     {
-        if (Rooms.GetChildren().Any(child => child is not Room)) return;
-        
-        var rooms = Rooms.GetChildren<Room>();
+        var rooms = Rooms.GetChildren<Node2D>();
 
-        foreach (var roomA in rooms)
+        // Apply marginally better separation behavior
+        foreach (var room in rooms)
         {
-            var separationVector = Vector2.Zero;
+            var separation = Vector2.Zero;
 
-            foreach (var roomB in rooms.Where(r => r != roomA))
+            foreach (var other in rooms)
             {
-                var distance = roomA.Position.DistanceTo(roomB.Position);
+                if (room == other) continue;
 
-                if (distance > separationDistance) continue;
+                var distance = room.Position.DistanceTo(other.Position);
+                var desiredSeparation = ((Vector2)room.GetMeta("size") + (Vector2)other.GetMeta("size")).Length() *
+                                        separationDivisor;
 
-                // Calculate direction and strength of separation force
-                var direction = (roomA.Position - roomB.Position).Normalized();
-                var force = (separationDistance - distance) / separationDistance * separationStrength;
+                if (distance > desiredSeparation) continue;
 
-                // Apply weighted separation force based on distance
-                separationVector += direction * force;
+                var direction = (room.Position - other.Position).Normalized();
+                var force = (desiredSeparation - distance) * separationStrength;
+                separation += direction * force;
             }
 
-            // Move roomA according to the accumulated separation vector
-            roomA.Position += separationVector;
+            separation *= damping;
+            room.Position += separation;
         }
     }
 }
