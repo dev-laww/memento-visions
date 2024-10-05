@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Utils;
 using Godot;
 using GodotUtilities;
 
@@ -64,11 +65,15 @@ public partial class Dungeon : Node2D
         timer.Timeout += CreateRooms;
     }
 
-    public override void _Process(double _delta) => ApplySeparationBehavior();
+    public override void _Process(double delta) => QueueRedraw();
+
+    public override void _PhysicsProcess(double delta) => ApplySeparationBehavior();
 
     public override void _Input(InputEvent @event)
     {
         if (@event.IsActionPressed("open_inventory")) CreateRooms();
+
+        if (@event.IsActionPressed("interact")) QueueRedraw();
 
         if (!@event.IsActionPressed("ui_select")) return;
 
@@ -79,56 +84,21 @@ public partial class Dungeon : Node2D
     private void CreateColliders()
     {
         var roomsCount = MathUtil.RNG.RandiRange(minRooms, maxRooms);
-        var usedPositions = new HashSet<Vector2>();
+        var points = Generator.GeneratePoints(roomsCount, roomSpawnRadius, tileSize);
 
-        for (var i = 0; i < roomsCount; i++)
+        points.ForEach(point =>
         {
-            Vector2 position;
-
-            do
-            {
-                position = new Vector2(
-                    MathUtil.RNG.RandfRange(-roomSpawnRadius, roomSpawnRadius),
-                    MathUtil.RNG.RandfRange(-roomSpawnRadius, roomSpawnRadius)
-                );
-
-                // Introduce randomness by adding an offset
-                var offsetX = MathUtil.RNG.RandfRange(-tileSize, tileSize);
-                var offsetY = MathUtil.RNG.RandfRange(-tileSize, tileSize);
-                position += new Vector2(offsetX, offsetY);
-            } while (IsPositionOccupied(position, usedPositions));
-
-            usedPositions.Add(position);
-
-            var collider = new RigidBody2D
-            {
-                GravityScale = 0,
-                CollisionLayer = 20,
-                CollisionMask = 20,
-                LockRotation = true,
-            };
             var size = new Vector2(
                 MathUtil.RNG.RandiRange(minRoomSize, maxRoomSize),
                 MathUtil.RNG.RandiRange(minRoomSize, maxRoomSize)
             ) * tileSize;
 
-            var shape = new RectangleShape2D { Size = size };
-            var collision = new CollisionShape2D { Shape = shape };
-            collider.AddChild(collision);
-            collider.SetMeta("size", size);
-            collider.Position = position; // Set the position here
+            var collider = Room.CreateCollider(point, size);
+
             Rooms.AddChild(collider);
-        }
+        });
 
         timer.Start();
-    }
-
-    private bool IsPositionOccupied(Vector2 position, HashSet<Vector2> usedPositions)
-    {
-        const float proximityThreshold = 50f; // Adjust as needed for proximity checks
-
-        // Check if the new position is too close to any used position
-        return usedPositions.Any(usedPos => position.DistanceTo(usedPos) < proximityThreshold);
     }
 
 
@@ -180,6 +150,7 @@ public partial class Dungeon : Node2D
         return false;
     }
 
+    // TODO: Detect when rooms stop moving
     private void ApplySeparationBehavior()
     {
         var rooms = Rooms.GetChildren<Node2D>();
@@ -194,8 +165,9 @@ public partial class Dungeon : Node2D
                 if (room == other) continue;
 
                 var distance = room.Position.DistanceTo(other.Position);
-                var desiredSeparation = ((Vector2)room.GetMeta("size") + (Vector2)other.GetMeta("size")).Length() *
-                                        separationDivisor;
+                var desiredSeparation = (
+                    (Vector2)room.GetMeta("size") + (Vector2)other.GetMeta("size")
+                ).Length() * separationDivisor;
 
                 if (distance > desiredSeparation) continue;
 
@@ -207,5 +179,23 @@ public partial class Dungeon : Node2D
             separation *= damping;
             room.Position += separation;
         }
+    }
+
+    public override void _Draw()
+    {
+        var rooms = Rooms.GetChildren<Node2D>();
+
+        var edges = Generator.TriangulatePoints(rooms.Select(room => room.Position).ToList());
+        //
+        // foreach (var edge in edges)
+        //     DrawLine(edge.P.ToVector2(), edge.Q.ToVector2(), Colors.White);
+
+        var mst = Generator.MinimumSpanningTree(edges);
+
+        foreach (var edge in edges)
+            DrawLine(edge.P.ToVector2(), edge.Q.ToVector2(), Colors.White);
+
+        foreach (var edge in mst)
+            DrawLine(edge.P.ToVector2(), edge.Q.ToVector2(), Colors.Green);
     }
 }
