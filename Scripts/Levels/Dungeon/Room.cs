@@ -26,7 +26,7 @@ public partial class Room : Node2D
 
         return room;
     }
-    
+
     public static RigidBody2D CreateCollider(Vector2 position, Vector2 size)
     {
         var collider = new RigidBody2D
@@ -42,7 +42,7 @@ public partial class Room : Node2D
         collider.AddChild(collision);
         collider.SetMeta("size", size);
         collider.Position = position;
-        
+
         return collider;
     }
 }

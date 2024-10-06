@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DelaunatorSharp;
+using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
 namespace Game.Utils;
-
-public static class Vector2Extensions
-{
-    public static DelaunayPoint ToPoint(this Vector2 vector) => new(vector.X, vector.Y);
-}
-
-public static class IPointExtensions
-{
-    public static Vector2 ToVector2(this IPoint point) => new((float)point.X, (float)point.Y);
-}
 
 public class DelaunayPoint : IPoint
 {
@@ -26,20 +16,6 @@ public class DelaunayPoint : IPoint
     {
         X = x;
         Y = y;
-    }
-}
-
-// DelaunayEdge class implementation (assuming it's similar to IEdge)
-public class DelaunayEdge : IEdge
-{
-    public IPoint P { get; }
-    public IPoint Q { get; }
-    public int Index { get; }
-
-    public DelaunayEdge(IPoint p, IPoint q)
-    {
-        P = p;
-        Q = q;
     }
 }
 
@@ -71,13 +47,13 @@ public class Generator
                 position += new Vector2(offsetX, offsetY);
             } while (usedPositions.Any(usedPos => position.DistanceTo(usedPos) < proximityThreshold));
 
+            position = position.SnapToGrid();
             usedPositions.Add(position);
             points.Add(position); // Add the generated position to the points list
         }
 
         return points;
     }
-
 
     public static List<IEdge> MinimumSpanningTree(List<IEdge> edges)
     {
@@ -95,7 +71,7 @@ public class Generator
             graph[edge.Q].Add(edge);
         }
 
-        // Prim's algorithm to find MST
+        // Prim's algorithm to find MST with Manhattan distance
         HashSet<IPoint> visited = new();
         List<IEdge> mstEdges = new();
         var priorityQueue = new SortedSet<(double weight, IEdge edge)>(Comparer<(double, IEdge)>.Create((x, y) =>
@@ -111,9 +87,8 @@ public class Generator
         // Initialize the priority queue with edges from the start point
         foreach (var edge in graph[startPoint])
         {
-            // Calculate the distance to use as weight
-            var (p, q) = (edge.P.ToVector2(), edge.Q.ToVector2());
-            var weight = p.DistanceTo(q);
+            var (p, q) = (edge.P.ToVector(), edge.Q.ToVector());
+            var weight = p.ManhattanDistanceTo(q); // Use Manhattan distance
             priorityQueue.Add((weight, edge));
         }
 
@@ -140,9 +115,8 @@ public class Generator
                 )
             )
             {
-                // Calculate the distance to use as weight
-                var (p, q) = (newEdge.P.ToVector2(), newEdge.Q.ToVector2());
-                var newWeight = p.DistanceTo(q);
+                var (p, q) = (newEdge.P.ToVector(), newEdge.Q.ToVector());
+                var newWeight = p.ManhattanDistanceTo(q); // Use Manhattan distance
                 priorityQueue.Add((newWeight, newEdge));
             }
         }

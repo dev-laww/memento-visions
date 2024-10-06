@@ -1,7 +1,7 @@
 using System;
 using Game.Components;
-using Game.Globals;
 using Game.Logic.States;
+using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
@@ -29,8 +29,6 @@ public partial class Player : CharacterBody2D
 
     public string MoveDirection => GetMoveDirection();
 
-    private const int GridSize = 8;
-
     public Vector2 lastMoveDirection = Vector2.Down;
     public Vector2 DashVelocity { get; set; }
     public bool CanDash { get; set; } = true;
@@ -53,14 +51,11 @@ public partial class Player : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         Velocity = Input.GetVector("move_left", "move_right", "move_up", "move_down") * statsManager.Speed;
-        Velocity = new Vector2(
-            (float)Math.Round(Velocity.X / GridSize) * GridSize,
-            (float)Math.Round(Velocity.Y / GridSize) * GridSize
-        );
 
         if (Dashing)
             Velocity = DashVelocity;
 
+        Velocity = Velocity.SnapToGrid();
         Velocity = CanMove ? Velocity : Vector2.Zero;
 
         if (Velocity.Length() > 0 && CanMove)
