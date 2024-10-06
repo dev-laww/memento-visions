@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DelaunatorSharp;
 using Game.Utils;
+using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
@@ -49,6 +51,11 @@ public partial class Dungeon : Node2D
     [Signal]
     public delegate void InvalidRoomsEventHandler();
 
+    [Signal]
+    public delegate void SettledEventHandler();
+
+    private bool settled;
+
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
@@ -63,9 +70,8 @@ public partial class Dungeon : Node2D
         CreateColliders();
         InvalidRooms += CreateColliders;
         timer.Timeout += CreateRooms;
+        Settled += QueueRedraw;
     }
-
-    public override void _Process(double delta) => QueueRedraw();
 
     public override void _PhysicsProcess(double delta) => ApplySeparationBehavior();
 
@@ -77,6 +83,8 @@ public partial class Dungeon : Node2D
 
         if (!@event.IsActionPressed("ui_select")) return;
 
+        settled = false;
+        QueueRedraw();
         Rooms.GetChildren().ToList().ForEach(room => room.QueueFree());
         CreateColliders();
     }
@@ -153,7 +161,16 @@ public partial class Dungeon : Node2D
     // TODO: Detect when rooms stop moving
     private void ApplySeparationBehavior()
     {
+        if (settled) return;
+
         var rooms = Rooms.GetChildren<Node2D>();
+
+        if (rooms.All(room => room is Room))
+        {
+            EmitSignal(SignalName.Settled);
+            settled = true;
+            return;
+        }
 
         // Apply marginally better separation behavior
         foreach (var room in rooms)
@@ -178,24 +195,34 @@ public partial class Dungeon : Node2D
 
             separation *= damping;
             room.Position += separation;
+            room.Position = room.Position.SnapToGrid();
         }
     }
 
     public override void _Draw()
     {
+        if (!settled) return;
+
+        var corridors = CreateCorridors();
+
+        foreach (var edge in corridors)
+        {
+            var (p1, p2) = (edge.P.ToVector(), edge.Q.ToVector());
+
+            DrawLine(p1, new Vector2(p1.X, p2.Y), Colors.Red);
+            DrawLine(new Vector2(p1.X, p2.Y), p2, Colors.Red);
+        }
+    }
+
+    // TODO: Implement a better algorithm to create corridors, possibly using A* pathfinding or hybridizing with Delaunay Triangulation
+    private List<IEdge> CreateCorridors()
+    {
         var rooms = Rooms.GetChildren<Node2D>();
+        var edges = rooms.Select(room => room.Position).Triangulate();
+        var mst = edges.MinimumSpanningTree();
 
-        var edges = Generator.TriangulatePoints(rooms.Select(room => room.Position).ToList());
-        //
-        // foreach (var edge in edges)
-        //     DrawLine(edge.P.ToVector2(), edge.Q.ToVector2(), Colors.White);
+        mst.AddRange(edges.Where(edge => !mst.Contains(edge)).Where(_ => MathUtil.RNG.RandfRange(0, 1) <= 0.2f));
 
-        var mst = Generator.MinimumSpanningTree(edges);
-
-        foreach (var edge in edges)
-            DrawLine(edge.P.ToVector2(), edge.Q.ToVector2(), Colors.White);
-
-        foreach (var edge in mst)
-            DrawLine(edge.P.ToVector2(), edge.Q.ToVector2(), Colors.Green);
+        return mst;
     }
 }
