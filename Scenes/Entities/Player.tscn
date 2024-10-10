@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=130 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/StatsManager.tscn" id="2_cqdhe"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b0d83ejsel370" path="res://assets/entities/player/idle.png" id="10_te860"]
 [ext_resource type="Texture2D" uid="uid://c8c7pr6uxjpd" path="res://assets/entities/player/walk.png" id="11_f0os2"]
 [ext_resource type="Script" path="res://Scripts/Components/HurtBox.cs" id="12_xp768"]
+[ext_resource type="Script" path="res://Scripts/Inventory/CollectionArea.cs" id="13_421k5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r5a8n"]
 atlas = ExtResource("8_gnh3f")
@@ -888,6 +889,9 @@ height = 11.9985
 radius = 8.0
 height = 24.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8sbq7"]
+radius = 8.0
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 4
 collision_mask = 1019
@@ -933,3 +937,10 @@ script = ExtResource("12_xp768")
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_dyvqy")
 debug_color = Color(0.996578, 0.311043, 0.384733, 0.42)
+
+[node name="CollectionArea" type="Area2D" parent="."]
+script = ExtResource("13_421k5")
+
+[node name="CollectionRange" type="CollisionShape2D" parent="CollectionArea"]
+position = Vector2(0, 9)
+shape = SubResource("CircleShape2D_8sbq7")

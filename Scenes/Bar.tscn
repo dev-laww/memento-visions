@@ -1,13 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://8xieh4pqx0hg"]
+[gd_scene load_steps=8 format=3 uid="uid://8xieh4pqx0hg"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
 [ext_resource type="Script" path="res://Scripts/Components/HitBox.cs" id="2_cqdlw"]
 [ext_resource type="Script" path="res://Scripts/Components/ContinuousDamageHitBox.cs" id="3_mr0hr"]
+[ext_resource type="Script" path="res://Scripts/Inventory/CanvasLayer.cs" id="4_nk35c"]
+[ext_resource type="PackedScene" uid="uid://o331m3uupyhm" path="res://Scenes/Inventory/InvetoryGui.tscn" id="5_0rdkq"]
+[ext_resource type="PackedScene" uid="uid://rjcjsjofwu37" path="res://Scenes/Inventory/GodotItem.tscn" id="6_po18s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5ivt"]
 size = Vector2(90, 84)
 
 [node name="Bar" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("4_nk35c")
+
+[node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("5_0rdkq")]
 
 [node name="Player" parent="." instance=ExtResource("1_28rab")]
 position = Vector2(320, 180)
@@ -27,8 +35,14 @@ position = Vector2(453, 187)
 collision_layer = 1024
 collision_mask = 2048
 script = ExtResource("3_mr0hr")
-Damage = 1.0
+Damage = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousDamageHitBox"]
 shape = SubResource("RectangleShape2D_o5ivt")
 debug_color = Color(0.732258, 0.454397, 0.353821, 0.42)
+
+[node name="godotItem" parent="." instance=ExtResource("6_po18s")]
+position = Vector2(327, 287)
+
+[connection signal="Closed" from="CanvasLayer/InventoryGui" to="CanvasLayer" method="_on_inventory_gui_closed"]
+[connection signal="Opened" from="CanvasLayer/InventoryGui" to="Player" method="_on_inventory_gui_opened"]
