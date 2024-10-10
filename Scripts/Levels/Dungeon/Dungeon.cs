@@ -2,59 +2,43 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DelaunatorSharp;
-using Game.Utils;
+using Game.Utils.Dungeon;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
-namespace Game;
+namespace Game.Levels.Dungeon;
 
+// TODO: Enlarge rooms
+// TODO: Add doors
+// TODO: Add enemy spawn system
+// TODO: Multilevel dungeons for roguelike experience
 [Scene]
 public partial class Dungeon : Node2D
 {
-    [Export]
-    private int minRooms = 6;
+    private enum CellType
+    {
+        None,
+        Room,
+        Hallway
+    }
 
     [Export]
-    private int maxRooms = 10;
+    private Vector2I size = new(30, 30);
 
     [Export]
-    private int minRoomSize = 10;
+    private int roomsCount;
 
     [Export]
-    private int maxRoomSize = 30;
-
-    [Export]
-    private int tileSize = 32;
-
-    [Export]
-    private int roomSpawnRadius = 200;
-
-    [Export]
-    private float separationStrength = 0.05f; // Force applied to move rooms apart
-
-    [Export]
-    private float damping = 1.2f; // Damping to reduce velocity over time
-
-    [Export]
-    private float separationDivisor = 0.4f; // Divisor to reduce separation distance
+    private Vector2I roomMaxSize = new(10, 10);
 
     [Node]
     private Node Rooms;
 
-    [Node]
-    private Camera2D camera;
-
-    [Node]
-    private Timer timer;
-
-    [Signal]
-    public delegate void InvalidRoomsEventHandler();
-
-    [Signal]
-    public delegate void SettledEventHandler();
-
-    private bool settled;
+    private Grid<CellType> grid;
+    private List<Room> rooms;
+    private HashSet<IEdge> hallways;
+    private bool pathFind;
 
     public override void _Notification(int what)
     {
@@ -63,166 +47,135 @@ public partial class Dungeon : Node2D
         WireNodes();
     }
 
-    public override void _Ready()
-    {
-        camera.Zoom = new Vector2(0.1f, 0.1f);
+    public override void _Ready() => Generate();
 
-        CreateColliders();
-        InvalidRooms += CreateColliders;
-        timer.Timeout += CreateRooms;
-        Settled += QueueRedraw;
-    }
-
-    public override void _PhysicsProcess(double delta) => ApplySeparationBehavior();
-
-    public override void _Input(InputEvent @event)
-    {
-        if (@event.IsActionPressed("open_inventory")) CreateRooms();
-
-        if (@event.IsActionPressed("interact")) QueueRedraw();
-
-        if (!@event.IsActionPressed("ui_select")) return;
-
-        settled = false;
-        QueueRedraw();
-        Rooms.GetChildren().ToList().ForEach(room => room.QueueFree());
-        CreateColliders();
-    }
-
-    private void CreateColliders()
-    {
-        var roomsCount = MathUtil.RNG.RandiRange(minRooms, maxRooms);
-        var points = Generator.GeneratePoints(roomsCount, roomSpawnRadius, tileSize);
-
-        points.ForEach(point =>
-        {
-            var size = new Vector2(
-                MathUtil.RNG.RandiRange(minRoomSize, maxRoomSize),
-                MathUtil.RNG.RandiRange(minRoomSize, maxRoomSize)
-            ) * tileSize;
-
-            var collider = Room.CreateCollider(point, size);
-
-            Rooms.AddChild(collider);
-        });
-
-        timer.Start();
-    }
-
-
-    private void CreateRooms()
-    {
-        var rooms = Rooms.GetChildren<RigidBody2D>();
-
-        if (!RoomsValid())
-        {
-            Rooms.GetChildren().ToList().ForEach(room => room.QueueFree());
-            CreateColliders();
-            return;
-        }
-
-        var positions = new List<Tuple<Vector2, Vector2>>();
-
-        foreach (var room in rooms)
-        {
-            var size = (Vector2)room.GetMeta("size");
-            positions.Add(new Tuple<Vector2, Vector2>(room.Position, size));
-            room.QueueFree();
-        }
-
-        foreach (var position in positions)
-        {
-            var room = Room.Create(position.Item1, position.Item2);
-            room.SetMeta("size", position.Item2); // Store the size in metadata for future reference
-            Rooms.AddChild(room);
-        }
-
-        timer.Stop();
-    }
-
-    private bool RoomsValid()
-    {
-        var rooms = Rooms.GetChildren<RigidBody2D>();
-
-        var areas = (
-            from room in rooms
-            let size = (Vector2)room.GetMeta("size")
-            select new Rect2(room.Position - size / 2, size)
-        ).ToList();
-
-        if (!areas.Any(area => areas.Where(other => area != other).Any(other => area.Intersects(other))))
-            return true;
-
-        separationDivisor += 0.01f;
-        EmitSignal(SignalName.InvalidRooms);
-        return false;
-    }
-
-    // TODO: Detect when rooms stop moving
-    private void ApplySeparationBehavior()
-    {
-        if (settled) return;
-
-        var rooms = Rooms.GetChildren<Node2D>();
-
-        if (rooms.All(room => room is Room))
-        {
-            EmitSignal(SignalName.Settled);
-            settled = true;
-            return;
-        }
-
-        // Apply marginally better separation behavior
-        foreach (var room in rooms)
-        {
-            var separation = Vector2.Zero;
-
-            foreach (var other in rooms)
-            {
-                if (room == other) continue;
-
-                var distance = room.Position.DistanceTo(other.Position);
-                var desiredSeparation = (
-                    (Vector2)room.GetMeta("size") + (Vector2)other.GetMeta("size")
-                ).Length() * separationDivisor;
-
-                if (distance > desiredSeparation) continue;
-
-                var direction = (room.Position - other.Position).Normalized();
-                var force = (desiredSeparation - distance) * separationStrength;
-                separation += direction * force;
-            }
-
-            separation *= damping;
-            room.Position += separation;
-            room.Position = room.Position.SnapToGrid();
-        }
-    }
+    public override void _Process(double delta) => QueueRedraw();
 
     public override void _Draw()
     {
-        if (!settled) return;
+        DrawRect(new Rect2(Vector2.Zero, size), Colors.Red, filled: false);
+        //
+        // foreach (var edge in hallways)
+        //     DrawLine(edge.P.ToVector(), edge.Q.ToVector(), Colors.Blue);
 
-        var corridors = CreateCorridors();
-
-        foreach (var edge in corridors)
-        {
-            var (p1, p2) = (edge.P.ToVector(), edge.Q.ToVector());
-
-            DrawLine(p1, new Vector2(p1.X, p2.Y), Colors.Red);
-            DrawLine(new Vector2(p1.X, p2.Y), p2, Colors.Red);
-        }
+        if (pathFind)
+            PathFindHallways();
     }
 
-    // TODO: Implement a better algorithm to create corridors, possibly using A* pathfinding or hybridizing with Delaunay Triangulation
-    private List<IEdge> CreateCorridors()
+    public override void _Input(InputEvent @event)
     {
-        var rooms = Rooms.GetChildren<Node2D>();
-        var edges = rooms.Select(room => room.Position).Triangulate();
+        if (@event.IsActionPressed("interact"))
+            pathFind = !pathFind;
+
+
+        if (!@event.IsActionPressed("ui_accept")) return;
+        Rooms.GetChildren().ToList().ForEach(c => c.QueueFree());
+        Generate();
+    }
+
+    private void Generate()
+    {
+        // Scale the size for the grid creation
+        grid = new Grid<CellType>(size, Vector2I.Zero);
+        rooms = new List<Room>();
+
+        PlaceRooms();
+        CreateHallways();
+    }
+
+    private void PlaceRooms()
+    {
+        var tries = 0;
+        do
+        {
+            tries++;
+
+            var location = new Vector2I().Random(Vector2I.Zero, size);
+            var roomSize = new Vector2I().Random(Vector2I.One, roomMaxSize);
+            var room = Room.Create(location, roomSize);
+            var add = rooms.All(other => !other.Intersects(room, padding: 1));
+
+            // Check if the room is completely within the dungeon with padding
+            if (room.Bounds.xMin() < 1 || room.Bounds.xMax() >= size.X - 1 ||
+                room.Bounds.yMin() < 1 || room.Bounds.yMax() >= size.Y - 1)
+                add = false;
+
+            if (!add)
+            {
+                room.QueueFree();
+                continue;
+            }
+
+            rooms.Add(room);
+            Rooms.AddChild(room);
+
+            foreach (var pos in room.Bounds.AllPositionsWithin())
+                grid[pos] = CellType.Room;
+        } while (rooms.Count < roomsCount && tries < 1000);
+    }
+
+    private void CreateHallways()
+    {
+        var edges = rooms.Select(r => r.Center.ToVector()).Triangulate();
         var mst = edges.MinimumSpanningTree();
 
-        mst.AddRange(edges.Where(edge => !mst.Contains(edge)).Where(_ => MathUtil.RNG.RandfRange(0, 1) <= 0.2f));
+        mst.AddRange(edges.Where(edge => !mst.Contains(edge)).Where(_ => MathUtil.RNG.RandfRange(0, 1) <= 0.125f));
 
-        return mst;
+        hallways = new HashSet<IEdge>(mst);
+    }
+
+    private void PathFindHallways()
+    {
+        var pathFinder = new PathFinder(size);
+
+        foreach (
+            var path in
+            from edge in hallways
+            let start = edge.P.ToVectorI()
+            let end = edge.Q.ToVectorI()
+            select pathFinder.FindPath(start, end, (PathFinder.Node a, PathFinder.Node b) =>
+            {
+                var pathCost = new PathFinder.PathCost
+                {
+                    Cost = b.Position.DistanceTo(end)
+                };
+
+                if (grid[b.Position] != CellType.Room)
+                {
+                    switch (grid[b.Position])
+                    {
+                        case CellType.None:
+                            pathCost.Cost += 5;
+                            break;
+                        case CellType.Hallway:
+                            pathCost.Cost += 1;
+                            break;
+                        case CellType.Room:
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
+                else
+                {
+                    pathCost.Cost += 10;
+                }
+
+                pathCost.Traversable = true;
+
+                return pathCost;
+            })
+        )
+        {
+            if (path == null) return;
+
+            foreach (var current in path.Where(current => grid[current] == CellType.None))
+                grid[current] = CellType.Hallway;
+
+            foreach (var pos in path.Where(pos => grid[pos] == CellType.Hallway))
+            {
+                DrawRect(new Rect2(pos, Vector2.One), Colors.Blue);
+            }
+        }
     }
 }
