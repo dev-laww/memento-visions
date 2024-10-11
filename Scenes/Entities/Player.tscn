@@ -1,7 +1,8 @@
-[gd_scene load_steps=130 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=131 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/StatsManager.tscn" id="2_cqdhe"]
+[ext_resource type="Resource" uid="uid://m4me0l7bwypk" path="res://Scripts/Inventory/InventoryItems/PlayerInventory.tres" id="2_raaf8"]
 [ext_resource type="Script" path="res://Scripts/Logic/States/StateMachine.cs" id="3_ebktw"]
 [ext_resource type="Script" path="res://Scripts/Entities/Player/States/Idle.cs" id="4_gml7l"]
 [ext_resource type="Script" path="res://Scripts/Entities/Player/States/Walk.cs" id="5_5apgk"]
@@ -896,6 +897,7 @@ radius = 8.0
 collision_layer = 4
 collision_mask = 1019
 script = ExtResource("1_3hkqn")
+Inventory = ExtResource("2_raaf8")
 
 [node name="StatsManager" parent="." instance=ExtResource("2_cqdhe")]
 unique_name_in_owner = true

@@ -17,6 +17,7 @@ namespace Game.Inventory
 			inventoryGui.close();
 
 		}
+	
 		public void _on_inventory_gui_opened()
 		{
 			GD.Print("Inventory Signal opened");

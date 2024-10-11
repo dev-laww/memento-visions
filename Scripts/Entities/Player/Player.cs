@@ -15,6 +15,8 @@ public partial class Player : CharacterBody2D
 {
 	[Export]
 	public float DashStaminaCost { get; set; } = 10f;
+	[Export]
+	public Inventory.Inventory Inventory { get; private set; }
 
 	[Node]
 	public AnimatedSprite2D sprites;
@@ -48,9 +50,11 @@ public partial class Player : CharacterBody2D
 
 	public override void _Ready()
 	{
+		Inventory = new Inventory.Inventory();
 		statsManager.StaminaChanged += (stamina) => CanDash = stamina > DashStaminaCost;
 		hurtBox.DamageReceived += (damage) => GD.Print($"Player received {damage} damage.");
 		collectionArea.AreaEntered += (itemname) => GD.Print("godot collection area entered");
+	
 		
 
 	}

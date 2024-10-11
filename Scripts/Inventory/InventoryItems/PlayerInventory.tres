@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://m4me0l7bwypk"]
+
+[ext_resource type="Resource" uid="uid://bx44kkdvb1r1s" path="res://Scripts/Inventory/InventoryItems/godotItem.tres" id="1_2xmg4"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Inventory.cs" id="2_g48bx"]
+
+[resource]
+script = ExtResource("2_g48bx")
+Items = [ExtResource("1_2xmg4"), ExtResource("1_2xmg4"), ExtResource("1_2xmg4")]
