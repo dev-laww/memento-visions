@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DelaunatorSharp;
 using Godot;
+using GodotUtilities;
 
 namespace Game.Utils.Extensions;
 
@@ -27,5 +28,27 @@ public static class Vector2Extensions
         var delaunator = new Delaunator(_points);
 
         return delaunator.GetEdges().ToList();
+    }
+
+    public static Vector2I ToVectorI(this Vector2 vector) => new((int)vector.X, (int)vector.Y);
+
+    public static Vector2 ToVector(this Vector2I vector) => new(vector.X, vector.Y);
+
+    public static Vector2I Random(this Vector2I vector, int min = 4, int max = 8)
+    {
+        var size = MathUtil.RNG.RandiRange(min, max);
+
+        vector.X = size;
+        vector.Y = size;
+
+        return vector;
+    }
+
+    public static Vector2I Random(this Vector2I vector, Vector2I min, Vector2I max)
+    {
+        vector.X = MathUtil.RNG.RandiRange(min.X, max.X);
+        vector.Y = MathUtil.RNG.RandiRange(min.Y, max.Y);
+
+        return vector;
     }
 }
