@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace Game.Utils.Dungeon;
+namespace Game.Utils.Generation;
 
 public class Grid<T>
 {

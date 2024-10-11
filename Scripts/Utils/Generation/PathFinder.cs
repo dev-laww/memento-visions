@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Priority_Queue;
 
-namespace Game.Utils.Dungeon;
+namespace Game.Utils.Generation;
 
 public class PathFinder
 {
@@ -83,9 +83,7 @@ public class PathFinder
             closed.Add(currentNode);
 
             if (currentNode.Position == end)
-            {
                 return ReconstructPath(currentNode);
-            }
 
             foreach (var offset in Neighbors)
             {
@@ -114,10 +112,9 @@ public class PathFinder
         return null;
     }
 
-    private bool InBounds(Vector2I position)
-    {
-        return position.X >= 0 && position.X < gridSize.X && position.Y >= 0 && position.Y < gridSize.Y;
-    }
+    private bool InBounds(Vector2I position) =>
+        position.X >= 0 && position.X < gridSize.X && position.Y >= 0 && position.Y < gridSize.Y;
+
 
     private List<Vector2I> ReconstructPath(Node node)
     {
