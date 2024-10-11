@@ -44,7 +44,7 @@ public static class Vector2Extensions
         return vector;
     }
 
-    public static Vector2I Random(this Vector2I vector, Vector2I min, Vector2I max, float aspectRatio = 1.2f)
+    public static Vector2I Random(this Vector2I vector, Vector2I min, Vector2I max)
     {
         vector.X = MathUtil.RNG.RandiRange(min.X, max.X);
         vector.Y = MathUtil.RNG.RandiRange(min.Y, max.Y);
