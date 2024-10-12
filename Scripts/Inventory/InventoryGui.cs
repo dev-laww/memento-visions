@@ -15,9 +15,9 @@ public partial class InventoryGui : Control
 	[Signal]	
 	public delegate void ClosedEventHandler();
 	private Inventory Inventory { get; set; }
-	  [Node]
-	  private GridContainer GridContainer;
-	  private Array <Node>Slots;
+	[Node]
+	 private GridContainer GridContainer;
+	 private Array <Node>Slots;
 	
 
 	public override void _Ready()
@@ -60,9 +60,9 @@ private void InventoryUpdateSignal()
 	public void update()
 	{
 		GD.Print("Inventorygui update called");
-		for (int i = 0; i < Inventory.Items.Count; i++)
+		for (int i = 0; i < Inventory.Slots.Count; i++)
 		{
-			Slots[i].Call("updateItem", Inventory.Items[i]);
+			Slots[i].Call("updateItem", Inventory.Slots[i]);
 		}
 	}	
 }

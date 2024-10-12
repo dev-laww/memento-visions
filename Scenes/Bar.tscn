@@ -16,6 +16,10 @@ size = Vector2(90, 84)
 script = ExtResource("4_nk35c")
 
 [node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("5_0rdkq")]
+offset_left = 194.0
+offset_top = 85.0
+offset_right = 440.0
+offset_bottom = 238.0
 
 [node name="Player" parent="." instance=ExtResource("1_28rab")]
 position = Vector2(320, 180)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1jd30nipxfa6"]
+[gd_scene load_steps=4 format=3 uid="uid://b1jd30nipxfa6"]
 
 [ext_resource type="Script" path="res://Scripts/Inventory/ItemSlot.cs" id="1_4fy4x"]
 [ext_resource type="Texture2D" uid="uid://rn24x1db86vf" path="res://assets/Inventory/inventorySlot.png" id="1_ityhv"]
+[ext_resource type="FontFile" uid="uid://43upi3g032py" path="res://assets/Font/zh-cn.ttf" id="3_3x4re"]
 
 [node name="Slot" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
@@ -31,3 +32,11 @@ layout_mode = 2
 [node name="Item" type="Sprite2D" parent="CenterContainer/Panel"]
 scale = Vector2(0.2, 0.2)
 skew = -0.0401426
+
+[node name="Quantity" type="Label" parent="CenterContainer/Panel"]
+layout_mode = 0
+offset_left = -4.0
+offset_right = 18.0
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("3_3x4re")
+horizontal_alignment = 2

@@ -11,7 +11,13 @@ public partial class Collectables : Area2D
 		public void collect (Inventory inventory)
 	{
 		 //called
-		inventory.AddItem(ItemRes);
+		 InventorySlot newSlot = new InventorySlot
+        {
+            Item = ItemRes,  // Assign the InventoryItems to the InventorySlot
+            Amount = 1       // Set the amount, this can be adjusted
+        };
+
+        inventory.AddItem(newSlot);
 		this.QueueFree();
 		
 	}

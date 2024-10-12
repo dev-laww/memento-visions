@@ -13,7 +13,7 @@ namespace Game.Inventory;
 	public partial class Inventory : Resource
 	{
 		[Export]
-		public Array<InventoryItems> Items { get; set; } = new Array<InventoryItems>();  
+		public Array<InventorySlot> Slots { get; set; } = new Array<InventorySlot>();  
 		[Signal]
 		public delegate void UpdateEventHandler();
 
@@ -34,8 +34,8 @@ namespace Game.Inventory;
 
             if (playerInventory != null)
             {
-                Items = playerInventory.Items;
-                GD.Print($"Loaded Inventory Count: {Items.Count}");
+                Slots = playerInventory.Slots;
+                GD.Print($"Loaded Inventory Count: {Slots.Count}");
             }
             else
             {
@@ -43,23 +43,40 @@ namespace Game.Inventory;
             }
         }
 
-	public void AddItem(InventoryItems item)
+	public void AddItem(InventorySlot slot ) 
 		{
-			
-			GD.Print(Items.Count); 
-            for (int i = 0; i < Items.Count; i++)
+			 GD.Print(Slots.Count); 
+    for (int i = 0; i < Slots.Count; i++)
+    {   
+        for (slot.Amount = 1; slot.Amount <= 50; slot.Amount++)
+        {
+            if (Slots[i] != null && Slots[i].Item == slot.Item)
             {
-                if (Items[i] == null)
-                {
-                    Items[i] = item;
-                    GD.Print($"Item added to slot {i}");
-                    EmitSignal(SignalName.Update);
-                    return;
-                }
+                Slots[i].Amount += slot.Amount;
+                GD.Print($"Item {slot.Item.Name} added to slot {i}");
+                EmitSignal(SignalName.Update);
+                return;
             }
-			
+        }
+    
+        if (Slots[i] == null) 
+        {
+            // Create a new InventorySlot and assign the item to it
+            InventorySlot newSlot = new InventorySlot
+            {
+                Item = slot.Item, 
+                Amount = 1
+            };
 
-    	}
+            Slots[i] = newSlot;
+            GD.Print($"Item {slot.Item.Name} added to slot {i}");
+            EmitSignal(SignalName.Update);
+            return;
+        }
+    }
+
+    GD.Print("No empty slots available.");
+}
 	}
 
 	

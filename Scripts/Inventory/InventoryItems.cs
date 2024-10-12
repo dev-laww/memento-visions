@@ -15,9 +15,10 @@ namespace Game.Inventory;
 		public Texture2D Texture { get; set; } 
 
 
-		public InventoryItems(){
+		public InventoryItems()
+		{
 			Name = "";
 			Texture = new Texture2D();
 
+		}
 	}
-}
