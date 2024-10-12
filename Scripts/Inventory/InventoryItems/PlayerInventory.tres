@@ -5,4 +5,4 @@
 
 [resource]
 script = ExtResource("2_g48bx")
-Items = [ExtResource("1_2xmg4"), ExtResource("1_2xmg4"), ExtResource("1_2xmg4")]
+Items = [null, ExtResource("1_2xmg4"), null, null, null, null, null, null, null, null, null, null, null, null]

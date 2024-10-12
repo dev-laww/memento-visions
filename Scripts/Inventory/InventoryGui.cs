@@ -7,7 +7,7 @@ using Godot.Collections;
 
 namespace Game.Inventory;
 
-	
+
 public partial class InventoryGui : Control
 {
 	[Signal]
@@ -17,47 +17,52 @@ public partial class InventoryGui : Control
 	private Inventory Inventory { get; set; }
 	  [Node]
 	  private GridContainer GridContainer;
-	  private Array <Node>slots;
+	  private Array <Node>Slots;
+	
 
 	public override void _Ready()
 	{
 		 Inventory = (Inventory)ResourceLoader.Load("res://Scripts/Inventory/InventoryItems/PlayerInventory.tres");
 		 GridContainer = GetNode<GridContainer>("NinePatchRect/GridContainer");
-		 
-		 slots = GridContainer.GetChildren();
+		 Inventory.Update += InventoryUpdateSignal;
+		 Slots = GridContainer.GetChildren();
 		 update();
 	
 
 	}
 
-public void _on_CloseButton_pressed(bool isopen) => EmitSignal(nameof(ClosedEventHandler));
-public void _on_OpenButton_pressed(bool isopen) => EmitSignal(nameof(OpenedEventHandler));
-	
+private void InventoryUpdateSignal()
+{
+	GD.Print("Inventory updated"); //hindi to nagana  :>
+	update();
+}
+
 	public bool isopen = true;
 	public void open()
-	{
-		
+	{	
 		this.Visible = true;
 		isopen = true;
-	
+		update();
+		EmitSignal(SignalName.Opened);
 		
 	}
 
-public void update()
-{
-	for (int i = 0; i < Inventory.Items.Count; i++)
-	{
-		ItemSlot itemSlot = (ItemSlot)slots[i];
-		itemSlot.updateItem(Inventory.Items[i]);
-		GD.Print("Item updated");
-		GD.Print(Inventory.Items[i].Name);
-	}
-}
+
 
 	public void close()
 	{
 		this.Visible = false;
 		isopen = false;
+		EmitSignal(SignalName.Closed);
 
 	}
+
+	public void update()
+	{
+		GD.Print("Inventorygui update called");
+		for (int i = 0; i < Inventory.Items.Count; i++)
+		{
+			Slots[i].Call("updateItem", Inventory.Items[i]);
+		}
+	}	
 }

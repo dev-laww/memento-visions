@@ -1,4 +1,4 @@
-[gd_scene load_steps=131 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=132 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/StatsManager.tscn" id="2_cqdhe"]
@@ -886,6 +886,23 @@ animations = [{
 radius = 3.99948
 height = 11.9985
 
+[sub_resource type="CSharpScript" id="CSharpScript_3ke6p"]
+script/source = "using Godot;
+using GodotUtilities;
+
+namespace Game;
+
+[Scene]
+public partial class CollisionShape2d : CollisionShape2D
+{
+	public override void _Notification(int what) {
+		if (what != NotificationSceneInstantiated) return;
+		
+		WireNodes();
+	}
+}
+"
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dyvqy"]
 radius = 8.0
 height = 24.0
@@ -897,7 +914,7 @@ radius = 8.0
 collision_layer = 4
 collision_mask = 1019
 script = ExtResource("1_3hkqn")
-Inventory = ExtResource("2_raaf8")
+inventory = ExtResource("2_raaf8")
 
 [node name="StatsManager" parent="." instance=ExtResource("2_cqdhe")]
 unique_name_in_owner = true
@@ -929,6 +946,7 @@ autoplay = "idle_front"
 position = Vector2(0, 10)
 rotation = 1.58684
 shape = SubResource("CapsuleShape2D_kaamo")
+script = SubResource("CSharpScript_3ke6p")
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 2048

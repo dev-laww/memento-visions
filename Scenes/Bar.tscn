@@ -44,5 +44,11 @@ debug_color = Color(0.732258, 0.454397, 0.353821, 0.42)
 [node name="godotItem" parent="." instance=ExtResource("6_po18s")]
 position = Vector2(327, 287)
 
+[node name="godotItem2" parent="." instance=ExtResource("6_po18s")]
+position = Vector2(195, 296)
+
+[node name="godotItem3" parent="." instance=ExtResource("6_po18s")]
+position = Vector2(492, 293)
+
 [connection signal="Closed" from="CanvasLayer/InventoryGui" to="CanvasLayer" method="_on_inventory_gui_closed"]
 [connection signal="Opened" from="CanvasLayer/InventoryGui" to="Player" method="_on_inventory_gui_opened"]

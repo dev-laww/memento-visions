@@ -6,7 +6,7 @@ public partial class ItemSlot : Panel
 {
 	private Sprite2D spriteItem;
 	private Sprite2D background;
-	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready()
 	{
 		spriteItem = GetNode<Sprite2D>("CenterContainer/Panel/Item");
@@ -20,7 +20,7 @@ public partial class ItemSlot : Panel
 			background.Frame=1;
 			spriteItem.Visible = true;
 			spriteItem.Texture = item.Texture;
-			GD.Print("Item updated");
+		
 		}
 		else
 		{
@@ -30,8 +30,5 @@ public partial class ItemSlot : Panel
 		}
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+	
 }

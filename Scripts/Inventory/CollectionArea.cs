@@ -7,6 +7,7 @@ public partial class CollectionArea : Area2D
 {
 	[Signal]
 	public delegate void CollectedEventHandler();
+	private Inventory inventory = new Inventory();
 	public override void _Ready()
 	{
 		AddToGroup("CollectionArea");
@@ -18,9 +19,10 @@ public partial class CollectionArea : Area2D
 	{
 		if (area.HasMethod("collect"))
 		{
-			area.Call("collect");
+			GD.Print("CollectionArea collect method called");
+			area.Call("collect",inventory);
 		}
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
+
 }

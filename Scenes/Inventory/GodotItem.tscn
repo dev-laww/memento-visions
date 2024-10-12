@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://rjcjsjofwu37"]
+[gd_scene load_steps=5 format=3 uid="uid://rjcjsjofwu37"]
 
 [ext_resource type="PackedScene" uid="uid://b5gun4it00e0f" path="res://Scenes/Inventory/Collectables.tscn" id="1_u66e8"]
+[ext_resource type="Resource" uid="uid://bx44kkdvb1r1s" path="res://Scripts/Inventory/InventoryItems/godotItem.tres" id="2_ko2xv"]
 [ext_resource type="Texture2D" uid="uid://dapkm8nsfpvko" path="res://icon.svg" id="2_vxbnr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4drvp"]
@@ -10,6 +11,7 @@ size = Vector2(61, 54)
 [node name="godotItem" instance=ExtResource("1_u66e8")]
 collision_layer = 3073
 collision_mask = 3073
+ItemRes = ExtResource("2_ko2xv")
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(-0.5, 0)

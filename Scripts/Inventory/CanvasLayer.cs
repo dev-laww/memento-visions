@@ -1,30 +1,37 @@
 using Godot;
 using GodotUtilities;
 
-namespace Game.Inventory
-{
+namespace Game.Inventory;
+
 	[Scene]
 	public partial class CanvasLayer : Godot.CanvasLayer
 	{
 		[Node]
 		public InventoryGui inventoryGui;
 
+		public override void _Notification(int what) 
+		{
+			if (what != NotificationSceneInstantiated) return;
+			WireNodes();
+		}
 		public override void _Ready() 
 		{
 			 
 			WireNodes();
-			
 			inventoryGui.close();
+			inventoryGui.Opened += OnInventoryGuiOpened;
+			inventoryGui.Closed += OnInventoryGuiClosed;
 
 		}
 	
-		public void _on_inventory_gui_opened()
+		public void OnInventoryGuiOpened()
 		{
+			// GetParent().GetTree().Paused = true; nagpapause lahat
 			GD.Print("Inventory Signal opened");
-			GetTree().Paused = true;
+		
 		}
 
-		public void _on_inventory_gui_closed()
+		public void OnInventoryGuiClosed()
 		{
 			GD.Print("Inventory Signal closed");
 			GetTree().Paused = false;
@@ -49,4 +56,3 @@ namespace Game.Inventory
 			}
 		}
 	}
-}
