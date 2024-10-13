@@ -26,7 +26,7 @@ public partial class Dungeon : Node2D
     private Vector2I gridSize = new(60, 60);
 
     [Export]
-    private int cellSize = 128;
+    private int cellSize = 64;
 
     [Export]
     private int roomsCount;
@@ -35,10 +35,16 @@ public partial class Dungeon : Node2D
     private Vector2I roomMaxSize = new(15, 15);
 
     [Node]
+    private Node2D Map;
+
+    [Node]
     private Node2D Rooms;
 
+    [Node]
+    private Node2D Hallways;
+
     private Grid<CellType> grid;
-    private List<Bounds> rooms;
+    private List<Room> rooms;
     private HashSet<IEdge> hallways;
     private bool pathFind;
 
@@ -52,7 +58,7 @@ public partial class Dungeon : Node2D
     public override void _Ready()
     {
         Generate();
-        Rooms.Position = new Vector2(-gridSize.X * cellSize / 2f, -gridSize.Y * cellSize / 2f);
+        Map.Position = new Vector2(-gridSize.X * cellSize / 2f, -gridSize.Y * cellSize / 2f);
     }
 
     public override void _Process(double delta) => QueueRedraw();
@@ -63,7 +69,10 @@ public partial class Dungeon : Node2D
         {
             pathFind = !pathFind;
             if (!pathFind)
-                Rooms.GetChildren().OfType<ColorRect>().ToList().ForEach(c => c.QueueFree());
+            {
+                Hallways.GetChildren().ToList().ForEach(c => c.QueueFree());
+                return;
+            }
 
             PathFindHallways();
         }
@@ -78,11 +87,12 @@ public partial class Dungeon : Node2D
     {
         // Scale the gridSize for the grid creation
         grid = new Grid<CellType>(gridSize, Vector2I.Zero);
-        rooms = new List<Bounds>();
+        rooms = new List<Room>();
 
         PlaceRooms();
         CreateHallways();
         PathFindHallways();
+        AddEntryPoints();
     }
 
     private void PlaceRooms()
@@ -95,7 +105,7 @@ public partial class Dungeon : Node2D
             var location = new Vector2I().Random(Vector2I.Zero, gridSize);
             var roomSize = new Vector2I().Random(Vector2I.One * 7, roomMaxSize);
             var bounds = new Bounds(location, roomSize);
-            var add = rooms.All(other => !other.Intersects(bounds, padding: 1));
+            var add = rooms.All(other => !other.Bounds.Intersects(bounds, padding: 2));
 
             // Check if the room is completely within the dungeon with padding
             if (bounds.Rect.xMin() < 0 || bounds.Rect.xMax() >= gridSize.X ||
@@ -104,9 +114,9 @@ public partial class Dungeon : Node2D
 
             if (!add) continue;
 
-            rooms.Add(bounds);
-            var room = Room.Create(location * cellSize, roomSize * cellSize);
+            var room = Room.Create(location * cellSize, roomSize * cellSize, bounds);
             Rooms.AddChild(room);
+            rooms.Add(room);
 
             foreach (var pos in bounds.Rect.AllPositionsWithin())
                 grid[pos] = CellType.Room;
@@ -115,7 +125,7 @@ public partial class Dungeon : Node2D
 
     private void CreateHallways()
     {
-        var edges = rooms.Select(r => r.Center.ToVector()).Triangulate();
+        var edges = rooms.Select(r => r.Bounds.Center.ToVector()).Triangulate();
         var mst = edges.MinimumSpanningTree();
 
         mst.AddRange(edges.Where(edge => !mst.Contains(edge)).Where(_ => MathUtil.RNG.RandfRange(0, 1) <= 0.125f));
@@ -123,8 +133,49 @@ public partial class Dungeon : Node2D
         hallways = new HashSet<IEdge>(mst);
     }
 
+    private void AddEntryPoints()
+    {
+        foreach (var room in rooms)
+        foreach (var entry in room.Bounds.EntryPoints)
+        {
+            var position = entry.Position;
+
+            if (!IsWithinGridBounds(position)) continue;
+
+            if (!HasHallwayNeighbor(position)|| !HasHallwayNeighbor(position + entry.Direction)) continue;
+
+            entry.Toggle();
+            room.Update();
+        }
+    }
+
+    private bool HasHallwayNeighbor(Vector2I position)
+    {
+        var directions = new[]
+        {
+            Vector2I.Zero,
+            Vector2I.Up,
+            Vector2I.Down,
+            Vector2I.Left,
+            Vector2I.Right
+        };
+
+        return directions.Any(dir =>
+        {
+            var neighbor = position + dir;
+            return IsWithinGridBounds(neighbor) && grid[neighbor] == CellType.Hallway;
+        });
+    }
+
+    private bool IsWithinGridBounds(Vector2I position)
+    {
+        return position.X >= 0 && position.X < gridSize.X &&
+               position.Y >= 0 && position.Y < grid.Size.Y;
+    }
+
     private void PathFindHallways()
     {
+        Hallways.GetChildren().ToList().ForEach(c => c.QueueFree());
         var pathFinder = new PathFinder(gridSize);
 
         foreach (
@@ -136,29 +187,16 @@ public partial class Dungeon : Node2D
             {
                 var pathCost = new PathFinder.PathCost
                 {
-                    Cost = b.Position.DistanceTo(end)
+                    Cost = b.Position.ToVector().ManhattanDistanceTo(end)
                 };
 
-                if (grid[b.Position] != CellType.Room)
+                pathCost.Cost += grid[b.Position] switch
                 {
-                    switch (grid[b.Position])
-                    {
-                        case CellType.None:
-                            pathCost.Cost += 5;
-                            break;
-                        case CellType.Hallway:
-                            pathCost.Cost += 1;
-                            break;
-                        case CellType.Room:
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                }
-                else
-                {
-                    pathCost.Cost += 10;
-                }
+                    CellType.None => 5,
+                    CellType.Hallway => 1,
+                    CellType.Room => 10000,
+                    _ => throw new ArgumentOutOfRangeException()
+                };
 
                 pathCost.Traversable = true;
 
@@ -173,15 +211,9 @@ public partial class Dungeon : Node2D
 
             foreach (var pos in path.Where(pos => grid[pos] == CellType.Hallway))
             {
-                var hallway = new ColorRect
-                {
-                    Position = pos * cellSize,
-                    Size = Vector2.One * cellSize,
-                    Visible = pathFind,
-                    Color = Colors.Blue
-                };
+                var hallway = Hallway.Create(pos * cellSize);
 
-                Rooms.AddChild(hallway);
+                Hallways.AddChild(hallway);
             }
         }
     }

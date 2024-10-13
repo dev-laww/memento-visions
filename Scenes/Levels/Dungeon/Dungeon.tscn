@@ -1,15 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://bd0vkg5260wvf"]
+[gd_scene load_steps=3 format=3 uid="uid://bd0vkg5260wvf"]
 
 [ext_resource type="Script" path="res://Scripts/Levels/Dungeon/Dungeon.cs" id="1_22fmi"]
+[ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="2_qid14"]
 
 [node name="Dungeon" type="Node2D"]
 script = ExtResource("1_22fmi")
-cellSize = 64
 roomsCount = 15
 
-[node name="Rooms" type="Node2D" parent="."]
+[node name="Map" type="Node2D" parent="."]
 
-[node name="Camera" type="Camera2D" parent="."]
-zoom = Vector2(0.1, 0.1)
+[node name="Rooms" type="Node2D" parent="Map"]
+unique_name_in_owner = true
+
+[node name="Hallways" type="Node2D" parent="Map"]
+unique_name_in_owner = true
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("2_qid14")]
+
+[node name="StatsManager" parent="Player" index="0"]
+Speed = 500.0
+MaxStamina = 1e+15
+
+[node name="Camera" type="Camera2D" parent="Player"]
+
+[editable path="Player"]
