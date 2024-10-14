@@ -162,8 +162,16 @@ public partial class Dungeon : Node2D
 
         return directions.Any(dir =>
         {
-            var neighbor = position + dir;
-            return IsWithinGridBounds(neighbor) && grid[neighbor] == CellType.Hallway;
+            for (var i = 1; i < 3; i++)
+            {
+                var pos = position + dir * i;
+
+                if (!IsWithinGridBounds(pos)) return false;
+
+                if (grid[pos] == CellType.Hallway) return true;
+            }
+            
+            return false;
         });
     }
 

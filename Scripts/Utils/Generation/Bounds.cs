@@ -17,8 +17,8 @@ public class Bounds
         
         var edges = new List<(Vector2I, Vector2I)>
         {
-            (new Vector2I(Rect.Position.X + Rect.Size.X / 2, Rect.Position.Y), Vector2I.Up),
-            (new Vector2I(Rect.Position.X + Rect.Size.X / 2, Rect.Position.Y + Rect.Size.Y), Vector2I.Down),
+            (new Vector2I(Rect.Position.X + Rect.Size.X / 2, Rect.Position.Y + Rect.Size.Y), Vector2I.Up),
+            (new Vector2I(Rect.Position.X + Rect.Size.X / 2, Rect.Position.Y), Vector2I.Down),
             (new Vector2I(Rect.Position.X, Rect.Position.Y + Rect.Size.Y / 2), Vector2I.Left),
             (new Vector2I(Rect.Position.X + Rect.Size.X, Rect.Position.Y + Rect.Size.Y / 2), Vector2I.Right),
         };

@@ -28,7 +28,7 @@ public partial class Room : Node2D
 
     public void Update()
     {
-        var entryPointsAsStrings = Bounds.EntryPoints.Where(e => e.Open).Select(point => point.Position.ToString()).ToArray();
+        var entryPointsAsStrings = Bounds.EntryPoints.Where(e => e.Open).Select(point => point.Direction.ToString()).ToArray();
         Label.Text = $"Position: {Bounds.Rect.Position}\nEntry Points: {string.Join("\n ", entryPointsAsStrings)}";
     }
 
