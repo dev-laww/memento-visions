@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://ca7x8v0aixg5x"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="1_fiyd1"]
+[ext_resource type="Texture2D" uid="uid://nf1bfbgjtvx" path="res://assets/Inventory/candlestick_1_1.png" id="1_i7ejo"]
+
+[resource]
+script = ExtResource("1_fiyd1")
+Name = "Another Item"
+Description = "asasdassdad"
+Value = 1
+Type = 2
+icon = ExtResource("1_i7ejo")
+Sprite = ExtResource("1_i7ejo")
+Stackable = true
+MaxStack = 9999999

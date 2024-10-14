@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dp1e6xsfpuo3y"]
+
+[ext_resource type="Texture2D" uid="uid://dapkm8nsfpvko" path="res://icon.svg" id="1_ejcw7"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="1_s8er4"]
+
+[resource]
+script = ExtResource("1_s8er4")
+Name = "Test"
+Description = "description"
+Value = 1
+Type = 2
+Icon = ExtResource("1_ejcw7")
+Sprite = ExtResource("1_ejcw7")
+Stackable = true
+MaxStack = 9999999

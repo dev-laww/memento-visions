@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://8xieh4pqx0hg"]
+[gd_scene load_steps=8 format=3 uid="uid://8xieh4pqx0hg"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
 [ext_resource type="Script" path="res://Scripts/Components/HitBox.cs" id="2_cqdlw"]
 [ext_resource type="Script" path="res://Scripts/Components/ContinuousDamageHitBox.cs" id="3_mr0hr"]
+[ext_resource type="PackedScene" uid="uid://cu4fpa8blkef8" path="res://Scenes/Components/Interactables/Item.tscn" id="5_ne7o4"]
+[ext_resource type="Resource" uid="uid://ca7x8v0aixg5x" path="res://resources/items/another item.tres" id="6_g251o"]
+[ext_resource type="Resource" uid="uid://dp1e6xsfpuo3y" path="res://resources/items/test.tres" id="7_85145"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5ivt"]
 size = Vector2(90, 84)
@@ -32,3 +35,11 @@ Damage = 5.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousDamageHitBox"]
 shape = SubResource("RectangleShape2D_o5ivt")
 debug_color = Color(0.732258, 0.454397, 0.353821, 0.42)
+
+[node name="Another Item" parent="." instance=ExtResource("5_ne7o4")]
+position = Vector2(354, 89)
+ItemResource = ExtResource("6_g251o")
+
+[node name="Test" parent="." instance=ExtResource("5_ne7o4")]
+position = Vector2(115, 64)
+ItemResource = ExtResource("7_85145")
