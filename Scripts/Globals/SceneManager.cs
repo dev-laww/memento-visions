@@ -54,7 +54,7 @@ public partial class SceneManager : Node
     public static SceneManager Instance { get; private set; }
 
     private PackedScene loadingScreenScene =
-        ResourceLoader.Load("res://Scenes/Screens/LoadingScreen.tscn") as PackedScene;
+        ResourceLoader.Load("res://Scenes/UI/Screens/LoadingScreen.tscn") as PackedScene;
 
     private const int WINDOW_WIDTH = 640;
     private const int WINDOW_HEIGHT = 360;
@@ -103,7 +103,7 @@ public partial class SceneManager : Node
         sceneToUnload = from ?? GetTree().CurrentScene;
         transition = transitionType;
         direction = moveDirection;
-        
+
         if (transition != Transition.Zelda)
         {
             loadingScreen = loadingScreenScene.Instantiate<LoadingScreen>();
