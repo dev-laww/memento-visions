@@ -23,7 +23,7 @@ public partial class Dungeon : Node2D
     }
 
     [Export]
-    private Vector2I gridSize = new(60, 60);
+    private Vector2I gridSize = new(50, 50);
 
     [Export]
     private int cellSize = 64;
@@ -105,7 +105,7 @@ public partial class Dungeon : Node2D
             var location = new Vector2I().Random(Vector2I.Zero, gridSize);
             var roomSize = new Vector2I().Random(Vector2I.One * 7, roomMaxSize);
             var bounds = new Bounds(location, roomSize);
-            var add = rooms.All(other => !other.Bounds.Intersects(bounds, padding: 2));
+            var add = rooms.All(other => !other.Bounds.Intersects(bounds, padding: 1));
 
             // Check if the room is completely within the dungeon with padding
             if (bounds.Rect.xMin() < 0 || bounds.Rect.xMax() >= gridSize.X ||
@@ -140,9 +140,9 @@ public partial class Dungeon : Node2D
         {
             var position = entry.Position;
 
-            if (!IsWithinGridBounds(position)) continue;
+            if (!grid.InBounds(position)) continue;
 
-            if (!HasHallwayNeighbor(position)|| !HasHallwayNeighbor(position + entry.Direction)) continue;
+            if (!HasHallwayNeighbor(position) || !HasHallwayNeighbor(position + entry.Direction)) continue;
 
             entry.Toggle();
             room.Update();
@@ -160,25 +160,7 @@ public partial class Dungeon : Node2D
             Vector2I.Right
         };
 
-        return directions.Any(dir =>
-        {
-            for (var i = 1; i < 3; i++)
-            {
-                var pos = position + dir * i;
-
-                if (!IsWithinGridBounds(pos)) return false;
-
-                if (grid[pos] == CellType.Hallway) return true;
-            }
-            
-            return false;
-        });
-    }
-
-    private bool IsWithinGridBounds(Vector2I position)
-    {
-        return position.X >= 0 && position.X < gridSize.X &&
-               position.Y >= 0 && position.Y < grid.Size.Y;
+        return directions.Any(dir => grid.InBounds(position + dir) && grid[position + dir] == CellType.Hallway);
     }
 
     private void PathFindHallways()
