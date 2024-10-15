@@ -34,7 +34,8 @@ public partial class Item : Node2D
                 return;
             }
 
-            Name = value.Name;
+            if (value.Name != null)
+                Name = value.Name;
 
             if (sprite == null || resource.Sprite == null) return;
 
@@ -97,9 +98,9 @@ public partial class Item : Node2D
             GD.PrintErr($"{Name}: Player is null.");
             return;
         }
-        
+
         var tween = CreateTween().SetParallel().SetTrans(Tween.TransitionType.Linear);
-        
+
         tween.TweenProperty(this, "global_position", player.GlobalPosition, 0.2);
         tween.TweenProperty(sprite, "scale", Vector2.Zero, 0.2);
 
