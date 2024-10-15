@@ -45,7 +45,7 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
-        statsManager.StaminaChanged += (stamina) => CanDash = stamina > DashStaminaCost;
+        statsManager.StatsChanged += StatChangeHandler;
         hurtBox.DamageReceived += (damage) => GD.Print($"Player received {damage} damage.");
     }
 
@@ -80,5 +80,16 @@ public partial class Player : CharacterBody2D
             return lastMoveDirection.X > 0 ? "right" : "left";
 
         return lastMoveDirection.Y < 0 ? "back" : "front";
+    }
+    
+    private void StatChangeHandler(float value, Stats stat)
+    {
+        GD.Print($"Player's {stat} changed to {value}.");
+        
+        CanDash = stat switch
+        {
+            Stats.Stamina => value >= DashStaminaCost,
+            _ => CanDash
+        };
     }
 }

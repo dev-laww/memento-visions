@@ -4,6 +4,12 @@ using GodotUtilities;
 
 namespace Game.Components;
 
+public enum Stats
+{
+    Stamina,
+    Health,
+}
+
 [Scene]
 [GlobalClass]
 public partial class StatsManager : Node
@@ -27,28 +33,16 @@ public partial class StatsManager : Node
     public float Stamina { get; private set; }
 
     [Signal]
-    public delegate void HealthChangedEventHandler(float health);
+    public delegate void StatsChangedEventHandler(float value, Stats stat);
 
     [Signal]
-    public delegate void HealthIncreasedEventHandler(float health);
+    public delegate void StatsIncreasedEventHandler(float value, Stats stat);
 
     [Signal]
-    public delegate void HealthDecreasedEventHandler(float health);
+    public delegate void StatsDecreasedEventHandler(float value, Stats stat);
 
     [Signal]
-    public delegate void HealthDepletedEventHandler();
-
-    [Signal]
-    public delegate void StaminaChangedEventHandler(float stamina);
-
-    [Signal]
-    public delegate void StaminaIncreasedEventHandler(float stamina);
-
-    [Signal]
-    public delegate void StaminaDecreasedEventHandler(float stamina);
-
-    [Signal]
-    public delegate void StaminaDepletedEventHandler();
+    public delegate void StatsDepletedEventHandler(Stats stat);
 
     public override void _Notification(int what)
     {
@@ -68,41 +62,48 @@ public partial class StatsManager : Node
 
     public void TakeDamage(float amount)
     {
-        EmitSignal(SignalName.HealthChanged, Health);
-        EmitSignal(SignalName.HealthDecreased, Health);
+        const int stat = (int)Stats.Health;
+        EmitSignal(SignalName.StatsChanged, Health, stat);
+        EmitSignal(SignalName.StatsDecreased, Health, stat);
         Health = Math.Max(Health - amount, 0);
 
         if (Health == 0)
-            EmitSignal(SignalName.HealthDepleted);
+            EmitSignal(SignalName.StatsDepleted, stat);
     }
 
     public void RecoverHealth(float amount)
     {
-        EmitSignal(SignalName.HealthChanged, Health);
-        EmitSignal(SignalName.HealthIncreased, Health);
+        if (Math.Abs(Health - MaxHealth) < 0.01) return;
+
+        const int stat = (int)Stats.Health;
+
+        EmitSignal(SignalName.StatsChanged, Health, stat);
+        EmitSignal(SignalName.StatsIncreased, Health, stat);
+
         Health = Math.Min(Health + amount, MaxHealth);
     }
 
     public void ConsumeStamina(float amount)
     {
-        EmitSignal(SignalName.StaminaChanged, Stamina);
-        EmitSignal(SignalName.StaminaDecreased, Stamina);
+        const int stat = (int)Stats.Stamina;
+
+        EmitSignal(SignalName.StatsChanged, Stamina, stat);
+        EmitSignal(SignalName.StatsDecreased, amount, stat);
         Stamina = Math.Max(Stamina - amount, 0);
 
         if (Stamina == 0)
-            EmitSignal(SignalName.StaminaDepleted);
+            EmitSignal(SignalName.StatsDepleted, stat);
     }
 
     public void RecoverStamina(float amount)
     {
-        if (Stamina + amount > MaxStamina)
-        {
-            Stamina = MaxStamina;
-            return;
-        }
+        if (Math.Abs(Stamina - MaxStamina) < 0.01) return;
 
-        EmitSignal(SignalName.StaminaChanged, Stamina);
-        EmitSignal(SignalName.StaminaIncreased, Stamina);
+        const int stat = (int)Stats.Stamina;
+
+        EmitSignal(SignalName.StatsChanged, Stamina, stat);
+        EmitSignal(SignalName.StatsIncreased, amount, stat);
+
         Stamina = Math.Min(Stamina + amount, MaxStamina);
     }
 }
