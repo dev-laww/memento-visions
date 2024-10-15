@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_fiyd1")
+UID = "aee3c94b-024a-4df9-9d25-6b000d0a2dcd"
 Name = "Another Item"
-Description = "asasdassdad"
+Description = ""
 Value = 1
 Type = 2
 icon = ExtResource("1_i7ejo")

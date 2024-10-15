@@ -5,11 +5,12 @@
 
 [resource]
 script = ExtResource("1_s8er4")
+UID = "c43c3d94-1ea1-4f75-a416-e82f8a893089"
 Name = "Test"
-Description = "description"
+Description = ""
 Value = 1
 Type = 2
-Icon = ExtResource("1_ejcw7")
+icon = ExtResource("1_ejcw7")
 Sprite = ExtResource("1_ejcw7")
 Stackable = true
 MaxStack = 9999999
