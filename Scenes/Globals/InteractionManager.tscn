@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://clj0h5nlh78ux"]
+
+[ext_resource type="Texture2D" uid="uid://css70n4do7070" path="res://assets/icons/f.png" id="1_mcyo7"]
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/theme.tres" id="2_gxsp3"]
+
+[node name="InteractionManager" type="Node2D"]
+
+[node name="InteractionUI" type="HBoxContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_right = 32.0
+offset_bottom = 16.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Icon" type="TextureRect" parent="InteractionUI"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("1_mcyo7")
+
+[node name="Label" type="Label" parent="InteractionUI"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_gxsp3")
+text = "Interact"
