@@ -84,7 +84,7 @@ public partial class Item : Node2D
         return warnings.ToArray();
     }
 
-    private async void PickUp(Player player)
+    private void PickUp(Player player)
     {
         if (ItemResource == null)
         {
@@ -103,8 +103,6 @@ public partial class Item : Node2D
         tween.TweenProperty(this, "global_position", player.GlobalPosition, 0.2);
         tween.TweenProperty(sprite, "scale", Vector2.Zero, 0.2);
 
-        await ToSignal(tween, "finished");
-
-        QueueFree();
+        tween.Finished += QueueFree;
     }
 }

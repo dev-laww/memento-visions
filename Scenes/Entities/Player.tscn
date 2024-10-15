@@ -1,8 +1,9 @@
-[gd_scene load_steps=128 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=129 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/StatsManager.tscn" id="2_cqdhe"]
 [ext_resource type="Script" path="res://Scripts/Logic/States/StateMachine.cs" id="3_ebktw"]
+[ext_resource type="Resource" uid="uid://diw2rt1u3pxap" path="res://resources/stats/player.tres" id="3_jlnk4"]
 [ext_resource type="Script" path="res://Scripts/Entities/Player/States/Idle.cs" id="4_gml7l"]
 [ext_resource type="Script" path="res://Scripts/Entities/Player/States/Walk.cs" id="5_5apgk"]
 [ext_resource type="Script" path="res://Scripts/Entities/Player/States/Attack.cs" id="6_3yc1u"]
@@ -895,6 +896,7 @@ script = ExtResource("1_3hkqn")
 
 [node name="StatsManager" parent="." instance=ExtResource("2_cqdhe")]
 unique_name_in_owner = true
+Stats = ExtResource("3_jlnk4")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
 unique_name_in_owner = true

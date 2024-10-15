@@ -1,48 +1,70 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 using GodotUtilities;
+using StatsResource = Game.Resources.Stats;
 
 namespace Game.Components;
 
-public enum Stats
+public enum StatsType
 {
     Stamina,
     Health,
 }
 
+[Tool]
 [Scene]
 [GlobalClass]
 public partial class StatsManager : Node
 {
-    [Export]
-    public float MaxHealth { get; set; } = 100f;
-
-    [Export]
-    public float Speed { get; set; } = 50f;
-
-    [Export]
-    public float MaxStamina { get; set; } = 100f;
-
     [Export(PropertyHint.Range, "1,10")]
     private float StaminaRecoveryRate { get; set; } = 1;
 
     [Node]
     private Timer staminaRecovery;
 
-    public float Health { get; private set; }
-    public float Stamina { get; private set; }
+    public float Health
+    {
+        get => health;
+        private set => health = value;
+    }
+
+    public float Stamina
+    {
+        get => stamina;
+        private set => stamina = value;
+    }
+
+    private float health;
+    private float stamina;
+
+    private float MaxHealth;
+    private float MaxStamina;
+    public float Speed { get; private set; }
+    private StatsResource resource;
+
+    [Export]
+    private StatsResource Stats
+    {
+        get => resource;
+        set
+        {
+            resource = value;
+            UpdateConfigurationWarnings();
+        }
+    }
 
     [Signal]
-    public delegate void StatsChangedEventHandler(float value, Stats stat);
+    public delegate void StatsChangedEventHandler(float value, StatsType stat);
 
     [Signal]
-    public delegate void StatsIncreasedEventHandler(float value, Stats stat);
+    public delegate void StatsIncreasedEventHandler(float value, StatsType stat);
 
     [Signal]
-    public delegate void StatsDecreasedEventHandler(float value, Stats stat);
+    public delegate void StatsDecreasedEventHandler(float value, StatsType stat);
 
     [Signal]
-    public delegate void StatsDepletedEventHandler(Stats stat);
+    public delegate void StatsDepletedEventHandler(StatsType stat);
 
     public override void _Notification(int what)
     {
@@ -53,57 +75,79 @@ public partial class StatsManager : Node
 
     public override void _Ready()
     {
-        Health = MaxHealth;
-        Stamina = MaxStamina;
+        InitializeStats();
 
         staminaRecovery.Timeout += () => RecoverStamina(StaminaRecoveryRate);
         staminaRecovery.Start();
     }
 
-    public void TakeDamage(float amount)
+    private void InitializeStats()
     {
-        const int stat = (int)Stats.Health;
-        EmitSignal(SignalName.StatsChanged, Health, stat);
-        EmitSignal(SignalName.StatsDecreased, Health, stat);
-        Health = Math.Max(Health - amount, 0);
+        Speed = Stats.Speed;
+        MaxHealth = Stats.MaxHealth;
+        MaxStamina = Stats.MaxStamina;
 
-        if (Health == 0)
-            EmitSignal(SignalName.StatsDepleted, stat);
+        // Initialize stats to max values
+        Health = MaxHealth;
+        Stamina = MaxStamina;
     }
 
-    public void RecoverHealth(float amount)
+    public void TakeDamage(float amount) => DecreaseStat(
+        stat: ref health,
+        value: amount,
+        type: StatsType.Health
+    );
+
+    public void RecoverHealth(float amount) => IncreaseStat(
+        stat: ref health,
+        max: ref MaxHealth,
+        value: amount,
+        type: StatsType.Health
+    );
+
+    public void ConsumeStamina(float amount) => DecreaseStat(
+        stat: ref stamina,
+        value: amount,
+        type: StatsType.Stamina
+    );
+
+    public void RecoverStamina(float amount) => IncreaseStat(
+        stat: ref stamina,
+        max: ref MaxStamina,
+        value: amount,
+        type: StatsType.Stamina
+    );
+
+    private void DecreaseStat(ref float stat, float value, StatsType type)
     {
-        if (Math.Abs(Health - MaxHealth) < 0.01) return;
+        stat = Math.Max(stat - value, 0);
 
-        const int stat = (int)Stats.Health;
+        var statType = (int)type;
+        // EmitSignal(SignalName.StatsChanged, Stamina, statType);
+        // EmitSignal(SignalName.StatsDecreased, value, statType);
 
-        EmitSignal(SignalName.StatsChanged, Health, stat);
-        EmitSignal(SignalName.StatsIncreased, Health, stat);
-
-        Health = Math.Min(Health + amount, MaxHealth);
+        // if (stat <= 0)
+        //     EmitSignal(SignalName.StatsDepleted, statType);
     }
 
-    public void ConsumeStamina(float amount)
+    private void IncreaseStat(ref float stat, ref float max, float value, StatsType type)
     {
-        const int stat = (int)Stats.Stamina;
+        if (stat >= max) return;
 
-        EmitSignal(SignalName.StatsChanged, Stamina, stat);
-        EmitSignal(SignalName.StatsDecreased, amount, stat);
-        Stamina = Math.Max(Stamina - amount, 0);
+        stat = Math.Min(stat + value, max);
 
-        if (Stamina == 0)
-            EmitSignal(SignalName.StatsDepleted, stat);
+        var statType = (int)type;
+        // EmitSignal(SignalName.StatsChanged, Stamina, statType);
+        // EmitSignal(SignalName.StatsIncreased, value, statType);
     }
 
-    public void RecoverStamina(float amount)
+    public override string[] _GetConfigurationWarnings()
     {
-        if (Math.Abs(Stamina - MaxStamina) < 0.01) return;
+        var warnings = new List<string>();
 
-        const int stat = (int)Stats.Stamina;
+        if (resource is null)
+            warnings.Add("Stats resource is not set.");
 
-        EmitSignal(SignalName.StatsChanged, Stamina, stat);
-        EmitSignal(SignalName.StatsIncreased, amount, stat);
-
-        Stamina = Math.Min(Stamina + amount, MaxStamina);
+        return warnings.ToArray();
     }
 }

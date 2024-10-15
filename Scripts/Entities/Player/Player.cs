@@ -82,13 +82,11 @@ public partial class Player : CharacterBody2D
         return lastMoveDirection.Y < 0 ? "back" : "front";
     }
     
-    private void StatChangeHandler(float value, Stats stat)
+    private void StatChangeHandler(float value, StatsType stat)
     {
-        GD.Print($"Player's {stat} changed to {value}.");
-        
         CanDash = stat switch
         {
-            Stats.Stamina => value >= DashStaminaCost,
+            StatsType.Stamina => value >= DashStaminaCost,
             _ => CanDash
         };
     }
