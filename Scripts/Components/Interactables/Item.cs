@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.Entities.Player;
 using Godot;
 using GodotUtilities;
 using ItemResource = Game.Resources.Item;
@@ -20,7 +21,7 @@ public partial class Item : Node2D
             if (value == null)
             {
                 Name = "Item";
-                
+
                 if (sprite != null)
                     sprite.Texture = null;
 
@@ -29,7 +30,7 @@ public partial class Item : Node2D
                     {
                         Radius = 5
                     };
-                
+
                 return;
             }
 
@@ -70,7 +71,7 @@ public partial class Item : Node2D
 
     public override void _Ready()
     {
-        pickupRange.BodyEntered += body => GD.Print($"{Name}: {body.Name} entered the pickup range.");
+        pickupRange.BodyEntered += body => PickUp(body as Player);
     }
 
     public override string[] _GetConfigurationWarnings()
@@ -81,5 +82,29 @@ public partial class Item : Node2D
             warnings.Add("ItemResource is not set.");
 
         return warnings.ToArray();
+    }
+
+    private async void PickUp(Player player)
+    {
+        if (ItemResource == null)
+        {
+            GD.PrintErr($"{Name}: ItemResource is not set.");
+            return;
+        }
+
+        if (player == null)
+        {
+            GD.PrintErr($"{Name}: Player is null.");
+            return;
+        }
+        
+        var tween = CreateTween().SetParallel().SetTrans(Tween.TransitionType.Linear);
+        
+        tween.TweenProperty(this, "global_position", player.GlobalPosition, 0.2);
+        tween.TweenProperty(sprite, "scale", Vector2.Zero, 0.2);
+
+        await ToSignal(tween, "finished");
+
+        QueueFree();
     }
 }
