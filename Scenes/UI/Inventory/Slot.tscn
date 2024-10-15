@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbloyj0ih0win"]
+
+[ext_resource type="Texture2D" uid="uid://rn24x1db86vf" path="res://assets/Inventory/inventorySlot.png" id="1_butkr"]
+[ext_resource type="Script" path="res://Scripts/UI/Inventory/Slot.cs" id="1_ranbd"]
+[ext_resource type="Resource" uid="uid://dp1e6xsfpuo3y" path="res://resources/items/test.tres" id="2_ehbna"]
+[ext_resource type="Texture2D" uid="uid://sy4pwvob14t1" path="res://assets/Inventory/keys_1_3.png" id="4_c7ms7"]
+[ext_resource type="FontFile" uid="uid://doq56gjhf7lo6" path="res://assets/Font/zxSpectrumExpanded.ttf" id="5_7e05u"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bakjo"]
+texture = ExtResource("1_butkr")
+region_rect = Rect2(0, 20, 20, 20)
+
+[node name="Slot" type="Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 34.0
+offset_bottom = 34.0
+script = ExtResource("1_ranbd")
+Item = ExtResource("2_ehbna")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bakjo")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="Sprite2D" parent="CenterContainer"]
+unique_name_in_owner = true
+position = Vector2(20, 20)
+scale = Vector2(2, 2)
+texture = ExtResource("4_c7ms7")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 3.0
+offset_top = 1.0
+offset_right = -5.0
+offset_bottom = 14.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("5_7e05u")
+theme_override_font_sizes/font_size = 16
+text = "1"
