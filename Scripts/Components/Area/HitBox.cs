@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Godot;
 
-namespace Game.Components;
+namespace Game.Components.Area;
 
 [Tool]
 [GlobalClass]

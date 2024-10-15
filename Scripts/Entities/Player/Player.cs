@@ -1,5 +1,6 @@
 using System;
 using Game.Components;
+using Game.Components.Area;
 using Game.Logic.States;
 using Game.Utils.Extensions;
 using Godot;

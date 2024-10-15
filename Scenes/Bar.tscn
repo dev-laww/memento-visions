@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://8xieh4pqx0hg"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
-[ext_resource type="Script" path="res://Scripts/Components/HitBox.cs" id="2_cqdlw"]
-[ext_resource type="Script" path="res://Scripts/Components/ContinuousDamageHitBox.cs" id="3_mr0hr"]
+[ext_resource type="Script" path="res://Scripts/Components/Area/HitBox.cs" id="2_cqdlw"]
+[ext_resource type="Script" path="res://Scripts/Components/Area/ContinuousDamageHitBox.cs" id="3_mr0hr"]
 [ext_resource type="PackedScene" uid="uid://cu4fpa8blkef8" path="res://Scenes/Components/Interactables/Item.tscn" id="5_ne7o4"]
 [ext_resource type="Resource" uid="uid://ca7x8v0aixg5x" path="res://resources/items/another item.tres" id="6_g251o"]
 [ext_resource type="Resource" uid="uid://dp1e6xsfpuo3y" path="res://resources/items/test.tres" id="7_85145"]

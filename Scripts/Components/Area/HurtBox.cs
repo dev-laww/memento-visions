@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Game.Components;
+namespace Game.Components.Area;
 
 [GlobalClass]
 public partial class HurtBox : Area2D

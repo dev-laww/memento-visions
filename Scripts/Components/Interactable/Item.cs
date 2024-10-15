@@ -4,7 +4,7 @@ using Godot;
 using GodotUtilities;
 using ItemResource = Game.Resources.Item;
 
-namespace Game.Components.Interactables;
+namespace Game.Components.Interactable;
 
 [Scene]
 [Tool]

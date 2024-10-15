@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c681ubn1ym03q" path="res://assets/entities/player/hurt.png" id="9_tcmu3"]
 [ext_resource type="Texture2D" uid="uid://b0d83ejsel370" path="res://assets/entities/player/idle.png" id="10_te860"]
 [ext_resource type="Texture2D" uid="uid://c8c7pr6uxjpd" path="res://assets/entities/player/walk.png" id="11_f0os2"]
-[ext_resource type="Script" path="res://Scripts/Components/HurtBox.cs" id="12_xp768"]
+[ext_resource type="Script" path="res://Scripts/Components/Area/HurtBox.cs" id="12_xp768"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r5a8n"]
 atlas = ExtResource("8_gnh3f")
