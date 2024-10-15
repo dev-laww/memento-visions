@@ -20,8 +20,34 @@ public partial class StatsManager : Node
     [Export(PropertyHint.Range, "1,10")]
     private float StaminaRecoveryRate { get; set; } = 1;
 
+    [Export]
+    private StatsResource Stats
+    {
+        get => resource;
+        set
+        {
+            resource = value;
+            UpdateConfigurationWarnings();
+        }
+    }
+
     [Node]
     private Timer staminaRecovery;
+
+    [Signal]
+    public delegate void StatsChangedEventHandler(float value, StatsType stat);
+
+    [Signal]
+    public delegate void StatsIncreasedEventHandler(float value, StatsType stat);
+
+    [Signal]
+    public delegate void StatsDecreasedEventHandler(float value, StatsType stat);
+
+    [Signal]
+    public delegate void StatsDepletedEventHandler(StatsType stat);
+
+
+    public float Speed { get; private set; }
 
     public float Health
     {
@@ -35,36 +61,23 @@ public partial class StatsManager : Node
         private set => stamina = value;
     }
 
-    private float health;
-    private float stamina;
-
-    private float MaxHealth;
-    private float MaxStamina;
-    public float Speed { get; private set; }
-    private StatsResource resource;
-
-    [Export]
-    private StatsResource Stats
+    public float MaxHealth
     {
-        get => resource;
-        set
-        {
-            resource = value;
-            UpdateConfigurationWarnings();
-        }
+        get => maxHealth;
+        private set => maxHealth = value;
     }
 
-    [Signal]
-    public delegate void StatsChangedEventHandler(float value, StatsType stat);
+    private float MaxStamina
+    {
+        get => maxStamina;
+        set => maxStamina = value;
+    }
 
-    [Signal]
-    public delegate void StatsIncreasedEventHandler(float value, StatsType stat);
-
-    [Signal]
-    public delegate void StatsDecreasedEventHandler(float value, StatsType stat);
-
-    [Signal]
-    public delegate void StatsDepletedEventHandler(StatsType stat);
+    private float health;
+    private float stamina;
+    private float maxHealth;
+    private float maxStamina;
+    private StatsResource resource;
 
     public override void _Notification(int what)
     {
@@ -100,7 +113,7 @@ public partial class StatsManager : Node
 
     public void RecoverHealth(float amount) => IncreaseStat(
         stat: ref health,
-        max: ref MaxHealth,
+        max: ref maxHealth,
         value: amount,
         type: StatsType.Health
     );
@@ -113,7 +126,7 @@ public partial class StatsManager : Node
 
     public void RecoverStamina(float amount) => IncreaseStat(
         stat: ref stamina,
-        max: ref MaxStamina,
+        max: ref maxStamina,
         value: amount,
         type: StatsType.Stamina
     );
