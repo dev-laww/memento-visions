@@ -5,12 +5,11 @@
 
 [resource]
 script = ExtResource("1_fiyd1")
-UID = "aee3c94b-024a-4df9-9d25-6b000d0a2dcd"
 Name = "Another Item"
 Description = ""
 Value = 1
 Type = 2
 icon = ExtResource("1_i7ejo")
-Sprite = ExtResource("1_i7ejo")
 Stackable = true
 MaxStack = 9999999
+metadata/uid = "06e05acb-1613-47e7-9be3-8c54efe14d3a"
