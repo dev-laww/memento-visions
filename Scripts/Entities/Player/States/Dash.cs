@@ -30,12 +30,6 @@ public partial class Dash : State
 
     public override void Enter()
     {
-        if (!player.CanDash)
-        {
-            stateMachine.ChangeState("idle");
-            return;
-        }
-
         player.Dashing = true;
     }
 
