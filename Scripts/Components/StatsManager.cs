@@ -123,11 +123,11 @@ public partial class StatsManager : Node
         stat = Math.Max(stat - value, 0);
 
         var statType = (int)type;
-        // EmitSignal(SignalName.StatsChanged, Stamina, statType);
-        // EmitSignal(SignalName.StatsDecreased, value, statType);
+        EmitSignal(SignalName.StatsChanged, Stamina, statType);
+        EmitSignal(SignalName.StatsDecreased, value, statType);
 
-        // if (stat <= 0)
-        //     EmitSignal(SignalName.StatsDepleted, statType);
+        if (stat <= 0)
+            EmitSignal(SignalName.StatsDepleted, statType);
     }
 
     private void IncreaseStat(ref float stat, ref float max, float value, StatsType type)
@@ -137,8 +137,8 @@ public partial class StatsManager : Node
         stat = Math.Min(stat + value, max);
 
         var statType = (int)type;
-        // EmitSignal(SignalName.StatsChanged, Stamina, statType);
-        // EmitSignal(SignalName.StatsIncreased, value, statType);
+        EmitSignal(SignalName.StatsChanged, Stamina, statType);
+        EmitSignal(SignalName.StatsIncreased, value, statType);
     }
 
     public override string[] _GetConfigurationWarnings()
