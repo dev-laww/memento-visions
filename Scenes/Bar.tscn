@@ -1,45 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://8xieh4pqx0hg"]
+[gd_scene load_steps=3 format=4 uid="uid://8xieh4pqx0hg"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
-[ext_resource type="Script" path="res://Scripts/Components/Area/HitBox.cs" id="2_cqdlw"]
-[ext_resource type="Script" path="res://Scripts/Components/Area/ContinuousDamageHitBox.cs" id="3_mr0hr"]
-[ext_resource type="PackedScene" uid="uid://cu4fpa8blkef8" path="res://Scenes/Components/Interactable/Item.tscn" id="5_ne7o4"]
-[ext_resource type="Resource" uid="uid://ca7x8v0aixg5x" path="res://resources/items/another item.tres" id="6_g251o"]
-[ext_resource type="Resource" uid="uid://dp1e6xsfpuo3y" path="res://resources/items/test.tres" id="7_85145"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5ivt"]
-size = Vector2(90, 84)
+[ext_resource type="TileSet" uid="uid://di324xlegxgrg" path="res://resources/tilesets/bar.tres" id="7_unifd"]
 
 [node name="Bar" type="Node2D"]
 
+[node name="Decorations" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAACAAIAAgAAAAgAAAADAAIAAgAAAAkAAAAEAAIAAgADAAkAAAA=")
+tile_set = ExtResource("7_unifd")
+
+[node name="Floor" type="TileMapLayer" parent="."]
+z_index = -2
+position = Vector2(25, 16)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAFAAAAAAABAAAAAAAEAAAAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAABAAEAAAABAAEAAAABAAIAAAABAAEAAAAFAAEAAAABAAEAAAAEAAEAAAABAAEAAAACAAEAAAABAAEAAAADAAEAAAABAAEAAAACAAIAAAABAAEAAAAFAAIAAAABAAEAAAAEAAIAAAABAAEAAAADAAIAAAABAAEAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAACAAAAAAAIAAEAAAACAAEAAAAIAAIAAAACAAEAAAAIAAMAAAACAAEAAAAIAAQAAAACAAIAAAAHAAQAAAABAAIAAAAGAAQAAAABAAIAAAAFAAQAAAABAAIAAAAEAAQAAAABAAIAAAADAAQAAAABAAIAAAACAAQAAAABAAIAAAABAAQAAAABAAIAAAAAAAQAAAAAAAIAAAAAAAMAAAAAAAEAAAABAAMAAAABAAEAAAACAAMAAAABAAEAAAADAAMAAAABAAEAAAAEAAMAAAABAAEAAAAFAAMAAAABAAEAAAAGAAMAAAABAAEAAAAHAAMAAAABAAEAAAAHAAIAAAABAAEAAAAHAAEAAAABAAEAAAAGAAEAAAABAAEAAAAGAAIAAAABAAEAAAD//wQAAgAUAAAAAAD//wMAAgAUAAAAAAD//wIAAgAUAAAAAAD//wEAAgAUAAAAAAD//wAAAgAUAAAAAAD/////AgAUAAAAAAAAAP//AgAUAAAAAAABAP//AgAUAAAAAAACAP//AgAUAAAAAAADAP//AgAUAAAAAAAEAP//AgAUAAAAAAAFAP//AgAUAAAAAAAGAP//AgAUAAAAAAAHAP//AgAUAAAAAAAIAP//AgAUAAAAAAAJAP//AgAUAAAAAAAJAAAAAgAUAAAAAAAJAAEAAgAUAAAAAAAJAAIAAgAUAAAAAAAJAAMAAgAUAAAAAAAJAAQAAgAUAAAAAAAJAAUAAgAUAAAAAAAIAAUAAgAUAAAAAAAHAAUAAgAUAAAAAAAGAAUAAgAUAAAAAAAFAAUAAgAUAAAAAAAEAAUAAgAUAAAAAAADAAUAAgAUAAAAAAACAAUAAgAUAAAAAAABAAUAAgAUAAAAAAAAAAUAAgAUAAAAAAD//wUAAgAUAAAAAAA=")
+tile_set = ExtResource("7_unifd")
+
 [node name="Player" parent="." instance=ExtResource("1_28rab")]
-position = Vector2(320, 180)
-
-[node name="HitBox" type="Area2D" parent="."]
-position = Vector2(173, 188)
-collision_layer = 1024
-collision_mask = 2048
-script = ExtResource("2_cqdlw")
-Damage = 1.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource("RectangleShape2D_o5ivt")
-
-[node name="ContinuousDamageHitBox" type="Area2D" parent="."]
-position = Vector2(453, 187)
-collision_layer = 1024
-collision_mask = 2048
-script = ExtResource("3_mr0hr")
-Damage = 5.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousDamageHitBox"]
-shape = SubResource("RectangleShape2D_o5ivt")
-debug_color = Color(0.732258, 0.454397, 0.353821, 0.42)
-
-[node name="Another Item" parent="." instance=ExtResource("5_ne7o4")]
-position = Vector2(354, 89)
-ItemResource = ExtResource("6_g251o")
-
-[node name="Test" parent="." instance=ExtResource("5_ne7o4")]
-position = Vector2(115, 64)
-ItemResource = ExtResource("7_85145")
+position = Vector2(160, 90)
