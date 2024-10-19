@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SceneManager="*res://Scripts/Globals/SceneManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+InteractionManager="*res://Scenes/Globals/InteractionManager.tscn"
 
 [dialogue_manager]
 
