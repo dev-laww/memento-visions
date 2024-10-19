@@ -1,19 +1,66 @@
-[gd_scene load_steps=3 format=4 uid="uid://8xieh4pqx0hg"]
+[gd_scene load_steps=10 format=4 uid="uid://8xieh4pqx0hg"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
+[ext_resource type="Texture2D" uid="uid://bld0optmgxhyy" path="res://assets/scenes/bar/door.png" id="3_iihhm"]
+[ext_resource type="Texture2D" uid="uid://ci332xcrlkg7" path="res://assets/scenes/bar/liquor-rack.png" id="4_qpfv8"]
+[ext_resource type="Texture2D" uid="uid://boqudvom2hggr" path="res://assets/scenes/bar/counter.png" id="5_fht51"]
+[ext_resource type="Texture2D" uid="uid://d2n54gpucgwid" path="res://assets/scenes/bar/seat.png" id="6_55dbo"]
 [ext_resource type="TileSet" uid="uid://di324xlegxgrg" path="res://resources/tilesets/bar.tres" id="7_unifd"]
+[ext_resource type="Texture2D" uid="uid://clnqhsnclctsb" path="res://assets/scenes/bar/painting.png" id="12_1v6r4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xev46"]
+size = Vector2(46, 16)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k086a"]
+radius = 4.0
+height = 12.0
 
 [node name="Bar" type="Node2D"]
-
-[node name="Decorations" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAACAAIAAgAAAAgAAAADAAIAAgAAAAkAAAAEAAIAAgADAAkAAAA=")
-tile_set = ExtResource("7_unifd")
+y_sort_enabled = true
 
 [node name="Floor" type="TileMapLayer" parent="."]
 z_index = -2
-position = Vector2(25, 16)
+position = Vector2(24, 14)
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAFAAAAAAABAAAAAAAEAAAAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAABAAEAAAABAAEAAAABAAIAAAABAAEAAAAFAAEAAAABAAEAAAAEAAEAAAABAAEAAAACAAEAAAABAAEAAAADAAEAAAABAAEAAAACAAIAAAABAAEAAAAFAAIAAAABAAEAAAAEAAIAAAABAAEAAAADAAIAAAABAAEAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAACAAAAAAAIAAEAAAACAAEAAAAIAAIAAAACAAEAAAAIAAMAAAACAAEAAAAIAAQAAAACAAIAAAAHAAQAAAABAAIAAAAGAAQAAAABAAIAAAAFAAQAAAABAAIAAAAEAAQAAAABAAIAAAADAAQAAAABAAIAAAACAAQAAAABAAIAAAABAAQAAAABAAIAAAAAAAQAAAAAAAIAAAAAAAMAAAAAAAEAAAABAAMAAAABAAEAAAACAAMAAAABAAEAAAADAAMAAAABAAEAAAAEAAMAAAABAAEAAAAFAAMAAAABAAEAAAAGAAMAAAABAAEAAAAHAAMAAAABAAEAAAAHAAIAAAABAAEAAAAHAAEAAAABAAEAAAAGAAEAAAABAAEAAAAGAAIAAAABAAEAAAD//wQAAgAUAAAAAAD//wMAAgAUAAAAAAD//wIAAgAUAAAAAAD//wEAAgAUAAAAAAD//wAAAgAUAAAAAAD/////AgAUAAAAAAAAAP//AgAUAAAAAAABAP//AgAUAAAAAAACAP//AgAUAAAAAAADAP//AgAUAAAAAAAEAP//AgAUAAAAAAAFAP//AgAUAAAAAAAGAP//AgAUAAAAAAAHAP//AgAUAAAAAAAIAP//AgAUAAAAAAAJAP//AgAUAAAAAAAJAAAAAgAUAAAAAAAJAAEAAgAUAAAAAAAJAAIAAgAUAAAAAAAJAAMAAgAUAAAAAAAJAAQAAgAUAAAAAAAJAAUAAgAUAAAAAAAIAAUAAgAUAAAAAAAHAAUAAgAUAAAAAAAGAAUAAgAUAAAAAAAFAAUAAgAUAAAAAAAEAAUAAgAUAAAAAAADAAUAAgAUAAAAAAACAAUAAgAUAAAAAAABAAUAAgAUAAAAAAAAAAUAAgAUAAAAAAD//wUAAgAUAAAAAAA=")
 tile_set = ExtResource("7_unifd")
 
 [node name="Player" parent="." instance=ExtResource("1_28rab")]
-position = Vector2(160, 90)
+position = Vector2(231, 129)
+
+[node name="Door" type="Sprite2D" parent="."]
+position = Vector2(68, 50)
+texture = ExtResource("3_iihhm")
+
+[node name="Painting" type="Sprite2D" parent="."]
+position = Vector2(404, 40)
+texture = ExtResource("12_1v6r4")
+
+[node name="Liquor Rack" type="StaticBody2D" parent="."]
+position = Vector2(104, 54)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Liquor Rack"]
+position = Vector2(0, 15)
+shape = SubResource("RectangleShape2D_xev46")
+
+[node name="Liquor-rack" type="Sprite2D" parent="Liquor Rack"]
+texture = ExtResource("4_qpfv8")
+
+[node name="Counter" type="StaticBody2D" parent="."]
+position = Vector2(107, 70)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Counter"]
+polygon = PackedVector2Array(-47, 13, -47, 24, 47, 24, 47, -21, 33, -21, 33, 13)
+
+[node name="Counter" type="Sprite2D" parent="Counter"]
+texture = ExtResource("5_fht51")
+
+[node name="Seat" type="StaticBody2D" parent="."]
+position = Vector2(71, 91)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Seat"]
+position = Vector2(0, 8)
+rotation = 1.57094
+shape = SubResource("CapsuleShape2D_k086a")
+
+[node name="Seat" type="Sprite2D" parent="Seat"]
+texture = ExtResource("6_55dbo")

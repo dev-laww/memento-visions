@@ -544,7 +544,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kaamo"]
 radius = 3.99948
-height = 11.9985
+height = 20.0295
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dyvqy"]
 radius = 8.0
@@ -583,8 +583,7 @@ animation = &"idle_front"
 autoplay = "idle_front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 10)
+position = Vector2(1.49012e-08, 13)
 rotation = 1.58684
 shape = SubResource("CapsuleShape2D_kaamo")
 
