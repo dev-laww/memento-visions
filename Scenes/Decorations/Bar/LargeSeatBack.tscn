@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxq1fj8j0r0tc"]
+
+[ext_resource type="Texture2D" uid="uid://o66ekifimlua" path="res://assets/scenes/bar/seat-large-back.png" id="1_jt052"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1qej"]
+size = Vector2(44, 9)
+
+[node name="LargeSeatBack" type="StaticBody2D"]
+position = Vector2(117, 172)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7.5)
+shape = SubResource("RectangleShape2D_w1qej")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_jt052")

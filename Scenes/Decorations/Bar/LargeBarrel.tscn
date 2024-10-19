@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://j0qixu5x2ins"]
+
+[ext_resource type="Texture2D" uid="uid://ceiceots6w5ie" path="res://assets/scenes/bar/barrel-large.png" id="1_bxhie"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ro33n"]
+radius = 6.0
+height = 20.0
+
+[node name="LargeBarrel" type="StaticBody2D"]
+position = Vector2(55, 141)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ro33n")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_bxhie")

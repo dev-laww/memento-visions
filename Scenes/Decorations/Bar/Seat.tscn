@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxb5hg2tcbaym"]
+
+[ext_resource type="Texture2D" uid="uid://d2n54gpucgwid" path="res://assets/scenes/bar/seat.png" id="1_1stij"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k086a"]
+radius = 5.0
+height = 14.0
+
+[node name="Seat" type="StaticBody2D"]
+position = Vector2(71, 91)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+rotation = 1.57094
+shape = SubResource("CapsuleShape2D_k086a")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_1stij")

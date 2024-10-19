@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bl75po1fdm40q"]
+
+[ext_resource type="Texture2D" uid="uid://boqudvom2hggr" path="res://assets/scenes/bar/counter.png" id="1_n03vp"]
+
+[node name="Counter" type="StaticBody2D"]
+position = Vector2(220, 142)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-47, 13, -47, 24, 47, 24, 47, -24, 33, -24, 33, 13)
+
+[node name="Counter" type="Sprite2D" parent="."]
+texture = ExtResource("1_n03vp")

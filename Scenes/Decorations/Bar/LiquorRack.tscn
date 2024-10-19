@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://6dopjvehyksh"]
+
+[ext_resource type="Texture2D" uid="uid://ci332xcrlkg7" path="res://assets/scenes/bar/liquor-rack.png" id="1_dg1lo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xev46"]
+size = Vector2(44, 18)
+
+[node name="Liquor Rack" type="StaticBody2D"]
+position = Vector2(124, 71)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 15)
+shape = SubResource("RectangleShape2D_xev46")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_dg1lo")

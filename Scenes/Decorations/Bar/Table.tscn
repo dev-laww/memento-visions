@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://0r3pqmjvamym"]
+
+[ext_resource type="Texture2D" uid="uid://boyimok8ahmor" path="res://assets/scenes/bar/table.png" id="1_hb75k"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pko05"]
+radius = 6.0
+height = 42.0
+
+[node name="Table" type="StaticBody2D"]
+position = Vector2(184, 93)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_pko05")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_hb75k")
