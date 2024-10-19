@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0d83ejsel370"
-path="res://.godot/imported/idle.png-3dccba5532f032c086eb755663af943a.ctex"
+uid="uid://dsip3w1nkl51x"
+path="res://.godot/imported/city.png-03ddcde5c28d0bf2d8354a34ce17c1a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entities/player/idle.png"
-dest_files=["res://.godot/imported/idle.png-3dccba5532f032c086eb755663af943a.ctex"]
+source_file="res://assets/tilesets/city.png"
+dest_files=["res://.godot/imported/city.png-03ddcde5c28d0bf2d8354a34ce17c1a6.ctex"]
 
 [params]
 

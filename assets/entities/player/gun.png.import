@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c681ubn1ym03q"
-path="res://.godot/imported/hurt.png-d5a8c5059212098e9e152cf2778e2d4d.ctex"
+uid="uid://cqkfcnxdrmj8i"
+path="res://.godot/imported/gun.png-48d87485e817efe85444fe30ac3769bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entities/player/hurt.png"
-dest_files=["res://.godot/imported/hurt.png-d5a8c5059212098e9e152cf2778e2d4d.ctex"]
+source_file="res://assets/entities/player/gun.png"
+dest_files=["res://.godot/imported/gun.png-48d87485e817efe85444fe30ac3769bc.ctex"]
 
 [params]
 
