@@ -9,7 +9,15 @@
 [ext_resource type="Script" path="res://Scripts/Entities/Player/States/Attack.cs" id="6_3yc1u"]
 [ext_resource type="Script" path="res://Scripts/Entities/Player/States/Dash.cs" id="7_v6oq8"]
 [ext_resource type="Texture2D" uid="uid://crm174xl683eq" path="res://assets/entities/player/player.png" id="9_2exdb"]
-[ext_resource type="Script" path="res://Scripts/Components/Area/HurtBox.cs" id="12_xp768"]
+[ext_resource type="PackedScene" uid="uid://pp1psblt31wv" path="res://Scenes/Components/Area/HurtBox.tscn" id="9_e4j62"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kaamo"]
+radius = 4.98331
+height = 15.9979
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7xh7"]
+radius = 9.0
+height = 28.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_il706"]
 atlas = ExtResource("9_2exdb")
@@ -542,14 +550,6 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kaamo"]
-radius = 3.99948
-height = 20.0295
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dyvqy"]
-radius = 8.0
-height = 24.0
-
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 4
 collision_mask = 1019
@@ -576,24 +576,20 @@ script = ExtResource("6_3yc1u")
 [node name="Dash" type="Node" parent="StateMachine"]
 script = ExtResource("7_v6oq8")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.49012e-08, 14)
+rotation = 1.58684
+shape = SubResource("CapsuleShape2D_kaamo")
+
+[node name="HurtBox" parent="." instance=ExtResource("9_e4j62")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_n7xh7")
+debug_color = Color(0.996578, 0.311043, 0.384733, 0.42)
+
 [node name="Sprites" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_ycwij")
 animation = &"idle_front"
 autoplay = "idle_front"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.49012e-08, 13)
-rotation = 1.58684
-shape = SubResource("CapsuleShape2D_kaamo")
-
-[node name="HurtBox" type="Area2D" parent="."]
-visible = false
-collision_layer = 2048
-collision_mask = 1024
-script = ExtResource("12_xp768")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, 1)
-shape = SubResource("CapsuleShape2D_dyvqy")
-debug_color = Color(0.996578, 0.311043, 0.384733, 0.42)

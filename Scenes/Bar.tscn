@@ -1,142 +1,142 @@
-[gd_scene load_steps=20 format=4 uid="uid://8xieh4pqx0hg"]
+[gd_scene load_steps=13 format=4 uid="uid://8xieh4pqx0hg"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
 [ext_resource type="Texture2D" uid="uid://bld0optmgxhyy" path="res://assets/scenes/bar/door.png" id="3_iihhm"]
-[ext_resource type="Texture2D" uid="uid://ci332xcrlkg7" path="res://assets/scenes/bar/liquor-rack.png" id="4_qpfv8"]
-[ext_resource type="Texture2D" uid="uid://boqudvom2hggr" path="res://assets/scenes/bar/counter.png" id="5_fht51"]
-[ext_resource type="Texture2D" uid="uid://d2n54gpucgwid" path="res://assets/scenes/bar/seat.png" id="6_55dbo"]
-[ext_resource type="Texture2D" uid="uid://ceiceots6w5ie" path="res://assets/scenes/bar/barrel-large.png" id="7_aaicw"]
+[ext_resource type="PackedScene" uid="uid://6dopjvehyksh" path="res://Scenes/Decorations/Bar/LiquorRack.tscn" id="5_a7o0g"]
+[ext_resource type="PackedScene" uid="uid://bl75po1fdm40q" path="res://Scenes/Decorations/Bar/Counter.tscn" id="6_uugt5"]
+[ext_resource type="PackedScene" uid="uid://bxb5hg2tcbaym" path="res://Scenes/Decorations/Bar/Seat.tscn" id="7_4neyr"]
 [ext_resource type="TileSet" uid="uid://di324xlegxgrg" path="res://resources/tilesets/bar.tres" id="7_unifd"]
-[ext_resource type="Texture2D" uid="uid://b6tbh2rhu28vc" path="res://assets/scenes/bar/barrel-small.png" id="8_j7a3w"]
-[ext_resource type="Texture2D" uid="uid://b5t0jek0fxmsj" path="res://assets/scenes/bar/seat-large-front.png" id="9_w0y67"]
-[ext_resource type="Texture2D" uid="uid://boyimok8ahmor" path="res://assets/scenes/bar/table.png" id="10_t3psw"]
-[ext_resource type="Texture2D" uid="uid://o66ekifimlua" path="res://assets/scenes/bar/seat-large-back.png" id="11_5m1p4"]
+[ext_resource type="PackedScene" uid="uid://j0qixu5x2ins" path="res://Scenes/Decorations/Bar/LargeBarrel.tscn" id="8_fqy60"]
+[ext_resource type="PackedScene" uid="uid://b5jpiv87dv1rl" path="res://Scenes/Decorations/Bar/Barrel.tscn" id="9_ikvjg"]
+[ext_resource type="PackedScene" uid="uid://ciwj30yficn0p" path="res://Scenes/Decorations/Bar/LargeSeatFront.tscn" id="10_8pc0o"]
+[ext_resource type="PackedScene" uid="uid://0r3pqmjvamym" path="res://Scenes/Decorations/Bar/Table.tscn" id="11_de4ou"]
 [ext_resource type="Texture2D" uid="uid://clnqhsnclctsb" path="res://assets/scenes/bar/painting.png" id="12_1v6r4"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xev46"]
-size = Vector2(46, 16)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k086a"]
-radius = 4.0
-height = 12.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ro33n"]
-radius = 6.0
-height = 20.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0njur"]
-radius = 6.0
-height = 16.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5nser"]
-size = Vector2(44, 10)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1qej"]
-size = Vector2(44, 9)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pko05"]
-radius = 6.0
-height = 42.0
+[ext_resource type="PackedScene" uid="uid://bxq1fj8j0r0tc" path="res://Scenes/Decorations/Bar/LargeSeatBack.tscn" id="12_ktjm6"]
 
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
 
-[node name="Floor" type="TileMapLayer" parent="."]
+[node name="Art" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Floor" type="TileMapLayer" parent="Art"]
 z_index = -2
 position = Vector2(24, 14)
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAFAAAAAAABAAAAAAAEAAAAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAABAAEAAAABAAEAAAABAAIAAAABAAEAAAAFAAEAAAABAAEAAAAEAAEAAAABAAEAAAACAAEAAAABAAEAAAADAAEAAAABAAEAAAACAAIAAAABAAEAAAAFAAIAAAABAAEAAAAEAAIAAAABAAEAAAADAAIAAAABAAEAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAACAAAAAAAIAAEAAAACAAEAAAAIAAIAAAACAAEAAAAIAAMAAAACAAEAAAAIAAQAAAACAAIAAAAHAAQAAAABAAIAAAAGAAQAAAABAAIAAAAFAAQAAAABAAIAAAAEAAQAAAABAAIAAAADAAQAAAABAAIAAAACAAQAAAABAAIAAAABAAQAAAABAAIAAAAAAAQAAAAAAAIAAAAAAAMAAAAAAAEAAAABAAMAAAABAAEAAAACAAMAAAABAAEAAAADAAMAAAABAAEAAAAEAAMAAAABAAEAAAAFAAMAAAABAAEAAAAGAAMAAAABAAEAAAAHAAMAAAABAAEAAAAHAAIAAAABAAEAAAAHAAEAAAABAAEAAAAGAAEAAAABAAEAAAAGAAIAAAABAAEAAAD//wQAAgAUAAAAAAD//wMAAgAUAAAAAAD//wIAAgAUAAAAAAD//wEAAgAUAAAAAAD//wAAAgAUAAAAAAD/////AgAUAAAAAAAAAP//AgAUAAAAAAABAP//AgAUAAAAAAACAP//AgAUAAAAAAADAP//AgAUAAAAAAAEAP//AgAUAAAAAAAFAP//AgAUAAAAAAAGAP//AgAUAAAAAAAHAP//AgAUAAAAAAAIAP//AgAUAAAAAAAJAP//AgAUAAAAAAAJAAAAAgAUAAAAAAAJAAEAAgAUAAAAAAAJAAIAAgAUAAAAAAAJAAMAAgAUAAAAAAAJAAQAAgAUAAAAAAAJAAUAAgAUAAAAAAAIAAUAAgAUAAAAAAAHAAUAAgAUAAAAAAAGAAUAAgAUAAAAAAAFAAUAAgAUAAAAAAAEAAUAAgAUAAAAAAADAAUAAgAUAAAAAAACAAUAAgAUAAAAAAABAAUAAgAUAAAAAAAAAAUAAgAUAAAAAAD//wUAAgAUAAAAAAA=")
 tile_set = ExtResource("7_unifd")
 
-[node name="Player" parent="." instance=ExtResource("1_28rab")]
-position = Vector2(231, 129)
-
-[node name="Door" type="Sprite2D" parent="."]
+[node name="Door" type="Sprite2D" parent="Art"]
 position = Vector2(68, 50)
 texture = ExtResource("3_iihhm")
 
-[node name="Painting" type="Sprite2D" parent="."]
+[node name="Painting" type="Sprite2D" parent="Art"]
 position = Vector2(404, 40)
 texture = ExtResource("12_1v6r4")
 
-[node name="Liquor Rack" type="StaticBody2D" parent="."]
-position = Vector2(104, 54)
+[node name="Counter" type="Node2D" parent="Art"]
+y_sort_enabled = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Liquor Rack"]
-position = Vector2(0, 15)
-shape = SubResource("RectangleShape2D_xev46")
+[node name="Liquor Rack" parent="Art/Counter" instance=ExtResource("5_a7o0g")]
+position = Vector2(112, 40)
 
-[node name="Liquor-rack" type="Sprite2D" parent="Liquor Rack"]
-texture = ExtResource("4_qpfv8")
+[node name="Counter" parent="Art/Counter" instance=ExtResource("6_uugt5")]
+position = Vector2(111, 66)
 
-[node name="Counter" type="StaticBody2D" parent="."]
-position = Vector2(107, 70)
+[node name="Seat" parent="Art/Counter" instance=ExtResource("7_4neyr")]
+position = Vector2(78, 88)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Counter"]
-polygon = PackedVector2Array(-47, 13, -47, 24, 47, 24, 47, -21, 33, -21, 33, 13)
+[node name="Seat2" parent="Art/Counter" instance=ExtResource("7_4neyr")]
+position = Vector2(108, 88)
 
-[node name="Counter" type="Sprite2D" parent="Counter"]
-texture = ExtResource("5_fht51")
+[node name="Seat3" parent="Art/Counter" instance=ExtResource("7_4neyr")]
+position = Vector2(140, 88)
 
-[node name="Seat" type="StaticBody2D" parent="."]
-position = Vector2(71, 91)
+[node name="Seat4" parent="Art/Counter" instance=ExtResource("7_4neyr")]
+position = Vector2(169, 57)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Seat"]
-position = Vector2(0, 8)
-rotation = 1.57094
-shape = SubResource("CapsuleShape2D_k086a")
+[node name="Seat5" parent="Art/Counter" instance=ExtResource("7_4neyr")]
+position = Vector2(169, 75)
 
-[node name="Seat" type="Sprite2D" parent="Seat"]
-texture = ExtResource("6_55dbo")
+[node name="Barrels" type="Node2D" parent="Art"]
+y_sort_enabled = true
 
-[node name="BarrelLarge" type="StaticBody2D" parent="."]
-position = Vector2(52, 168)
+[node name="LargeBarrel" parent="Art/Barrels" instance=ExtResource("8_fqy60")]
+position = Vector2(51, 219)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BarrelLarge"]
-position = Vector2(0, 7)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_ro33n")
+[node name="Barrel" parent="Art/Barrels" instance=ExtResource("9_ikvjg")]
+position = Vector2(61, 225)
 
-[node name="Sprite" type="Sprite2D" parent="BarrelLarge"]
-texture = ExtResource("7_aaicw")
+[node name="Barrel2" parent="Art/Barrels" instance=ExtResource("9_ikvjg")]
+position = Vector2(50, 229)
 
-[node name="BarrelSmall" type="StaticBody2D" parent="."]
-position = Vector2(62, 172)
+[node name="LargeBarrel2" parent="Art/Barrels" instance=ExtResource("8_fqy60")]
+position = Vector2(429, 68)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BarrelSmall"]
-position = Vector2(0, 6)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_0njur")
+[node name="Barrel3" parent="Art/Barrels" instance=ExtResource("9_ikvjg")]
+position = Vector2(435, 77)
 
-[node name="Sprite" type="Sprite2D" parent="BarrelSmall"]
-texture = ExtResource("8_j7a3w")
+[node name="Tables" type="Node2D" parent="Art"]
+y_sort_enabled = true
 
-[node name="LargeSeatFront" type="StaticBody2D" parent="."]
-position = Vector2(117, 150)
+[node name="Table" type="Node2D" parent="Art/Tables"]
+y_sort_enabled = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LargeSeatFront"]
-position = Vector2(0, 7)
-shape = SubResource("RectangleShape2D_5nser")
+[node name="LargeSeatFront" parent="Art/Tables/Table" instance=ExtResource("10_8pc0o")]
+position = Vector2(368, 88)
 
-[node name="Sprite" type="Sprite2D" parent="LargeSeatFront"]
-texture = ExtResource("9_w0y67")
+[node name="Table" parent="Art/Tables/Table" instance=ExtResource("11_de4ou")]
+position = Vector2(368, 102)
 
-[node name="LargeSeatBack" type="StaticBody2D" parent="."]
-position = Vector2(117, 172)
+[node name="LargeSeatBack" parent="Art/Tables/Table" instance=ExtResource("12_ktjm6")]
+position = Vector2(368, 112)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LargeSeatBack"]
-position = Vector2(0, 7.5)
-shape = SubResource("RectangleShape2D_w1qej")
+[node name="Table2" type="Node2D" parent="Art/Tables"]
+y_sort_enabled = true
 
-[node name="Sprite" type="Sprite2D" parent="LargeSeatBack"]
-texture = ExtResource("11_5m1p4")
+[node name="LargeSeatFront" parent="Art/Tables/Table2" instance=ExtResource("10_8pc0o")]
+position = Vector2(368, 160)
 
-[node name="Table" type="StaticBody2D" parent="."]
-position = Vector2(117, 163)
+[node name="Table" parent="Art/Tables/Table2" instance=ExtResource("11_de4ou")]
+position = Vector2(368, 174)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Table"]
-position = Vector2(0, 8)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_pko05")
+[node name="LargeSeatBack" parent="Art/Tables/Table2" instance=ExtResource("12_ktjm6")]
+position = Vector2(368, 184)
 
-[node name="Sprite" type="Sprite2D" parent="Table"]
-texture = ExtResource("10_t3psw")
+[node name="Table3" type="Node2D" parent="Art/Tables"]
+y_sort_enabled = true
+
+[node name="LargeSeatFront" parent="Art/Tables/Table3" instance=ExtResource("10_8pc0o")]
+position = Vector2(272, 88)
+
+[node name="Table" parent="Art/Tables/Table3" instance=ExtResource("11_de4ou")]
+position = Vector2(272, 102)
+
+[node name="LargeSeatBack" parent="Art/Tables/Table3" instance=ExtResource("12_ktjm6")]
+position = Vector2(272, 112)
+
+[node name="Table4" type="Node2D" parent="Art/Tables"]
+y_sort_enabled = true
+
+[node name="LargeSeatFront" parent="Art/Tables/Table4" instance=ExtResource("10_8pc0o")]
+position = Vector2(272, 160)
+
+[node name="Table" parent="Art/Tables/Table4" instance=ExtResource("11_de4ou")]
+position = Vector2(272, 174)
+
+[node name="LargeSeatBack" parent="Art/Tables/Table4" instance=ExtResource("12_ktjm6")]
+position = Vector2(272, 184)
+
+[node name="Table5" type="Node2D" parent="Art/Tables"]
+y_sort_enabled = true
+
+[node name="LargeSeatFront" parent="Art/Tables/Table5" instance=ExtResource("10_8pc0o")]
+position = Vector2(160, 160)
+
+[node name="Table" parent="Art/Tables/Table5" instance=ExtResource("11_de4ou")]
+position = Vector2(160, 174)
+
+[node name="LargeSeatBack" parent="Art/Tables/Table5" instance=ExtResource("12_ktjm6")]
+position = Vector2(160, 184)
+
+[node name="Player" parent="." instance=ExtResource("1_28rab")]
+position = Vector2(55, 108)
