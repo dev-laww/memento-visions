@@ -4,7 +4,7 @@ using Game.Globals;
 using Godot;
 using GodotUtilities;
 
-namespace Game;
+namespace Game.Components.Area;
 
 [Tool]
 [Scene]
