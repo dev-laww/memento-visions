@@ -7,7 +7,6 @@ using GodotUtilities;
 namespace Game.Components.Area;
 
 [Tool]
-[Scene]
 public partial class Interaction : Area2D
 {
     [Export]
@@ -17,11 +16,6 @@ public partial class Interaction : Area2D
     public delegate void InteractedEventHandler();
     
     public Marker2D Marker { get; private set; }
-    public override void _Notification(int what) {
-        if (what != NotificationSceneInstantiated) return;
-        
-        WireNodes();
-    }
 
     public override void _Ready()
     {

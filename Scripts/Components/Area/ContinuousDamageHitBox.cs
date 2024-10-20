@@ -2,7 +2,6 @@
 
 namespace Game.Components.Area;
 
-[GlobalClass]
 [Tool]
 public partial class ContinuousDamageHitBox : HitBox
 {

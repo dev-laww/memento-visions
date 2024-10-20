@@ -18,8 +18,9 @@ public partial class HurtBox : Area2D
 
 	private void OnHurtBoxAreaEntered(Area2D area)
 	{
-		
 		if (area is not HitBox hitBox) return;
+		
+		if (hitBox.Owner == Owner) return;
 
 		ReceiveDamage(hitBox.Damage);
 	}
