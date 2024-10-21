@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sy4pwvob14t1"
-path="res://.godot/imported/keys_1_3.png-a4a003711442f93158d4d17839061702.ctex"
+uid="uid://b8kxjlkscihn4"
+path="res://.godot/imported/nine-patch.png-1d1bf568f9fc8d13443e0af0ad19abdb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Inventory/keys_1_3.png"
-dest_files=["res://.godot/imported/keys_1_3.png-a4a003711442f93158d4d17839061702.ctex"]
+source_file="res://assets/ui/nine-patch.png"
+dest_files=["res://.godot/imported/nine-patch.png-1d1bf568f9fc8d13443e0af0ad19abdb.ctex"]
 
 [params]
 

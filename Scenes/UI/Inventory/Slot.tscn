@@ -1,58 +1,62 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbloyj0ih0win"]
+[gd_scene load_steps=8 format=3 uid="uid://bxelej2d23ekr"]
 
-[ext_resource type="Texture2D" uid="uid://rn24x1db86vf" path="res://assets/Inventory/inventorySlot.png" id="1_butkr"]
-[ext_resource type="Script" path="res://Scripts/UI/Inventory/Slot.cs" id="1_ranbd"]
-[ext_resource type="Resource" uid="uid://dp1e6xsfpuo3y" path="res://resources/items/test.tres" id="2_ehbna"]
-[ext_resource type="Texture2D" uid="uid://sy4pwvob14t1" path="res://assets/Inventory/keys_1_3.png" id="4_c7ms7"]
-[ext_resource type="FontFile" uid="uid://doq56gjhf7lo6" path="res://assets/Font/zxSpectrumExpanded.ttf" id="5_7e05u"]
+[ext_resource type="Texture2D" uid="uid://bhg24ad0ut6dq" path="res://assets/ui/slot.png" id="1_ebret"]
+[ext_resource type="Texture2D" uid="uid://drys52s61n2w" path="res://assets/ui/selector.png" id="2_qffsv"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bakjo"]
-texture = ExtResource("1_butkr")
-region_rect = Rect2(0, 20, 20, 20)
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2evq"]
+atlas = ExtResource("2_qffsv")
+region = Rect2(0, 0, 32, 32)
 
-[node name="Slot" type="Control"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 3
-anchors_preset = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 34.0
-offset_bottom = 34.0
-script = ExtResource("1_ranbd")
-Item = ExtResource("2_ehbna")
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqrcc"]
+atlas = ExtResource("2_qffsv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r81dq"]
+atlas = ExtResource("2_qffsv")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kd4pk"]
+atlas = ExtResource("2_qffsv")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yerui"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2evq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqrcc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r81dq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kd4pk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="Slot" type="MarginContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(32, 32)
+offset_right = 32.0
+offset_bottom = 32.0
 
 [node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_bakjo")
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Sprite" type="Sprite2D" parent="Panel"]
+position = Vector2(16, 16)
+texture = ExtResource("1_ebret")
 
-[node name="Icon" type="Sprite2D" parent="CenterContainer"]
-unique_name_in_owner = true
-position = Vector2(20, 20)
-scale = Vector2(2, 2)
-texture = ExtResource("4_c7ms7")
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 3.0
-offset_top = 1.0
-offset_right = -5.0
-offset_bottom = 14.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("5_7e05u")
-theme_override_font_sizes/font_size = 16
-text = "1"
+[node name="Selector" type="AnimatedSprite2D" parent="Panel"]
+visible = false
+position = Vector2(16, 16)
+sprite_frames = SubResource("SpriteFrames_yerui")
+autoplay = "default"
+frame_progress = 0.62217

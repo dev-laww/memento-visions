@@ -19,10 +19,6 @@ unique_name_in_owner = true
 
 [node name="Player" parent="." instance=ExtResource("2_qid14")]
 
-[node name="StatsManager" parent="Player" index="0"]
-Speed = 500.0
-MaxStamina = 1e+15
-
 [node name="Camera" type="Camera2D" parent="Player"]
 zoom = Vector2(0.5, 0.5)
 
