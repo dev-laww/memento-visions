@@ -1,7 +1,6 @@
 using System;
 using Game.Components;
 using Game.Components.Area;
-using Game.Logic.States;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
@@ -73,10 +72,13 @@ public partial class Player : CharacterBody2D
             lastMoveDirection = Velocity.Normalized();
 
         MoveAndSlide();
+    }
 
-        if (Input.IsActionJustPressed("attack")) StateMachine.ChangeState(Attack);
+    public override void _Input(InputEvent @event)
+    {
+        if (@event.IsActionPressed("attack")) StateMachine.ChangeState(Attack);
 
-        if (!Input.IsActionJustPressed("dash") || !CanDash || !CanMove) return;
+        if (!@event.IsActionPressed("dash") || !CanDash || !CanMove) return;
 
         statsManager.ConsumeStamina(DashStaminaCost);
         StateMachine.ChangeState(Dash);
