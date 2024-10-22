@@ -2,7 +2,6 @@ using Godot;
 
 namespace Game.Components.Area;
 
-[GlobalClass]
 public partial class HurtBox : Area2D
 {
 	[Signal]
