@@ -55,29 +55,33 @@ public partial class Player : CharacterBody2D
 
         StateMachine.AddStates(Idle);
         StateMachine.AddStates(Walk);
-        StateMachine.AddStates(Dash, EnterDash);
+        StateMachine.AddStates(Dash, EnterDash, ExitDash);
         StateMachine.AddStates(Attack, EnterAttack, ExitAttack);
         StateMachine.SetInitialState(Idle);
 
         velocity.Accelerating += () => StateMachine.ChangeState(Walk);
         velocity.Decelerating += () => StateMachine.ChangeState(Idle);
+        velocity.DashEnded += () =>
+        {
+            var input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+
+            if (input.Length() > 0) StateMachine.ChangeState(Walk);
+            else StateMachine.ChangeState(Idle);
+        };
     }
 
     public override void _PhysicsProcess(double delta)
     {
         StateMachine.Update();
 
-        var dir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+        if (!CanMove) return;
 
-        if (!Dashing && CanMove)
-            velocity.Accelerate(dir);
-        else
-        {
-            Velocity = DashVelocity;
-            MoveAndSlide();
-        }
+        var input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
-        if (Velocity.Length() > 0 && CanMove)
+        if (!Dashing)
+            velocity.Accelerate(input);
+
+        if (Velocity.Length() > 0)
             lastMoveDirection = Velocity.Normalized();
     }
 
@@ -87,7 +91,6 @@ public partial class Player : CharacterBody2D
 
         if (!@event.IsActionPressed("dash") || !CanDash || !CanMove) return;
 
-        statsManager.ConsumeStamina(DashStaminaCost);
         StateMachine.ChangeState(Dash);
     }
 
@@ -114,22 +117,19 @@ public partial class Player : CharacterBody2D
 
     private void Walk() => sprites.Play($"walk_{MoveDirection}");
 
-    private void EnterDash() => Dashing = true;
+    private void EnterDash()
+    {
+        statsManager.ConsumeStamina(DashStaminaCost);
+        Dashing = true;
+    }
 
     private void Dash()
     {
-        DashVelocity = lastMoveDirection * statsManager.Speed * 10;
-
-        var tween = CreateTween();
-        tween.SetParallel().TweenProperty(this, "DashVelocity", Vector2.Zero, 0.1f);
-
-        tween.Finished += () =>
-        {
-            Dashing = false;
-            if (velocity.IsOwnerMoving) StateMachine.ChangeState(Walk);
-            else StateMachine.ChangeState(Idle);
-        };
+        velocity.Dash(lastMoveDirection);
+        sprites.Play($"walk_{MoveDirection}");
     }
+
+    private void ExitDash() => Dashing = false;
 
     private void EnterAttack() => CanMove = false;
 

@@ -26,11 +26,20 @@ public partial class Velocity : Node
     [Export]
     private float Deceleration { get; set; } = 6f;
 
+    [Export]
+    private float DashDuration { get; set; } = 0.1f;
+
     [Signal]
     public delegate void DeceleratingEventHandler();
 
     [Signal]
     public delegate void AcceleratingEventHandler();
+
+    [Signal]
+    public delegate void DashStartedEventHandler();
+
+    [Signal]
+    public delegate void DashEndedEventHandler();
 
     private Vector2 velocity
     {
@@ -44,9 +53,25 @@ public partial class Velocity : Node
     private StatsManager resource;
     private Vector2 v = Vector2.Zero;
     private bool accelerating;
+    private bool dashing;
+    private Timer dashTimer;
+
+    public override void _Ready()
+    {
+        // Setup dash duration timer
+        dashTimer = new Timer
+        {
+            WaitTime = DashDuration,
+            OneShot = true
+        };
+        AddChild(dashTimer);
+        dashTimer.Timeout += EndDash;
+    }
 
     public void Accelerate(Vector2 direction)
     {
+        if (dashing) return;
+
         if (direction.IsZeroApprox())
         {
             Decelerate();
@@ -66,6 +91,8 @@ public partial class Velocity : Node
 
     public void Decelerate()
     {
+        if (dashing) return;
+
         if (accelerating)
         {
             accelerating = false;
@@ -75,6 +102,28 @@ public partial class Velocity : Node
         velocity = velocity.MoveToward(Vector2.Zero, Deceleration);
 
         ApplyMovement();
+    }
+
+    public void Dash(Vector2 direction, float multiplier = 2.25f)
+    {
+        if (direction.IsZeroApprox()) return;
+
+        if (!dashing)
+        {
+            dashing = true; 
+            dashTimer.Start();
+            EmitSignal(SignalName.DashStarted);
+        }
+        
+        velocity = direction * (Stats.Speed * multiplier);
+        ApplyMovement();
+    }
+
+    private void EndDash()
+    {
+        dashing = false;
+        velocity = Vector2.Zero;
+        EmitSignal(SignalName.DashEnded);
     }
 
     private void ApplyMovement()

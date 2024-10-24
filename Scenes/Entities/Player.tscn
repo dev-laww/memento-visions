@@ -1548,6 +1548,7 @@ script = ExtResource("4_iaq51")
 Stats = NodePath("../StatsManager")
 Acceleration = 1000.0
 Deceleration = 5.0
+DashDuration = 0.2
 
 [node name="HurtBox" parent="." instance=ExtResource("9_e4j62")]
 
