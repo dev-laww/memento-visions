@@ -103,6 +103,12 @@ public partial class Velocity : Node
 
         ApplyMovement();
     }
+    
+    public void Stop()
+    {
+        velocity = Vector2.Zero;
+        ApplyMovement();
+    }
 
     public void Dash(Vector2 direction, float multiplier = 2.25f)
     {
