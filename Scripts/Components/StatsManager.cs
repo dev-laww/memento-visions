@@ -96,6 +96,8 @@ public partial class StatsManager : Node
 
     private void InitializeStats()
     {
+        if (Stats is null) return;
+        
         Speed = Stats.Speed;
         MaxHealth = Stats.MaxHealth;
         MaxStamina = Stats.MaxStamina;
