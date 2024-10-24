@@ -17,16 +17,13 @@ public partial class Player : CharacterBody2D
     public float DashStaminaCost { get; set; } = 10f;
 
     [Node]
-    public AnimatedSprite2D sprites;
-
-    [Node]
     public StatsManager statsManager;
 
     [Node]
     private HurtBox hurtBox;
 
     [Node]
-    private AnimationPlayer WeaponAnimationPlayer;
+    private AnimationPlayer animations;
 
     [Node]
     private Velocity velocity;
@@ -61,13 +58,7 @@ public partial class Player : CharacterBody2D
 
         velocity.Accelerating += () => StateMachine.ChangeState(Walk);
         velocity.Decelerating += () => StateMachine.ChangeState(Idle);
-        velocity.DashEnded += () =>
-        {
-            var input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-
-            if (input.Length() > 0) StateMachine.ChangeState(Walk);
-            else StateMachine.ChangeState(Idle);
-        };
+        velocity.DashEnded += HandleTransition;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -113,9 +104,9 @@ public partial class Player : CharacterBody2D
         };
     }
 
-    private void Idle() => sprites.Play($"idle_{MoveDirection}");
+    private void Idle() => animations.Play($"idle_{MoveDirection}");
 
-    private void Walk() => sprites.Play($"walk_{MoveDirection}");
+    private void Walk() => animations.Play($"walk_{MoveDirection}");
 
     private void EnterDash()
     {
@@ -126,7 +117,7 @@ public partial class Player : CharacterBody2D
     private void Dash()
     {
         velocity.Dash(lastMoveDirection);
-        sprites.Play($"walk_{MoveDirection}");
+        animations.Play($"walk_{MoveDirection}");
     }
 
     private void ExitDash() => Dashing = false;
@@ -135,15 +126,21 @@ public partial class Player : CharacterBody2D
 
     private async void Attack()
     {
-        sprites.Play($"attack_{MoveDirection}");
-        WeaponAnimationPlayer.Play($"dagger_{MoveDirection}");
+        velocity.Stop();
+        animations.Play($"gun_{MoveDirection}");
 
-        await ToSignal(sprites, "animation_finished");
-        await ToSignal(WeaponAnimationPlayer, "animation_finished");
-
-        if (velocity.IsOwnerMoving) StateMachine.ChangeState(Walk);
-        else StateMachine.ChangeState(Idle);
+        await ToSignal(animations, "animation_finished");
+        
+        HandleTransition();
     }
 
     private void ExitAttack() => CanMove = true;
+
+    private void HandleTransition()
+    {
+        var input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+
+        if (input.Length() > 0) StateMachine.ChangeState(Walk);
+        else StateMachine.ChangeState(Idle);
+    }
 }

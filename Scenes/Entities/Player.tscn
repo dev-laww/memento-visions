@@ -11,13 +11,13 @@
 [ext_resource type="Texture2D" uid="uid://ewcstib33ik2" path="res://assets/entities/player/sword.png" id="13_8pgha"]
 [ext_resource type="PackedScene" uid="uid://d1vccy60bddua" path="res://Scenes/Components/Area/HitBox.tscn" id="14_vy0tl"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7xh7"]
-radius = 9.0
-height = 28.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kaamo"]
 radius = 4.98331
 height = 15.9979
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7xh7"]
+radius = 9.0
+height = 28.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_il706"]
 atlas = ExtResource("9_2exdb")
@@ -2186,6 +2186,11 @@ Acceleration = 1000.0
 Deceleration = 5.0
 DashDuration = 0.2
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.49012e-08, 14)
+rotation = 1.58684
+shape = SubResource("CapsuleShape2D_kaamo")
+
 [node name="HurtBox" parent="." instance=ExtResource("9_e4j62")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
@@ -2193,10 +2198,16 @@ position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_n7xh7")
 debug_color = Color(0.996578, 0.311043, 0.384733, 0.42)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.49012e-08, 14)
-rotation = 1.58684
-shape = SubResource("CapsuleShape2D_kaamo")
+[node name="HitBox" parent="." instance=ExtResource("14_vy0tl")]
+position = Vector2(0.112813, 21)
+Stats = ExtResource("3_jlnk4")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitBox"]
+position = Vector2(-1.80677e-07, 1)
+rotation = 3.14159
+scale = Vector2(0.00959646, 0.00949658)
+polygon = PackedVector2Array(-23, -424.1, -23, -422.9, -85.1, -419, -95.2, -419, -184.4, -403, -189.3, -403, -272.3, -378, -275.4, -378, -315.4, -362, -318.5, -362, -355.5, -344, -358.5, -344, -400.5, -322, -402.6, -322, -444.6, -296, -446.6, -296, -495.6, -261, -497.7, -261, -549.7, -218, -551.8, -218, -615.8, -155, -616.9, -155, -649.9, -116, -651, -116, -687, -68, -688.1, -68, -728.1, -4, -729.2, -4, -770.3, 79, -771.4, 79, -789.4, 126, -790.5, 126, -815.5, 209, -816.7, 209, -830.7, 282, -831.8, 282, -839.8, 374, -841, 374, -840, 422, -840, 425, 840, 423, 843.1, 423, 838, 328.9, 838, 321.8, 826, 253.7, 826, 247.8, 817, 210, 817, 207.7, 802, 161.7, 802, 157.6, 772, 81.5, 772, 78.5, 734, 3.40002, 734, 2.40002, 702, -46.7, 702, -48.7, 643, -124.7, 643, -126.8, 579, -192.8, 579, -193.9, 521, -243, 521, -244, 452, -292, 452, -293.2, 374, -336.3, 374, -337.3, 321, -360.3, 321, -361.4, 258, -383.5, 258, -384.6, 230, -391.6, 230, -392.6, 145, -410.7, 145, -411.8, 78, -419.8, 78, -420.9)
+disabled = true
 
 [node name="Sprites" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ycwij")
@@ -2213,14 +2224,3 @@ animation = &"sword_right"
 libraries = {
 "": SubResource("AnimationLibrary_bjmy2")
 }
-
-[node name="HitBox" parent="." instance=ExtResource("14_vy0tl")]
-position = Vector2(0.112813, 21)
-Stats = ExtResource("3_jlnk4")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitBox"]
-position = Vector2(-1.80677e-07, 1)
-rotation = 3.14159
-scale = Vector2(0.00959646, 0.00949658)
-polygon = PackedVector2Array(-23, -424.1, -23, -422.9, -85.1, -419, -95.2, -419, -184.4, -403, -189.3, -403, -272.3, -378, -275.4, -378, -315.4, -362, -318.5, -362, -355.5, -344, -358.5, -344, -400.5, -322, -402.6, -322, -444.6, -296, -446.6, -296, -495.6, -261, -497.7, -261, -549.7, -218, -551.8, -218, -615.8, -155, -616.9, -155, -649.9, -116, -651, -116, -687, -68, -688.1, -68, -728.1, -4, -729.2, -4, -770.3, 79, -771.4, 79, -789.4, 126, -790.5, 126, -815.5, 209, -816.7, 209, -830.7, 282, -831.8, 282, -839.8, 374, -841, 374, -840, 422, -840, 425, 840, 423, 843.1, 423, 838, 328.9, 838, 321.8, 826, 253.7, 826, 247.8, 817, 210, 817, 207.7, 802, 161.7, 802, 157.6, 772, 81.5, 772, 78.5, 734, 3.40002, 734, 2.40002, 702, -46.7, 702, -48.7, 643, -124.7, 643, -126.8, 579, -192.8, 579, -193.9, 521, -243, 521, -244, 452, -292, 452, -293.2, 374, -336.3, 374, -337.3, 321, -360.3, 321, -361.4, 258, -383.5, 258, -384.6, 230, -391.6, 230, -392.6, 145, -410.7, 145, -411.8, 78, -419.8, 78, -420.9)
-disabled = true
