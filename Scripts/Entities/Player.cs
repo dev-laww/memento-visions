@@ -1,7 +1,7 @@
 using System;
 using Game.Components;
 using Game.Components.Area;
-using Game.Utils.Extensions;
+using Game.Components.Movement;
 using Godot;
 using GodotUtilities;
 using GodotUtilities.Logic;
@@ -24,9 +24,12 @@ public partial class Player : CharacterBody2D
 
     [Node]
     private HurtBox hurtBox;
-    
+
     [Node]
     private AnimationPlayer WeaponAnimationPlayer;
+
+    [Node]
+    private Velocity velocity;
 
     private string MoveDirection => GetMoveDirection();
 
@@ -55,28 +58,32 @@ public partial class Player : CharacterBody2D
         StateMachine.AddStates(Dash, EnterDash);
         StateMachine.AddStates(Attack, EnterAttack, ExitAttack);
         StateMachine.SetInitialState(Idle);
+
+        velocity.Accelerating += () => StateMachine.ChangeState(Walk);
+        velocity.Decelerating += () => StateMachine.ChangeState(Idle);
     }
 
     public override void _PhysicsProcess(double delta)
     {
         StateMachine.Update();
-        Velocity = Input.GetVector("move_left", "move_right", "move_up", "move_down") * statsManager.Speed;
 
-        if (Dashing)
+        var dir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+
+        if (!Dashing && CanMove)
+            velocity.Accelerate(dir);
+        else
+        {
             Velocity = DashVelocity;
-
-        Velocity = Velocity.SnapToGrid();
-        Velocity = CanMove ? Velocity : Vector2.Zero;
+            MoveAndSlide();
+        }
 
         if (Velocity.Length() > 0 && CanMove)
             lastMoveDirection = Velocity.Normalized();
-
-        MoveAndSlide();
     }
 
     public override void _Input(InputEvent @event)
     {
-        if (@event.IsActionPressed("attack")) StateMachine.ChangeState(Attack);
+        if (@event.IsActionPressed("attack") && CanMove && !Dashing) StateMachine.ChangeState(Attack);
 
         if (!@event.IsActionPressed("dash") || !CanDash || !CanMove) return;
 
@@ -103,17 +110,9 @@ public partial class Player : CharacterBody2D
         };
     }
 
-    private void Idle()
-    {
-        sprites.Play($"idle_{MoveDirection}");
-        if (Velocity.Length() > 0) StateMachine.ChangeState(Walk);
-    }
+    private void Idle() => sprites.Play($"idle_{MoveDirection}");
 
-    private void Walk()
-    {
-        sprites.Play($"walk_{MoveDirection}");
-        if (Velocity.IsZeroApprox()) StateMachine.ChangeState(Idle);
-    }
+    private void Walk() => sprites.Play($"walk_{MoveDirection}");
 
     private void EnterDash() => Dashing = true;
 
@@ -123,16 +122,12 @@ public partial class Player : CharacterBody2D
 
         var tween = CreateTween();
         tween.SetParallel().TweenProperty(this, "DashVelocity", Vector2.Zero, 0.1f);
-        tween.SetParallel().TweenProperty(this, "Dashing", false, 0.1f);
+
         tween.Finished += () =>
         {
-            if (Velocity.IsZeroApprox())
-            {
-                StateMachine.ChangeState(Idle);
-                return;
-            }
-            
-            StateMachine.ChangeState(Walk);
+            Dashing = false;
+            if (velocity.IsOwnerMoving) StateMachine.ChangeState(Walk);
+            else StateMachine.ChangeState(Idle);
         };
     }
 
@@ -146,7 +141,8 @@ public partial class Player : CharacterBody2D
         await ToSignal(sprites, "animation_finished");
         await ToSignal(WeaponAnimationPlayer, "animation_finished");
 
-        StateMachine.ChangeState(Idle);
+        if (velocity.IsOwnerMoving) StateMachine.ChangeState(Walk);
+        else StateMachine.ChangeState(Idle);
     }
 
     private void ExitAttack() => CanMove = true;
