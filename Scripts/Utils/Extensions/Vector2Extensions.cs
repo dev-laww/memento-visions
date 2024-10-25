@@ -51,4 +51,12 @@ public static class Vector2Extensions
 
         return vector;
     }
+
+    public static Vector2 IndependentMoveToward(this Vector2 vector, Vector2 target, float delta)
+    {
+        var newX = Mathf.MoveToward(vector.X, target.X, delta);
+        var newY = Mathf.MoveToward(vector.Y, target.Y, delta);
+
+        return new Vector2(newX, newY);
+    }
 }
