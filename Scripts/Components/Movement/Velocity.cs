@@ -99,11 +99,11 @@ public partial class Velocity : Node
             EmitSignal(SignalName.Decelerating);
         }
 
-        velocity = velocity.MoveToward(Vector2.Zero, Deceleration);
+        velocity = velocity.IndependentMoveToward(Vector2.Zero, Deceleration);
 
         ApplyMovement();
     }
-    
+
     public void Stop()
     {
         velocity = Vector2.Zero;
@@ -116,11 +116,11 @@ public partial class Velocity : Node
 
         if (!dashing)
         {
-            dashing = true; 
+            dashing = true;
             dashTimer.Start();
             EmitSignal(SignalName.DashStarted);
         }
-        
+
         velocity = direction * (Stats.Speed * multiplier);
         ApplyMovement();
     }
