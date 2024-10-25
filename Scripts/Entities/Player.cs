@@ -69,11 +69,12 @@ public partial class Player : CharacterBody2D
 
         var input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
-        if (!Dashing)
-            velocity.Accelerate(input);
+        if (!input.IsZeroApprox())
+            lastMoveDirection = input;
 
-        if (Velocity.Length() > 0)
-            lastMoveDirection = Velocity.Normalized();
+        if (Dashing) return;
+
+        velocity.Accelerate(input);
     }
 
     public override void _Input(InputEvent @event)
@@ -130,7 +131,7 @@ public partial class Player : CharacterBody2D
         animations.Play($"gun_{MoveDirection}");
 
         await ToSignal(animations, "animation_finished");
-        
+
         HandleTransition();
     }
 
