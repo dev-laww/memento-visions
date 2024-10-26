@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://ciwj30yficn0p"]
+[gd_scene load_steps=4 format=3 uid="uid://ciwj30yficn0p"]
 
+[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_r7xsn"]
 [ext_resource type="Texture2D" uid="uid://b5t0jek0fxmsj" path="res://assets/scenes/bar/seat-large-front.png" id="1_v6fxy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5nser"]
@@ -13,4 +14,5 @@ position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_5nser")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+material = ExtResource("1_r7xsn")
 texture = ExtResource("1_v6fxy")

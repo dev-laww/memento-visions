@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://6dopjvehyksh"]
+[gd_scene load_steps=4 format=3 uid="uid://6dopjvehyksh"]
 
 [ext_resource type="Texture2D" uid="uid://ci332xcrlkg7" path="res://assets/scenes/bar/liquor-rack.png" id="1_dg1lo"]
+[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_rx0v0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xev46"]
 size = Vector2(44, 18)
@@ -13,4 +14,5 @@ position = Vector2(0, 15)
 shape = SubResource("RectangleShape2D_xev46")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+material = ExtResource("1_rx0v0")
 texture = ExtResource("1_dg1lo")
