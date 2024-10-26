@@ -1,4 +1,4 @@
-[gd_scene load_steps=150 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=151 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/StatsManager.tscn" id="2_cqdhe"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Components/Movement/Velocity.cs" id="4_iaq51"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="7_s1dwx"]
 [ext_resource type="Texture2D" uid="uid://crm174xl683eq" path="res://assets/entities/player/player.png" id="9_2exdb"]
+[ext_resource type="Script" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="9_401x2"]
 [ext_resource type="PackedScene" uid="uid://pp1psblt31wv" path="res://Scenes/Components/Area/HurtBox.tscn" id="9_e4j62"]
 [ext_resource type="Texture2D" uid="uid://dy4sm0jy3tyiv" path="res://assets/entities/player/dagger.png" id="11_8i84g"]
 [ext_resource type="Texture2D" uid="uid://cqkfcnxdrmj8i" path="res://assets/entities/player/gun.png" id="12_qu0d5"]
@@ -2216,13 +2217,14 @@ sprite_frames = SubResource("SpriteFrames_ycwij")
 animation = &"idle_front"
 autoplay = "idle_front"
 frame = 1
+script = ExtResource("9_401x2")
 
 [node name="Weapons" type="AnimatedSprite2D" parent="."]
 visible = false
 material = ExtResource("7_s1dwx")
 sprite_frames = SubResource("SpriteFrames_d0gpk")
-animation = &"sword_left"
-frame = 3
+animation = &"gun_left"
+script = ExtResource("9_401x2")
 
 [node name="Animations" type="AnimationPlayer" parent="."]
 libraries = {

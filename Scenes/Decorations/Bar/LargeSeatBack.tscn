@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxq1fj8j0r0tc"]
+[gd_scene load_steps=5 format=3 uid="uid://bxq1fj8j0r0tc"]
 
 [ext_resource type="Texture2D" uid="uid://o66ekifimlua" path="res://assets/scenes/bar/seat-large-back.png" id="1_jt052"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_v06wn"]
+[ext_resource type="Script" path="res://Scripts/Components/SmoothSprite2D.cs" id="3_la2mn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w1qej"]
 size = Vector2(44, 9)
@@ -16,3 +17,4 @@ shape = SubResource("RectangleShape2D_w1qej")
 [node name="Sprite" type="Sprite2D" parent="."]
 material = ExtResource("1_v06wn")
 texture = ExtResource("1_jt052")
+script = ExtResource("3_la2mn")
