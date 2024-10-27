@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ciyu41ce0ytbo"]
-
-[ext_resource type="Script" path="res://Scripts/Components/Area/ContinuousDamageHitBox.cs" id="1_oq4ge"]
-
-[node name="ContinuousDamagehitBox" type="Area2D"]
-collision_layer = 1024
-collision_mask = 2048
-script = ExtResource("1_oq4ge")

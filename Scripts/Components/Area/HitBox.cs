@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.Resources;
 using Godot;
 
 namespace Game.Components.Area;
 
 [Tool]
+[GlobalClass]
 public partial class HitBox : Area2D
 {
     private float _damage;
-    
+
     private Stats resource;
 
     [Export]
@@ -46,7 +46,13 @@ public partial class HitBox : Area2D
     [Signal]
     public delegate void DamageDecreasedEventHandler(float damage);
 
-    public override void _Ready() => Damage = Stats.Attack;
+    public override void _Ready()
+    {
+        Damage = Stats.Attack;
+        CollisionLayer = 1 << 10;
+        CollisionMask = 1 << 11;
+        NotifyPropertyListChanged();
+    }
 
     public override string[] _GetConfigurationWarnings()
     {
