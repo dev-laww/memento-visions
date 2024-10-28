@@ -8,13 +8,13 @@
 size = Vector2(44, 18)
 
 [node name="Liquor Rack" type="StaticBody2D"]
-position = Vector2(124, 71)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 15)
 shape = SubResource("RectangleShape2D_xev46")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 2
 material = ExtResource("1_rx0v0")
 texture = ExtResource("1_dg1lo")
 script = ExtResource("3_bavm6")

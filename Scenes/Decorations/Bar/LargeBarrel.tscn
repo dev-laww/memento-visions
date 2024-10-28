@@ -9,7 +9,6 @@ radius = 6.0
 height = 20.0
 
 [node name="LargeBarrel" type="StaticBody2D"]
-position = Vector2(55, 141)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
@@ -17,6 +16,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ro33n")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 2
 material = ExtResource("1_2ndbh")
 texture = ExtResource("1_bxhie")
 script = ExtResource("3_3clu1")
