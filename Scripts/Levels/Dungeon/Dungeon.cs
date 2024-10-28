@@ -5,6 +5,7 @@ using DelaunatorSharp;
 using Game.Utils.Generation;
 using Game.Utils.Extensions;
 using Godot;
+using Godot.Collections;
 using GodotUtilities;
 
 namespace Game.Levels.Dungeon;
@@ -23,16 +24,16 @@ public partial class Dungeon : Node2D
     }
 
     [Export]
-    private Vector2I gridSize = new(50, 50);
+    private Vector2I gridSize = new(60, 60);
 
     [Export]
-    private int cellSize = 64;
+    private int cellSize = 48;
 
     [Export]
     private int roomsCount;
 
     [Export]
-    private Vector2I roomMaxSize = new(15, 15);
+    private Vector2I roomMaxSize = new(20, 20);
 
     [Node]
     private Node2D Map;
@@ -43,10 +44,14 @@ public partial class Dungeon : Node2D
     [Node]
     private Node2D Hallways;
 
+    [Node]
+    private TileMapLayer TileMap;
+
     private Grid<CellType> grid;
     private List<Room> rooms;
     private HashSet<IEdge> hallways;
     private bool pathFind;
+    private Array<Vector2I> terrain = new();
 
     public override void _Notification(int what)
     {
@@ -79,6 +84,8 @@ public partial class Dungeon : Node2D
 
 
         if (!@event.IsActionPressed("ui_accept")) return;
+        TileMap.Clear();
+        terrain.Clear();
         Rooms.GetChildren().ToList().ForEach(c => c.QueueFree());
         Generate();
     }
@@ -92,7 +99,7 @@ public partial class Dungeon : Node2D
         PlaceRooms();
         CreateHallways();
         PathFindHallways();
-        AddEntryPoints();
+        TileMap.SetCellsTerrainConnect(terrain, 0, 0);
     }
 
     private void PlaceRooms()
@@ -103,7 +110,12 @@ public partial class Dungeon : Node2D
             tries++;
 
             var location = new Vector2I().Random(Vector2I.Zero, gridSize);
-            var roomSize = new Vector2I().Random(Vector2I.One * 7, roomMaxSize);
+            var roomSize = new Vector2I().Random(Vector2I.One * 10, roomMaxSize);
+
+            // Calculate the center and radius for an oval (or circle if width and height are equal)
+            var centerX = roomSize.X / 2f;
+            var centerY = roomSize.Y / 2f;
+
             var bounds = new Bounds(location, roomSize);
             var add = rooms.All(other => !other.Bounds.Intersects(bounds, padding: 1));
 
@@ -114,12 +126,23 @@ public partial class Dungeon : Node2D
 
             if (!add) continue;
 
+            // Only add cells that fall within the elliptical shape
             var room = Room.Create(location * cellSize, roomSize * cellSize, bounds);
+            foreach (var pos in bounds.Rect.AllPositionsWithin())
+            {
+                var localPos = pos - location;
+                var dx = (localPos.X - centerX) / centerX;
+                var dy = (localPos.Y - centerY) / centerY;
+
+                // Check if within ellipse (circular if centerX == centerY)
+                if (!(dx * dx + dy * dy <= 1)) continue;
+
+                grid[pos] = CellType.Room;
+                terrain.Add(pos);
+            }
+
             Rooms.AddChild(room);
             rooms.Add(room);
-
-            foreach (var pos in bounds.Rect.AllPositionsWithin())
-                grid[pos] = CellType.Room;
         } while (rooms.Count < roomsCount && tries < 1000);
     }
 
@@ -132,37 +155,7 @@ public partial class Dungeon : Node2D
 
         hallways = new HashSet<IEdge>(mst);
     }
-
-    private void AddEntryPoints()
-    {
-        foreach (var room in rooms)
-        foreach (var entry in room.Bounds.EntryPoints)
-        {
-            var position = entry.Position;
-
-            if (!grid.InBounds(position)) continue;
-
-            if (!HasHallwayNeighbor(position) || !HasHallwayNeighbor(position + entry.Direction)) continue;
-
-            entry.Toggle();
-            room.Update();
-        }
-    }
-
-    private bool HasHallwayNeighbor(Vector2I position)
-    {
-        var directions = new[]
-        {
-            Vector2I.Zero,
-            Vector2I.Up,
-            Vector2I.Down,
-            Vector2I.Left,
-            Vector2I.Right
-        };
-
-        return directions.Any(dir => grid.InBounds(position + dir) && grid[position + dir] == CellType.Hallway);
-    }
-
+    
     private void PathFindHallways()
     {
         Hallways.GetChildren().ToList().ForEach(c => c.QueueFree());
@@ -177,7 +170,7 @@ public partial class Dungeon : Node2D
             {
                 var pathCost = new PathFinder.PathCost
                 {
-                    Cost = b.Position.ToVector().ManhattanDistanceTo(end)
+                    Cost = b.Position.ToVector().DistanceTo(end)
                 };
 
                 pathCost.Cost += grid[b.Position] switch
@@ -204,6 +197,7 @@ public partial class Dungeon : Node2D
                 var hallway = Hallway.Create(pos * cellSize);
 
                 Hallways.AddChild(hallway);
+                terrain.Add(pos);
             }
         }
     }

@@ -21,10 +21,7 @@ public partial class Hallway : Node2D
 	
 	public static Hallway Create(Vector2I position) {
 		var hallway = GD.Load<PackedScene>("res://Scenes/Levels/Dungeon/Hallway.tscn").Instantiate<Hallway>();
-		
 		hallway.GlobalPosition = position;
-		hallway.Label.Text = $"{(position / 64).ToString()}";
-		hallway.Background.Size = new Vector2(64, 64);
 		
 		return hallway;
 	}
