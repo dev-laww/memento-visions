@@ -10,9 +10,6 @@ public partial class Hallway : Node2D
 	[Node]
 	private Label Label;
 	
-	[Node]
-	private ColorRect Background;
-	
 	public override void _Notification(int what) {
 		if (what != NotificationSceneInstantiated) return;
 		

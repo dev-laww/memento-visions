@@ -24,16 +24,16 @@ public partial class Dungeon : Node2D
     }
 
     [Export]
-    private Vector2I gridSize = new(60, 60);
+    private Vector2I gridSize = new(40, 40);
 
     [Export]
-    private int cellSize = 48;
+    private int cellSize = 128;
 
     [Export]
     private int roomsCount;
 
     [Export]
-    private Vector2I roomMaxSize = new(20, 20);
+    private Vector2I roomMaxSize = new(10, 10);
 
     [Node]
     private Node2D Map;
@@ -46,6 +46,9 @@ public partial class Dungeon : Node2D
 
     [Node]
     private TileMapLayer TileMap;
+
+    [Node]
+    private TileMapLayer Ground;
 
     private Grid<CellType> grid;
     private List<Room> rooms;
@@ -86,6 +89,7 @@ public partial class Dungeon : Node2D
         if (!@event.IsActionPressed("ui_accept")) return;
         TileMap.Clear();
         terrain.Clear();
+        Ground.Clear();
         Rooms.GetChildren().ToList().ForEach(c => c.QueueFree());
         Generate();
     }
@@ -100,6 +104,20 @@ public partial class Dungeon : Node2D
         CreateHallways();
         PathFindHallways();
         TileMap.SetCellsTerrainConnect(terrain, 0, 0);
+        for (var i = 0; i < gridSize.X; i++)
+        for (var j = 0; j < gridSize.Y; j++)
+        {
+            var cell = new Vector2I(i, j);
+
+            Ground.SetCell(cell, atlasCoords: new Vector2I(0, 4), sourceId: 4);
+
+
+            if (grid[i, j] != CellType.None) continue;
+
+            var atlas = new Vector2I(0, 0);
+
+            TileMap.SetCell(cell, atlasCoords: atlas, sourceId: 4);
+        }
     }
 
     private void PlaceRooms()
@@ -155,7 +173,7 @@ public partial class Dungeon : Node2D
 
         hallways = new HashSet<IEdge>(mst);
     }
-    
+
     private void PathFindHallways()
     {
         Hallways.GetChildren().ToList().ForEach(c => c.QueueFree());
@@ -170,7 +188,7 @@ public partial class Dungeon : Node2D
             {
                 var pathCost = new PathFinder.PathCost
                 {
-                    Cost = b.Position.ToVector().DistanceTo(end)
+                    Cost = b.Position.ToVector().ManhattanDistanceTo(end)
                 };
 
                 pathCost.Cost += grid[b.Position] switch
