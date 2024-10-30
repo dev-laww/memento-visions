@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Levels/Dungeon/Dungeon.cs" id="1_22fmi"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_b7ns4"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="2_qid14"]
-[ext_resource type="TileSet" uid="uid://bcvije43w8ygj" path="res://resources/tilesets/city.tres" id="3_rxejq"]
+[ext_resource type="TileSet" uid="uid://cioppguad37wr" path="res://resources/tilesets/canopy.tres" id="3_5w4wh"]
 [ext_resource type="Script" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_xrxef"]
 
 [node name="Dungeon" type="Node2D"]
@@ -12,11 +12,18 @@ roomsCount = 15
 
 [node name="Map" type="Node2D" parent="."]
 
+[node name="Ground" type="TileMapLayer" parent="Map"]
+unique_name_in_owner = true
+texture_filter = 2
+material = ExtResource("2_b7ns4")
+tile_set = ExtResource("3_5w4wh")
+script = ExtResource("3_xrxef")
+
 [node name="TileMap" type="TileMapLayer" parent="Map"]
 unique_name_in_owner = true
 texture_filter = 2
 material = ExtResource("2_b7ns4")
-tile_set = ExtResource("3_rxejq")
+tile_set = ExtResource("3_5w4wh")
 script = ExtResource("3_xrxef")
 
 [node name="Rooms" type="Node2D" parent="Map"]
