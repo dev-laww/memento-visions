@@ -128,7 +128,7 @@ public partial class Player : CharacterBody2D
     private async void Attack()
     {
         velocity.Stop();
-        animations.Play($"gun_{MoveDirection}");
+        animations.Play($"dagger_{MoveDirection}");
 
         await ToSignal(animations, "animation_finished");
 
