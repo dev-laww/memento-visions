@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
+using Godot.Collections;
 
 namespace Game.Components.Area;
 
@@ -6,8 +9,21 @@ namespace Game.Components.Area;
 [GlobalClass]
 public partial class HurtBox : Area2D
 {
+    [Export]
+    private StatsManager StatsManager
+    {
+        get => statsManager;
+        set
+        {
+            statsManager = value;
+            UpdateConfigurationWarnings();
+        }
+    }
+
     [Signal]
     public delegate void DamageReceivedEventHandler(float damage);
+    
+    private StatsManager statsManager;
 
     public override void _Ready()
     {
@@ -18,7 +34,11 @@ public partial class HurtBox : Area2D
         NotifyPropertyListChanged();
     }
 
-    public void ReceiveDamage(float damage) => EmitSignal(SignalName.DamageReceived, damage);
+    public void ReceiveDamage(float damage)
+    {
+        EmitSignal(SignalName.DamageReceived, damage);
+        statsManager.TakeDamage(damage);
+    }
 
     private void OnHurtBoxAreaEntered(Area2D area)
     {
@@ -27,5 +47,15 @@ public partial class HurtBox : Area2D
         if (hitBox.Owner == Owner) return;
 
         ReceiveDamage(hitBox.Damage);
+    }
+
+    public override string[] _GetConfigurationWarnings()
+    {
+        var warnings = new List<string>();
+        
+        if (statsManager == null)
+            warnings.Add("StatsManager is not set.");
+
+        return warnings.ToArray();
     }
 }
