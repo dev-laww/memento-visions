@@ -138,7 +138,7 @@ public partial class StatsManager : Node
         stat = Math.Max(stat - value, 0);
 
         var statType = (int)type;
-        EmitSignal(SignalName.StatsChanged, Stamina, statType);
+        EmitSignal(SignalName.StatsChanged, stat, statType);
         EmitSignal(SignalName.StatsDecreased, value, statType);
 
         if (stat <= 0)
@@ -152,7 +152,7 @@ public partial class StatsManager : Node
         stat = Math.Min(stat + value, max);
 
         var statType = (int)type;
-        EmitSignal(SignalName.StatsChanged, Stamina, statType);
+        EmitSignal(SignalName.StatsChanged, stat, statType);
         EmitSignal(SignalName.StatsIncreased, value, statType);
     }
 
