@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cktp08gmb038p"]
+
+[ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/Font/04b03.woff2" id="1_qtwas"]
+
+[resource]
+font = ExtResource("1_qtwas")
+font_size = 8
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
