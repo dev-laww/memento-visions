@@ -3,7 +3,7 @@ using Game.Entities.Player;
 using Godot;
 using GodotUtilities;
 
-namespace Game.Utils.Extensions;
+namespace Game.Extensions;
 
 public static class Node2DExtensions
 {

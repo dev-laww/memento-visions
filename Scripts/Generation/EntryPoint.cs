@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace Game.Utils.Generation;
+namespace Game.Generation;
 
 public class EntryPoint
 {

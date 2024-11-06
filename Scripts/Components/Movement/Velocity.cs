@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Game.Utils.Extensions;
+using Game.Extensions;
 using Godot;
 
 

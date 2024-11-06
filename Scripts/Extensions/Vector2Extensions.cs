@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using DelaunatorSharp;
-using Game.Utils.Generation;
+using Game.Generation;
 using Godot;
 using GodotUtilities;
 
-namespace Game.Utils.Extensions;
+namespace Game.Extensions;
 
 public static class Vector2Extensions
 {

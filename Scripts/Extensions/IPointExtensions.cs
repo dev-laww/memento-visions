@@ -1,7 +1,7 @@
 ﻿using DelaunatorSharp;
 using Godot;
 
-namespace Game.Utils.Extensions;
+namespace Game.Extensions;
 
 public static class IPointExtensions
 {

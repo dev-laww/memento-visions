@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Game.Components.Area;
-using Game.Utils.Extensions;
+using Game.Extensions;
 using Godot;
 
 namespace Game.Globals;

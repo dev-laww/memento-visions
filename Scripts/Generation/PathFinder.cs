@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Priority_Queue;
 
-namespace Game.Utils.Generation;
+namespace Game.Generation;
 
 public class PathFinder
 {
