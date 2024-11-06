@@ -6,6 +6,8 @@ using StatsResource = Game.Resources.Stats;
 
 namespace Game.Components;
 
+// TODO: create attack object to implement crit and other stats
+
 public enum StatsType
 {
     Stamina,
@@ -14,7 +16,6 @@ public enum StatsType
 
 [Tool]
 [Scene]
-[GlobalClass]
 public partial class StatsManager : Node
 {
     [Export(PropertyHint.Range, "1,10")]
