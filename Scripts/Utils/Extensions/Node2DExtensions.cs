@@ -11,9 +11,6 @@ public static class Node2DExtensions
     {
         var player = node.GetTree().GetNodesInGroup<Player>("Player").FirstOrDefault();
 
-        if (player == null)
-            GD.PrintErr("Player not found.");
-
         return player;
     }
 
