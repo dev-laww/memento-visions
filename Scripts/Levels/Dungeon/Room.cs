@@ -1,4 +1,4 @@
-using Game.Generation;
+using Game.Generation.Dungeon;
 using Godot;
 using GodotUtilities;
 

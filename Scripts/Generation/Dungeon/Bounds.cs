@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Godot;
 
-namespace Game.Generation;
+namespace Game.Generation.Dungeon;
 
 public class Bounds
 {

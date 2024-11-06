@@ -1,6 +1,6 @@
 ﻿using DelaunatorSharp;
 
-namespace Game.Generation;
+namespace Game.Generation.Dungeon;
 
 public class DelaunayPoint : IPoint
 {

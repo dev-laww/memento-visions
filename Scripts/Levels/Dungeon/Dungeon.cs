@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DelaunatorSharp;
-using Game.Generation;
+using Game.Generation.Dungeon;
 using Game.Extensions;
 using Godot;
 using Godot.Collections;
