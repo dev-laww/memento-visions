@@ -23,7 +23,7 @@ public partial class StateMachine : Node
         {
             if (!child.IsConnected("script_changed", Callable.From(UpdateConfigurationWarnings)))
                 child.ScriptChanged += UpdateConfigurationWarnings;
-            
+
             if (child is not State state) continue;
 
             states.Add(state);

@@ -42,9 +42,9 @@ public partial class HurtBox : Area2D
             Attack.Type.Magical => attack.Roll(StatsManager.Defense, StatsManager.MagicalDamageMultiplier),
             _ => attack.Roll(StatsManager.Defense)
         };
-        
+
         statsManager.TakeDamage(attack.Damage);
-        
+
         EmitSignal(SignalName.AttackReceived, attack.Damage, (int)attack.AttackType, attack.IsCritical);
     }
 
@@ -53,7 +53,7 @@ public partial class HurtBox : Area2D
         if (area is not HitBox hitBox) return;
 
         if (hitBox.Owner == Owner) return;
-        
+
         ReceiveAttack(hitBox);
     }
 

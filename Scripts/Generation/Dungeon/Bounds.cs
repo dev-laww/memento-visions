@@ -8,13 +8,13 @@ public class Bounds
     public Rect2I Rect { get; }
 
     public Vector2I Center => Rect.Position + Rect.Size / 2;
-    
+
     public List<EntryPoint> EntryPoints { get; } = new();
 
     public Bounds(Vector2I position, Vector2I size)
     {
         Rect = new Rect2I(position, size);
-        
+
         var edges = new List<(Vector2I, Vector2I)>
         {
             (new Vector2I(Rect.Position.X + Rect.Size.X / 2, Rect.Position.Y + Rect.Size.Y), Vector2I.Up),

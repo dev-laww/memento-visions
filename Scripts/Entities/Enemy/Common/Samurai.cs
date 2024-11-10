@@ -55,7 +55,8 @@ public partial class Samurai : CharacterBody2D
                 stateMachine.ChangeState(Walk);
         };
         StatsManager.StatsDecreased += StatDecrease;
-        HurtBox.AttackReceived += (damage, type, isCritical) => GD.Print($"Samurai received {damage} {(isCritical ? "Critical " : "")}{type} damage.");
+        HurtBox.AttackReceived += (damage, type, isCritical) =>
+            GD.Print($"Samurai received {damage} {(isCritical ? "Critical " : "")}{type} damage.");
 
         stateMachine.AddStates(Idle);
         stateMachine.AddStates(Walk);

@@ -21,9 +21,9 @@ public partial class HitBox : Area2D
             UpdateConfigurationWarnings();
         }
     }
-    
+
     private StatsManager manager;
-    
+
     public Attack Attack => Type switch
     {
         Attack.Type.Physical => StatsManager.PhysicalAttack,

@@ -19,7 +19,7 @@ public partial class ContinuousDamageHitBox : HitBox
         };
         timer.Timeout += DealDamage;
         AddChild(timer);
-        
+
         AreaEntered += OnAreaEntered;
         AreaExited += OnAreaExited;
     }
@@ -29,20 +29,20 @@ public partial class ContinuousDamageHitBox : HitBox
         foreach (var area in GetOverlappingAreas())
         {
             if (!area.IsInGroup("HurtBox")) continue;
-            
-            var hurtBox = (HurtBox) area;
-            
+
+            var hurtBox = (HurtBox)area;
+
             hurtBox.ReceiveAttack(this);
         }
     }
-    
+
     private void OnAreaEntered(Area2D area)
     {
         if (!area.IsInGroup("HurtBox")) return;
-        
+
         timer.Start();
     }
-    
+
     private void OnAreaExited(Area2D area)
     {
         if (!area.IsInGroup("HurtBox")) return;

@@ -30,7 +30,7 @@ public partial class InteractionManager : Node2D
     public override void _Process(double delta)
     {
         ui.Hide();
-        
+
         if (areas.Count == 0) return;
 
         var closest = GetClosest();

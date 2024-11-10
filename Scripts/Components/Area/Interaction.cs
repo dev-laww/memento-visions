@@ -11,10 +11,10 @@ public partial class Interaction : Area2D
 {
     [Export]
     public string InteractionLabel = "Interact";
-    
+
     [Signal]
     public delegate void InteractedEventHandler();
-    
+
     public Marker2D Marker { get; private set; }
 
     public override void _Ready()
@@ -23,7 +23,7 @@ public partial class Interaction : Area2D
         BodyExited += body => InteractionManager.Unregister(this);
         Marker = GetChildren().OfType<Marker2D>().First();
     }
-    
+
     public void Interact() => EmitSignal(SignalName.Interacted);
 
     public override string[] _GetConfigurationWarnings()
@@ -31,11 +31,10 @@ public partial class Interaction : Area2D
         var warnings = new List<string>();
 
         var marker = GetChildren().OfType<Marker2D>().FirstOrDefault();
-        
+
         if (marker == null)
             warnings.Add("Marker2D not found.");
-        
+
         return warnings.ToArray();
     }
 }
-
