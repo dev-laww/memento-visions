@@ -15,14 +15,14 @@
 
 [sub_resource type="Resource" id="Resource_8unyy"]
 script = ExtResource("2_8ghi8")
-Health = 100
-MaxHealth = 100
-MaxStamina = 100
-Mana = 100
-MaxMana = 100
-Attack = 10
-Defense = 10
-Speed = 50
+MaxHealth = 100.0
+MaxMana = 100.0
+Attack = 10.0
+Magic = 10.0
+Defense = 10.0
+Speed = 50.0
+PhysicalDamageMultiplier = 1.0
+MagicalDamageMultiplier = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2unvb"]
 radius = 43.0465

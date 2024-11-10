@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Game.Resources;
+using Game.Battle;
 using Godot;
 
 namespace Game.Components.Area;
@@ -8,47 +8,31 @@ namespace Game.Components.Area;
 [GlobalClass]
 public partial class HitBox : Area2D
 {
-    private float _damage;
-
-    private Stats resource;
+    [Export]
+    public Attack.Type Type { get; set; } = Attack.Type.Physical;
 
     [Export]
-    private Stats Stats
+    public StatsManager StatsManager
     {
-        get => resource;
+        get => manager;
         set
         {
-            resource = value;
+            manager = value;
             UpdateConfigurationWarnings();
         }
     }
-
-    public float Damage
+    
+    private StatsManager manager;
+    
+    public Attack Attack => Type switch
     {
-        get => _damage;
-        set
-        {
-            _damage = value;
-
-            if (value is <= 0 or float.NaN)
-                return;
-
-            if (value > _damage)
-                EmitSignal(SignalName.DamageIncreased, _damage - value);
-            else
-                EmitSignal(SignalName.DamageDecreased, value - _damage);
-        }
-    }
-
-    [Signal]
-    public delegate void DamageIncreasedEventHandler(float damage);
-
-    [Signal]
-    public delegate void DamageDecreasedEventHandler(float damage);
+        Attack.Type.Physical => StatsManager.PhysicalAttack,
+        Attack.Type.Magical => StatsManager.MagicalAttack,
+        _ => StatsManager.PhysicalAttack
+    };
 
     public override void _Ready()
     {
-        Damage = Stats.Attack;
         CollisionLayer = 1 << 10;
         CollisionMask = 1 << 11;
         NotifyPropertyListChanged();
@@ -58,8 +42,8 @@ public partial class HitBox : Area2D
     {
         var warnings = new List<string>();
 
-        if (Stats == null)
-            warnings.Add("Stats resource not found.");
+        if (manager == null)
+            warnings.Add("StatsManager is not set.");
 
         return warnings.ToArray();
     }

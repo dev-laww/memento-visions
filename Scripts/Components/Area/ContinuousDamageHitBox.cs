@@ -31,8 +31,8 @@ public partial class ContinuousDamageHitBox : HitBox
             if (!area.IsInGroup("HurtBox")) continue;
             
             var hurtBox = (HurtBox) area;
-
-            hurtBox.ReceiveDamage(Damage);
+            
+            hurtBox.ReceiveAttack(this);
         }
     }
     

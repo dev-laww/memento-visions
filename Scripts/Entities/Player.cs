@@ -48,7 +48,6 @@ public partial class Player : CharacterBody2D
     public override void _Ready()
     {
         statsManager.StatsChanged += StatChangeHandler;
-        hurtBox.DamageReceived += (damage) => GD.Print($"Player received {damage} damage.");
 
         StateMachine.AddStates(Idle);
         StateMachine.AddStates(Walk);
@@ -100,7 +99,7 @@ public partial class Player : CharacterBody2D
     {
         CanDash = stat switch
         {
-            StatsType.Stamina => value >= DashStaminaCost,
+            StatsType.Mana => value >= DashStaminaCost,
             _ => CanDash
         };
     }
@@ -111,7 +110,7 @@ public partial class Player : CharacterBody2D
 
     private void EnterDash()
     {
-        statsManager.ConsumeStamina(DashStaminaCost);
+        statsManager.ConsumeMana(DashStaminaCost);
         Dashing = true;
     }
 

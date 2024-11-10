@@ -1,4 +1,5 @@
 using Game.Components;
+using Game.Components.Area;
 using Game.Components.Movement;
 using Game.Extensions;
 using Godot;
@@ -21,6 +22,9 @@ public partial class Samurai : CharacterBody2D
 
     [Node]
     private AnimationPlayer Animation;
+
+    [Node]
+    private HurtBox HurtBox;
 
     private bool inRange;
     private bool attacking;
@@ -51,7 +55,7 @@ public partial class Samurai : CharacterBody2D
                 stateMachine.ChangeState(Walk);
         };
         StatsManager.StatsDecreased += StatDecrease;
-        StatsManager.StatsChanged += (value, stat) => GD.Print($"Samurai {stat} changed to {value}");
+        HurtBox.AttackReceived += (damage, type, isCritical) => GD.Print($"Samurai received {damage} {(isCritical ? "Critical " : "")}{type} damage.");
 
         stateMachine.AddStates(Idle);
         stateMachine.AddStates(Walk);

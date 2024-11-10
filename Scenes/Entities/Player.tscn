@@ -2221,12 +2221,13 @@ sprite_frames = SubResource("SpriteFrames_d0gpk")
 animation = &"dagger_right"
 script = ExtResource("9_401x2")
 
-[node name="HitBox" type="Area2D" parent="."]
+[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
 position = Vector2(0.112813, 21)
 collision_layer = 1024
 collision_mask = 2048
 script = ExtResource("6_ly21x")
-Stats = ExtResource("3_jlnk4")
+Type = 1
+StatsManager = NodePath("../StatsManager")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitBox"]
 position = Vector2(-1.78814e-07, 1)

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
+using Game.Battle;
 using Godot;
-using Godot.Collections;
 
 namespace Game.Components.Area;
 
@@ -21,8 +20,8 @@ public partial class HurtBox : Area2D
     }
 
     [Signal]
-    public delegate void DamageReceivedEventHandler(float damage);
-    
+    public delegate void AttackReceivedEventHandler(float damage, Attack.Type type, bool isCritical = false);
+
     private StatsManager statsManager;
 
     public override void _Ready()
@@ -34,10 +33,19 @@ public partial class HurtBox : Area2D
         NotifyPropertyListChanged();
     }
 
-    public void ReceiveDamage(float damage)
+    public void ReceiveAttack(HitBox hitBox)
     {
-        EmitSignal(SignalName.DamageReceived, damage);
-        statsManager.TakeDamage(damage);
+        var attack = hitBox.Attack;
+        attack = hitBox.Type switch
+        {
+            Attack.Type.Physical => attack.Roll(StatsManager.Defense, StatsManager.PhysicalDamageMultiplier),
+            Attack.Type.Magical => attack.Roll(StatsManager.Defense, StatsManager.MagicalDamageMultiplier),
+            _ => attack.Roll(StatsManager.Defense)
+        };
+        
+        statsManager.TakeDamage(attack.Damage);
+        
+        EmitSignal(SignalName.AttackReceived, attack.Damage, (int)attack.AttackType, attack.IsCritical);
     }
 
     private void OnHurtBoxAreaEntered(Area2D area)
@@ -45,14 +53,14 @@ public partial class HurtBox : Area2D
         if (area is not HitBox hitBox) return;
 
         if (hitBox.Owner == Owner) return;
-
-        ReceiveDamage(hitBox.Damage);
+        
+        ReceiveAttack(hitBox);
     }
 
     public override string[] _GetConfigurationWarnings()
     {
         var warnings = new List<string>();
-        
+
         if (statsManager == null)
             warnings.Add("StatsManager is not set.");
 
