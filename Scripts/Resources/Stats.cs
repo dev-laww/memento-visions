@@ -4,29 +4,30 @@ namespace Game.Resources;
 
 [Tool]
 [GlobalClass]
-public partial class Stats: Resource
+public partial class Stats : Resource
 {
     [Export]
-    public int Health { get; set; } = 100;
+    public float MaxHealth { get; set; } = 100;
 
     [Export]
-    public int MaxHealth { get; set; } = 100;
-    
-    [Export]
-    public int MaxStamina { get; set; } = 100;
+    public float MaxMana { get; set; } = 100;
 
     [Export]
-    public int Mana { get; set; } = 100;
+    public float Attack { get; set; } = 10;
 
     [Export]
-    public int MaxMana { get; set; } = 100;
+    public float Magic { get; set; } = 10;
 
     [Export]
-    public int Attack { get; set; } = 10;
+    public float Defense { get; set; } = 10;
 
     [Export]
-    public int Defense { get; set; } = 10;
+    public float Speed { get; set; } = 50;
+
+    [ExportCategory("Resistance Multipliers")]
+    [Export]
+    public float PhysicalDamageMultiplier { get; set; } = 1.0f;
 
     [Export]
-    public int Speed { get; set; } = 50;
+    public float MagicalDamageMultiplier { get; set; } = 1.0f;
 }
