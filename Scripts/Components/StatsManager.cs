@@ -1,16 +1,22 @@
 using System;
 using System.Collections.Generic;
+using Game.Battle;
 using Godot;
 using GodotUtilities;
 using StatsResource = Game.Resources.Stats;
 
 namespace Game.Components;
 
-// TODO: create attack object to implement crit and other stats
+// TODO: add methods for modifying other stats
+// TODO: Buff and debuff system maybe??
 
 public enum StatsType
 {
-    Stamina,
+    Mana,
+    Speed,
+    Attack,
+    Defense,
+    Magic,
     Health,
 }
 
@@ -47,7 +53,6 @@ public partial class StatsManager : Node
     [Signal]
     public delegate void StatsDepletedEventHandler(StatsType stat);
 
-
     public float Speed { get; private set; }
 
     public float Health
@@ -56,10 +61,28 @@ public partial class StatsManager : Node
         private set => health = value;
     }
 
-    public float Stamina
+    public float Magic
     {
-        get => stamina;
-        private set => stamina = value;
+        get => magic;
+        private set => magic = value;
+    }
+
+    public float Defense
+    {
+        get => defense;
+        private set => defense = value;
+    }
+
+    public float Attack
+    {
+        get => attack;
+        private set => attack = value;
+    }
+
+    public float Mana
+    {
+        get => mana;
+        private set => mana = value;
     }
 
     public float MaxHealth
@@ -68,16 +91,23 @@ public partial class StatsManager : Node
         private set => maxHealth = value;
     }
 
-    private float MaxStamina
+    private float MaxMana
     {
-        get => maxStamina;
-        set => maxStamina = value;
+        get => maxMana;
+        set => maxMana = value;
     }
 
+    public Attack MagicalAttack => Battle.Attack.Magical(Attack);
+    public Attack PhysicalAttack => Battle.Attack.Physical(Attack);
+    public float PhysicalDamageMultiplier => Stats.PhysicalDamageMultiplier;
+    public float MagicalDamageMultiplier => Stats.MagicalDamageMultiplier;
     private float health;
-    private float stamina;
+    private float mana;
     private float maxHealth;
-    private float maxStamina;
+    private float maxMana;
+    private float magic;
+    private float defense;
+    private float attack;
     private StatsResource resource;
 
     public override void _Notification(int what)
@@ -91,21 +121,23 @@ public partial class StatsManager : Node
     {
         InitializeStats();
 
-        staminaRecovery.Timeout += () => RecoverStamina(StaminaRecoveryRate);
+        staminaRecovery.Timeout += () => RecoverMana(StaminaRecoveryRate);
         staminaRecovery.Start();
     }
 
     private void InitializeStats()
     {
         if (Stats is null) return;
-        
+
         Speed = Stats.Speed;
         MaxHealth = Stats.MaxHealth;
-        MaxStamina = Stats.MaxStamina;
+        MaxMana = Stats.MaxMana;
+        Attack = Stats.Attack;
+        Magic = Stats.Magic;
+        Defense = Stats.Defense;
 
-        // Initialize stats to max values
         Health = MaxHealth;
-        Stamina = MaxStamina;
+        Mana = MaxMana;
     }
 
     public void TakeDamage(float amount) => DecreaseStat(
@@ -121,17 +153,17 @@ public partial class StatsManager : Node
         type: StatsType.Health
     );
 
-    public void ConsumeStamina(float amount) => DecreaseStat(
-        stat: ref stamina,
+    public void ConsumeMana(float amount) => DecreaseStat(
+        stat: ref mana,
         value: amount,
-        type: StatsType.Stamina
+        type: StatsType.Mana
     );
 
-    public void RecoverStamina(float amount) => IncreaseStat(
-        stat: ref stamina,
-        max: ref maxStamina,
+    public void RecoverMana(float amount) => IncreaseStat(
+        stat: ref mana,
+        max: ref maxMana,
         value: amount,
-        type: StatsType.Stamina
+        type: StatsType.Mana
     );
 
     private void DecreaseStat(ref float stat, float value, StatsType type)
