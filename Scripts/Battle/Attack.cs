@@ -1,3 +1,4 @@
+using Godot;
 using GodotUtilities;
 
 namespace Game.Battle;
@@ -16,30 +17,33 @@ public class Attack
 
     public bool IsCritical { get; private set; }
 
-    public Attack(float damage, Type type, bool critical)
+    private Attack(float damage, Type type, bool critical)
     {
         Damage = damage;
         AttackType = type;
         IsCritical = critical;
     }
 
-    public void RollCritical() => IsCritical = MathUtil.RNG.RandiRange(0, 100) > 80;
-
     public static Attack Physical(float damage, bool critical = false) => new(damage, Type.Physical, critical);
 
-    public static Attack Magic(float damage, bool critical = false) => new(damage, Type.Magical, critical);
+    public static Attack Magical(float damage, bool critical = false) => new(damage, Type.Magical, critical);
 
-    public float CalculateDamage(float defense, float physicalMultiplier, float magicMultiplier)
+    public Attack Roll(float defense, float damageMultiplier = 1f)
     {
-        RollCritical();
-        
-        var damage = Damage - defense * (AttackType == Type.Physical ? 1 : 0.8f);
+        var damage = Damage;
+        var critical = MathUtil.RNG.RandfRange(0, 1) < 0.1f;
 
-        if (IsCritical)
-            damage += damage * (Damage / 3);
-        
-        IsCritical = false;
-        
-        return damage * (AttackType == Type.Physical ? physicalMultiplier : magicMultiplier);
+        if (critical)
+            damage += Damage * (damage / 3);
+
+        damage -= defense * AttackType switch
+        {
+            Type.Physical => 1f,
+            Type.Magical => 0.8f,
+            _ => 1f
+        };
+        damage *= damageMultiplier;
+
+        return new Attack(damage, AttackType, critical);
     }
 }
