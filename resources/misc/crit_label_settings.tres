@@ -1,9 +1,0 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c732h65cvbig7"]
-
-[ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/Font/04b03.woff2" id="1_djatv"]
-
-[resource]
-font = ExtResource("1_djatv")
-font_color = Color(1, 0.15, 0.15, 1)
-outline_size = 4
-outline_color = Color(0.18, 0, 0, 1)
