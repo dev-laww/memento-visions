@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1_q15j2")
-Health = 100
-MaxHealth = 100
-MaxStamina = 100
-Mana = 100
-MaxMana = 100
-Attack = 10
-Defense = 10
-Speed = 100
+MaxHealth = 100.0
+MaxMana = 100.0
+Attack = 20.0
+Magic = 20.0
+Defense = 10.0
+Speed = 100.0
+PhysicalDamageMultiplier = 1.0
+MagicalDamageMultiplier = 1.0
