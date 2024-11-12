@@ -62,19 +62,6 @@ public partial class DamageNumber : Node2D
     private Label label => GetNodeOrNull<Label>("Label");
     private ResourcePreloader resourcePreloader => GetNodeOrNull<ResourcePreloader>("ResourcePreloader");
 
-    public override void _Input(InputEvent @event)
-    {
-        if (@event.IsActionPressed("move_up"))
-        {
-            Animate();
-            return;
-        }
-        
-        if (!@event.IsActionPressed("move_down")) return;
-        
-        Critical();
-    }
-
     public void Animate()
     {
         animationPlayer.Stop();

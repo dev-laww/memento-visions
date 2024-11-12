@@ -1129,6 +1129,7 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id="Animation_bp6l3"]
 length = 0.5
+step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1328,6 +1329,7 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id="Animation_xqtun"]
 length = 0.5
+step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
