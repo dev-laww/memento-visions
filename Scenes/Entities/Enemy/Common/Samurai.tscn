@@ -447,9 +447,9 @@ StatsManager = NodePath("../StatsManager")
 shape = SubResource("CapsuleShape2D_m6lc7")
 debug_color = Color(0.994106, 0, 0.227366, 0.42)
 
-[node name="DamageNumberManager" parent="." node_paths=PackedStringArray("hurtBox") instance=ExtResource("6_erfge")]
+[node name="DamageNumberManager" parent="." node_paths=PackedStringArray("statsManager") instance=ExtResource("6_erfge")]
 position = Vector2(0, -21)
-hurtBox = NodePath("../HurtBox")
+statsManager = NodePath("../StatsManager")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 12)

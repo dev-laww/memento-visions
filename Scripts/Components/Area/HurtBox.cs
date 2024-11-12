@@ -19,9 +19,6 @@ public partial class HurtBox : Area2D
         }
     }
 
-    [Signal]
-    public delegate void AttackReceivedEventHandler(float damage, Attack.Type type, bool isCritical = false);
-
     private StatsManager statsManager;
 
     public override void _Ready()
@@ -43,9 +40,7 @@ public partial class HurtBox : Area2D
             _ => attack.Roll(StatsManager.Defense)
         };
 
-        statsManager.TakeDamage(attack.Damage);
-
-        EmitSignal(SignalName.AttackReceived, attack.Damage, (int)attack.AttackType, attack.IsCritical);
+        statsManager.ReceiveAttack(attack);
     }
 
     private void OnHurtBoxAreaEntered(Area2D area)

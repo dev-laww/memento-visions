@@ -53,6 +53,9 @@ public partial class StatsManager : Node
     [Signal]
     public delegate void StatsDepletedEventHandler(StatsType stat);
 
+    [Signal]
+    public delegate void AttackReceivedEventHandler(float damage, Attack.Type type, bool isCritical = false);
+
     public float Speed { get; private set; }
 
     public float Health
@@ -140,11 +143,15 @@ public partial class StatsManager : Node
         Mana = MaxMana;
     }
 
-    public void TakeDamage(float amount) => DecreaseStat(
-        stat: ref health,
-        value: amount,
-        type: StatsType.Health
-    );
+    public void ReceiveAttack(Attack atk)
+    {
+        EmitSignal(SignalName.AttackReceived, atk.Damage, (int)atk.AttackType, atk.IsCritical);
+        DecreaseStat(
+            stat: ref health,
+            value: atk.Damage,
+            type: StatsType.Health
+        );
+    }
 
     public void RecoverHealth(float amount) => IncreaseStat(
         stat: ref health,

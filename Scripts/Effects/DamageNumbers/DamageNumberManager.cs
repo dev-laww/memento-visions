@@ -1,5 +1,6 @@
 using System.Linq;
 using Game.Battle;
+using Game.Components;
 using Game.Components.Area;
 using Game.Extensions;
 using Godot;
@@ -14,12 +15,12 @@ namespace Game.Effects.DamageNumbers;
 public partial class DamageNumberManager : Node2D
 {
     [Export]
-    private HurtBox hurtBox
+    private StatsManager statsManager
     {
-        get => box;
+        get => manager;
         set
         {
-            box = value;
+            manager = value;
             UpdateConfigurationWarnings();
         }
     }
@@ -33,7 +34,7 @@ public partial class DamageNumberManager : Node2D
     [Node]
     private Timer timer;
 
-    private HurtBox box;
+    private StatsManager manager;
     private DamageNumber number => numberSpawn.GetChildrenOfType<DamageNumber>().FirstOrDefault();
     private float damage;
 
@@ -46,7 +47,8 @@ public partial class DamageNumberManager : Node2D
 
     public override void _Ready()
     {
-        hurtBox.AttackReceived += OnAttackReceived;
+        if (statsManager != null)
+            statsManager.AttackReceived += OnAttackReceived;
         timer.Timeout += OnTimerTimeout;
     }
 
@@ -54,8 +56,8 @@ public partial class DamageNumberManager : Node2D
     {
         var warnings = new System.Collections.Generic.List<string>();
 
-        if (box == null)
-            warnings.Add("HurtBox is not set.");
+        if (manager == null)
+            warnings.Add("StatsManager is not set.");
 
         return warnings.ToArray();
     }
@@ -87,7 +89,7 @@ public partial class DamageNumberManager : Node2D
     private async void OnTimerTimeout()
     {
         damage = 0;
-        
+
         if (number == null) return;
 
         await number.Exit();
