@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=8 format=3 uid="uid://cxgbxsavclkj7"]
 
-[ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/Font/04b03.woff2" id="2_4xgr6"]
+[ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="2_4xgr6"]
 [ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="2_8j7kc"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7n05q"]
