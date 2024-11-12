@@ -3,7 +3,7 @@ using Game.Extensions;
 using Godot;
 using GodotUtilities;
 
-namespace Game.Effects.DamageNumbers;
+namespace Game.Effects.HealthNumbers;
 
 [Tool]
 [Scene]

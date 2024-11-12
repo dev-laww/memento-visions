@@ -1,18 +1,17 @@
 using System.Linq;
 using Game.Battle;
 using Game.Components;
-using Game.Components.Area;
 using Game.Extensions;
 using Godot;
 using GodotUtilities;
 
-namespace Game.Effects.DamageNumbers;
+namespace Game.Effects.HealthNumbers;
 
 // TODO: make this health numbers and add regen numbers
 
 [Tool]
 [Scene]
-public partial class DamageNumberManager : Node2D
+public partial class HealthNumberManager : Node2D
 {
     [Export]
     private StatsManager statsManager

@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://do4ijtd5xbu2c"]
 
-[ext_resource type="PackedScene" uid="uid://bsudix8wv6q4o" path="res://Scenes/Effects/DamageNumbers/DamageNumber.tscn" id="1_2d4ih"]
-[ext_resource type="Script" path="res://Scripts/Effects/DamageNumbers/DamageNumberManager.cs" id="1_smxel"]
+[ext_resource type="PackedScene" uid="uid://bsudix8wv6q4o" path="res://Scenes/Effects/HealthNumbers/DamageNumber.tscn" id="1_2d4ih"]
+[ext_resource type="Script" path="res://Scripts/Effects/HealthNumbers/HealthNumberManager.cs" id="1_smxel"]
 
-[node name="DamageNumberManager" type="Node2D"]
+[node name="HealthNumberManager" type="Node2D"]
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_smxel")
 
