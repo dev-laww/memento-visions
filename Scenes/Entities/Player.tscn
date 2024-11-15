@@ -1,10 +1,11 @@
-[gd_scene load_steps=151 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=152 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/StatsManager.tscn" id="2_cqdhe"]
 [ext_resource type="Resource" uid="uid://diw2rt1u3pxap" path="res://resources/stats/player.tres" id="3_jlnk4"]
 [ext_resource type="Script" path="res://Scripts/Components/Movement/Velocity.cs" id="4_iaq51"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/HurtBox.cs" id="5_5x453"]
+[ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Effects/HealthNumbers/HealthNumberManager.tscn" id="5_lfb6s"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/HitBox.cs" id="6_ly21x"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="7_s1dwx"]
 [ext_resource type="Texture2D" uid="uid://crm174xl683eq" path="res://assets/entities/player/player.png" id="9_2exdb"]
@@ -2194,6 +2195,9 @@ DashDuration = 0.2
 position = Vector2(-1.49012e-08, 14)
 rotation = 1.58684
 shape = SubResource("CapsuleShape2D_kaamo")
+
+[node name="HealthNumberManager" parent="." node_paths=PackedStringArray("statsManager") instance=ExtResource("5_lfb6s")]
+statsManager = NodePath("../StatsManager")
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
 collision_layer = 2048
