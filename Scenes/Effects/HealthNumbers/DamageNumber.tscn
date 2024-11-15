@@ -233,7 +233,6 @@ Text = "123"
 resources = [PackedStringArray("magical", "physical"), [ExtResource("5_fvbuw"), ExtResource("1_i155x")]]
 
 [node name="Label" type="Label" parent="."]
-z_index = 2
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

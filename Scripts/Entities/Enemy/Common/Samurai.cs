@@ -23,9 +23,6 @@ public partial class Samurai : CharacterBody2D
     [Node]
     private AnimationPlayer Animation;
 
-    [Node]
-    private HurtBox HurtBox;
-
     private bool inRange;
     private bool attacking;
     private string attackDirection;

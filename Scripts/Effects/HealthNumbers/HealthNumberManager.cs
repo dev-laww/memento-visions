@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Game.Battle;
 using Game.Components;
@@ -6,8 +7,6 @@ using Godot;
 using GodotUtilities;
 
 namespace Game.Effects.HealthNumbers;
-
-// TODO: make this health numbers and add regen numbers
 
 [Tool]
 [Scene]
@@ -33,9 +32,12 @@ public partial class HealthNumberManager : Node2D
     [Node]
     private Timer timer;
 
+    [Node]
+    private Node2D regenSpawns;
+
     private StatsManager manager;
-    private DamageNumber number => numberSpawn.GetChildrenOfType<DamageNumber>().FirstOrDefault();
-    private float damage;
+    private DamageNumber damage => numberSpawn.GetChildrenOfType<DamageNumber>().FirstOrDefault();
+    private float damageReceived;
 
     public override void _Notification(int what)
     {
@@ -47,50 +49,67 @@ public partial class HealthNumberManager : Node2D
     public override void _Ready()
     {
         if (statsManager != null)
+        {
             statsManager.AttackReceived += OnAttackReceived;
+            statsManager.StatsIncreased += OnStatsIncreased;
+        }
+
         timer.Timeout += OnTimerTimeout;
-    }
-
-    public override string[] _GetConfigurationWarnings()
-    {
-        var warnings = new System.Collections.Generic.List<string>();
-
-        if (manager == null)
-            warnings.Add("StatsManager is not set.");
-
-        return warnings.ToArray();
     }
 
     private void OnAttackReceived(float dmg, Attack.Type type, bool critical)
     {
         timer.Reset();
-        damage += dmg;
+        damageReceived += dmg;
 
-        if (number == null)
+        if (damage == null)
         {
-            var scene = resourcePreloader.GetResource<PackedScene>("number");
+            var scene = resourcePreloader.GetResource<PackedScene>("damage");
             var num = scene.Instantiate<DamageNumber>();
             numberSpawn.AddChild(num);
         }
 
-        number!.Text = $"{damage}";
-        number!.DamageType = type;
+        damage!.Text = $"{damageReceived}";
+        damage!.DamageType = type;
 
         if (critical)
         {
-            number.Critical();
+            damage.Critical();
             return;
         }
 
-        number.Animate();
+        damage.Animate();
+    }
+
+    private void OnStatsIncreased(float amount, StatsType type)
+    {
+        if (type != StatsType.Health) return;
+
+        var scene = resourcePreloader.GetResource<PackedScene>("regen");
+        var num = scene.Instantiate<RegenNumber>();
+        var spawn = regenSpawns.GetChildrenOfType<Node2D>().ToArray()[MathUtil.RNG.RandiRange(0, 7)];
+        num.Text = $"+{amount}";
+        
+        spawn.AddChild(num);
     }
 
     private async void OnTimerTimeout()
     {
-        damage = 0;
+        damageReceived = 0;
 
-        if (number == null) return;
+        if (damage == null) return;
 
-        await number.Exit();
+        await damage.Exit();
+    }
+
+    public override string[] _GetConfigurationWarnings()
+    {
+        var warnings = new List<string>();
+
+        if (manager == null)
+            warnings.Add("StatsManager is not set.");
+
+
+        return warnings.ToArray();
     }
 }
