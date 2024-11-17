@@ -3,57 +3,80 @@ using Godot;
 
 namespace Game.Resources;
 
-public enum ItemType
-{
-    Consumable,
-    Weapon,
-    Material,
-    Quest
-}
-
-[GlobalClass]
 [Tool]
+[GlobalClass]
 public partial class Item : Resource
 {
+    public enum StackSizes
+    {
+        Default = 64,
+        Unstackable = 1,
+        Small = 16,
+        Medium = 32,
+    }
+
     [Export]
-    public string Name { get; set; }
+    public string Name;
+
+    [Export]
+    public string UniqueName;
 
     [Export(PropertyHint.MultilineText)]
-    public string Description { get; set; }
+    public string Description;
 
     [Export]
-    public int Value { get; set; } = 1;
+    private Texture2D icon;
 
     [Export]
-    public ItemType Type { get; set; } = ItemType.Material;
+    public Texture2D sprite;
 
     [Export]
-    private Texture2D icon { get; set; }
-
-    [Export]
-    public Texture2D sprite { get; set; }
-
-    [Export]
-    public bool Stackable { get; set; } = true;
-
-    public Texture2D Icon
+    public bool Stackable
     {
-        get => GetTexture(icon, sprite);
+        get => IsStackable();
+        set => SetStackable(value);
     }
 
-    public Texture2D Sprite
+    [Export(PropertyHint.Enum, "Unstackable (1),Small (16),Medium (32),Default (64)")]
+    public int StackSize
     {
-        get => GetTexture(sprite, icon);
+        get => _stackSize switch
+        {
+            StackSizes.Unstackable => 0,
+            StackSizes.Small => 1,
+            StackSizes.Medium => 2,
+            _ => 3
+        };
+        set
+        {
+            if (!Stackable)
+            {
+                _stackSize = StackSizes.Unstackable;
+                return;
+            }
+
+            _stackSize = value switch
+            {
+                0 => StackSizes.Unstackable,
+                1 => StackSizes.Small,
+                2 => StackSizes.Medium,
+                _ => StackSizes.Default
+            };
+        }
     }
+    
+    public Texture2D Icon => GetTexture(icon, sprite);
+    public Texture2D Sprite => GetTexture(sprite, icon);
 
-    [Export]
-    public int MaxStack { get; set; } = 9999999;
+    private bool _stackable = true;
+    private StackSizes _stackSize = StackSizes.Default;
+    protected virtual bool IsStackable() => _stackable;
 
-    public readonly Guid UID = Guid.NewGuid();
-
-    public Item()
+    protected virtual void SetStackable(bool value)
     {
-        SetMeta("uid", UID.ToString());
+        _stackable = value;
+        StackSize = value ? (int)StackSizes.Default : (int)StackSizes.Unstackable;
+        NotifyPropertyListChanged();
     }
 
     private Texture2D GetTexture(Texture2D primary, Texture2D secondary)

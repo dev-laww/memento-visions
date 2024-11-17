@@ -6,8 +6,8 @@ using ItemResource = Game.Resources.Item;
 
 namespace Game.Components.Interactable;
 
-[Scene]
 [Tool]
+[Scene]
 public partial class Item : Node2D
 {
     [Export]
@@ -18,49 +18,41 @@ public partial class Item : Node2D
         {
             resource = value;
             UpdateConfigurationWarnings();
+
             if (value == null)
             {
                 Name = "Item";
 
-                if (sprite != null)
-                    sprite.Texture = null;
+                sprite.Texture = null;
+                collision.Shape = new CircleShape2D
+                {
+                    Radius = 5
+                };
 
-                if (collision != null)
-                    collision.Shape = new CircleShape2D()
-                    {
-                        Radius = 5
-                    };
+                sprite.NotifyPropertyListChanged();
+                collision.NotifyPropertyListChanged();
 
                 return;
             }
 
-            if (value.Name != null)
-                Name = value.Name;
+            Name = string.IsNullOrEmpty(value.Name) ? "Item" : value.Name;
 
-            if (sprite == null || resource.Sprite == null) return;
-
-            sprite.Texture = resource.Sprite;
-
-            if (collision == null) return;
-
-            var size = sprite.Texture.GetSize().X / 2 + 1.4f;
-
+            sprite.Texture = value.Sprite;
             collision.Shape = new CircleShape2D
             {
-                Radius = size
+                Radius = value.Sprite != null ? value.Sprite.GetSize().X / 2 + 1.4f : 5
             };
+
+            sprite.NotifyPropertyListChanged();
+            collision.NotifyPropertyListChanged();
         }
     }
 
     [Node]
-    private Sprite2D sprite;
-
-    [Node]
     private Area2D pickupRange;
 
-    [Node]
-    private CollisionShape2D collision;
-
+    private Sprite2D sprite => GetNode<Sprite2D>("Sprite");
+    private CollisionShape2D collision => GetNode<CollisionShape2D>("%Collision");
     private ItemResource resource;
 
     public override void _Notification(int what)
@@ -70,10 +62,7 @@ public partial class Item : Node2D
         WireNodes();
     }
 
-    public override void _Ready()
-    {
-        pickupRange.BodyEntered += body => PickUp(body as Player);
-    }
+    public override void _Ready() => pickupRange.BodyEntered += body => PickUp(body as Player);
 
     public override string[] _GetConfigurationWarnings()
     {
@@ -95,7 +84,7 @@ public partial class Item : Node2D
 
         if (player == null)
         {
-            GD.PrintErr($"{Name}: Player is null.");
+            GD.PrintErr($"{Name}: Body is invalid.");
             return;
         }
 
