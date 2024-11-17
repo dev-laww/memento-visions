@@ -1,8 +1,8 @@
-# Trese: Chronicles of Underworld
+# Memento Visions
 
-Trese: Chronicles of Underworld is a game based on the Netflix series Trese. The game is a 2D topdown game where the
-player plays as Alexandra Trese, a detective who solves supernatural crimes in the city of Manila. The game is set in
-the same universe as the Netflix series and follows the same storyline. The player will have to solve various puzzles
+Memento Visions is a game based on the Netflix series Memento Visions. The game is a 2D topdown game where the
+player plays as Alejandro Gutierrez, a detective who solves supernatural crimes in the city of Manila. The game is set
+in the same universe as the Netflix series and follows the same storyline. The player will have to solve various puzzles
 and fight supernatural creatures to progress through the game. The game will have multiple levels and will be available
 on PC platform.
 

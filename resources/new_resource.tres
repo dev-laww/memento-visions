@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://dhm588t2uyvqw"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="1_yu6ub"]
+
+[resource]
+script = ExtResource("1_yu6ub")
+Name = ""
+UniqueName = ""
+Description = ""
+Stackable = true
+StackSize = 3
+metadata/uid = "3897ba50-830d-401f-8ff8-f117b57557e4"

@@ -16,7 +16,7 @@ ResourceScriptDirectories=["res://"]
 
 [application]
 
-config/name="Trese: Chronicles of Underworld"
+config/name="Memento Visions"
 run/main_scene="res://Scenes/Bar.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
