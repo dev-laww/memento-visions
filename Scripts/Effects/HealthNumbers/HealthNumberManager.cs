@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Battle;
-using Game.Components;
+using Game.Components.Managers;
 using Game.Extensions;
 using Godot;
 using GodotUtilities;

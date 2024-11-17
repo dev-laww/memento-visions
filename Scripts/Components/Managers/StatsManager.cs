@@ -5,7 +5,7 @@ using Godot;
 using GodotUtilities;
 using StatsResource = Game.Resources.Stats;
 
-namespace Game.Components;
+namespace Game.Components.Managers;
 
 // TODO: add methods for modifying other stats
 // TODO: Buff and debuff system maybe??
