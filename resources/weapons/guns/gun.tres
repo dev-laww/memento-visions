@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://dj4fwvxem0cau"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/Weapon.cs" id="1_ltvtw"]
+
+[resource]
+script = ExtResource("1_ltvtw")
+Type = 0
+Name = ""
+UniqueName = ""
+Description = ""
+Stackable = false
+StackSize = 0
