@@ -18,9 +18,6 @@
         </Compile>
         <Compile Remove="Scenes\**" />
         <EmbeddedResource Remove="Scenes\**" />
-        <Compile Update="Scripts\Components\Managers\StatsManager.cs">
-          <Namespace>Game</Namespace>
-        </Compile>
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Delaunator" Version="1.0.10" />

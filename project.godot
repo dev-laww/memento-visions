@@ -57,9 +57,10 @@ enabled=PackedStringArray("res://addons/AS2P/plugin.cfg", "res://addons/dialogue
 
 folder_colors={
 "res://Scenes/": "blue",
-"res://Scripts/": "red",
+"res://Scripts/": "pink",
 "res://addons/": "gray",
 "res://assets/": "orange",
+"res://data/": "yellow",
 "res://resources/": "teal",
 "res://script_templates/": "gray"
 }
