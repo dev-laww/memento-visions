@@ -16,19 +16,6 @@
             "debug_navigation": false,
             "additional_options": "",
             "scene": "current"
-        },
-        {
-            "name": "Launch Current Scene",
-            "type": "godot",
-            "request": "launch",
-            "project": "${workspaceFolder}",
-            "port": 6007,
-            "debugServer": 6006,
-            "debug_collisions": false,
-            "debug_paths": false,
-            "debug_navigation": false,
-            "additional_options": "",
-            "scene": "current"
         }
     ]
 }
