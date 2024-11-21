@@ -2197,6 +2197,7 @@ rotation = 1.58684
 shape = SubResource("CapsuleShape2D_kaamo")
 
 [node name="HealthNumberManager" parent="." node_paths=PackedStringArray("statsManager") instance=ExtResource("5_lfb6s")]
+position = Vector2(0, -17)
 statsManager = NodePath("../StatsManager")
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
