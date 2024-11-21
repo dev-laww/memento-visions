@@ -1,40 +1,60 @@
-using System.Collections.Generic;
-using System.Linq;
 using Game.Globals;
 using Godot;
 using GodotUtilities;
 
 namespace Game.Components.Area;
 
+// TODO: add animations for showing and hiding the interaction UI
+
 [Tool]
+[Scene]
 public partial class Interaction : Area2D
 {
-    [Export]
-    public string InteractionLabel = "Interact";
+    [Export(PropertyHint.MultilineText)]
+    public string InteractionLabel
+    {
+        get => GetNodeOrNull<Label>("%Label").Text;
+        set
+        {
+            var label = GetNodeOrNull<Label>("%Label");
+
+            if (label == null) return;
+
+            label.Text = value;
+            label.NotifyPropertyListChanged();
+        }
+    }
 
     [Signal]
     public delegate void InteractedEventHandler();
 
-    public Marker2D Marker { get; private set; }
+    [Node]
+    private Node2D interactionUI;
+
+    public override void _Notification(int what)
+    {
+        if (what != NotificationSceneInstantiated) return;
+
+        WireNodes();
+    }
 
     public override void _Ready()
     {
         BodyEntered += body => InteractionManager.Register(this);
-        BodyExited += body => InteractionManager.Unregister(this);
-        Marker = GetChildren().OfType<Marker2D>().First();
+        BodyExited += body =>
+        {
+            InteractionManager.Unregister(this);
+            HideUI();
+        };
+
+        if (Engine.IsEditorHint()) return;
+
+        interactionUI.Hide();
     }
 
     public void Interact() => EmitSignal(SignalName.Interacted);
 
-    public override string[] _GetConfigurationWarnings()
-    {
-        var warnings = new List<string>();
+    public void HideUI() => interactionUI.Hide();
 
-        var marker = GetChildren().OfType<Marker2D>().FirstOrDefault();
-
-        if (marker == null)
-            warnings.Add("Marker2D not found.");
-
-        return warnings.ToArray();
-    }
+    public void ShowUI() => interactionUI.Show();
 }

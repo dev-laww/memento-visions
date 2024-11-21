@@ -9,43 +9,24 @@ namespace Game.Globals;
 public partial class InteractionManager : Node2D
 {
     private static InteractionManager instance;
-
     private readonly List<Interaction> areas = new();
+    private Interaction lastClosest;
 
-    private HBoxContainer ui;
-
-    private PackedScene InteractionUIScene = GD.Load<PackedScene>("res://Scenes/UI/InteractionUI.tscn");
-
-    public override void _Ready()
-    {
-        instance = this;
-
-        ui = InteractionUIScene.Instantiate<HBoxContainer>();
-
-        AddChild(ui);
-
-        ui.Hide();
-    }
+    public override void _Ready() => instance = this;
 
     public override void _Process(double delta)
     {
-        ui.Hide();
-
         if (areas.Count == 0) return;
 
         var closest = GetClosest();
-        var label = ui.GetNode<Label>("Label");
-        label.Text = closest.InteractionLabel;
 
-        var icon = ui.GetNode<TextureRect>("Icon");
-        var offset = new Vector2(
-            (icon.Size.X + label.Size.X) / 2,
-            ui.Size.Y / 2
-        );
+        if (closest == lastClosest) return;
 
-        ui.GlobalPosition = closest.Marker.GlobalPosition - offset;
+        areas.ForEach(area => area.HideUI());
 
-        GetTree().CreateTimer(0.2).Timeout += () => ui.Show();
+        lastClosest = closest;
+
+        closest.ShowUI();
     }
 
     public override void _Input(InputEvent @event)
@@ -59,7 +40,13 @@ public partial class InteractionManager : Node2D
 
     public static void Register(Interaction area) => instance.areas.Add(area);
 
-    public static void Unregister(Interaction area) => instance.areas.Remove(area);
+    public static void Unregister(Interaction area)
+    {
+        if (area == instance.lastClosest)
+            instance.lastClosest = null;
+        
+        instance.areas.Remove(area);
+    }
 
     private Interaction GetClosest()
     {
@@ -68,8 +55,8 @@ public partial class InteractionManager : Node2D
         areas.Sort((a, b) =>
         {
             var player = this.GetPlayer();
-            var aDistance = a.Marker.GlobalPosition.DistanceTo(player.GlobalPosition);
-            var bDistance = b.Marker.GlobalPosition.DistanceTo(player.GlobalPosition);
+            var aDistance = a.GlobalPosition.DistanceTo(player.GlobalPosition);
+            var bDistance = b.GlobalPosition.DistanceTo(player.GlobalPosition);
 
             return aDistance.CompareTo(bDistance);
         });
