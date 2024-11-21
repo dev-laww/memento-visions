@@ -1,0 +1,7 @@
+[
+    {
+        "name": "Test Item",
+        "unique_name": "item:test",
+        "resource": "res://resources/items/test.tres"
+    }
+]

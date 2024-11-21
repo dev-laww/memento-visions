@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Sword",
+        "unique_name": "weapon:sword",
+        "resource": "res://resources/weapons/swords/sword.tres"
+    },
+    {
+        "name": "Gun",
+        "unique_name": "weapon:gun",
+        "resource": "res://resources/weapons/guns/gun.tres"
+    },
+    {
+        "name": "Dagger",
+        "unique_name": "weapon:dagger",
+        "resource": "res://resources/weapons/daggers/dagger.tres"
+    },
+    {
+        "name": "Whip",
+        "unique_name": "weapon:whip",
+        "resource": "res://resources/weapons/whips/whip.tres"
+    }
+]

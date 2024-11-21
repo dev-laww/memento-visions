@@ -1,0 +1,13 @@
+[
+    {
+        "name": "Test Recipe",
+        "unique_name": "recipe:test",
+        "result": "res://resources/items/test.tres",
+        "ingredients": [
+            {
+                "item": "res://resources/items/test.tres",
+                "amount": 1
+            }
+        ]
+    }
+]
