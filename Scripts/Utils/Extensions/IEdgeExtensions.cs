@@ -2,7 +2,7 @@
 using System.Linq;
 using DelaunatorSharp;
 
-namespace Game.Extensions;
+namespace Game.Utils.Extensions;
 
 public static class IEdgeExtensions
 {

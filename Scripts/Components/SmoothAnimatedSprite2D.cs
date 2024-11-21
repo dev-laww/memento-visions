@@ -1,4 +1,4 @@
-﻿using Game.Extensions;
+﻿using Game.Utils.Extensions;
 
 namespace Game.Components;
 

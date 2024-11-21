@@ -6,7 +6,7 @@ using Game.Generation.Dungeon;
 using Godot;
 using GodotUtilities;
 
-namespace Game.Extensions;
+namespace Game.Utils.Extensions;
 
 public static class Vector2Extensions
 {

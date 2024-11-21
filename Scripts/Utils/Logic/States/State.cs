@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Game.Logic.States;
+namespace Game.Utils.Logic.States;
 
 [Tool]
 [GlobalClass]

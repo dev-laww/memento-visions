@@ -1,5 +1,5 @@
 using Game.Battle;
-using Game.Extensions;
+using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 

@@ -1,6 +1,6 @@
 using Game.Components.Managers;
 using Game.Components.Movement;
-using Game.Extensions;
+using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 using GodotUtilities.Logic;
