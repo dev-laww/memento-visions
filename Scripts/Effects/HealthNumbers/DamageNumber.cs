@@ -36,7 +36,7 @@ public partial class DamageNumber : Node2D
         set
         {
             if (label == null) return;
-            
+
             damageType = value;
             label.LabelSettings = value switch
             {
@@ -77,7 +77,7 @@ public partial class DamageNumber : Node2D
     public SignalAwaiter Exit()
     {
         animationPlayer.Play("exit");
-        
+
         return ToSignal(animationPlayer, "animation_finished");
     }
 }

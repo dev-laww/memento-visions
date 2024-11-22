@@ -14,9 +14,9 @@ public partial class ContinuousDamageHitBox : HitBox
     public override void _Ready()
     {
         base._Ready();
-        
+
         if (Engine.IsEditorHint()) return;
-        
+
         timer = new Timer
         {
             WaitTime = damageInterval,

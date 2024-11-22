@@ -88,8 +88,9 @@ public partial class HealthNumberManager : Node2D
         var scene = resourcePreloader.GetResource<PackedScene>("regen");
         var num = scene.Instantiate<RegenNumber>();
         var spawn = regenSpawns.GetChildrenOfType<Node2D>().ToArray()[MathUtil.RNG.RandiRange(0, 7)];
+
         num.Text = $"+{amount}";
-        
+
         spawn.AddChild(num);
     }
 

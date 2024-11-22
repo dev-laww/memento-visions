@@ -131,7 +131,7 @@ public partial class SceneManager : Node
         }
 
         loadProgressTimer = new Timer
-            { WaitTime = 0.1f };
+        { WaitTime = 0.1f };
         loadProgressTimer.Timeout += MonitorLoadStatus;
         GetTree().Root.AddChild(loadProgressTimer);
         loadProgressTimer.Start();

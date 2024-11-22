@@ -64,7 +64,7 @@ public partial class Item : Resource
             };
         }
     }
-    
+
     public Texture2D Icon => GetTexture(icon, sprite);
     public Texture2D Sprite => GetTexture(sprite, icon);
 

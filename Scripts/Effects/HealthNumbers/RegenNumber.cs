@@ -29,7 +29,7 @@ public partial class RegenNumber : Node2D
 
     [Node]
     private AnimationPlayer animationPlayer;
-    
+
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
@@ -38,6 +38,4 @@ public partial class RegenNumber : Node2D
     }
 
     private Label label => GetNodeOrNull<Label>("Label");
-    
-    
 }

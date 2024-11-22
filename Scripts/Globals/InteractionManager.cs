@@ -44,7 +44,7 @@ public partial class InteractionManager : Node2D
     {
         if (area == instance.lastClosest)
             instance.lastClosest = null;
-        
+
         instance.areas.Remove(area);
     }
 
