@@ -1,17 +1,31 @@
+using System.Collections.Generic;
 using Game.Resources;
+using Game.Utils.JSON;
 using Godot;
 using GodotUtilities;
+using Item = Game.Utils.JSON.Models.Item;
 
 namespace Game.Components.Managers;
 
-// TODO: Implement me
+// TODO: implement weapon unlocking system
 [Scene]
 public partial class WeaponManager : Node2D
 {
     [Signal]
     public delegate void WeaponChangedEventHandler();
 
+    [Export]
     public Weapon CurrentWeapon { get; private set; }
+
+    private const string WEAPONS_DATA_PATH = "res://data/weapons.json";
+    private readonly List<Item> weaponsData = JSON.Load<List<Item>>(WEAPONS_DATA_PATH);
+    private readonly List<Weapon> weapons = new();
+
+    public override void _Ready()
+    {
+        weaponsData.ForEach(w => weapons.Add(GD.Load<Weapon>(w.Resource)));
+        CurrentWeapon = weapons.Find(w => w.UniqueName == "weapon:dagger"); // default weapon or none depending on the story
+    }
 
     public override void _Notification(int what)
     {
@@ -23,7 +37,36 @@ public partial class WeaponManager : Node2D
     public void ChangeWeapon(string weapon)
     {
         EmitSignal(SignalName.WeaponChanged);
-        
-        // load json then get resource path
+
+        CurrentWeapon = weapons.Find(w => w.UniqueName == weapon);
+    }
+
+    public void RemoveWeapon()
+    {
+        EmitSignal(SignalName.WeaponChanged);
+
+        CurrentWeapon = null;
+    }
+
+    public void AddWeapon(string weapon)
+    {
+        var data = weaponsData.Find(w => w.UniqueName == weapon);
+
+        if (data == null) return;
+
+        var resource = GD.Load<Weapon>(data.Resource);
+
+        weapons.Add(resource);
+    }
+
+    public void ReloadWeapons()
+    {
+        weapons.Clear();
+        weaponsData.Clear();
+
+        var json = JSON.Load<List<Item>>(WEAPONS_DATA_PATH);
+
+        json.ForEach(w => weaponsData.Add(w));
+        weaponsData.ForEach(w => weapons.Add(GD.Load<Weapon>(w.Resource)));
     }
 }
