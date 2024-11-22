@@ -12,10 +12,8 @@ public class Recipe
     public string UniqueName { get; set; }
 
     [JsonPropertyName("result")]
-    public Result Result { get; set; }
+    public RecipeItem RecipeItem { get; set; }
 
     [JsonPropertyName("ingredients")]
-    public List<Ingredient> Ingredients { get; set; }
-
-    public override string ToString() => $"{Name}: {UniqueName}";
+    public List<RecipeItem> Ingredients { get; set; }
 }

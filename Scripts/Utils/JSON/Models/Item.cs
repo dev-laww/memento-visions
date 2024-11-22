@@ -12,6 +12,4 @@ public class Item
 
     [JsonPropertyName("resource")]
     public string Resource { get; set; }
-
-    public override string ToString() => $"{Name}: {UniqueName}";
 }
