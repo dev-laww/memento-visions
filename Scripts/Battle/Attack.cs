@@ -34,7 +34,7 @@ public class Attack
         var critical = MathUtil.RNG.RandfRange(0, 1) < 0.2f;
 
         if (critical)
-            damage *=  MathUtil.RNG.RandfRange(1.5f, 2f);
+            damage *= MathUtil.RNG.RandfRange(1.5f, 2f);
 
         damage -= defense * AttackType switch
         {

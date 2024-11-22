@@ -18,7 +18,7 @@ public class JSON
         GD.PrintErr($"File not found: {path}");
         return default;
     }
-    
+
     public static void Save<T>(string path, T data)
     {
         var json = JsonSerializer.Serialize(data);
