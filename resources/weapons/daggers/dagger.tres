@@ -1,12 +1,21 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://dmxu5vr74s3ov"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://dmxu5vr74s3ov"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/Weapon.cs" id="1_fxgis"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kakl1"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [resource]
 script = ExtResource("1_fxgis")
 Type = 0
-Name = ""
-UniqueName = ""
+Animations = SubResource("SpriteFrames_kakl1")
+Name = "Dagger"
+UniqueName = "weapon:dagger"
 Description = ""
 Stackable = false
 StackSize = 0

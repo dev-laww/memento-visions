@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_mp330")
 Type = 0
-Name = ""
-UniqueName = ""
+Name = "Whip"
+UniqueName = "weapon:whip"
 Description = ""
 Stackable = false
 StackSize = 0

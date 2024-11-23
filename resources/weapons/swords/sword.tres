@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_6dlaw")
 Type = 0
-Name = ""
-UniqueName = ""
+Name = "Sword"
+UniqueName = "weapon:sword"
 Description = ""
 Stackable = false
 StackSize = 0

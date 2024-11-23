@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_ltvtw")
 Type = 0
-Name = ""
-UniqueName = ""
+Name = "Gun"
+UniqueName = "weapon:gun"
 Description = ""
 Stackable = false
 StackSize = 0
