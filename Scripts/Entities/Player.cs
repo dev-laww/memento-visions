@@ -64,7 +64,7 @@ public partial class Player : CharacterBody2D
     {
         StateMachine.Update();
 
-        if (!CanMove) return;
+        if (!CanMove || !IsProcessingInput()) return;
 
         var input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
@@ -138,6 +138,8 @@ public partial class Player : CharacterBody2D
 
     private void HandleTransition()
     {
+        if (!IsProcessingInput()) return;
+
         var input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
         if (input.Length() > 0) StateMachine.ChangeState(Walk);
