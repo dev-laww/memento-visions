@@ -2,13 +2,11 @@ using System.Collections.Generic;
 using Game.Resources;
 using Game.Utils.JSON;
 using Godot;
-using GodotUtilities;
 using Item = Game.Utils.JSON.Models.Item;
 
 namespace Game.Components.Managers;
 
 // TODO: implement weapon unlocking system
-[Scene]
 public partial class WeaponManager : Node2D
 {
     [Signal]
@@ -25,13 +23,6 @@ public partial class WeaponManager : Node2D
     {
         weaponsData.ForEach(w => weapons.Add(GD.Load<Weapon>(w.Resource)));
         CurrentWeapon = weapons.Find(w => w.UniqueName == "weapon:dagger"); // default weapon or none depending on the story
-    }
-
-    public override void _Notification(int what)
-    {
-        if (what != NotificationSceneInstantiated) return;
-
-        WireNodes();
     }
 
     public void ChangeWeapon(string weapon)
