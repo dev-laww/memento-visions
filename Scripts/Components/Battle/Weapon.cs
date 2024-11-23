@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Game.Resources;
 using Godot;
+using GodotUtilities;
 
 namespace Game.Components.Battle;
 
 // TODO: implement sound effects
 [Tool]
+[Scene]
 [GlobalClass]
 public partial class Weapon : Node2D
 {
@@ -65,6 +68,12 @@ public partial class Weapon : Node2D
             Name = string.IsNullOrEmpty(value.Name) ? "Weapon" : value.Name;
             NotifyPropertyListChanged();
         }
+    }
+
+    public override void _Notification(int what)
+    {
+        if (what == NotificationEnterTree && resource != null)
+            Resource = resource;
     }
 
     private AnimatedSprite2D smoothAnimatedSprite2D => GetNodeOrNull<AnimatedSprite2D>("Assets/SmoothAnimatedSprite2D");
