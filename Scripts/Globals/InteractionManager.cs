@@ -20,7 +20,7 @@ public partial class InteractionManager : Node2D
 
         var closest = GetClosest();
 
-        if (closest == lastClosest) return;
+        if (closest == lastClosest || closest == null) return;
 
         areas.ForEach(area => area.HideUI());
 
@@ -46,6 +46,7 @@ public partial class InteractionManager : Node2D
             instance.lastClosest = null;
 
         instance.areas.Remove(area);
+        area.HideUI();
     }
 
     private Interaction GetClosest()
