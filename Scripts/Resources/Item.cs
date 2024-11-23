@@ -81,9 +81,9 @@ public partial class Item : Resource
 
     private Texture2D GetTexture(Texture2D primary, Texture2D secondary)
     {
-        if (primary == null && secondary == null)
-            throw new Exception("Item must have a sprite or secondary icon");
+        if (primary != null || secondary != null) return primary ?? secondary;
 
-        return primary ?? secondary;
+        GD.PrintErr("Both primary and secondary textures are null.");
+        return null;
     }
 }
