@@ -1,4 +1,4 @@
-using Game.Battle;
+using Game.Utils.Battle;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Game.Battle;
+using Game.Utils.Battle;
 using Game.Components.Managers;
 using Game.Utils.Extensions;
 using Godot;

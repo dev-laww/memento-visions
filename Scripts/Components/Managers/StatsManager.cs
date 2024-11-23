@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Game.Battle;
+using Game.Utils.Battle;
 using Godot;
 using GodotUtilities;
 using StatsResource = Game.Resources.Stats;
@@ -100,8 +100,8 @@ public partial class StatsManager : Node
         set => maxMana = value;
     }
 
-    public Attack MagicalAttack => Battle.Attack.Magical(Attack);
-    public Attack PhysicalAttack => Battle.Attack.Physical(Attack);
+    public Attack MagicalAttack => Utils.Battle.Attack.Magical(Attack);
+    public Attack PhysicalAttack => Utils.Battle.Attack.Physical(Attack);
     public float PhysicalDamageMultiplier => Stats.PhysicalDamageMultiplier;
     public float MagicalDamageMultiplier => Stats.MagicalDamageMultiplier;
     private float health;

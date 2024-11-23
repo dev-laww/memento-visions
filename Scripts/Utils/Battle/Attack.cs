@@ -1,7 +1,7 @@
 using System;
 using GodotUtilities;
 
-namespace Game.Battle;
+namespace Game.Utils.Battle;
 
 public class Attack
 {
