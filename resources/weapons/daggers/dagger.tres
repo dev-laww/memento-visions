@@ -1,21 +1,166 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://dmxu5vr74s3ov"]
+[gd_resource type="Resource" script_class="WeaponData" load_steps=22 format=3 uid="uid://dmxu5vr74s3ov"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Weapon.cs" id="1_fxgis"]
+[ext_resource type="Texture2D" uid="uid://bhcc617yhnh4v" path="res://assets/weapons/daggers/dagger/icon.png" id="1_4fdsx"]
+[ext_resource type="Script" path="res://Scripts/Resources/WeaponData.cs" id="1_p3phb"]
+[ext_resource type="Texture2D" uid="uid://1mcfankrs1d5" path="res://assets/weapons/daggers/dagger/sprite-frames.png" id="1_sy1qj"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_kakl1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_urwel"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7v14"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71w4d"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2wam"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu2gl"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xulvo"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5285"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12b6k"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vd3ml"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7yos"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oya3u"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50c2y"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wh1c2"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nyr6t"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pi2vg"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(896, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsj3w"]
+atlas = ExtResource("1_sy1qj")
+region = Rect2(960, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d1y8w"]
 animations = [{
-"frames": [],
-"loop": true,
-"name": &"default",
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urwel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7v14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71w4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2wam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urwel")
+}],
+"loop": false,
+"name": &"back",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu2gl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xulvo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5285")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12b6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu2gl")
+}],
+"loop": false,
+"name": &"front",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vd3ml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7yos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oya3u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50c2y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vd3ml")
+}],
+"loop": false,
+"name": &"left",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wh1c2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nyr6t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pi2vg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hsj3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wh1c2")
+}],
+"loop": false,
+"name": &"right",
 "speed": 8.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hy7nv"]
+
 [resource]
-script = ExtResource("1_fxgis")
+script = ExtResource("1_p3phb")
 Type = 0
-Animations = SubResource("SpriteFrames_kakl1")
+Animations = SubResource("SpriteFrames_d1y8w")
+AttackSound = SubResource("AudioStreamRandomizer_hy7nv")
 Name = "Dagger"
 UniqueName = "weapon:dagger"
 Description = ""
+icon = ExtResource("1_4fdsx")
 Stackable = false
 StackSize = 0
