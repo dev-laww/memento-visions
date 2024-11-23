@@ -13,30 +13,30 @@ public partial class WeaponManager : Node2D
     public delegate void WeaponChangedEventHandler();
 
     [Export]
-    public Weapon CurrentWeapon { get; private set; }
+    public WeaponData CurrentWeaponData { get; private set; }
 
     private const string WEAPONS_DATA_PATH = "res://data/weapons.json";
     private readonly List<Item> weaponsData = JSON.Load<List<Item>>(WEAPONS_DATA_PATH);
-    private readonly List<Weapon> weapons = new();
+    private readonly List<WeaponData> weapons = new();
 
     public override void _Ready()
     {
-        weaponsData.ForEach(w => weapons.Add(GD.Load<Weapon>(w.Resource)));
-        CurrentWeapon = weapons.Find(w => w.UniqueName == "weapon:dagger"); // default weapon or none depending on the story
+        weaponsData.ForEach(w => weapons.Add(GD.Load<WeaponData>(w.Resource)));
+        CurrentWeaponData = weapons.Find(w => w.UniqueName == "weapon:dagger"); // default weapon or none depending on the story
     }
 
     public void ChangeWeapon(string weapon)
     {
         EmitSignal(SignalName.WeaponChanged);
 
-        CurrentWeapon = weapons.Find(w => w.UniqueName == weapon);
+        CurrentWeaponData = weapons.Find(w => w.UniqueName == weapon);
     }
 
     public void RemoveWeapon()
     {
         EmitSignal(SignalName.WeaponChanged);
 
-        CurrentWeapon = null;
+        CurrentWeaponData = null;
     }
 
     public void AddWeapon(string weapon)
@@ -45,7 +45,7 @@ public partial class WeaponManager : Node2D
 
         if (data == null) return;
 
-        var resource = GD.Load<Weapon>(data.Resource);
+        var resource = GD.Load<WeaponData>(data.Resource);
 
         weapons.Add(resource);
     }
@@ -58,6 +58,6 @@ public partial class WeaponManager : Node2D
         var json = JSON.Load<List<Item>>(WEAPONS_DATA_PATH);
 
         json.ForEach(w => weaponsData.Add(w));
-        weaponsData.ForEach(w => weapons.Add(GD.Load<Weapon>(w.Resource)));
+        weaponsData.ForEach(w => weapons.Add(GD.Load<WeaponData>(w.Resource)));
     }
 }

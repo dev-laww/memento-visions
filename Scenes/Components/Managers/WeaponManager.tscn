@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwrlh0ftexywp"]
+[gd_scene load_steps=2 format=3 uid="uid://3htk6vaquvye"]
 
 [ext_resource type="Script" path="res://Scripts/Components/Managers/WeaponManager.cs" id="1_i5v4s"]
 

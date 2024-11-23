@@ -4,7 +4,7 @@ namespace Game.Resources;
 
 [Tool]
 [GlobalClass]
-public partial class Weapon : Item
+public partial class WeaponData : Item
 {
     public enum Variant
     {
@@ -18,15 +18,15 @@ public partial class Weapon : Item
     private Variant Type { get; set; } = Variant.Dagger;
 
     [Export]
-    private SpriteFrames Animations { get; set; }
+    public SpriteFrames Animations { get; set; }
 
     [Export]
-    private AudioStream AttackSound { get; set; }
+    public AudioStream AttackSound { get; set; }
 
     [Export]
-    private AudioStream HitSound { get; set; }
+    public AudioStream HitSound { get; set; }
 
-    public Weapon()
+    public WeaponData()
     {
         StackSize = (int)StackSizes.Unstackable;
         NotifyPropertyListChanged();
