@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=22 format=3 uid="uid://dmxu5vr74s3ov"]
+[gd_resource type="Resource" script_class="WeaponData" load_steps=21 format=3 uid="uid://dmxu5vr74s3ov"]
 
 [ext_resource type="Texture2D" uid="uid://bhcc617yhnh4v" path="res://assets/weapons/daggers/dagger/icon.png" id="1_4fdsx"]
 [ext_resource type="Script" path="res://Scripts/Resources/WeaponData.cs" id="1_p3phb"]
@@ -151,13 +151,10 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hy7nv"]
-
 [resource]
 script = ExtResource("1_p3phb")
 Type = 0
 Animations = SubResource("SpriteFrames_d1y8w")
-AttackSound = SubResource("AudioStreamRandomizer_hy7nv")
 Name = "Dagger"
 UniqueName = "weapon:dagger"
 Description = ""
