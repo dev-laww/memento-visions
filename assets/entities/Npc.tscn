@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Entities/NPC.cs" id="1_edqcn"]
 [ext_resource type="Resource" uid="uid://s24ahicax5gg" path="res://dialogue/Test.dialogue" id="2_f4xey"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/Interaction.cs" id="3_bbm02"]
-[ext_resource type="Texture2D" uid="uid://css70n4do7070" path="res://assets/icons/f.png" id="4_7lkx6"]
+[ext_resource type="Texture2D" uid="uid://dyxsacj8kktd1" path="res://assets/icons/f.png" id="4_7lkx6"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/theme.tres" id="5_hpcyi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_47tev"]
