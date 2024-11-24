@@ -22,6 +22,7 @@ public partial class CutsceneTrigger : Area2D
     }
 
     private Resource resource;
+    private bool triggered;
 
     public override void _Ready()
     {
@@ -33,9 +34,13 @@ public partial class CutsceneTrigger : Area2D
 
     private void OnBodyEntered(Node body)
     {
+        if (triggered) return;
+        
         var player = this.GetPlayer();
         player.SetProcessInput(false);
         DialogueManager.ShowDialogueBalloon(Dialog, "START");
+        
+        triggered = true;
     }
 
     public override string[] _GetConfigurationWarnings()
