@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Godot;
 using DialogueManagerRuntime;
 using Game.Utils.Extensions;
-using GodotUtilities;
 
 namespace Game.Components.Area;
 
@@ -10,6 +9,7 @@ namespace Game.Components.Area;
 [GlobalClass]
 public partial class CutsceneTrigger : Area2D
 {
+    // // TODO: add resource hint for dialog
     [Export]
     private Resource Dialog
     {
