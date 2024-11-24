@@ -9,7 +9,7 @@ namespace Game.Components.Area;
 [GlobalClass]
 public partial class CutsceneTrigger : Area2D
 {
-    // // TODO: add resource hint for dialog
+    // TODO: add resource hint for dialog
     [Export]
     private Resource Dialog
     {
@@ -26,7 +26,7 @@ public partial class CutsceneTrigger : Area2D
     public override void _Ready()
     {
         CollisionMask = 1 << 2;
-        CollisionLayer = 1 << 5; // ??
+        CollisionLayer = 1 << 4;
         BodyEntered += OnBodyEntered;
         DialogueManager.DialogueEnded += dialogueResource => this.GetPlayer().SetProcessInput(true);
     }
