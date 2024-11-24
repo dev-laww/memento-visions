@@ -6,7 +6,7 @@ using GodotUtilities;
 
 namespace Game.Components.Battle;
 
-// TODO: implement sound effects
+// TODO: implement sound effects, collision shape animations
 [Tool]
 [Scene]
 [GlobalClass]
@@ -81,6 +81,14 @@ public partial class Weapon : Node2D
     private AudioStreamPlayer2D hitSfx => GetNodeOrNull<AudioStreamPlayer2D>("Assets/HitSfx");
     private AnimationPlayer player => GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
     private WeaponData resource;
+    
+    public void Animate(string direction)
+    {
+        if (player == null) return;
+
+        player.CurrentAnimation = direction;
+        player.Play();
+    }
 
     public override void _EnterTree()
     {
@@ -98,12 +106,23 @@ public partial class Weapon : Node2D
         attackSfxNode.Name = "AttackSfx";
         hitSfxNode.Name = "HitSfx";
 
+        var library = new AnimationLibrary();
+
+        library.AddAnimation("front", new Animation());
+        library.AddAnimation("back", new Animation());
+        library.AddAnimation("left", new Animation());
+        library.AddAnimation("right", new Animation());
+
+        playerNode.AddAnimationLibrary("", library);
+        playerNode.CurrentAnimation = "front";
+
         AddChild(assets);
         AddChild(playerNode);
         assets.AddChild(spriteNode);
         assets.AddChild(attackSfxNode);
         assets.AddChild(hitSfxNode);
         assets.SetDisplayFolded(true);
+
 
         spriteNode.SetOwner(GetTree().GetEditedSceneRoot());
         playerNode.SetOwner(GetTree().GetEditedSceneRoot());
