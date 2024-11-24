@@ -16,11 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://clnqhsnclctsb" path="res://assets/scenes/bar/painting.png" id="12_1v6r4"]
 [ext_resource type="PackedScene" uid="uid://bxq1fj8j0r0tc" path="res://Scenes/Decorations/Bar/LargeSeatBack.tscn" id="12_ktjm6"]
 [ext_resource type="PackedScene" uid="uid://bx3whdhahfxx8" path="res://assets/entities/Npc.tscn" id="16_bpf3v"]
-[ext_resource type="PackedScene" uid="uid://beycqnce7g0jw" path="res://dialogue/CutsceneTrigger.tscn" id="17_ig1dm"]
-[ext_resource type="Resource" uid="uid://cxd7fxbcaj6xb" path="res://dialogue/Chapter1.dialogue" id="18_iegwo"]
+[ext_resource type="Script" path="res://Scripts/Components/Area/CutsceneTrigger.cs" id="16_e0dl0"]
+[ext_resource type="Resource" uid="uid://cxd7fxbcaj6xb" path="res://dialogue/Chapter1.dialogue" id="17_auh23"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0i4uh"]
-size = Vector2(1.31763, 38.9006)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rh5w0"]
+size = Vector2(8, 66)
 
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
@@ -29,6 +29,15 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="Floor" type="TileMapLayer" parent="Art"]
+z_index = -2
+texture_filter = 2
+material = ExtResource("2_7gq68")
+position = Vector2(24, 14)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAFAAAAAAABAAAAAAAEAAAAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAABAAEAAAABAAEAAAABAAIAAAABAAEAAAAFAAEAAAABAAEAAAAEAAEAAAABAAEAAAACAAEAAAABAAEAAAADAAEAAAABAAEAAAACAAIAAAABAAEAAAAFAAIAAAABAAEAAAAEAAIAAAABAAEAAAADAAIAAAABAAEAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAACAAAAAAAIAAEAAAACAAEAAAAIAAIAAAACAAEAAAAIAAMAAAACAAEAAAAIAAQAAAACAAIAAAAHAAQAAAABAAIAAAAGAAQAAAABAAIAAAAFAAQAAAABAAIAAAAEAAQAAAABAAIAAAADAAQAAAABAAIAAAACAAQAAAABAAIAAAABAAQAAAABAAIAAAAAAAQAAAAAAAIAAAAAAAMAAAAAAAEAAAABAAMAAAABAAEAAAACAAMAAAABAAEAAAADAAMAAAABAAEAAAAEAAMAAAABAAEAAAAFAAMAAAABAAEAAAAGAAMAAAABAAEAAAAHAAMAAAABAAEAAAAHAAIAAAABAAEAAAAHAAEAAAABAAEAAAAGAAEAAAABAAEAAAAGAAIAAAABAAEAAAD//wQAAgAUAAAAAAD//wMAAgAUAAAAAAD//wIAAgAUAAAAAAD//wEAAgAUAAAAAAD//wAAAgAUAAAAAAD/////AgAUAAAAAAAAAP//AgAUAAAAAAABAP//AgAUAAAAAAACAP//AgAUAAAAAAADAP//AgAUAAAAAAAEAP//AgAUAAAAAAAFAP//AgAUAAAAAAAGAP//AgAUAAAAAAAHAP//AgAUAAAAAAAIAP//AgAUAAAAAAAJAP//AgAUAAAAAAAJAAAAAgAUAAAAAAAJAAEAAgAUAAAAAAAJAAIAAgAUAAAAAAAJAAMAAgAUAAAAAAAJAAQAAgAUAAAAAAAJAAUAAgAUAAAAAAAIAAUAAgAUAAAAAAAHAAUAAgAUAAAAAAAGAAUAAgAUAAAAAAAFAAUAAgAUAAAAAAAEAAUAAgAUAAAAAAADAAUAAgAUAAAAAAACAAUAAgAUAAAAAAABAAUAAgAUAAAAAAAAAAUAAgAUAAAAAAD//wUAAgAUAAAAAAA=")
+tile_set = ExtResource("7_unifd")
+script = ExtResource("3_tm1gt")
+
+[node name="Floor2" type="TileMapLayer" parent="Art"]
 z_index = -2
 texture_filter = 2
 material = ExtResource("2_7gq68")
@@ -159,15 +168,15 @@ position = Vector2(160, 184)
 [node name="Player" parent="." instance=ExtResource("1_28rab")]
 position = Vector2(55, 108)
 
-[node name="NPC" parent="." instance=ExtResource("16_bpf3v")]
-position = Vector2(231, 105)
-
-[node name="CutsceneTrigger" parent="." instance=ExtResource("17_ig1dm")]
-scale = Vector2(1.6485, 0.675078)
-DialogResource = ExtResource("18_iegwo")
-DialogueStart = "The_Spirit_Call"
+[node name="CutsceneTrigger" type="Area2D" parent="."]
+position = Vector2(319, 139)
+collision_layer = 32
+collision_mask = 4
+script = ExtResource("16_e0dl0")
+Dialog = ExtResource("17_auh23")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger"]
-position = Vector2(182.019, 204.45)
-scale = Vector2(-6.44581, 0.929613)
-shape = SubResource("RectangleShape2D_0i4uh")
+shape = SubResource("RectangleShape2D_rh5w0")
+
+[node name="NPC" parent="." instance=ExtResource("16_bpf3v")]
+position = Vector2(231, 105)

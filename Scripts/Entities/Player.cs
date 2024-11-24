@@ -2,6 +2,7 @@ using System;
 using Game.Components.Managers;
 using Game.Components.Area;
 using Game.Components.Movement;
+using Game.Utils.Logic.States;
 using Godot;
 using GodotUtilities;
 using GodotUtilities.Logic;
@@ -138,7 +139,12 @@ public partial class Player : CharacterBody2D
 
     private void HandleTransition()
     {
-        if (!IsProcessingInput()) return;
+        if (!IsProcessingInput())
+        {
+            velocity.Decelerate();
+            StateMachine.ChangeState(Idle);
+            return;
+        }
 
         var input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
