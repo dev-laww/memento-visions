@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://8xieh4pqx0hg"]
+[gd_scene load_steps=20 format=4 uid="uid://8xieh4pqx0hg"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_7gq68"]
@@ -16,6 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://clnqhsnclctsb" path="res://assets/scenes/bar/painting.png" id="12_1v6r4"]
 [ext_resource type="PackedScene" uid="uid://bxq1fj8j0r0tc" path="res://Scenes/Decorations/Bar/LargeSeatBack.tscn" id="12_ktjm6"]
 [ext_resource type="PackedScene" uid="uid://bx3whdhahfxx8" path="res://assets/entities/Npc.tscn" id="16_bpf3v"]
+[ext_resource type="PackedScene" uid="uid://beycqnce7g0jw" path="res://dialogue/CutsceneTrigger.tscn" id="17_ig1dm"]
+[ext_resource type="Resource" uid="uid://cxd7fxbcaj6xb" path="res://dialogue/Chapter1.dialogue" id="18_iegwo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0i4uh"]
+size = Vector2(1.31763, 38.9006)
 
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
@@ -156,3 +161,13 @@ position = Vector2(55, 108)
 
 [node name="NPC" parent="." instance=ExtResource("16_bpf3v")]
 position = Vector2(231, 105)
+
+[node name="CutsceneTrigger" parent="." instance=ExtResource("17_ig1dm")]
+scale = Vector2(1.6485, 0.675078)
+DialogResource = ExtResource("18_iegwo")
+DialogueStart = "The_Spirit_Call"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger"]
+position = Vector2(182.019, 204.45)
+scale = Vector2(-6.44581, 0.929613)
+shape = SubResource("RectangleShape2D_0i4uh")

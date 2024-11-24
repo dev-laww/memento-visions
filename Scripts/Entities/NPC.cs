@@ -17,6 +17,7 @@ namespace Game.Entities
 
         [Export]
         private string DialogueStart = "Start";
+        private bool isDialogueActive = false;
 
         public override void _Ready()
         {
@@ -29,19 +30,22 @@ namespace Game.Entities
                 GD.PrintErr("Interaction node is missing!");
             }
             interaction.Interacted += OnInteracted;
-
-            // Connect the dialogue finished signal to a lambda expression
+            
             DialogueManager.DialogueEnded += (Resource dialogueResource) =>
             {
                 GD.Print("Dialogue finished");
                 this.GetPlayer().SetProcessInput(true);
+                isDialogueActive = false; 
             };
         }
 
         private void OnInteracted()
         {
+            if (isDialogueActive) return; 
+
             this.GetPlayer().SetProcessInput(false);
             DialogueManager.ShowDialogueBalloon(DialogResource, DialogueStart);
+            isDialogueActive = true; 
         }
 
         public override void _Notification(int what)

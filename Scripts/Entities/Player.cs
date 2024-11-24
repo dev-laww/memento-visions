@@ -26,7 +26,7 @@ public partial class Player : CharacterBody2D
     private AnimationPlayer animations;
 
     [Node]
-    private Velocity velocity;
+    public Velocity velocity;
 
     private string MoveDirection => GetMoveDirection();
 
