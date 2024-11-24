@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://8xieh4pqx0hg"]
+[gd_scene load_steps=17 format=4 uid="uid://8xieh4pqx0hg"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_7gq68"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://0r3pqmjvamym" path="res://Scenes/Decorations/Bar/Table.tscn" id="11_de4ou"]
 [ext_resource type="Texture2D" uid="uid://clnqhsnclctsb" path="res://assets/scenes/bar/painting.png" id="12_1v6r4"]
 [ext_resource type="PackedScene" uid="uid://bxq1fj8j0r0tc" path="res://Scenes/Decorations/Bar/LargeSeatBack.tscn" id="12_ktjm6"]
+[ext_resource type="PackedScene" uid="uid://bx3whdhahfxx8" path="res://assets/entities/Npc.tscn" id="16_bpf3v"]
 
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
@@ -152,3 +153,6 @@ position = Vector2(160, 184)
 
 [node name="Player" parent="." instance=ExtResource("1_28rab")]
 position = Vector2(55, 108)
+
+[node name="NPC" parent="." instance=ExtResource("16_bpf3v")]
+position = Vector2(231, 105)
