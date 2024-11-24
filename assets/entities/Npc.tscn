@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://bx3whdhahfxx8"]
+
+[ext_resource type="Script" path="res://Scripts/Entities/NPC.cs" id="1_edqcn"]
+[ext_resource type="Resource" uid="uid://s24ahicax5gg" path="res://dialogue/Test.dialogue" id="2_f4xey"]
+[ext_resource type="Script" path="res://Scripts/Components/Area/Interaction.cs" id="3_bbm02"]
+[ext_resource type="Texture2D" uid="uid://css70n4do7070" path="res://assets/icons/f.png" id="4_7lkx6"]
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/theme.tres" id="5_hpcyi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_47tev"]
+size = Vector2(54, 50)
+
+[node name="NPC" type="Node2D"]
+script = ExtResource("1_edqcn")
+DialogResource = ExtResource("2_f4xey")
+
+[node name="Interaction" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("3_bbm02")
+InteractionLabel = "Interact"
+
+[node name="InteractionUI" type="Node2D" parent="Interaction"]
+position = Vector2(1, 24)
+scale = Vector2(0.5, 0.5)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interaction/InteractionUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="Interaction/InteractionUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_7lkx6")
+
+[node name="Label" type="Label" parent="Interaction/InteractionUI/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_hpcyi")
+text = "Interact"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+shape = SubResource("RectangleShape2D_47tev")

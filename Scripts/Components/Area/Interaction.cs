@@ -29,7 +29,7 @@ public partial class Interaction : Area2D
             label.NotifyPropertyListChanged();
         }
     }
-    
+
     private Node2D interactionUI => GetNode<Node2D>("InteractionUI");
 
     [Signal]
@@ -38,7 +38,7 @@ public partial class Interaction : Area2D
     public override void _EnterTree()
     {
         if (GetNodeOrNull("InteractionUI") != null) return;
-        
+
         var ui = new Node2D();
         ui.Name = "InteractionUI";
 
@@ -83,7 +83,7 @@ public partial class Interaction : Area2D
         CollisionLayer = 1 << 4;
         CollisionMask = 1 << 2;
         NotifyPropertyListChanged();
-        
+
         BodyEntered += body => InteractionManager.Register(this);
         BodyExited += body => InteractionManager.Unregister(this);
 

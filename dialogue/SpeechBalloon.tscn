@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://d31jjedjmxphj"]
+
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_label.gd" id="1_xvm1h"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="2_b0rwy"]
+
+[node name="SpeechBalloon" type="Node2D"]
+
+[node name="Balloon" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="NinePatchRect" parent="Balloon"]
+layout_mode = 0
+offset_right = 206.0
+offset_bottom = 164.0
+
+[node name="CharacterLabel" type="RichTextLabel" parent="Balloon"]
+layout_mode = 0
+offset_right = 134.0
+offset_bottom = 105.0
+
+[node name="DialogueLabel" type="RichTextLabel" parent="Balloon"]
+layout_mode = 0
+offset_right = 110.0
+offset_bottom = 105.0
+script = ExtResource("1_xvm1h")
+skip_pause_at_abbreviations = PackedStringArray("Mr", "Mrs", "Ms", "Dr", "etc", "eg", "ex")
+
+[node name="ResponsesMenu" type="Container" parent="Balloon"]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 40.0
+script = ExtResource("2_b0rwy")
+
+[node name="Pin" type="TextureRect" parent="."]
+offset_right = 76.0
+offset_bottom = 72.0
