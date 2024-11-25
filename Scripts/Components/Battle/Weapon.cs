@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Game.Resources;
 using Godot;
 using GodotUtilities;
 
 namespace Game.Components.Battle;
 
-// TODO: implement sound effects, collision shape animations
+// TODO: implement sound effects, collision shape animations, attack pattern animations
 [Tool]
 [Scene]
 [GlobalClass]
 public partial class Weapon : Node2D
 {
     [Export]
-    private WeaponData Resource
+    public WeaponData Resource
     {
         get => resource;
         set
@@ -81,13 +82,11 @@ public partial class Weapon : Node2D
     private AudioStreamPlayer2D hitSfx => GetNodeOrNull<AudioStreamPlayer2D>("Assets/HitSfx");
     private AnimationPlayer player => GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
     private WeaponData resource;
-    
-    public void Animate(string direction)
-    {
-        if (player == null) return;
 
-        player.CurrentAnimation = direction;
-        player.Play();
+    public SignalAwaiter Animate(string direction)
+    {
+        player.Play(direction);
+        return ToSignal(player, "animation_finished");
     }
 
     public override void _EnterTree()
@@ -114,7 +113,6 @@ public partial class Weapon : Node2D
         library.AddAnimation("right", new Animation());
 
         playerNode.AddAnimationLibrary("", library);
-        playerNode.CurrentAnimation = "front";
 
         AddChild(assets);
         AddChild(playerNode);

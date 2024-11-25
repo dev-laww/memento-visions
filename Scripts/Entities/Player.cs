@@ -29,6 +29,9 @@ public partial class Player : CharacterBody2D
     [Node]
     public Velocity velocity;
 
+    [Node]
+    private WeaponManager weaponManager;
+
     private string MoveDirection => GetMoveDirection();
 
     private Vector2 lastMoveDirection = Vector2.Down;
@@ -135,9 +138,11 @@ public partial class Player : CharacterBody2D
     private async void Attack()
     {
         velocity.Stop();
-        animations.Play($"dagger_{MoveDirection}");
-
+        animations.Play($"attack_{MoveDirection}");
+        var signal = weaponManager.Animate(MoveDirection);
+        
         await ToSignal(animations, "animation_finished");
+        await signal;
 
         HandleTransition();
     }
