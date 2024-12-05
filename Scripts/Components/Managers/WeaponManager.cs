@@ -33,6 +33,7 @@ public partial class WeaponManager : Node2D
 
         var instance = scene.Instantiate<Weapon>();
         
+        instance.SetVisible(false);
         CurrentWeapon = instance;
         AddChild(CurrentWeapon);
     }
