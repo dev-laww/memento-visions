@@ -21,14 +21,6 @@ namespace Game.Entities
 
         public override void _Ready()
         {
-            if (interaction != null)
-            {
-                interaction.ShowUI();
-            }
-            else
-            {
-                GD.PrintErr("Interaction node is missing!");
-            }
             interaction.Interacted += OnInteracted;
             
             DialogueManager.DialogueEnded += (Resource dialogueResource) =>
