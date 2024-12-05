@@ -20,55 +20,41 @@ wait_time = 0.8
 
 [node name="Spawn" type="Node2D" parent="RegenSpawns"]
 position = Vector2(-3.75, 1.25)
-scale = Vector2(1, 1)
 
 [node name="Spawn2" type="Node2D" parent="RegenSpawns"]
 position = Vector2(-1.25, 1.25)
-scale = Vector2(1, 1)
 
 [node name="Spawn3" type="Node2D" parent="RegenSpawns"]
 position = Vector2(2.5, -1.25)
-scale = Vector2(1, 1)
 
 [node name="Spawn4" type="Node2D" parent="RegenSpawns"]
 position = Vector2(1.25, 1.25)
-scale = Vector2(1, 1)
 
 [node name="Spawn5" type="Node2D" parent="RegenSpawns"]
 position = Vector2(-1.25, -2.5)
-scale = Vector2(1, 1)
 
 [node name="Spawn6" type="Node2D" parent="RegenSpawns"]
 position = Vector2(1.25, 2.5)
-scale = Vector2(1, 1)
 
 [node name="Spawn7" type="Node2D" parent="RegenSpawns"]
 position = Vector2(-3.75, 0)
-scale = Vector2(1, 1)
 
 [node name="Spawn8" type="Node2D" parent="RegenSpawns"]
 position = Vector2(-1.25, 2.5)
-scale = Vector2(1, 1)
 
 [node name="Spawn9" type="Node2D" parent="RegenSpawns"]
 position = Vector2(3.75, 0)
-scale = Vector2(1, 1)
 
 [node name="Spawn10" type="Node2D" parent="RegenSpawns"]
 position = Vector2(1.25, -1.25)
-scale = Vector2(1, 1)
 
 [node name="Spawn11" type="Node2D" parent="RegenSpawns"]
 position = Vector2(0, -2.5)
-scale = Vector2(1, 1)
 
 [node name="Spawn12" type="Node2D" parent="RegenSpawns"]
 position = Vector2(-2.5, -1.25)
-scale = Vector2(1, 1)
 
 [node name="Spawn13" type="Node2D" parent="RegenSpawns"]
 position = Vector2(1.25, -2.5)
-scale = Vector2(1, 1)
 
 [node name="NumberSpawn" type="Marker2D" parent="."]
-scale = Vector2(1, 1)
