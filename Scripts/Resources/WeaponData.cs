@@ -15,7 +15,7 @@ public partial class WeaponData : Item
     }
 
     [Export]
-    private Variant Type { get; set; } = Variant.Dagger;
+    public Variant Type { get; set; } = Variant.Dagger;
 
     [Export]
     public SpriteFrames Animations { get; set; }

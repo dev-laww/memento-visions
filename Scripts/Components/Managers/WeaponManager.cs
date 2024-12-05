@@ -15,12 +15,13 @@ public partial class WeaponManager : Node2D
     [Signal]
     public delegate void WeaponChangedEventHandler();
 
-    public Weapon CurrentWeapon { get; set; }
+    public Weapon CurrentWeapon { get; private set; }
+    public WeaponData.Variant CurrentWeaponType => CurrentWeapon?.Resource.Type ?? WeaponData.Variant.Dagger;
 
     private const string WEAPONS_DATA_PATH = "res://data/weapons.json";
     private readonly List<Item> weaponsData = JSON.Load<List<Item>>(WEAPONS_DATA_PATH);
 
-    public override void _Ready() => ChangeWeapon("weapon:dagger");
+    public override void _Ready() => ChangeWeapon("weapon:gun");
     
 
     public void ChangeWeapon(string weapon)
@@ -29,6 +30,13 @@ public partial class WeaponManager : Node2D
 
         CurrentWeapon?.QueueFree();
         var data = weaponsData.Find(w => w.UniqueName == weapon);
+
+        if (data == null)
+        {
+            GD.PushWarning("Weapon not found");
+            return;
+        }
+        
         var scene = GD.Load<PackedScene>(data.Scene);
 
         var instance = scene.Instantiate<Weapon>();

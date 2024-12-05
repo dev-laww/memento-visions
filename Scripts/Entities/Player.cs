@@ -2,6 +2,7 @@ using System;
 using Game.Components.Managers;
 using Game.Components.Area;
 using Game.Components.Movement;
+using Game.Resources;
 using Game.Utils.Logic.States;
 using Godot;
 using GodotUtilities;
@@ -138,9 +139,24 @@ public partial class Player : CharacterBody2D
     private async void Attack()
     {
         velocity.Stop();
-        animations.Play($"attack_{MoveDirection}");
+
+        switch (weaponManager.CurrentWeaponType)
+        {
+            case WeaponData.Variant.Gun:
+                animations.Play($"ranged_attack_{MoveDirection}");
+                break;
+            case WeaponData.Variant.Dagger:
+            case WeaponData.Variant.Sword:
+            case WeaponData.Variant.Whip:
+                animations.Play($"attack_{MoveDirection}");
+                break;
+            default:
+                GD.PushError("Weapon type not found");
+                break;       
+        }
+
         var signal = weaponManager.Animate(MoveDirection);
-        
+
         await ToSignal(animations, "animation_finished");
         await signal;
 
