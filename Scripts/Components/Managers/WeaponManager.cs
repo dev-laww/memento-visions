@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Game.Components.Battle;
 using Game.Resources;
 using Game.Utils.JSON;
@@ -36,17 +35,17 @@ public partial class WeaponManager : Node2D
             GD.PushWarning("Weapon not found");
             return;
         }
-        
+
         var scene = GD.Load<PackedScene>(data.Scene);
 
         var instance = scene.Instantiate<Weapon>();
-        
+
         instance.SetVisible(false);
         CurrentWeapon = instance;
         AddChild(CurrentWeapon);
     }
 
-    public void RemoveWeapon() 
+    public void RemoveWeapon()
     {
         EmitSignal(SignalName.WeaponChanged);
 
