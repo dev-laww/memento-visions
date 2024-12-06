@@ -6,3 +6,5 @@ workspace.xml
 .idea/
 
 MementoVisions.sln.DotSettings.user
+
+.DS_Store
