@@ -21,7 +21,6 @@ public partial class WeaponManager : Node2D
     private readonly List<Item> weaponsData = JSON.Load<List<Item>>(WEAPONS_DATA_PATH);
 
     public override void _Ready() => ChangeWeapon("weapon:gun");
-    
 
     public void ChangeWeapon(string weapon)
     {
