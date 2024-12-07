@@ -6,32 +6,13 @@ using GodotUtilities;
 namespace Game;
 
 [Scene]
-[Tool]
-public partial class Slot : Control
+public partial class Slot : MarginContainer
 {
     [Export]
-    public Item Item
-    {
-        get => resource;
-        set
-        {
-            resource = value;
-            UpdateConfigurationWarnings();
-
-            if (icon == null) return;
-
-            icon.Texture = resource?.Icon;
-
-            if (icon.Texture == null) return;
-
-            var size = icon.Texture.GetSize();
-            var scale = new Vector2(32, 32) / size;
-            icon.Scale = scale;
-        }
-    }
+    public Item Item;
 
     [Node]
-    private Sprite2D icon;
+    private Panel panel;
 
     private Item resource;
     private int quantity;
