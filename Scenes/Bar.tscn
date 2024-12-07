@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://8xieh4pqx0hg"]
+[gd_scene load_steps=21 format=4 uid="uid://8xieh4pqx0hg"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_7gq68"]
@@ -17,7 +17,85 @@
 [ext_resource type="PackedScene" uid="uid://bxq1fj8j0r0tc" path="res://Scenes/Decorations/Bar/LargeSeatBack.tscn" id="12_ktjm6"]
 [ext_resource type="PackedScene" uid="uid://bx3whdhahfxx8" path="res://assets/entities/Npc.tscn" id="16_bpf3v"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/CutsceneTrigger.cs" id="16_e0dl0"]
-[ext_resource type="Resource" uid="uid://cxd7fxbcaj6xb" path="res://dialogue/Chapter1.dialogue" id="17_auh23"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="17_h3ncd"]
+
+[sub_resource type="Resource" id="Resource_w4ef1"]
+script = ExtResource("17_h3ncd")
+using_states = PackedStringArray()
+titles = {
+"START": "2"
+}
+character_names = PackedStringArray("Chief", "Alex")
+first_title = "2"
+lines = {
+"1": {
+"id": "1",
+"next_id": "2",
+"text": "START",
+"type": &"title"
+},
+"2": {
+"character": "Chief",
+"character_replacements": Array[Dictionary]([]),
+"id": "2",
+"next_id": "3",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Nice of you to finally arrive, Alejandro Gutierrez… or should I call you Alex?”",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Nice of you to finally arrive, Alejandro Gutierrez… or should I call you Alex?”",
+"type": &"dialogue"
+},
+"3": {
+"character": "Alex",
+"character_replacements": Array[Dictionary]([]),
+"id": "3",
+"next_id": "4",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Alex is fine, Chief. Now, what do we have here?",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Alex is fine, Chief. Now, what do we have here?",
+"type": &"dialogue"
+},
+"4": {
+"character": "Chief",
+"character_replacements": Array[Dictionary]([]),
+"id": "4",
+"next_id": "5",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Rumors are circulating about a vengeful spirit in this place, said to kill anyone who seeks it. Recently, several people have gone missing around here. Speculation suggests these disappearances are connected to encounters with the spirit, but we have no concrete evidence yet.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Rumors are circulating about a vengeful spirit in this place, said to kill anyone who seeks it. Recently, several people have gone missing around here. Speculation suggests these disappearances are connected to encounters with the spirit, but we have no concrete evidence yet.",
+"type": &"dialogue"
+},
+"5": {
+"character": "Alex",
+"character_replacements": Array[Dictionary]([]),
+"id": "5",
+"next_id": "6",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "I see. Then let’s start digging for clues.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "I see. Then let’s start digging for clues.",
+"type": &"dialogue"
+},
+"6": {
+"id": "6",
+"is_snippet": false,
+"next_id": "end",
+"type": &"goto"
+}
+}
+raw_text = "~ START
+Chief: Nice of you to finally arrive, Alejandro Gutierrez… or should I call you Alex?”
+Alex: Alex is fine, Chief. Now, what do we have here?
+Chief: Rumors are circulating about a vengeful spirit in this place, said to kill anyone who seeks it. Recently, several people have gone missing around here. Speculation suggests these disappearances are connected to encounters with the spirit, but we have no concrete evidence yet.
+Alex: I see. Then let’s start digging for clues.
+=> END"
+metadata/dialogue_manager_version = "2.42.2"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rh5w0"]
 size = Vector2(8, 66)
@@ -27,6 +105,7 @@ y_sort_enabled = true
 
 [node name="Art" type="Node2D" parent="."]
 y_sort_enabled = true
+position = Vector2(-17, -3)
 
 [node name="Door" type="Sprite2D" parent="Art"]
 texture_filter = 2
@@ -152,16 +231,7 @@ z_index = -2
 texture_filter = 2
 material = ExtResource("2_7gq68")
 position = Vector2(24, 14)
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAFAAAAAAABAAAAAAAEAAAAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAABAAEAAAABAAEAAAABAAIAAAABAAEAAAAFAAEAAAABAAEAAAAEAAEAAAABAAEAAAACAAEAAAABAAEAAAADAAEAAAABAAEAAAACAAIAAAABAAEAAAAFAAIAAAABAAEAAAAEAAIAAAABAAEAAAADAAIAAAABAAEAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAACAAAAAAAIAAEAAAACAAEAAAAIAAIAAAACAAEAAAAIAAMAAAACAAEAAAAIAAQAAAACAAIAAAAHAAQAAAABAAIAAAAGAAQAAAABAAIAAAAFAAQAAAABAAIAAAAEAAQAAAABAAIAAAADAAQAAAABAAIAAAACAAQAAAABAAIAAAABAAQAAAABAAIAAAAAAAQAAAAAAAIAAAAAAAMAAAAAAAEAAAABAAMAAAABAAEAAAACAAMAAAABAAEAAAADAAMAAAABAAEAAAAEAAMAAAABAAEAAAAFAAMAAAABAAEAAAAGAAMAAAABAAEAAAAHAAMAAAABAAEAAAAHAAIAAAABAAEAAAAHAAEAAAABAAEAAAAGAAEAAAABAAEAAAAGAAIAAAABAAEAAAD//wQAAgAUAAAAAAD//wMAAgAUAAAAAAD//wIAAgAUAAAAAAD//wEAAgAUAAAAAAD//wAAAgAUAAAAAAD/////AgAUAAAAAAAAAP//AgAUAAAAAAABAP//AgAUAAAAAAACAP//AgAUAAAAAAADAP//AgAUAAAAAAAEAP//AgAUAAAAAAAFAP//AgAUAAAAAAAGAP//AgAUAAAAAAAHAP//AgAUAAAAAAAIAP//AgAUAAAAAAAJAP//AgAUAAAAAAAJAAAAAgAUAAAAAAAJAAEAAgAUAAAAAAAJAAIAAgAUAAAAAAAJAAMAAgAUAAAAAAAJAAQAAgAUAAAAAAAJAAUAAgAUAAAAAAAIAAUAAgAUAAAAAAAHAAUAAgAUAAAAAAAGAAUAAgAUAAAAAAAFAAUAAgAUAAAAAAAEAAUAAgAUAAAAAAADAAUAAgAUAAAAAAACAAUAAgAUAAAAAAABAAUAAgAUAAAAAAAAAAUAAgAUAAAAAAD//wUAAgAUAAAAAAA=")
-tile_set = ExtResource("7_unifd")
-script = ExtResource("3_tm1gt")
-
-[node name="Floor2" type="TileMapLayer" parent="Art"]
-z_index = -2
-texture_filter = 2
-material = ExtResource("2_7gq68")
-position = Vector2(24, 14)
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAFAAAAAAABAAAAAAAEAAAAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAABAAEAAAABAAEAAAABAAIAAAABAAEAAAAFAAEAAAABAAEAAAAEAAEAAAABAAEAAAACAAEAAAABAAEAAAADAAEAAAABAAEAAAACAAIAAAABAAEAAAAFAAIAAAABAAEAAAAEAAIAAAABAAEAAAADAAIAAAABAAEAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAACAAAAAAAIAAEAAAACAAEAAAAIAAIAAAACAAEAAAAIAAMAAAACAAEAAAAIAAQAAAACAAIAAAAHAAQAAAABAAIAAAAGAAQAAAABAAIAAAAFAAQAAAABAAIAAAAEAAQAAAABAAIAAAADAAQAAAABAAIAAAACAAQAAAABAAIAAAABAAQAAAABAAIAAAAAAAQAAAAAAAIAAAAAAAMAAAAAAAEAAAABAAMAAAABAAEAAAACAAMAAAABAAEAAAADAAMAAAABAAEAAAAEAAMAAAABAAEAAAAFAAMAAAABAAEAAAAGAAMAAAABAAEAAAAHAAMAAAABAAEAAAAHAAIAAAABAAEAAAAHAAEAAAABAAEAAAAGAAEAAAABAAEAAAAGAAIAAAABAAEAAAD//wQAAgAUAAAAAAD//wMAAgAUAAAAAAD//wIAAgAUAAAAAAD//wEAAgAUAAAAAAD//wAAAgAUAAAAAAD/////AgAUAAAAAAAAAP//AgAUAAAAAAABAP//AgAUAAAAAAACAP//AgAUAAAAAAADAP//AgAUAAAAAAAEAP//AgAUAAAAAAAFAP//AgAUAAAAAAAGAP//AgAUAAAAAAAHAP//AgAUAAAAAAAIAP//AgAUAAAAAAAJAP//AgAUAAAAAAAJAAAAAgAUAAAAAAAJAAEAAgAUAAAAAAAJAAIAAgAUAAAAAAAJAAMAAgAUAAAAAAAJAAQAAgAUAAAAAAAJAAUAAgAUAAAAAAAIAAUAAgAUAAAAAAAHAAUAAgAUAAAAAAAGAAUAAgAUAAAAAAAFAAUAAgAUAAAAAAAEAAUAAgAUAAAAAAADAAUAAgAUAAAAAAACAAUAAgAUAAAAAAABAAUAAgAUAAAAAAAAAAUAAgAUAAAAAAD//wUAAgAUAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAFAAAAAAABAAAAAAAEAAAAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAABAAEAAAABAAEAAAABAAIAAAABAAEAAAAFAAEAAAABAAEAAAAEAAEAAAABAAEAAAACAAEAAAABAAEAAAADAAEAAAABAAEAAAACAAIAAAABAAEAAAAFAAIAAAABAAEAAAAEAAIAAAABAAEAAAADAAIAAAABAAEAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAABAAAAAAAIAAEAAAABAAEAAAAIAAIAAAABAAEAAAAIAAMAAAABAAEAAAAIAAQAAAABAAEAAAAHAAQAAAABAAEAAAAGAAQAAAABAAEAAAAFAAQAAAABAAEAAAAEAAQAAAABAAEAAAADAAQAAAABAAEAAAACAAQAAAABAAEAAAABAAQAAAABAAEAAAAAAAQAAAAAAAEAAAAAAAMAAAAAAAEAAAABAAMAAAABAAEAAAACAAMAAAABAAEAAAADAAMAAAABAAEAAAAEAAMAAAABAAEAAAAFAAMAAAABAAEAAAAGAAMAAAABAAEAAAAHAAMAAAABAAEAAAAHAAIAAAABAAEAAAAHAAEAAAABAAEAAAAGAAEAAAABAAEAAAAGAAIAAAABAAEAAAD//wAAAgAUAAAAAAD/////AgAUAAAAAAAAAP//AgAUAAAAAAABAP//AgAUAAAAAAACAP//AgAUAAAAAAADAP//AgAUAAAAAAAEAP//AgAUAAAAAAAFAP//AgAUAAAAAAAGAP//AgAUAAAAAAAHAP//AgAUAAAAAAAIAP//AgAUAAAAAAAJAP//AgAUAAAAAAAJAAAAAAABAAAAAAAJAAEAAAABAAEAAAD//wEAAgAUAAAAAAD//wIAAgAUAAAAAAD//wMAAgAUAAAAAAD//wQAAgAUAAAAAAD//wUAAgAUAAAAAAD//wYAAgAUAAAAAAD//wcAAgAUAAAAAAAAAAcAAgAUAAAAAAABAAcAAgAUAAAAAAACAAcAAgAUAAAAAAADAAcAAgAUAAAAAAAEAAcAAgAUAAAAAAAFAAcAAgAUAAAAAAAGAAcAAgAUAAAAAAAHAAcAAgAUAAAAAAAIAAcAAgAUAAAAAAAJAAcAAgAUAAAAAAAKAAcAAgAUAAAAAAALAAcAAgAUAAAAAAAMAAcAAgAUAAAAAAAKAP//AgAUAAAAAAALAP//AgAUAAAAAAAMAP//AgAUAAAAAAAMAAAAAAACAAAAAAAMAAEAAAACAAEAAAAMAAIAAAACAAEAAAAMAAMAAAACAAEAAAAMAAQAAAACAAEAAAAMAAUAAAACAAEAAAAMAAYAAAACAAIAAAAJAAIAAAABAAEAAAAJAAMAAAABAAEAAAAJAAQAAAABAAEAAAALAAAAAAABAAAAAAAKAAAAAAABAAAAAAAKAAEAAAABAAEAAAALAAEAAAABAAEAAAALAAIAAAABAAEAAAALAAMAAAABAAEAAAAKAAMAAAABAAEAAAAKAAIAAAABAAEAAAAKAAQAAAABAAEAAAALAAQAAAABAAEAAAALAAUAAAABAAEAAAALAAYAAAABAAIAAAAKAAYAAAABAAIAAAAJAAYAAAABAAIAAAAIAAYAAAABAAIAAAAHAAYAAAABAAIAAAAGAAYAAAABAAIAAAAFAAYAAAABAAIAAAAEAAYAAAABAAIAAAADAAYAAAABAAIAAAACAAYAAAABAAIAAAABAAYAAAABAAIAAAAAAAYAAAAAAAIAAAAAAAUAAAAAAAEAAAABAAUAAAABAAEAAAACAAUAAAABAAEAAAADAAUAAAABAAEAAAAEAAUAAAABAAEAAAAFAAUAAAABAAEAAAAGAAUAAAABAAEAAAAHAAUAAAABAAEAAAAIAAUAAAABAAEAAAAJAAUAAAABAAEAAAAKAAUAAAABAAEAAAANAP//AgAUAAAAAAANAAAAAgAUAAAAAAANAAEAAgAUAAAAAAANAAIAAgAUAAAAAAANAAMAAgAUAAAAAAANAAQAAgAUAAAAAAANAAUAAgAUAAAAAAANAAYAAgAUAAAAAAANAAcAAgAUAAAAAAA=")
 tile_set = ExtResource("7_unifd")
 script = ExtResource("3_tm1gt")
 
@@ -169,14 +239,14 @@ script = ExtResource("3_tm1gt")
 position = Vector2(55, 108)
 
 [node name="CutsceneTrigger" type="Area2D" parent="."]
-position = Vector2(319, 139)
+position = Vector2(309, 139)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("16_e0dl0")
-Dialog = ExtResource("17_auh23")
+Dialog = SubResource("Resource_w4ef1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger"]
 shape = SubResource("RectangleShape2D_rh5w0")
 
 [node name="NPC" parent="." instance=ExtResource("16_bpf3v")]
-position = Vector2(231, 105)
+position = Vector2(192, 113)
