@@ -29,7 +29,7 @@ InteractionManager="*res://Scripts/Globals/InteractionManager.cs"
 
 [dialogue_manager]
 
-general/balloon_path="res://dialogue/Balloon.tscn"
+general/balloon_path="res://Scenes/UI/Dialogue/Balloon.tscn"
 general/uses_dotnet=true
 
 [display]
