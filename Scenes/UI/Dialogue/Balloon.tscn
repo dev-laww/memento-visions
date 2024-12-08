@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://ce8t2napfsiwi"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Dialogue/Balloon.cs" id="1_beuaf"]
-[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/theme.tres" id="2_rrnqr"]
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_rrnqr"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="3_qk1gj"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="4_7lmc0"]
 
