@@ -1,0 +1,117 @@
+[gd_scene load_steps=13 format=3 uid="uid://bp16euqvq6il3"]
+
+[ext_resource type="Texture2D" uid="uid://bhg24ad0ut6dq" path="res://assets/ui/slot.png" id="1_dwah6"]
+[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_eu5ef"]
+[ext_resource type="Texture2D" uid="uid://drys52s61n2w" path="res://assets/ui/selector.png" id="3_o2xtx"]
+[ext_resource type="Script" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="4_8s03u"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b5sbs"]
+texture = ExtResource("1_dwah6")
+region_rect = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vh55g"]
+atlas = ExtResource("3_o2xtx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5r7t"]
+atlas = ExtResource("3_o2xtx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1hdd"]
+atlas = ExtResource("3_o2xtx")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qo6r"]
+atlas = ExtResource("3_o2xtx")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jrtgn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vh55g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5r7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1hdd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qo6r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="Animation" id="Animation_6586f"]
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmoothAnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SmoothAnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["default"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fpqwq"]
+_data = {
+"default": SubResource("Animation_6586f")
+}
+
+[node name="Slot" type="Control"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_b5sbs")
+
+[node name="SmoothAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 2
+material = ExtResource("2_eu5ef")
+position = Vector2(12.4, 12.4)
+scale = Vector2(0.775, 0.775)
+sprite_frames = SubResource("SpriteFrames_jrtgn")
+autoplay = "default"
+script = ExtResource("4_8s03u")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fpqwq")
+}
+autoplay = "default"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 20.0
+offset_bottom = 20.0
