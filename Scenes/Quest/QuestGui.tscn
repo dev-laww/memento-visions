@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bkgjauxklnmyv"]
+
+[node name="QuestGui" type="CanvasLayer"]
+
+[node name="Container" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 256.0
+offset_bottom = 264.0
+
+[node name="Column" type="VBoxContainer" parent="Container"]
+layout_mode = 0
+offset_right = 257.0
+offset_bottom = 265.0
+
+[node name="Title" type="Label" parent="Container/Column"]
+layout_mode = 2
+text = "Quest Name"
+
+[node name="Tree" type="Tree" parent="Container/Column"]
+layout_mode = 2
