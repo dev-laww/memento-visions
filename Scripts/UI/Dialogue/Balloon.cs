@@ -18,8 +18,8 @@ public partial class Balloon : CanvasLayer
 
     private Resource resource;
     private Array<Variant> temporaryGameStates = new();
-    private bool isWaitingForInput = false;
-    private bool willHideBalloon = false;
+    private bool isWaitingForInput;
+    private bool willHideBalloon;
 
     private DialogueLine dialogueLine;
 

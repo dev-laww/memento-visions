@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://ce8t2napfsiwi"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Dialogue/Balloon.cs" id="1_beuaf"]
-[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="2_pfodg"]
+[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="2_l1cmb"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_rrnqr"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="3_qk1gj"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="4_7lmc0"]
@@ -89,7 +89,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource("Theme_qq3yp")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/Balloon"]
+[node name="Panel" type="NinePatchRect" parent="MarginContainer/Balloon"]
 clip_children = 2
 layout_mode = 1
 anchors_preset = 12
@@ -102,13 +102,13 @@ offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
-texture = ExtResource("2_pfodg")
+texture = ExtResource("2_l1cmb")
 patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 
-[node name="Dialogue" type="MarginContainer" parent="MarginContainer/Balloon/NinePatchRect"]
+[node name="Dialogue" type="MarginContainer" parent="MarginContainer/Balloon/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -121,11 +121,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_rrnqr")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Balloon/NinePatchRect/Dialogue"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Balloon/Panel/Dialogue"]
 layout_mode = 2
 theme = ExtResource("2_rrnqr")
 
-[node name="CharacterLabel" type="RichTextLabel" parent="MarginContainer/Balloon/NinePatchRect/Dialogue/VBoxContainer"]
+[node name="CharacterLabel" type="RichTextLabel" parent="MarginContainer/Balloon/Panel/Dialogue/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
@@ -136,7 +136,7 @@ text = "Character"
 fit_content = true
 scroll_active = false
 
-[node name="DialogueLabel" parent="MarginContainer/Balloon/NinePatchRect/Dialogue/VBoxContainer" instance=ExtResource("3_qk1gj")]
+[node name="DialogueLabel" parent="MarginContainer/Balloon/Panel/Dialogue/VBoxContainer" instance=ExtResource("3_qk1gj")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
