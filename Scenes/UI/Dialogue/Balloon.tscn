@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://ce8t2napfsiwi"]
+[gd_scene load_steps=11 format=3 uid="uid://ce8t2napfsiwi"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Dialogue/Balloon.cs" id="1_beuaf"]
+[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="2_l1cmb"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_rrnqr"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="3_qk1gj"]
 [ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="4_7lmc0"]
@@ -88,7 +89,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource("Theme_qq3yp")
 
-[node name="Panel" type="Panel" parent="MarginContainer/Balloon"]
+[node name="Panel" type="NinePatchRect" parent="MarginContainer/Balloon"]
 clip_children = 2
 layout_mode = 1
 anchors_preset = 12
@@ -101,6 +102,11 @@ offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
+texture = ExtResource("2_l1cmb")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
 
 [node name="Dialogue" type="MarginContainer" parent="MarginContainer/Balloon/Panel"]
 layout_mode = 1

@@ -17,7 +17,7 @@ ResourceScriptDirectories=["res://"]
 [application]
 
 config/name="Memento Visions"
-run/main_scene="res://Scenes/Bar.tscn"
+run/main_scene="res://Scenes/GameManager.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

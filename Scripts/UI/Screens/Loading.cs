@@ -5,7 +5,7 @@ using GodotUtilities;
 namespace Game;
 
 [Scene]
-public partial class LoadingScreen : Node2D
+public partial class Loading : Node2D
 {
     [Signal]
     public delegate void TransitionInCompleteEventHandler();
@@ -61,7 +61,7 @@ public partial class LoadingScreen : Node2D
     public void UpdateBar(float value)
     {
         var tween = CreateTween();
-        tween.TweenProperty(timer, "value", value, 0.2f);
+        tween.TweenProperty(progressBar, "value", value, 0.2f);
     }
 
     public void ReportMidpoint() => EmitSignal(SignalName.TransitionInComplete);

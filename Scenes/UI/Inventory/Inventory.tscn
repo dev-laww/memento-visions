@@ -44,6 +44,7 @@ layout_mode = 2
 alignment = 2
 
 [node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/Header"]
+modulate = Color(0.940362, 5.17406e-06, 1.15514e-06, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
