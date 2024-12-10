@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3tw8nswexhey"]
+
+[ext_resource type="Script" path="res://Scripts/GameManager.cs" id="1_o7ktj"]
+[ext_resource type="PackedScene" uid="uid://npt6wv2s1hvr" path="res://Scenes/UI/Screens/Start.tscn" id="2_2lr5o"]
+[ext_resource type="PackedScene" uid="uid://8xieh4pqx0hg" path="res://Scenes/Bar.tscn" id="2_3xeoh"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_o7ktj")
+showStartScreen = true
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("StartScreen"), [ExtResource("2_2lr5o")]]
+
+[node name="UserInterface" type="CanvasLayer" parent="."]
+
+[node name="CurrentScene" type="Node" parent="."]
+
+[node name="Bar" parent="CurrentScene" instance=ExtResource("2_3xeoh")]

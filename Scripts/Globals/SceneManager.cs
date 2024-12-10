@@ -1,6 +1,5 @@
 using System;
 using Godot;
-using GodotUtilities;
 using Array = Godot.Collections.Array;
 
 namespace Game.Globals;
@@ -34,10 +33,10 @@ public static class TransitionExtensions
 public partial class SceneManager : Node
 {
     [Signal]
-    public delegate void LoadStartEventHandler(LoadingScreen loadingScreen);
+    public delegate void LoadStartEventHandler(Loading loadingScreen);
 
     [Signal]
-    public delegate void SceneAddedEventHandler(Node node, LoadingScreen loadingScreen);
+    public delegate void SceneAddedEventHandler(Node node, Loading loadingScreen);
 
     [Signal]
     public delegate void LoadCompleteEventHandler(Node node);
@@ -51,14 +50,12 @@ public partial class SceneManager : Node
     [Signal]
     public delegate void ContentFailedToLoadEventHandler(string path);
 
-    public static SceneManager Instance { get; private set; }
-
     private PackedScene loadingScreenScene =
-        ResourceLoader.Load("res://Scenes/UI/Screens/LoadingScreen.tscn") as PackedScene;
+        ResourceLoader.Load("res://Scenes/UI/Screens/Loading.tscn") as PackedScene;
 
     private const int WINDOW_WIDTH = 640;
     private const int WINDOW_HEIGHT = 360;
-    private LoadingScreen loadingScreen;
+    private Loading loadingScreen;
     private Transition transition;
     private Vector2 direction;
     private string contentPath;
@@ -66,7 +63,8 @@ public partial class SceneManager : Node
     private Node loadSceneInTo;
     private Node sceneToUnload;
     private bool loading;
-
+    public static SceneManager Instance;
+    
     public override void _Ready()
     {
         Instance = this;
@@ -75,43 +73,43 @@ public partial class SceneManager : Node
         ContentFinishedLoading += OnFinishedLoading;
     }
 
-    public async void ChangeScene(
+    public static async void ChangeScene(
         string to,
         Node from = null,
-        Transition transitionType = Transition.Fade,
+        Transition transition = Transition.Fade,
         Node loadInTo = null,
         Vector2 moveDirection = default
     )
     {
-        if (loading)
+        if (Instance.loading)
         {
             GD.PushWarning("SceneManager is already loading a scene.");
             return;
         }
 
-        if (moveDirection == default && transitionType == Transition.Zelda)
+        if (moveDirection == default && transition == Transition.Zelda)
         {
             GD.PushWarning("Move direction is not set");
             return;
         }
 
-        if (transitionType != Transition.Zelda && loadingScreen != null)
-            await ToSignal(loadingScreen.animationPlayer, "animation_finished");
+        if (transition != Transition.Zelda && Instance.loadingScreen != null)
+            await Instance.ToSignal(Instance.loadingScreen.animationPlayer, "animation_finished");
 
-        loading = true;
-        loadSceneInTo = loadInTo ?? GetTree().Root;
-        sceneToUnload = from ?? GetTree().CurrentScene;
-        transition = transitionType;
-        direction = moveDirection;
+        Instance.loading = true;
+        Instance.loadSceneInTo = loadInTo ?? Instance.GetTree().Root;
+        Instance.sceneToUnload = from ?? Instance.GetTree().CurrentScene;
+        Instance.transition = transition;
+        Instance.direction = moveDirection;
 
-        if (transition != Transition.Zelda)
+        if (Instance.transition != Transition.Zelda)
         {
-            loadingScreen = loadingScreenScene.Instantiate<LoadingScreen>();
-            GetTree().Root.AddChild(loadingScreen);
-            loadingScreen.StartTransition(transition);
+            Instance.loadingScreen = Instance.loadingScreenScene.Instantiate<Loading>();
+            Instance.GetTree().Root.AddChild(Instance.loadingScreen);
+            Instance.loadingScreen.StartTransition(Instance.transition);
         }
 
-        LoadContent(to);
+        Instance.LoadContent(to);
     }
 
     private async void LoadContent(string path)
