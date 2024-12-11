@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://bp16euqvq6il3"]
+[gd_scene load_steps=26 format=3 uid="uid://svqrge4l63b4"]
 
 [ext_resource type="Texture2D" uid="uid://bhg24ad0ut6dq" path="res://assets/ui/slot.png" id="1_dwah6"]
+[ext_resource type="Script" path="res://Scripts/UI/Inventory/Slot.cs" id="1_qhish"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_eu5ef"]
 [ext_resource type="Texture2D" uid="uid://drys52s61n2w" path="res://assets/ui/selector.png" id="3_o2xtx"]
 [ext_resource type="Script" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="4_8s03u"]
@@ -8,6 +9,28 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b5sbs"]
 texture = ExtResource("1_dwah6")
 region_rect = Rect2(0, 0, 32, 32)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c3qap"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vxdbv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_64emx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_khpii"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ur5c3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_85jku"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x3d1s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ng3e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rtla1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_er7yl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_51nwt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vh55g"]
 atlas = ExtResource("3_o2xtx")
@@ -41,17 +64,17 @@ animations = [{
 "texture": SubResource("AtlasTexture_0qo6r")
 }],
 "loop": true,
-"name": &"default",
+"name": &"select",
 "speed": 8.0
 }]
 
-[sub_resource type="Animation" id="Animation_6586f"]
+[sub_resource type="Animation" id="Animation_3mhtl"]
 length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SmoothAnimatedSprite2D:frame")
+tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -63,25 +86,56 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SmoothAnimatedSprite2D:animation")
+tracks/1/path = NodePath(".:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": ["default"]
+"values": ["select"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fpqwq"]
+[sub_resource type="Animation" id="Animation_wfa5p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y5wc8"]
 _data = {
-"default": SubResource("Animation_6586f")
+"RESET": SubResource("Animation_wfa5p"),
+"select": SubResource("Animation_3mhtl")
 }
 
-[node name="Slot" type="Control"]
-custom_minimum_size = Vector2(24, 24)
+[node name="Slot" type="Control" groups=["Slots"]]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 32.0
+offset_bottom = 32.0
+script = ExtResource("1_qhish")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -92,26 +146,38 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_b5sbs")
 
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c3qap")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_vxdbv")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_64emx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_khpii")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ur5c3")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_85jku")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_x3d1s")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_0ng3e")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rtla1")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_er7yl")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_51nwt")
+
 [node name="SmoothAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
 texture_filter = 2
 material = ExtResource("2_eu5ef")
-position = Vector2(12.4, 12.4)
-scale = Vector2(0.775, 0.775)
+position = Vector2(16, 16)
 sprite_frames = SubResource("SpriteFrames_jrtgn")
-autoplay = "default"
+animation = &"select"
+autoplay = "select"
 script = ExtResource("4_8s03u")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../SmoothAnimatedSprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_fpqwq")
+"": SubResource("AnimationLibrary_y5wc8")
 }
-autoplay = "default"
-
-[node name="TextureRect" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(16, 16)
-layout_mode = 0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 20.0
-offset_bottom = 20.0
+autoplay = "RESET"

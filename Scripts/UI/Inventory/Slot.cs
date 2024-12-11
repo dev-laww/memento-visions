@@ -1,21 +1,18 @@
-using System.Collections.Generic;
-using Game.Resources;
 using Godot;
 using GodotUtilities;
 
 namespace Game;
 
 [Scene]
-public partial class Slot : MarginContainer
+public partial class Slot : Control
 {
-    [Export]
-    public Item Item;
+    [Node]
+    private AnimationPlayer animationPlayer;
 
     [Node]
-    private Panel panel;
+    private Button button;
 
-    private Item resource;
-    private int quantity;
+    public bool IsSelected => animationPlayer.CurrentAnimation == "select";
 
     public override void _Notification(int what)
     {
@@ -24,14 +21,17 @@ public partial class Slot : MarginContainer
         WireNodes();
     }
 
-
-    public override string[] _GetConfigurationWarnings()
+    public override void _Ready()
     {
-        var warnings = new List<string>();
-
-        if (resource == null)
-            warnings.Add("Item is not set");
-
-        return warnings.ToArray();
+        button.Pressed += Select;
+        button.SetDefaultCursorShape(CursorShape.PointingHand);
     }
+
+    private void Select()
+    {
+        GetTree().CallGroup("Slots", "Deselect");
+        animationPlayer.Play("select");
+    }
+
+    private void Deselect() => animationPlayer.Play("RESET");
 }
