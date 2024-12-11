@@ -39,6 +39,12 @@ public partial class GameManager : Node
 
     public override void _Notification(int what)
     {
+        if (what == NotificationWMCloseRequest)
+        {
+            // TODO: save game
+            return;
+        }
+        
         if (what != NotificationSceneInstantiated) return;
 
         WireNodes();
