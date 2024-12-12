@@ -53,8 +53,9 @@ public partial class SceneManager : Node
     private PackedScene loadingScreenScene =
         ResourceLoader.Load("res://Scenes/UI/Screens/Loading.tscn") as PackedScene;
 
-    private const int WINDOW_WIDTH = 640;
-    private const int WINDOW_HEIGHT = 360;
+    // TODO: cleanup
+    private int WINDOW_WIDTH => GetViewport().GetWindow().Size.X;
+    private int WINDOW_HEIGHT => GetViewport().GetWindow().Size.Y;
     private Loading loadingScreen;
     private Transition transition;
     private Vector2 direction;

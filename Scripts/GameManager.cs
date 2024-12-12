@@ -50,10 +50,15 @@ public partial class GameManager : Node
         WireNodes();
     }
 
-    public static void ChangeScene(string path, Transition transition = Transition.Fade) => SceneManager.ChangeScene(
+    public static void ChangeScene(
+        string path,
+        Vector2 direction = default,
+        Transition transition = Transition.Fade
+        ) => SceneManager.ChangeScene(
         path,
-        
+        transition: transition,
         from: instance.currentScene.GetChildren().FirstOrDefault(),
-        loadInTo: instance.currentScene
+        loadInTo: instance.currentScene,
+        moveDirection: direction
     );
 }

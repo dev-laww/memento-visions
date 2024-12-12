@@ -14,9 +14,10 @@ public partial class Start : Control
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
+        
 
         WireNodes();
     }
 
-    public override void _Ready() => button.Pressed += () => GameManager.ChangeScene("res://Scenes/Bar.tscn");
+    public override void _Ready() => button.Pressed += () => GameManager.ChangeScene("res://Scenes/Bar.tscn", transition: Transition.Zelda, direction: Vector2.Down);
 }
