@@ -6,29 +6,26 @@ namespace Game.Quests;
 
 [Tool]
 [GlobalClass]
-public partial class QuestObjectives : Quest
+public partial class QuestObjectives : Node
 {
-    [Export] public Quest quest;
+    [Export] public Quest quest { get; set; }
+    [Export] public int TargetCount;
+  
    
     public void StartQuest()
     {
-        GD.Print("Quest Started");
-        quest.Status = QuestStatus.Active;
-        QuestManager.Quests.Add(new Quest { QuestName = quest.QuestName, QuestDescription = quest.QuestDescription, Reward = quest.Reward, Experience = quest.Experience, Status = quest.Status });
-        GD.Print("Quest Status: " + quest.Status);
-        GD.Print("Quest Name: " + QuestName);
+        quest.Status = Quest.QuestStatus.Active;
     }
     public void ObjectiveComplete()
     {
-        GD.Print("Objective Complete");
-        quest.Status = QuestStatus.Completed;
-        GD.Print("Quest Status: " + quest.Status);
+
+        quest.Status = Quest.QuestStatus.Completed;
+
     }
     public void DeliverQuest()
     {
-        GD.Print("Quest Delivered");
-        quest.Status = QuestStatus.Delivered;
-        GD.Print("Quest Status: " + quest.Status);
+        quest.Status = Quest.QuestStatus.Delivered;
+
         //give reward
     }
 }

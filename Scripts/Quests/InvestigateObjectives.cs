@@ -1,14 +1,22 @@
 using Godot;
 using GodotUtilities;
 
-namespace Game.Quests;
-
-[Scene]
-public partial class Investigate : QuestObjectives
+namespace Game.Quests
 {
-	private void OnInteracted()
-	{
-		ObjectiveComplete();
-	}
-}
+    [Tool]
+    [GlobalClass]
+    public partial class InvestigateObjectives : QuestObjectives
+    {
+        private void OnInteracted()
+        {
+            ObjectiveComplete();
+            GD.Print("Investigation Complete");
+        }
 
+        private void StartInvestigation()
+        {
+            StartQuest();
+            GD.Print("Investigation Started");
+        }
+    }
+}

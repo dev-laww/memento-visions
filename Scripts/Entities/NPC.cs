@@ -1,6 +1,7 @@
 using Godot;
 using DialogueManagerRuntime;
 using Game.Components.Area;
+using Game.Quests;
 using Game.Utils.Extensions;
 using GodotUtilities;
 
@@ -14,6 +15,8 @@ namespace Game.Entities
 
         [Export]
         private Resource DialogResource;
+        [Export]
+        private Quest Quest;
 
         [Export]
         private string DialogueStart = "Start";
@@ -22,22 +25,27 @@ namespace Game.Entities
         public override void _Ready()
         {
             interaction.Interacted += OnInteracted;
-            
+
             DialogueManager.DialogueEnded += (Resource dialogueResource) =>
             {
                 GD.Print("Dialogue finished");
                 this.GetPlayer().SetProcessInput(true);
-                isDialogueActive = false; 
+                isDialogueActive = false;
             };
         }
 
         private void OnInteracted()
         {
-            if (isDialogueActive) return; 
+            if (isDialogueActive) return;
 
             this.GetPlayer().SetProcessInput(false);
             DialogueManager.ShowDialogueBalloon(DialogResource, DialogueStart);
-            isDialogueActive = true; 
+            isDialogueActive = true;
+            if (Quest.Status == Quest.QuestStatus.Active)
+            {
+                Quest.Objectives.ObjectiveComplete();
+                Quest.PrintQuest();
+            }
         }
 
         public override void _Notification(int what)
