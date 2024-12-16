@@ -8,8 +8,12 @@ namespace Game.Components.Area
     [GlobalClass]
     public partial class QuestTrigger : Area2D
     {
+        [Signal]
+        public delegate void DiedEventHandler();
         [Export] Quest Quest;
         private bool triggered;
+        private SlayObjectives SlayObjectives = new SlayObjectives();
+        
 
         public override void _Ready()
         {
@@ -20,12 +24,19 @@ namespace Game.Components.Area
 
         private void OnBodyEntered(Node body)
         {
+            if (Quest.Objectives is SlayObjectives slayObjectives)
+            {
+                slayObjectives.OnEnemyDied("EnemyName");
+            }
+
             if (triggered) return;
 
             Quest.StartQuest();
             Quest.PrintQuest();
+           
             triggered = true;
         }
+    
 
         public override string[] _GetConfigurationWarnings()
         {

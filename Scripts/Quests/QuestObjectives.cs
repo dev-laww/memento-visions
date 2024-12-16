@@ -10,6 +10,7 @@ public partial class QuestObjectives : Node
 {
     [Export] public Quest quest { get; set; }
     [Export] public int TargetCount;
+
   
    
     public void StartQuest()
@@ -18,7 +19,6 @@ public partial class QuestObjectives : Node
     }
     public void ObjectiveComplete()
     {
-
         quest.Status = Quest.QuestStatus.Completed;
 
     }

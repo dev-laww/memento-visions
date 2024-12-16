@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ceex4qw6g8cph"]
+
+[ext_resource type="Script" path="res://Scripts/Quests/Quest.cs" id="1_qk8la"]
+[ext_resource type="Script" path="res://Scripts/Quests/SlayObjectives.cs" id="2_2b0fh"]
+
+[node name="SlayTest" type="Node" node_paths=PackedStringArray("Objectives")]
+script = ExtResource("1_qk8la")
+QuestTitle = "SlayTest"
+QuestDescription = "triggerSlaysignal"
+Objectives = NodePath("Slayyy")
+Status = 0
+Reward = 1
+Experience = 2
+
+[node name="Slayyy" type="Node" parent="." node_paths=PackedStringArray("quest")]
+script = ExtResource("2_2b0fh")
+quest = NodePath("..")
+TargetCount = 4

@@ -13,7 +13,7 @@ namespace Game.Quests
             GD.Print("Investigation Complete");
         }
 
-        private void StartInvestigation()
+        public void StartInvestigation()
         {
             StartQuest();
             GD.Print("Investigation Started");

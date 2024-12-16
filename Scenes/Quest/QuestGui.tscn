@@ -1,21 +1,36 @@
-[gd_scene format=3 uid="uid://bkgjauxklnmyv"]
+[gd_scene load_steps=2 format=3 uid="uid://bkgjauxklnmyv"]
+
+[ext_resource type="Script" path="res://Scripts/Quests/QuestGui.cs" id="1_13ams"]
 
 [node name="QuestGui" type="CanvasLayer"]
+script = ExtResource("1_13ams")
 
 [node name="Container" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 256.0
-offset_bottom = 264.0
+offset_left = 168.0
+offset_top = 2.0
+offset_right = 424.0
+offset_bottom = 266.0
 
 [node name="Column" type="VBoxContainer" parent="Container"]
 layout_mode = 0
-offset_right = 257.0
+offset_left = -2.0
+offset_right = 255.0
 offset_bottom = 265.0
+alignment = 1
 
 [node name="Title" type="Label" parent="Container/Column"]
 layout_mode = 2
-text = "Quest Name"
+text = "Quest "
+horizontal_alignment = 1
 
 [node name="Tree" type="Tree" parent="Container/Column"]
+clip_contents = false
+layout_direction = 1
 layout_mode = 2
+size_flags_vertical = 3
+column_titles_visible = true
+allow_search = false
+enable_recursive_folding = false
+select_mode = 2

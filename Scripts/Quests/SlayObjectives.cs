@@ -1,3 +1,5 @@
+using Game.Components.Area;
+using Game.Components.Managers;
 using Godot;
 using GodotUtilities;
 
@@ -8,17 +10,20 @@ namespace Game.Quests
     public partial class SlayObjectives : QuestObjectives
     {
         [Export]
-        private int amount;
-        [Export]
         private string EnemyName;
-
-        // connect signal on enemy dies call OnEnemyDied method
-        public void OnEnemyDied()
+        private int amount = 0;
+       
+        public override void _Ready()
+        {  
+         GD.Print(TargetCount);
+        }
+        public void OnEnemyDied (string EnemyKilled)
         {
-            amount--;
-            if (amount == 0)
+            if (EnemyKilled != EnemyName) return;
+            if (++amount == TargetCount)
             {
                 ObjectiveComplete();
+                GD.Print("Slay Objective Complete");
             }
         }
     }

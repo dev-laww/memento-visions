@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://8xieh4pqx0hg"]
+[gd_scene load_steps=27 format=4 uid="uid://8xieh4pqx0hg"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
 [ext_resource type="Script" path="res://Scripts/Bar.cs" id="1_xynrn"]
@@ -18,16 +18,25 @@
 [ext_resource type="PackedScene" uid="uid://bxq1fj8j0r0tc" path="res://Scenes/Decorations/Bar/LargeSeatBack.tscn" id="12_ktjm6"]
 [ext_resource type="PackedScene" uid="uid://bx3whdhahfxx8" path="res://assets/entities/Npc.tscn" id="16_bpf3v"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/CutsceneTrigger.cs" id="16_e0dl0"]
-[ext_resource type="Resource" uid="uid://cxd7fxbcaj6xb" path="res://dialogue/Chapter1.dialogue" id="17_auh23"]
-[ext_resource type="Script" path="res://Scripts/Quests/QuestObjectives.cs" id="19_wflnx"]
-[ext_resource type="Script" path="res://Scripts/Quests/Quest.cs" id="20_ix3bq"]
+[ext_resource type="PackedScene" uid="uid://dch6xdswnc43g" path="res://Scenes/Quest/InteractWithNpc.tscn" id="19_mlmrh"]
+[ext_resource type="Resource" uid="uid://cxd7fxbcaj6xb" path="res://resources/dialogues/Chapter1.dialogue" id="20_aor4l"]
+[ext_resource type="PackedScene" uid="uid://ceex4qw6g8cph" path="res://Scenes/Quest/SlayTest.tscn" id="20_bcbgm"]
+[ext_resource type="Script" path="res://Scripts/Components/Area/QuestTrigger.cs" id="21_ehkdp"]
+[ext_resource type="PackedScene" uid="uid://bkgjauxklnmyv" path="res://Scenes/Quest/QuestGui.tscn" id="23_4vde5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rh5w0"]
 size = Vector2(8, 66)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ff1w2"]
+radius = 15.6525
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jjm14"]
+
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_xynrn")
+
+[node name="QuestGui" parent="." instance=ExtResource("23_4vde5")]
 
 [node name="Art" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -177,27 +186,36 @@ position = Vector2(319, 139)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("16_e0dl0")
-Dialog = ExtResource("17_auh23")
+Dialog = ExtResource("20_aor4l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger"]
 shape = SubResource("RectangleShape2D_rh5w0")
 
-[node name="NPC" parent="." instance=ExtResource("16_bpf3v")]
+[node name="InteractWithNPC" parent="CutsceneTrigger" instance=ExtResource("19_mlmrh")]
+
+[node name="SlayTest" parent="CutsceneTrigger" instance=ExtResource("20_bcbgm")]
+
+[node name="NPC" parent="." node_paths=PackedStringArray("Quest") instance=ExtResource("16_bpf3v")]
 position = Vector2(231, 105)
+DialogResource = ExtResource("20_aor4l")
+Quest = NodePath("../CutsceneTrigger/InteractWithNPC")
 
-[node name="QuestObjectives" type="Node" parent="NPC" node_paths=PackedStringArray("quest")]
-script = ExtResource("19_wflnx")
-quest = NodePath("../Quest")
-QuestName = "Search"
-QuestDescription = "Find more clues"
-Status = 0
-Reward = 1
-Experience = 1
+[node name="QuestTrigger" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
+position = Vector2(181, 213)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("21_ehkdp")
+Quest = NodePath("../CutsceneTrigger/SlayTest")
 
-[node name="Quest" type="Node" parent="NPC"]
-script = ExtResource("20_ix3bq")
-QuestName = "Search"
-QuestDescription = "Find more clues"
-Status = 0
-Reward = 1
-Experience = 1
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
+shape = SubResource("CircleShape2D_ff1w2")
+
+[node name="QuestTrigger1" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
+position = Vector2(287, 141)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("21_ehkdp")
+Quest = NodePath("../CutsceneTrigger/InteractWithNPC")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger1"]
+shape = SubResource("CapsuleShape2D_jjm14")
