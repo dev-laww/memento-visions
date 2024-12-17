@@ -23,7 +23,6 @@ namespace Game.Quests
             if (++amount == TargetCount)
             {
                 ObjectiveComplete();
-                GD.Print("Slay Objective Complete");
             }
         }
     }

@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Quests/QuestGui.cs" id="1_13ams"]
 
 [node name="QuestGui" type="CanvasLayer"]
+visible = false
 script = ExtResource("1_13ams")
 
 [node name="Container" type="Control" parent="."]

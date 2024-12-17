@@ -17,9 +17,6 @@ namespace Game.Entities
         private Resource DialogResource;
         [Export]
         private Quest Quest;
-
-        [Export]
-        private string DialogueStart = "Start";
         private bool isDialogueActive = false;
 
         public override void _Ready()
@@ -39,14 +36,22 @@ namespace Game.Entities
             if (isDialogueActive) return;
 
             this.GetPlayer().SetProcessInput(false);
-            DialogueManager.ShowDialogueBalloon(DialogResource, DialogueStart);
+            DialogueManager.ShowDialogueBalloon(DialogResource, "Start");
             isDialogueActive = true;
+
+            if (Quest == null)
+            {
+                GD.PrintErr("Quest is not assigned to this NPC.");
+                return;
+            }
+
             if (Quest.Status == Quest.QuestStatus.Active)
             {
-                Quest.Objectives.ObjectiveComplete();
+                Quest.CompleteQuest();
                 Quest.PrintQuest();
             }
         }
+
 
         public override void _Notification(int what)
         {

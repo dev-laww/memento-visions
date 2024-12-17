@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 namespace Game.Quests
@@ -7,6 +8,9 @@ namespace Game.Quests
     [GlobalClass]
     public partial class QuestManager : Node
     {
+        // Event to notify when quests change
+        public static event Action OnQuestsChanged;
+
         public static List<Quest> Quests = new List<Quest>();
 
         public override void _Ready()
@@ -19,6 +23,8 @@ namespace Game.Quests
             if (!Quests.Contains(quest))
             {
                 Quests.Add(quest);
+                // Trigger the event to notify GUI and other listeners
+                OnQuestsChanged?.Invoke();
             }
         }
 
@@ -27,6 +33,8 @@ namespace Game.Quests
             if (Quests.Contains(quest))
             {
                 Quests.Remove(quest);
+                // Trigger the event to notify GUI and other listeners
+                OnQuestsChanged?.Invoke();
             }
         }
 

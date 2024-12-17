@@ -8,7 +8,6 @@ script = ExtResource("1_aloi7")
 QuestTitle = "NPC quest"
 QuestDescription = "Interact with NPC"
 Objectives = NodePath("InvestigateObjectives")
-Status = 0
 Reward = 1
 Experience = 1
 
