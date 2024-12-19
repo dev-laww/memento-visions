@@ -1,11 +1,18 @@
 ~ Start
 Chief: Nice of you to finally arrive, Alejandro Gutierrez... or should I call you Alex?
+
 - Alex is fine. Now, \n what do we have here?
-- Whatever you prefer Chief. \n Can you tell me now what we're doing here?
-Chief: Rumors are circulating about a vengeful spirit in this place, said to kill anyone who seeks it.
-Chief: Recently, several people have gone missing around here.
+	do npc.GiveQuest()
+- Whatever you prefer, Chief. \n Can you tell me what we're dealing with?
+	do npc.CompleteQuest()
+Chief: Rumors are circulating about a vengeful spirit in this place. They say it kills anyone who seeks it out.
 
-Chief: Speculation suggests these disappearances are connected to encounters with the spirit, but we have no concrete evidence yet.
+Chief: Recently, several people have gone missing around here. 
 
-#Tutorial Starts here WASD
+Chief: Some think the disappearances are tied to encounters with the spirit. But as of now, we don’t have solid evidence.
+
+#Tutorial Starts here
+Chief: Let’s take a closer look. 
+#Use **WASD** to move around and investigate.
+
 => END

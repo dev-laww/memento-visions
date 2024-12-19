@@ -30,7 +30,6 @@ namespace Game.Entities
                 isDialogueActive = false;
             };
         }
-
         private void OnInteracted()
         {
             if (isDialogueActive) return;
@@ -38,18 +37,16 @@ namespace Game.Entities
             this.GetPlayer().SetProcessInput(false);
             DialogueManager.ShowDialogueBalloon(DialogResource, "Start");
             isDialogueActive = true;
-
-            if (Quest == null)
-            {
-                GD.PrintErr("Quest is not assigned to this NPC.");
-                return;
-            }
-
-            if (Quest.Status == Quest.QuestStatus.Available)
-            {
-                Quest.StartQuest();
-                Quest.PrintQuest();
-            }
+            
+        }
+       public void GiveQuest()
+        { 
+            if (Quest.Status == Quest.QuestStatus.Available) Quest.StartQuest();
+        }
+       public void CompleteQuest()
+        {
+           if (Quest.Status == Quest.QuestStatus.Active) Quest.CompleteQuest();
+            
         }
 
 

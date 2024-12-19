@@ -94,7 +94,7 @@ public partial class Player : CharacterBody2D
     public override void _Input(InputEvent @event)
     {
        
-      if (@event.IsActionPressed("Inventory")) QuestGui.ToggleQuestGui();
+      if (@event.IsActionPressed("Quest")) QuestGui.ToggleQuestGui();
         
       
     
@@ -180,4 +180,5 @@ public partial class Player : CharacterBody2D
         if (input.Length() > 0) StateMachine.ChangeState(Walk);
         else StateMachine.ChangeState(Idle);
     }
+    
 }
