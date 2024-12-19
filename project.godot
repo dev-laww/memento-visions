@@ -26,12 +26,13 @@ config/icon="res://icon.svg"
 SceneManager="*res://Scripts/Globals/SceneManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 InteractionManager="*res://Scripts/Globals/InteractionManager.cs"
+Bar="*res://Scripts/Bar.cs"
 
 [dialogue_manager]
 
 general/balloon_path="res://Scenes/UI/Dialogue/Balloon.tscn"
 general/uses_dotnet=true
-general/states=["SceneManager", "InteractionManager"]
+general/states=["SceneManager", "InteractionManager", "Bar"]
 
 [display]
 
