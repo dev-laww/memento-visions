@@ -45,9 +45,9 @@ namespace Game.Entities
                 return;
             }
 
-            if (Quest.Status == Quest.QuestStatus.Active)
+            if (Quest.Status == Quest.QuestStatus.Available)
             {
-                Quest.CompleteQuest();
+                Quest.StartQuest();
                 Quest.PrintQuest();
             }
         }

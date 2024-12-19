@@ -8,11 +8,11 @@ script = ExtResource("1_qk8la")
 QuestTitle = "SlayTest"
 QuestDescription = "triggerSlaysignal"
 Objectives = NodePath("Slayyy")
-Status = 0
 Reward = 1
 Experience = 2
 
 [node name="Slayyy" type="Node" parent="." node_paths=PackedStringArray("quest")]
 script = ExtResource("2_2b0fh")
+EnemyName = "Samurai"
 quest = NodePath("..")
 TargetCount = 4

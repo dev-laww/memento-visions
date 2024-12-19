@@ -2,6 +2,7 @@ using Game.Components.Area;
 using Game.Components.Managers;
 using Godot;
 using GodotUtilities;
+using Game.Enemy.Common;
 
 namespace Game.Quests
 {
@@ -12,10 +13,11 @@ namespace Game.Quests
         [Export]
         private string EnemyName;
         private int amount = 0;
+        private Samurai samurai;
        
         public override void _Ready()
         {  
-         GD.Print(TargetCount);
+        
         }
         public void OnEnemyDied (string EnemyKilled)
         {
