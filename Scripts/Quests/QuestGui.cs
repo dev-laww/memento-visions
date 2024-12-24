@@ -1,14 +1,19 @@
 using Godot;
 using GodotUtilities;
 
-namespace Game.Quests
-{
+namespace Game.Quests;
+
     [Scene]
     public partial class QuestGui : CanvasLayer
     {
-        private Tree _tree;
-        private TreeItem _treeRoot;
-        private bool _isVisible = false;
+        private Tree Tree;
+        private TreeItem TreeRoot;
+        private bool IsVisible = false;
+        private Label QuestTitle;
+        private Label QuestDescription;
+        private Label QuestStatus;
+        private Label QuestReward;
+        private PanelContainer QuestPanel;
 
         public override void _Notification(int what)
         {
@@ -18,27 +23,34 @@ namespace Game.Quests
 
         public override void _Ready()
         {
-            _tree = GetNode<Tree>("Container/Column/Tree");
+            Tree = GetNode<Tree>("Container/Column/Tree");
+            QuestPanel = GetNode<PanelContainer>("Container/PanelContainer");
+            QuestTitle = GetNode<Label>("Container/PanelContainer/MarginContainer/VBoxContainer/Title");
+            QuestDescription = GetNode<Label>("Container/PanelContainer/MarginContainer/VBoxContainer/Description");
+            QuestStatus = GetNode<Label>("Container/PanelContainer/MarginContainer/VBoxContainer/Status");
+            QuestReward = GetNode<Label>("Container/PanelContainer/MarginContainer/VBoxContainer/Reward");
+            
             QuestManager.OnQuestsChanged += UpdateQuestList;
             InitializeTree();
+            Tree.ItemSelected += OnItemSelected;
             Visible = false;
         }
 
         private void InitializeTree()
         {
-            _tree.Clear();
-            _treeRoot = _tree.CreateItem();
-            _treeRoot.SetText(0, "Quests");
-            _tree.Columns = 2;
-            _tree.SetColumnTitle(0, "Quest Name");
-            _tree.SetColumnTitle(1, "Status");
+            Tree.Clear();
+            TreeRoot = Tree.CreateItem();
+            TreeRoot.SetText(0, "Quests"); 
+            Tree.Columns = 2;
+            Tree.SetColumnTitle(0, "Quest Name");
+            Tree.SetColumnTitle(1, "Status");
         }
 
         public void ToggleQuestGui()
         {
-            _isVisible = !_isVisible;
-            Visible = _isVisible;
-            if (_isVisible)
+            IsVisible = !IsVisible;
+            Visible = IsVisible;
+            if (IsVisible)
             {
                 UpdateQuestList();
             }
@@ -47,13 +59,19 @@ namespace Game.Quests
         public void UpdateQuestList()
         {
             if (!Visible) return;
-            while (_treeRoot.GetChildCount() > 0)
+            while (TreeRoot.GetChildCount() > 0)
             {
-                _treeRoot.GetChild(0).Free();
+                TreeRoot.GetChild(0).Free();
+            }
+            foreach (var quest in QuestManager.GetCompletedQuests())
+            {
+                var item = Tree.CreateItem(TreeRoot);
+                item.SetText(0, quest.QuestTitle);
+                item.SetText(1, quest.Status.ToString());
             }
             foreach (var quest in QuestManager.GetActiveQuests())
             {
-                var item = _tree.CreateItem(_treeRoot);
+                var item = Tree.CreateItem(TreeRoot);
                 item.SetText(0, quest.QuestTitle);
                 item.SetText(1, quest.Status.ToString());
             }
@@ -62,6 +80,23 @@ namespace Game.Quests
         public override void _ExitTree()
         {
             QuestManager.OnQuestsChanged -= UpdateQuestList;
+            Tree.ItemSelected -= OnItemSelected; 
+            QuestPanel.Visible = false;
         }
+        
+        public void OnItemSelected()
+        {
+            var item = Tree.GetSelected();
+            if (item == null) return;
+            var quest = QuestManager.GetQuestByTitle(item.GetText(0));
+            GD.Print(quest.QuestDescription);
+            QuestTitle.Text = quest.QuestTitle;
+            QuestDescription.Text = quest.QuestDescription;
+            QuestStatus.Text = quest.Status.ToString();
+            QuestReward.Text = quest.Reward.ToString();
+            QuestPanel.Visible = true;
+            
+            
+        }
+        
     }
-}
