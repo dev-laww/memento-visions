@@ -52,7 +52,6 @@ public partial class GameManager : Node
 
     public static void ChangeScene(string path, Transition transition = Transition.Fade) => SceneManager.ChangeScene(
         path,
-        
         from: instance.currentScene.GetChildren().FirstOrDefault(),
         loadInTo: instance.currentScene
     );
