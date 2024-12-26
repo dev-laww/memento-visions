@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bx3whdhahfxx8"]
+[gd_scene load_steps=8 format=3 uid="uid://bx3whdhahfxx8"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/NPC.cs" id="1_edqcn"]
-[ext_resource type="Resource" uid="uid://s24ahicax5gg" path="res://resources/dialogues/Test.dialogue" id="2_f4xey"]
+[ext_resource type="Resource" uid="uid://s24ahicax5gg" path="res://resources/Test.dialogue" id="2_f4xey"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/Interaction.cs" id="3_bbm02"]
+[ext_resource type="Texture2D" uid="uid://dapkm8nsfpvko" path="res://icon.svg" id="3_ksq18"]
 [ext_resource type="Texture2D" uid="uid://dyxsacj8kktd1" path="res://assets/icons/f.png" id="4_7lkx6"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="5_hpcyi"]
 
@@ -12,6 +13,11 @@ size = Vector2(54, 50)
 [node name="NPC" type="Node2D"]
 script = ExtResource("1_edqcn")
 DialogResource = ExtResource("2_f4xey")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.76837e-07, 1.90735e-06)
+scale = Vector2(0.28125, 0.21875)
+texture = ExtResource("3_ksq18")
 
 [node name="Interaction" type="Area2D" parent="."]
 collision_layer = 16

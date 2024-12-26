@@ -38,7 +38,7 @@ public partial class CutsceneTrigger : Area2D
         
         var player = this.GetPlayer();
         player.SetProcessInput(false);
-        DialogueManager.ShowDialogueBalloon(Dialog, "START");
+        DialogueManager.ShowDialogueBalloon(Dialog, "Start");
         
         triggered = true;
     }
