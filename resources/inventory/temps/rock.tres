@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c71am62dl1cq6"]
+
+[ext_resource type="Texture2D" uid="uid://b1vp2c7eh8v3s" path="res://assets/inventory/items/temp/5.png" id="1_6xmt5"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="2_fsslb"]
+
+[resource]
+script = ExtResource("2_fsslb")
+Name = "rock"
+UniqueName = "stone"
+Description = "can be ingested??"
+icon = ExtResource("1_6xmt5")
+Stackable = true
+StackSize = 1
