@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="2_fsslb"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_fsslb")
 Name = "rock"
 UniqueName = "stone"
