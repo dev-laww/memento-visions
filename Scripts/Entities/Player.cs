@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using Game.Components.Managers;
 using Game.Components.Area;
 using Game.Components.Movement;
 using Game.Quests;
 using Game.Resources;
-using Game.Utils.Logic.States;
 using Godot;
 using GodotUtilities;
 using GodotUtilities.Logic;
