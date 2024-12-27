@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using Godot;
 
 namespace Game.Resources;
@@ -85,5 +85,24 @@ public partial class Item : Resource
 
         GD.PrintErr("Both primary and secondary textures are null.");
         return null;
+    }
+    
+    public static Item operator +(Item item1, Item item2)
+    {
+        var conditions = new[]
+        {
+            item1.GetType() == item2.GetType(),
+            item1.UniqueName == item2.UniqueName,
+            item1.Stackable && item2.Stackable
+        };
+
+        if (conditions.Contains(false))
+        {
+            GD.PrintErr("Items are not stackable.");
+            return item1;
+        }
+        
+        item1.StackSize += item2.StackSize;
+        return item1;
     }
 }
