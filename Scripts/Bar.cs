@@ -19,7 +19,7 @@ namespace Game
 
             // Retrieve Player immediately (likely works fine)
             player = this.GetPlayer();
-            npc = GetNode<NPC>("/root/GameManager/CurrentScene/Bar/NPC");
+            // npc = GetNode<NPC>("/root/GameManager/CurrentScene/Bar/NPC");
         }
 
      

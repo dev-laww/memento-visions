@@ -1,3 +1,222 @@
-[gd_scene format=3 uid="uid://8xieh4pqx0hg"]
+[gd_scene load_steps=27 format=4 uid="uid://8xieh4pqx0hg"]
 
-[node name="" type="Object"]
+[ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
+[ext_resource type="Script" path="res://Scripts/Bar.cs" id="1_xynrn"]
+[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_7gq68"]
+[ext_resource type="Texture2D" uid="uid://bld0optmgxhyy" path="res://assets/scenes/bar/door.png" id="3_iihhm"]
+[ext_resource type="Script" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_tm1gt"]
+[ext_resource type="Script" path="res://Scripts/Components/SmoothSprite2D.cs" id="5_a0tbo"]
+[ext_resource type="PackedScene" uid="uid://6dopjvehyksh" path="res://Scenes/Decorations/Bar/LiquorRack.tscn" id="5_a7o0g"]
+[ext_resource type="PackedScene" uid="uid://bl75po1fdm40q" path="res://Scenes/Decorations/Bar/Counter.tscn" id="6_uugt5"]
+[ext_resource type="PackedScene" uid="uid://bxb5hg2tcbaym" path="res://Scenes/Decorations/Bar/Seat.tscn" id="7_4neyr"]
+[ext_resource type="TileSet" uid="uid://di324xlegxgrg" path="res://resources/tilesets/bar.tres" id="7_unifd"]
+[ext_resource type="PackedScene" uid="uid://j0qixu5x2ins" path="res://Scenes/Decorations/Bar/LargeBarrel.tscn" id="8_fqy60"]
+[ext_resource type="PackedScene" uid="uid://b5jpiv87dv1rl" path="res://Scenes/Decorations/Bar/Barrel.tscn" id="9_ikvjg"]
+[ext_resource type="PackedScene" uid="uid://ciwj30yficn0p" path="res://Scenes/Decorations/Bar/LargeSeatFront.tscn" id="10_8pc0o"]
+[ext_resource type="PackedScene" uid="uid://0r3pqmjvamym" path="res://Scenes/Decorations/Bar/Table.tscn" id="11_de4ou"]
+[ext_resource type="Texture2D" uid="uid://clnqhsnclctsb" path="res://assets/scenes/bar/painting.png" id="12_1v6r4"]
+[ext_resource type="PackedScene" uid="uid://bxq1fj8j0r0tc" path="res://Scenes/Decorations/Bar/LargeSeatBack.tscn" id="12_ktjm6"]
+[ext_resource type="PackedScene" uid="uid://bx3whdhahfxx8" path="res://assets/entities/Npc.tscn" id="16_bpf3v"]
+[ext_resource type="Script" path="res://Scripts/Components/Area/CutsceneTrigger.cs" id="16_e0dl0"]
+[ext_resource type="PackedScene" uid="uid://dch6xdswnc43g" path="res://Scenes/Quest/InteractWithNpc.tscn" id="19_mlmrh"]
+[ext_resource type="Resource" uid="uid://cxd7fxbcaj6xb" path="res://resources/dialogues/Chapter1.dialogue" id="20_aor4l"]
+[ext_resource type="PackedScene" uid="uid://ceex4qw6g8cph" path="res://Scenes/Quest/SlayTest.tscn" id="20_bcbgm"]
+[ext_resource type="Script" path="res://Scripts/Components/Area/QuestTrigger.cs" id="21_ehkdp"]
+[ext_resource type="PackedScene" uid="uid://bkgjauxklnmyv" path="res://Scenes/Quest/QuestGui.tscn" id="23_4vde5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rh5w0"]
+size = Vector2(8, 66)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ff1w2"]
+radius = 15.6525
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jjm14"]
+
+[node name="Bar" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_xynrn")
+
+[node name="NPC" parent="." node_paths=PackedStringArray("Quest") instance=ExtResource("16_bpf3v")]
+position = Vector2(231, 105)
+scale = Vector2(1.01046, 0.97799)
+DialogResource = ExtResource("20_aor4l")
+Quest = NodePath("../CutsceneTrigger/InteractWithNPC")
+
+[node name="QuestGui" parent="." instance=ExtResource("23_4vde5")]
+
+[node name="Art" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Door" type="Sprite2D" parent="Art"]
+texture_filter = 2
+material = ExtResource("2_7gq68")
+position = Vector2(252, 50)
+texture = ExtResource("3_iihhm")
+script = ExtResource("5_a0tbo")
+
+[node name="Painting" type="Sprite2D" parent="Art"]
+texture_filter = 2
+material = ExtResource("2_7gq68")
+position = Vector2(404, 40)
+texture = ExtResource("12_1v6r4")
+script = ExtResource("5_a0tbo")
+
+[node name="Counter" type="Node2D" parent="Art"]
+y_sort_enabled = true
+
+[node name="Liquor Rack" parent="Art/Counter" instance=ExtResource("5_a7o0g")]
+position = Vector2(112, 40)
+
+[node name="Counter" parent="Art/Counter" instance=ExtResource("6_uugt5")]
+position = Vector2(111, 66)
+
+[node name="Seat" parent="Art/Counter" instance=ExtResource("7_4neyr")]
+position = Vector2(78, 88)
+
+[node name="Seat2" parent="Art/Counter" instance=ExtResource("7_4neyr")]
+position = Vector2(108, 88)
+
+[node name="Seat3" parent="Art/Counter" instance=ExtResource("7_4neyr")]
+position = Vector2(140, 88)
+
+[node name="Seat4" parent="Art/Counter" instance=ExtResource("7_4neyr")]
+position = Vector2(169, 57)
+
+[node name="Seat5" parent="Art/Counter" instance=ExtResource("7_4neyr")]
+position = Vector2(169, 75)
+
+[node name="Barrels" type="Node2D" parent="Art"]
+y_sort_enabled = true
+
+[node name="LargeBarrel" parent="Art/Barrels" instance=ExtResource("8_fqy60")]
+position = Vector2(51, 219)
+
+[node name="Barrel" parent="Art/Barrels" instance=ExtResource("9_ikvjg")]
+position = Vector2(61, 225)
+
+[node name="Barrel2" parent="Art/Barrels" instance=ExtResource("9_ikvjg")]
+position = Vector2(50, 229)
+
+[node name="LargeBarrel2" parent="Art/Barrels" instance=ExtResource("8_fqy60")]
+position = Vector2(429, 68)
+
+[node name="Barrel3" parent="Art/Barrels" instance=ExtResource("9_ikvjg")]
+position = Vector2(435, 77)
+
+[node name="Tables" type="Node2D" parent="Art"]
+y_sort_enabled = true
+
+[node name="Table" type="Node2D" parent="Art/Tables"]
+y_sort_enabled = true
+
+[node name="LargeSeatFront" parent="Art/Tables/Table" instance=ExtResource("10_8pc0o")]
+position = Vector2(368, 88)
+
+[node name="Table" parent="Art/Tables/Table" instance=ExtResource("11_de4ou")]
+position = Vector2(368, 102)
+
+[node name="LargeSeatBack" parent="Art/Tables/Table" instance=ExtResource("12_ktjm6")]
+position = Vector2(368, 112)
+
+[node name="Table2" type="Node2D" parent="Art/Tables"]
+y_sort_enabled = true
+
+[node name="LargeSeatFront" parent="Art/Tables/Table2" instance=ExtResource("10_8pc0o")]
+position = Vector2(368, 160)
+
+[node name="Table" parent="Art/Tables/Table2" instance=ExtResource("11_de4ou")]
+position = Vector2(368, 174)
+
+[node name="LargeSeatBack" parent="Art/Tables/Table2" instance=ExtResource("12_ktjm6")]
+position = Vector2(368, 184)
+
+[node name="Table3" type="Node2D" parent="Art/Tables"]
+y_sort_enabled = true
+
+[node name="LargeSeatFront" parent="Art/Tables/Table3" instance=ExtResource("10_8pc0o")]
+position = Vector2(272, 88)
+
+[node name="Table" parent="Art/Tables/Table3" instance=ExtResource("11_de4ou")]
+position = Vector2(272, 102)
+
+[node name="LargeSeatBack" parent="Art/Tables/Table3" instance=ExtResource("12_ktjm6")]
+position = Vector2(272, 112)
+
+[node name="Table4" type="Node2D" parent="Art/Tables"]
+y_sort_enabled = true
+
+[node name="LargeSeatFront" parent="Art/Tables/Table4" instance=ExtResource("10_8pc0o")]
+position = Vector2(272, 160)
+
+[node name="Table" parent="Art/Tables/Table4" instance=ExtResource("11_de4ou")]
+position = Vector2(272, 174)
+
+[node name="LargeSeatBack" parent="Art/Tables/Table4" instance=ExtResource("12_ktjm6")]
+position = Vector2(272, 184)
+
+[node name="Table5" type="Node2D" parent="Art/Tables"]
+y_sort_enabled = true
+
+[node name="LargeSeatFront" parent="Art/Tables/Table5" instance=ExtResource("10_8pc0o")]
+position = Vector2(160, 160)
+
+[node name="Table" parent="Art/Tables/Table5" instance=ExtResource("11_de4ou")]
+position = Vector2(160, 174)
+
+[node name="LargeSeatBack" parent="Art/Tables/Table5" instance=ExtResource("12_ktjm6")]
+position = Vector2(160, 184)
+
+[node name="Floor" type="TileMapLayer" parent="Art"]
+z_index = -2
+texture_filter = 2
+material = ExtResource("2_7gq68")
+position = Vector2(24, 14)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAFAAAAAAABAAAAAAAEAAAAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAABAAEAAAABAAEAAAABAAIAAAABAAEAAAAFAAEAAAABAAEAAAAEAAEAAAABAAEAAAACAAEAAAABAAEAAAADAAEAAAABAAEAAAACAAIAAAABAAEAAAAFAAIAAAABAAEAAAAEAAIAAAABAAEAAAADAAIAAAABAAEAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAACAAAAAAAIAAEAAAACAAEAAAAIAAIAAAACAAEAAAAIAAMAAAACAAEAAAAIAAQAAAACAAIAAAAHAAQAAAABAAIAAAAGAAQAAAABAAIAAAAFAAQAAAABAAIAAAAEAAQAAAABAAIAAAADAAQAAAABAAIAAAACAAQAAAABAAIAAAABAAQAAAABAAIAAAAAAAQAAAAAAAIAAAAAAAMAAAAAAAEAAAABAAMAAAABAAEAAAACAAMAAAABAAEAAAADAAMAAAABAAEAAAAEAAMAAAABAAEAAAAFAAMAAAABAAEAAAAGAAMAAAABAAEAAAAHAAMAAAABAAEAAAAHAAIAAAABAAEAAAAHAAEAAAABAAEAAAAGAAEAAAABAAEAAAAGAAIAAAABAAEAAAD//wQAAgAUAAAAAAD//wMAAgAUAAAAAAD//wIAAgAUAAAAAAD//wEAAgAUAAAAAAD//wAAAgAUAAAAAAD/////AgAUAAAAAAAAAP//AgAUAAAAAAABAP//AgAUAAAAAAACAP//AgAUAAAAAAADAP//AgAUAAAAAAAEAP//AgAUAAAAAAAFAP//AgAUAAAAAAAGAP//AgAUAAAAAAAHAP//AgAUAAAAAAAIAP//AgAUAAAAAAAJAP//AgAUAAAAAAAJAAAAAgAUAAAAAAAJAAEAAgAUAAAAAAAJAAIAAgAUAAAAAAAJAAMAAgAUAAAAAAAJAAQAAgAUAAAAAAAJAAUAAgAUAAAAAAAIAAUAAgAUAAAAAAAHAAUAAgAUAAAAAAAGAAUAAgAUAAAAAAAFAAUAAgAUAAAAAAAEAAUAAgAUAAAAAAADAAUAAgAUAAAAAAACAAUAAgAUAAAAAAABAAUAAgAUAAAAAAAAAAUAAgAUAAAAAAD//wUAAgAUAAAAAAA=")
+tile_set = ExtResource("7_unifd")
+script = ExtResource("3_tm1gt")
+
+[node name="Floor2" type="TileMapLayer" parent="Art"]
+z_index = -2
+texture_filter = 2
+material = ExtResource("2_7gq68")
+position = Vector2(24, 14)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAFAAAAAAABAAAAAAAEAAAAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAABAAEAAAABAAEAAAABAAIAAAABAAEAAAAFAAEAAAABAAEAAAAEAAEAAAABAAEAAAACAAEAAAABAAEAAAADAAEAAAABAAEAAAACAAIAAAABAAEAAAAFAAIAAAABAAEAAAAEAAIAAAABAAEAAAADAAIAAAABAAEAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAACAAAAAAAIAAEAAAACAAEAAAAIAAIAAAACAAEAAAAIAAMAAAACAAEAAAAIAAQAAAACAAIAAAAHAAQAAAABAAIAAAAGAAQAAAABAAIAAAAFAAQAAAABAAIAAAAEAAQAAAABAAIAAAADAAQAAAABAAIAAAACAAQAAAABAAIAAAABAAQAAAABAAIAAAAAAAQAAAAAAAIAAAAAAAMAAAAAAAEAAAABAAMAAAABAAEAAAACAAMAAAABAAEAAAADAAMAAAABAAEAAAAEAAMAAAABAAEAAAAFAAMAAAABAAEAAAAGAAMAAAABAAEAAAAHAAMAAAABAAEAAAAHAAIAAAABAAEAAAAHAAEAAAABAAEAAAAGAAEAAAABAAEAAAAGAAIAAAABAAEAAAD//wQAAgAUAAAAAAD//wMAAgAUAAAAAAD//wIAAgAUAAAAAAD//wEAAgAUAAAAAAD//wAAAgAUAAAAAAD/////AgAUAAAAAAAAAP//AgAUAAAAAAABAP//AgAUAAAAAAACAP//AgAUAAAAAAADAP//AgAUAAAAAAAEAP//AgAUAAAAAAAFAP//AgAUAAAAAAAGAP//AgAUAAAAAAAHAP//AgAUAAAAAAAIAP//AgAUAAAAAAAJAP//AgAUAAAAAAAJAAAAAgAUAAAAAAAJAAEAAgAUAAAAAAAJAAIAAgAUAAAAAAAJAAMAAgAUAAAAAAAJAAQAAgAUAAAAAAAJAAUAAgAUAAAAAAAIAAUAAgAUAAAAAAAHAAUAAgAUAAAAAAAGAAUAAgAUAAAAAAAFAAUAAgAUAAAAAAAEAAUAAgAUAAAAAAADAAUAAgAUAAAAAAACAAUAAgAUAAAAAAABAAUAAgAUAAAAAAAAAAUAAgAUAAAAAAD//wUAAgAUAAAAAAA=")
+tile_set = ExtResource("7_unifd")
+script = ExtResource("3_tm1gt")
+
+[node name="Player" parent="." instance=ExtResource("1_28rab")]
+position = Vector2(55, 108)
+
+[node name="CutsceneTrigger" type="Area2D" parent="."]
+position = Vector2(319, 139)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("16_e0dl0")
+Dialog = ExtResource("20_aor4l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneTrigger"]
+shape = SubResource("RectangleShape2D_rh5w0")
+
+[node name="InteractWithNPC" parent="CutsceneTrigger" instance=ExtResource("19_mlmrh")]
+
+[node name="SlayTest" parent="CutsceneTrigger" instance=ExtResource("20_bcbgm")]
+
+[node name="QuestTrigger" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
+position = Vector2(181, 213)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("21_ehkdp")
+Quest = NodePath("../CutsceneTrigger/SlayTest")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
+shape = SubResource("CircleShape2D_ff1w2")
+
+[node name="QuestTrigger1" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
+position = Vector2(287, 141)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("21_ehkdp")
+Quest = NodePath("../CutsceneTrigger/InteractWithNPC")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger1"]
+shape = SubResource("CapsuleShape2D_jjm14")
