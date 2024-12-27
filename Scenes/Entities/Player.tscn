@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=97 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_cqdhe"]
@@ -11,7 +11,6 @@
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="7_s1dwx"]
 [ext_resource type="Texture2D" uid="uid://crm174xl683eq" path="res://assets/entities/player.png" id="9_2exdb"]
 [ext_resource type="Script" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="9_401x2"]
-[ext_resource type="PackedScene" uid="uid://bkgjauxklnmyv" path="res://Scenes/Quest/QuestGui.tscn" id="12_wmu4i"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kaamo"]
 radius = 4.98331
@@ -1143,5 +1142,3 @@ script = ExtResource("5_3fgj7")
 libraries = {
 "": SubResource("AnimationLibrary_bjmy2")
 }
-
-[node name="QuestGui" parent="." instance=ExtResource("12_wmu4i")]
