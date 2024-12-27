@@ -30,8 +30,6 @@ public partial class Dummy : CharacterBody2D
     {
         statsManager.AttackReceived += OnAttackReceived;
     }
-
-    public override void _Process(double delta) => animationPlayer.Play("idle");
     
 
     private void OnAttackReceived(float dmg, Attack.Type type, bool critical)

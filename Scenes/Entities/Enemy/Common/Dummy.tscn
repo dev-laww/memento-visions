@@ -7,7 +7,7 @@
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="3_txlvp"]
 [ext_resource type="Texture2D" uid="uid://ci7so60mgolah" path="res://assets/entities/enemy/common/dummy/sprite.png" id="4_x85v6"]
 [ext_resource type="Script" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="5_gqlf7"]
-[ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Effects/HealthNumbers/HealthNumberManager.tscn" id="7_xk10n"]
+[ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Components/Managers/HealthNumberManager.tscn" id="7_xk10n"]
 
 [sub_resource type="Resource" id="Resource_c02qt"]
 script = ExtResource("2_jbplj")

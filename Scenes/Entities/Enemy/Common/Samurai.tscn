@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dvfyiekl3kiqi" path="res://assets/entities/enemy/common/samurai/idle.png" id="4_7fj1g"]
 [ext_resource type="Texture2D" uid="uid://dsjee5nlrwo87" path="res://assets/entities/enemy/common/samurai/walk.png" id="5_4afnw"]
 [ext_resource type="Script" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="6_bv0hl"]
-[ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Effects/HealthNumbers/HealthNumberManager.tscn" id="6_erfge"]
+[ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Components/Managers/HealthNumberManager.tscn" id="6_erfge"]
 [ext_resource type="Texture2D" uid="uid://b58rckgt1wu0u" path="res://assets/entities/enemy/common/samurai/hit.png" id="9_a8nl6"]
 
 [sub_resource type="Resource" id="Resource_8unyy"]

@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Components/Movement/Velocity.cs" id="4_iaq51"]
 [ext_resource type="Script" path="res://Scripts/Components/Managers/WeaponManager.cs" id="5_3fgj7"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/HurtBox.cs" id="5_5x453"]
-[ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Effects/HealthNumbers/HealthNumberManager.tscn" id="5_lfb6s"]
+[ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Components/Managers/HealthNumberManager.tscn" id="5_lfb6s"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/HitBox.cs" id="6_ly21x"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="7_s1dwx"]
 [ext_resource type="Texture2D" uid="uid://crm174xl683eq" path="res://assets/entities/player.png" id="9_2exdb"]

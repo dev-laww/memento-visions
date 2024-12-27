@@ -26,7 +26,6 @@ config/icon="res://icon.svg"
 SceneManager="*res://Scripts/Globals/SceneManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 InteractionManager="*res://Scripts/Globals/InteractionManager.cs"
-Bar="*res://Scripts/Bar.cs"
 
 [dialogue_manager]
 
