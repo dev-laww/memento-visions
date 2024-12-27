@@ -1,15 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://b161abm0o6ij2"]
+[gd_scene load_steps=8 format=3 uid="uid://b161abm0o6ij2"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Inventory/Inventory.cs" id="1_7jd4f"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="1_35u5w"]
 [ext_resource type="ButtonGroup" uid="uid://0v7aexkru1o0" path="res://resources/ui/inventory-button-group.tres" id="1_hubp2"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_quj2b"]
 [ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="2_r77rr"]
-[ext_resource type="Texture2D" uid="uid://d3bb2tvefmwuy" path="res://assets/inventory/material.png" id="4_scjby"]
 [ext_resource type="PackedScene" uid="uid://svqrge4l63b4" path="res://Scenes/UI/Inventory/Slot.tscn" id="5_17bmp"]
-[ext_resource type="Texture2D" uid="uid://cjeyscxre4r72" path="res://assets/inventory/potion.png" id="5_i127d"]
-[ext_resource type="Texture2D" uid="uid://ctbi5my7bs710" path="res://assets/inventory/weapon.png" id="6_dk1bs"]
-[ext_resource type="Texture2D" uid="uid://dp1y1rf3d2tae" path="res://assets/inventory/quest.png" id="7_vfoko"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7hgj7"]
 texture = ExtResource("2_r77rr")
@@ -26,9 +21,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_7jd4f")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("Slot"), [ExtResource("5_17bmp")]]
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -84,7 +79,6 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_7pn5k")
 toggle_mode = true
 button_pressed = true
 button_group = ExtResource("1_hubp2")
-icon = ExtResource("4_scjby")
 icon_alignment = 1
 
 [node name="ConsumablesButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
@@ -99,7 +93,6 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_7hgj7")
 theme_override_styles/normal = SubResource("StyleBoxTexture_7pn5k")
 toggle_mode = true
 button_group = ExtResource("1_hubp2")
-icon = ExtResource("5_i127d")
 icon_alignment = 1
 
 [node name="WeaponsButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
@@ -114,7 +107,6 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_7hgj7")
 theme_override_styles/normal = SubResource("StyleBoxTexture_7pn5k")
 toggle_mode = true
 button_group = ExtResource("1_hubp2")
-icon = ExtResource("6_dk1bs")
 icon_alignment = 1
 
 [node name="QuestItemsButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
@@ -129,7 +121,6 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_7hgj7")
 theme_override_styles/normal = SubResource("StyleBoxTexture_7pn5k")
 toggle_mode = true
 button_group = ExtResource("1_hubp2")
-icon = ExtResource("7_vfoko")
 icon_alignment = 1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/Main"]

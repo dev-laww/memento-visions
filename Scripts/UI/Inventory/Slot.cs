@@ -9,7 +9,8 @@ public partial class Slot : Control
     [Node]
     private AnimationPlayer animationPlayer;
 
-    [Node] public Button button;
+    [Node]
+    public Button button;
 
     public bool IsSelected => animationPlayer.CurrentAnimation == "select";
     public bool IsOccupied { get; set; }
