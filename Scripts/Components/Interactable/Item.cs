@@ -92,7 +92,10 @@ public partial class Item : Node2D
 
         tween.TweenProperty(this, "global_position", player.GlobalPosition, 0.2);
         tween.TweenProperty(sprite, "scale", Vector2.Zero, 0.2);
-
-        tween.Finished += QueueFree;
+        tween.Finished += () =>
+        {
+            QueueFree();
+            player.PickUpItem(ItemResource);
+        };
     }
 }

@@ -65,10 +65,26 @@ public partial class Item : Resource
         }
     }
 
+    public int Value
+    {
+        get => _value;
+        set
+        {
+            if (value < 0)
+            {
+                GD.PrintErr("Value cannot be less than 0.");
+                return;
+            }
+
+            _value = value;
+        }
+    }
+
     public Texture2D Icon => GetTexture(icon, sprite);
     public Texture2D Sprite => GetTexture(sprite, icon);
 
     private bool _stackable = true;
+    private int _value = 1;
     private StackSizes _stackSize = StackSizes.Default;
     protected virtual bool IsStackable() => _stackable;
 
@@ -86,7 +102,7 @@ public partial class Item : Resource
         GD.PrintErr("Both primary and secondary textures are null.");
         return null;
     }
-    
+
     public static Item operator +(Item item1, Item item2)
     {
         var conditions = new[]
@@ -101,8 +117,8 @@ public partial class Item : Resource
             GD.PrintErr("Items are not stackable.");
             return item1;
         }
-        
-        item1.StackSize += item2.StackSize;
+
+        item1.Value += item2.Value;
         return item1;
     }
 }

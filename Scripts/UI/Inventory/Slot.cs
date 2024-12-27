@@ -1,3 +1,4 @@
+using Game.Resources;
 using Godot;
 using GodotUtilities;
 
@@ -12,8 +13,35 @@ public partial class Slot : Control
     [Node]
     public Button button;
 
+    [Node]
+    private Label label;
+
+    [Node]
+    private TextureRect icon;
+
+    public Item Item
+    {
+        get => _item;
+        set
+        {
+            _item = value;
+
+            if (_item == null)
+            {
+                label.Visible = false;
+                icon.Texture = null;
+                return;
+            }
+
+            label.Visible = Item.Value > 1;
+            label.Text = _item.Value.ToString();
+            icon.Texture = _item.Icon;
+        }
+    }
+
+    private Item _item;
     public bool IsSelected => animationPlayer.CurrentAnimation == "select";
-    public bool IsOccupied { get; set; }
+    public bool IsOccupied => _item != null;
 
     public override void _Notification(int what)
     {
@@ -26,7 +54,19 @@ public partial class Slot : Control
     {
         button.Pressed += Select;
         button.SetDefaultCursorShape(CursorShape.PointingHand);
+
+        label.Visible = false;
+        icon.Texture = null;
     }
+
+    public void AddToStack(Item itemToAdd) => Item += itemToAdd;
+    
+    public void Clear()
+    {
+        Item = null;
+        Deselect();
+    }
+    
 
     private void Select()
     {
