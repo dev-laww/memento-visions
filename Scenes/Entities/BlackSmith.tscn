@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8bsxe6qi4s18"]
+
+[ext_resource type="Script" path="res://Scripts/Components/Area/Interaction.cs" id="1_e5uyn"]
+[ext_resource type="Texture2D" uid="uid://dyxsacj8kktd1" path="res://assets/icons/f.png" id="2_fhpyo"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rjjbp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s3emj"]
+radius = 26.0768
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x7hsq"]
+
+[node name="BlackSmith" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_rjjbp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Interaction" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("1_e5uyn")
+InteractionLabel = "Interact"
+
+[node name="InteractionUI" type="Node2D" parent="Interaction"]
+scale = Vector2(0.5, 0.5)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interaction/InteractionUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="Interaction/InteractionUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_fhpyo")
+
+[node name="Label" type="Label" parent="Interaction/InteractionUI/HBoxContainer"]
+layout_mode = 2
+text = "Interact"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+shape = SubResource("CircleShape2D_s3emj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_x7hsq")

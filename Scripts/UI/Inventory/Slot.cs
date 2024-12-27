@@ -9,10 +9,10 @@ public partial class Slot : Control
     [Node]
     private AnimationPlayer animationPlayer;
 
-    [Node]
-    private Button button;
+    [Node] public Button button;
 
     public bool IsSelected => animationPlayer.CurrentAnimation == "select";
+    public bool IsOccupied { get; set; }
 
     public override void _Notification(int what)
     {
