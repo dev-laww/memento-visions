@@ -1,5 +1,6 @@
 using Game.Components.Managers;
 using Game.Components.Movement;
+using Game.Quests;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
@@ -22,10 +23,13 @@ public partial class Samurai : CharacterBody2D
     [Node]
     private AnimationPlayer Animation;
 
+    [Export] private string Name;
+
     private bool inRange;
     private bool attacking;
     private string attackDirection;
     private DelegateStateMachine stateMachine = new();
+    private SlayObjectives SlayObjectives = new();
 
     public override void _Notification(int what)
     {
@@ -36,6 +40,7 @@ public partial class Samurai : CharacterBody2D
 
     public override void _Ready()
     {
+        StatsManager.StatsDepleted += OnStatsDepleted;
         Range.BodyEntered += body =>
         {
             inRange = true;
@@ -123,5 +128,10 @@ public partial class Samurai : CharacterBody2D
         if (stat != StatsType.Health || attacking) return;
 
         stateMachine.ChangeState(Hurt);
+    }
+    
+    private void OnStatsDepleted(StatsType stat)
+    {
+       SlayObjectives.OnEnemyDied(Name);
     }
 }

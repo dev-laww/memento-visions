@@ -44,7 +44,7 @@ public partial class GameManager : Node
             // TODO: save game
             return;
         }
-        
+
         if (what != NotificationSceneInstantiated) return;
 
         WireNodes();

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using Godot;
 
 namespace Game.Resources;
@@ -65,10 +65,26 @@ public partial class Item : Resource
         }
     }
 
+    public int Value
+    {
+        get => _value;
+        set
+        {
+            if (value < 0)
+            {
+                GD.PrintErr("Value cannot be less than 0.");
+                return;
+            }
+
+            _value = value;
+        }
+    }
+
     public Texture2D Icon => GetTexture(icon, sprite);
     public Texture2D Sprite => GetTexture(sprite, icon);
 
     private bool _stackable = true;
+    private int _value = 1;
     private StackSizes _stackSize = StackSizes.Default;
     protected virtual bool IsStackable() => _stackable;
 
@@ -85,5 +101,24 @@ public partial class Item : Resource
 
         GD.PrintErr("Both primary and secondary textures are null.");
         return null;
+    }
+
+    public static Item operator +(Item item1, Item item2)
+    {
+        var conditions = new[]
+        {
+            item1.GetType() == item2.GetType(),
+            item1.UniqueName == item2.UniqueName,
+            item1.Stackable && item2.Stackable
+        };
+
+        if (conditions.Contains(false))
+        {
+            GD.PrintErr("Items are not stackable.");
+            return item1;
+        }
+
+        item1.Value += item2.Value;
+        return item1;
     }
 }

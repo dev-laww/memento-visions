@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dch6xdswnc43g"]
+
+[ext_resource type="Script" path="res://Scripts/Quests/Quest.cs" id="1_aloi7"]
+[ext_resource type="Script" path="res://Scripts/Quests/InvestigateObjectives.cs" id="3_c28bd"]
+
+[node name="InteractWithNPC" type="Node" node_paths=PackedStringArray("Objectives")]
+script = ExtResource("1_aloi7")
+QuestTitle = "NPC quest"
+QuestDescription = "Interact with NPC"
+Objectives = NodePath("InvestigateObjectives")
+Reward = 1
+Experience = 1
+
+[node name="InvestigateObjectives" type="Node" parent="." node_paths=PackedStringArray("quest")]
+script = ExtResource("3_c28bd")
+quest = NodePath("..")

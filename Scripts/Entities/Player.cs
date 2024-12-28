@@ -1,9 +1,10 @@
 using System;
+using System.Collections.Generic;
 using Game.Components.Managers;
 using Game.Components.Area;
 using Game.Components.Movement;
+using Game.Quests;
 using Game.Resources;
-using Game.Utils.Logic.States;
 using Godot;
 using GodotUtilities;
 using GodotUtilities.Logic;
@@ -33,15 +34,20 @@ public partial class Player : CharacterBody2D
     [Node]
     private WeaponManager weaponManager;
 
-    private string MoveDirection => GetMoveDirection();
+    [Signal]
+    public delegate void ItemPickedUpEventHandler(Item item);
 
+    private string MoveDirection => GetMoveDirection();
     private Vector2 lastMoveDirection = Vector2.Down;
+    private QuestGui QuestGui { get; set; }
     private Vector2 DashVelocity { get; set; }
     private bool CanDash { get; set; } = true;
     private bool Dashing { get; set; }
     private bool CanMove { get; set; } = true;
-
     private DelegateStateMachine StateMachine = new();
+    
+    // TODO: Consider moving to a global script
+    public List<Item> Inventory = new();
 
     public override void _Notification(int what)
     {
@@ -52,6 +58,7 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
+        QuestGui = GetNodeOrNull<QuestGui>("QuestGui");
         statsManager.StatsChanged += StatChangeHandler;
 
         StateMachine.AddStates(Idle);
@@ -90,6 +97,8 @@ public partial class Player : CharacterBody2D
 
     public override void _Input(InputEvent @event)
     {
+        if (@event.IsActionPressed("Quest")) QuestGui.ToggleQuestGui();
+
         if (@event.IsActionPressed("attack") && CanMove && !Dashing) StateMachine.ChangeState(Attack);
 
         if (!@event.IsActionPressed("dash") || !CanDash || !CanMove) return;
@@ -97,25 +106,7 @@ public partial class Player : CharacterBody2D
         StateMachine.ChangeState(Dash);
     }
 
-    private string GetMoveDirection()
-    {
-        if (lastMoveDirection == Vector2.Zero) return "front";
-
-        if (Math.Abs(lastMoveDirection.X) > Math.Abs(lastMoveDirection.Y))
-            return lastMoveDirection.X > 0 ? "right" : "left";
-
-        return lastMoveDirection.Y < 0 ? "back" : "front";
-    }
-
-    private void StatChangeHandler(float value, StatsType stat)
-    {
-        CanDash = stat switch
-        {
-            StatsType.Mana => value >= DashStaminaCost,
-            _ => CanDash
-        };
-    }
-
+    // States
     private void Idle() => animations.Play($"idle_{MoveDirection}");
 
     private void Walk() => animations.Play($"walk_{MoveDirection}");
@@ -152,7 +143,7 @@ public partial class Player : CharacterBody2D
                 break;
             default:
                 GD.PushError("Weapon type not found");
-                break;       
+                break;
         }
 
         var signal = weaponManager.Animate(MoveDirection);
@@ -165,11 +156,43 @@ public partial class Player : CharacterBody2D
 
     private void ExitAttack() => CanMove = true;
 
+    // Helpers
     private void HandleTransition()
     {
         var input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
         if (input.Length() > 0) StateMachine.ChangeState(Walk);
         else StateMachine.ChangeState(Idle);
+    }
+
+    private string GetMoveDirection()
+    {
+        if (lastMoveDirection == Vector2.Zero) return "front";
+
+        if (Math.Abs(lastMoveDirection.X) > Math.Abs(lastMoveDirection.Y))
+            return lastMoveDirection.X > 0 ? "right" : "left";
+
+        return lastMoveDirection.Y < 0 ? "back" : "front";
+    }
+
+    private void StatChangeHandler(float value, StatsType stat)
+    {
+        CanDash = stat switch
+        {
+            StatsType.Mana => value >= DashStaminaCost,
+            _ => CanDash
+        };
+    }
+
+    public void PickUpItem(Item item)
+    {
+        var existing = Inventory.Find(i => i.UniqueName == item.UniqueName);
+
+        if (existing != null)
+            existing += item;
+        else
+            Inventory.Add(item);
+
+        EmitSignal(SignalName.ItemPickedUp, item);
     }
 }

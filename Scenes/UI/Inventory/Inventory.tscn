@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://b161abm0o6ij2"]
+[gd_scene load_steps=9 format=3 uid="uid://b161abm0o6ij2"]
 
+[ext_resource type="Script" path="res://Scripts/UI/Inventory/Inventory.cs" id="1_7jd4f"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="1_35u5w"]
 [ext_resource type="ButtonGroup" uid="uid://0v7aexkru1o0" path="res://resources/ui/inventory-button-group.tres" id="1_hubp2"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_quj2b"]
@@ -15,14 +16,17 @@ texture = ExtResource("2_r77rr")
 region_rect = Rect2(0, 0, 32, 32)
 
 [node name="Inventory" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_7jd4f")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("slot"), [ExtResource("5_17bmp")]]
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -44,6 +48,7 @@ layout_mode = 2
 alignment = 2
 
 [node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/Header"]
+unique_name_in_owner = true
 modulate = Color(0.940362, 5.17406e-06, 1.15514e-06, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -66,6 +71,7 @@ layout_mode = 2
 theme_override_constants/separation = 2
 
 [node name="MaterialsButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -81,6 +87,7 @@ button_group = ExtResource("1_hubp2")
 icon_alignment = 1
 
 [node name="ConsumablesButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -95,6 +102,7 @@ button_group = ExtResource("1_hubp2")
 icon_alignment = 1
 
 [node name="WeaponsButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -109,6 +117,7 @@ button_group = ExtResource("1_hubp2")
 icon_alignment = 1
 
 [node name="QuestItemsButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -139,6 +148,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.970662, 1)
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -153,7 +163,8 @@ size_flags_horizontal = 3
 theme = ExtResource("2_quj2b")
 horizontal_scroll_mode = 3
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer"]
+[node name="SlotsContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -161,166 +172,175 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 12
 
-[node name="Slot" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot2" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Button" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer/Slot" index="1"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Slot2" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot3" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot3" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot4" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot4" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot5" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot5" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot6" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot6" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot7" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot7" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot8" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot8" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot9" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot9" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot10" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot10" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot11" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot11" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot12" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot12" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot13" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot13" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot14" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot14" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot15" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot15" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot16" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot16" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot17" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot17" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot18" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot18" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot19" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot19" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot20" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot20" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot21" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot21" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot22" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot22" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot23" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot23" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot24" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot24" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot25" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot25" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot26" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot26" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot27" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot27" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot28" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot28" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot29" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot29" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot30" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot30" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot31" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot31" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot32" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot32" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot33" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot33" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot34" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot34" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot35" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot35" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot36" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot36" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot37" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot37" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot38" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot38" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot39" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot39" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot40" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot40" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot41" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot41" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot42" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot42" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot43" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot43" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot44" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot44" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot45" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot45" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot46" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot46" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot47" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot47" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot48" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot48" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot49" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot49" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot50" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot50" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot51" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot51" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot52" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot52" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot53" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot53" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
-[node name="Slot54" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer" instance=ExtResource("5_17bmp")]
+[node name="Slot54" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
+layout_mode = 2
+
+[node name="Slot55" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
 
 [node name="Details" type="NinePatchRect" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer"]
@@ -351,6 +371,20 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
@@ -358,4 +392,4 @@ size_flags_vertical = 8
 theme = ExtResource("2_quj2b")
 text = "Equip"
 
-[editable path="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/GridContainer/Slot"]
+[editable path="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer/Slot"]

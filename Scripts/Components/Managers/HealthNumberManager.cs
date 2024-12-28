@@ -64,8 +64,7 @@ public partial class HealthNumberManager : Node2D
 
         if (damage == null)
         {
-            var scene = resourcePreloader.GetResource<PackedScene>("damage");
-            var num = scene.Instantiate<DamageNumber>();
+            var num = resourcePreloader.InstanceSceneOrNull<DamageNumber>("damage");
             numberSpawn.AddChild(num);
         }
 
@@ -85,8 +84,7 @@ public partial class HealthNumberManager : Node2D
     {
         if (type != StatsType.Health) return;
 
-        var scene = resourcePreloader.GetResource<PackedScene>("regen");
-        var num = scene.Instantiate<RegenNumber>();
+        var num = resourcePreloader.InstanceSceneOrNull<RegenNumber>("regen");
         var spawn = regenSpawns.GetChildrenOfType<Node2D>().ToArray()[MathUtil.RNG.RandiRange(0, 7)];
 
         num.Text = $"+{amount}";
