@@ -141,12 +141,13 @@ animations = [{
 
 [resource]
 script = ExtResource("1_ltvtw")
-Type = 2
+Variant = 2
 Animations = SubResource("SpriteFrames_3lbdf")
 Name = "Gun"
 UniqueName = "weapon:gun"
-Description = ""
+Type = 2
+Value = 1
+Description = "The gun is a modern marvel of force, its sleek barrel emanating cold efficiency. A squeeze of the trigger unleashes precise, deafening power, its muzzle flash illuminating the air in a heartbeat of controlled chaos. Compact or heavy, it stands as a tool of both defense and destruction."
 icon = ExtResource("2_kgrww")
 sprite = ExtResource("2_kgrww")
 Stackable = false
-StackSize = 0

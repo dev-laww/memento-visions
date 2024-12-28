@@ -142,11 +142,12 @@ animations = [{
 
 [resource]
 script = ExtResource("1_6dlaw")
-Type = 1
+Variant = 0
 Animations = SubResource("SpriteFrames_smq3l")
 Name = "Sword"
 UniqueName = "weapon:sword"
-Description = ""
+Type = 2
+Value = 1
+Description = "The sword is a masterpiece of balance and craftsmanship, its polished steel blade gleaming with an air of authority. Each swing is fluid, carrying both grace and devastating power. The hilt, adorned with intricate designs, fits snugly in the grip, making it a weapon that commands respect and instills fear on the battlefield."
 icon = ExtResource("1_2is5w")
 Stackable = false
-StackSize = 0
