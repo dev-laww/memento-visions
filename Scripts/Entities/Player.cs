@@ -3,10 +3,10 @@ using Game.Components.Managers;
 using Game.Components.Area;
 using Game.Components.Movement;
 using Game.Quests;
-using Game.Resources;
 using Godot;
 using GodotUtilities;
 using GodotUtilities.Logic;
+using Variant = Game.Resources.Variant;
 
 
 namespace Game.Entities.Player;
@@ -129,12 +129,12 @@ public partial class Player : CharacterBody2D
 
         switch (weaponManager.CurrentWeaponType)
         {
-            case Weapon.Variant.Gun:
+            case Variant.Gun:
                 animations.Play($"ranged_attack_{MoveDirection}");
                 break;
-            case Weapon.Variant.Dagger:
-            case Weapon.Variant.Sword:
-            case Weapon.Variant.Whip:
+            case Variant.Dagger:
+            case Variant.Sword:
+            case Variant.Whip:
                 animations.Play($"attack_{MoveDirection}");
                 break;
             default:

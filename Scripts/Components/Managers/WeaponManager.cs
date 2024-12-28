@@ -3,7 +3,7 @@ using Game.Components.Battle;
 using Game.Utils.JSON;
 using Godot;
 using Item = Game.Utils.JSON.Models.Item;
-using WeaponResource = Game.Resources.Weapon;
+using Variant = Game.Resources.Variant;
 
 namespace Game.Components.Managers;
 
@@ -15,7 +15,7 @@ public partial class WeaponManager : Node2D
     public delegate void WeaponChangedEventHandler();
 
     public Weapon CurrentWeapon { get; private set; }
-    public WeaponResource.Variant CurrentWeaponType => CurrentWeapon?.Resource.Type ?? WeaponResource.Variant.Dagger;
+    public Variant CurrentWeaponType => CurrentWeapon?.Resource.Variant ?? Variant.Dagger;
 
     private const string WEAPONS_DATA_PATH = "res://data/weapons.json";
     private readonly List<Item> weaponsData = JSON.Load<List<Item>>(WEAPONS_DATA_PATH);

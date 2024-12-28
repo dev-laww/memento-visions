@@ -2,20 +2,20 @@
 
 namespace Game.Resources;
 
+public enum Variant
+{
+    Dagger,
+    Sword,
+    Gun,
+    Whip
+}
+
 [Tool]
 [GlobalClass]
 public partial class Weapon : Item
 {
-    public enum Variant
-    {
-        Dagger,
-        Sword,
-        Gun,
-        Whip
-    }
-
     [Export]
-    public Variant Type { get; set; } = Variant.Dagger;
+    public Variant Variant { get; set; } = Variant.Dagger;
 
     [Export]
     public SpriteFrames Animations { get; set; }
@@ -26,9 +26,8 @@ public partial class Weapon : Item
     [Export]
     public AudioStream HitSound { get; set; }
 
-    public Weapon()
-    {
-        Stackable = false;
-        NotifyPropertyListChanged();
-    }
+    protected override bool IsStackable() => false;
+    protected override Type GetItemType() => Type.Weapon;
+    protected override void SetItemType(Type value) { }
+    protected override void SetValue(int value) { }
 }

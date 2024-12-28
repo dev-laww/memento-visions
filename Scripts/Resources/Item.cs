@@ -3,6 +3,14 @@ using Godot;
 
 namespace Game.Resources;
 
+public enum Type
+{
+    Material,
+    Consumable,
+    Weapon,
+    Quest
+}
+
 [Tool]
 [GlobalClass]
 public partial class Item : Resource
@@ -12,23 +20,20 @@ public partial class Item : Resource
 
     [Export]
     public string UniqueName;
-    
+
+    [Export]
+    public Type Type
+    {
+        get => GetItemType();
+        private set => SetItemType(value);
+    }
+
     [Export]
     public int Value
     {
         get => _value;
-        private set
-        {
-            if (value < 0)
-            {
-                GD.PrintErr("Value cannot be less than 0.");
-                return;
-            }
-
-            _value = value;
-        }
+        private set => SetValue(value);
     }
-
 
     [Export(PropertyHint.MultilineText)]
     public string Description;
@@ -40,11 +45,16 @@ public partial class Item : Resource
     public Texture2D sprite;
 
     [Export]
-    public bool Stackable;
-    
+    public bool Stackable
+    {
+        get => IsStackable();
+        private set => _stackable = value;
+    }
+
     public Texture2D Icon => GetTexture(icon, sprite);
     public Texture2D Sprite => GetTexture(sprite, icon);
 
+    private Type _type = Type.Material;
     private bool _stackable = true;
     private int _value = 1;
 
@@ -91,5 +101,20 @@ public partial class Item : Resource
 
         item1.Value -= item2.Value;
         return item1;
+    }
+
+    protected virtual bool IsStackable() => _stackable;
+    protected virtual Type GetItemType() => _type;
+    protected virtual void SetItemType(Type type) => _type = type;
+
+    protected virtual void SetValue(int value)
+    {
+        if (value < 0)
+        {
+            GD.PrintErr("Value cannot be less than 0.");
+            return;
+        }
+
+        _value = value;
     }
 }
