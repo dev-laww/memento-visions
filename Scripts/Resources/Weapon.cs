@@ -4,7 +4,7 @@ namespace Game.Resources;
 
 [Tool]
 [GlobalClass]
-public partial class WeaponData : Item
+public partial class Weapon : Item
 {
     public enum Variant
     {
@@ -26,7 +26,7 @@ public partial class WeaponData : Item
     [Export]
     public AudioStream HitSound { get; set; }
 
-    public WeaponData()
+    public Weapon()
     {
         StackSize = (int)StackSizes.Unstackable;
         NotifyPropertyListChanged();

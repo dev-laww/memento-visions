@@ -133,12 +133,12 @@ public partial class Player : CharacterBody2D
 
         switch (weaponManager.CurrentWeaponType)
         {
-            case WeaponData.Variant.Gun:
+            case Weapon.Variant.Gun:
                 animations.Play($"ranged_attack_{MoveDirection}");
                 break;
-            case WeaponData.Variant.Dagger:
-            case WeaponData.Variant.Sword:
-            case WeaponData.Variant.Whip:
+            case Weapon.Variant.Dagger:
+            case Weapon.Variant.Sword:
+            case Weapon.Variant.Whip:
                 animations.Play($"attack_{MoveDirection}");
                 break;
             default:

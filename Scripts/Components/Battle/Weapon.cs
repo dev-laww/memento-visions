@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Game.Resources;
 using Godot;
 using GodotUtilities;
+using WeaponResource = Game.Resources.Weapon;
 
 namespace Game.Components.Battle;
 
@@ -14,7 +15,7 @@ namespace Game.Components.Battle;
 public partial class Weapon : Node2D
 {
     [Export]
-    public WeaponData Resource
+    public WeaponResource Resource
     {
         get => resource;
         set
@@ -81,7 +82,7 @@ public partial class Weapon : Node2D
     private AudioStreamPlayer2D attackSfx => GetNodeOrNull<AudioStreamPlayer2D>("Assets/AttackSfx");
     private AudioStreamPlayer2D hitSfx => GetNodeOrNull<AudioStreamPlayer2D>("Assets/HitSfx");
     private AnimationPlayer player => GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
-    private WeaponData resource;
+    private WeaponResource resource;
 
     public SignalAwaiter Animate(string direction)
     {
