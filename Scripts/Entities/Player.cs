@@ -2,7 +2,6 @@ using System;
 using Game.Components.Managers;
 using Game.Components.Area;
 using Game.Components.Movement;
-using Game.Quests;
 using Game.Resources;
 using Godot;
 using GodotUtilities;
@@ -38,7 +37,6 @@ public partial class Player : CharacterBody2D
 
     private string MoveDirection => GetMoveDirection();
     private Vector2 lastMoveDirection = Vector2.Down;
-    private QuestGui QuestGui { get; set; }
     private Vector2 DashVelocity { get; set; }
     private bool CanDash { get; set; } = true;
     private bool Dashing { get; set; }
@@ -54,7 +52,6 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
-        QuestGui = GetNodeOrNull<QuestGui>("QuestGui");
         statsManager.StatsChanged += StatChangeHandler;
 
         StateMachine.AddStates(Idle);
@@ -93,7 +90,6 @@ public partial class Player : CharacterBody2D
 
     public override void _Input(InputEvent @event)
     {
-        if (@event.IsActionPressed("Quest")) QuestGui.ToggleQuestGui();
 
         if (@event.IsActionPressed("attack") && CanMove && !Dashing) StateMachine.ChangeState(Attack);
 

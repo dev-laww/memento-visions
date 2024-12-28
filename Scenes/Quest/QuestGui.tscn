@@ -57,6 +57,7 @@ hide_root = true
 select_mode = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="Container"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.00466563
@@ -100,6 +101,7 @@ layout_mode = 2
 [node name="CloseButton" type="Button" parent="Container"]
 modulate = Color(0.940362, 5.17406e-06, 1.15514e-06, 1)
 custom_minimum_size = Vector2(24, 24)
+layout_mode = 0
 offset_left = 612.0
 offset_top = 1.0
 offset_right = 636.0
