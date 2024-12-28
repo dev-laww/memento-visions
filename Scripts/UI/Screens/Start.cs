@@ -19,5 +19,5 @@ public partial class Start : Control
         WireNodes();
     }
 
-    public override void _Ready() => button.Pressed += () => GameManager.ChangeScene("res://Scenes/Bar.tscn", transition: Transition.Zelda, direction: Vector2.Down);
+    public override void _Ready() => button.Pressed += () => GameManager.ChangeScene("res://Scenes/Bar.tscn");
 }

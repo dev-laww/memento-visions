@@ -27,14 +27,11 @@ public partial class GameManager : Node
     public override void _Ready()
     {
         instance = this;
-        if (showStartScreen || !OS.IsDebugBuild())
-        {
-            currentScene.GetChildren().ToList().ForEach(c => c.QueueFree());
-            var startScreen = resourcePreloader.GetResource<PackedScene>("StartScreen").Instantiate();
-            currentScene.AddChild(startScreen);
-        }
+        if (!showStartScreen && OS.IsDebugBuild()) return;
 
-        WireNodes();
+        currentScene.GetChildren().ToList().ForEach(c => c.QueueFree());
+        var startScreen = resourcePreloader.GetResource<PackedScene>("StartScreen").Instantiate();
+        currentScene.AddChild(startScreen);
     }
 
     public override void _Notification(int what)
@@ -54,7 +51,7 @@ public partial class GameManager : Node
         string path,
         Vector2 direction = default,
         Transition transition = Transition.Fade
-        ) => SceneManager.ChangeScene(
+    ) => SceneManager.ChangeScene(
         path,
         transition: transition,
         from: instance.currentScene.GetChildren().FirstOrDefault(),
