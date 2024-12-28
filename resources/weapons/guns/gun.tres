@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=21 format=3 uid="uid://dj4fwvxem0cau"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=21 format=3 uid="uid://dj4fwvxem0cau"]
 
 [ext_resource type="Texture2D" uid="uid://d1uj108kqd8jq" path="res://assets/weapons/guns/gun/sprite-frames.png" id="1_a4j3k"]
-[ext_resource type="Script" path="res://Scripts/Resources/WeaponData.cs" id="1_ltvtw"]
+[ext_resource type="Script" path="res://Scripts/Resources/Weapon.cs" id="1_ltvtw"]
 [ext_resource type="Texture2D" uid="uid://cvsxqb1aw8lo3" path="res://assets/weapons/guns/gun/icon.png" id="2_kgrww"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tutkl"]

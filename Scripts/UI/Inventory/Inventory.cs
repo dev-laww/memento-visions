@@ -30,7 +30,7 @@ public partial class Inventory : Control
 
     public override void _Ready()
     {
-        player.ItemPickedUp += OnItemPickup;
+        player.Inventory.ItemPickUp += OnItemPickup;
         closeButton.Pressed += Close;
         VisibilityChanged += () => GetTree().Paused = Visible;
     }
@@ -51,14 +51,14 @@ public partial class Inventory : Control
 
     private void OnItemPickup(Item _item)
     {
-        var inventory = player.Inventory;
+        var inventory = player.Inventory.Items;
         var slots = slotsContainer.GetChildrenOfType<Slot>().ToList();
-
+        
         slots.ForEach(s => s.Item = null);
         inventory.ForEach(i =>
         {
             var slot = slots.FirstOrDefault(slot => !slot.IsOccupied);
-
+        
             if (slot == null)
             {
                 var newSlot = resourcePreloader.InstanceSceneOrNull<Slot>();
@@ -66,7 +66,7 @@ public partial class Inventory : Control
                 slotsContainer.AddChild(newSlot);
                 return;
             }
-
+        
             slot.Item = i;
         });
     }

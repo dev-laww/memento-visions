@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=21 format=3 uid="uid://dmxu5vr74s3ov"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=21 format=3 uid="uid://dmxu5vr74s3ov"]
 
 [ext_resource type="Texture2D" uid="uid://bhcc617yhnh4v" path="res://assets/weapons/daggers/dagger/icon.png" id="1_4fdsx"]
-[ext_resource type="Script" path="res://Scripts/Resources/WeaponData.cs" id="1_p3phb"]
+[ext_resource type="Script" path="res://Scripts/Resources/Weapon.cs" id="1_p3phb"]
 [ext_resource type="Texture2D" uid="uid://1mcfankrs1d5" path="res://assets/weapons/daggers/dagger/sprite-frames.png" id="1_sy1qj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_urwel"]

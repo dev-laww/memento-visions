@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=21 format=3 uid="uid://dtttc4lu3snvs"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=21 format=3 uid="uid://dtttc4lu3snvs"]
 
 [ext_resource type="Texture2D" uid="uid://dlwsy8jlu2lqy" path="res://assets/weapons/swords/sword/icon.png" id="1_2is5w"]
-[ext_resource type="Script" path="res://Scripts/Resources/WeaponData.cs" id="1_6dlaw"]
+[ext_resource type="Script" path="res://Scripts/Resources/Weapon.cs" id="1_6dlaw"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3iblh"]
-load_path = "res://.godot/imported/sword.png-66cec319ad00420f8fa36a12a37570e5.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iannc"]
 atlas = SubResource("CompressedTexture2D_3iblh")
@@ -143,7 +142,7 @@ animations = [{
 
 [resource]
 script = ExtResource("1_6dlaw")
-Type = 0
+Type = 1
 Animations = SubResource("SpriteFrames_smq3l")
 Name = "Sword"
 UniqueName = "weapon:sword"
