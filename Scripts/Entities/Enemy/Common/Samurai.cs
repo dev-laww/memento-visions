@@ -23,7 +23,8 @@ public partial class Samurai : CharacterBody2D
     [Node]
     private AnimationPlayer Animation;
 
-    [Export] private string Name;
+    [Export]
+    private string Name;
 
     private bool inRange;
     private bool attacking;
@@ -63,7 +64,10 @@ public partial class Samurai : CharacterBody2D
         stateMachine.SetInitialState(Walk);
     }
 
-    public override void _PhysicsProcess(double delta) => stateMachine.Update();
+    public override void _PhysicsProcess(double delta)
+    {
+        stateMachine.Update();
+    }
 
 
     private void Idle()
@@ -107,7 +111,10 @@ public partial class Samurai : CharacterBody2D
         stateMachine.ChangeState(Idle);
     }
 
-    private void ExitAttacking() => attacking = false;
+    private void ExitAttacking()
+    {
+        attacking = false;
+    }
 
     private async void Hurt()
     {
@@ -129,9 +136,9 @@ public partial class Samurai : CharacterBody2D
 
         stateMachine.ChangeState(Hurt);
     }
-    
+
     private void OnStatsDepleted(StatsType stat)
     {
-       SlayObjectives.OnEnemyDied(Name);
+        SlayObjectives.OnEnemyDied(Name);
     }
 }

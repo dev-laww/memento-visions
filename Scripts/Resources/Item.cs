@@ -12,7 +12,7 @@ public partial class Item : Resource
         Default = 64,
         Unstackable = 1,
         Small = 16,
-        Medium = 32,
+        Medium = 32
     }
 
     [Export]
@@ -95,11 +95,10 @@ public partial class Item : Resource
         NotifyPropertyListChanged();
     }
 
-    private Texture2D GetTexture(Texture2D primary, Texture2D secondary)
+    private static Texture2D GetTexture(Texture2D primary, Texture2D secondary)
     {
         if (primary != null || secondary != null) return primary ?? secondary;
 
-        GD.PrintErr("Both primary and secondary textures are null.");
         return null;
     }
 

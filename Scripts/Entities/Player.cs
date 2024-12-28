@@ -45,7 +45,7 @@ public partial class Player : CharacterBody2D
     private bool Dashing { get; set; }
     private bool CanMove { get; set; } = true;
     private DelegateStateMachine StateMachine = new();
-    
+
     // TODO: Consider moving to a global script
     public List<Item> Inventory = new();
 

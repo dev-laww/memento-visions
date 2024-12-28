@@ -12,7 +12,7 @@ public class Item
 
     [JsonPropertyName("resource")]
     public string Resource { get; set; }
-    
+
     [JsonPropertyName("scene")]
     public string Scene { get; set; }
 }

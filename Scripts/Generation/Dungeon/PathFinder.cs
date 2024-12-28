@@ -30,7 +30,7 @@ public class PathFinder
         new(1, 0),
         new(-1, 0),
         new(0, 1),
-        new(0, -1),
+        new(0, -1)
     };
 
     private readonly Dictionary<Vector2I, Node> grid;
@@ -49,12 +49,10 @@ public class PathFinder
         stack = new Stack<Vector2I>();
 
         for (var x = 0; x < size.X; x++)
+        for (var y = 0; y < size.Y; y++)
         {
-            for (var y = 0; y < size.Y; y++)
-            {
-                var position = new Vector2I(x, y);
-                grid[position] = new Node(position);
-            }
+            var position = new Vector2I(x, y);
+            grid[position] = new Node(position);
         }
     }
 
@@ -126,10 +124,7 @@ public class PathFinder
             node = node.Previous;
         }
 
-        while (stack.Count > 0)
-        {
-            result.Add(stack.Pop());
-        }
+        while (stack.Count > 0) result.Add(stack.Pop());
 
         return result;
     }

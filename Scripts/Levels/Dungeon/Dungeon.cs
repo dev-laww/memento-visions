@@ -105,19 +105,19 @@ public partial class Dungeon : Node2D
         PathFindHallways();
         TileMap.SetCellsTerrainConnect(terrain, 0, 0);
         for (var i = 0; i < gridSize.X; i++)
-            for (var j = 0; j < gridSize.Y; j++)
-            {
-                var cell = new Vector2I(i, j);
+        for (var j = 0; j < gridSize.Y; j++)
+        {
+            var cell = new Vector2I(i, j);
 
-                Ground.SetCell(cell, atlasCoords: new Vector2I(0, 4), sourceId: 4);
+            Ground.SetCell(cell, atlasCoords: new Vector2I(0, 4), sourceId: 4);
 
 
-                if (grid[i, j] != CellType.None) continue;
+            if (grid[i, j] != CellType.None) continue;
 
-                var atlas = new Vector2I(0, 0);
+            var atlas = new Vector2I(0, 0);
 
-                TileMap.SetCell(cell, atlasCoords: atlas, sourceId: 4);
-            }
+            TileMap.SetCell(cell, atlasCoords: atlas, sourceId: 4);
+        }
     }
 
     private void PlaceRooms()
@@ -135,7 +135,7 @@ public partial class Dungeon : Node2D
             var centerY = roomSize.Y / 2f;
 
             var bounds = new Bounds(location, roomSize);
-            var add = rooms.All(other => !other.Bounds.Intersects(bounds, padding: 1));
+            var add = rooms.All(other => !other.Bounds.Intersects(bounds, 1));
 
             // Check if the room is completely within the dungeon with padding
             if (bounds.Rect.xMin() < 0 || bounds.Rect.xMax() >= gridSize.X ||

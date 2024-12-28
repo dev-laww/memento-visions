@@ -35,21 +35,21 @@ public partial class CutsceneTrigger : Area2D
     private void OnBodyEntered(Node body)
     {
         if (triggered) return;
-        
+
         var player = this.GetPlayer();
         player.SetProcessInput(false);
         DialogueManager.ShowDialogueBalloon(Dialog, "Start");
-        
+
         triggered = true;
     }
 
     public override string[] _GetConfigurationWarnings()
     {
         var warnings = new List<string>();
-        
+
         if (Dialog == null)
             warnings.Add("Dialog is not set.");
-        
+
         return warnings.ToArray();
     }
 }

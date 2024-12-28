@@ -17,7 +17,7 @@ public enum StatsType
     Attack,
     Defense,
     Magic,
-    Health,
+    Health
 }
 
 [Tool]

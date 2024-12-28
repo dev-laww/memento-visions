@@ -2,53 +2,52 @@ using Godot;
 using System;
 using Game.Quests;
 
-namespace Game.Components.Area
+namespace Game.Components.Area;
+
+[Tool]
+[GlobalClass]
+public partial class QuestTrigger : Area2D
 {
-    [Tool]
-    [GlobalClass]
-    public partial class QuestTrigger : Area2D
+    [Signal]
+    public delegate void DiedEventHandler();
+
+    [Export]
+    private Quest Quest;
+
+    private bool triggered;
+    private SlayObjectives SlayObjectives = new();
+
+
+    public override void _Ready()
     {
-        [Signal]
-        public delegate void DiedEventHandler();
-        [Export] Quest Quest;
-        private bool triggered;
-        private SlayObjectives SlayObjectives = new SlayObjectives();
-        
+        CollisionMask = 1 << 2;
+        CollisionLayer = 1 << 4;
+        BodyEntered += OnBodyEntered;
+    }
 
-        public override void _Ready()
-        {
-            CollisionMask = 1 << 2;
-            CollisionLayer = 1 << 4;
-            BodyEntered += OnBodyEntered;
-        }
+    private void OnBodyEntered(Node body)
+    {
+        if (Quest.Objectives is SlayObjectives slayObjectives) slayObjectives.OnEnemyDied("EnemyName");
 
-        private void OnBodyEntered(Node body)
-        {
-            if (Quest.Objectives is SlayObjectives slayObjectives)
-            {
-                slayObjectives.OnEnemyDied("EnemyName");
-            }
+        if (triggered) return;
 
-            if (triggered) return;
+        Quest.StartQuest();
+        Quest.PrintQuest();
 
-            Quest.StartQuest();
-            Quest.PrintQuest();
-           
-            triggered = true;
-        }
-    
+        triggered = true;
+    }
 
-        public override string[] _GetConfigurationWarnings()
-        {
-            var warnings = new System.Collections.Generic.List<string>();
 
-            if (Quest == null)
-                warnings.Add("Quest is not set.");
+    public override string[] _GetConfigurationWarnings()
+    {
+        var warnings = new System.Collections.Generic.List<string>();
 
-            if (string.IsNullOrEmpty(Quest.QuestTitle))
-                warnings.Add("TargetId is not set.");
+        if (Quest == null)
+            warnings.Add("Quest is not set.");
 
-            return warnings.ToArray();
-        }
+        if (string.IsNullOrEmpty(Quest.QuestTitle))
+            warnings.Add("TargetId is not set.");
+
+        return warnings.ToArray();
     }
 }

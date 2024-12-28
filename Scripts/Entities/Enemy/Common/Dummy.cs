@@ -30,7 +30,6 @@ public partial class Dummy : CharacterBody2D
     {
         statsManager.AttackReceived += OnAttackReceived;
     }
-    
 
     private void OnAttackReceived(float dmg, Attack.Type type, bool critical)
     {

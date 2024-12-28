@@ -37,10 +37,8 @@ public partial class GameManager : Node
     public override void _Notification(int what)
     {
         if (what == NotificationWMCloseRequest)
-        {
             // TODO: save game
             return;
-        }
 
         if (what != NotificationSceneInstantiated) return;
 
@@ -51,11 +49,14 @@ public partial class GameManager : Node
         string path,
         Vector2 direction = default,
         Transition transition = Transition.Fade
-    ) => SceneManager.ChangeScene(
-        path,
-        transition: transition,
-        from: instance.currentScene.GetChildren().FirstOrDefault(),
-        loadInTo: instance.currentScene,
-        moveDirection: direction
-    );
+    )
+    {
+        SceneManager.ChangeScene(
+            path,
+            transition: transition,
+            from: instance.currentScene.GetChildren().FirstOrDefault(),
+            loadInTo: instance.currentScene,
+            moveDirection: direction
+        );
+    }
 }

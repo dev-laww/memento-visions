@@ -76,19 +76,13 @@ public partial class Balloon : CanvasLayer
 
             if (@event is InputEventMouseButton && @event.IsPressed() &&
                 (@event as InputEventMouseButton).ButtonIndex == MouseButton.Left)
-            {
                 Next(dialogueLine.NextId);
-            }
             else if (@event.IsActionPressed(NextAction) && GetViewport().GuiGetFocusOwner() == balloon)
-            {
                 Next(dialogueLine.NextId);
-            }
         };
 
         if (string.IsNullOrEmpty((string)responsesMenu.Get("next_action")))
-        {
             responsesMenu.Set("next_action", NextAction);
-        }
 
         responsesMenu.Connect(
             "response_selected",
@@ -113,10 +107,7 @@ public partial class Balloon : CanvasLayer
         var visibleRatio = dialogueLabel.VisibleRatio;
         DialogueLine =
             await DialogueManager.GetNextDialogueLine(resource, DialogueLine.Id, temporaryGameStates);
-        if (visibleRatio < 1.0f)
-        {
-            dialogueLabel.Call("skip_typing");
-        }
+        if (visibleRatio < 1.0f) dialogueLabel.Call("skip_typing");
     }
 
     public async void Start(Resource dialogueResource, string title, Array<Variant> extraGameStates = null)
@@ -173,11 +164,8 @@ public partial class Balloon : CanvasLayer
         }
         else if (!string.IsNullOrEmpty(dialogueLine.Time))
         {
-            float time = 0f;
-            if (!float.TryParse(dialogueLine.Time, out time))
-            {
-                time = dialogueLine.Text.Length * 0.02f;
-            }
+            var time = 0f;
+            if (!float.TryParse(dialogueLine.Time, out time)) time = dialogueLine.Text.Length * 0.02f;
 
             await ToSignal(GetTree().CreateTimer(time), "timeout");
             Next(dialogueLine.NextId);

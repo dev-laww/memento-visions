@@ -60,13 +60,12 @@ public partial class Slot : Control
     }
 
     public void AddToStack(Item itemToAdd) => Item += itemToAdd;
-    
+
     public void Clear()
     {
         Item = null;
         Deselect();
     }
-    
 
     private void Select()
     {

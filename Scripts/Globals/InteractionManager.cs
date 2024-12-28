@@ -38,7 +38,10 @@ public partial class InteractionManager : Node2D
         closest.Interact();
     }
 
-    public static void Register(Interaction area) => instance.areas.Add(area);
+    public static void Register(Interaction area)
+    {
+        instance.areas.Add(area);
+    }
 
     public static void Unregister(Interaction area)
     {

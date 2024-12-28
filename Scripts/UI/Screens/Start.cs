@@ -14,7 +14,6 @@ public partial class Start : Control
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
-        
 
         WireNodes();
     }

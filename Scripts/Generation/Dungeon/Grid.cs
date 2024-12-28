@@ -16,10 +16,8 @@ public class Grid<T>
         data = new T[size.X * size.Y];
     }
 
-    public int GetIndex(Vector2I pos)
-    {
-        return pos.X + (Size.X * pos.Y);
-    }
+    public int GetIndex(Vector2I pos) => pos.X + Size.X * pos.Y;
+    
 
     public bool InBounds(Vector2I pos)
     {

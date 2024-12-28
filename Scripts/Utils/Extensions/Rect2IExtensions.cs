@@ -13,11 +13,7 @@ public static class Rect2IExtensions
     public static IEnumerable<Vector2I> AllPositionsWithin(this Rect2I rect)
     {
         for (var y = rect.yMin(); y < rect.yMax(); y++)
-        {
-            for (var x = rect.xMin(); x < rect.xMax(); x++)
-            {
-                yield return new Vector2I((int)x, (int)y);
-            }
-        }
+        for (var x = rect.xMin(); x < rect.xMax(); x++)
+            yield return new Vector2I((int)x, (int)y);
     }
 }

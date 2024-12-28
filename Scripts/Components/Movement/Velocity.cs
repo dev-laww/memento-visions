@@ -155,14 +155,9 @@ public partial class Velocity : Node
         var warnings = new List<string>();
 
         if (Parent is not (CharacterBody2D or RigidBody2D))
-        {
             warnings.Add("Velocity component should be attached to a CharacterBody2D or RigidBody2D node.");
-        }
 
-        if (Stats == null)
-        {
-            warnings.Add("StatsManager is not set.");
-        }
+        if (Stats == null) warnings.Add("StatsManager is not set.");
 
         return warnings.ToArray();
     }

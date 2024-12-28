@@ -3,49 +3,60 @@ using System;
 using System.Collections.Generic;
 using GodotUtilities;
 
-namespace Game.Quests
+namespace Game.Quests;
+
+[Tool]
+[GlobalClass]
+public partial class Quest : Node
 {
-    [Tool]
-    [GlobalClass]
-    public partial class Quest : Node
+    [Export]
+    public string QuestTitle;
+
+    [Export]
+    public string QuestDescription;
+
+    [Export]
+    public QuestObjectives Objectives;
+
+    public enum QuestStatus
     {
-        [Export] public string QuestTitle;
-        [Export] public string QuestDescription;
-        [Export] public QuestObjectives Objectives;
+        Available,
+        Active,
+        Completed,
+        Delivered
+    }
 
-        public enum QuestStatus
-        {
-            Available,
-            Active,
-            Completed,
-            Delivered
-        }
+    [Export]
+    public QuestStatus Status = QuestStatus.Available;
 
-        [Export] public QuestStatus Status = QuestStatus.Available;
-        [Export] public int Reward;
-        [Export] public string[] QuestItems;
-        [Export] public int Experience;
-        
-        public void StartQuest()
-        {
-            Status = QuestStatus.Active;
-            GD.Print("Quest Started");
-            QuestManager.AddQuest(this);
-        }
-        
-        public void CompleteQuest()
-        {
-            Status = QuestStatus.Completed;
-            GD.Print("Quest Completed");
-        }
+    [Export]
+    public int Reward;
 
-        public void PrintQuest()
+    [Export]
+    public string[] QuestItems;
+
+    [Export]
+    public int Experience;
+
+    public void StartQuest()
+    {
+        Status = QuestStatus.Active;
+        GD.Print("Quest Started");
+        QuestManager.AddQuest(this);
+    }
+
+    public void CompleteQuest()
+    {
+        Status = QuestStatus.Completed;
+        GD.Print("Quest Completed");
+    }
+
+    public void PrintQuest()
+    {
+        foreach (var quest in QuestManager.Quests)
         {
-            foreach (var quest in QuestManager.Quests)
-            {
-                GD.Print(quest.QuestTitle);
-                GD.Print("Quest Status: " + quest.Status);
-            }
+            GD.Print(quest.QuestTitle);
+            GD.Print("Quest Status: " + quest.Status);
         }
     }
 }

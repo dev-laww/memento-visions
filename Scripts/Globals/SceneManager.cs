@@ -24,7 +24,7 @@ public static class TransitionExtensions
             Transition.Wipe => "wipe_to_right",
             Transition.Zelda => "zelda",
             Transition.None => "no_to_transition",
-            _ => "no_to_transition",
+            _ => "no_to_transition"
         };
     }
 }
@@ -65,7 +65,7 @@ public partial class SceneManager : Node
     private Node sceneToUnload;
     private bool loading;
     public static SceneManager Instance;
-    
+
     public override void _Ready()
     {
         Instance = this;
@@ -130,7 +130,7 @@ public partial class SceneManager : Node
         }
 
         loadProgressTimer = new Timer
-        { WaitTime = 0.1f };
+            { WaitTime = 0.1f };
         loadProgressTimer.Timeout += MonitorLoadStatus;
         GetTree().Root.AddChild(loadProgressTimer);
         loadProgressTimer.Start();
