@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b161abm0o6ij2"]
+[gd_scene load_steps=11 format=3 uid="uid://b161abm0o6ij2"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Inventory/Inventory.cs" id="1_7jd4f"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="1_35u5w"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_quj2b"]
 [ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="2_r77rr"]
 [ext_resource type="PackedScene" uid="uid://svqrge4l63b4" path="res://Scenes/UI/Inventory/Slot.tscn" id="5_17bmp"]
+[ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/inventory/items/temp/Item5.png" id="7_e5fdf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7hgj7"]
 texture = ExtResource("2_r77rr")
@@ -14,6 +15,10 @@ region_rect = Rect2(32, 0, 32, 32)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7pn5k"]
 texture = ExtResource("2_r77rr")
 region_rect = Rect2(0, 0, 32, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cxeph"]
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Inventory" type="Control"]
 process_mode = 3
@@ -54,6 +59,7 @@ custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_default_cursor_shape = 2
 theme = ExtResource("2_quj2b")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_7hgj7")
 theme_override_styles/hover = SubResource("StyleBoxTexture_7pn5k")
@@ -76,6 +82,7 @@ custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_default_cursor_shape = 2
 theme = ExtResource("2_quj2b")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_7hgj7")
 theme_override_styles/hover = SubResource("StyleBoxTexture_7pn5k")
@@ -92,6 +99,7 @@ custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_default_cursor_shape = 2
 theme = ExtResource("2_quj2b")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_7hgj7")
 theme_override_styles/hover = SubResource("StyleBoxTexture_7pn5k")
@@ -107,6 +115,7 @@ custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_default_cursor_shape = 2
 theme = ExtResource("2_quj2b")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_7hgj7")
 theme_override_styles/hover = SubResource("StyleBoxTexture_7pn5k")
@@ -122,6 +131,7 @@ custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_default_cursor_shape = 2
 theme = ExtResource("2_quj2b")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_7hgj7")
 theme_override_styles/hover = SubResource("StyleBoxTexture_7pn5k")
@@ -174,12 +184,7 @@ columns = 12
 
 [node name="Slot" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
-
-[node name="Button" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer/Slot" index="1"]
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 8.0
-offset_bottom = 8.0
+Selected = true
 
 [node name="Slot2" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
@@ -375,21 +380,51 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(32, 32)
+[node name="SelectedItemIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture = ExtResource("7_e5fdf")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 150)
+[node name="SelectedItemDetails" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 125)
 layout_mode = 2
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SelectedItemName" type="Label" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_quj2b")
+theme_override_font_sizes/font_size = 24
+text = "Apple"
+label_settings = SubResource("LabelSettings_cxeph")
+
+[node name="SelectedItemQuantity" type="Label" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_quj2b")
+theme_override_font_sizes/font_size = 8
+text = "x1000"
+
+[node name="SelectedItemDescription" type="RichTextLabel" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_quj2b")
+theme_override_font_sizes/normal_font_size = 8
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet urna magna. Pellentesque fermentum consectetur nisi, quis bibendum enim fringilla non. Nunc posuere nec lorem in iaculis. Sed quis velit vestibulum, molestie eros tincidunt, vulputate lectus. Integer malesuada euismod dui nec aliquam."
+
+[node name="EquipButton" type="Button" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 8
+mouse_default_cursor_shape = 2
 theme = ExtResource("2_quj2b")
+toggle_mode = true
 text = "Equip"
-
-[editable path="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer/Slot"]

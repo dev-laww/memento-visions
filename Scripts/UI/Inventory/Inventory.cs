@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Game.Entities.Player;
 using Game.Resources;
@@ -5,7 +6,7 @@ using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
-namespace Game;
+namespace Game.UI.Inventory;
 
 [Scene]
 public partial class Inventory : Control
@@ -19,7 +20,12 @@ public partial class Inventory : Control
     [Node]
     private Button closeButton;
 
+    [Node]
+    private Button equipButton;
+
     private Player player => this.GetPlayer();
+    private List<Slot> slots => slotsContainer.GetChildrenOfType<Slot>().ToList();
+    private Slot selectedSlot => slots.FirstOrDefault(s => s.Selected);
 
     public override void _Notification(int what)
     {
@@ -30,10 +36,14 @@ public partial class Inventory : Control
 
     public override void _Ready()
     {
-        player.Inventory.ItemPickUp += OnItemPickup;
-        closeButton.Pressed += Close;
-        VisibilityChanged += () => GetTree().Paused = Visible;
+        equipButton.Toggled += OnEquipButtonToggle;
+        closeButton.Pressed += () => GetTree().CreateTimer(0.1f).Timeout += Close;
+        VisibilityChanged += OnVisibilityChanged;
+
+        if (player != null)
+            player.Inventory.ItemPickUp += OnItemPickup;
     }
+
 
     // TODO: Centralize ui opening and closing
     public override void _Input(InputEvent @event)
@@ -52,13 +62,12 @@ public partial class Inventory : Control
     private void OnItemPickup(Item _item)
     {
         var inventory = player.Inventory.Items;
-        var slots = slotsContainer.GetChildrenOfType<Slot>().ToList();
-        
-        slots.ForEach(s => s.Item = null);
+
+        slots.ForEach(s => s.Clear());
         inventory.ForEach(i =>
         {
             var slot = slots.FirstOrDefault(slot => !slot.IsOccupied);
-        
+
             if (slot == null)
             {
                 var newSlot = resourcePreloader.InstanceSceneOrNull<Slot>();
@@ -66,9 +75,22 @@ public partial class Inventory : Control
                 slotsContainer.AddChild(newSlot);
                 return;
             }
-        
+
             slot.Item = i;
         });
+    }
+
+    private void OnVisibilityChanged()
+    {
+        GetTree().Paused = Visible;
+        if (!Visible) return;
+        slots.First().Select();
+    }
+
+    private void OnEquipButtonToggle(bool toggled)
+    {
+        equipButton.Text = toggled ? "Unequip" : "Equip";
+        equipButton.Modulate = toggled ? Colors.Red : Colors.White;
     }
 
     // TODO: Add inventory animation
