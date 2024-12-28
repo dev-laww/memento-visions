@@ -6,9 +6,9 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("2_fsslb")
-Name = "rock"
-UniqueName = "stone"
-Description = "can be ingested??"
+Name = "Rock"
+UniqueName = "item:stone"
+Value = 1
+Description = "Can be ingested??"
 icon = ExtResource("1_6xmt5")
 Stackable = true
-stackSize = 3
