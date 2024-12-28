@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Game.Resources;
 using Godot;
 using ItemResource = Game.Resources.Item;
 using WeaponResource = Game.Resources.Weapon;
@@ -8,16 +10,20 @@ namespace Game.Components.Managers;
 [GlobalClass]
 public partial class InventoryManager : Node
 {
+    [Export]
+    private WeaponManager weaponManager;
+
     [Signal]
     public delegate void ItemPickUpEventHandler(ItemResource item);
 
     [Signal]
     public delegate void ItemConsumeEventHandler(ItemResource item);
 
-    [Signal]
-    public delegate void WeaponChangedEventHandler(WeaponResource weapon);
+    private readonly List<ItemResource> Items = new();
 
-    public readonly List<ItemResource> Items = new();
+    public WeaponResource CurrentWeapon => weaponManager.CurrentWeapon.Resource;
+
+    public void ChangeWeapon(string uniqueName) => weaponManager.ChangeWeapon(uniqueName);
 
     public void PickUpItem(ItemResource item)
     {
@@ -50,4 +56,6 @@ public partial class InventoryManager : Node
             Items.Remove(existing);
         }
     }
+
+    public List<ItemResource> GetFilteredItems(Type type) => Items.Where(i => i.Type == type).ToList();
 }

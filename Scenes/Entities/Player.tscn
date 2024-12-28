@@ -1093,8 +1093,9 @@ Acceleration = 1000.0
 Deceleration = 5.0
 DashDuration = 0.2
 
-[node name="Inventory" type="Node" parent="."]
+[node name="Inventory" type="Node" parent="." node_paths=PackedStringArray("weaponManager")]
 script = ExtResource("5_5rnnb")
+weaponManager = NodePath("../WeaponManager")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.49012e-08, 14)
