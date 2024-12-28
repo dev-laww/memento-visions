@@ -28,10 +28,7 @@ public partial class Weapon : Item
 
     public Weapon()
     {
-        stackSize = (int)StackSizes.Unstackable;
+        Stackable = false;
         NotifyPropertyListChanged();
     }
-
-    protected override bool IsStackable() => false;
-    protected override void SetStackable(bool value) => NotifyPropertyListChanged();
 }

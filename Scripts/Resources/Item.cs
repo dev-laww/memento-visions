@@ -7,14 +7,6 @@ namespace Game.Resources;
 [GlobalClass]
 public partial class Item : Resource
 {
-    public enum StackSizes
-    {
-        Default = 64,
-        Unstackable = 1,
-        Small = 16,
-        Medium = 32
-    }
-
     [Export]
     public string Name;
 
@@ -31,39 +23,7 @@ public partial class Item : Resource
     public Texture2D sprite;
 
     [Export]
-    public bool Stackable
-    {
-        get => IsStackable();
-        set => SetStackable(value);
-    }
-
-    [Export(PropertyHint.Enum, "Unstackable (1),Small (16),Medium (32),Default (64)")]
-    protected int stackSize
-    {
-        get => StackSize switch
-        {
-            (int)StackSizes.Unstackable => 0,
-            (int)StackSizes.Small => 1,
-            (int)StackSizes.Medium => 2,
-            _ => 3
-        };
-        set
-        {
-            if (!Stackable)
-            {
-                StackSize = (int)StackSizes.Unstackable;
-                return;
-            }
-
-            StackSize = value switch
-            {
-                0 => (int)StackSizes.Unstackable,
-                1 => (int)StackSizes.Small,
-                2 => (int)StackSizes.Medium,
-                _ => (int)StackSizes.Default
-            };
-        }
-    }
+    public bool Stackable;
 
     public int Value
     {
@@ -85,15 +45,6 @@ public partial class Item : Resource
 
     private bool _stackable = true;
     private int _value = 1;
-    public int StackSize { get; private set; } = (int)StackSizes.Default;
-    protected virtual bool IsStackable() => _stackable;
-
-    protected virtual void SetStackable(bool value)
-    {
-        _stackable = value;
-        stackSize = value ? (int)StackSizes.Default : (int)StackSizes.Unstackable;
-        NotifyPropertyListChanged();
-    }
 
     private static Texture2D GetTexture(Texture2D primary, Texture2D secondary)
     {

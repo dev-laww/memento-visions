@@ -21,9 +21,9 @@ public partial class InventoryManager : Node
 
     public void PickUpItem(ItemResource item)
     {
-        var existing = Items.Find(i => i.UniqueName == item.UniqueName && i.Value != (int)item.StackSize);
-        
-        if (existing is { Stackable: true } && existing.Value < existing.StackSize)
+        var existing = Items.Find(i => i.UniqueName == item.UniqueName);
+
+        if (existing is { Stackable: true })
             Items[Items.IndexOf(existing)] += item;
         else
             Items.Add(item);
