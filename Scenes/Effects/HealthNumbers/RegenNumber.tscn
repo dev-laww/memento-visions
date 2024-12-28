@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c0b7ywpsfdaq1"]
 
 [ext_resource type="Script" path="res://Scripts/Effects/HealthNumbers/RegenNumber.cs" id="1_6aafh"]
-[ext_resource type="LabelSettings" uid="uid://bs1j7c2cj6mvr" path="res://resources/misc/regen_label_setting.tres" id="1_skris"]
+[ext_resource type="LabelSettings" uid="uid://bs1j7c2cj6mvr" path="res://resources/misc/regen-text.tres" id="1_skris"]
 
 [sub_resource type="Animation" id="Animation_bv0qh"]
 length = 0.001

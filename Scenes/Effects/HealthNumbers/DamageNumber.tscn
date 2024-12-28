@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://bsudix8wv6q4o"]
 
 [ext_resource type="Script" path="res://Scripts/Effects/HealthNumbers/DamageNumber.cs" id="1_a1ci2"]
-[ext_resource type="LabelSettings" uid="uid://cktp08gmb038p" path="res://resources/misc/physical_label_setting.tres" id="1_i155x"]
-[ext_resource type="LabelSettings" uid="uid://cfhifyl7s3fo7" path="res://resources/misc/magical_label_settings.tres" id="5_fvbuw"]
+[ext_resource type="LabelSettings" uid="uid://cktp08gmb038p" path="res://resources/misc/normal-text.tres" id="1_i155x"]
+[ext_resource type="LabelSettings" uid="uid://cfhifyl7s3fo7" path="res://resources/misc/magical-damage-text.tres" id="5_fvbuw"]
 
 [sub_resource type="Animation" id="Animation_byiv3"]
 length = 0.001
