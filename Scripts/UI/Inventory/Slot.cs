@@ -39,6 +39,7 @@ public partial class Slot : Control
     [Node]
     private AnimationPlayer animationPlayer;
 
+    [Export]
     public Item Item
     {
         get => item;
@@ -54,6 +55,8 @@ public partial class Slot : Control
                 icon.Texture = null;
                 return;
             }
+
+            if (label == null || icon == null) return;
 
             label.Visible = item.Value > 1;
             label.Text = item.Value > 999 ? "999+" : item.Value.ToString();
@@ -75,7 +78,7 @@ public partial class Slot : Control
     public override void _Ready()
     {
         if (Selected) Select();
-        
+
         if (Engine.IsEditorHint()) return;
 
         button.Pressed += Select;

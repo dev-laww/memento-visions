@@ -12,6 +12,23 @@ public partial class Item : Resource
 
     [Export]
     public string UniqueName;
+    
+    [Export]
+    public int Value
+    {
+        get => _value;
+        private set
+        {
+            if (value < 0)
+            {
+                GD.PrintErr("Value cannot be less than 0.");
+                return;
+            }
+
+            _value = value;
+        }
+    }
+
 
     [Export(PropertyHint.MultilineText)]
     public string Description;
@@ -24,22 +41,7 @@ public partial class Item : Resource
 
     [Export]
     public bool Stackable;
-
-    public int Value
-    {
-        get => _value;
-        set
-        {
-            if (value < 0)
-            {
-                GD.PrintErr("Value cannot be less than 0.");
-                return;
-            }
-
-            _value = value;
-        }
-    }
-
+    
     public Texture2D Icon => GetTexture(icon, sprite);
     public Texture2D Sprite => GetTexture(sprite, icon);
 

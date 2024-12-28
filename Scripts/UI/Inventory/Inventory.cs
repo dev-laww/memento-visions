@@ -23,9 +23,33 @@ public partial class Inventory : Control
     [Node]
     private Button equipButton;
 
+    [Node]
+    private Button materialsButton;
+
+    [Node]
+    private Button consumablesButton;
+
+    [Node]
+    private Button weaponsButton;
+
+    [Node]
+    private Button questItemsButton;
+
+    [Node]
+    private TextureRect selectedItemIcon;
+
+    [Node]
+    private Label selectedItemName;
+
+    [Node]
+    private Label selectedItemQuantity;
+
+    [Node]
+    private RichTextLabel selectedItemDescription;
+
     private Player player => this.GetPlayer();
     private List<Slot> slots => slotsContainer.GetChildrenOfType<Slot>().ToList();
-    private Slot selectedSlot => slots.FirstOrDefault(s => s.Selected);
+    private Item selectedItem;
 
     public override void _Notification(int what)
     {
@@ -36,12 +60,29 @@ public partial class Inventory : Control
 
     public override void _Ready()
     {
+        weaponsButton.Toggled += toggled => equipButton.Visible = toggled;
         equipButton.Toggled += OnEquipButtonToggle;
         closeButton.Pressed += () => GetTree().CreateTimer(0.1f).Timeout += Close;
         VisibilityChanged += OnVisibilityChanged;
 
         if (player != null)
             player.Inventory.ItemPickUp += OnItemPickup;
+
+        equipButton.Visible = false;
+    }
+
+    public override void _Process(double delta)
+    {
+        var item = slots.FirstOrDefault(s => s.Selected)?.Item;
+
+        if (item == null || selectedItem == item) return;
+
+        selectedItemIcon.Texture = item.Icon;
+        selectedItemName.Text = item.Name;
+        selectedItemQuantity.Text = $"x{item.Value.ToString()}";
+        selectedItemDescription.Text = item.Description;
+
+        selectedItem = item;
     }
 
 
@@ -83,8 +124,11 @@ public partial class Inventory : Control
     private void OnVisibilityChanged()
     {
         GetTree().Paused = Visible;
+
         if (!Visible) return;
+
         slots.First().Select();
+        materialsButton.ButtonPressed = true;
     }
 
     private void OnEquipButtonToggle(bool toggled)
