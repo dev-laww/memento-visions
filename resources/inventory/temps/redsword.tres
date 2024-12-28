@@ -4,10 +4,11 @@
 [ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="2_0ts4m"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_0ts4m")
 Name = "redSword"
 UniqueName = "Apple"
 Description = "a sword glowing red"
 icon = ExtResource("1_vmoti")
-Stackable = true
-StackSize = 1
+Stackable = false
+stackSize = 0
