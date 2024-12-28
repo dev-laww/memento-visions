@@ -5,58 +5,58 @@ using Game.Quests;
 using Game.Utils.Extensions;
 using GodotUtilities;
 
-namespace Game.Entities;
-
-[Scene]
-public partial class NPC : Node2D
+namespace Game.Entities
 {
-    [Node]
-    private Interaction interaction;
-
-    [Export]
-    private Resource DialogResource;
-
-    [Export]
-    private Quest Quest;
-
-    private bool isDialogueActive = false;
-
-    public override void _Ready()
+    [Scene]
+    public partial class NPC : Node2D
     {
-        interaction.Interacted += OnInteracted;
+        [Node]
+        private Interaction interaction;
 
-        DialogueManager.DialogueEnded += (Resource dialogueResource) =>
+        [Export]
+        private Resource DialogResource;
+        [Export]
+        private Quest Quest;
+        private bool isDialogueActive = false;
+
+        public override void _Ready()
         {
-            GD.Print("Dialogue finished");
-            this.GetPlayer().SetProcessInput(true);
-            isDialogueActive = false;
-        };
-    }
+            interaction.Interacted += OnInteracted;
 
-    private void OnInteracted()
-    {
-        if (isDialogueActive) return;
+            DialogueManager.DialogueEnded += (Resource dialogueResource) =>
+            {
+                this.GetPlayer().SetProcessInput(true);
+                isDialogueActive = false;
+            };
+        }
+        private void OnInteracted()
+        {
+            if (isDialogueActive) return;
 
-        this.GetPlayer().SetProcessInput(false);
-        DialogueManager.ShowDialogueBalloon(DialogResource, "Start");
-        isDialogueActive = true;
-    }
+            this.GetPlayer().SetProcessInput(false);
+            DialogueManager.ShowDialogueBalloon(DialogResource, "Start");
+            isDialogueActive = true;
+            
+        }
+       public void GiveQuest()
+        { 
+            if (Quest.Objectives is InvestigateObjectives investigateObjectives)
+            {
+                investigateObjectives.StartInvestigation();
+            }
+        }
+       public void CompleteQuest()
+        {
+           if (Quest.Status == Quest.QuestStatus.Active) Quest.CompleteQuest();
+            
+        }
 
-    public void GiveQuest()
-    {
-        if (Quest.Status == Quest.QuestStatus.Available) Quest.StartQuest();
-    }
 
-    public void CompleteQuest()
-    {
-        if (Quest.Status == Quest.QuestStatus.Active) Quest.CompleteQuest();
-    }
+        public override void _Notification(int what)
+        {
+            if (what != NotificationSceneInstantiated) return;
 
-
-    public override void _Notification(int what)
-    {
-        if (what != NotificationSceneInstantiated) return;
-
-        WireNodes();
+            WireNodes();
+        }
     }
 }
