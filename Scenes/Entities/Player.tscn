@@ -1,10 +1,11 @@
-[gd_scene load_steps=97 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=98 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_cqdhe"]
 [ext_resource type="Resource" uid="uid://diw2rt1u3pxap" path="res://resources/stats/player.tres" id="3_jlnk4"]
 [ext_resource type="Script" path="res://Scripts/Components/Movement/Velocity.cs" id="4_iaq51"]
 [ext_resource type="Script" path="res://Scripts/Components/Managers/WeaponManager.cs" id="5_3fgj7"]
+[ext_resource type="Script" path="res://Scripts/Components/Managers/InventoryManager.cs" id="5_5rnnb"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/HurtBox.cs" id="5_5x453"]
 [ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Components/Managers/HealthNumberManager.tscn" id="5_lfb6s"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/HitBox.cs" id="6_ly21x"]
@@ -1091,6 +1092,9 @@ Stats = NodePath("../StatsManager")
 Acceleration = 1000.0
 Deceleration = 5.0
 DashDuration = 0.2
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("5_5rnnb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.49012e-08, 14)

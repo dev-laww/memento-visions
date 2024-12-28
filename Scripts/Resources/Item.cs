@@ -38,29 +38,29 @@ public partial class Item : Resource
     }
 
     [Export(PropertyHint.Enum, "Unstackable (1),Small (16),Medium (32),Default (64)")]
-    public int StackSize
+    protected int stackSize
     {
-        get => _stackSize switch
+        get => StackSize switch
         {
-            StackSizes.Unstackable => 0,
-            StackSizes.Small => 1,
-            StackSizes.Medium => 2,
+            (int)StackSizes.Unstackable => 0,
+            (int)StackSizes.Small => 1,
+            (int)StackSizes.Medium => 2,
             _ => 3
         };
         set
         {
             if (!Stackable)
             {
-                _stackSize = StackSizes.Unstackable;
+                StackSize = (int)StackSizes.Unstackable;
                 return;
             }
 
-            _stackSize = value switch
+            StackSize = value switch
             {
-                0 => StackSizes.Unstackable,
-                1 => StackSizes.Small,
-                2 => StackSizes.Medium,
-                _ => StackSizes.Default
+                0 => (int)StackSizes.Unstackable,
+                1 => (int)StackSizes.Small,
+                2 => (int)StackSizes.Medium,
+                _ => (int)StackSizes.Default
             };
         }
     }
@@ -85,13 +85,13 @@ public partial class Item : Resource
 
     private bool _stackable = true;
     private int _value = 1;
-    private StackSizes _stackSize = StackSizes.Default;
+    public int StackSize { get; private set; } = (int)StackSizes.Default;
     protected virtual bool IsStackable() => _stackable;
 
     protected virtual void SetStackable(bool value)
     {
         _stackable = value;
-        StackSize = value ? (int)StackSizes.Default : (int)StackSizes.Unstackable;
+        stackSize = value ? (int)StackSizes.Default : (int)StackSizes.Unstackable;
         NotifyPropertyListChanged();
     }
 
@@ -118,6 +118,25 @@ public partial class Item : Resource
         }
 
         item1.Value += item2.Value;
+        return item1;
+    }
+
+    public static Item operator -(Item item1, Item item2)
+    {
+        var conditions = new[]
+        {
+            item1.GetType() == item2.GetType(),
+            item1.UniqueName == item2.UniqueName,
+            item1.Stackable && item2.Stackable
+        };
+
+        if (conditions.Contains(false))
+        {
+            GD.PrintErr("Items are not stackable.");
+            return item1;
+        }
+
+        item1.Value -= item2.Value;
         return item1;
     }
 }

@@ -95,7 +95,7 @@ public partial class Item : Node2D
         tween.Finished += () =>
         {
             QueueFree();
-            player.PickUpItem(ItemResource);
+            player.Inventory.PickUpItem(ItemResource);
         };
     }
 }

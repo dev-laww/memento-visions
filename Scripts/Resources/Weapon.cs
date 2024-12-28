@@ -28,7 +28,7 @@ public partial class Weapon : Item
 
     public Weapon()
     {
-        StackSize = (int)StackSizes.Unstackable;
+        stackSize = (int)StackSizes.Unstackable;
         NotifyPropertyListChanged();
     }
 

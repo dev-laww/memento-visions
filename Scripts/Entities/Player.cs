@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Game.Components.Managers;
 using Game.Components.Area;
 using Game.Components.Movement;
@@ -34,8 +33,8 @@ public partial class Player : CharacterBody2D
     [Node]
     private WeaponManager weaponManager;
 
-    [Signal]
-    public delegate void ItemPickedUpEventHandler(Item item);
+    [Node]
+    public InventoryManager Inventory;
 
     private string MoveDirection => GetMoveDirection();
     private Vector2 lastMoveDirection = Vector2.Down;
@@ -45,9 +44,6 @@ public partial class Player : CharacterBody2D
     private bool Dashing { get; set; }
     private bool CanMove { get; set; } = true;
     private DelegateStateMachine StateMachine = new();
-
-    // TODO: Consider moving to a global script
-    public List<Item> Inventory = new();
 
     public override void _Notification(int what)
     {
@@ -182,17 +178,5 @@ public partial class Player : CharacterBody2D
             StatsType.Mana => value >= DashStaminaCost,
             _ => CanDash
         };
-    }
-
-    public void PickUpItem(Item item)
-    {
-        var existing = Inventory.Find(i => i.UniqueName == item.UniqueName);
-
-        if (existing != null)
-            existing += item;
-        else
-            Inventory.Add(item);
-
-        EmitSignal(SignalName.ItemPickedUp, item);
     }
 }
