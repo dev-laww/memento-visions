@@ -5,9 +5,10 @@ using GodotUtilities;
 
 namespace Game.Utils.Extensions;
 
+#nullable enable
 public static class ControlExtensions
 {
-    public static Player GetPlayer(this Control node)
+    public static Player? GetPlayer(this Control node)
     {
         var player = node.GetTree().GetNodesInGroup<Player>("Player").FirstOrDefault();
 
