@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using Game.Components.Managers;
 using Game.Components.Area;
 using Game.Components.Movement;
+using Game.Resources;
 using Godot;
 using GodotUtilities;
 using GodotUtilities.Logic;
@@ -14,26 +16,13 @@ namespace Game.Entities.Player;
 [GlobalClass]
 public partial class Player : CharacterBody2D
 {
-    [Export]
-    public float DashStaminaCost { get; set; } = 10f;
-
-    [Node]
-    public StatsManager statsManager;
-
-    [Node]
-    private HurtBox hurtBox;
-
-    [Node]
-    private AnimationPlayer animations;
-
-    [Node]
-    public Velocity velocity;
-
-    [Node]
-    private WeaponManager weaponManager;
-
-    [Node]
-    public InventoryManager Inventory;
+    [Export] public float DashStaminaCost { get; set; } = 10f;
+    [Node] public StatsManager statsManager;
+    [Node] private HurtBox hurtBox;
+    [Node] private AnimationPlayer animations;
+    [Node] public Velocity velocity;
+    [Node] private WeaponManager weaponManager;
+    [Node] public InventoryManager Inventory;
 
     private string MoveDirection => GetMoveDirection();
     private Vector2 lastMoveDirection = Vector2.Down;
@@ -63,6 +52,20 @@ public partial class Player : CharacterBody2D
         velocity.Accelerating += () => StateMachine.ChangeState(Walk);
         velocity.Decelerating += () => StateMachine.ChangeState(Idle);
         velocity.DashEnded += HandleTransition;
+        
+        // TODO: implement weapon unlocking system
+        var weapons = new List<string>()
+        {
+            "res://resources/weapons/daggers/dagger.tres",
+            "res://resources/weapons/guns/gun.tres"
+        };
+        
+        weapons.ForEach(path =>
+        {
+            var res = GD.Load<Weapon>(path);
+            Inventory.PickUpItem(res);
+        });
+        Inventory.ChangeWeapon("weapon:dagger");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -90,7 +93,6 @@ public partial class Player : CharacterBody2D
 
     public override void _Input(InputEvent @event)
     {
-
         if (@event.IsActionPressed("attack") && CanMove && !Dashing) StateMachine.ChangeState(Attack);
 
         if (!@event.IsActionPressed("dash") || !CanDash || !CanMove) return;
@@ -117,12 +119,20 @@ public partial class Player : CharacterBody2D
 
     private void ExitDash() => Dashing = false;
 
-    private void EnterAttack() => CanMove = false;
+    private void EnterAttack()
+    {
+        if (weaponManager.CurrentWeapon == null)
+        {
+            HandleTransition();
+            return;
+        }
+
+        CanMove = false;
+        velocity.Stop();
+    }
 
     private async void Attack()
     {
-        velocity.Stop();
-
         switch (weaponManager.CurrentWeaponType)
         {
             case Variant.Gun:

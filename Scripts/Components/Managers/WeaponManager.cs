@@ -11,8 +11,7 @@ namespace Game.Components.Managers;
 [GlobalClass]
 public partial class WeaponManager : Node2D
 {
-    [Signal]
-    public delegate void WeaponChangedEventHandler();
+    [Signal] public delegate void WeaponChangedEventHandler();
 
     public Weapon CurrentWeapon { get; private set; }
     public Variant CurrentWeaponType => CurrentWeapon?.Resource.Variant ?? Variant.Dagger;
@@ -20,13 +19,19 @@ public partial class WeaponManager : Node2D
     private const string WEAPONS_DATA_PATH = "res://data/weapons.json";
     private readonly List<Item> weaponsData = JSON.Load<List<Item>>(WEAPONS_DATA_PATH);
 
-    public override void _Ready() => ChangeWeapon("weapon:gun");
+    // public override void _Ready() => ChangeWeapon("weapon:gun");
 
     public void ChangeWeapon(string weapon)
     {
-        EmitSignal(SignalName.WeaponChanged);
-
         CurrentWeapon?.QueueFree();
+        
+        if (weapon == null)
+        {
+            CurrentWeapon = null;
+            EmitSignal(SignalName.WeaponChanged);
+            return;
+        }
+        
         var data = weaponsData.Find(w => w.UniqueName == weapon);
 
         if (data == null)
@@ -42,6 +47,7 @@ public partial class WeaponManager : Node2D
         instance.SetVisible(false);
         CurrentWeapon = instance;
         AddChild(CurrentWeapon);
+        EmitSignal(SignalName.WeaponChanged);
     }
 
     public void RemoveWeapon()
