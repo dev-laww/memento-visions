@@ -4,15 +4,11 @@ namespace Game.Utils.JSON.Models;
 
 public class Item
 {
-    [JsonPropertyName("name")]
-    public string Name { get; set; }
+    [JsonPropertyName("name")] public string Name { get; set; }
 
-    [JsonPropertyName("unique_name")]
-    public string UniqueName { get; set; }
+    [JsonPropertyName("unique_name")] public string UniqueName { get; set; }
 
-    [JsonPropertyName("resource")]
-    public string Resource { get; set; }
+    [JsonPropertyName("resource")] public string Resource { get; set; }
 
-    [JsonPropertyName("scene")]
-    public string Scene { get; set; }
+    [JsonPropertyName("scene")] public string Scene { get; set; }
 }

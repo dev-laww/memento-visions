@@ -8,8 +8,7 @@ namespace Game.Utils.Logic.States;
 [GlobalClass]
 public partial class StateMachine : Node
 {
-    [Export]
-    private State initialState;
+    [Export] private State initialState;
 
     public State CurrentState { get; private set; }
 

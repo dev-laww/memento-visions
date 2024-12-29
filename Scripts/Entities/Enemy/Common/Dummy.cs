@@ -10,14 +10,11 @@ namespace Game;
 [Scene]
 public partial class Dummy : CharacterBody2D
 {
-    [Node]
-    private StatsManager statsManager;
+    [Node] private StatsManager statsManager;
 
-    [Node]
-    private AnimationPlayer animationPlayer;
+    [Node] private AnimationPlayer animationPlayer;
 
-    [Node]
-    private HealthNumberManager healthNumberManager;
+    [Node] private HealthNumberManager healthNumberManager;
 
     public override void _Notification(int what)
     {

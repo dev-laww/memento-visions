@@ -8,11 +8,9 @@ namespace Game.Quests;
 [GlobalClass]
 public partial class QuestObjectives : Node
 {
-    [Export]
-    public Quest quest { get; set; }
+    [Export] public Quest quest { get; set; }
 
-    [Export]
-    public int TargetCount;
+    [Export] public int TargetCount;
 
     public void StartQuest()
     {

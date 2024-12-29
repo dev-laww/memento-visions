@@ -43,15 +43,11 @@ public partial class Inventory : Control
 
     public override void _Ready()
     {
-        InitializeUI();
         SetupEventHandlers();
-        InitializeInventory();
-    }
 
-    private void InitializeUI()
-    {
-        equipButton.Visible = false;
-        materialItemsButton.ButtonPressed = true;
+        if (player == null) return;
+
+        Reset();
     }
 
     private void SetupEventHandlers()
@@ -65,9 +61,12 @@ public partial class Inventory : Control
         player.Inventory.ItemPickUp += OnItemPickup;
     }
 
-    private void InitializeInventory()
+    private void Reset()
     {
+        equipButton.Visible = false;
+        materialItemsButton.ButtonPressed = true;
         FilterItems(Type.Material.ToString());
+        slots.First().Select();
         Clear();
         SelectItem(null);
     }
@@ -82,6 +81,7 @@ public partial class Inventory : Control
             FilterItems(filter);
 
         if (selectedSlotItem == null || selectedSlotItem == selectedItem) return;
+
         SelectItem(selectedSlotItem);
         HandleEquipButton();
     }
@@ -113,8 +113,7 @@ public partial class Inventory : Control
 
         if (!Visible) return;
 
-        slots.First().Select();
-        materialItemsButton.ButtonPressed = true;
+        Reset();
     }
 
     private void FilterItems(string filter)

@@ -52,14 +52,14 @@ public partial class Player : CharacterBody2D
         velocity.Accelerating += () => StateMachine.ChangeState(Walk);
         velocity.Decelerating += () => StateMachine.ChangeState(Idle);
         velocity.DashEnded += HandleTransition;
-        
+
         // TODO: implement weapon unlocking system
         var weapons = new List<string>()
         {
             "res://resources/weapons/daggers/dagger.tres",
             "res://resources/weapons/guns/gun.tres"
         };
-        
+
         weapons.ForEach(path =>
         {
             var res = GD.Load<Weapon>(path);

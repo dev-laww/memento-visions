@@ -24,14 +24,14 @@ public partial class WeaponManager : Node2D
     public void ChangeWeapon(string weapon)
     {
         CurrentWeapon?.QueueFree();
-        
+
         if (weapon == null)
         {
             CurrentWeapon = null;
             EmitSignal(SignalName.WeaponChanged);
             return;
         }
-        
+
         var data = weaponsData.Find(w => w.UniqueName == weapon);
 
         if (data == null)

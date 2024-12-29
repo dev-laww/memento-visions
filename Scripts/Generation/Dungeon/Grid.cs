@@ -17,7 +17,6 @@ public class Grid<T>
     }
 
     public int GetIndex(Vector2I pos) => pos.X + Size.X * pos.Y;
-    
 
     public bool InBounds(Vector2I pos)
     {

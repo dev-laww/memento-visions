@@ -11,28 +11,20 @@ namespace Game.Enemy.Common;
 [Scene]
 public partial class Samurai : CharacterBody2D
 {
-    [Signal]
-    public delegate void EnemyDiedEventHandler(string enemyName);
-    [Node]
-    private StatsManager StatsManager;
+    [Signal] public delegate void EnemyDiedEventHandler(string enemyName);
+    [Node] private StatsManager StatsManager;
 
-    [Node]
-    private Velocity velocity;
+    [Node] private Velocity velocity;
+    [Node] private Area2D Range;
+    [Node] private AnimationPlayer Animation;
 
-    [Node]
-    private Area2D Range;
-
-    [Node]
-    private AnimationPlayer Animation;
-
+    [Export] private Quest quest;
     [Export] private string Name;
 
     private bool inRange;
     private bool attacking;
     private string attackDirection;
     private DelegateStateMachine stateMachine = new();
-    [Export]
-    private Quest quest;
 
     public override void _Notification(int what)
     {
@@ -109,7 +101,7 @@ public partial class Samurai : CharacterBody2D
 
         stateMachine.ChangeState(Idle);
         OnStatsDepleted(StatsType.Health);
-      GD.Print(StatsManager.Health); 
+        GD.Print(StatsManager.Health);
     }
 
     private void ExitAttacking() => attacking = false;
@@ -134,10 +126,10 @@ public partial class Samurai : CharacterBody2D
 
         stateMachine.ChangeState(Hurt);
     }
-    
- private void OnStatsDepleted(StatsType stat)
-{
-    if (stat == StatsType.Health)
-        EmitSignal(SignalName.EnemyDied, Name);
-}
+
+    private void OnStatsDepleted(StatsType stat)
+    {
+        if (stat == StatsType.Health)
+            EmitSignal(SignalName.EnemyDied, Name);
+    }
 }

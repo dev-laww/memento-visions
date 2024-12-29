@@ -16,7 +16,7 @@ public partial class Quest : Node
         Completed,
         Delivered
     }
-    
+
     [Export] public string QuestTitle;
     [Export] public string QuestDescription;
     [Export] public QuestObjectives Objectives;

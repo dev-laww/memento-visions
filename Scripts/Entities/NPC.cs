@@ -14,7 +14,7 @@ namespace Game.Entities
 
         [Export] private Resource DialogResource;
         [Export] private Quest Quest;
-        
+
         private bool isDialogueActive;
 
         public override void _Ready()

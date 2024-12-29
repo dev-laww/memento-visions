@@ -26,6 +26,7 @@ public partial class Slot : Control
             NotifyPropertyListChanged();
         }
     }
+
     [Export]
     public Item Item
     {
@@ -50,7 +51,7 @@ public partial class Slot : Control
             icon.Texture = item.Icon;
         }
     }
-    
+
     [Node] public Button button;
     [Node] private Label label;
     [Node] private TextureRect icon;

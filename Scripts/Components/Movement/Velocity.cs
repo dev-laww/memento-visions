@@ -21,26 +21,14 @@ public partial class Velocity : Node
         }
     }
 
-    [Export]
-    private float Acceleration { get; set; } = 100f;
+    [Export] private float Acceleration { get; set; } = 100f;
+    [Export] private float Deceleration { get; set; } = 6f;
+    [Export] private float DashDuration { get; set; } = 0.1f;
 
-    [Export]
-    private float Deceleration { get; set; } = 6f;
-
-    [Export]
-    private float DashDuration { get; set; } = 0.1f;
-
-    [Signal]
-    public delegate void DeceleratingEventHandler();
-
-    [Signal]
-    public delegate void AcceleratingEventHandler();
-
-    [Signal]
-    public delegate void DashStartedEventHandler();
-
-    [Signal]
-    public delegate void DashEndedEventHandler();
+    [Signal] public delegate void DeceleratingEventHandler();
+    [Signal] public delegate void AcceleratingEventHandler();
+    [Signal] public delegate void DashStartedEventHandler();
+    [Signal] public delegate void DashEndedEventHandler();
 
     private Vector2 velocity
     {
