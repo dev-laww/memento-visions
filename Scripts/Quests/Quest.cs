@@ -9,15 +9,6 @@ namespace Game.Quests;
 [GlobalClass]
 public partial class Quest : Node
 {
-    [Export]
-    public string QuestTitle;
-
-    [Export]
-    public string QuestDescription;
-
-    [Export]
-    public QuestObjectives Objectives;
-
     public enum QuestStatus
     {
         Available,
@@ -25,18 +16,14 @@ public partial class Quest : Node
         Completed,
         Delivered
     }
-
-    [Export]
-    public QuestStatus Status = QuestStatus.Available;
-
-    [Export]
-    public int Reward;
-
-    [Export]
-    public string[] QuestItems;
-
-    [Export]
-    public int Experience;
+    
+    [Export] public string QuestTitle;
+    [Export] public string QuestDescription;
+    [Export] public QuestObjectives Objectives;
+    [Export] public QuestStatus Status = QuestStatus.Available;
+    [Export] public int Reward;
+    [Export] public string[] QuestItems;
+    [Export] public int Experience;
 
     public void StartQuest()
     {

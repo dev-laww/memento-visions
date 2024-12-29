@@ -23,32 +23,16 @@ public partial class Dungeon : Node2D
         Hallway
     }
 
-    [Export]
-    private Vector2I gridSize = new(40, 40);
+    [Export] private Vector2I gridSize = new(40, 40);
+    [Export] private int cellSize = 128;
+    [Export] private int roomsCount;
+    [Export] private Vector2I roomMaxSize = new(10, 10);
 
-    [Export]
-    private int cellSize = 128;
-
-    [Export]
-    private int roomsCount;
-
-    [Export]
-    private Vector2I roomMaxSize = new(10, 10);
-
-    [Node]
-    private Node2D Map;
-
-    [Node]
-    private Node2D Rooms;
-
-    [Node]
-    private Node2D Hallways;
-
-    [Node]
-    private TileMapLayer TileMap;
-
-    [Node]
-    private TileMapLayer Ground;
+    [Node] private Node2D Map;
+    [Node] private Node2D Rooms;
+    [Node] private Node2D Hallways;
+    [Node] private TileMapLayer TileMap;
+    [Node] private TileMapLayer Ground;
 
     private Grid<CellType> grid;
     private List<Room> rooms;
@@ -184,7 +168,7 @@ public partial class Dungeon : Node2D
             from edge in hallways
             let start = edge.P.ToVectorI()
             let end = edge.Q.ToVectorI()
-            select pathFinder.FindPath(start, end, (a, b) =>
+            select pathFinder.FindPath(start, end, (_, b) =>
             {
                 var pathCost = new PathFinder.PathCost
                 {

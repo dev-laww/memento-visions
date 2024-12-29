@@ -8,8 +8,7 @@ namespace Game;
 [Scene]
 public partial class Start : Control
 {
-    [Node]
-    private Button button;
+    [Node] private Button button;
 
     public override void _Notification(int what)
     {

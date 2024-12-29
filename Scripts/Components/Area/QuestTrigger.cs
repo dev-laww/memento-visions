@@ -8,11 +8,9 @@ namespace Game.Components.Area;
 [GlobalClass]
 public partial class QuestTrigger : Area2D
 {
-    [Signal]
-    public delegate void DiedEventHandler();
+    [Export] private Quest Quest;
 
-    [Export]
-    private Quest Quest;
+    [Signal] public delegate void DiedEventHandler();
 
     private bool triggered;
     private SlayObjectives SlayObjectives = new();

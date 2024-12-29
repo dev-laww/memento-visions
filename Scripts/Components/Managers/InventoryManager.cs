@@ -10,18 +10,14 @@ namespace Game.Components.Managers;
 [GlobalClass]
 public partial class InventoryManager : Node
 {
-    [Export]
-    private WeaponManager weaponManager;
+    [Export] private WeaponManager weaponManager;
 
-    [Signal]
-    public delegate void ItemPickUpEventHandler(ItemResource item);
-
-    [Signal]
-    public delegate void ItemConsumeEventHandler(ItemResource item);
+    [Signal] public delegate void ItemPickUpEventHandler(ItemResource item);
+    [Signal] public delegate void ItemConsumeEventHandler(ItemResource item);
 
     private readonly List<ItemResource> Items = new();
 
-    public WeaponResource CurrentWeapon => weaponManager.CurrentWeapon.Resource;
+    public WeaponResource CurrentWeapon => weaponManager.CurrentWeapon?.Resource;
 
     public void ChangeWeapon(string uniqueName) => weaponManager.ChangeWeapon(uniqueName);
 

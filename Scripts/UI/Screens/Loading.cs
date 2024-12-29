@@ -7,17 +7,11 @@ namespace Game;
 [Scene]
 public partial class Loading : Node2D
 {
-    [Signal]
-    public delegate void TransitionInCompleteEventHandler();
+    [Node] private ProgressBar progressBar;
+    [Node] public AnimationPlayer animationPlayer;
+    [Node] private Timer timer;
 
-    [Node]
-    private ProgressBar progressBar;
-
-    [Node]
-    public AnimationPlayer animationPlayer;
-
-    [Node]
-    private Timer timer;
+    [Signal] public delegate void TransitionInCompleteEventHandler();
 
     private Transition transition;
 

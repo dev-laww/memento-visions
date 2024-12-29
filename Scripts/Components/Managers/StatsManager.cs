@@ -24,8 +24,7 @@ public enum StatsType
 [Scene]
 public partial class StatsManager : Node
 {
-    [Export(PropertyHint.Range, "1,10")]
-    private float StaminaRecoveryRate { get; set; } = 1;
+    [Export(PropertyHint.Range, "1,10")] private float StaminaRecoveryRate { get; set; } = 1;
 
     [Export]
     private StatsResource Stats
@@ -38,23 +37,13 @@ public partial class StatsManager : Node
         }
     }
 
-    [Node]
-    private Timer staminaRecovery;
+    [Node] private Timer staminaRecovery;
 
-    [Signal]
-    public delegate void StatsChangedEventHandler(float value, StatsType stat);
-
-    [Signal]
-    public delegate void StatsIncreasedEventHandler(float value, StatsType stat);
-
-    [Signal]
-    public delegate void StatsDecreasedEventHandler(float value, StatsType stat);
-
-    [Signal]
-    public delegate void StatsDepletedEventHandler(StatsType stat);
-
-    [Signal]
-    public delegate void AttackReceivedEventHandler(float damage, Attack.Type type, bool isCritical = false);
+    [Signal] public delegate void StatsChangedEventHandler(float value, StatsType stat);
+    [Signal] public delegate void StatsIncreasedEventHandler(float value, StatsType stat);
+    [Signal] public delegate void StatsDecreasedEventHandler(float value, StatsType stat);
+    [Signal] public delegate void StatsDepletedEventHandler(StatsType stat);
+    [Signal] public delegate void AttackReceivedEventHandler(float damage, Attack.Type type, bool isCritical = false);
 
     public float Speed { get; private set; }
 

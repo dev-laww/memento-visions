@@ -32,8 +32,7 @@ public partial class Interaction : Area2D
 
     private Node2D interactionUI => GetNode<Node2D>("InteractionUI");
 
-    [Signal]
-    public delegate void InteractedEventHandler();
+    [Signal] public delegate void InteractedEventHandler();
 
     public override void _EnterTree()
     {

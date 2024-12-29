@@ -48,8 +48,7 @@ public partial class Item : Node2D
         }
     }
 
-    [Node]
-    private Area2D pickupRange;
+    [Node] private Area2D pickupRange;
 
     private Sprite2D sprite => GetNode<Sprite2D>("Sprite");
     private CollisionShape2D collision => GetNode<CollisionShape2D>("%Collision");

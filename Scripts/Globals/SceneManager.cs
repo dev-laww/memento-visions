@@ -32,23 +32,12 @@ public static class TransitionExtensions
 // TODO: Add wipe direction to Transition.Wipe
 public partial class SceneManager : Node
 {
-    [Signal]
-    public delegate void LoadStartEventHandler(Loading loadingScreen);
-
-    [Signal]
-    public delegate void SceneAddedEventHandler(Node node, Loading loadingScreen);
-
-    [Signal]
-    public delegate void LoadCompleteEventHandler(Node node);
-
-    [Signal]
-    public delegate void ContentFinishedLoadingEventHandler(Node2D content);
-
-    [Signal]
-    public delegate void ContentInvalidEventHandler(string path);
-
-    [Signal]
-    public delegate void ContentFailedToLoadEventHandler(string path);
+    [Signal] public delegate void LoadStartEventHandler(Loading loadingScreen);
+    [Signal] public delegate void SceneAddedEventHandler(Node node, Loading loadingScreen);
+    [Signal] public delegate void LoadCompleteEventHandler(Node node);
+    [Signal] public delegate void ContentFinishedLoadingEventHandler(Node2D content);
+    [Signal] public delegate void ContentInvalidEventHandler(string path);
+    [Signal] public delegate void ContentFailedToLoadEventHandler(string path);
 
     private PackedScene loadingScreenScene =
         ResourceLoader.Load("res://Scenes/UI/Screens/Loading.tscn") as PackedScene;

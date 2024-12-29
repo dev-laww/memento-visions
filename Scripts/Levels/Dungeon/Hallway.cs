@@ -6,8 +6,7 @@ namespace Game;
 [Scene]
 public partial class Hallway : Node2D
 {
-    [Node]
-    private Label Label;
+    [Node] private Label Label;
 
     public override void _Notification(int what)
     {

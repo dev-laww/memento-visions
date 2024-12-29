@@ -8,8 +8,7 @@ public partial class ContinuousDamageHitBox : HitBox
 {
     private Timer timer;
 
-    [Export]
-    private float damageInterval = 0.5f;
+    [Export] private float damageInterval = 0.5f;
 
     public override void _Ready()
     {

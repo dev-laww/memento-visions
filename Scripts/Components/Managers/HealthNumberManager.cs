@@ -23,17 +23,10 @@ public partial class HealthNumberManager : Node2D
         }
     }
 
-    [Node]
-    private Marker2D numberSpawn;
-
-    [Node]
-    private ResourcePreloader resourcePreloader;
-
-    [Node]
-    private Timer timer;
-
-    [Node]
-    private Node2D regenSpawns;
+    [Node] private Marker2D numberSpawn;
+    [Node] private ResourcePreloader resourcePreloader;
+    [Node] private Timer timer;
+    [Node] private Node2D regenSpawns;
 
     private StatsManager manager;
     private DamageNumber damage => numberSpawn.GetChildrenOfType<DamageNumber>().FirstOrDefault();

@@ -9,17 +9,11 @@ namespace Game;
 [Scene]
 public partial class GameManager : Node
 {
-    [Export]
-    private bool showStartScreen;
+    [Export] private bool showStartScreen;
 
-    [Node]
-    private CanvasLayer userInterface;
-
-    [Node]
-    private Node currentScene;
-
-    [Node]
-    private ResourcePreloader resourcePreloader;
+    [Node] private CanvasLayer userInterface;
+    [Node] private Node currentScene;
+    [Node] private ResourcePreloader resourcePreloader;
 
     private static GameManager instance;
     public static Node CurrentScene => instance.currentScene;

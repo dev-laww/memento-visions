@@ -10,14 +10,12 @@ namespace Game.Entities
     [Scene]
     public partial class NPC : Node2D
     {
-        [Node]
-        private Interaction interaction;
+        [Node] private Interaction interaction;
 
-        [Export]
-        private Resource DialogResource;
-        [Export]
-        private Quest Quest;
-        private bool isDialogueActive = false;
+        [Export] private Resource DialogResource;
+        [Export] private Quest Quest;
+        
+        private bool isDialogueActive;
 
         public override void _Ready()
         {
@@ -25,30 +23,31 @@ namespace Game.Entities
 
             DialogueManager.DialogueEnded += (Resource dialogueResource) =>
             {
-                this.GetPlayer().SetProcessInput(true);
+                this.GetPlayer()?.SetProcessInput(true);
                 isDialogueActive = false;
             };
         }
+
         private void OnInteracted()
         {
             if (isDialogueActive) return;
 
-            this.GetPlayer().SetProcessInput(false);
+            this.GetPlayer()?.SetProcessInput(false);
             DialogueManager.ShowDialogueBalloon(DialogResource, "Start");
             isDialogueActive = true;
-            
         }
-       public void GiveQuest()
-        { 
+
+        public void GiveQuest()
+        {
             if (Quest.Objectives is InvestigateObjectives investigateObjectives)
             {
                 investigateObjectives.StartInvestigation();
             }
         }
-       public void CompleteQuest()
+
+        public void CompleteQuest()
         {
-           if (Quest.Status == Quest.QuestStatus.Active) Quest.CompleteQuest();
-            
+            if (Quest.Status == Quest.QuestStatus.Active) Quest.CompleteQuest();
         }
 
 

@@ -27,8 +27,7 @@ public partial class RegenNumber : Node2D
         }
     }
 
-    [Node]
-    private AnimationPlayer animationPlayer;
+    [Node] private AnimationPlayer animationPlayer;
 
     public override void _Notification(int what)
     {

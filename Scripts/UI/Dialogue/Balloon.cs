@@ -5,11 +5,8 @@ namespace DialogueManagerRuntime;
 
 public partial class Balloon : CanvasLayer
 {
-    [Export]
-    public string NextAction = "ui_accept";
-
-    [Export]
-    public string SkipAction = "ui_cancel";
+    [Export] public string NextAction = "ui_accept";
+    [Export] public string SkipAction = "ui_cancel";
 
     private Control balloon;
     private RichTextLabel characterLabel;

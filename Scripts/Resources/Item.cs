@@ -15,11 +15,8 @@ public enum Type
 [GlobalClass]
 public partial class Item : Resource
 {
-    [Export]
-    public string Name;
-
-    [Export]
-    public string UniqueName;
+    [Export] public string Name;
+    [Export] public string UniqueName;
 
     [Export]
     public Type Type
@@ -35,14 +32,9 @@ public partial class Item : Resource
         private set => SetValue(value);
     }
 
-    [Export(PropertyHint.MultilineText)]
-    public string Description;
-
-    [Export]
-    private Texture2D icon;
-
-    [Export]
-    public Texture2D sprite;
+    [Export(PropertyHint.MultilineText)] public string Description;
+    [Export] private Texture2D icon;
+    [Export] public Texture2D sprite;
 
     [Export]
     public bool Stackable

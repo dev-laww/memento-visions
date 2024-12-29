@@ -7,8 +7,7 @@ namespace Game.Levels.Dungeon;
 [Scene]
 public partial class Room : Node2D
 {
-    [Node]
-    private Label Label;
+    [Node] private Label Label;
 
     public Bounds Bounds { get; private set; }
 

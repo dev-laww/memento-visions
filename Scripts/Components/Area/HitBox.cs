@@ -9,8 +9,7 @@ namespace Game.Components.Area;
 [GlobalClass]
 public partial class HitBox : Area2D
 {
-    [Export]
-    public Attack.Type Type { get; set; } = Attack.Type.Physical;
+    [Export] public Attack.Type Type { get; set; } = Attack.Type.Physical;
 
     [Export]
     public StatsManager StatsManager
