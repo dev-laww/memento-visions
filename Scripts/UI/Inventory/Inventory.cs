@@ -10,43 +10,23 @@ using Type = Game.Resources.Type;
 
 namespace Game.UI.Inventory;
 
-// TODO: Fix bugs
-
+// TODO: Cache items in slots
 [Scene]
 public partial class Inventory : Control
 {
-    [Node]
-    private GridContainer slotsContainer;
+    [Node] private GridContainer slotsContainer;
+    [Node] private ResourcePreloader resourcePreloader;
 
-    [Node]
-    private ResourcePreloader resourcePreloader;
+    [Node] private Button closeButton;
+    [Node] private Button equipButton;
+    [Node] private Button materialItemsButton;
+    [Node] private Button weaponItemsButton;
 
-    [Node]
-    private Button closeButton;
-
-    [Node]
-    private Button equipButton;
-
-    [Node]
-    private Button materialItemsButton;
-
-    [Node]
-    private Button weaponItemsButton;
-
-    [Node]
-    private TextureRect selectedItemIcon;
-
-    [Node]
-    private Label selectedItemName;
-
-    [Node]
-    private Label selectedItemType;
-
-    [Node]
-    private Label selectedItemQuantity;
-
-    [Node]
-    private RichTextLabel selectedItemDescription;
+    [Node] private TextureRect selectedItemIcon;
+    [Node] private Label selectedItemName;
+    [Node] private Label selectedItemType;
+    [Node] private Label selectedItemQuantity;
+    [Node] private RichTextLabel selectedItemDescription;
 
     private Player player => this.GetPlayer();
     private List<Slot> slots => slotsContainer.GetChildrenOfType<Slot>().ToList();
@@ -63,49 +43,49 @@ public partial class Inventory : Control
 
     public override void _Ready()
     {
-        weaponItemsButton.ButtonGroup.Pressed += button => OnButtonGroupPressed(button as Button);
+        InitializeUI();
+        SetupEventHandlers();
+        InitializeInventory();
+    }
+
+    private void InitializeUI()
+    {
+        equipButton.Visible = false;
+        materialItemsButton.ButtonPressed = true;
+    }
+
+    private void SetupEventHandlers()
+    {
         equipButton.Toggled += OnEquipButtonToggle;
         closeButton.Pressed += () => GetTree().CreateTimer(0.1f).Timeout += Close;
         VisibilityChanged += OnVisibilityChanged;
 
         if (player == null) return;
 
+        player.Inventory.ItemPickUp += OnItemPickup;
+    }
+
+    private void InitializeInventory()
+    {
         FilterItems(Type.Material.ToString());
         Clear();
-
-        player.Inventory.ItemPickUp += OnItemPickup;
-        selectedItemIcon.Texture = null;
-        selectedItemName.Text = "";
-        selectedItemType.Text = "";
-        selectedItemQuantity.Text = "";
-        selectedItemDescription.Text = "";
-        equipButton.Visible = false;
+        SelectItem(null);
     }
 
     public override void _Process(double delta)
     {
-        var item = slots.FirstOrDefault(s => s.Selected)?.Item;
+        var selectedSlotItem = slots.FirstOrDefault(s => s.Selected)?.Item;
 
-        equipButton.ButtonPressed = player.Inventory.CurrentWeapon.UniqueName == item?.UniqueName;
+        var filter = selectedButton.Name.ToString().Replace("ItemsButton", "");
 
-        if (item == null || selectedItem == item) return;
+        if (selectedType.ToString() != filter)
+            FilterItems(filter);
 
-        selectedItemIcon.Texture = item.Icon;
-        selectedItemName.Text = item.Name;
-        selectedItemType.Text = item.Type.ToString();
-        selectedItemQuantity.Text = $"x{item.Value.ToString()}";
-        selectedItemDescription.Text = item.Description;
-
-        selectedItem = item;
-        equipButton.Visible = item.Type == Type.Weapon || weaponItemsButton.ButtonPressed;
-
-        var pressed = equipButton.ButtonPressed;
-        equipButton.Text = pressed ? "Unequip" : "Equip";
-        equipButton.Modulate = pressed ? Colors.Red : Colors.White;
+        if (selectedSlotItem == null || selectedSlotItem == selectedItem) return;
+        SelectItem(selectedSlotItem);
+        HandleEquipButton();
     }
 
-
-    // TODO: Centralize ui opening and closing
     public override void _Input(InputEvent @event)
     {
         if (@event.IsActionPressed("menu"))
@@ -114,84 +94,92 @@ public partial class Inventory : Control
             return;
         }
 
-        if (!@event.IsActionPressed("open_inventory")) return;
-
-        Toggle();
+        if (@event.IsActionPressed("open_inventory"))
+            Toggle();
     }
 
     private void OnItemPickup(Item item)
     {
-        var filter = selectedButton?.Name.ToString().Replace("ItemsButton", "") ?? "Material";
+        var currentFilter = selectedButton?.Name.ToString().Replace("ItemsButton", "") ?? "Material";
+        var allSlotsEmpty = slots.All(slot => slot.Item == null);
 
-        if (item.Type.ToString() != filter) return;
-
-        FilterItems(filter);
+        if (item.Type.ToString() == currentFilter || allSlotsEmpty)
+            FilterItems(currentFilter);
     }
 
     private void OnVisibilityChanged()
     {
-        GetTree().Paused = Visible;
+        player?.SetProcessInput(!Visible);
 
         if (!Visible) return;
 
         slots.First().Select();
         materialItemsButton.ButtonPressed = true;
-        FilterItems(Type.Material.ToString());
-    }
-
-    private void OnEquipButtonToggle(bool toggled)
-    {
-        var currentWeapon = player.Inventory.CurrentWeapon;
-
-        if (selectedItem == null || currentWeapon.UniqueName == selectedItem.UniqueName) return;
-
-        equipButton.Text = toggled ? "Unequip" : "Equip";
-        equipButton.Modulate = toggled ? Colors.Red : Colors.White;
-        player.Inventory.ChangeWeapon(selectedItem.UniqueName);
-    }
-
-    private void OnButtonGroupPressed(Button button)
-    {
-        if (player == null) return;
-
-        var filter = button.Name.ToString().Replace("ItemsButton", "");
-
-        FilterItems(filter);
     }
 
     private void FilterItems(string filter)
     {
         var type = (Type)Enum.Parse(typeof(Type), filter);
 
-        var hasOccupiedSlot = slots.Any(slot => slot.IsOccupied);
-
-        if (selectedType == type && hasOccupiedSlot) return;
-
         Clear();
-
         var items = player.Inventory.GetFilteredItems(type);
 
-        items.ForEach(item =>
+        foreach (var item in items)
         {
             var slot = slots.FirstOrDefault(slot => !slot.IsOccupied);
-
             if (slot == null)
             {
                 var newSlot = resourcePreloader.InstanceSceneOrNull<Slot>();
                 newSlot.Item = item;
                 slotsContainer.AddChild(newSlot);
-                return;
+                continue;
             }
 
             slot.Item = item;
-        });
+        }
 
         selectedType = type;
     }
 
-    private void Clear() => slots.ForEach(slot => slot.Item = null);
+    private void SelectItem(Item item)
+    {
+        selectedItem = item;
+        UpdateItemDisplay(item);
+    }
 
-    // TODO: Add inventory animation
+    private void UpdateItemDisplay(Item item)
+    {
+        selectedItemIcon.Texture = item?.Icon;
+        selectedItemName.Text = item?.Name;
+        selectedItemType.Text = item?.Type.ToString();
+        selectedItemQuantity.Text = item != null ? $"x{item.Value}" : null;
+        selectedItemDescription.Text = item?.Description;
+    }
+
+    private void OnEquipButtonToggle(bool toggled)
+    {
+        if (!toggled)
+            player.Inventory.ChangeWeapon(null);
+        else
+            player.Inventory.ChangeWeapon(selectedItem.UniqueName);
+
+        HandleEquipButton();
+    }
+
+    private void HandleEquipButton()
+    {
+        if (selectedItem == null) return;
+
+        var currentWeapon = player.Inventory.CurrentWeapon;
+        var isCurrentWeapon = currentWeapon?.UniqueName == selectedItem.UniqueName;
+
+        equipButton.ButtonPressed = isCurrentWeapon;
+        equipButton.Visible = selectedItem.Type == Type.Weapon;
+        equipButton.Text = isCurrentWeapon ? "Unequip" : "Equip";
+        equipButton.Modulate = isCurrentWeapon ? Colors.Red : Colors.White;
+    }
+
+    private void Clear() => slots.ForEach(slot => slot.Item = null);
     private void Toggle() => Visible = !Visible;
     private void Close() => Visible = false;
 }
