@@ -8,12 +8,13 @@ public partial class QuestGui : Control
 {
     private Tree Tree;
     private TreeItem TreeRoot;
-    private bool IsVisible;
+    private bool IsVisible = false;
     private Label QuestTitle;
     private Label QuestDescription;
     private Label QuestStatus;
     private Label QuestReward;
     private PanelContainer QuestPanel;
+    private Button CloseButton;
     QuestObjectives questObjectives = new QuestObjectives();
 
     public override void _Notification(int what)
@@ -31,10 +32,13 @@ public override void _Ready()
     QuestDescription = GetNode<Label>("PanelContainer/MarginContainer/VBoxContainer/Description");
     QuestStatus = GetNode<Label>("PanelContainer/MarginContainer/VBoxContainer/Status");
     QuestReward = GetNode<Label>("PanelContainer/MarginContainer/VBoxContainer/Reward");
+    CloseButton = GetNode<Button>("CloseButton");
+    
 
     QuestManager.OnQuestsChanged += UpdateQuestList;
     Tree.ItemSelected += OnItemSelected;
     Visible = false;
+    CloseButton.Pressed += ToggleQuestGui;
 }
 
 private void UpdateQuestList()
@@ -42,7 +46,16 @@ private void UpdateQuestList()
     Tree.Clear();
     TreeRoot = Tree.CreateItem();
     TreeRoot.SetText(0, "Quests");
-    foreach (var quest in QuestManager.GetActiveQuests())
+    
+    foreach (var quest in QuestManager.GetActiveQuests()) 
+    {
+        var item = Tree.CreateItem(TreeRoot);
+        item.SetText(0, quest.QuestTitle);
+        item.SetText(1, quest.Status.ToString());
+        item.SetText(2, $"{questObjectives.GetProgress():P0}");
+    }
+    
+    foreach (var quest in QuestManager.GetCompletedQuests())
     {
         var item = Tree.CreateItem(TreeRoot);
         item.SetText(0, quest.QuestTitle);
@@ -73,17 +86,14 @@ private void UpdateQuestList()
         QuestTitle.Text = quest.QuestTitle;
         QuestDescription.Text = quest.QuestDescription;
         QuestStatus.Text = quest.Status.ToString();
-        QuestReward.Text = quest.Reward.ToString();
+        QuestReward.Text = $"Gold: {quest.Gold} Experience: {quest.Experience}";
     }
 
     public void ToggleQuestGui()
     {
         IsVisible = !IsVisible;
         Visible = IsVisible;
-        if (IsVisible)
-        {
-            QuestManager.OnQuestsChanged += UpdateQuestList;
-        }
+        UpdateQuestList();
     }
     public override void _Input(InputEvent @event)
     {

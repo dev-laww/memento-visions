@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using Game.Resources;
 using GodotUtilities;
 
 namespace Game.Quests;
@@ -14,6 +15,7 @@ public partial class Quest : Node
         Available,
         Active,
         Completed,
+        Failed,
         Delivered
     }
 
@@ -21,10 +23,12 @@ public partial class Quest : Node
     [Export] public string QuestDescription;
     [Export] public QuestObjectives Objectives;
     [Export] public QuestStatus Status = QuestStatus.Available;
-    [Export] public int Reward;
-    [Export] public string[] QuestItems;
+    [ExportGroup("Rewards")]
+    [Export] public int Gold;
     [Export] public int Experience;
-    
+    [Export] public Item[] QuestItems;
+   
+   
     public override void _Ready()
     {
     }
@@ -55,5 +59,13 @@ public partial class Quest : Node
         // Objective?.Cleanup();
         QuestManager.RemoveQuest(this);
         GD.Print("Quest Delivered");
+    }
+    public void FailQuest()
+    {
+        if (Status != QuestStatus.Active) return;
+        Status = QuestStatus.Failed;
+        // Objective?.Cleanup();
+        QuestManager.RemoveQuest(this);
+        GD.Print("Quest Failed");
     }
 }
