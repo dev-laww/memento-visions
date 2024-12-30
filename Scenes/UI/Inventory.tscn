@@ -435,7 +435,6 @@ text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit am
 
 [node name="EquipButton" type="Button" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 8

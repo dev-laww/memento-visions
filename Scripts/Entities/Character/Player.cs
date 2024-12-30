@@ -62,7 +62,7 @@ public partial class Player : Entity
         weapons.ForEach(path =>
         {
             var res = GD.Load<Weapon>(path);
-            Inventory.PickUpItem(res);
+            Inventory.AddItem(res);
         });
         Inventory.ChangeWeapon("weapon:dagger");
     }
