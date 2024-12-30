@@ -1,9 +1,7 @@
-using System.Linq;
-using Game.Globals;
 using Godot;
 using GodotUtilities;
 
-namespace Game;
+namespace Game.Components.Managers;
 
 [Scene]
 public partial class Start : Control
@@ -17,5 +15,5 @@ public partial class Start : Control
         WireNodes();
     }
 
-    public override void _Ready() => button.Pressed += () => GameManager.ChangeScene("res://Scenes/Bar.tscn");
+    public override void _Ready() => button.Pressed += () => GameManager.ChangeScene("res://Scenes/World/Bar.tscn");
 }

@@ -57,7 +57,7 @@ public partial class Inventory : Control
         equipButton.Toggled += OnEquipButtonToggle;
         closeButton.Pressed += () => GetTree().CreateTimer(0.1f).Timeout += Close;
         VisibilityChanged += OnVisibilityChanged;
-        slots.ForEach(slot =>slot.Selected += OnSlotSelected);
+        slots.ForEach(slot => slot.Selected += OnSlotSelected);
         slots.First().Select();
 
         if (player == null) return;
@@ -199,5 +199,14 @@ public partial class Inventory : Control
         unselectedSlots.ForEach(s => s.Deselect());
 
         NotifyPropertyListChanged();
+    }
+
+    public override void _ExitTree()
+    {
+        slots.ForEach(slot => slot.Selected -= OnSlotSelected);
+
+        if (player == null) return;
+
+        player.Inventory.ItemPickUp -= OnItemPickup;
     }
 }

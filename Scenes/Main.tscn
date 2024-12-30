@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://hc1bdnea1afd"]
+
+[ext_resource type="Script" path="res://Scripts/Components/Managers/GameManager.cs" id="1_jd26h"]
+[ext_resource type="PackedScene" uid="uid://npt6wv2s1hvr" path="res://Scenes/UI/Screens/Start.tscn" id="2_xr7b5"]
+[ext_resource type="PackedScene" uid="uid://b4wadx6dv5aan" path="res://Scenes/World/Bar.tscn" id="3_rgwis"]
+[ext_resource type="PackedScene" uid="uid://b161abm0o6ij2" path="res://Scenes/UI/Inventory.tscn" id="4_3s3bi"]
+[ext_resource type="PackedScene" uid="uid://dd1jerr3yxfmm" path="res://Scenes/UI/Crafting.tscn" id="5_1xnus"]
+[ext_resource type="PackedScene" uid="uid://bkgjauxklnmyv" path="res://Scenes/Quest/QuestGui.tscn" id="6_vcj0g"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_jd26h")
+showStartScreen = true
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("StartScreen"), [ExtResource("2_xr7b5")]]
+
+[node name="CurrentScene" type="Node" parent="."]
+
+[node name="Bar" parent="CurrentScene" instance=ExtResource("3_rgwis")]
+
+[node name="UserInterface" type="CanvasLayer" parent="."]
+
+[node name="Inventory" parent="UserInterface" instance=ExtResource("4_3s3bi")]
+visible = false
+
+[node name="Crafting" parent="UserInterface" instance=ExtResource("5_1xnus")]
+visible = false
+
+[node name="QuestGui" parent="UserInterface" instance=ExtResource("6_vcj0g")]
+visible = false

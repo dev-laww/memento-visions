@@ -4,7 +4,7 @@ using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
-namespace Game;
+namespace Game.Components.Managers;
 
 [Scene]
 public partial class GameManager : Node
