@@ -49,7 +49,7 @@ namespace Game.Entities
         {
             if (Quest.Objectives is InvestigateObjectives investigateObjectives)
             {
-                investigateObjectives.OnInteracted();
+                investigateObjectives.OnInteracted("NPC");
             }
         }
 

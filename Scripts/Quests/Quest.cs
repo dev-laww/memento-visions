@@ -37,8 +37,7 @@ public partial class Quest : Node
     public void StartQuest()
     {
         if (Status != QuestStatus.Available) return;
-        Status = QuestStatus.Active;
-        // Objective?.Initialize(this);
+        Status = QuestStatus.Active; ;
         QuestManager.AddQuest(this);
         QuestManager.NotifyQuestStarted(this);
         GD.Print("Quest Started");
@@ -56,7 +55,7 @@ public partial class Quest : Node
     {
         if (Status != QuestStatus.Completed) return;
         Status = QuestStatus.Delivered;
-        // Objective?.Cleanup();
+
         QuestManager.RemoveQuest(this);
         GD.Print("Quest Delivered");
     }
@@ -64,7 +63,7 @@ public partial class Quest : Node
     {
         if (Status != QuestStatus.Active) return;
         Status = QuestStatus.Failed;
-        // Objective?.Cleanup();
+
         QuestManager.RemoveQuest(this);
         GD.Print("Quest Failed");
     }
