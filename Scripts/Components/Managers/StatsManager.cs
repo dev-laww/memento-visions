@@ -89,7 +89,7 @@ public partial class StatsManager : Node
         set => maxMana = value;
     }
 
-    public Attack MagicalAttack => Utils.Battle.Attack.Magical(Attack);
+    public Attack MagicalAttack => Utils.Battle.Attack.Magical(Magic);
     public Attack PhysicalAttack => Utils.Battle.Attack.Physical(Attack);
     public float PhysicalDamageMultiplier => Stats.PhysicalDamageMultiplier;
     public float MagicalDamageMultiplier => Stats.MagicalDamageMultiplier;
