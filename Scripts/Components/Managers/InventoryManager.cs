@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Resources;
 using Godot;
-using ItemResource = Game.Resources.Item;
-using WeaponResource = Game.Resources.Weapon;
 
 namespace Game.Components.Managers;
 
@@ -12,16 +10,16 @@ public partial class InventoryManager : Node
 {
     [Export] private WeaponManager weaponManager;
 
-    [Signal] public delegate void ItemPickUpEventHandler(ItemResource item);
-    [Signal] public delegate void ItemConsumeEventHandler(ItemResource item);
+    [Signal] public delegate void ItemPickUpEventHandler(Item item);
+    [Signal] public delegate void ItemRemoveEventHandler(Item item);
 
-    private readonly List<ItemResource> Items = new();
+    private readonly List<Item> Items = new();
 
-    public WeaponResource CurrentWeapon => weaponManager.CurrentWeapon?.Resource;
+    public Weapon CurrentWeapon => weaponManager.CurrentWeapon?.Resource;
 
     public void ChangeWeapon(string uniqueName) => weaponManager.ChangeWeapon(uniqueName);
 
-    public void PickUpItem(ItemResource item)
+    public void PickUpItem(Item item)
     {
         var existing = Items.Find(i => i.UniqueName == item.UniqueName);
 
@@ -33,7 +31,7 @@ public partial class InventoryManager : Node
         EmitSignal(SignalName.ItemPickUp, item);
     }
 
-    public void ConsumeItem(ItemResource item)
+    public void RemoveItem(Item item)
     {
         var existing = Items.Find(i => i.UniqueName == item.UniqueName);
 
@@ -48,10 +46,11 @@ public partial class InventoryManager : Node
                 Items.Remove(existing);
         }
         else
-        {
             Items.Remove(existing);
-        }
+        
+        
+        EmitSignal(SignalName.ItemRemove, item);
     }
 
-    public List<ItemResource> GetFilteredItems(Type type) => Items.Where(i => i.Type == type).ToList();
+    public List<Item> GetFilteredItems(Type type) => Items.Where(i => i.Type == type).ToList();
 }
