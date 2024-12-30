@@ -61,7 +61,7 @@ public partial class Inventory : Control
 
         if (player == null) return;
 
-        player.Inventory.ItemPickUp += OnItemPickup;
+        player.Inventory.ItemAdd += OnItemPickup;
     }
 
     private void Reset()
@@ -206,6 +206,6 @@ public partial class Inventory : Control
 
         if (player == null) return;
 
-        player.Inventory.ItemPickUp -= OnItemPickup;
+        player.Inventory.ItemAdd -= OnItemPickup;
     }
 }

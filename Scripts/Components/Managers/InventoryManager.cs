@@ -10,16 +10,16 @@ public partial class InventoryManager : Node
 {
     [Export] private WeaponManager weaponManager;
 
-    [Signal] public delegate void ItemPickUpEventHandler(Item item);
+    [Signal] public delegate void ItemAddEventHandler(Item item);
     [Signal] public delegate void ItemRemoveEventHandler(Item item);
 
-    private readonly List<Item> Items = new();
+    public readonly List<Item> Items = new();
 
     public Weapon CurrentWeapon => weaponManager.CurrentWeapon?.Resource;
 
     public void ChangeWeapon(string uniqueName) => weaponManager.ChangeWeapon(uniqueName);
 
-    public void PickUpItem(Item item)
+    public void AddItem(Item item)
     {
         var existing = Items.Find(i => i.UniqueName == item.UniqueName);
 
@@ -28,7 +28,7 @@ public partial class InventoryManager : Node
         else
             Items.Add(item);
 
-        EmitSignal(SignalName.ItemPickUp, item);
+        EmitSignal(SignalName.ItemAdd, item);
     }
 
     public void RemoveItem(Item item)
