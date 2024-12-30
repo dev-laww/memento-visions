@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=4 uid="uid://cwuokpjg3q21s"]
+[gd_scene load_steps=22 format=4 uid="uid://cwuokpjg3q21s"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_2wwem"]
+[ext_resource type="Script" path="res://Scripts/Quests/TestArea.cs" id="1_5ueqw"]
 [ext_resource type="TileSet" uid="uid://bcvije43w8ygj" path="res://resources/tilesets/city.tres" id="2_0d65y"]
 [ext_resource type="Script" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_ush2q"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/ContinuousDamageHitBox.cs" id="4_eh38v"]
@@ -40,6 +41,7 @@ size = Vector2(51.571, 114.834)
 size = Vector2(214, 20)
 
 [node name="Test Area" type="Node2D"]
+script = ExtResource("1_5ueqw")
 
 [node name="SmoothTileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 2
@@ -69,21 +71,10 @@ Stats = SubResource("Resource_lyd12")
 [node name="Samurai" parent="." instance=ExtResource("4_ff3sm")]
 position = Vector2(707, 342)
 
-[node name="Player" parent="." instance=ExtResource("5_dhbyu")]
-position = Vector2(114, 468)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-
-[node name="Container" parent="Player" instance=ExtResource("8_5fhi4")]
-offset_left = -318.0
-offset_top = -177.0
-offset_right = 371.0
-offset_bottom = 214.0
-
 [node name="NPC" parent="." node_paths=PackedStringArray("Quest") instance=ExtResource("6_6asky")]
 position = Vector2(33, 447)
 DialogResource = ExtResource("7_uaett")
-Quest = NodePath("SlayTest")
+Quest = NodePath("../QuestTrigger2/InteractWithNPC")
 
 [node name="SlayTest" parent="NPC" instance=ExtResource("7_0lxe1")]
 
@@ -103,7 +94,7 @@ debug_color = Color(0.935299, 1.61719e-05, 0.636979, 0.42)
 
 [node name="QuestTrigger2" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
 position = Vector2(60, 349)
-scale = Vector2(3.10824, 0.119054)
+scale = Vector2(2.03469, 0.11816)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("6_jhv87")
@@ -115,6 +106,7 @@ shape = SubResource("RectangleShape2D_75ve7")
 debug_color = Color(0.907471, 0.0001236, 0.739933, 0.42)
 
 [node name="InteractWithNPC" parent="QuestTrigger2" instance=ExtResource("17_dt2h7")]
+QuestItems = []
 
 [node name="QuestTrigger3" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
 collision_layer = 16
@@ -127,3 +119,15 @@ position = Vector2(108, 193)
 shape = SubResource("RectangleShape2D_o43ct")
 
 [node name="10 Apples" parent="QuestTrigger3" instance=ExtResource("13_m1a1h")]
+QuestItems = []
+
+[node name="Player" parent="." instance=ExtResource("5_dhbyu")]
+position = Vector2(114, 468)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Container" parent="Player" instance=ExtResource("8_5fhi4")]
+offset_left = -318.0
+offset_top = -177.0
+offset_right = 371.0
+offset_bottom = 214.0

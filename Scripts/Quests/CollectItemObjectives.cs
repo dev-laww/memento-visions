@@ -8,7 +8,7 @@ namespace Game.Quests;
 
 [Tool]
 [GlobalClass]
-public partial class PickupItemObjectives : QuestObjectives
+public partial class CollectItemObjectives : QuestObjectives
 {
 	[Export] public string itemUniqueName { get; set; }
 	private InventoryManager InventoryManager;
@@ -20,7 +20,6 @@ public partial class PickupItemObjectives : QuestObjectives
 		playerInventory.ItemPickUp += OnItemAdded;
 	}
 	
-
 	private void OnItemAdded(Item item)
 	{
 		if (item.UniqueName != itemUniqueName) return;
