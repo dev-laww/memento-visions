@@ -50,23 +50,23 @@ public abstract partial class Entity : CharacterBody2D
     /// </summary>
     public override void _Ready()
     {
-        string message = null;
-
-        switch (HurtBox)
-        {
-            case null when StatsManager == null:
-                message = "Entity must have a HurtBox and StatsManager node";
-                break;
-            case null:
-                message = "Entity must have a HurtBox node";
-                break;
-            default:
-                if (StatsManager == null)
-                    message = "Entity must have a StatsManager node";
-                break;
-        }
-
-        if (message != null) throw new NullReferenceException(message);
+        // string message = null;
+        //
+        // switch (HurtBox)
+        // {
+        //     case null when StatsManager == null:
+        //         message = "Entity must have a HurtBox and StatsManager node";
+        //         break;
+        //     case null:
+        //         message = "Entity must have a HurtBox node";
+        //         break;
+        //     default:
+        //         if (StatsManager == null)
+        //             message = "Entity must have a StatsManager node";
+        //         break;
+        // }
+        //
+        // if (message != null) throw new NullReferenceException(message);
         
         StatsManager.StatsDepleted += OnStatsDepleted;
     }
