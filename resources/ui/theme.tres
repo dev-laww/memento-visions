@@ -1,7 +1,8 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cxgbxsavclkj7"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://cxgbxsavclkj7"]
 
 [ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="2_4xgr6"]
 [ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="2_8j7kc"]
+[ext_resource type="Texture2D" uid="uid://dgsv4v8nhg8kt" path="res://assets/ui/scroll.png" id="2_areet"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7n05q"]
 texture = ExtResource("2_8j7kc")
@@ -43,6 +44,32 @@ texture_margin_right = 6.0
 texture_margin_bottom = 6.0
 region_rect = Rect2(32, 0, 32, 32)
 
+[sub_resource type="ImageTexture" id="ImageTexture_scn80"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0tspa"]
+texture = ExtResource("2_areet")
+texture_margin_left = 3.0
+texture_margin_top = 4.0
+texture_margin_right = 3.0
+texture_margin_bottom = 7.0
+region_rect = Rect2(11, 3, 10, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_whp4l"]
+texture = ExtResource("2_areet")
+texture_margin_left = 3.0
+texture_margin_top = 5.0
+texture_margin_right = 3.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(43, 3, 10, 25)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rw7yr"]
+texture = ExtResource("2_areet")
+texture_margin_left = 4.0
+texture_margin_top = 5.0
+texture_margin_right = 4.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(11, 32, 10, 32)
+
 [resource]
 default_font = ExtResource("2_4xgr6")
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
@@ -68,3 +95,14 @@ Button/styles/focus = SubResource("StyleBoxEmpty_l288m")
 Button/styles/hover = SubResource("StyleBoxTexture_m1lmm")
 Button/styles/normal = SubResource("StyleBoxTexture_f5w84")
 Button/styles/pressed = SubResource("StyleBoxTexture_tpi46")
+VScrollBar/icons/decrement = SubResource("ImageTexture_scn80")
+VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_scn80")
+VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_scn80")
+VScrollBar/icons/increment = SubResource("ImageTexture_scn80")
+VScrollBar/icons/increment_highlight = SubResource("ImageTexture_scn80")
+VScrollBar/icons/increment_pressed = SubResource("ImageTexture_scn80")
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_0tspa")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_0tspa")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_whp4l")
+VScrollBar/styles/scroll = SubResource("StyleBoxTexture_rw7yr")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxTexture_rw7yr")
