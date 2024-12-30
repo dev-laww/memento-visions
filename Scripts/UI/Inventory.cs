@@ -11,7 +11,6 @@ using Type = Game.Resources.Type;
 
 namespace Game.UI;
 
-// TODO: Cache items in slots
 [Tool]
 [Scene]
 public partial class Inventory : Control
