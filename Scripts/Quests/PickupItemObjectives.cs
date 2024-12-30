@@ -1,5 +1,7 @@
 using Game.Components.Managers;
+using Game.Resources;
 using Godot;
+using Game.Utils.Extensions;
 using GodotUtilities;
 
 namespace Game.Quests;
@@ -8,27 +10,24 @@ namespace Game.Quests;
 [GlobalClass]
 public partial class PickupItemObjectives : QuestObjectives
 {
-	[Export] public string ItemId { get; set; }
-	[Export] public bool ConsumeItems { get; set; } = true;
+	[Export] public string itemUniqueName { get; set; }
+	private InventoryManager InventoryManager;
 
 	public override void _Ready()
-	{
-		// Connect to inventory events
-		
+	{ 
+		var playerInventory = this.GetPlayer()?.Inventory;
+		if(playerInventory == null) return;
+		playerInventory.ItemPickUp += OnItemAdded;
 	}
+	
 
-	private void OnItemAdded(string itemId, int amount)
+	private void OnItemAdded(Item item)
 	{
-		if (itemId != ItemId) return;
+		if (item.UniqueName != itemUniqueName) return;
 
-		currentCount += amount;
+		currentCount += item.Value;
+		GD.Print(item.Value);
 		UpdateProgress();
-
-		if (ConsumeItems && currentCount >= TargetCount)
-		{
-			// Remove quest items from inventory
-
-		}
 	}
 
 	public override void _ExitTree()

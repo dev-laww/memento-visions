@@ -22,35 +22,34 @@ public partial class QuestGui : Control
         WireNodes();
     }
 
-    public override void _Ready()
-    {
-        Tree = GetNode<Tree>("Column/Tree");
-        QuestPanel = GetNode<PanelContainer>("PanelContainer");
-        QuestTitle = GetNode<Label>("PanelContainer/MarginContainer/VBoxContainer/Title");
-        QuestDescription = GetNode<Label>("PanelContainer/MarginContainer/VBoxContainer/Description");
-        QuestStatus = GetNode<Label>("PanelContainer/MarginContainer/VBoxContainer/Status");
-        QuestReward = GetNode<Label>("PanelContainer/MarginContainer/VBoxContainer/Reward");
-       
-        QuestManager.OnQuestsChanged += UpdateQuestList;
-        // QuestManager.OnQuestStarted += OnQuestStarted;
-        // QuestManager.OnQuestCompleted += OnQuestCompleted;
-        Tree.ItemSelected += OnItemSelected;
-        Visible = false;
-    } 
+public override void _Ready()
+{
+    Tree = GetNode<Tree>("Column/Tree");
+    Tree.Columns = 3;
+    QuestPanel = GetNode<PanelContainer>("PanelContainer");
+    QuestTitle = GetNode<Label>("PanelContainer/MarginContainer/VBoxContainer/Title");
+    QuestDescription = GetNode<Label>("PanelContainer/MarginContainer/VBoxContainer/Description");
+    QuestStatus = GetNode<Label>("PanelContainer/MarginContainer/VBoxContainer/Status");
+    QuestReward = GetNode<Label>("PanelContainer/MarginContainer/VBoxContainer/Reward");
 
-    private void UpdateQuestList()
+    QuestManager.OnQuestsChanged += UpdateQuestList;
+    Tree.ItemSelected += OnItemSelected;
+    Visible = false;
+}
+
+private void UpdateQuestList()
+{
+    Tree.Clear();
+    TreeRoot = Tree.CreateItem();
+    TreeRoot.SetText(0, "Quests");
+    foreach (var quest in QuestManager.GetActiveQuests())
     {
-        Tree.Clear();
-        TreeRoot = Tree.CreateItem();
-        TreeRoot.SetText(0, "Quests");
-        foreach (var quest in QuestManager.GetActiveQuests())
-        {
-            var item = Tree.CreateItem(TreeRoot);
-            item.SetText(0, quest.QuestTitle);
-            item.SetText(1, quest.Status.ToString());
-            item.SetText(2,$"{questObjectives.GetProgress():P0}");
-        }
+        var item = Tree.CreateItem(TreeRoot);
+        item.SetText(0, quest.QuestTitle);
+        item.SetText(1, quest.Status.ToString());
+        item.SetText(2, $"{questObjectives.GetProgress():P0}");
     }
+}
     
     public override void _ExitTree()
     {

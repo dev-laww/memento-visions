@@ -6,7 +6,7 @@ namespace Game.Quests;
 [GlobalClass]
 public partial class InvestigateObjectives : QuestObjectives
 {
-    private void OnInteracted()
+    public void OnInteracted()
     {
         ObjectiveComplete();
         GD.Print("Investigation Complete");

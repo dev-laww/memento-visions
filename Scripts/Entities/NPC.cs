@@ -47,7 +47,10 @@ namespace Game.Entities
 
         public void CompleteQuest()
         {
-            if (Quest.Status == Quest.QuestStatus.Active) Quest.CompleteQuest();
+            if (Quest.Objectives is InvestigateObjectives investigateObjectives)
+            {
+                investigateObjectives.OnInteracted();
+            }
         }
 
 
