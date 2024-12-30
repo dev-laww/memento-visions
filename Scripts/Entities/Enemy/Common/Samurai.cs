@@ -11,20 +11,13 @@ namespace Game.Enemy.Common;
 [Scene]
 public partial class Samurai : Entity
 {
-    [Signal] public delegate void EnemyDiedEventHandler(string enemyName);
-
     [Node] private Velocity velocity;
     [Node] private Area2D Range;
     [Node] private AnimationPlayer Animation;
-    
-    [Export] private string Name;
-    
 
     private bool inRange;
     private bool attacking;
     private string attackDirection;
-    
-    
     
     public override void _Notification(int what)
     {
@@ -35,9 +28,7 @@ public partial class Samurai : Entity
 
     public override void _Ready()
     {
-         
         base._Ready();
-        StatsManager.StatsDepleted += OnStatsDepleted;
         Range.BodyEntered += body =>
         {
             inRange = true;

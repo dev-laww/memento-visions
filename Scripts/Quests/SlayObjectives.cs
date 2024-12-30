@@ -16,24 +16,23 @@ public partial class SlayObjectives : QuestObjectives
 
     public override void _Ready()
     {
-       GetTree().GetNodesInGroup("Enemies")
+        GD.Print("called");
+        GetTree().GetNodesInGroup("Enemy")
             .Where(enemy => enemy is Entity)
             .Cast<Entity>()
             .ToList()
-            .ForEach (enemy => enemy.Death += OnEnemyDied);
-       
-
+            .ForEach(enemy => enemy.Death += OnEnemyDied);
     }
 
     public void OnEnemyDied(Entity enemy)
     {
-        string EnemyKilled = enemy.UniqueName;
-        GD.Print("Enemy Killed: " + EnemyKilled + " Enemy Name: " + UniqueName);
+        var EnemyKilled = enemy.UniqueName;
+
         if (EnemyKilled != UniqueName) return;
-        if (amount != TargetCount)
-        {
-            currentCount++;
-            UpdateProgress();
-        }
+        if (amount == TargetCount) return;
+
+        currentCount++;
+        UpdateProgress();
+        GD.Print(currentCount);
     }
 }
