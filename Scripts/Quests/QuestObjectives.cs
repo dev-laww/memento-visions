@@ -9,23 +9,31 @@ namespace Game.Quests;
 public partial class QuestObjectives : Node
 {
     [Export] public Quest quest { get; set; }
+    [Export] public int TargetCount { get; set; } = 1;
+    protected int currentCount;
 
-    [Export] public int TargetCount;
-
-    public void StartQuest()
+    public virtual void StartQuest()
     {
+        currentCount = 0;
         quest.Status = Quest.QuestStatus.Active;
     }
 
-    public void ObjectiveComplete()
+    public virtual void ObjectiveComplete()
     {
-        quest.Status = Quest.QuestStatus.Completed;
+        quest.CompleteQuest();
     }
-
-    public void DeliverQuest()
+    
+    public virtual float GetProgress()
     {
-        quest.Status = Quest.QuestStatus.Delivered;
-
-        //give reward
+        return (float) currentCount / TargetCount;
     }
+    
+    public virtual void UpdateProgress()
+    {
+        if (currentCount >= TargetCount)
+        {
+            ObjectiveComplete();
+        }
+    }
+    
 }

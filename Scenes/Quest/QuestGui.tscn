@@ -14,10 +14,7 @@ region_rect = Rect2(32, 0, 32, 32)
 texture = ExtResource("3_f3hhp")
 region_rect = Rect2(0, 0, 32, 32)
 
-[node name="QuestGui" type="CanvasLayer"]
-script = ExtResource("1_13ams")
-
-[node name="Container" type="Control" parent="."]
+[node name="Container" type="Control"]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 0
@@ -25,8 +22,9 @@ offset_left = 1.0
 offset_right = 644.0
 offset_bottom = 358.0
 theme = ExtResource("2_co4w4")
+script = ExtResource("1_13ams")
 
-[node name="Column" type="VBoxContainer" parent="Container"]
+[node name="Column" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -38,12 +36,12 @@ grow_vertical = 2
 theme = SubResource("Theme_iv430")
 alignment = 1
 
-[node name="Title" type="Label" parent="Container/Column"]
+[node name="Title" type="Label" parent="Column"]
 layout_mode = 2
 text = "Quest "
 horizontal_alignment = 1
 
-[node name="Tree" type="Tree" parent="Container/Column"]
+[node name="Tree" type="Tree" parent="Column"]
 clip_contents = false
 layout_direction = 1
 layout_mode = 2
@@ -56,7 +54,7 @@ enable_recursive_folding = false
 hide_root = true
 select_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="Container"]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -71,34 +69,34 @@ grow_vertical = 2
 theme = ExtResource("2_co4w4")
 metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="Container/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 45
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 45
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Container/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 clip_contents = true
 layout_mode = 2
 size_flags_stretch_ratio = 20.0
 theme = ExtResource("2_co4w4")
 theme_override_constants/separation = 19
 
-[node name="Title" type="Label" parent="Container/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 uppercase = true
 
-[node name="Status" type="Label" parent="Container/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Status" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Description" type="Label" parent="Container/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Description" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Reward" type="Label" parent="Container/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Reward" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="CloseButton" type="Button" parent="Container"]
+[node name="CloseButton" type="Button" parent="."]
 modulate = Color(0.940362, 5.17406e-06, 1.15514e-06, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 0

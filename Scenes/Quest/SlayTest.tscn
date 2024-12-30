@@ -13,6 +13,6 @@ Experience = 2
 
 [node name="Slayyy" type="Node" parent="." node_paths=PackedStringArray("quest")]
 script = ExtResource("2_2b0fh")
-EnemyName = "Samurai"
+UniqueName = "enemy:samurai"
 quest = NodePath("..")
-TargetCount = 4
+TargetCount = 2

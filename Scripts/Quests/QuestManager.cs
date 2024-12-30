@@ -10,6 +10,8 @@ public partial class QuestManager : Node
 {
     // Event to notify when quests change
     public static event Action OnQuestsChanged;
+    public static event Action<Quest> OnQuestStarted;
+    public static event Action<Quest> OnQuestCompleted;
 
     public static List<Quest> Quests = new();
 
@@ -23,7 +25,6 @@ public partial class QuestManager : Node
         if (!Quests.Contains(quest))
         {
             Quests.Add(quest);
-            // Trigger the event to notify GUI and other listeners
             OnQuestsChanged?.Invoke();
         }
     }
@@ -33,7 +34,6 @@ public partial class QuestManager : Node
         if (Quests.Contains(quest))
         {
             Quests.Remove(quest);
-            // Trigger the event to notify GUI and other listeners
             OnQuestsChanged?.Invoke();
         }
     }
@@ -53,8 +53,13 @@ public partial class QuestManager : Node
         return Quests.FindAll(quest => quest.Status == Quest.QuestStatus.Completed);
     }
 
-    public static void PrintAllQuests()
+    public static void NotifyQuestStarted(Quest quest)
     {
-        foreach (var quest in Quests) GD.Print($"Quest: {quest.QuestTitle}, Status: {quest.Status}");
+        OnQuestStarted?.Invoke(quest);
+    }
+
+    public static void NotifyQuestCompleted(Quest quest)
+    {
+        OnQuestCompleted?.Invoke(quest);
     }
 }

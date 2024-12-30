@@ -14,3 +14,4 @@ Experience = 1
 [node name="InvestigateObjectives" type="Node" parent="." node_paths=PackedStringArray("quest")]
 script = ExtResource("3_c28bd")
 quest = NodePath("..")
+TargetCount = 0

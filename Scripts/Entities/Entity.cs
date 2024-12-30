@@ -18,7 +18,7 @@ public abstract partial class Entity : CharacterBody2D
     /// Unique name of the entity.
     /// </summary>
     [Export]
-    private string UniqueName;
+    public string UniqueName;
 
     /// <summary>
     /// Reference to the StatsManager node.

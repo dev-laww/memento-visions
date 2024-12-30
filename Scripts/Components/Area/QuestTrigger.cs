@@ -25,13 +25,8 @@ public partial class QuestTrigger : Area2D
 
     private void OnBodyEntered(Node body)
     {
-        if (Quest.Objectives is SlayObjectives slayObjectives) slayObjectives.OnEnemyDied("EnemyName");
-
         if (triggered) return;
-
         Quest.StartQuest();
-        Quest.PrintQuest();
-
         triggered = true;
     }
 
@@ -45,7 +40,6 @@ public partial class QuestTrigger : Area2D
 
         if (string.IsNullOrEmpty(Quest.QuestTitle))
             warnings.Add("TargetId is not set.");
-
         return warnings.ToArray();
     }
 }

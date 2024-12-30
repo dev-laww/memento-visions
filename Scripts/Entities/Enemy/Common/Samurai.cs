@@ -16,14 +16,16 @@ public partial class Samurai : Entity
     [Node] private Velocity velocity;
     [Node] private Area2D Range;
     [Node] private AnimationPlayer Animation;
-
-    [Export] private Quest quest;
+    
     [Export] private string Name;
+    
 
     private bool inRange;
     private bool attacking;
     private string attackDirection;
-
+    
+    
+    
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
@@ -33,6 +35,7 @@ public partial class Samurai : Entity
 
     public override void _Ready()
     {
+         
         base._Ready();
         StatsManager.StatsDepleted += OnStatsDepleted;
         Range.BodyEntered += body =>
@@ -123,4 +126,5 @@ public partial class Samurai : Entity
 
         StateMachine.ChangeState(Hurt);
     }
+    
 }

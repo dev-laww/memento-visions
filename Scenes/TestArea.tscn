@@ -1,13 +1,35 @@
-[gd_scene load_steps=9 format=4 uid="uid://d1sfelxvkm0qk"]
+[gd_scene load_steps=17 format=4 uid="uid://cwuokpjg3q21s"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_2wwem"]
 [ext_resource type="TileSet" uid="uid://bcvije43w8ygj" path="res://resources/tilesets/city.tres" id="2_0d65y"]
 [ext_resource type="Script" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_ush2q"]
+[ext_resource type="Script" path="res://Scripts/Components/Area/ContinuousDamageHitBox.cs" id="4_eh38v"]
 [ext_resource type="PackedScene" uid="uid://d1gnxumr8r1hu" path="res://Scenes/Entities/Enemy/Common/Samurai.tscn" id="4_ff3sm"]
+[ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="5_4mm67"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="5_dhbyu"]
 [ext_resource type="PackedScene" uid="uid://bx3whdhahfxx8" path="res://assets/entities/Npc.tscn" id="6_6asky"]
+[ext_resource type="Script" path="res://Scripts/Components/Area/QuestTrigger.cs" id="6_jhv87"]
+[ext_resource type="Script" path="res://Scripts/Resources/Stats.cs" id="6_y471r"]
 [ext_resource type="PackedScene" uid="uid://ceex4qw6g8cph" path="res://Scenes/Quest/SlayTest.tscn" id="7_0lxe1"]
 [ext_resource type="Resource" uid="uid://cxd7fxbcaj6xb" path="res://resources/dialogues/Chapter1.dialogue" id="7_uaett"]
+[ext_resource type="PackedScene" uid="uid://bkgjauxklnmyv" path="res://Scenes/Quest/QuestGui.tscn" id="8_5fhi4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6bk0g"]
+size = Vector2(127.5, 141.5)
+
+[sub_resource type="Resource" id="Resource_lyd12"]
+script = ExtResource("6_y471r")
+MaxHealth = 100.0
+MaxMana = 100.0
+Attack = 10.0
+Magic = 10.0
+Defense = 10.0
+Speed = 50.0
+PhysicalDamageMultiplier = 1.0
+MagicalDamageMultiplier = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rrm0u"]
+size = Vector2(8.43156, 26.5766)
 
 [node name="Test Area" type="Node2D"]
 
@@ -19,14 +41,36 @@ tile_map_data = PackedByteArray("AAAAAAAAAgABAAEAAAABAAAAAgABAAEAAAACAAAAAgABAAE
 tile_set = ExtResource("2_0d65y")
 script = ExtResource("3_ush2q")
 
+[node name="ContinuousDamageHitBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
+z_index = 1
+position = Vector2(483, 451)
+collision_layer = 1024
+collision_mask = 2048
+script = ExtResource("4_eh38v")
+damageInterval = 0.1
+StatsManager = NodePath("StatsManager")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContinuousDamageHitBox"]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_6bk0g")
+debug_color = Color(0.684873, 0.308652, 0.977388, 0.42)
+
+[node name="StatsManager" parent="ContinuousDamageHitBox" instance=ExtResource("5_4mm67")]
+Stats = SubResource("Resource_lyd12")
+
 [node name="Samurai" parent="." instance=ExtResource("4_ff3sm")]
 position = Vector2(707, 342)
-Name = "Samurai"
 
 [node name="Player" parent="." instance=ExtResource("5_dhbyu")]
 position = Vector2(114, 468)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Container" parent="Player" instance=ExtResource("8_5fhi4")]
+offset_left = -318.0
+offset_top = -177.0
+offset_right = 371.0
+offset_bottom = 214.0
 
 [node name="NPC" parent="." node_paths=PackedStringArray("Quest") instance=ExtResource("6_6asky")]
 position = Vector2(33, 447)
@@ -34,3 +78,17 @@ DialogResource = ExtResource("7_uaett")
 Quest = NodePath("SlayTest")
 
 [node name="SlayTest" parent="NPC" instance=ExtResource("7_0lxe1")]
+
+[node name="QuestTrigger" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
+position = Vector2(230, 438)
+scale = Vector2(-0.524191, 1.79333)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("6_jhv87")
+Quest = NodePath("../NPC/SlayTest")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
+rotation = -3.14159
+scale = Vector2(4.97766, -4.00658)
+shape = SubResource("RectangleShape2D_rrm0u")
+debug_color = Color(0.935299, 1.61719e-05, 0.636979, 0.42)

@@ -24,26 +24,36 @@ public partial class Quest : Node
     [Export] public int Reward;
     [Export] public string[] QuestItems;
     [Export] public int Experience;
+    
+    public override void _Ready()
+    {
+    }
+    
 
     public void StartQuest()
     {
+        if (Status != QuestStatus.Available) return;
         Status = QuestStatus.Active;
-        GD.Print("Quest Started");
+        // Objective?.Initialize(this);
         QuestManager.AddQuest(this);
+        QuestManager.NotifyQuestStarted(this);
+        GD.Print("Quest Started");
     }
 
     public void CompleteQuest()
     {
+        if (Status != QuestStatus.Active) return;
         Status = QuestStatus.Completed;
+        QuestManager.NotifyQuestCompleted(this);
         GD.Print("Quest Completed");
     }
 
-    public void PrintQuest()
+    public void DeliverQuest()
     {
-        foreach (var quest in QuestManager.Quests)
-        {
-            GD.Print(quest.QuestTitle);
-            GD.Print("Quest Status: " + quest.Status);
-        }
+        if (Status != QuestStatus.Completed) return;
+        Status = QuestStatus.Delivered;
+        // Objective?.Cleanup();
+        QuestManager.RemoveQuest(this);
+        GD.Print("Quest Delivered");
     }
 }
