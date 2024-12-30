@@ -9,7 +9,7 @@ public class Recipe
 
     [JsonPropertyName("unique_name")] public string UniqueName { get; set; }
 
-    [JsonPropertyName("result")] public RecipeItem RecipeItem { get; set; }
+    [JsonPropertyName("result")] public RecipeItem Result { get; set; }
 
     [JsonPropertyName("ingredients")] public List<RecipeItem> Ingredients { get; set; }
 }

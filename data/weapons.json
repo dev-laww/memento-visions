@@ -6,7 +6,7 @@
 		"scene": "res://Scenes/Weapons/Daggers/Dagger.tscn"
 	},
 	{
-		"name": "Dagger",
+		"name": "Sword",
 		"unique_name": "weapon:sword",
 		"resource": "res://resources/weapons/Swords/Sword.tres",
 		"scene": "res://Scenes/Weapons/Swords/Sword.tscn"

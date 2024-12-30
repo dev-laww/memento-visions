@@ -29,7 +29,7 @@ public partial class Item : Resource
     public int Value
     {
         get => _value;
-        private set => SetValue(value);
+        set => SetValue(value);
     }
 
     [Export(PropertyHint.MultilineText)] public string Description;

@@ -1,16 +1,16 @@
 [
-    {
-        "name": "Test Recipe",
-        "unique_name": "recipe:test",
-        "result": {
-            "item": "res://resources/items/test.tres",
-            "amount": 1
-        },
-        "ingredients": [
-            {
-                "item": "res://resources/items/test.tres",
-                "amount": 1
-            }
-        ]
-    }
+	{
+		"name": "Red Sword",
+		"unique_name": "recipe:test",
+		"result": {
+			"unique_name": "weapon:sword",
+			"amount": 1
+		},
+		"ingredients": [
+			{
+				"unique_name": "item:",
+				"amount": 1
+			}
+		]
+	}
 ]

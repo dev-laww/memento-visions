@@ -1,7 +1,7 @@
 [
-    {
-        "name": "Test Item",
-        "unique_name": "item:test",
-        "resource": "res://resources/items/test.tres"
-    }
+	{
+		"name": "Apple",
+		"unique_name": "item:test",
+		"resource": "res://resources/items/apple.tres"
+	}
 ]
