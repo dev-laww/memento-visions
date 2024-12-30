@@ -1,25 +1,13 @@
-[gd_scene load_steps=31 format=3 uid="uid://svqrge4l63b4"]
+[gd_scene load_steps=29 format=3 uid="uid://svqrge4l63b4"]
 
 [ext_resource type="Texture2D" uid="uid://bhg24ad0ut6dq" path="res://assets/ui/slot.png" id="1_dwah6"]
-[ext_resource type="Script" path="res://Scripts/UI/Inventory/Slot.cs" id="1_qhish"]
+[ext_resource type="Script" path="res://Scripts/UI/Common/Slot.cs" id="1_qhish"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_eu5ef"]
-[ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="3_aiab2"]
 [ext_resource type="Texture2D" uid="uid://drys52s61n2w" path="res://assets/ui/selector.png" id="3_o2xtx"]
 [ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/inventory/items/temp/Item5.png" id="3_xgpvm"]
 [ext_resource type="Script" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="4_8s03u"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="4_luf03"]
 [ext_resource type="LabelSettings" uid="uid://cktp08gmb038p" path="res://resources/misc/normal-text.tres" id="5_7i6yw"]
-
-[sub_resource type="Resource" id="Resource_8toyk"]
-resource_local_to_scene = true
-script = ExtResource("3_aiab2")
-Name = "Apple"
-UniqueName = "item:apple"
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-icon = ExtResource("3_xgpvm")
-sprite = ExtResource("3_xgpvm")
-Stackable = true
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b5sbs"]
 texture = ExtResource("1_dwah6")
@@ -144,7 +132,7 @@ _data = {
 "select": SubResource("Animation_3mhtl")
 }
 
-[node name="Slot" type="Control" groups=["Slots"]]
+[node name="Slot" type="Control"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 3
 anchors_preset = 0
@@ -152,7 +140,6 @@ offset_right = 32.0
 offset_bottom = 32.0
 mouse_default_cursor_shape = 2
 script = ExtResource("1_qhish")
-Item = SubResource("Resource_8toyk")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1

@@ -4,20 +4,18 @@ using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
-namespace Game.UI.Inventory;
+namespace Game.UI.Common;
 
 [Tool]
 [Scene]
 public partial class Slot : Control
 {
     [Export]
-    public bool Selected
+    public bool IsSelected
     {
         get => _selected;
         private set
         {
-            _selected = value;
-
             if (value)
                 Select();
             else
@@ -52,11 +50,12 @@ public partial class Slot : Control
         }
     }
 
-    [Node] public Button button;
+    [Node] private Button button;
     [Node] private Label label;
     [Node] private TextureRect icon;
     [Node] private AnimationPlayer animationPlayer;
 
+    [Signal] public delegate void SelectedEventHandler(Slot slot);
 
     private Item item;
     private bool _selected;
@@ -71,12 +70,7 @@ public partial class Slot : Control
 
     public override void _Ready()
     {
-        if (Selected) Select();
-
-        if (Engine.IsEditorHint()) return;
-
         button.Pressed += Select;
-        button.SetDefaultCursorShape(CursorShape.PointingHand);
 
         if (this.GetPlayer() == null) return;
 
@@ -99,9 +93,10 @@ public partial class Slot : Control
         slots.ForEach(s => s.Deselect());
         animationPlayer.Play("select");
         _selected = true;
+        EmitSignal(SignalName.Selected, this);
     }
 
-    private void Deselect()
+    public void Deselect()
     {
         if (animationPlayer == null) return;
 

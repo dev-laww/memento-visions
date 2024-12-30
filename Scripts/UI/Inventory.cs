@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Entities.Player;
 using Game.Resources;
+using Game.UI.Common;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 using Type = Game.Resources.Type;
 
-namespace Game.UI.Inventory;
+namespace Game.UI;
 
-// TODO: Cache items in slots
+[Tool]
 [Scene]
 public partial class Inventory : Control
 {
@@ -45,7 +46,7 @@ public partial class Inventory : Control
     {
         SetupEventHandlers();
 
-        if (player == null) return;
+        if (player == null || Engine.IsEditorHint()) return;
 
         Reset();
     }
@@ -55,6 +56,8 @@ public partial class Inventory : Control
         equipButton.Toggled += OnEquipButtonToggle;
         closeButton.Pressed += () => GetTree().CreateTimer(0.1f).Timeout += Close;
         VisibilityChanged += OnVisibilityChanged;
+        slots.ForEach(slot => slot.Selected += OnSlotSelected);
+        slots.First().Select();
 
         if (player == null) return;
 
@@ -66,14 +69,16 @@ public partial class Inventory : Control
         equipButton.Visible = false;
         materialItemsButton.ButtonPressed = true;
         FilterItems(Type.Material.ToString());
-        slots.First().Select();
         Clear();
         SelectItem(null);
+        slots.First().Select();
     }
 
     public override void _Process(double delta)
     {
-        var selectedSlotItem = slots.FirstOrDefault(s => s.Selected)?.Item;
+        if (Engine.IsEditorHint() || player == null) return;
+
+        var selectedSlotItem = slots.FirstOrDefault(s => s.IsSelected)?.Item;
 
         var filter = selectedButton.Name.ToString().Replace("ItemsButton", "");
 
@@ -109,7 +114,9 @@ public partial class Inventory : Control
 
     private void OnVisibilityChanged()
     {
-        player?.SetProcessInput(!Visible);
+        if (Engine.IsEditorHint() || player == null) return;
+
+        player.SetProcessInput(!Visible);
 
         if (!Visible) return;
 
@@ -118,6 +125,8 @@ public partial class Inventory : Control
 
     private void FilterItems(string filter)
     {
+        if (Engine.IsEditorHint()) return;
+
         var type = (Type)Enum.Parse(typeof(Type), filter);
 
         Clear();
@@ -181,4 +190,22 @@ public partial class Inventory : Control
     private void Clear() => slots.ForEach(slot => slot.Item = null);
     private void Toggle() => Visible = !Visible;
     private void Close() => Visible = false;
+
+    private void OnSlotSelected(Slot slot)
+    {
+        var unselectedSlots = slots.Where(s => s != slot).ToList();
+
+        unselectedSlots.ForEach(s => s.Deselect());
+
+        NotifyPropertyListChanged();
+    }
+
+    public override void _ExitTree()
+    {
+        slots.ForEach(slot => slot.Selected -= OnSlotSelected);
+
+        if (player == null) return;
+
+        player.Inventory.ItemPickUp -= OnItemPickup;
+    }
 }
