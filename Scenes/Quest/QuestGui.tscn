@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkgjauxklnmyv"]
+[gd_scene load_steps=11 format=3 uid="uid://bkgjauxklnmyv"]
 
 [ext_resource type="Script" path="res://Scripts/Quests/QuestGui.cs" id="1_13ams"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_co4w4"]
@@ -7,6 +7,10 @@
 [ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="4_i5ols"]
 
 [sub_resource type="Theme" id="Theme_iv430"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jxthp"]
+texture = ExtResource("3_gicar")
+region_rect = Rect2(5.51383, 5.51389, 20.5758, 20.9715)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wruye"]
 texture = ExtResource("3_gicar")
@@ -32,13 +36,21 @@ script = ExtResource("1_13ams")
 
 [node name="Column" type="VBoxContainer" parent="."]
 layout_mode = 1
+offset_top = 20.0
 offset_right = 305.0
 offset_bottom = 357.0
 theme = SubResource("Theme_iv430")
 alignment = 1
 
-[node name="Title" type="Label" parent="Column"]
+[node name="PanelContainer" type="PanelContainer" parent="Column"]
 layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_co4w4")
+theme_override_styles/panel = SubResource("StyleBoxTexture_jxthp")
+
+[node name="Title" type="Label" parent="Column/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 0
 theme = ExtResource("2_co4w4")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0.61339, 0.61339, 0.61339, 1)
@@ -46,12 +58,22 @@ theme_override_font_sizes/font_size = 16
 text = "Quest "
 horizontal_alignment = 1
 
-[node name="Tree" type="Tree" parent="Column"]
+[node name="MarginContainer" type="MarginContainer" parent="Column/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_co4w4")
+theme_override_constants/margin_left = 45
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 45
+theme_override_constants/margin_bottom = 25
+
+[node name="Tree" type="Tree" parent="Column/PanelContainer/MarginContainer"]
 clip_contents = false
 layout_direction = 1
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_co4w4")
+theme_override_constants/button_margin = 10
 allow_reselect = true
 allow_search = false
 hide_folding = true
@@ -67,7 +89,8 @@ anchor_top = 0.0810056
 anchor_right = 0.987558
 anchor_bottom = 1.0
 offset_left = 317.0
-offset_top = -1.0
+offset_top = -8.00001
+offset_right = 0.000183105
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_co4w4")
@@ -75,7 +98,6 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_wruye")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
-theme = ExtResource("2_co4w4")
 theme_override_constants/margin_left = 45
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 45

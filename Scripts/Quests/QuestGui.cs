@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Godot;
 using GodotUtilities;
 
@@ -15,7 +17,7 @@ public partial class QuestGui : Control
     private Label QuestReward;
     private PanelContainer QuestPanel;
     private Button CloseButton;
-    QuestObjectives questObjectives = new QuestObjectives();
+
 
     public override void _Notification(int what)
     {
@@ -39,6 +41,7 @@ public override void _Ready()
     Tree.ItemSelected += OnItemSelected;
     Visible = false;
     CloseButton.Pressed += ToggleQuestGui;
+    QuestObjectives.OnProgressUpdated += UpdateQuestList;
 }
 
 private void UpdateQuestList()
@@ -46,27 +49,44 @@ private void UpdateQuestList()
     Tree.Clear();
     TreeRoot = Tree.CreateItem();
     TreeRoot.SetText(0, "Quests");
-    
+        
     foreach (var quest in QuestManager.GetActiveQuests()) 
     {
         var item = Tree.CreateItem(TreeRoot);
         item.SetText(0, quest.QuestTitle);
         item.SetText(1, quest.Status.ToString());
-        item.SetText(2, $"{questObjectives.GetProgress():P0}");
+
+        if (quest.Objectives != null)
+        {
+            item.SetText(2, $"{quest.Objectives.currentCount}/{quest.Objectives.TargetCount}");
+        }
+        else
+        {
+            item.SetText(2, "N/A");
+        }
     }
-    
+        
     foreach (var quest in QuestManager.GetCompletedQuests())
     {
         var item = Tree.CreateItem(TreeRoot);
         item.SetText(0, quest.QuestTitle);
         item.SetText(1, quest.Status.ToString());
-        item.SetText(2, $"{questObjectives.GetProgress():P0}");
+
+        if (quest.Objectives != null)
+        {
+            item.SetText(2, $"{quest.Objectives.TargetCount}/{quest.Objectives.TargetCount}");
+        }
+        else
+        {
+            item.SetText(2, "Complete");
+        }
     }
 }
     
     public override void _ExitTree()
     {
         QuestManager.OnQuestsChanged -= UpdateQuestList;
+        QuestObjectives.OnProgressUpdated -= UpdateQuestList;
         Tree.ItemSelected -= OnItemSelected;
         QuestPanel.Visible = false;
     }
@@ -85,8 +105,39 @@ private void UpdateQuestList()
         QuestPanel.Visible = true;
         QuestTitle.Text = quest.QuestTitle;
         QuestDescription.Text = quest.QuestDescription;
-        QuestStatus.Text = quest.Status.ToString();
-        QuestReward.Text = $"Gold: {quest.Gold} Experience: {quest.Experience}";
+        
+        if (quest.Objectives != null)
+        {
+            if (quest.Status == Quest.QuestStatus.Completed)
+            {
+                QuestStatus.Text = $"Completed ({quest.Objectives.TargetCount}/{quest.Objectives.TargetCount})";
+            }
+            else
+            {
+                QuestStatus.Text = $"Progress: {quest.Objectives.currentCount}/{quest.Objectives.TargetCount}";
+            }
+        }
+        else
+        {
+            QuestStatus.Text = quest.Status.ToString();
+        }
+        
+        var rewardText = $"Gold: {quest.Gold} Experience: {quest.Experience}";
+        
+        if (quest.QuestItems != null && quest.QuestItems.Length > 0)
+        {
+            var itemNames = quest.QuestItems
+                .Where(item => item != null)
+                .Select(item => item.Name)
+                .ToList();
+            
+            if (itemNames.Any())
+            {
+                rewardText += $"\nItems: {string.Join(", ", itemNames)}";
+            }
+        }
+
+        QuestReward.Text = rewardText;
     }
 
     public void ToggleQuestGui()
