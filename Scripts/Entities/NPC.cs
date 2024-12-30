@@ -43,6 +43,7 @@ namespace Game.Entities
             {
                 investigateObjectives.StartInvestigation();
             }
+            
         }
 
         public void CompleteQuest()
@@ -51,6 +52,7 @@ namespace Game.Entities
             {
                 investigateObjectives.OnInteracted("NPC");
             }
+            Quest.DeliverQuest();
         }
 
 

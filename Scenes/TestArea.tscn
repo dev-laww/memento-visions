@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://cwuokpjg3q21s"]
+[gd_scene load_steps=30 format=4 uid="uid://cwuokpjg3q21s"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_2wwem"]
 [ext_resource type="Script" path="res://Scripts/Quests/TestArea.cs" id="1_5ueqw"]
@@ -34,7 +34,7 @@ Speed = 50.0
 PhysicalDamageMultiplier = 1.0
 MagicalDamageMultiplier = 1.0
 
-[sub_resource type="Resource" id="Resource_3ph0v"]
+[sub_resource type="Resource" id="Resource_l6x7t"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -46,7 +46,7 @@ icon = ExtResource("13_eyarq")
 sprite = ExtResource("13_eyarq")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_cjdij"]
+[sub_resource type="Resource" id="Resource_hus4u"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -58,7 +58,19 @@ icon = ExtResource("13_eyarq")
 sprite = ExtResource("13_eyarq")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_ldoqy"]
+[sub_resource type="Resource" id="Resource_afe6l"]
+resource_local_to_scene = true
+script = ExtResource("14_ov4of")
+Name = "Apple"
+UniqueName = "item:apple"
+Type = 1
+Value = 1
+Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
+icon = ExtResource("13_eyarq")
+sprite = ExtResource("13_eyarq")
+Stackable = true
+
+[sub_resource type="Resource" id="Resource_vnhhs"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -75,6 +87,18 @@ size = Vector2(8.43156, 26.5766)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75ve7"]
 size = Vector2(51.571, 114.834)
+
+[sub_resource type="Resource" id="Resource_s23v0"]
+resource_local_to_scene = true
+script = ExtResource("14_ov4of")
+Name = "Apple"
+UniqueName = "item:apple"
+Type = 1
+Value = 1
+Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
+icon = ExtResource("13_eyarq")
+sprite = ExtResource("13_eyarq")
+Stackable = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o43ct"]
 size = Vector2(214, 20)
@@ -116,18 +140,21 @@ DialogResource = ExtResource("7_uaett")
 Quest = NodePath("../QuestTrigger2/InteractWithNPC")
 
 [node name="SlayTest" parent="NPC" instance=ExtResource("7_0lxe1")]
+Gold = 11
+Experience = 10
+QuestItems = [SubResource("Resource_l6x7t")]
 
-[node name="Apple3" parent="." instance=ExtResource("12_lbij3")]
+[node name="Item" parent="." instance=ExtResource("12_lbij3")]
 position = Vector2(60, 129)
-ItemResource = SubResource("Resource_3ph0v")
+ItemResource = SubResource("Resource_hus4u")
 
-[node name="Apple2" parent="." instance=ExtResource("12_lbij3")]
+[node name="Item2" parent="." instance=ExtResource("12_lbij3")]
 position = Vector2(175, 134)
-ItemResource = SubResource("Resource_cjdij")
+ItemResource = SubResource("Resource_afe6l")
 
-[node name="Apple" parent="." instance=ExtResource("12_lbij3")]
+[node name="Item3" parent="." instance=ExtResource("12_lbij3")]
 position = Vector2(109, 125)
-ItemResource = SubResource("Resource_ldoqy")
+ItemResource = SubResource("Resource_vnhhs")
 
 [node name="QuestTrigger" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
 position = Vector2(230, 438)
@@ -157,6 +184,7 @@ shape = SubResource("RectangleShape2D_75ve7")
 debug_color = Color(0.907471, 0.0001236, 0.739933, 0.42)
 
 [node name="InteractWithNPC" parent="QuestTrigger2" instance=ExtResource("17_dt2h7")]
+QuestItems = [SubResource("Resource_s23v0")]
 
 [node name="QuestTrigger3" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
 collision_layer = 16

@@ -81,6 +81,7 @@ Button/font_sizes/font_size = 8
 Button/styles/normal = SubResource("StyleBoxTexture_f5w84")
 Button/styles/pressed = SubResource("StyleBoxTexture_tpi46")
 Tree/constants/button_margin = 4
+Tree/constants/parent_hl_line_margin = 13
 Tree/styles/button_pressed = SubResource("StyleBoxTexture_7fmyg")
 Tree/styles/panel = SubResource("StyleBoxTexture_1k5nv")
 VScrollBar/icons/decrement = SubResource("ImageTexture_scn80")

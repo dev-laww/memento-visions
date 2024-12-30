@@ -27,7 +27,7 @@ public partial class QuestGui : Control
 
 public override void _Ready()
 {
-    Tree = GetNode<Tree>("Column/Tree");
+    Tree = GetNode<Tree>("Column/PanelContainer/MarginContainer/Tree");
     Tree.Columns = 3;
     QuestPanel = GetNode<PanelContainer>("PanelContainer");
     QuestTitle = GetNode<Label>("PanelContainer/MarginContainer/VBoxContainer/Title");

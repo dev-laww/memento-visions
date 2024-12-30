@@ -1,7 +1,10 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using Game.Entities.Player;
 using Game.Resources;
+using Game.UI;
+using Game.Utils.Extensions;
 using GodotUtilities;
 
 namespace Game.Quests;
@@ -53,8 +56,21 @@ public partial class Quest : Node
 
     public void DeliverQuest()
     {
+        var playerInventory = this.GetPlayer()?.Inventory;
+        if (playerInventory == null)
+        {
+            GD.PrintErr("Player inventory not found!");
+            return;
+        }
         if (Status != QuestStatus.Completed) return;
         Status = QuestStatus.Delivered;
+        // Player.AddGold(Gold);
+        // Player.AddExperience(Experience);
+        foreach (var item in QuestItems)
+        {
+            playerInventory.AddItem(item);
+        }
+        
 
         QuestManager.RemoveQuest(this);
         GD.Print("Quest Delivered");
