@@ -30,9 +30,6 @@ public partial class Dummy : Entity
     {
         animationPlayer.Stop();
 
-        if (critical)
-            animationPlayer.Play("crit");
-        else
-            animationPlayer.Play("hit");
+        animationPlayer.Play(critical ? "crit" : "hit");
     }
 }
