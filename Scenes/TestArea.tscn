@@ -26,6 +26,8 @@ Name = "Samurai"
 [node name="Player" parent="." instance=ExtResource("5_dhbyu")]
 position = Vector2(114, 468)
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
 [node name="NPC" parent="." node_paths=PackedStringArray("Quest") instance=ExtResource("6_6asky")]
 position = Vector2(33, 447)
 DialogResource = ExtResource("7_uaett")

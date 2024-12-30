@@ -1,18 +1,17 @@
 using Game.Components.Managers;
 using Game.Components.Movement;
+using Game.Entities;
 using Game.Quests;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
-using GodotUtilities.Logic;
 
 namespace Game.Enemy.Common;
 
 [Scene]
-public partial class Samurai : CharacterBody2D
+public partial class Samurai : Entity
 {
     [Signal] public delegate void EnemyDiedEventHandler(string enemyName);
-    [Node] private StatsManager StatsManager;
 
     [Node] private Velocity velocity;
     [Node] private Area2D Range;
@@ -24,7 +23,6 @@ public partial class Samurai : CharacterBody2D
     private bool inRange;
     private bool attacking;
     private string attackDirection;
-    private DelegateStateMachine stateMachine = new();
 
     public override void _Notification(int what)
     {
@@ -35,30 +33,31 @@ public partial class Samurai : CharacterBody2D
 
     public override void _Ready()
     {
+        base._Ready();
         StatsManager.StatsDepleted += OnStatsDepleted;
         Range.BodyEntered += body =>
         {
             inRange = true;
 
             if (!attacking)
-                stateMachine.ChangeState(Attack);
+                StateMachine.ChangeState(Attack);
         };
         Range.BodyExited += body =>
         {
             inRange = false;
 
             if (!attacking)
-                stateMachine.ChangeState(Walk);
+                StateMachine.ChangeState(Walk);
         };
         StatsManager.StatsDecreased += StatDecrease;
-        stateMachine.AddStates(Idle);
-        stateMachine.AddStates(Walk);
-        stateMachine.AddStates(Hurt);
-        stateMachine.AddStates(Attack, EnterAttacking, ExitAttacking);
-        stateMachine.SetInitialState(Walk);
+        StateMachine.AddStates(Idle);
+        StateMachine.AddStates(Walk);
+        StateMachine.AddStates(Hurt);
+        StateMachine.AddStates(Attack, EnterAttacking, ExitAttacking);
+        StateMachine.SetInitialState(Walk);
     }
 
-    public override void _PhysicsProcess(double delta) => stateMachine.Update();
+    public override void _PhysicsProcess(double delta) => StateMachine.Update();
 
 
     private void Idle()
@@ -95,13 +94,11 @@ public partial class Samurai : CharacterBody2D
 
         if (!inRange)
         {
-            stateMachine.ChangeState(Walk);
+            StateMachine.ChangeState(Walk);
             return;
         }
 
-        stateMachine.ChangeState(Idle);
-        OnStatsDepleted(StatsType.Health);
-        GD.Print(StatsManager.Health);
+        StateMachine.ChangeState(Idle);
     }
 
     private void ExitAttacking() => attacking = false;
@@ -113,23 +110,17 @@ public partial class Samurai : CharacterBody2D
 
         if (inRange)
         {
-            stateMachine.ChangeState(Idle);
+            StateMachine.ChangeState(Idle);
             return;
         }
 
-        stateMachine.ChangeState(Walk);
+        StateMachine.ChangeState(Walk);
     }
-
+    
     private void StatDecrease(float value, StatsType stat)
     {
         if (stat != StatsType.Health || attacking) return;
 
-        stateMachine.ChangeState(Hurt);
-    }
-
-    private void OnStatsDepleted(StatsType stat)
-    {
-        if (stat == StatsType.Health)
-            EmitSignal(SignalName.EnemyDied, Name);
+        StateMachine.ChangeState(Hurt);
     }
 }

@@ -153,3 +153,4 @@ script = ExtResource("3_tm1gt")
 
 [node name="Player" parent="." instance=ExtResource("1_28rab")]
 position = Vector2(55, 108)
+DashStaminaCost = 30.0

@@ -14,10 +14,9 @@ namespace Game.Entities.Player;
 
 [Scene]
 [GlobalClass]
-public partial class Player : CharacterBody2D
+public partial class Player : Entity
 {
     [Export] public float DashStaminaCost { get; set; } = 10f;
-    [Node] public StatsManager statsManager;
     [Node] private HurtBox hurtBox;
     [Node] private AnimationPlayer animations;
     [Node] public Velocity velocity;
@@ -30,7 +29,6 @@ public partial class Player : CharacterBody2D
     private bool CanDash { get; set; } = true;
     private bool Dashing { get; set; }
     private bool CanMove { get; set; } = true;
-    private DelegateStateMachine StateMachine = new();
 
     public override void _Notification(int what)
     {
@@ -41,7 +39,8 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
-        statsManager.StatsChanged += StatChangeHandler;
+        base._Ready();
+        StatsManager.StatsChanged += StatChangeHandler;
 
         StateMachine.AddStates(Idle);
         StateMachine.AddStates(Walk);
@@ -107,7 +106,7 @@ public partial class Player : CharacterBody2D
 
     private void EnterDash()
     {
-        statsManager.ConsumeMana(DashStaminaCost);
+        StatsManager.ConsumeMana(DashStaminaCost);
         Dashing = true;
     }
 

@@ -24,4 +24,7 @@
         <PackageReference Include="Firebelley.GodotUtilities" Version="5.0.0" />
         <PackageReference Include="OptimizedPriorityQueue" Version="5.1.0" />
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Scripts\Entities\Character\" />
+    </ItemGroup>
 </Project>
