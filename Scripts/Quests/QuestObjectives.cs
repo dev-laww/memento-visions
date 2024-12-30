@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using GodotUtilities;
 
@@ -8,9 +9,10 @@ namespace Game.Quests;
 [GlobalClass]
 public partial class QuestObjectives : Node
 {
+    public static event Action OnProgressUpdated;
     [Export] public Quest quest { get; set; }
     [Export] public int TargetCount { get; set; } = 1;
-    protected int currentCount;
+    public int currentCount;
 
     public virtual void StartQuest()
     {
@@ -34,6 +36,7 @@ public partial class QuestObjectives : Node
         {
             ObjectiveComplete();
         }
+        OnProgressUpdated?.Invoke();  
     }
     
 }
