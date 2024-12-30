@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b328i2sbpwivv"]
+
+[ext_resource type="Script" path="res://Scripts/Quests/Quest.cs" id="1_e7638"]
+[ext_resource type="Script" path="res://Scripts/Quests/PickupItemObjectives.cs" id="2_i5l03"]
+
+[node name="10 Apples" type="Node" node_paths=PackedStringArray("Objectives")]
+script = ExtResource("1_e7638")
+QuestTitle = "apples"
+QuestDescription = "collect 3 apples"
+Objectives = NodePath("PickupItemObjectives")
+
+[node name="PickupItemObjectives" type="Node" parent="." node_paths=PackedStringArray("quest")]
+script = ExtResource("2_i5l03")
+itemUniqueName = "item:apple"
+quest = NodePath("..")
+TargetCount = 3
