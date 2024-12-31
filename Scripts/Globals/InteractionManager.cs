@@ -6,7 +6,7 @@ using Godot;
 
 namespace Game.Globals;
 
-public partial class InteractionManager : Node2D
+public partial class InteractionManager : Node
 {
     private static InteractionManager instance;
     private readonly List<Interaction> areas = new();
