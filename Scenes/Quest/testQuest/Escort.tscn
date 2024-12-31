@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://2atebgrg3iic"]
+
+[ext_resource type="Script" path="res://Scripts/Quests/Quest.cs" id="1_hvvou"]
+[ext_resource type="Script" path="res://Scripts/Quests/EscortObjectives.cs" id="2_4xx0d"]
+
+[node name="Escort" type="Node" node_paths=PackedStringArray("Objectives")]
+script = ExtResource("1_hvvou")
+QuestTitle = "Escort"
+QuestDescription = "escort the NPC"
+Objectives = NodePath("EscortObjectives")
+QuestItems = []
+
+[node name="EscortObjectives" type="Node" parent="." node_paths=PackedStringArray("quest")]
+script = ExtResource("2_4xx0d")
+EscortTargetName = "npc"
+DestinationArea = "finish"
+quest = NodePath("..")

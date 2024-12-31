@@ -43,14 +43,16 @@ namespace Game.Entities
             {
                 investigateObjectives.StartInvestigation();
             }
+            
         }
 
         public void CompleteQuest()
         {
             if (Quest.Objectives is InvestigateObjectives investigateObjectives)
             {
-                investigateObjectives.OnInteracted();
+                investigateObjectives.OnInteracted("NPC");
             }
+            Quest.DeliverQuest();
         }
 
 

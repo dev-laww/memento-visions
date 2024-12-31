@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=4 uid="uid://cwuokpjg3q21s"]
+[gd_scene load_steps=35 format=4 uid="uid://cwuokpjg3q21s"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_2wwem"]
+[ext_resource type="Script" path="res://Scripts/Quests/TestArea.cs" id="1_5ueqw"]
 [ext_resource type="TileSet" uid="uid://bcvije43w8ygj" path="res://resources/tilesets/city.tres" id="2_0d65y"]
 [ext_resource type="Script" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_ush2q"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/ContinuousDamageHitBox.cs" id="4_eh38v"]
@@ -13,8 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://ceex4qw6g8cph" path="res://Scenes/Quest/testQuest/SlayTest.tscn" id="7_0lxe1"]
 [ext_resource type="Resource" uid="uid://cxd7fxbcaj6xb" path="res://resources/dialogues/Chapter1.dialogue" id="7_uaett"]
 [ext_resource type="PackedScene" uid="uid://bkgjauxklnmyv" path="res://Scenes/Quest/QuestGui.tscn" id="8_5fhi4"]
+[ext_resource type="Script" path="res://Scripts/Components/Area/DestinationArea.cs" id="8_tkndw"]
+[ext_resource type="PackedScene" uid="uid://cu4fpa8blkef8" path="res://Scenes/Components/Interactable/Item.tscn" id="12_lbij3"]
+[ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/inventory/items/temp/Item5.png" id="13_eyarq"]
 [ext_resource type="PackedScene" uid="uid://b328i2sbpwivv" path="res://Scenes/Quest/testQuest/10Apples.tscn" id="13_m1a1h"]
+[ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="14_ov4of"]
 [ext_resource type="PackedScene" uid="uid://dch6xdswnc43g" path="res://Scenes/Quest/testQuest/InteractWithNpc.tscn" id="17_dt2h7"]
+[ext_resource type="PackedScene" uid="uid://2atebgrg3iic" path="res://Scenes/Quest/testQuest/Escort.tscn" id="19_3ru6h"]
+[ext_resource type="PackedScene" uid="uid://dp6suhjwm3mm5" path="res://Scenes/Entities/Escort.tscn" id="20_lq608"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6bk0g"]
 size = Vector2(127.5, 141.5)
@@ -23,12 +30,63 @@ size = Vector2(127.5, 141.5)
 script = ExtResource("6_y471r")
 MaxHealth = 100.0
 MaxMana = 100.0
-Attack = 1e+06
+Attack = 10.0
 Magic = 10.0
 Defense = 10.0
 Speed = 50.0
 PhysicalDamageMultiplier = 1.0
 MagicalDamageMultiplier = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tuypo"]
+size = Vector2(214, 20)
+
+[sub_resource type="Resource" id="Resource_gtvr7"]
+resource_local_to_scene = true
+script = ExtResource("14_ov4of")
+Name = "Apple"
+UniqueName = "item:apple"
+Type = 1
+Value = 1
+Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
+icon = ExtResource("13_eyarq")
+sprite = ExtResource("13_eyarq")
+Stackable = true
+
+[sub_resource type="Resource" id="Resource_324su"]
+resource_local_to_scene = true
+script = ExtResource("14_ov4of")
+Name = "Apple"
+UniqueName = "item:apple"
+Type = 1
+Value = 1
+Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
+icon = ExtResource("13_eyarq")
+sprite = ExtResource("13_eyarq")
+Stackable = true
+
+[sub_resource type="Resource" id="Resource_23sgx"]
+resource_local_to_scene = true
+script = ExtResource("14_ov4of")
+Name = "Apple"
+UniqueName = "item:apple"
+Type = 1
+Value = 1
+Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
+icon = ExtResource("13_eyarq")
+sprite = ExtResource("13_eyarq")
+Stackable = true
+
+[sub_resource type="Resource" id="Resource_mxrpj"]
+resource_local_to_scene = true
+script = ExtResource("14_ov4of")
+Name = "Apple"
+UniqueName = "item:apple"
+Type = 1
+Value = 1
+Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
+icon = ExtResource("13_eyarq")
+sprite = ExtResource("13_eyarq")
+Stackable = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rrm0u"]
 size = Vector2(8.43156, 26.5766)
@@ -36,10 +94,26 @@ size = Vector2(8.43156, 26.5766)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75ve7"]
 size = Vector2(51.571, 114.834)
 
+[sub_resource type="Resource" id="Resource_i0juv"]
+resource_local_to_scene = true
+script = ExtResource("14_ov4of")
+Name = "Apple"
+UniqueName = "item:apple"
+Type = 1
+Value = 1
+Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
+icon = ExtResource("13_eyarq")
+sprite = ExtResource("13_eyarq")
+Stackable = true
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o43ct"]
 size = Vector2(214, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1se2"]
+size = Vector2(20, 327.326)
+
 [node name="Test Area" type="Node2D"]
+script = ExtResource("1_5ueqw")
 
 [node name="SmoothTileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 2
@@ -66,26 +140,41 @@ debug_color = Color(0.684873, 0.308652, 0.977388, 0.42)
 [node name="StatsManager" parent="ContinuousDamageHitBox" instance=ExtResource("5_4mm67")]
 Stats = SubResource("Resource_lyd12")
 
+[node name="finish" type="Area2D" parent="." node_paths=PackedStringArray("Quest") groups=["area"]]
+position = Vector2(116, 310)
+scale = Vector2(-1.78947, -4.42145)
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("8_tkndw")
+Quest = NodePath("../QuestTrigger4/Escort")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="finish"]
+shape = SubResource("RectangleShape2D_tuypo")
+
 [node name="Samurai" parent="." instance=ExtResource("4_ff3sm")]
 position = Vector2(707, 342)
-
-[node name="Player" parent="." instance=ExtResource("5_dhbyu")]
-position = Vector2(114, 468)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-
-[node name="Container" parent="Player" instance=ExtResource("8_5fhi4")]
-offset_left = -318.0
-offset_top = -177.0
-offset_right = 371.0
-offset_bottom = 214.0
 
 [node name="NPC" parent="." node_paths=PackedStringArray("Quest") instance=ExtResource("6_6asky")]
 position = Vector2(33, 447)
 DialogResource = ExtResource("7_uaett")
-Quest = NodePath("SlayTest")
+Quest = NodePath("../QuestTrigger2/InteractWithNPC")
 
 [node name="SlayTest" parent="NPC" instance=ExtResource("7_0lxe1")]
+Gold = 11
+Experience = 10
+QuestItems = [SubResource("Resource_gtvr7")]
+
+[node name="Item" parent="." instance=ExtResource("12_lbij3")]
+position = Vector2(60, 129)
+ItemResource = SubResource("Resource_324su")
+
+[node name="Item2" parent="." instance=ExtResource("12_lbij3")]
+position = Vector2(175, 134)
+ItemResource = SubResource("Resource_23sgx")
+
+[node name="Item3" parent="." instance=ExtResource("12_lbij3")]
+position = Vector2(109, 125)
+ItemResource = SubResource("Resource_mxrpj")
 
 [node name="QuestTrigger" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
 position = Vector2(230, 438)
@@ -103,7 +192,7 @@ debug_color = Color(0.935299, 1.61719e-05, 0.636979, 0.42)
 
 [node name="QuestTrigger2" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
 position = Vector2(60, 349)
-scale = Vector2(3.10824, 0.119054)
+scale = Vector2(2.03469, 0.11816)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("6_jhv87")
@@ -115,6 +204,7 @@ shape = SubResource("RectangleShape2D_75ve7")
 debug_color = Color(0.907471, 0.0001236, 0.739933, 0.42)
 
 [node name="InteractWithNPC" parent="QuestTrigger2" instance=ExtResource("17_dt2h7")]
+QuestItems = [SubResource("Resource_i0juv")]
 
 [node name="QuestTrigger3" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
 collision_layer = 16
@@ -127,3 +217,35 @@ position = Vector2(108, 193)
 shape = SubResource("RectangleShape2D_o43ct")
 
 [node name="10 Apples" parent="QuestTrigger3" instance=ExtResource("13_m1a1h")]
+
+[node name="QuestTrigger4" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
+position = Vector2(349, 487)
+scale = Vector2(0.734224, 0.50103)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("6_jhv87")
+Quest = NodePath("Escort")
+
+[node name="Escort" parent="QuestTrigger4" instance=ExtResource("19_3ru6h")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger4"]
+position = Vector2(-1.36198, -55.8849)
+shape = SubResource("RectangleShape2D_t1se2")
+
+[node name="Player" parent="." instance=ExtResource("5_dhbyu")]
+position = Vector2(114, 468)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Container" parent="Player" instance=ExtResource("8_5fhi4")]
+offset_left = -318.0
+offset_top = -177.0
+offset_right = 371.0
+offset_bottom = 182.0
+
+[node name="npc" parent="." node_paths=PackedStringArray("quest") groups=["NPC"] instance=ExtResource("20_lq608")]
+position = Vector2(60, 521)
+scale = Vector2(0.734224, 0.50103)
+disable_mode = 0
+quest = NodePath("../QuestTrigger4/Escort")
+UniqueName = "npc:escort"

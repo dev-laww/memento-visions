@@ -1,6 +1,10 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using Game.Entities.Player;
+using Game.Resources;
+using Game.UI;
+using Game.Utils.Extensions;
 using GodotUtilities;
 
 namespace Game.Quests;
@@ -14,6 +18,7 @@ public partial class Quest : Node
         Available,
         Active,
         Completed,
+        Failed,
         Delivered
     }
 
@@ -21,10 +26,13 @@ public partial class Quest : Node
     [Export] public string QuestDescription;
     [Export] public QuestObjectives Objectives;
     [Export] public QuestStatus Status = QuestStatus.Available;
-    [Export] public int Reward;
-    [Export] public string[] QuestItems;
+    [ExportGroup("Rewards")]
+    [Export] public int Gold;
     [Export] public int Experience;
-    
+    [Export] public Item[] QuestItems;
+   [Signal] public delegate void OnQuestCompletedEventHandler();
+   
+   
     public override void _Ready()
     {
     }
@@ -33,8 +41,7 @@ public partial class Quest : Node
     public void StartQuest()
     {
         if (Status != QuestStatus.Available) return;
-        Status = QuestStatus.Active;
-        // Objective?.Initialize(this);
+        Status = QuestStatus.Active; ;
         QuestManager.AddQuest(this);
         QuestManager.NotifyQuestStarted(this);
         GD.Print("Quest Started");
@@ -46,14 +53,36 @@ public partial class Quest : Node
         Status = QuestStatus.Completed;
         QuestManager.NotifyQuestCompleted(this);
         GD.Print("Quest Completed");
+        EmitSignal(SignalName.OnQuestCompleted);
     }
 
     public void DeliverQuest()
     {
+        var playerInventory = this.GetPlayer()?.Inventory;
+        if (playerInventory == null)
+        {
+            GD.PrintErr("Player inventory not found!");
+            return;
+        }
         if (Status != QuestStatus.Completed) return;
         Status = QuestStatus.Delivered;
-        // Objective?.Cleanup();
+        // Player.AddGold(Gold);
+        // Player.AddExperience(Experience);
+        foreach (var item in QuestItems)
+        {
+            playerInventory.AddItem(item);
+        }
+        
+
         QuestManager.RemoveQuest(this);
         GD.Print("Quest Delivered");
+    }
+    public void FailQuest()
+    {
+        if (Status != QuestStatus.Active) return;
+        Status = QuestStatus.Failed;
+
+        QuestManager.RemoveQuest(this);
+        GD.Print("Quest Failed");
     }
 }

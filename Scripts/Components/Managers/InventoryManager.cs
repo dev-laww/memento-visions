@@ -51,6 +51,10 @@ public partial class InventoryManager : Node
         
         EmitSignal(SignalName.ItemRemove, item);
     }
+    public List<Item> GetItemsByUniqueName(string uniqueName)
+    {
+        return Items.Where(item => item.UniqueName == uniqueName).ToList();
+    }
 
     public List<Item> GetFilteredItems(Type type) => Items.Where(i => i.Type == type).ToList();
 }

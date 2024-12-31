@@ -1,15 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://ceex4qw6g8cph"]
+[gd_scene load_steps=4 format=3 uid="uid://ceex4qw6g8cph"]
 
 [ext_resource type="Script" path="res://Scripts/Quests/Quest.cs" id="1_qk8la"]
 [ext_resource type="Script" path="res://Scripts/Quests/SlayObjectives.cs" id="2_2b0fh"]
+[ext_resource type="Resource" uid="uid://bxgw165vramlx" path="res://resources/items/apple.tres" id="2_vp3d5"]
 
 [node name="SlayTest" type="Node" node_paths=PackedStringArray("Objectives")]
 script = ExtResource("1_qk8la")
 QuestTitle = "SlayTest"
 QuestDescription = "triggerSlaysignal"
 Objectives = NodePath("Slayyy")
-Reward = 1
 Experience = 2
+QuestItems = [ExtResource("2_vp3d5")]
 
 [node name="Slayyy" type="Node" parent="." node_paths=PackedStringArray("quest")]
 script = ExtResource("2_2b0fh")
