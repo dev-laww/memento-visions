@@ -17,7 +17,7 @@ public partial class PickupItemObjectives : QuestObjectives
 	{ 
 		var playerInventory = this.GetPlayer()?.Inventory;
 		if(playerInventory == null) return;
-		playerInventory.ItemPickUp += OnItemAdded;
+		playerInventory.ItemAdd += OnItemAdded;
 	}
 	
 
