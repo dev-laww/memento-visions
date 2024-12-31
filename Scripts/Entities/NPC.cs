@@ -39,9 +39,9 @@ namespace Game.Entities
 
         public void GiveQuest()
         {
-            if (Quest.Objectives is InvestigateObjectives investigateObjectives)
+            if (Quest.Objectives is DefenseObjectives defenseObjectives)
             {
-                investigateObjectives.StartInvestigation();
+                defenseObjectives.StartDefense();
             }
             
         }

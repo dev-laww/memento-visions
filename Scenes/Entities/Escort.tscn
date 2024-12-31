@@ -1,12 +1,17 @@
-[gd_scene load_steps=55 format=3 uid="uid://dp6suhjwm3mm5"]
+[gd_scene load_steps=58 format=3 uid="uid://dp6suhjwm3mm5"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Character/Escort.cs" id="1_u8bxb"]
+[ext_resource type="Script" path="res://Scripts/Components/Area/Interaction.cs" id="2_7d6lo"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_xe27h"]
 [ext_resource type="Script" path="res://Scripts/Resources/Stats.cs" id="3_sg3ox"]
+[ext_resource type="Texture2D" uid="uid://dyxsacj8kktd1" path="res://assets/icons/f.png" id="4_urfm7"]
 [ext_resource type="Script" path="res://Scripts/Components/Movement/Velocity.cs" id="4_w4hrq"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/HurtBox.cs" id="5_d67cr"]
 [ext_resource type="Texture2D" uid="uid://db5rchhjpbc5g" path="res://assets/entities/escort/Char_001_Idle.png" id="6_bpgb1"]
 [ext_resource type="Texture2D" uid="uid://dukv28wob344v" path="res://assets/entities/escort/Char_001.png" id="7_3hg04"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1ybfl"]
+radius = 33.9559
 
 [sub_resource type="Resource" id="Resource_tguun"]
 script = ExtResource("3_sg3ox")
@@ -541,9 +546,68 @@ disable_mode = 2
 script = ExtResource("1_u8bxb")
 UniqueName = "escort"
 
+[node name="Interaction" type="Area2D" parent="."]
+position = Vector2(0, 1)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("2_7d6lo")
+InteractionLabel = "Interact"
+
+[node name="InteractionUI" type="Node2D" parent="Interaction"]
+scale = Vector2(0.5, 0.5)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interaction/InteractionUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="Interaction/InteractionUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_urfm7")
+
+[node name="Label" type="Label" parent="Interaction/InteractionUI/HBoxContainer"]
+layout_mode = 2
+text = "Interact"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+shape = SubResource("CircleShape2D_1ybfl")
+
 [node name="Velocity" type="Node" parent="." node_paths=PackedStringArray("Stats")]
 script = ExtResource("4_w4hrq")
 Stats = NodePath("../StatsManager")
+
+[node name="InteractionUI" type="Node2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(0.5, 0.5)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InteractionUI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="InteractionUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_urfm7")
+
+[node name="Label" type="Label" parent="InteractionUI/HBoxContainer"]
+layout_mode = 2
+text = "Interact"
 
 [node name="StatsManager" parent="." instance=ExtResource("2_xe27h")]
 Stats = SubResource("Resource_tguun")

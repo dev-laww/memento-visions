@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Game.Entities.Player;
 using Game.Resources;
 using Game.UI;
@@ -77,12 +78,14 @@ public partial class Quest : Node
         QuestManager.RemoveQuest(this);
         GD.Print("Quest Delivered");
     }
-    public void FailQuest()
+    public async Task FailQuest()
     {
         if (Status != QuestStatus.Active) return;
         Status = QuestStatus.Failed;
 
         QuestManager.RemoveQuest(this);
         GD.Print("Quest Failed");
+        await ToSignal(GetTree().CreateTimer(5), "timeout");
+        Status = QuestStatus.Available;
     }
 }

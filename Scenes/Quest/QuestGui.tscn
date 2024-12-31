@@ -123,6 +123,7 @@ theme_override_fonts/font = ExtResource("4_i5ols")
 [node name="Description" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_i5ols")
+autowrap_mode = 3
 
 [node name="Reward" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

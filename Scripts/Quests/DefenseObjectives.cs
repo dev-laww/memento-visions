@@ -1,6 +1,7 @@
 using System.Linq;
 using Godot;
 using Game.Components.Managers;
+using GodotUtilities;
 
 namespace Game.Quests;
 
@@ -11,7 +12,6 @@ public partial class DefenseObjectives : QuestObjectives
     [Export] public string DefenseTargetName { get; set; }
     [Export] public float DefenseDuration { get; set; } = 60f;
     [Export] public float RequiredHealth { get; set; } = 50f;
-
     private Node2D defenseTarget;
     private float elapsedTime;
     private bool isFailed;
@@ -22,12 +22,11 @@ public partial class DefenseObjectives : QuestObjectives
         base._Ready();
         FindDefenseTarget();
         ConnectSignals();
-        StartDefense();
     }
 
     private void FindDefenseTarget()
     {
-        defenseTarget = GetTree().GetNodesInGroup("DefenseTargets")
+        defenseTarget = GetTree().GetNodesInGroup("NPC")
             .OfType<Node2D>()
             .FirstOrDefault(target => target.Name == DefenseTargetName);
 
@@ -52,8 +51,9 @@ public partial class DefenseObjectives : QuestObjectives
         }
     }
 
-    private void StartDefense()
+    public void StartDefense()
     {
+        quest.StartQuest();
         elapsedTime = 0;
         isFailed = false;
         currentCount = 0;
@@ -84,6 +84,7 @@ public partial class DefenseObjectives : QuestObjectives
         {
             isFailed = true;
             quest.FailQuest();
+            
         }
     }
 

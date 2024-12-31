@@ -2,6 +2,7 @@ using System;
 using Game.Components.Managers;
 using Game.Components.Movement;
 using DialogueManagerRuntime;
+using Game.Components.Area;
 using Game.Entities;
 using Game.Quests;
 using Game.Utils.Extensions;
@@ -18,10 +19,12 @@ public partial class Escort : Entity
     [Node] private AnimationPlayer Animation;
     [Node] private Area2D Range;
     [Node] private Area2D ChaseRange;
+    [Node] private Interaction interaction;
     [Export] private Quest quest;
+    [Export] private Resource DialogResource;
     private bool inRange;
-
-    public string Name = "npc";
+    private bool isDialogueActive;
+    
     private Vector2 lastMoveDirection = Vector2.Down;
 
     public override void _Notification(int what)
@@ -40,8 +43,20 @@ public partial class Escort : Entity
         StateMachine.AddStates(Hurt);
         StateMachine.SetInitialState(Idle);
         quest.OnQuestCompleted += DisconnectSignals;
+        interaction.Interacted += OnInteracted;
+        
     }
 
+    
+    private void OnInteracted()
+    {
+        if (isDialogueActive) return;
+
+        this.GetPlayer()?.SetProcessInput(false);
+        DialogueManager.ShowDialogueBalloon(DialogResource, "Start");
+        isDialogueActive = true;
+    }
+    
     public override void _PhysicsProcess(double delta) => StateMachine.Update();
 
     private void Idle()

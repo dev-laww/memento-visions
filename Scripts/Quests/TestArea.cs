@@ -17,7 +17,7 @@ public partial class TestArea : Node2D
 		base._Ready();
 		WireNodes();
 		player = this.GetPlayer();
-		npc = GetNode<NPC>("NPC");
+		npc = GetNode<NPC>("Tower");
 	}
 
 }

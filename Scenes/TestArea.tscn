@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://cwuokpjg3q21s"]
+[gd_scene load_steps=37 format=4 uid="uid://cwuokpjg3q21s"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_2wwem"]
 [ext_resource type="Script" path="res://Scripts/Quests/TestArea.cs" id="1_5ueqw"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/inventory/items/temp/Item5.png" id="13_eyarq"]
 [ext_resource type="PackedScene" uid="uid://b328i2sbpwivv" path="res://Scenes/Quest/testQuest/10Apples.tscn" id="13_m1a1h"]
 [ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="14_ov4of"]
+[ext_resource type="PackedScene" uid="uid://d2vmxefe8srsv" path="res://Scenes/Quest/testQuest/Defense.tscn" id="15_n6h3e"]
 [ext_resource type="PackedScene" uid="uid://dch6xdswnc43g" path="res://Scenes/Quest/testQuest/InteractWithNpc.tscn" id="17_dt2h7"]
 [ext_resource type="PackedScene" uid="uid://2atebgrg3iic" path="res://Scenes/Quest/testQuest/Escort.tscn" id="19_3ru6h"]
 [ext_resource type="PackedScene" uid="uid://dp6suhjwm3mm5" path="res://Scenes/Entities/Escort.tscn" id="20_lq608"]
@@ -40,7 +41,7 @@ MagicalDamageMultiplier = 1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tuypo"]
 size = Vector2(214, 20)
 
-[sub_resource type="Resource" id="Resource_gtvr7"]
+[sub_resource type="Resource" id="Resource_x7ys1"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -52,7 +53,18 @@ icon = ExtResource("13_eyarq")
 sprite = ExtResource("13_eyarq")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_324su"]
+[sub_resource type="Resource" id="Resource_3i586"]
+script = ExtResource("6_y471r")
+MaxHealth = 100.0
+MaxMana = 100.0
+Attack = 10.0
+Magic = 10.0
+Defense = 10.0
+Speed = 50.0
+PhysicalDamageMultiplier = 1.0
+MagicalDamageMultiplier = 1.0
+
+[sub_resource type="Resource" id="Resource_i0cps"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -64,7 +76,7 @@ icon = ExtResource("13_eyarq")
 sprite = ExtResource("13_eyarq")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_23sgx"]
+[sub_resource type="Resource" id="Resource_6l5yc"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -76,7 +88,7 @@ icon = ExtResource("13_eyarq")
 sprite = ExtResource("13_eyarq")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_mxrpj"]
+[sub_resource type="Resource" id="Resource_7o0gs"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -94,7 +106,7 @@ size = Vector2(8.43156, 26.5766)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75ve7"]
 size = Vector2(51.571, 114.834)
 
-[sub_resource type="Resource" id="Resource_i0juv"]
+[sub_resource type="Resource" id="Resource_qegvw"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -154,27 +166,32 @@ shape = SubResource("RectangleShape2D_tuypo")
 [node name="Samurai" parent="." instance=ExtResource("4_ff3sm")]
 position = Vector2(707, 342)
 
-[node name="NPC" parent="." node_paths=PackedStringArray("Quest") instance=ExtResource("6_6asky")]
+[node name="Tower" parent="." node_paths=PackedStringArray("Quest") groups=["NPC"] instance=ExtResource("6_6asky")]
 position = Vector2(33, 447)
 DialogResource = ExtResource("7_uaett")
-Quest = NodePath("../QuestTrigger2/InteractWithNPC")
+Quest = NodePath("Quest")
 
-[node name="SlayTest" parent="NPC" instance=ExtResource("7_0lxe1")]
+[node name="SlayTest" parent="Tower" instance=ExtResource("7_0lxe1")]
 Gold = 11
 Experience = 10
-QuestItems = [SubResource("Resource_gtvr7")]
+QuestItems = [SubResource("Resource_x7ys1")]
+
+[node name="Quest" parent="Tower" instance=ExtResource("15_n6h3e")]
+
+[node name="StatsManager" parent="Tower" instance=ExtResource("5_4mm67")]
+Stats = SubResource("Resource_3i586")
 
 [node name="Item" parent="." instance=ExtResource("12_lbij3")]
 position = Vector2(60, 129)
-ItemResource = SubResource("Resource_324su")
+ItemResource = SubResource("Resource_i0cps")
 
 [node name="Item2" parent="." instance=ExtResource("12_lbij3")]
 position = Vector2(175, 134)
-ItemResource = SubResource("Resource_23sgx")
+ItemResource = SubResource("Resource_6l5yc")
 
 [node name="Item3" parent="." instance=ExtResource("12_lbij3")]
 position = Vector2(109, 125)
-ItemResource = SubResource("Resource_mxrpj")
+ItemResource = SubResource("Resource_7o0gs")
 
 [node name="QuestTrigger" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
 position = Vector2(230, 438)
@@ -182,7 +199,7 @@ scale = Vector2(-0.524191, 1.79333)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("6_jhv87")
-Quest = NodePath("../NPC/SlayTest")
+Quest = NodePath("../Tower/SlayTest")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
 rotation = -3.14159
@@ -204,7 +221,7 @@ shape = SubResource("RectangleShape2D_75ve7")
 debug_color = Color(0.907471, 0.0001236, 0.739933, 0.42)
 
 [node name="InteractWithNPC" parent="QuestTrigger2" instance=ExtResource("17_dt2h7")]
-QuestItems = [SubResource("Resource_i0juv")]
+QuestItems = [SubResource("Resource_qegvw")]
 
 [node name="QuestTrigger3" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
 collision_layer = 16
