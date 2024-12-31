@@ -30,7 +30,7 @@ public static class TransitionExtensions
 }
 
 // TODO: Add wipe direction to Transition.Wipe
-public partial class SceneManager : Node
+public partial class SceneManager : Global<SceneManager>
 {
     [Signal] public delegate void LoadStartEventHandler(Loading loadingScreen);
     [Signal] public delegate void SceneAddedEventHandler(Node node, Loading loadingScreen);
@@ -53,11 +53,9 @@ public partial class SceneManager : Node
     private Node loadSceneInTo;
     private Node sceneToUnload;
     private bool loading;
-    public static SceneManager Instance;
 
     public override void _Ready()
     {
-        Instance = this;
         ContentInvalid += path => GD.PushError($"Content at path {path} is invalid.");
         ContentFailedToLoad += path => GD.PushError($"Failed to load content at path {path}.");
         ContentFinishedLoading += OnFinishedLoading;

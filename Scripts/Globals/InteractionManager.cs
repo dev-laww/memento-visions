@@ -6,13 +6,10 @@ using Godot;
 
 namespace Game.Globals;
 
-public partial class InteractionManager : Node
+public partial class InteractionManager : Global<InteractionManager>
 {
-    private static InteractionManager instance;
     private readonly List<Interaction> areas = new();
     private Interaction lastClosest;
-
-    public override void _Ready() => instance = this;
 
     public override void _Process(double delta)
     {
@@ -38,17 +35,15 @@ public partial class InteractionManager : Node
         closest.Interact();
     }
 
-    public static void Register(Interaction area)
-    {
-        instance.areas.Add(area);
-    }
+    public static void Register(Interaction area) => Instance.areas.Add(area);
+    
 
     public static void Unregister(Interaction area)
     {
-        if (area == instance.lastClosest)
-            instance.lastClosest = null;
+        if (area == Instance.lastClosest)
+            Instance.lastClosest = null;
 
-        instance.areas.Remove(area);
+        Instance.areas.Remove(area);
         area.HideUI();
     }
 
