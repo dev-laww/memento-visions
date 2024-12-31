@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=13 format=3 uid="uid://cxgbxsavclkj7"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://cxgbxsavclkj7"]
 
 [ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="2_4xgr6"]
 [ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="2_8j7kc"]
@@ -39,10 +39,18 @@ region_rect = Rect2(0, 0, 32, 32)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tpi46"]
 texture = ExtResource("2_8j7kc")
 texture_margin_left = 6.0
-texture_margin_top = 6.0
+texture_margin_top = 7.0
 texture_margin_right = 6.0
-texture_margin_bottom = 6.0
-region_rect = Rect2(32, 0, 32, 32)
+texture_margin_bottom = 8.0
+region_rect = Rect2(64, 0, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ljqiu"]
+texture = ExtResource("2_8j7kc")
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(64, 0, 32, 33)
 
 [sub_resource type="ImageTexture" id="ImageTexture_scn80"]
 
@@ -95,6 +103,7 @@ Button/styles/focus = SubResource("StyleBoxEmpty_l288m")
 Button/styles/hover = SubResource("StyleBoxTexture_m1lmm")
 Button/styles/normal = SubResource("StyleBoxTexture_f5w84")
 Button/styles/pressed = SubResource("StyleBoxTexture_tpi46")
+Button/styles/pressed_mirrored = SubResource("StyleBoxTexture_ljqiu")
 VScrollBar/icons/decrement = SubResource("ImageTexture_scn80")
 VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_scn80")
 VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_scn80")

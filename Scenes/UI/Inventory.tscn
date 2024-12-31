@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b161abm0o6ij2"]
+[gd_scene load_steps=16 format=3 uid="uid://b161abm0o6ij2"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Inventory.cs" id="1_7jd4f"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="1_35u5w"]
@@ -8,12 +8,38 @@
 [ext_resource type="PackedScene" uid="uid://svqrge4l63b4" path="res://Scenes/UI/Common/Slot.tscn" id="5_17bmp"]
 [ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/inventory/items/temp/Item5.png" id="7_e5fdf"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vk6jo"]
+atlas = ExtResource("2_r77rr")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5eqpt"]
+load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qmeb"]
+atlas = SubResource("CompressedTexture2D_5eqpt")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nl8iq"]
+load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ceocv"]
+atlas = SubResource("CompressedTexture2D_nl8iq")
+region = Rect2(128, 32, 32, 32)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7hgj7"]
 texture = ExtResource("2_r77rr")
-region_rect = Rect2(32, 0, 32, 32)
+texture_margin_left = 4.0
+texture_margin_top = 7.0
+texture_margin_right = 4.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(64, 0, 32, 32)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7pn5k"]
 texture = ExtResource("2_r77rr")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 10.0
 region_rect = Rect2(0, 0, 32, 32)
 
 [sub_resource type="LabelSettings" id="LabelSettings_cxeph"]
@@ -52,20 +78,16 @@ layout_mode = 2
 layout_mode = 2
 alignment = 2
 
-[node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/Header"]
+[node name="CloseButton" type="TextureButton" parent="MarginContainer/VBoxContainer/Header"]
 unique_name_in_owner = true
-modulate = Color(0.940362, 5.17406e-06, 1.15514e-06, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 mouse_default_cursor_shape = 2
-theme = ExtResource("2_quj2b")
-theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_7hgj7")
-theme_override_styles/hover = SubResource("StyleBoxTexture_7pn5k")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_7hgj7")
-theme_override_styles/normal = SubResource("StyleBoxTexture_7pn5k")
-icon_alignment = 1
+texture_normal = SubResource("AtlasTexture_vk6jo")
+texture_pressed = SubResource("AtlasTexture_7qmeb")
+texture_disabled = SubResource("AtlasTexture_ceocv")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="Main" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
