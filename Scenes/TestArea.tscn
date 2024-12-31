@@ -40,7 +40,7 @@ MagicalDamageMultiplier = 1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tuypo"]
 size = Vector2(214, 20)
 
-[sub_resource type="Resource" id="Resource_cwnkh"]
+[sub_resource type="Resource" id="Resource_gtvr7"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -52,7 +52,7 @@ icon = ExtResource("13_eyarq")
 sprite = ExtResource("13_eyarq")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_xn52j"]
+[sub_resource type="Resource" id="Resource_324su"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -64,7 +64,7 @@ icon = ExtResource("13_eyarq")
 sprite = ExtResource("13_eyarq")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_gjd1s"]
+[sub_resource type="Resource" id="Resource_23sgx"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -76,7 +76,7 @@ icon = ExtResource("13_eyarq")
 sprite = ExtResource("13_eyarq")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_rpvpi"]
+[sub_resource type="Resource" id="Resource_mxrpj"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -94,7 +94,7 @@ size = Vector2(8.43156, 26.5766)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75ve7"]
 size = Vector2(51.571, 114.834)
 
-[sub_resource type="Resource" id="Resource_vorj3"]
+[sub_resource type="Resource" id="Resource_i0juv"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -141,7 +141,8 @@ debug_color = Color(0.684873, 0.308652, 0.977388, 0.42)
 Stats = SubResource("Resource_lyd12")
 
 [node name="finish" type="Area2D" parent="." node_paths=PackedStringArray("Quest") groups=["area"]]
-position = Vector2(0, -2)
+position = Vector2(116, 310)
+scale = Vector2(-1.78947, -4.42145)
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("8_tkndw")
@@ -161,19 +162,19 @@ Quest = NodePath("../QuestTrigger2/InteractWithNPC")
 [node name="SlayTest" parent="NPC" instance=ExtResource("7_0lxe1")]
 Gold = 11
 Experience = 10
-QuestItems = [SubResource("Resource_cwnkh")]
+QuestItems = [SubResource("Resource_gtvr7")]
 
 [node name="Item" parent="." instance=ExtResource("12_lbij3")]
 position = Vector2(60, 129)
-ItemResource = SubResource("Resource_xn52j")
+ItemResource = SubResource("Resource_324su")
 
 [node name="Item2" parent="." instance=ExtResource("12_lbij3")]
 position = Vector2(175, 134)
-ItemResource = SubResource("Resource_gjd1s")
+ItemResource = SubResource("Resource_23sgx")
 
 [node name="Item3" parent="." instance=ExtResource("12_lbij3")]
 position = Vector2(109, 125)
-ItemResource = SubResource("Resource_rpvpi")
+ItemResource = SubResource("Resource_mxrpj")
 
 [node name="QuestTrigger" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
 position = Vector2(230, 438)
@@ -203,7 +204,7 @@ shape = SubResource("RectangleShape2D_75ve7")
 debug_color = Color(0.907471, 0.0001236, 0.739933, 0.42)
 
 [node name="InteractWithNPC" parent="QuestTrigger2" instance=ExtResource("17_dt2h7")]
-QuestItems = [SubResource("Resource_vorj3")]
+QuestItems = [SubResource("Resource_i0juv")]
 
 [node name="QuestTrigger3" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
 collision_layer = 16
@@ -242,8 +243,9 @@ offset_top = -177.0
 offset_right = 371.0
 offset_bottom = 182.0
 
-[node name="npc" parent="." groups=["NPC"] instance=ExtResource("20_lq608")]
+[node name="npc" parent="." node_paths=PackedStringArray("quest") groups=["NPC"] instance=ExtResource("20_lq608")]
 position = Vector2(60, 521)
 scale = Vector2(0.734224, 0.50103)
 disable_mode = 0
+quest = NodePath("../QuestTrigger4/Escort")
 UniqueName = "npc:escort"

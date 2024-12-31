@@ -30,6 +30,7 @@ public partial class Quest : Node
     [Export] public int Gold;
     [Export] public int Experience;
     [Export] public Item[] QuestItems;
+   [Signal] public delegate void OnQuestCompletedEventHandler();
    
    
     public override void _Ready()
@@ -52,6 +53,7 @@ public partial class Quest : Node
         Status = QuestStatus.Completed;
         QuestManager.NotifyQuestCompleted(this);
         GD.Print("Quest Completed");
+        EmitSignal(SignalName.OnQuestCompleted);
     }
 
     public void DeliverQuest()
