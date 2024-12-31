@@ -8,13 +8,13 @@
 	{
 		"name": "Sword",
 		"unique_name": "weapon:sword",
-		"resource": "res://resources/weapons/Swords/Sword.tres",
+		"resource": "res://resources/weapons/swords/sword.tres",
 		"scene": "res://Scenes/Weapons/Swords/Sword.tscn"
 	},
 	{
 		"name": "Gun",
 		"unique_name": "weapon:gun",
-		"resource": "res://resources/weapons/Guns/Gun.tres",
+		"resource": "res://resources/weapons/guns/gun.tres",
 		"scene": "res://Scenes/Weapons/Guns/Gun.tscn"
 	}
 ]

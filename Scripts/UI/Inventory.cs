@@ -18,7 +18,7 @@ public partial class Inventory : Control
     [Node] private GridContainer slotsContainer;
     [Node] private ResourcePreloader resourcePreloader;
 
-    [Node] private Button closeButton;
+    [Node] private TextureButton closeButton;
     [Node] private Button equipButton;
     [Node] private Button materialItemsButton;
     [Node] private Button weaponItemsButton;

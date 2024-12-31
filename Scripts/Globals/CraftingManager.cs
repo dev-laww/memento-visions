@@ -71,7 +71,7 @@ public partial class CraftingManager : Node
                 return false;
 
             if (existing.Stackable)
-                return existing.Value >= ingredient.Value;
+                return existing.Value >= ingredient.Value * item.Value;
 
             return true;
         });

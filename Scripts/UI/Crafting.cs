@@ -16,13 +16,12 @@ public partial class Crafting : Control
     [Node] private GridContainer slotsContainer;
     [Node] private ResourcePreloader resourcePreloader;
 
-    [Node] private Button closeButton;
+    [Node] private TextureButton closeButton;
     [Node] private Button craftButton;
 
     [Node] private TextureRect selectedItemIcon;
     [Node] private Label selectedItemName;
     [Node] private Label selectedItemType;
-    [Node] private Label selectedItemQuantity;
     [Node] private RichTextLabel selectedItemDescription;
 
 
@@ -106,7 +105,6 @@ public partial class Crafting : Control
         selectedItemIcon.Texture = item?.Icon;
         selectedItemName.Text = item?.Name;
         selectedItemType.Text = item?.Type.ToString();
-        selectedItemQuantity.Text = item != null ? $"x{item.Value}" : null;
         selectedItemDescription.Text = item?.Description;
     }
 
