@@ -29,11 +29,11 @@ public partial class Inventory : Control
     [Node] private Label selectedItemQuantity;
     [Node] private RichTextLabel selectedItemDescription;
 
-    private Player player => this.GetPlayer();
+    private Player Player;
     private List<Slot> slots => slotsContainer.GetChildrenOfType<Slot>().ToList();
     private Button selectedButton => weaponItemsButton.ButtonGroup.GetPressedButton() as Button;
+    private ButtonGroup buttonGroup;
     private Item selectedItem;
-    private Type selectedType;
 
     public override void _Notification(int what)
     {
@@ -44,24 +44,28 @@ public partial class Inventory : Control
 
     public override void _Ready()
     {
+        Player = this.GetPlayer();
+        buttonGroup = weaponItemsButton.ButtonGroup;
+
         SetupEventHandlers();
 
-        if (player == null || Engine.IsEditorHint()) return;
+        if (Player == null || Engine.IsEditorHint()) return;
 
         Reset();
     }
 
     private void SetupEventHandlers()
     {
-        equipButton.Toggled += OnEquipButtonToggle;
+        equipButton.Pressed += OnEquipButtonPress;
+        buttonGroup.Pressed += OnButtonPressed;
         closeButton.Pressed += () => GetTree().CreateTimer(0.1f).Timeout += Close;
         VisibilityChanged += OnVisibilityChanged;
         slots.ForEach(slot => slot.Selected += OnSlotSelected);
         slots.First().Select();
 
-        if (player == null) return;
+        if (Player == null) return;
 
-        player.Inventory.ItemAdd += OnItemPickup;
+        Player.Inventory.ItemAdd += OnItemPickup;
     }
 
     private void Reset()
@@ -70,25 +74,7 @@ public partial class Inventory : Control
         materialItemsButton.ButtonPressed = true;
         FilterItems(Type.Material.ToString());
         Clear();
-        SelectItem(null);
         slots.First().Select();
-    }
-
-    public override void _Process(double delta)
-    {
-        if (Engine.IsEditorHint() || player == null) return;
-
-        var selectedSlotItem = slots.FirstOrDefault(s => s.IsSelected)?.Item;
-
-        var filter = selectedButton.Name.ToString().Replace("ItemsButton", "");
-
-        if (selectedType.ToString() != filter)
-            FilterItems(filter);
-
-        if (selectedSlotItem == null || selectedSlotItem == selectedItem) return;
-
-        SelectItem(selectedSlotItem);
-        HandleEquipButton();
     }
 
     public override void _Input(InputEvent @event)
@@ -108,15 +94,16 @@ public partial class Inventory : Control
         var currentFilter = selectedButton?.Name.ToString().Replace("ItemsButton", "") ?? "Material";
         var allSlotsEmpty = slots.All(slot => slot.Item == null);
 
+        // TODO: Fix item not showing up when all slots are empty
         if (item.Type.ToString() == currentFilter || allSlotsEmpty)
             FilterItems(currentFilter);
     }
 
     private void OnVisibilityChanged()
     {
-        if (Engine.IsEditorHint() || player == null) return;
+        if (Engine.IsEditorHint() || Player == null) return;
 
-        player.SetProcessInput(!Visible);
+        Player.SetProcessInput(!Visible);
 
         if (!Visible) return;
 
@@ -130,7 +117,7 @@ public partial class Inventory : Control
         var type = (Type)Enum.Parse(typeof(Type), filter);
 
         Clear();
-        var items = player.Inventory.GetFilteredItems(type);
+        var items = Player.Inventory.GetFilteredItems(type);
 
         foreach (var item in items)
         {
@@ -146,50 +133,42 @@ public partial class Inventory : Control
             slot.Item = item;
         }
 
-        selectedType = type;
+        slots.First().Select();
     }
 
-    private void SelectItem(Item item)
+    private void OnEquipButtonPress()
     {
-        selectedItem = item;
-        UpdateItemDisplay(item);
-    }
-
-    private void UpdateItemDisplay(Item item)
-    {
-        selectedItemIcon.Texture = item?.Icon;
-        selectedItemName.Text = item?.Name;
-        selectedItemType.Text = item?.Type.ToString();
-        selectedItemQuantity.Text = item != null ? $"x{item.Value}" : null;
-        selectedItemDescription.Text = item?.Description;
-    }
-
-    private void OnEquipButtonToggle(bool toggled)
-    {
-        if (!toggled)
-            player.Inventory.ChangeWeapon(null);
+        if (selectedItem.UniqueName == Player.Inventory.CurrentWeapon?.UniqueName)
+            Player.Inventory.ChangeWeapon(null);
         else
-            player.Inventory.ChangeWeapon(selectedItem.UniqueName);
+            Player.Inventory.ChangeWeapon(selectedItem.UniqueName);
 
         HandleEquipButton();
     }
 
     private void HandleEquipButton()
     {
-        if (selectedItem == null) return;
+        var currentWeapon = Player.Inventory.CurrentWeapon;
+        var isCurrentWeapon = currentWeapon?.UniqueName == selectedItem?.UniqueName;
+        var isWeapon = selectedItem?.Type == Type.Weapon;
 
-        var currentWeapon = player.Inventory.CurrentWeapon;
-        var isCurrentWeapon = currentWeapon?.UniqueName == selectedItem.UniqueName;
+        equipButton.Visible = isWeapon;
+
+        if (!isWeapon) return;
 
         equipButton.ButtonPressed = isCurrentWeapon;
-        equipButton.Visible = selectedItem.Type == Type.Weapon;
         equipButton.Text = isCurrentWeapon ? "Unequip" : "Equip";
         equipButton.Modulate = isCurrentWeapon ? Colors.Red : Colors.White;
     }
 
-    private void Clear() => slots.ForEach(slot => slot.Item = null);
     private void Toggle() => Visible = !Visible;
     private void Close() => Visible = false;
+
+    private void Clear()
+    {
+        slots.ForEach(slot => slot.Item = null);
+        slots.First().Select();
+    }
 
     private void OnSlotSelected(Slot slot)
     {
@@ -198,14 +177,35 @@ public partial class Inventory : Control
         unselectedSlots.ForEach(s => s.Deselect());
 
         NotifyPropertyListChanged();
+
+        if (Engine.IsEditorHint()) return;
+
+        var item = slot.Item;
+        selectedItem = item;
+        selectedItemIcon.Texture = item?.Icon;
+        selectedItemName.Text = item?.Name;
+        selectedItemType.Text = item?.Type.ToString();
+        selectedItemQuantity.Text = item != null ? $"x{item.Value}" : null;
+        selectedItemDescription.Text = item?.Description;
+
+        HandleEquipButton();
+    }
+
+    private void OnButtonPressed(BaseButton button)
+    {
+        var filter = button.Name.ToString().Replace("ItemsButton", "");
+
+        FilterItems(filter);
     }
 
     public override void _ExitTree()
     {
+        equipButton.Pressed -= OnEquipButtonPress;
+        VisibilityChanged -= OnVisibilityChanged;
         slots.ForEach(slot => slot.Selected -= OnSlotSelected);
 
-        if (player == null) return;
+        if (Player == null) return;
 
-        player.Inventory.ItemAdd -= OnItemPickup;
+        Player.Inventory.ItemAdd -= OnItemPickup;
     }
 }
