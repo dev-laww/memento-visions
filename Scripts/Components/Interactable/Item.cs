@@ -22,36 +22,23 @@ public partial class Item : Node2D
             if (value == null)
             {
                 Name = "Item";
-
                 sprite.Texture = null;
-                collision.Shape = new CircleShape2D
-                {
-                    Radius = 5
-                };
 
                 sprite.NotifyPropertyListChanged();
-                collision.NotifyPropertyListChanged();
 
                 return;
             }
 
             Name = string.IsNullOrEmpty(value.Name) ? "Item" : value.Name;
-
             sprite.Texture = value.Sprite;
-            collision.Shape = new CircleShape2D
-            {
-                Radius = value.Sprite != null ? value.Sprite.GetSize().X / 2 + 1.4f : 5
-            };
 
             sprite.NotifyPropertyListChanged();
-            collision.NotifyPropertyListChanged();
         }
     }
 
     [Node] private Area2D pickupRange;
 
     private Sprite2D sprite => GetNode<Sprite2D>("Sprite");
-    private CollisionShape2D collision => GetNode<CollisionShape2D>("%Collision");
     private ItemResource resource;
 
     public override void _Notification(int what)
