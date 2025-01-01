@@ -141,7 +141,7 @@ public partial class Inventory : Control
     {
         player?.SetProcessInput(!Visible);
 
-        if (!Engine.IsEditorHint() && Visible)
+        if (!Engine.IsEditorHint() && Visible && player != null)
             Reset();
     }
 
@@ -217,7 +217,7 @@ public partial class Inventory : Control
     {
         DeselectOtherSlots(selectedSlot);
 
-        if (Engine.IsEditorHint()) return;
+        if (Engine.IsEditorHint() || player == null) return;
 
         selectedItem = selectedSlot.Item;
         selectedItemIcon.Texture = selectedItem?.Icon;
@@ -241,6 +241,8 @@ public partial class Inventory : Control
 
     private void OnFilterButtonPressed(BaseButton button)
     {
+        if (Engine.IsEditorHint() || player == null) return;
+
         var filter = button.Name.ToString().Replace("ItemsButton", "");
         FilterItems(filter);
     }
