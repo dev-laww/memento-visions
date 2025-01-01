@@ -26,4 +26,3 @@ visible = false
 visible = false
 
 [node name="QuestGui" parent="UserInterface" instance=ExtResource("6_vcj0g")]
-visible = false
