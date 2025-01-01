@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Godot;
+﻿using Godot;
 
 namespace Game.Resources;
 
@@ -33,8 +32,20 @@ public partial class Item : Resource
     }
 
     [Export(PropertyHint.MultilineText)] public string Description;
-    [Export] private Texture2D icon;
-    [Export] public Texture2D sprite;
+
+    [Export]
+    public Texture2D Icon
+    {
+        get => Engine.IsEditorHint() ? icon : icon ?? sprite;
+        private set => icon = value;
+    }
+
+    [Export]
+    public Texture2D Sprite
+    {
+        get => Engine.IsEditorHint() ? sprite : sprite ?? icon;
+        private set => sprite = value;
+    }
 
     [Export]
     public bool Stackable
@@ -43,57 +54,11 @@ public partial class Item : Resource
         private set => _stackable = value;
     }
 
-    public Texture2D Icon => GetTexture(icon, sprite);
-    public Texture2D Sprite => GetTexture(sprite, icon);
-
+    private Texture2D icon;
+    private Texture2D sprite;
     private Type _type = Type.Material;
     private bool _stackable = true;
     private int _value = 1;
-
-    private static Texture2D GetTexture(Texture2D primary, Texture2D secondary)
-    {
-        if (primary != null || secondary != null) return primary ?? secondary;
-
-        return null;
-    }
-
-    public static Item operator +(Item item1, Item item2)
-    {
-        var conditions = new[]
-        {
-            item1.GetType() == item2.GetType(),
-            item1.UniqueName == item2.UniqueName,
-            item1.Stackable && item2.Stackable
-        };
-
-        if (conditions.Contains(false))
-        {
-            GD.PrintErr("Items are not stackable.");
-            return item1;
-        }
-
-        item1.Value += item2.Value;
-        return item1;
-    }
-
-    public static Item operator -(Item item1, Item item2)
-    {
-        var conditions = new[]
-        {
-            item1.GetType() == item2.GetType(),
-            item1.UniqueName == item2.UniqueName,
-            item1.Stackable && item2.Stackable
-        };
-
-        if (conditions.Contains(false))
-        {
-            GD.PrintErr("Items are not stackable.");
-            return item1;
-        }
-
-        item1.Value -= item2.Value;
-        return item1;
-    }
 
     protected virtual bool IsStackable() => _stackable;
     protected virtual Type GetItemType() => _type;
@@ -111,4 +76,81 @@ public partial class Item : Resource
     }
 
     public override string ToString() => $"{UniqueName} (x{Value})";
+
+    // Additional methods for stacking items
+    private bool ValidateStack(Item other = null)
+    {
+        if (!Stackable)
+        {
+            GD.PrintErr("Item is not stackable.");
+            return false;
+        }
+
+        if (other == null || AreItemsCompatible(other)) return true;
+
+        GD.PrintErr("Items are not compatible for stacking.");
+        return false;
+    }
+
+    private bool AreItemsCompatible(Item other) =>
+        GetType() == other.GetType() &&
+        UniqueName == other.UniqueName &&
+        other.Stackable;
+
+    private Item ModifyValue(int modification)
+    {
+        if (!ValidateStack()) return this;
+        Value += modification;
+        return this;
+    }
+
+    private Item ScaleValue(int factor, bool isDivision = false)
+    {
+        if (!ValidateStack()) return this;
+
+        if (isDivision && factor == 0)
+        {
+            GD.PrintErr("Cannot divide by zero.");
+            return this;
+        }
+
+        Value = isDivision ? Value / factor : Value * factor;
+        return this;
+    }
+
+    public static Item operator +(Item item1, Item item2) =>
+        !item1.ValidateStack(item2) ? item1 : item1.ModifyValue(item2.Value);
+
+    public static Item operator -(Item item1, Item item2) =>
+        !item1.ValidateStack(item2) ? item1 : item1.ModifyValue(-item2.Value);
+
+    public static Item operator *(Item item1, Item item2) =>
+        !item1.ValidateStack(item2) ? item1 : item1.ScaleValue(item2.Value);
+
+    public static Item operator /(Item item1, Item item2) =>
+        !item1.ValidateStack(item2) ? item1 : item1.ScaleValue(item2.Value, isDivision: true);
+
+    public static Item operator +(Item item, int value) =>
+        item.ModifyValue(value);
+
+    public static Item operator -(Item item, int value) =>
+        item.ModifyValue(-value);
+
+    public static Item operator *(Item item, int value) =>
+        item.ScaleValue(value);
+
+    public static Item operator /(Item item, int value) =>
+        item.ScaleValue(value, isDivision: true);
+
+    public static Item operator ++(Item item) =>
+        item.ModifyValue(1);
+
+    public static Item operator --(Item item) =>
+        item.ModifyValue(-1);
+
+    // Reverse operations with simplified implementation
+    public static Item operator +(int value, Item item) => item + value;
+    public static Item operator -(int value, Item item) => item - value;
+    public static Item operator *(int value, Item item) => item * value;
+    public static Item operator /(int value, Item item) => item / value;
 }
