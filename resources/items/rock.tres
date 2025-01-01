@@ -12,4 +12,5 @@ Type = 0
 Value = 1
 Description = "Can be ingested??"
 Icon = ExtResource("1_le0yr")
+Sprite = ExtResource("1_le0yr")
 Stackable = true
