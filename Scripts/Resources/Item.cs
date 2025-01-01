@@ -109,4 +109,6 @@ public partial class Item : Resource
 
         _value = value;
     }
+
+    public override string ToString() => $"{UniqueName} (x{Value})";
 }
