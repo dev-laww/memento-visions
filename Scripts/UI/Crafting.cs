@@ -55,7 +55,7 @@ public partial class Crafting : Control
             return;
         }
 
-        if (@event.IsActionPressed("open_inventory"))
+        if (@event.IsActionPressed("open_crafting"))
         {
             Toggle();
         }
