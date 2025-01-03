@@ -149,25 +149,28 @@ layout_mode = 2
 theme = ExtResource("2_co4w4")
 theme_override_fonts/font = ExtResource("4_i5ols")
 theme_override_font_sizes/font_size = 26
-text = "TEST"
 horizontal_alignment = 1
 uppercase = true
+
+[node name="Subtitle" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Task" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="Description" type="RichTextLabel" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
-text = "DESCRIPTION"
 fit_content = true
 
 [node name="Status" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("4_i5ols")
-text = "STATUS"
 vertical_alignment = 2
 
 [node name="Reward" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_i5ols")
-text = "REWARDS"
 vertical_alignment = 2

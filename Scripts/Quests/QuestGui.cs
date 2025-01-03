@@ -12,6 +12,8 @@ public partial class QuestGui : Control
     private TreeItem TreeRoot;
     private bool IsVisible = false;
     private Label QuestTitle;
+    private Label Task;
+    private Label Subtitle;
     private RichTextLabel QuestDescription;
     private Label QuestStatus;
     private Label QuestReward;
@@ -33,6 +35,8 @@ public partial class QuestGui : Control
         Tree.SetColumnExpand(0, true);
         
         QuestTitle = GetNode<Label>("MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Title");
+        Task = GetNode<Label>("MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Task");
+        Subtitle = GetNode<Label>("MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Subtitle");
         QuestDescription = GetNode<RichTextLabel>("MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Description");
         QuestStatus = GetNode<Label>("MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Status");
         QuestReward = GetNode<Label>("MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Reward");
@@ -112,10 +116,21 @@ public partial class QuestGui : Control
     private void UpdateQuestDetails(Quest quest)
     {
         QuestTitle.Text = quest.QuestTitle;
+        Subtitle.Text ="Task: ${quest.QuestSubtitle}" ;
+        Task.Text = quest.QuestTask;
         QuestDescription.Text = quest.QuestDescription;
+    
         
         if (quest.Objectives != null)
         {
+            if (quest.Objectives is InvestigateObjectives investigateObjectives)
+            {
+                foreach (var target in investigateObjectives.TargetDisplayNames)
+                {
+                    QuestStatus.Text += $"{target}\n";
+                }
+            }
+            else
             if (quest.Status == Quest.QuestStatus.Completed)
             {
                 QuestStatus.Text = $"Completed ({quest.Objectives.TargetCount}/{quest.Objectives.TargetCount})";
