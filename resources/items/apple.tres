@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bxgw165vramlx"]
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://bxgw165vramlx"]
 
-[ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/inventory/items/temp/Item5.png" id="1_jixvm"]
 [ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="1_q1p51"]
 
 [resource]
@@ -11,6 +10,4 @@ UniqueName = "item:apple"
 Type = 1
 Value = 1
 Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("1_jixvm")
-Sprite = ExtResource("1_jixvm")
 Stackable = true
