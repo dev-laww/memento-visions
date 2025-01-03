@@ -149,5 +149,5 @@ UniqueName = "weapon:sword"
 Type = 2
 Value = 1
 Description = "The sword is a masterpiece of balance and craftsmanship, its polished steel blade gleaming with an air of authority. Each swing is fluid, carrying both grace and devastating power. The hilt, adorned with intricate designs, fits snugly in the grip, making it a weapon that commands respect and instills fear on the battlefield."
-icon = ExtResource("1_2is5w")
+Icon = ExtResource("1_2is5w")
 Stackable = false

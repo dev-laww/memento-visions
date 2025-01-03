@@ -9,7 +9,6 @@
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_jd26h")
-showStartScreen = true
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
 resources = [PackedStringArray("StartScreen"), [ExtResource("2_xr7b5")]]
@@ -27,4 +26,3 @@ visible = false
 visible = false
 
 [node name="QuestGui" parent="UserInterface" instance=ExtResource("6_vcj0g")]
-visible = false

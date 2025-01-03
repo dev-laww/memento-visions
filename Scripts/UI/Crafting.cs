@@ -24,10 +24,11 @@ public partial class Crafting : Control
     [Node] private Label selectedItemType;
     [Node] private RichTextLabel selectedItemDescription;
 
-
-    private Player player => this.GetPlayer();
-    private List<Slot> slots => slotsContainer.GetChildrenOfType<Slot>().ToList();
+    private Player player;
     private Item selectedItem;
+
+
+    private List<Slot> Slots => slotsContainer.GetChildrenOfType<Slot>().ToList();
 
     public override void _Notification(int what)
     {
@@ -36,23 +37,14 @@ public partial class Crafting : Control
         WireNodes();
     }
 
+
     public override void _Ready()
     {
-        SetupEventHandlers();
+        Initialize();
 
-        if (player == null || Engine.IsEditorHint()) return;
+        if (!ShouldInitializeGameplay()) return;
 
         Reset();
-    }
-
-
-    private void SetupEventHandlers()
-    {
-        craftButton.Pressed += OnCraftButtonPressed;
-        closeButton.Pressed += () => GetTree().CreateTimer(0.1f).Timeout += Close;
-        VisibilityChanged += OnVisibilityChanged;
-        slots.ForEach(slot => slot.Selected += OnSlotSelected);
-        slots.First().Select();
     }
 
     public override void _Input(InputEvent @event)
@@ -64,55 +56,108 @@ public partial class Crafting : Control
         }
 
         if (@event.IsActionPressed("open_crafting"))
+        {
             Toggle();
+        }
     }
 
-    private void Toggle() => Visible = !Visible;
-    private void Close() => Visible = false;
-    private void Clear() => slots.ForEach(slot => slot.Item = null);
+    public override void _ExitTree()
+    {
+        // cleanup events
+        Slots.ForEach(slot => slot.Selected -= OnSlotSelected);
+    }
+
+    private void Initialize()
+    {
+        player = this.GetPlayer();
+        SetupEventHandlers();
+    }
+
+    private bool ShouldInitializeGameplay() => player != null && !Engine.IsEditorHint();
+
+    private void SetupEventHandlers()
+    {
+        // UI Events
+        craftButton.Pressed += OnCraftButtonPress;
+        closeButton.Pressed += HandleCloseButtonPress;
+        VisibilityChanged += OnVisibilityChanged;
+
+        // Slot Events
+        InitializeSlotEvents();
+    }
+
+    private void InitializeSlotEvents()
+    {
+        Slots.ForEach(slot => slot.Selected += OnSlotSelected);
+        Slots.First().Select();
+    }
+
+    private void HandleCloseButtonPress() => GetTree().CreateTimer(0.1f).Timeout += Close;
 
     private void Reset()
     {
-        Clear();
-        SelectItem(null);
-        slots.First().Select();
+        ClearSlots();
+    }
+
+
+    private bool ShouldRefreshDisplayOnPickup(Item item, string currentFilter)
+    {
+        return item.Type.ToString() == currentFilter || Slots.All(slot => slot.Item == null);
     }
 
     private void OnVisibilityChanged()
     {
-        if (Engine.IsEditorHint() || player == null) return;
+        player?.SetProcessInput(!Visible);
 
-        player.SetProcessInput(!Visible);
-
-        if (!Visible) return;
+        if (Engine.IsEditorHint() || Visible || player == null) return;
 
         Reset();
     }
 
-    private void OnCraftButtonPressed()
+    private Slot FindOrCreateSlot()
     {
-        GD.Print("Pressed");
+        var existingSlot = Slots.FirstOrDefault(slot => !slot.IsOccupied);
+        if (existingSlot != null) return existingSlot;
+
+        var newSlot = resourcePreloader.InstanceSceneOrNull<Slot>();
+        slotsContainer.AddChild(newSlot);
+        return newSlot;
     }
 
-    private void SelectItem(Item item)
+    private void OnCraftButtonPress()
     {
-        selectedItem = item;
-        UpdateItemDisplay(item);
+        GD.Print("Crafting button pressed");
     }
 
-    private void UpdateItemDisplay(Item item)
+    // TODO: animate visibility
+    private void Toggle() => Visible = !Visible;
+    private void Close() => Visible = false;
+
+    private void ClearSlots()
     {
-        selectedItemIcon.Texture = item?.Icon;
-        selectedItemName.Text = item?.Name;
-        selectedItemType.Text = item?.Type.ToString();
-        selectedItemDescription.Text = item?.Description;
+        Slots.ForEach(slot => slot.Clear());
+        Slots.First().Select();
     }
 
-    private void OnSlotSelected(Slot slot)
+    private void OnSlotSelected(Slot selectedSlot)
     {
-        var unselectedSlots = slots.Where(s => s != slot).ToList();
+        DeselectOtherSlots(selectedSlot);
 
-        unselectedSlots.ForEach(s => s.Deselect());
+        if (Engine.IsEditorHint() || player == null) return;
+
+        selectedItem = selectedSlot.Item;
+        selectedItemIcon.Texture = selectedItem?.Icon;
+        selectedItemName.Text = selectedItem?.Name;
+        selectedItemType.Text = selectedItem?.Type.ToString();
+        selectedItemDescription.Text = selectedItem?.Description;
+    }
+
+    private void DeselectOtherSlots(Slot selectedSlot)
+    {
+        var unselectedSlots = Slots.Where(s => s != selectedSlot);
+
+        foreach (var slot in unselectedSlots)
+            slot.Deselect();
 
         NotifyPropertyListChanged();
     }

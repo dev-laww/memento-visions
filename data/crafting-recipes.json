@@ -8,8 +8,8 @@
 		},
 		"ingredients": [
 			{
-				"unique_name": "item:",
-				"amount": 1
+				"unique_name": "item:rock",
+				"amount": 3
 			}
 		]
 	}

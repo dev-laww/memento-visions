@@ -160,5 +160,5 @@ UniqueName = "weapon:dagger"
 Type = 2
 Value = 1
 Description = "The dagger is a sleek, deadly tool of precision, its blade honed to a razor edge that glints ominously in the light. Compact and agile, it feels like an extension of the hand, perfect for quick, decisive strikes. The hilt is wrapped in textured leather, offering a secure grip for silent and efficient execution."
-icon = ExtResource("1_4fdsx")
+Icon = ExtResource("1_4fdsx")
 Stackable = false
