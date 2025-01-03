@@ -24,6 +24,7 @@ public partial class Quest : Node
     }
 
     [Export] public string QuestTitle;
+    [Export] public string QuestSubtitle;
     [Export] public string QuestDescription;
     [Export] public QuestObjectives Objectives;
     [Export] public QuestStatus Status = QuestStatus.Available;
