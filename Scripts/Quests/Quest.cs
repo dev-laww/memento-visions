@@ -24,6 +24,9 @@ public partial class Quest : Node
     }
 
     [Export] public string QuestTitle;
+    [Export] public string QuestSubtitle;
+    [Export] public string QuestTask;
+    [Export] public string CompleteTask;
     [Export] public string QuestDescription;
     [Export] public QuestObjectives Objectives;
     [Export] public QuestStatus Status = QuestStatus.Available;
@@ -52,6 +55,7 @@ public partial class Quest : Node
     {
         if (Status != QuestStatus.Active) return;
         Status = QuestStatus.Completed;
+       if (CompleteTask != null) QuestTask = CompleteTask;
         QuestManager.NotifyQuestCompleted(this);
         GD.Print("Quest Completed");
         EmitSignal(SignalName.OnQuestCompleted);
@@ -65,7 +69,7 @@ public partial class Quest : Node
             GD.PrintErr("Player inventory not found!");
             return;
         }
-        if (Status != QuestStatus.Completed) return;
+        if (Status is not (QuestStatus.Completed or QuestStatus.Active)) return;
         Status = QuestStatus.Delivered;
         // Player.AddGold(Gold);
         // Player.AddExperience(Experience);
@@ -73,8 +77,6 @@ public partial class Quest : Node
         {
             playerInventory.AddItem(item);
         }
-        
-
         QuestManager.RemoveQuest(this);
         GD.Print("Quest Delivered");
     }

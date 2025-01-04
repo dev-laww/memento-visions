@@ -6,6 +6,7 @@
 [node name="Defense" type="Node" node_paths=PackedStringArray("Objectives")]
 script = ExtResource("1_b3pbl")
 QuestTitle = "Defense TEst"
+QuestSubtitle = "defend"
 QuestDescription = "Hold out and defend the target for 1 minute. Ensure the target's health does not drop below 50% to succeed."
 Objectives = NodePath("DefenseObjectives")
 QuestItems = []

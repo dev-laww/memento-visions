@@ -41,7 +41,7 @@ MagicalDamageMultiplier = 1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tuypo"]
 size = Vector2(214, 20)
 
-[sub_resource type="Resource" id="Resource_x7ys1"]
+[sub_resource type="Resource" id="Resource_3ppsq"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -49,8 +49,8 @@ UniqueName = "item:apple"
 Type = 1
 Value = 1
 Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-icon = ExtResource("13_eyarq")
-sprite = ExtResource("13_eyarq")
+Icon = ExtResource("13_eyarq")
+Sprite = ExtResource("13_eyarq")
 Stackable = true
 
 [sub_resource type="Resource" id="Resource_3i586"]
@@ -64,7 +64,7 @@ Speed = 50.0
 PhysicalDamageMultiplier = 1.0
 MagicalDamageMultiplier = 1.0
 
-[sub_resource type="Resource" id="Resource_i0cps"]
+[sub_resource type="Resource" id="Resource_vqjdd"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -72,11 +72,11 @@ UniqueName = "item:apple"
 Type = 1
 Value = 1
 Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-icon = ExtResource("13_eyarq")
-sprite = ExtResource("13_eyarq")
+Icon = ExtResource("13_eyarq")
+Sprite = ExtResource("13_eyarq")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_6l5yc"]
+[sub_resource type="Resource" id="Resource_mxqbi"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -84,11 +84,11 @@ UniqueName = "item:apple"
 Type = 1
 Value = 1
 Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-icon = ExtResource("13_eyarq")
-sprite = ExtResource("13_eyarq")
+Icon = ExtResource("13_eyarq")
+Sprite = ExtResource("13_eyarq")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_7o0gs"]
+[sub_resource type="Resource" id="Resource_qfgrs"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -96,8 +96,8 @@ UniqueName = "item:apple"
 Type = 1
 Value = 1
 Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-icon = ExtResource("13_eyarq")
-sprite = ExtResource("13_eyarq")
+Icon = ExtResource("13_eyarq")
+Sprite = ExtResource("13_eyarq")
 Stackable = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rrm0u"]
@@ -106,7 +106,7 @@ size = Vector2(8.43156, 26.5766)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75ve7"]
 size = Vector2(51.571, 114.834)
 
-[sub_resource type="Resource" id="Resource_qegvw"]
+[sub_resource type="Resource" id="Resource_j5613"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -114,8 +114,8 @@ UniqueName = "item:apple"
 Type = 1
 Value = 1
 Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-icon = ExtResource("13_eyarq")
-sprite = ExtResource("13_eyarq")
+Icon = ExtResource("13_eyarq")
+Sprite = ExtResource("13_eyarq")
 Stackable = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o43ct"]
@@ -169,12 +169,14 @@ position = Vector2(707, 342)
 [node name="Tower" parent="." node_paths=PackedStringArray("Quest") groups=["NPC"] instance=ExtResource("6_6asky")]
 position = Vector2(33, 447)
 DialogResource = ExtResource("7_uaett")
-Quest = NodePath("Quest")
+Quest = NodePath("SlayTest")
 
 [node name="SlayTest" parent="Tower" instance=ExtResource("7_0lxe1")]
+QuestTask = "kill the samurai"
+CompleteTask = "go to the godot npc"
 Gold = 11
 Experience = 10
-QuestItems = [SubResource("Resource_x7ys1")]
+QuestItems = [SubResource("Resource_3ppsq")]
 
 [node name="Quest" parent="Tower" instance=ExtResource("15_n6h3e")]
 
@@ -183,15 +185,15 @@ Stats = SubResource("Resource_3i586")
 
 [node name="Item" parent="." instance=ExtResource("12_lbij3")]
 position = Vector2(60, 129)
-ItemResource = SubResource("Resource_i0cps")
+ItemResource = SubResource("Resource_vqjdd")
 
 [node name="Item2" parent="." instance=ExtResource("12_lbij3")]
 position = Vector2(175, 134)
-ItemResource = SubResource("Resource_6l5yc")
+ItemResource = SubResource("Resource_mxqbi")
 
 [node name="Item3" parent="." instance=ExtResource("12_lbij3")]
 position = Vector2(109, 125)
-ItemResource = SubResource("Resource_7o0gs")
+ItemResource = SubResource("Resource_qfgrs")
 
 [node name="QuestTrigger" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
 position = Vector2(230, 438)
@@ -221,7 +223,7 @@ shape = SubResource("RectangleShape2D_75ve7")
 debug_color = Color(0.907471, 0.0001236, 0.739933, 0.42)
 
 [node name="InteractWithNPC" parent="QuestTrigger2" instance=ExtResource("17_dt2h7")]
-QuestItems = [SubResource("Resource_qegvw")]
+QuestItems = [SubResource("Resource_j5613")]
 
 [node name="QuestTrigger3" type="Area2D" parent="." node_paths=PackedStringArray("Quest")]
 collision_layer = 16
@@ -257,7 +259,7 @@ position = Vector2(114, 468)
 [node name="Container" parent="Player" instance=ExtResource("8_5fhi4")]
 offset_left = -318.0
 offset_top = -177.0
-offset_right = 371.0
+offset_right = 319.0
 offset_bottom = 182.0
 
 [node name="npc" parent="." node_paths=PackedStringArray("quest") groups=["NPC"] instance=ExtResource("20_lq608")]
@@ -265,4 +267,5 @@ position = Vector2(60, 521)
 scale = Vector2(0.734224, 0.50103)
 disable_mode = 0
 quest = NodePath("../QuestTrigger4/Escort")
+DialogResource = ExtResource("7_uaett")
 UniqueName = "npc:escort"

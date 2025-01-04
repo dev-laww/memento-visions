@@ -2,30 +2,29 @@
 
 [ext_resource type="Script" path="res://Scripts/Quests/QuestGui.cs" id="1_13ams"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_co4w4"]
+[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="2_pqwqj"]
 [ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="3_f3hhp"]
-[ext_resource type="Texture2D" uid="uid://bhg24ad0ut6dq" path="res://assets/ui/slot.png" id="3_gicar"]
 [ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="4_i5ols"]
 
-[sub_resource type="Theme" id="Theme_iv430"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2tvt"]
+atlas = ExtResource("3_f3hhp")
+region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jxthp"]
-texture = ExtResource("3_gicar")
-region_rect = Rect2(5.51383, 5.51389, 20.5758, 20.9715)
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eivkp"]
+load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wruye"]
-texture = ExtResource("3_gicar")
-region_rect = Rect2(5.88819, 4.93425, 21.3204, 21.2188)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jagst"]
+atlas = SubResource("CompressedTexture2D_eivkp")
+region = Rect2(64, 32, 32, 32)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wox3q"]
-texture = ExtResource("3_f3hhp")
-region_rect = Rect2(32, 0, 32, 32)
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sfl0v"]
+load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ekexb"]
-texture = ExtResource("3_f3hhp")
-region_rect = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu2a5"]
+atlas = SubResource("CompressedTexture2D_sfl0v")
+region = Rect2(128, 32, 32, 32)
 
 [node name="Container" type="Control"]
-visible = false
 clip_contents = true
 layout_mode = 3
 anchors_preset = 0
@@ -34,22 +33,28 @@ offset_right = 644.0
 offset_bottom = 358.0
 script = ExtResource("1_13ams")
 
-[node name="Column" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-offset_top = 20.0
-offset_right = 305.0
-offset_bottom = 357.0
-theme = SubResource("Theme_iv430")
-alignment = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="Column"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_co4w4")
-theme_override_styles/panel = SubResource("StyleBoxTexture_jxthp")
 
-[node name="Title" type="Label" parent="Column/PanelContainer"]
+[node name="Header" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+alignment = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = ExtResource("2_co4w4")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -57,91 +62,115 @@ theme_override_colors/font_shadow_color = Color(0.61339, 0.61339, 0.61339, 1)
 theme_override_font_sizes/font_size = 16
 text = "Quest "
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Column/PanelContainer"]
+[node name="CloseButton" type="TextureButton" parent="MarginContainer/VBoxContainer/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("2_co4w4")
-theme_override_constants/margin_left = 45
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 45
-theme_override_constants/margin_bottom = 25
+mouse_default_cursor_shape = 2
+texture_normal = SubResource("AtlasTexture_f2tvt")
+texture_pressed = SubResource("AtlasTexture_jagst")
+texture_disabled = SubResource("AtlasTexture_wu2a5")
+ignore_texture_size = true
+stretch_mode = 0
 
-[node name="Tree" type="Tree" parent="Column/PanelContainer/MarginContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_pqwqj")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+
+[node name="Tree" type="Tree" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer"]
 clip_contents = false
+custom_minimum_size = Vector2(230, 0)
 layout_direction = 1
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_co4w4")
 theme_override_constants/button_margin = 10
-allow_reselect = true
 allow_search = false
 hide_folding = true
 enable_recursive_folding = false
 hide_root = true
 select_mode = 1
+scroll_horizontal_enabled = false
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_pqwqj")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.00466563
-anchor_top = 0.0810056
-anchor_right = 0.987558
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 317.0
-offset_top = -8.00001
-offset_right = 0.000183105
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_co4w4")
-theme_override_styles/panel = SubResource("StyleBoxTexture_wruye")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 45
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 45
-theme_override_constants/margin_bottom = 25
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer"]
 clip_contents = true
 layout_mode = 2
 size_flags_stretch_ratio = 20.0
 theme = ExtResource("2_co4w4")
-theme_override_constants/separation = 19
+theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_co4w4")
 theme_override_fonts/font = ExtResource("4_i5ols")
+theme_override_font_sizes/font_size = 26
+horizontal_alignment = 1
 uppercase = true
 
-[node name="Status" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Subtitle" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Task" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Description" type="RichTextLabel" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+fit_content = true
+
+[node name="Status" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("4_i5ols")
+vertical_alignment = 2
+
+[node name="Reward" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_i5ols")
-
-[node name="Description" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_i5ols")
-autowrap_mode = 3
-
-[node name="Reward" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_i5ols")
-
-[node name="CloseButton" type="Button" parent="."]
-modulate = Color(0.940362, 5.17406e-06, 1.15514e-06, 1)
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 0
-offset_left = 612.0
-offset_top = 1.0
-offset_right = 636.0
-offset_bottom = 25.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("2_co4w4")
-theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_wox3q")
-theme_override_styles/hover = SubResource("StyleBoxTexture_ekexb")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_wox3q")
-theme_override_styles/normal = SubResource("StyleBoxTexture_ekexb")
-icon_alignment = 1
+vertical_alignment = 2

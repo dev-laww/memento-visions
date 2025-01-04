@@ -26,6 +26,7 @@ public partial class SlayObjectives : QuestObjectives
 
     public void OnEnemyDied(Entity enemy)
     {
+        if(quest.Status != Quest.QuestStatus.Active) return;
         var EnemyKilled = enemy.UniqueName;
 
         if (EnemyKilled != UniqueName) return;

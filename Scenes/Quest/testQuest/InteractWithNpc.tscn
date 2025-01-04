@@ -7,6 +7,7 @@
 [node name="InteractWithNPC" type="Node" node_paths=PackedStringArray("Objectives")]
 script = ExtResource("1_aloi7")
 QuestTitle = "NPC quest"
+QuestSubtitle = "talk"
 QuestDescription = "Interact with NPC"
 Objectives = NodePath("InvestigateObjectives")
 Experience = 1

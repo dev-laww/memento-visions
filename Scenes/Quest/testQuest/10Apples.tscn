@@ -6,6 +6,7 @@
 [node name="10 Apples" type="Node" node_paths=PackedStringArray("Objectives")]
 script = ExtResource("1_e7638")
 QuestTitle = "apples"
+QuestSubtitle = "collect"
 QuestDescription = "collect 3 apples"
 Objectives = NodePath("CollectItemObjectives")
 QuestItems = []
