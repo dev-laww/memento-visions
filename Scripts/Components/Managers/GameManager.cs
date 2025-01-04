@@ -35,15 +35,15 @@ public partial class GameManager : Node
 
     public override void _Process(double delta)
     {
-        if (Input.MouseMode != Input.MouseModeEnum.ConfinedHidden)
-            Input.SetMouseMode(Input.MouseModeEnum.ConfinedHidden);
-
-        if (currentOverlay == null) return;
-
-        if (currentOverlay.IsVisible())
-            Input.SetMouseMode(Input.MouseModeEnum.Confined);
-        else
-            currentOverlay = null;
+        // if (Input.MouseMode != Input.MouseModeEnum.ConfinedHidden)
+        //     Input.SetMouseMode(Input.MouseModeEnum.ConfinedHidden);
+        //
+        // if (currentOverlay == null) return;
+        //
+        // if (currentOverlay.IsVisible())
+        //     Input.SetMouseMode(Input.MouseModeEnum.Confined);
+        // else
+        //     currentOverlay = null;
     }
 
     private void HandleOverlay(string overlayName)
