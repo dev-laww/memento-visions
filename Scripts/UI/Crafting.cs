@@ -7,11 +7,11 @@ using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
-namespace Game;
+namespace Game.UI;
 
 [Tool]
 [Scene]
-public partial class Crafting : Control
+public partial class Crafting : Overlay
 {
     [Node] private GridContainer slotsContainer;
     [Node] private ResourcePreloader resourcePreloader;
@@ -45,20 +45,6 @@ public partial class Crafting : Control
         if (!ShouldInitializeGameplay()) return;
 
         Reset();
-    }
-
-    public override void _Input(InputEvent @event)
-    {
-        if (@event.IsActionPressed("menu"))
-        {
-            Close();
-            return;
-        }
-
-        if (@event.IsActionPressed("open_crafting"))
-        {
-            Toggle();
-        }
     }
 
     public override void _ExitTree()
@@ -107,8 +93,6 @@ public partial class Crafting : Control
 
     private void OnVisibilityChanged()
     {
-        player?.SetProcessInput(!Visible);
-
         if (Engine.IsEditorHint() || Visible || player == null) return;
 
         Reset();
@@ -128,10 +112,6 @@ public partial class Crafting : Control
     {
         GD.Print("Crafting button pressed");
     }
-
-    // TODO: animate visibility
-    private void Toggle() => Visible = !Visible;
-    private void Close() => Visible = false;
 
     private void ClearSlots()
     {

@@ -17,7 +17,7 @@ namespace Game.UI;
 
 [Tool]
 [Scene]
-public partial class Inventory : Control
+public partial class Inventory : Overlay
 {
     // UI Components
     [Node] private GridContainer slotsContainer;
@@ -58,20 +58,6 @@ public partial class Inventory : Control
         if (!ShouldInitializeGameplay()) return;
 
         Reset();
-    }
-
-    public override void _Input(InputEvent @event)
-    {
-        if (@event.IsActionPressed("menu"))
-        {
-            Close();
-            return;
-        }
-
-        if (@event.IsActionPressed("open_inventory"))
-        {
-            Toggle();
-        }
     }
 
     public override void _ExitTree()
@@ -139,8 +125,6 @@ public partial class Inventory : Control
 
     private void OnVisibilityChanged()
     {
-        player?.SetProcessInput(!Visible);
-
         if (!Engine.IsEditorHint() && Visible && player != null)
             Reset();
     }
@@ -202,10 +186,6 @@ public partial class Inventory : Control
         equipButton.Text = isCurrentWeapon ? "Unequip" : "Equip";
         equipButton.Modulate = isCurrentWeapon ? Colors.Red : Colors.White;
     }
-
-    // TODO: animate visibility
-    private void Toggle() => Visible = !Visible;
-    private void Close() => Visible = false;
 
     private void ClearSlots()
     {
