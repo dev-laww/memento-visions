@@ -1,5 +1,6 @@
 using System.Linq;
 using Game.Globals;
+using Game.UI;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
@@ -15,8 +16,10 @@ public partial class GameManager : Node
     [Node] private Node currentScene;
     [Node] private ResourcePreloader resourcePreloader;
 
+    private Overlay currentOverlay;
     private static GameManager instance;
     public static Node CurrentScene => instance.currentScene;
+    private Overlay GetOverlay(string name) => userInterface.GetNode<Overlay>(name);
 
     public override void _Ready()
     {
@@ -26,6 +29,56 @@ public partial class GameManager : Node
         currentScene.GetChildren().ToList().ForEach(c => c.QueueFree());
         var startScreen = resourcePreloader.GetResource<PackedScene>("StartScreen").Instantiate();
         currentScene.AddChild(startScreen);
+
+        Input.SetMouseMode(Input.MouseModeEnum.Visible);
+    }
+
+    public override void _Process(double delta)
+    {
+        if (Input.MouseMode != Input.MouseModeEnum.ConfinedHidden)
+            Input.SetMouseMode(Input.MouseModeEnum.ConfinedHidden);
+
+        if (currentOverlay == null) return;
+
+        if (currentOverlay.IsVisible())
+            Input.SetMouseMode(Input.MouseModeEnum.Confined);
+        else
+            currentOverlay = null;
+    }
+
+    private void HandleOverlay(string overlayName)
+    {
+        if (overlayName == "Menu" && currentOverlay != null)
+        {
+            currentOverlay.Close();
+            currentOverlay = null;
+            return;
+        }
+
+        var targetOverlay = GetOverlay(overlayName);
+
+        if (currentOverlay == targetOverlay)
+        {
+            currentOverlay?.Toggle();
+            currentOverlay = null;
+            return;
+        }
+
+        if (currentOverlay != null)
+            return;
+
+        currentOverlay = targetOverlay;
+        currentOverlay?.Toggle();
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (@event.IsActionPressed("open_inventory"))
+            HandleOverlay("Inventory");
+        else if (@event.IsActionPressed("open_crafting"))
+            HandleOverlay("Crafting");
+        else if (@event.IsActionPressed("menu"))
+            HandleOverlay("Menu");
     }
 
     public override void _Notification(int what)
@@ -38,6 +91,8 @@ public partial class GameManager : Node
 
         WireNodes();
     }
+
+    public static void OpenOverlay(string overlayName) => instance.HandleOverlay(overlayName);
 
     public static void ChangeScene(
         string path,
