@@ -4,6 +4,7 @@ using GodotUtilities;
 
 namespace Game.Levels.Dungeon;
 
+[Tool]
 [Scene]
 public partial class Room : Node2D
 {

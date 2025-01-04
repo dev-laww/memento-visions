@@ -3,6 +3,7 @@ using GodotUtilities;
 
 namespace Game;
 
+[Tool]
 [Scene]
 public partial class Hallway : Node2D
 {

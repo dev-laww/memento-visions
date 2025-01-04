@@ -14,6 +14,7 @@ namespace Game.Levels.Dungeon;
 // TODO: Add enemy spawn system
 // TODO: Multilevel dungeons for roguelike experience
 [Scene]
+[Tool]
 public partial class Dungeon : Node2D
 {
     private enum CellType
@@ -55,31 +56,13 @@ public partial class Dungeon : Node2D
 
     public override void _Process(double delta) => QueueRedraw();
 
-    public override void _Input(InputEvent @event)
+    public void Generate()
     {
-        if (@event.IsActionPressed("interact"))
-        {
-            pathFind = !pathFind;
-            if (!pathFind)
-            {
-                Hallways.GetChildren().ToList().ForEach(c => c.QueueFree());
-                return;
-            }
-
-            PathFindHallways();
-        }
-
-
-        if (!@event.IsActionPressed("ui_accept")) return;
         TileMap.Clear();
         terrain.Clear();
         Ground.Clear();
         Rooms.GetChildren().ToList().ForEach(c => c.QueueFree());
-        Generate();
-    }
 
-    private void Generate()
-    {
         // Scale the gridSize for the grid creation
         grid = new Grid<CellType>(gridSize, Vector2I.Zero);
         rooms = new List<Room>();
