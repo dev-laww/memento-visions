@@ -22,5 +22,4 @@ public partial class Weapon : Item
     protected override bool IsStackable() => false;
     protected override Type GetItemType() => Type.Weapon;
     protected override void SetItemType(Type value) { }
-    protected override void SetValue(int value) { }
 }

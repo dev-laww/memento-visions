@@ -66,9 +66,9 @@ public partial class Item : Resource
 
     protected virtual void SetValue(int value)
     {
-        if (value < 0)
+        if (value <= 0)
         {
-            GD.PrintErr("Value cannot be less than 0.");
+            GD.PrintErr("Value cannot be less than 1.");
             return;
         }
 
@@ -80,12 +80,6 @@ public partial class Item : Resource
     // Additional methods for stacking items
     private bool ValidateStack(Item other = null)
     {
-        if (!Stackable)
-        {
-            GD.PrintErr("Item is not stackable.");
-            return false;
-        }
-
         if (other == null || AreItemsCompatible(other)) return true;
 
         GD.PrintErr("Items are not compatible for stacking.");
@@ -94,8 +88,7 @@ public partial class Item : Resource
 
     private bool AreItemsCompatible(Item other) =>
         GetType() == other.GetType() &&
-        UniqueName == other.UniqueName &&
-        other.Stackable;
+        UniqueName == other.UniqueName;
 
     private Item ModifyValue(int modification)
     {
