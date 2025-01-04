@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Entities.Player;
+using Game.Globals;
 using Game.Resources;
 using Game.UI.Common;
 using Game.Utils.Extensions;
@@ -18,6 +19,10 @@ public partial class Crafting : Overlay
 
     [Node] private TextureButton closeButton;
     [Node] private Button craftButton;
+
+    [Node] private TextureButton increaseButton;
+    [Node] private TextureButton decreaseButton;
+    [Node] private LineEdit quantityInput;
 
     [Node] private TextureRect selectedItemIcon;
     [Node] private Label selectedItemName;
@@ -64,6 +69,9 @@ public partial class Crafting : Overlay
     private void SetupEventHandlers()
     {
         // UI Events
+        quantityInput.TextChanged += OnQuantityInputTextChanged;
+        increaseButton.Pressed += IncreaseQuantity;
+        decreaseButton.Pressed += DecreaseQuantity;
         craftButton.Pressed += OnCraftButtonPress;
         closeButton.Pressed += HandleCloseButtonPress;
         VisibilityChanged += OnVisibilityChanged;
@@ -82,7 +90,19 @@ public partial class Crafting : Overlay
 
     private void Reset()
     {
+        var items = new List<Item>(RecipeManager.CraftableItems);
+        items.ForEach(item => item.Value = 1);
+
+        if (!Visible) return;
+
         ClearSlots();
+
+        items.ForEach(item =>
+        {
+            var slot = FindOrCreateSlot();
+            slot.Item = item;
+        });
+        Slots.First().Select();
     }
 
 
@@ -93,7 +113,7 @@ public partial class Crafting : Overlay
 
     private void OnVisibilityChanged()
     {
-        if (Engine.IsEditorHint() || Visible || player == null) return;
+        if (Engine.IsEditorHint() || player == null) return;
 
         Reset();
     }
@@ -130,6 +150,8 @@ public partial class Crafting : Overlay
         selectedItemName.Text = selectedItem?.Name;
         selectedItemType.Text = selectedItem?.Type.ToString();
         selectedItemDescription.Text = selectedItem?.Description;
+        quantityInput.Text = selectedItem?.Value.ToString() ?? "0";
+        decreaseButton.Disabled = selectedItem is not { Value: > 1 };
     }
 
     private void DeselectOtherSlots(Slot selectedSlot)
@@ -140,5 +162,33 @@ public partial class Crafting : Overlay
             slot.Deselect();
 
         NotifyPropertyListChanged();
+    }
+
+    private void IncreaseQuantity()
+    {
+        if (selectedItem == null) return;
+
+        selectedItem++;
+        quantityInput.Text = selectedItem.Value.ToString();
+        decreaseButton.Disabled = selectedItem.Value <= 1;
+    }
+
+    private void DecreaseQuantity()
+    {
+        if (selectedItem == null) return;
+
+        selectedItem--;
+        quantityInput.Text = selectedItem.Value.ToString();
+        decreaseButton.Disabled = selectedItem.Value <= 1;
+    }
+
+    private void OnQuantityInputTextChanged(string newText)
+    {
+        if (selectedItem == null) return;
+
+        if (!int.TryParse(newText, out var value)) return;
+
+        decreaseButton.Disabled = value <= 1;
+        selectedItem.Value = value;
     }
 }

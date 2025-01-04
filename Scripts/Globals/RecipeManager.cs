@@ -12,8 +12,8 @@ namespace Game.Globals;
 
 public partial class RecipeManager : Global<RecipeManager>
 {
-    public readonly List<Item> CraftableItems = new();
-    public readonly List<Item> PotionAndFoodItems = new();
+    public static readonly List<Item> CraftableItems = new();
+    public static readonly List<Item> PotionAndFoodItems = new();
     private readonly List<Recipe> recipes = new();
     private readonly List<ItemModel> items = new();
 
