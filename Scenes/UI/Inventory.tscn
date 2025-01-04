@@ -1,30 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://b161abm0o6ij2"]
+[gd_scene load_steps=13 format=3 uid="uid://b161abm0o6ij2"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Inventory.cs" id="1_7jd4f"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="1_35u5w"]
 [ext_resource type="ButtonGroup" uid="uid://0v7aexkru1o0" path="res://resources/ui/inventory-button-group.tres" id="1_hubp2"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_quj2b"]
 [ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="2_r77rr"]
+[ext_resource type="PackedScene" uid="uid://cb8psn10ig05k" path="res://Scenes/UI/Common/CloseButton.tscn" id="3_5hmpm"]
+[ext_resource type="Material" uid="uid://bkm4tri52hhdr" path="res://resources/shaders/blur.tres" id="3_jakka"]
 [ext_resource type="PackedScene" uid="uid://svqrge4l63b4" path="res://Scenes/UI/Common/Slot.tscn" id="5_17bmp"]
 [ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/inventory/items/temp/Item5.png" id="7_e5fdf"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vk6jo"]
-atlas = ExtResource("2_r77rr")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5eqpt"]
-load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7qmeb"]
-atlas = SubResource("CompressedTexture2D_5eqpt")
-region = Rect2(64, 32, 32, 32)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nl8iq"]
-load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ceocv"]
-atlas = SubResource("CompressedTexture2D_nl8iq")
-region = Rect2(128, 32, 32, 32)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7hgj7"]
 texture = ExtResource("2_r77rr")
@@ -59,6 +43,16 @@ script = ExtResource("1_7jd4f")
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
 resources = [PackedStringArray("slot"), [ExtResource("5_17bmp")]]
 
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource("3_jakka")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00141, 1)
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -78,16 +72,9 @@ layout_mode = 2
 layout_mode = 2
 alignment = 2
 
-[node name="CloseButton" type="TextureButton" parent="MarginContainer/VBoxContainer/Header"]
+[node name="CloseButton" parent="MarginContainer/VBoxContainer/Header" instance=ExtResource("3_5hmpm")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-mouse_default_cursor_shape = 2
-texture_normal = SubResource("AtlasTexture_vk6jo")
-texture_pressed = SubResource("AtlasTexture_7qmeb")
-texture_disabled = SubResource("AtlasTexture_ceocv")
-ignore_texture_size = true
-stretch_mode = 0
 
 [node name="Main" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

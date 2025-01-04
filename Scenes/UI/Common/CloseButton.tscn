@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://cb8psn10ig05k"]
+
+[ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="1_0ox20"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pp7ig"]
+atlas = ExtResource("1_0ox20")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eivkp"]
+load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbd0s"]
+atlas = SubResource("CompressedTexture2D_eivkp")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sfl0v"]
+load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j15wf"]
+atlas = SubResource("CompressedTexture2D_sfl0v")
+region = Rect2(128, 32, 32, 32)
+
+[node name="CloseButton" type="TextureButton"]
+custom_minimum_size = Vector2(24, 24)
+mouse_default_cursor_shape = 2
+texture_normal = SubResource("AtlasTexture_pp7ig")
+texture_pressed = SubResource("AtlasTexture_nbd0s")
+texture_disabled = SubResource("AtlasTexture_j15wf")
+ignore_texture_size = true
+stretch_mode = 0

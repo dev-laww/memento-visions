@@ -1,32 +1,16 @@
-[gd_scene load_steps=54 format=3 uid="uid://dd1jerr3yxfmm"]
+[gd_scene load_steps=51 format=3 uid="uid://dd1jerr3yxfmm"]
 
 [ext_resource type="PackedScene" uid="uid://svqrge4l63b4" path="res://Scenes/UI/Common/Slot.tscn" id="1_i0y0q"]
 [ext_resource type="Script" path="res://Scripts/UI/Crafting.cs" id="1_xer77"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_xbes8"]
 [ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="3_5klxs"]
+[ext_resource type="Material" uid="uid://bkm4tri52hhdr" path="res://resources/shaders/blur.tres" id="3_8o6kh"]
+[ext_resource type="PackedScene" uid="uid://cb8psn10ig05k" path="res://Scenes/UI/Common/CloseButton.tscn" id="3_pjuxn"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="5_li2ry"]
 [ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="6_ehywe"]
 [ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/inventory/items/temp/Item5.png" id="6_w3jy4"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pp7ig"]
-atlas = ExtResource("3_5klxs")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eivkp"]
-load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nbd0s"]
-atlas = SubResource("CompressedTexture2D_eivkp")
-region = Rect2(64, 32, 32, 32)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sfl0v"]
-load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j15wf"]
-atlas = SubResource("CompressedTexture2D_sfl0v")
-region = Rect2(128, 32, 32, 32)
-
-[sub_resource type="Resource" id="Resource_pxh53"]
+[sub_resource type="Resource" id="Resource_v7d2a"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -38,7 +22,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_y247x"]
+[sub_resource type="Resource" id="Resource_4xppf"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -50,7 +34,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_r5cny"]
+[sub_resource type="Resource" id="Resource_3dibl"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -62,7 +46,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_ysler"]
+[sub_resource type="Resource" id="Resource_dnh5y"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -74,7 +58,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_5h11c"]
+[sub_resource type="Resource" id="Resource_102f2"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -86,7 +70,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_35prr"]
+[sub_resource type="Resource" id="Resource_u8myh"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -98,7 +82,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_bfjsx"]
+[sub_resource type="Resource" id="Resource_am165"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -110,7 +94,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_qsjh7"]
+[sub_resource type="Resource" id="Resource_fvxfo"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -122,7 +106,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_8xohs"]
+[sub_resource type="Resource" id="Resource_4vveh"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -134,7 +118,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_7hclh"]
+[sub_resource type="Resource" id="Resource_a67j6"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -146,7 +130,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_8ywyd"]
+[sub_resource type="Resource" id="Resource_b0ub2"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -158,7 +142,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_xupjo"]
+[sub_resource type="Resource" id="Resource_5wuan"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -170,7 +154,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_lmh71"]
+[sub_resource type="Resource" id="Resource_does0"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -182,7 +166,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_s5d3q"]
+[sub_resource type="Resource" id="Resource_ip7l3"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -194,7 +178,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_uj05w"]
+[sub_resource type="Resource" id="Resource_y2xeh"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -206,7 +190,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_nxwwv"]
+[sub_resource type="Resource" id="Resource_r8k36"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -218,7 +202,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_fyuao"]
+[sub_resource type="Resource" id="Resource_6tswd"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -230,7 +214,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_qg70m"]
+[sub_resource type="Resource" id="Resource_3n588"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -242,7 +226,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_0e7pn"]
+[sub_resource type="Resource" id="Resource_q5ug6"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -254,7 +238,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_arct7"]
+[sub_resource type="Resource" id="Resource_i1kjl"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -266,7 +250,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_ounoh"]
+[sub_resource type="Resource" id="Resource_c7jyd"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -278,7 +262,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_2vsum"]
+[sub_resource type="Resource" id="Resource_ji5yw"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -290,7 +274,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_anr7v"]
+[sub_resource type="Resource" id="Resource_cdrd1"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -302,7 +286,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_jtai1"]
+[sub_resource type="Resource" id="Resource_7kwgm"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -314,7 +298,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_wepou"]
+[sub_resource type="Resource" id="Resource_4u3jk"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -326,7 +310,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_d3u6j"]
+[sub_resource type="Resource" id="Resource_7x87o"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -338,7 +322,7 @@ Icon = ExtResource("6_w3jy4")
 Sprite = ExtResource("6_w3jy4")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_fg8pi"]
+[sub_resource type="Resource" id="Resource_jqff8"]
 resource_local_to_scene = true
 script = ExtResource("6_ehywe")
 Name = "Apple"
@@ -409,6 +393,16 @@ script = ExtResource("1_xer77")
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
 resources = [PackedStringArray("slot"), [ExtResource("1_i0y0q")]]
 
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource("3_8o6kh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00141, 1)
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -428,16 +422,9 @@ layout_mode = 2
 layout_mode = 2
 alignment = 2
 
-[node name="CloseButton" type="TextureButton" parent="MarginContainer/VBoxContainer/Header"]
+[node name="CloseButton" parent="MarginContainer/VBoxContainer/Header" instance=ExtResource("3_pjuxn")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
-mouse_default_cursor_shape = 2
-texture_normal = SubResource("AtlasTexture_pp7ig")
-texture_pressed = SubResource("AtlasTexture_nbd0s")
-texture_disabled = SubResource("AtlasTexture_j15wf")
-ignore_texture_size = true
-stretch_mode = 0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -486,21 +473,21 @@ IsSelected = true
 
 [node name="Slot2" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_pxh53")
+Item = SubResource("Resource_v7d2a")
 
 [node name="Slot3" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot4" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_y247x")
+Item = SubResource("Resource_4xppf")
 
 [node name="Slot5" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot6" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_r5cny")
+Item = SubResource("Resource_3dibl")
 
 [node name="Slot7" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
@@ -513,165 +500,165 @@ layout_mode = 2
 
 [node name="Slot10" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_ysler")
+Item = SubResource("Resource_dnh5y")
 
 [node name="Slot11" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot12" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_5h11c")
+Item = SubResource("Resource_102f2")
 
 [node name="Slot13" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot14" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_35prr")
+Item = SubResource("Resource_u8myh")
 
 [node name="Slot15" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot16" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_bfjsx")
+Item = SubResource("Resource_am165")
 
 [node name="Slot17" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot18" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_qsjh7")
+Item = SubResource("Resource_fvxfo")
 
 [node name="Slot19" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot20" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_8xohs")
+Item = SubResource("Resource_4vveh")
 
 [node name="Slot21" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot22" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_7hclh")
+Item = SubResource("Resource_a67j6")
 
 [node name="Slot23" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot24" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_8ywyd")
+Item = SubResource("Resource_b0ub2")
 
 [node name="Slot25" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot26" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_xupjo")
+Item = SubResource("Resource_5wuan")
 
 [node name="Slot27" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot28" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_lmh71")
+Item = SubResource("Resource_does0")
 
 [node name="Slot29" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot30" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_s5d3q")
+Item = SubResource("Resource_ip7l3")
 
 [node name="Slot31" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot32" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_uj05w")
+Item = SubResource("Resource_y2xeh")
 
 [node name="Slot33" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot34" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_nxwwv")
+Item = SubResource("Resource_r8k36")
 
 [node name="Slot35" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot36" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_fyuao")
+Item = SubResource("Resource_6tswd")
 
 [node name="Slot37" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot38" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_qg70m")
+Item = SubResource("Resource_3n588")
 
 [node name="Slot39" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot40" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_0e7pn")
+Item = SubResource("Resource_q5ug6")
 
 [node name="Slot41" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot42" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_arct7")
+Item = SubResource("Resource_i1kjl")
 
 [node name="Slot43" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot44" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_ounoh")
+Item = SubResource("Resource_c7jyd")
 
 [node name="Slot45" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot46" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_2vsum")
+Item = SubResource("Resource_ji5yw")
 
 [node name="Slot47" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot48" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_anr7v")
+Item = SubResource("Resource_cdrd1")
 
 [node name="Slot49" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot50" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_jtai1")
+Item = SubResource("Resource_7kwgm")
 
 [node name="Slot51" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot52" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_wepou")
+Item = SubResource("Resource_4u3jk")
 
 [node name="Slot53" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_d3u6j")
+Item = SubResource("Resource_7x87o")
 
 [node name="Slot54" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot55" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_fg8pi")
+Item = SubResource("Resource_jqff8")
 
 [node name="Details" type="NinePatchRect" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(170, 0)
