@@ -31,6 +31,7 @@ public partial class InventoryManager : Node
         EmitSignal(SignalName.ItemAdd, item);
     }
 
+    // TODO: clean this up
     public void RemoveItem(Item item)
     {
         var existing = Items.Find(i => i.UniqueName == item.UniqueName);
@@ -40,17 +41,20 @@ public partial class InventoryManager : Node
 
         if (existing.Stackable)
         {
-            existing -= item;
+            var remove = existing.Value <= item.Value;
 
-            if (existing.Value == 0)
+            if (remove)
                 Items.Remove(existing);
+            else
+                existing -= item;
         }
         else
             Items.Remove(existing);
-        
-        
+
+
         EmitSignal(SignalName.ItemRemove, item);
     }
+
     public List<Item> GetItemsByUniqueName(string uniqueName)
     {
         return Items.Where(item => item.UniqueName == uniqueName).ToList();
