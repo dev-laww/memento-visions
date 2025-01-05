@@ -90,8 +90,7 @@ public partial class Crafting : Overlay
 
     private void Reset()
     {
-        var items = new List<Item>(RecipeManager.CraftableItems);
-        items.ForEach(item => item.Value = 1);
+        var items = RecipeManager.CraftableItems;
 
         if (!Visible) return;
 

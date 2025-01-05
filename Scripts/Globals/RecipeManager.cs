@@ -12,8 +12,13 @@ namespace Game.Globals;
 
 public partial class RecipeManager : Global<RecipeManager>
 {
-    public static readonly List<Item> CraftableItems = new();
-    public static readonly List<Item> PotionAndFoodItems = new();
+    public static List<Item> CraftableItems => Instance.craftableItems.Select(item => item.Duplicate()).ToList();
+
+    public static List<Item> PotionAndFoodItems =>
+        Instance.potionAndFoodItems.Select(item => item.Duplicate()).ToList();
+
+    private readonly List<Item> craftableItems = new();
+    private readonly List<Item> potionAndFoodItems = new();
     private readonly List<Recipe> recipes = new();
     private readonly List<ItemModel> items = new();
 
@@ -29,22 +34,22 @@ public partial class RecipeManager : Global<RecipeManager>
         items.AddRange(itemsData);
         items.AddRange(weaponsData);
 
-        var craftableItems = items.Where(
+        var crafts = items.Where(
             data => craftingRecipes.Any(recipe => recipe.Result.UniqueName == data.UniqueName)
         );
 
-        var resources = craftableItems.Select(item => GD.Load<Item>(item.Resource));
+        var resources = crafts.Select(item => GD.Load<Item>(item.Resource));
 
-        var potionAndFoodItems = items.Where(
+        var potionsAndFood = items.Where(
             data => potionAndFoodRecipes.Any(recipe => recipe.Result.UniqueName == data.UniqueName)
         );
 
-        var potionAndFoodResources = potionAndFoodItems.Select(item => GD.Load<Item>(item.Resource));
+        var potionAndFoodResources = potionsAndFood.Select(item => GD.Load<Item>(item.Resource));
 
         recipes.AddRange(craftingRecipes);
         recipes.AddRange(potionAndFoodRecipes);
-        CraftableItems.AddRange(resources);
-        PotionAndFoodItems.AddRange(potionAndFoodResources);
+        craftableItems.AddRange(resources);
+        potionAndFoodItems.AddRange(potionAndFoodResources);
     }
 
     public static Item CreateItem(string name)
