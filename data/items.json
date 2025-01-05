@@ -1,7 +1,12 @@
 [
 	{
 		"name": "Apple",
-		"unique_name": "item:test",
+		"unique_name": "item:apple",
 		"resource": "res://resources/items/apple.tres"
+	},
+		{
+		"name": "Rock",
+		"unique_name": "item:rock",
+		"resource": "res://resources/items/rock.tres"
 	}
 ]
