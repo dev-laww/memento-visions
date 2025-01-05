@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System;
+using Godot;
 
 namespace Game.Resources;
 
@@ -12,7 +13,7 @@ public enum Type
 
 [Tool]
 [GlobalClass]
-public partial class Item : Resource
+public partial class Item : Resource, ICloneable
 {
     [Export] public string Name;
     [Export] public string UniqueName;
@@ -146,4 +147,8 @@ public partial class Item : Resource
     public static Item operator -(int value, Item item) => item - value;
     public static Item operator *(int value, Item item) => item * value;
     public static Item operator /(int value, Item item) => item / value;
+
+    public object Clone() => MemberwiseClone();
+
+    public Item Duplicate() => (Item)Clone();
 }
