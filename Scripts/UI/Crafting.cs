@@ -10,6 +10,8 @@ using GodotUtilities;
 
 namespace Game.UI;
 
+
+// TODO: implement craft button disabling and incrementing/decrementing item quantity disabling
 [Tool]
 [Scene]
 public partial class Crafting : Overlay
@@ -129,7 +131,9 @@ public partial class Crafting : Overlay
 
     private void OnCraftButtonPress()
     {
-        GD.Print("Crafting button pressed");
+        if (selectedItem == null || player == null) return;
+
+        GD.Print(RecipeManager.CreateItem(selectedItem));
     }
 
     private void ClearSlots()

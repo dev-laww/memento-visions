@@ -52,16 +52,11 @@ public partial class RecipeManager : Global<RecipeManager>
         potionAndFoodItems.AddRange(potionAndFoodResources);
     }
 
-    public static Item CreateItem(string name)
+    public static Item CreateItem(Item item)
     {
         var items = Instance.items;
         var recipes = Instance.recipes;
         var player = Instance.GetPlayer();
-
-        var item = items.Find(i => i.UniqueName == name)?.ToItem();
-
-        if (item is null)
-            return null;
 
         var recipe = recipes.Find(r => r.Result.UniqueName == item.UniqueName);
 
@@ -72,11 +67,12 @@ public partial class RecipeManager : Global<RecipeManager>
         var ingredients = recipe.Ingredients.Select(ingredient =>
         {
             var data = items.Find(i => i.UniqueName == ingredient.UniqueName);
+
             var resource = GD.Load<Item>(data.Resource);
             resource.Value = ingredient.Amount;
 
             return resource;
-        });
+        }).ToList();
 
         // check if player has enough ingredients
         var playerInventory = player?.Inventory;
@@ -97,6 +93,14 @@ public partial class RecipeManager : Global<RecipeManager>
             return true;
         });
 
-        return hasIngredients ? item : null;
+        if (!hasIngredients) return null;
+
+        // remove ingredients from player inventory
+        ingredients.ForEach(ingredient => playerInventory.RemoveItem(ingredient));
+
+        // add item to player inventory
+        playerInventory.AddItem(item);
+
+        return item;
     }
 }
