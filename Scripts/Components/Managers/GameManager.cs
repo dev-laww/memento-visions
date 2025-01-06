@@ -77,8 +77,6 @@ public partial class GameManager : Node
     {
         if (@event.IsActionPressed("open_inventory"))
             HandleOverlay("Inventory");
-        else if (@event.IsActionPressed("open_crafting"))
-            HandleOverlay("Crafting");
         else if (@event.IsActionPressed("menu"))
             HandleOverlay("Menu");
     }

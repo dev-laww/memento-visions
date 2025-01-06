@@ -55,7 +55,7 @@ public partial class Interaction : Area2D
         texture.Texture = GD.Load<Texture2D>("res://assets/icons/f.png");
         label.Name = nameof(Label);
         label.Text = "Interact";
-        label.Theme = GD.Load<Theme>("res://resources/theme.tres");
+        label.Theme = GD.Load<Theme>("res://resources/ui/theme.tres");
         ui.Scale = new Vector2(0.5f, 0.5f);
 
         container.SetVSizeFlags(Control.SizeFlags.ShrinkCenter);
