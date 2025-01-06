@@ -54,35 +54,61 @@ public partial class RecipeManager : Global<RecipeManager>
 
     public static Item CreateItem(Item item)
     {
+        var player = Instance.GetPlayer();
+        if (player?.Inventory is null)
+            return null;
+
+        if (!CanCreateItem(item))
+            return null;
+
+        var (recipe, ingredients) = GetRecipeInfo(item);
+
+        if (recipe is null) return null;
+
+        // remove ingredients from player inventory
+        ingredients.ForEach(ingredient => player.Inventory.RemoveItem(ingredient));
+
+        // add item to player inventory
+        player.Inventory.AddItem(item);
+
+        return item;
+    }
+
+    public static (Recipe Recipe, List<Item> Ingredients) GetRecipeInfo(Item item)
+    {
         var items = Instance.items;
         var recipes = Instance.recipes;
-        var player = Instance.GetPlayer();
 
         var recipe = recipes.Find(r => r.Result.UniqueName == item.UniqueName);
 
         if (recipe is null)
-            return null;
+            return (null, null);
 
-        // find ingredients in items and load it to item
         var ingredients = recipe.Ingredients.Select(ingredient =>
         {
             var data = items.Find(i => i.UniqueName == ingredient.UniqueName);
-
             var resource = GD.Load<Item>(data.Resource);
             resource.Value = ingredient.Amount;
-
             return resource;
         }).ToList();
 
-        // check if player has enough ingredients
-        var playerInventory = player?.Inventory;
+        return (recipe, ingredients);
+    }
 
-        if (playerInventory is null)
-            return null;
+    public static bool CanCreateItem(Item item)
+    {
+        var player = Instance.GetPlayer();
+        if (player?.Inventory is null)
+            return false;
 
-        var hasIngredients = ingredients.All(ingredient =>
+        var (_, ingredients) = GetRecipeInfo(item);
+
+        if (ingredients is null)
+            return false;
+
+        return ingredients.All(ingredient =>
         {
-            var existing = playerInventory.Items.Find(i => i.UniqueName == ingredient.UniqueName);
+            var existing = player.Inventory.Items.Find(i => i.UniqueName == ingredient.UniqueName);
 
             if (existing is null)
                 return false;
@@ -92,15 +118,5 @@ public partial class RecipeManager : Global<RecipeManager>
 
             return true;
         });
-
-        if (!hasIngredients) return null;
-
-        // remove ingredients from player inventory
-        ingredients.ForEach(ingredient => playerInventory.RemoveItem(ingredient));
-
-        // add item to player inventory
-        playerInventory.AddItem(item);
-
-        return item;
     }
 }
