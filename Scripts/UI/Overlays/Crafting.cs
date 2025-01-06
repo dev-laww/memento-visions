@@ -10,7 +10,7 @@ using GodotUtilities;
 
 namespace Game.UI.Overlays;
 
-// TODO: implement craft button disabling and incrementing/decrementing item quantity disabling
+// TODO: improve popup animation
 [Tool]
 [Scene]
 public partial class Crafting : Overlay
@@ -29,6 +29,12 @@ public partial class Crafting : Overlay
     [Node] private Label selectedItemName;
     [Node] private Label selectedItemType;
     [Node] private RichTextLabel selectedItemDescription;
+
+    [Node] private TextureRect craftedItemIcon;
+    [Node] private Label craftedItemName;
+    [Node] private Label craftedItemQuantity;
+    [Node] private Button okayButton;
+    [Node] private AnimationPlayer animationPlayer;
 
     private Player player;
     private Item selectedItem;
@@ -74,6 +80,7 @@ public partial class Crafting : Overlay
         increaseButton.Pressed += IncreaseQuantity;
         decreaseButton.Pressed += DecreaseQuantity;
         craftButton.Pressed += OnCraftButtonPress;
+        okayButton.Pressed += OnOkayButtonPress;
         closeButton.Pressed += HandleCloseButtonPress;
         VisibilityChanged += OnVisibilityChanged;
 
@@ -129,13 +136,19 @@ public partial class Crafting : Overlay
         return newSlot;
     }
 
-    private void OnCraftButtonPress()
+    private async void OnCraftButtonPress()
     {
         if (selectedItem == null || player == null) return;
 
-        RecipeManager.CreateItem(selectedItem);
+        var craftedItem = RecipeManager.CreateItem(selectedItem);
 
-        // TODO: Add popup message
+        craftedItemIcon.Texture = craftedItem.Icon;
+        craftedItemName.Text = craftedItem.Name;
+        craftedItemQuantity.Text = $"x{craftedItem.Value}";
+
+        animationPlayer.Play("show-popup");
+
+        await ToSignal(animationPlayer, "animation_finished");
 
         Reset();
     }
@@ -216,5 +229,15 @@ public partial class Crafting : Overlay
 
         selectedItem.Value = value;
         UpdateButtonStates();
+    }
+
+    private async void OnOkayButtonPress()
+    {
+        animationPlayer.Play("hide-popup");
+        await ToSignal(animationPlayer, "animation_finished");
+
+        craftedItemIcon.Texture = null;
+        craftedItemName.Text = null;
+        craftedItemQuantity.Text = null;
     }
 }
