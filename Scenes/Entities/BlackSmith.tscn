@@ -1,27 +1,132 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8bsxe6qi4s18"]
+[gd_scene load_steps=23 format=3 uid="uid://casihsp0usdna"]
 
-[ext_resource type="Script" path="res://Scripts/Components/Area/Interaction.cs" id="1_e5uyn"]
-[ext_resource type="Texture2D" uid="uid://dyxsacj8kktd1" path="res://assets/icons/f.png" id="2_fhpyo"]
+[ext_resource type="Script" path="res://Scripts/Components/Area/Interaction.cs" id="1_hw0pw"]
+[ext_resource type="Script" path="res://Scripts/Entities/Character/BlackSmith.cs" id="1_m0lkp"]
+[ext_resource type="Texture2D" uid="uid://dyxsacj8kktd1" path="res://assets/icons/f.png" id="2_lunr2"]
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="3_kip8c"]
+[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="4_iumo3"]
+[ext_resource type="Texture2D" uid="uid://cedupdnagtvrd" path="res://assets/entities/npc/black-smith.png" id="5_eh65q"]
+[ext_resource type="Script" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="6_j0jn0"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rjjbp"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rtbut"]
+radius = 4.0
+height = 12.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_s3emj"]
-radius = 26.0768
+[sub_resource type="CircleShape2D" id="CircleShape2D_imwyk"]
+radius = 47.1699
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x7hsq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_x65sy"]
+atlas = ExtResource("5_eh65q")
+region = Rect2(0, 0, 64, 64)
 
-[node name="BlackSmith" type="StaticBody2D"]
-physics_material_override = SubResource("PhysicsMaterial_rjjbp")
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0lfp"]
+atlas = ExtResource("5_eh65q")
+region = Rect2(64, 0, 64, 64)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[sub_resource type="AtlasTexture" id="AtlasTexture_52p33"]
+atlas = ExtResource("5_eh65q")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42s21"]
+atlas = ExtResource("5_eh65q")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6wht"]
+atlas = ExtResource("5_eh65q")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tg3lk"]
+atlas = ExtResource("5_eh65q")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjm48"]
+atlas = ExtResource("5_eh65q")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k75rt"]
+atlas = ExtResource("5_eh65q")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pqnn"]
+atlas = ExtResource("5_eh65q")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ie4qs"]
+atlas = ExtResource("5_eh65q")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1jkb"]
+atlas = ExtResource("5_eh65q")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_646r2"]
+atlas = ExtResource("5_eh65q")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qdt71"]
+animations = [{
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_x65sy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0lfp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52p33")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42s21")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6wht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tg3lk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjm48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k75rt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pqnn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ie4qs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1jkb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_646r2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[node name="BlackSmith" type="CharacterBody2D"]
+script = ExtResource("1_m0lkp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 11)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_rtbut")
 
 [node name="Interaction" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 4
-script = ExtResource("1_e5uyn")
-InteractionLabel = "Interact"
+script = ExtResource("1_hw0pw")
+InteractionLabel = "Craft"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+shape = SubResource("CircleShape2D_imwyk")
+debug_color = Color(0.256341, 0.611973, 0.48127, 0.42)
 
 [node name="InteractionUI" type="Node2D" parent="Interaction"]
+position = Vector2(1, 21)
 scale = Vector2(0.5, 0.5)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Interaction/InteractionUI"]
@@ -39,14 +144,18 @@ size_flags_vertical = 4
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("2_fhpyo")
+texture = ExtResource("2_lunr2")
 
 [node name="Label" type="Label" parent="Interaction/InteractionUI/HBoxContainer"]
 layout_mode = 2
-text = "Interact"
+theme = ExtResource("3_kip8c")
+text = "Craft"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
-shape = SubResource("CircleShape2D_s3emj")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_x7hsq")
+[node name="SmoothAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 2
+material = ExtResource("4_iumo3")
+sprite_frames = SubResource("SpriteFrames_qdt71")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.718616
+script = ExtResource("6_j0jn0")
