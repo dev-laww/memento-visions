@@ -146,8 +146,21 @@ public partial class Inventory : Overlay
         {
             var slot = FindOrCreateSlot();
 
-            if (slot != null)
+            if (slot == null) continue;
+
+            if (item.Stackable)
+            {
                 slot.Item = item;
+                continue;
+            }
+
+            for (var i = 0; i < item.Value; i++)
+            {
+                var newSlot = FindOrCreateSlot();
+                var duplicate = item.Duplicate();
+                duplicate.Value = 1;
+                newSlot.Item = duplicate;
+            }
         }
 
         Slots.First().Select();
