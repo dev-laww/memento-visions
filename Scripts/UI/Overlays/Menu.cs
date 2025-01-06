@@ -2,7 +2,7 @@ using Game.UI;
 using Godot;
 using GodotUtilities;
 
-namespace Game;
+namespace Game.UI.Overlays;
 
 [Scene]
 public partial class Menu : Overlay

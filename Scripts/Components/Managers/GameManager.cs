@@ -1,6 +1,6 @@
 using System.Linq;
 using Game.Globals;
-using Game.UI;
+using Game.UI.Overlays;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;

@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://b161abm0o6ij2"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Inventory.cs" id="1_7jd4f"]
+[ext_resource type="Script" path="res://Scripts/UI/Overlays/Inventory.cs" id="1_7jd4f"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="1_35u5w"]
 [ext_resource type="ButtonGroup" uid="uid://0v7aexkru1o0" path="res://resources/ui/inventory-button-group.tres" id="1_hubp2"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_quj2b"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cptktl4hefaup"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Menu.cs" id="1_7puxv"]
+[ext_resource type="Script" path="res://Scripts/UI/Overlays/Menu.cs" id="1_7puxv"]
 [ext_resource type="PackedScene" uid="uid://cb8psn10ig05k" path="res://Scenes/UI/Common/CloseButton.tscn" id="1_lerko"]
 [ext_resource type="Material" uid="uid://bkm4tri52hhdr" path="res://resources/shaders/blur.tres" id="2_7dkn7"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="3_3p34d"]

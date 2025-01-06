@@ -1,7 +1,7 @@
 using Game.Utils.Extensions;
 using Godot;
 
-namespace Game.UI;
+namespace Game.UI.Overlays;
 
 // TODO: animate open/close
 public abstract partial class Overlay : Control

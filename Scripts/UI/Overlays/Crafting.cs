@@ -8,7 +8,7 @@ using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
-namespace Game.UI;
+namespace Game.UI.Overlays;
 
 
 // TODO: implement craft button disabling and incrementing/decrementing item quantity disabling
