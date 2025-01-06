@@ -20,7 +20,7 @@
 [ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="18_7my0j"]
 [ext_resource type="Texture2D" uid="uid://b1vp2c7eh8v3s" path="res://assets/inventory/items/temp/5.png" id="19_yc7vt"]
 
-[sub_resource type="Resource" id="Resource_oyilj"]
+[sub_resource type="Resource" id="Resource_ws77i"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Apple"
@@ -32,7 +32,7 @@ Icon = ExtResource("17_cmsyt")
 Sprite = ExtResource("17_cmsyt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_2nn4o"]
+[sub_resource type="Resource" id="Resource_ehh5e"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -44,7 +44,7 @@ Icon = ExtResource("19_yc7vt")
 Sprite = ExtResource("19_yc7vt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_0xdx6"]
+[sub_resource type="Resource" id="Resource_ahe8g"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -56,7 +56,7 @@ Icon = ExtResource("19_yc7vt")
 Sprite = ExtResource("19_yc7vt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_6o4tv"]
+[sub_resource type="Resource" id="Resource_q7443"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -209,16 +209,28 @@ DashStaminaCost = 30.0
 
 [node name="Apple" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(105, 123)
-ItemResource = SubResource("Resource_oyilj")
+ItemResource = SubResource("Resource_ws77i")
 
 [node name="Rock" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(83, 151)
-ItemResource = SubResource("Resource_2nn4o")
+ItemResource = SubResource("Resource_ehh5e")
 
 [node name="Rock2" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(61, 157)
-ItemResource = SubResource("Resource_0xdx6")
+ItemResource = SubResource("Resource_ahe8g")
 
 [node name="Rock3" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(76, 169)
-ItemResource = SubResource("Resource_6o4tv")
+ItemResource = SubResource("Resource_q7443")
+
+[node name="Rock4" parent="." instance=ExtResource("16_2no68")]
+position = Vector2(100, 196)
+ItemResource = SubResource("Resource_ehh5e")
+
+[node name="Rock5" parent="." instance=ExtResource("16_2no68")]
+position = Vector2(78, 202)
+ItemResource = SubResource("Resource_ahe8g")
+
+[node name="Rock6" parent="." instance=ExtResource("16_2no68")]
+position = Vector2(93, 214)
+ItemResource = SubResource("Resource_q7443")

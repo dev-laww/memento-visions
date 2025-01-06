@@ -133,7 +133,9 @@ public partial class Crafting : Overlay
     {
         if (selectedItem == null || player == null) return;
 
-        GD.Print(RecipeManager.CreateItem(selectedItem));
+        RecipeManager.CreateItem(selectedItem);
+        
+        UpdateButtonStates();
     }
 
     private void ClearSlots()
@@ -154,7 +156,26 @@ public partial class Crafting : Overlay
         selectedItemType.Text = selectedItem?.Type.ToString();
         selectedItemDescription.Text = selectedItem?.Description;
         quantityInput.Text = selectedItem?.Value.ToString() ?? "0";
-        decreaseButton.Disabled = selectedItem is not { Value: > 1 };
+
+        UpdateButtonStates();
+    }
+
+    private void UpdateButtonStates()
+    {
+        if (selectedItem == null)
+        {
+            craftButton.Disabled = true;
+            decreaseButton.Disabled = true;
+            increaseButton.Disabled = true;
+            return;
+        }
+
+        craftButton.Disabled = !RecipeManager.CanCreateItem(selectedItem);
+        decreaseButton.Disabled = selectedItem.Value <= 1;
+
+        var nextItem = selectedItem.Duplicate();
+        nextItem++;
+        increaseButton.Disabled = !RecipeManager.CanCreateItem(nextItem);
     }
 
     private void DeselectOtherSlots(Slot selectedSlot)
@@ -173,7 +194,7 @@ public partial class Crafting : Overlay
 
         selectedItem++;
         quantityInput.Text = selectedItem.Value.ToString();
-        decreaseButton.Disabled = selectedItem.Value <= 1;
+        UpdateButtonStates();
     }
 
     private void DecreaseQuantity()
@@ -182,7 +203,7 @@ public partial class Crafting : Overlay
 
         selectedItem--;
         quantityInput.Text = selectedItem.Value.ToString();
-        decreaseButton.Disabled = selectedItem.Value <= 1;
+        UpdateButtonStates();
     }
 
     private void OnQuantityInputTextChanged(string newText)
@@ -191,7 +212,7 @@ public partial class Crafting : Overlay
 
         if (!int.TryParse(newText, out var value)) return;
 
-        decreaseButton.Disabled = value <= 1;
         selectedItem.Value = value;
+        UpdateButtonStates();
     }
 }

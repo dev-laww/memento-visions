@@ -88,7 +88,8 @@ public partial class RecipeManager : Global<RecipeManager>
         {
             var data = items.Find(i => i.UniqueName == ingredient.UniqueName);
             var resource = GD.Load<Item>(data.Resource);
-            resource.Value = ingredient.Amount;
+            resource.Value = ingredient.Amount * item.Value;
+            GD.Print(resource);
             return resource;
         }).ToList();
 
