@@ -12,13 +12,8 @@ namespace Game.Globals;
 
 public partial class RecipeManager : Global<RecipeManager>
 {
-    public static List<Item> CraftableItems => Instance.craftableItems.Select(item => item.Duplicate()).ToList();
-
-    public static List<Item> PotionAndFoodItems =>
-        Instance.potionAndFoodItems.Select(item => item.Duplicate()).ToList();
-
-    private readonly List<Item> craftableItems = new();
-    private readonly List<Item> potionAndFoodItems = new();
+    public static readonly List<Item> CraftableItems = new();
+    public static readonly List<Item> PotionAndFoodItems = new();
     private readonly List<Recipe> recipes = new();
     private readonly List<ItemModel> items = new();
 
@@ -48,8 +43,8 @@ public partial class RecipeManager : Global<RecipeManager>
 
         recipes.AddRange(craftingRecipes);
         recipes.AddRange(potionAndFoodRecipes);
-        craftableItems.AddRange(resources);
-        potionAndFoodItems.AddRange(potionAndFoodResources);
+        CraftableItems.AddRange(resources);
+        PotionAndFoodItems.AddRange(potionAndFoodResources);
     }
 
     public static Item CreateItem(Item item)
@@ -89,7 +84,7 @@ public partial class RecipeManager : Global<RecipeManager>
             var data = items.Find(i => i.UniqueName == ingredient.UniqueName);
             var resource = GD.Load<Item>(data.Resource);
             resource.Value = ingredient.Amount * item.Value;
-            GD.Print(resource);
+
             return resource;
         }).ToList();
 
@@ -115,7 +110,7 @@ public partial class RecipeManager : Global<RecipeManager>
                 return false;
 
             if (existing.Stackable)
-                return existing.Value >= ingredient.Value * item.Value;
+                return existing.Value >= ingredient.Value;
 
             return true;
         });

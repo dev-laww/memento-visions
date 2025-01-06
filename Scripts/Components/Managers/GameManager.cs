@@ -48,6 +48,8 @@ public partial class GameManager : Node
 
     private void HandleOverlay(string overlayName)
     {
+        // TODO: Fix this causes bugs, you cant open an overlay sometimes
+
         if (overlayName == "Menu" && currentOverlay != null)
         {
             currentOverlay.Close();

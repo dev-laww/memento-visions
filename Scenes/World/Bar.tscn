@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://b4wadx6dv5aan"]
+[gd_scene load_steps=27 format=4 uid="uid://b4wadx6dv5aan"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_7gq68"]
@@ -20,7 +20,7 @@
 [ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="18_7my0j"]
 [ext_resource type="Texture2D" uid="uid://b1vp2c7eh8v3s" path="res://assets/inventory/items/temp/5.png" id="19_yc7vt"]
 
-[sub_resource type="Resource" id="Resource_ws77i"]
+[sub_resource type="Resource" id="Resource_k0a3p"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Apple"
@@ -32,7 +32,7 @@ Icon = ExtResource("17_cmsyt")
 Sprite = ExtResource("17_cmsyt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_ehh5e"]
+[sub_resource type="Resource" id="Resource_7e3ui"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -44,7 +44,7 @@ Icon = ExtResource("19_yc7vt")
 Sprite = ExtResource("19_yc7vt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_ahe8g"]
+[sub_resource type="Resource" id="Resource_2lkfb"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -56,7 +56,43 @@ Icon = ExtResource("19_yc7vt")
 Sprite = ExtResource("19_yc7vt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_q7443"]
+[sub_resource type="Resource" id="Resource_ltyjn"]
+resource_local_to_scene = true
+script = ExtResource("18_7my0j")
+Name = "Rock"
+UniqueName = "item:rock"
+Type = 0
+Value = 1
+Description = "Can be ingested??"
+Icon = ExtResource("19_yc7vt")
+Sprite = ExtResource("19_yc7vt")
+Stackable = true
+
+[sub_resource type="Resource" id="Resource_012i1"]
+resource_local_to_scene = true
+script = ExtResource("18_7my0j")
+Name = "Rock"
+UniqueName = "item:rock"
+Type = 0
+Value = 1
+Description = "Can be ingested??"
+Icon = ExtResource("19_yc7vt")
+Sprite = ExtResource("19_yc7vt")
+Stackable = true
+
+[sub_resource type="Resource" id="Resource_wv6mu"]
+resource_local_to_scene = true
+script = ExtResource("18_7my0j")
+Name = "Rock"
+UniqueName = "item:rock"
+Type = 0
+Value = 1
+Description = "Can be ingested??"
+Icon = ExtResource("19_yc7vt")
+Sprite = ExtResource("19_yc7vt")
+Stackable = true
+
+[sub_resource type="Resource" id="Resource_12ul8"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -209,28 +245,28 @@ DashStaminaCost = 30.0
 
 [node name="Apple" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(105, 123)
-ItemResource = SubResource("Resource_ws77i")
+ItemResource = SubResource("Resource_k0a3p")
 
 [node name="Rock" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(83, 151)
-ItemResource = SubResource("Resource_ehh5e")
+ItemResource = SubResource("Resource_7e3ui")
 
 [node name="Rock2" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(61, 157)
-ItemResource = SubResource("Resource_ahe8g")
+ItemResource = SubResource("Resource_2lkfb")
 
 [node name="Rock3" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(76, 169)
-ItemResource = SubResource("Resource_q7443")
+ItemResource = SubResource("Resource_ltyjn")
 
 [node name="Rock4" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(100, 196)
-ItemResource = SubResource("Resource_ehh5e")
+ItemResource = SubResource("Resource_012i1")
 
 [node name="Rock5" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(78, 202)
-ItemResource = SubResource("Resource_ahe8g")
+ItemResource = SubResource("Resource_wv6mu")
 
 [node name="Rock6" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(93, 214)
-ItemResource = SubResource("Resource_q7443")
+ItemResource = SubResource("Resource_12ul8")

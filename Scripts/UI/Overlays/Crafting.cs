@@ -10,7 +10,6 @@ using GodotUtilities;
 
 namespace Game.UI.Overlays;
 
-
 // TODO: implement craft button disabling and incrementing/decrementing item quantity disabling
 [Tool]
 [Scene]
@@ -104,6 +103,7 @@ public partial class Crafting : Overlay
             slot.Item = item;
         });
         Slots.First().Select();
+        UpdateButtonStates();
     }
 
 
@@ -134,8 +134,10 @@ public partial class Crafting : Overlay
         if (selectedItem == null || player == null) return;
 
         RecipeManager.CreateItem(selectedItem);
-        
-        UpdateButtonStates();
+
+        // TODO: Add popup message
+
+        Reset();
     }
 
     private void ClearSlots()
@@ -150,7 +152,7 @@ public partial class Crafting : Overlay
 
         if (Engine.IsEditorHint() || player == null) return;
 
-        selectedItem = selectedSlot.Item;
+        selectedItem = selectedSlot.Item?.Duplicate();
         selectedItemIcon.Texture = selectedItem?.Icon;
         selectedItemName.Text = selectedItem?.Name;
         selectedItemType.Text = selectedItem?.Type.ToString();
