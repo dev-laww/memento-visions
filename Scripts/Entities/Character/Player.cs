@@ -6,7 +6,6 @@ using Game.Components.Movement;
 using Game.Resources;
 using Godot;
 using GodotUtilities;
-using GodotUtilities.Logic;
 using Variant = Game.Resources.Variant;
 
 
@@ -80,6 +79,7 @@ public partial class Player : Entity
 
         if (!CanMove || !IsProcessingInput()) return;
 
+        // TODO: Clean movement system, make it handle this
         var input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
         if (!input.IsZeroApprox())
@@ -132,15 +132,20 @@ public partial class Player : Entity
 
     private async void Attack()
     {
+        // TODO: make use of animation tree player to handle animation directions
         switch (weaponManager.CurrentWeaponType)
         {
             case Variant.Gun:
-                animations.Play($"ranged_attack_{MoveDirection}");
+                animations.Play($"gun/{MoveDirection}");
                 break;
             case Variant.Dagger:
+                animations.Play($"dagger/{MoveDirection}");
+                break;
             case Variant.Sword:
+                animations.Play($"sword/{MoveDirection}");
+                break;
             case Variant.Whip:
-                animations.Play($"attack_{MoveDirection}");
+                animations.Play($"dagger/{MoveDirection}");
                 break;
             default:
                 GD.PushError("Weapon type not found");
