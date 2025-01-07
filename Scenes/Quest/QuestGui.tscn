@@ -109,6 +109,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_co4w4")
 theme_override_constants/button_margin = 10
+column_titles_visible = true
 allow_search = false
 hide_folding = true
 enable_recursive_folding = false

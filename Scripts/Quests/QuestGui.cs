@@ -54,6 +54,7 @@ public partial class QuestGui : Control
     private void UpdateQuestList()
     {
         Tree.Clear();
+        Tree.SetColumnTitle(0, "ACTIVE QUESTS");
         TreeRoot = Tree.CreateItem();
         TreeRoot.SetText(0, "Quests");
             
@@ -168,7 +169,7 @@ public partial class QuestGui : Control
         IsVisible = !IsVisible;
         Visible = IsVisible;
         UpdateQuestList();
-        UpdateCurrentQuestDetails(); // Update details when toggling GUI
+        UpdateCurrentQuestDetails(); 
     }
 
     public override void _Input(InputEvent @event)
