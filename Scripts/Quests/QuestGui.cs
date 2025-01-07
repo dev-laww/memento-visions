@@ -62,7 +62,6 @@ public partial class QuestGui : Control
         {
             var item = Tree.CreateItem(TreeRoot);
             item.SetText(0, $"{quest.QuestTitle}\n{quest.QuestSubtitle.Split('.')[0]}");
-            item.SetText(1, quest.Status.ToString());
             item.SetMetadata(0, quest.QuestTitle);
             if (quest.QuestTitle == CurrentQuestTitle)
             {
@@ -74,7 +73,6 @@ public partial class QuestGui : Control
         {
             var item = Tree.CreateItem(TreeRoot);
             item.SetText(0, $"{quest.QuestTitle}\n{quest.QuestSubtitle.Split('.')[0]}");
-            item.SetText(1, quest.Status.ToString());
             item.SetMetadata(0, quest.QuestTitle);
 
             if (quest.QuestTitle == CurrentQuestTitle)

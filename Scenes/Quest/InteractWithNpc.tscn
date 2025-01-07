@@ -8,8 +8,8 @@ script = ExtResource("1_aloi7")
 QuestTitle = "NPC quest"
 QuestDescription = "Interact with NPC"
 Objectives = NodePath("InvestigateObjectives")
-Reward = 1
 Experience = 1
+QuestItems = []
 
 [node name="InvestigateObjectives" type="Node" parent="." node_paths=PackedStringArray("quest")]
 script = ExtResource("3_c28bd")

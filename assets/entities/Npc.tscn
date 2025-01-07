@@ -1,23 +1,54 @@
-[gd_scene load_steps=8 format=3 uid="uid://bx3whdhahfxx8"]
+[gd_scene load_steps=13 format=3 uid="uid://dfs3i5g2hci20"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/NPC.cs" id="1_edqcn"]
 [ext_resource type="Resource" uid="uid://s24ahicax5gg" path="res://resources/dialogues/Test.dialogue" id="2_f4xey"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/Interaction.cs" id="3_bbm02"]
-[ext_resource type="Texture2D" uid="uid://dapkm8nsfpvko" path="res://icon.svg" id="3_ksq18"]
 [ext_resource type="Texture2D" uid="uid://dyxsacj8kktd1" path="res://assets/icons/f.png" id="4_7lkx6"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="5_hpcyi"]
+[ext_resource type="Texture2D" uid="uid://db5rchhjpbc5g" path="res://assets/entities/escort/Char_001_Idle.png" id="6_3mol8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_47tev"]
 size = Vector2(54, 50)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_grtxo"]
+atlas = ExtResource("6_3mol8")
+region = Rect2(0, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkrfk"]
+atlas = ExtResource("6_3mol8")
+region = Rect2(72, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4u7c5"]
+atlas = ExtResource("6_3mol8")
+region = Rect2(144, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4xh3"]
+atlas = ExtResource("6_3mol8")
+region = Rect2(216, 0, 72, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lei5s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grtxo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkrfk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4u7c5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4xh3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="NPC" type="Node2D"]
 script = ExtResource("1_edqcn")
 DialogResource = ExtResource("2_f4xey")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-4.76837e-07, 1.90735e-06)
-scale = Vector2(0.28125, 0.21875)
-texture = ExtResource("3_ksq18")
 
 [node name="Interaction" type="Area2D" parent="."]
 collision_layer = 16
@@ -53,3 +84,11 @@ text = "Interact"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
 shape = SubResource("RectangleShape2D_47tev")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1.19209e-07)
+scale = Vector2(0.396701, 0.332465)
+sprite_frames = SubResource("SpriteFrames_lei5s")
+autoplay = "default"
+frame = 3
+speed_scale = 1.5
