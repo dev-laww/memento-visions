@@ -7,7 +7,6 @@ namespace Game.Components.Battle;
 
 // TODO: implement sound effects, collision shape animations, attack pattern animations
 [Tool]
-[Scene]
 [GlobalClass]
 public partial class Weapon : Node2D
 {
