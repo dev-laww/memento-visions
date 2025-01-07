@@ -9,15 +9,14 @@ namespace Game.Quests;
 [Scene]
 public partial class TestArea : Node2D
 {
-	private Player player;
-	private NPC npc;
-	
-	public override void _Ready()
-	{
-		base._Ready();
-		WireNodes();
-		player = this.GetPlayer();
-		npc = GetNode<NPC>("Tower");
-	}
+    private Player player;
+    private NPC npc;
 
+    public override void _Ready()
+    {
+        base._Ready();
+        WireNodes();
+        player = this.GetPlayer();
+        npc = this.GetNode<NPC>("/root/GameManager/CurrentScene/TestArea/NPC");
+    }
 }

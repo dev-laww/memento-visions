@@ -27,12 +27,13 @@ SceneManager="*res://Scripts/Globals/SceneManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 InteractionManager="*res://Scripts/Globals/InteractionManager.cs"
 CraftingManager="*res://Scripts/Globals/RecipeManager.cs"
+TestArea="*res://Scripts/Quests/TestArea.cs"
 
 [dialogue_manager]
 
 general/balloon_path="res://Scenes/UI/Dialogue/Balloon.tscn"
 general/uses_dotnet=true
-general/states=["SceneManager", "InteractionManager", "Bar"]
+general/states=["SceneManager", "InteractionManager", "Bar", "TestArea"]
 
 [display]
 
