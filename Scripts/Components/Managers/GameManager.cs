@@ -29,8 +29,6 @@ public partial class GameManager : Node
         currentScene.GetChildren().ToList().ForEach(c => c.QueueFree());
         var startScreen = resourcePreloader.GetResource<PackedScene>("StartScreen").Instantiate();
         currentScene.AddChild(startScreen);
-
-        Input.SetMouseMode(Input.MouseModeEnum.Visible);
     }
 
     public override void _Process(double delta)
@@ -48,7 +46,7 @@ public partial class GameManager : Node
 
     private void HandleOverlay(string overlayName)
     {
-        // TODO: Fix this causes bugs, you cant open an overlay sometimes
+        var targetOverlay = GetOverlay(overlayName);
 
         if (overlayName == "Menu" && currentOverlay != null)
         {
@@ -57,20 +55,21 @@ public partial class GameManager : Node
             return;
         }
 
-        var targetOverlay = GetOverlay(overlayName);
-
         if (currentOverlay == targetOverlay)
         {
-            currentOverlay?.Toggle();
+            targetOverlay.Close();
             currentOverlay = null;
             return;
         }
 
         if (currentOverlay != null)
-            return;
+        {
+            currentOverlay.Close();
+            currentOverlay = null;
+        }
 
+        targetOverlay.Open();
         currentOverlay = targetOverlay;
-        currentOverlay?.Toggle();
     }
 
     public override void _Input(InputEvent @event)
