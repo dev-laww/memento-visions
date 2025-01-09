@@ -9,7 +9,7 @@ radius = 12.0
 script = ExtResource("1_2v84p")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-z_index = -1
+z_index = 1
 
 [node name="PickupRange" type="Area2D" parent="."]
 collision_layer = 64

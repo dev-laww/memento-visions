@@ -3,10 +3,11 @@
 [ext_resource type="Script" path="res://Scripts/Quests/Quest.cs" id="1_e7638"]
 [ext_resource type="Script" path="res://Scripts/Quests/CollectItemObjectives.cs" id="2_i4a2i"]
 
-[node name="10 Apples" type="Node" node_paths=PackedStringArray("Objectives")]
+[node name="3 Apples" type="Node" node_paths=PackedStringArray("Objectives")]
 script = ExtResource("1_e7638")
-QuestTitle = "apples"
-QuestSubtitle = "collect"
+QuestTitle = "Collecting Apples"
+QuestSubtitle = "collect items"
+QuestTask = "PIckup 3 Apples "
 QuestDescription = "collect 3 apples"
 Objectives = NodePath("CollectItemObjectives")
 QuestItems = []

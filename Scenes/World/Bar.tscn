@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://b4wadx6dv5aan"]
+[gd_scene load_steps=31 format=4 uid="uid://b4wadx6dv5aan"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_7gq68"]
@@ -21,8 +21,9 @@
 [ext_resource type="Texture2D" uid="uid://b1vp2c7eh8v3s" path="res://assets/inventory/items/temp/5.png" id="19_yc7vt"]
 [ext_resource type="PackedScene" uid="uid://casihsp0usdna" path="res://Scenes/Entities/BlackSmith.tscn" id="20_0uort"]
 [ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemy/Common/Dummy.tscn" id="21_7ld5i"]
+[ext_resource type="Script" path="res://Scripts/Components/Area/TransitionArea.cs" id="21_8srna"]
 
-[sub_resource type="Resource" id="Resource_0ewng"]
+[sub_resource type="Resource" id="Resource_cx76v"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Apple"
@@ -34,7 +35,7 @@ Icon = ExtResource("17_cmsyt")
 Sprite = ExtResource("17_cmsyt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_4ownp"]
+[sub_resource type="Resource" id="Resource_riqce"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -46,7 +47,7 @@ Icon = ExtResource("19_yc7vt")
 Sprite = ExtResource("19_yc7vt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_3gi0m"]
+[sub_resource type="Resource" id="Resource_aavkh"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -58,7 +59,7 @@ Icon = ExtResource("19_yc7vt")
 Sprite = ExtResource("19_yc7vt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_uuprv"]
+[sub_resource type="Resource" id="Resource_vy4sw"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -70,7 +71,7 @@ Icon = ExtResource("19_yc7vt")
 Sprite = ExtResource("19_yc7vt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_r0fnq"]
+[sub_resource type="Resource" id="Resource_aj2dx"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -82,7 +83,7 @@ Icon = ExtResource("19_yc7vt")
 Sprite = ExtResource("19_yc7vt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_tpwfo"]
+[sub_resource type="Resource" id="Resource_d21s4"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -94,7 +95,7 @@ Icon = ExtResource("19_yc7vt")
 Sprite = ExtResource("19_yc7vt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_qari8"]
+[sub_resource type="Resource" id="Resource_vu5bq"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -105,6 +106,8 @@ Description = "Can be ingested??"
 Icon = ExtResource("19_yc7vt")
 Sprite = ExtResource("19_yc7vt")
 Stackable = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0h7wc"]
 
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
@@ -245,36 +248,49 @@ script = ExtResource("3_tm1gt")
 position = Vector2(55, 108)
 DashStaminaCost = 30.0
 
-[node name="Apple" parent="." instance=ExtResource("16_2no68")]
+[node name="Item" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(105, 123)
-ItemResource = SubResource("Resource_0ewng")
+ItemResource = SubResource("Resource_cx76v")
 
-[node name="Rock" parent="." instance=ExtResource("16_2no68")]
+[node name="Item2" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(83, 151)
-ItemResource = SubResource("Resource_4ownp")
+ItemResource = SubResource("Resource_riqce")
 
-[node name="Rock2" parent="." instance=ExtResource("16_2no68")]
+[node name="Item3" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(61, 157)
-ItemResource = SubResource("Resource_3gi0m")
+ItemResource = SubResource("Resource_aavkh")
 
-[node name="Rock3" parent="." instance=ExtResource("16_2no68")]
+[node name="Item4" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(76, 169)
-ItemResource = SubResource("Resource_uuprv")
+ItemResource = SubResource("Resource_vy4sw")
 
-[node name="Rock4" parent="." instance=ExtResource("16_2no68")]
+[node name="Item5" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(100, 196)
-ItemResource = SubResource("Resource_r0fnq")
+ItemResource = SubResource("Resource_aj2dx")
 
-[node name="Rock5" parent="." instance=ExtResource("16_2no68")]
+[node name="Item6" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(78, 202)
-ItemResource = SubResource("Resource_tpwfo")
+ItemResource = SubResource("Resource_d21s4")
 
-[node name="Rock6" parent="." instance=ExtResource("16_2no68")]
+[node name="Item7" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(93, 214)
-ItemResource = SubResource("Resource_qari8")
+ItemResource = SubResource("Resource_vu5bq")
 
 [node name="BlackSmith" parent="." instance=ExtResource("20_0uort")]
 position = Vector2(181, 117)
+
+[node name="Area2D" type="Area2D" parent="BlackSmith"]
+
+[node name="TransitionArea" type="Area2D" parent="."]
+position = Vector2(100, 196)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("21_8srna")
+TargetScenePath = "res://Scenes/TestArea.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
+position = Vector2(136, -133)
+shape = SubResource("RectangleShape2D_0h7wc")
 
 [node name="Dummy" parent="." instance=ExtResource("21_7ld5i")]
 position = Vector2(168, 246)
