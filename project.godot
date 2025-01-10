@@ -68,6 +68,10 @@ folder_colors={
 "res://script_templates/": "gray"
 }
 
+[gdunit4]
+
+settings/common/update_notification_enabled=false
+
 [input]
 
 move_up={

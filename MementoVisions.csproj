@@ -10,6 +10,9 @@
         <Compile Remove="script_templates\**" />
         <EmbeddedResource Remove="script_templates\**" />
         <None Remove="script_templates\**" />
+        <Compile Update="gdunit4_testadapter\**">
+            <Visible>false</Visible>
+        </Compile>
         <Compile Update="addons\**">
             <Visible>false</Visible>
         </Compile>

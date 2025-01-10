@@ -9,3 +9,7 @@ workspace.xml
 MementoVisions.sln.DotSettings.user
 
 .DS_Store
+
+# GdUnit4
+/gdunit4_testadapter
+GdUnit*
