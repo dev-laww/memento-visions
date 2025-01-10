@@ -1,6 +1,6 @@
 <Project Sdk="Godot.NET.Sdk/4.3.0">
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net7.0</TargetFramework>
         <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'ios' ">net8.0</TargetFramework>
         <EnableDynamicLoading>true</EnableDynamicLoading>
@@ -19,15 +19,17 @@
         <Compile Remove="Scenes\**" />
         <EmbeddedResource Remove="Scenes\**" />
         <Compile Update="Scripts\Utils\Battle\IEnemy.cs">
-          <Namespace>Game</Namespace>
+            <Namespace>Game</Namespace>
         </Compile>
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Delaunator" Version="1.0.10" />
         <PackageReference Include="Firebelley.GodotUtilities" Version="5.0.0" />
+        <PackageReference Include="gdUnit4.api" Version="4.4.0-rc6" />
+        <PackageReference Include="gdUnit4.test.adapter" Version="2.1.0-rc2" />
         <PackageReference Include="OptimizedPriorityQueue" Version="5.1.0" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Scripts\Entities\Character\" />
+        <Folder Include="Scripts\Entities\Character\" />
     </ItemGroup>
 </Project>
