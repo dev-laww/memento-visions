@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemy/Common/Dummy.tscn" id="21_7ld5i"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/TransitionArea.cs" id="21_8srna"]
 
-[sub_resource type="Resource" id="Resource_cx76v"]
+[sub_resource type="Resource" id="Resource_crcp1"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Apple"
@@ -35,7 +35,7 @@ Icon = ExtResource("17_cmsyt")
 Sprite = ExtResource("17_cmsyt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_riqce"]
+[sub_resource type="Resource" id="Resource_dbl43"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -47,7 +47,7 @@ Icon = ExtResource("19_yc7vt")
 Sprite = ExtResource("19_yc7vt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_aavkh"]
+[sub_resource type="Resource" id="Resource_2j2s6"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -59,7 +59,7 @@ Icon = ExtResource("19_yc7vt")
 Sprite = ExtResource("19_yc7vt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_vy4sw"]
+[sub_resource type="Resource" id="Resource_6whpc"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -71,7 +71,7 @@ Icon = ExtResource("19_yc7vt")
 Sprite = ExtResource("19_yc7vt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_aj2dx"]
+[sub_resource type="Resource" id="Resource_l41bh"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -83,7 +83,7 @@ Icon = ExtResource("19_yc7vt")
 Sprite = ExtResource("19_yc7vt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_d21s4"]
+[sub_resource type="Resource" id="Resource_2edtk"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -95,7 +95,7 @@ Icon = ExtResource("19_yc7vt")
 Sprite = ExtResource("19_yc7vt")
 Stackable = true
 
-[sub_resource type="Resource" id="Resource_vu5bq"]
+[sub_resource type="Resource" id="Resource_ixpwr"]
 resource_local_to_scene = true
 script = ExtResource("18_7my0j")
 Name = "Rock"
@@ -250,31 +250,31 @@ DashStaminaCost = 30.0
 
 [node name="Item" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(105, 123)
-ItemResource = SubResource("Resource_cx76v")
+ItemResource = SubResource("Resource_crcp1")
 
 [node name="Item2" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(83, 151)
-ItemResource = SubResource("Resource_riqce")
+ItemResource = SubResource("Resource_dbl43")
 
 [node name="Item3" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(61, 157)
-ItemResource = SubResource("Resource_aavkh")
+ItemResource = SubResource("Resource_2j2s6")
 
 [node name="Item4" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(76, 169)
-ItemResource = SubResource("Resource_vy4sw")
+ItemResource = SubResource("Resource_6whpc")
 
 [node name="Item5" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(100, 196)
-ItemResource = SubResource("Resource_aj2dx")
+ItemResource = SubResource("Resource_l41bh")
 
 [node name="Item6" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(78, 202)
-ItemResource = SubResource("Resource_d21s4")
+ItemResource = SubResource("Resource_2edtk")
 
 [node name="Item7" parent="." instance=ExtResource("16_2no68")]
 position = Vector2(93, 214)
-ItemResource = SubResource("Resource_vu5bq")
+ItemResource = SubResource("Resource_ixpwr")
 
 [node name="BlackSmith" parent="." instance=ExtResource("20_0uort")]
 position = Vector2(181, 117)

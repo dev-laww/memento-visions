@@ -2,7 +2,6 @@
 Chief: Nice of you to finally arrive, Alejandro Gutierrez...[wait=1] or should I call you Alex?
 
 - Alex is fine. Now, \n what do we have here?
-	do npc.GiveQuest()
 - Whatever you prefer, Chief. \n Can you tell me what we're dealing with?
 Chief: Rumors are circulating about a vengeful spirit in this place. They say it kills anyone who seeks it out.
 Chief: Recently, several people have gone missing around here. 
