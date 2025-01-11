@@ -16,9 +16,6 @@ resources = [PackedStringArray("StartScreen"), [ExtResource("2_xr7b5")]]
 
 [node name="CurrentScene" type="Node" parent="."]
 
-[node name="CanvasModulate" type="CanvasModulate" parent="CurrentScene"]
-color = Color(0.622207, 0.528981, 0.766297, 1)
-
 [node name="TestArea" parent="CurrentScene" instance=ExtResource("3_8focn")]
 
 [node name="UserInterface" type="CanvasLayer" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://cwuokpjg3q21s"]
+[gd_scene load_steps=24 format=4 uid="uid://cwuokpjg3q21s"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_2wwem"]
 [ext_resource type="Script" path="res://Scripts/Quests/TestArea.cs" id="1_5ueqw"]
@@ -18,9 +18,10 @@
 [ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemy/Common/Dummy.tscn" id="16_l380o"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/CutsceneTrigger.cs" id="19_ak4g3"]
 [ext_resource type="Resource" uid="uid://s24ahicax5gg" path="res://resources/dialogues/Test.dialogue" id="20_8mujs"]
+[ext_resource type="PackedScene" uid="uid://ccwn3jluwjn16" path="res://Scenes/Decorations/Lamp.tscn" id="20_xya3y"]
 [ext_resource type="PackedScene" uid="uid://casihsp0usdna" path="res://Scenes/Entities/BlackSmith.tscn" id="22_eft3a"]
 
-[sub_resource type="Resource" id="Resource_2b01j"]
+[sub_resource type="Resource" id="Resource_jqcbe"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -42,6 +43,43 @@ Defense = 10.0
 Speed = 50.0
 PhysicalDamageMultiplier = 1.0
 MagicalDamageMultiplier = 1.0
+
+[sub_resource type="Environment" id="Environment_jhw4i"]
+background_mode = 3
+background_color = Color(0.0509804, 0.0509804, 0.101961, 1)
+background_energy_multiplier = 16.0
+ambient_light_color = Color(0, 0.917647, 0.839216, 1)
+ambient_light_energy = 0.0
+ssao_radius = 16.0
+ssao_intensity = 20.25
+ssao_power = 3.44609
+ssao_detail = 5.0
+ssao_horizon = 1.0
+ssil_radius = 16.0
+ssil_intensity = 16.0
+sdfgi_use_occlusion = true
+sdfgi_bounce_feedback = 1.99
+sdfgi_min_cell_size = 62.87
+sdfgi_cascade0_distance = 4023.68
+sdfgi_max_distance = 64378.9
+glow_enabled = true
+glow_levels/1 = 16.0
+glow_levels/2 = 16.0
+glow_levels/3 = 0.0
+glow_levels/4 = 16.0
+glow_normalized = true
+glow_intensity = 8.0
+fog_mode = 1
+fog_light_energy = 16.0
+fog_sun_scatter = 1.0
+fog_density = 1.0
+fog_height = 1024.0
+fog_height_density = 16.0
+volumetric_fog_detail_spread = 1.31951
+adjustment_enabled = true
+adjustment_brightness = 0.9
+adjustment_contrast = 1.2
+adjustment_saturation = 0.8
 
 [node name="Test Area" type="Node2D"]
 script = ExtResource("1_5ueqw")
@@ -78,7 +116,7 @@ QuestTask = "kill the samurai"
 CompleteTask = "go to the godot npc"
 Gold = 11
 Experience = 10
-QuestItems = [SubResource("Resource_2b01j")]
+QuestItems = [SubResource("Resource_jqcbe")]
 
 [node name="StatsManager" parent="NPC" instance=ExtResource("5_4mm67")]
 Stats = SubResource("Resource_3i586")
@@ -94,19 +132,6 @@ TargetScenePath = "res://Scenes/World/Bar.tscn"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TransitionArea"]
 position = Vector2(454, 598)
 polygon = PackedVector2Array(295, -135, 294, -165, 328, -165, 328, -136)
-
-[node name="Player" parent="." instance=ExtResource("5_dhbyu")]
-position = Vector2(252, 350)
-metadata/_edit_group_ = true
-
-[node name="PointLight2D" type="PointLight2D" parent="Player"]
-position = Vector2(2, 9)
-energy = 0.5
-shadow_enabled = true
-texture = ExtResource("15_ox75j")
-texture_scale = 0.7
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="Dummy" parent="." instance=ExtResource("16_l380o")]
 position = Vector2(738, 198)
@@ -125,3 +150,23 @@ polygon = PackedVector2Array(170, -64, 195, -23, 242, -20, 254, -53, 237, -86, 2
 
 [node name="BlackSmith" parent="." instance=ExtResource("22_eft3a")]
 position = Vector2(781, 310)
+
+[node name="lamp" parent="." instance=ExtResource("20_xya3y")]
+position = Vector2(423, 258)
+
+[node name="Player" parent="." instance=ExtResource("5_dhbyu")]
+position = Vector2(232, 363)
+metadata/_edit_group_ = true
+
+[node name="PointLight2D" type="PointLight2D" parent="Player"]
+position = Vector2(2, 9)
+color = Color(0.724643, 0.724643, 0.724643, 1)
+energy = 0.6
+shadow_enabled = true
+texture = ExtResource("15_ox75j")
+texture_scale = 0.7
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jhw4i")
