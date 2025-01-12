@@ -16,7 +16,6 @@ public partial class SlayObjectives : QuestObjectives
 
     public override void _Ready()
     {
-        GD.Print("called");
         GetTree().GetNodesInGroup("Enemy")
             .Where(enemy => enemy is Entity)
             .Cast<Entity>()
