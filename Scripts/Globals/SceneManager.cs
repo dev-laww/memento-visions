@@ -189,6 +189,7 @@ public partial class SceneManager : Global<SceneManager>
         {
             loadingScreen.FinishTransition();
             await ToSignal(loadingScreen.animationPlayer, "animation_finished");
+            loadingScreen = null; 
         }
 
         EmitSignal(SignalName.LoadComplete, content);

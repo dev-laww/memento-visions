@@ -533,7 +533,7 @@ _data = {
 "wipe_to_right": SubResource("Animation_7yl5p")
 }
 
-[node name="Loading" type="Node2D"]
+[node name="Loading" type="CanvasLayer"]
 script = ExtResource("1_4s7hv")
 
 [node name="Control" type="Control" parent="."]
@@ -550,8 +550,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 640.0
-offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_awhaq")
@@ -561,8 +559,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 640.0
-offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -588,5 +584,3 @@ libraries = {
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

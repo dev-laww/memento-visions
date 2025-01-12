@@ -5,7 +5,7 @@ using GodotUtilities;
 namespace Game;
 
 [Scene]
-public partial class Loading : Node2D
+public partial class Loading : CanvasLayer
 {
     [Node] private ProgressBar progressBar;
     [Node] public AnimationPlayer animationPlayer;
