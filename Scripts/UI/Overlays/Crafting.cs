@@ -96,6 +96,7 @@ public partial class Crafting : Overlay
 
     private void HandleCloseButtonPress() => GetTree().CreateTimer(0.1f).Timeout += Close;
 
+    // TODO: handle close when crafted item popup is visible
     private void Reset()
     {
         var items = RecipeManager.CraftableItems;
