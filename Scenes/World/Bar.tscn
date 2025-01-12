@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://b4wadx6dv5aan"]
+[gd_scene load_steps=18 format=4 uid="uid://b4wadx6dv5aan"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_7gq68"]
@@ -15,99 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://0r3pqmjvamym" path="res://Scenes/Decorations/Bar/Table.tscn" id="11_de4ou"]
 [ext_resource type="Texture2D" uid="uid://clnqhsnclctsb" path="res://assets/scenes/bar/painting.png" id="12_1v6r4"]
 [ext_resource type="PackedScene" uid="uid://bxq1fj8j0r0tc" path="res://Scenes/Decorations/Bar/LargeSeatBack.tscn" id="12_ktjm6"]
-[ext_resource type="PackedScene" uid="uid://cu4fpa8blkef8" path="res://Scenes/Components/Interactable/Item.tscn" id="16_2no68"]
-[ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/inventory/items/temp/Item5.png" id="17_cmsyt"]
-[ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="18_7my0j"]
-[ext_resource type="Texture2D" uid="uid://b1vp2c7eh8v3s" path="res://assets/inventory/items/temp/5.png" id="19_yc7vt"]
 [ext_resource type="PackedScene" uid="uid://casihsp0usdna" path="res://Scenes/Entities/BlackSmith.tscn" id="20_0uort"]
 [ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemy/Common/Dummy.tscn" id="21_7ld5i"]
-[ext_resource type="Script" path="res://Scripts/Components/Area/TransitionArea.cs" id="21_8srna"]
-
-[sub_resource type="Resource" id="Resource_crcp1"]
-resource_local_to_scene = true
-script = ExtResource("18_7my0j")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 1
-Value = 1
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("17_cmsyt")
-Sprite = ExtResource("17_cmsyt")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_dbl43"]
-resource_local_to_scene = true
-script = ExtResource("18_7my0j")
-Name = "Rock"
-UniqueName = "item:rock"
-Type = 0
-Value = 1
-Description = "Can be ingested??"
-Icon = ExtResource("19_yc7vt")
-Sprite = ExtResource("19_yc7vt")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_2j2s6"]
-resource_local_to_scene = true
-script = ExtResource("18_7my0j")
-Name = "Rock"
-UniqueName = "item:rock"
-Type = 0
-Value = 1
-Description = "Can be ingested??"
-Icon = ExtResource("19_yc7vt")
-Sprite = ExtResource("19_yc7vt")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_6whpc"]
-resource_local_to_scene = true
-script = ExtResource("18_7my0j")
-Name = "Rock"
-UniqueName = "item:rock"
-Type = 0
-Value = 1
-Description = "Can be ingested??"
-Icon = ExtResource("19_yc7vt")
-Sprite = ExtResource("19_yc7vt")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_l41bh"]
-resource_local_to_scene = true
-script = ExtResource("18_7my0j")
-Name = "Rock"
-UniqueName = "item:rock"
-Type = 0
-Value = 1
-Description = "Can be ingested??"
-Icon = ExtResource("19_yc7vt")
-Sprite = ExtResource("19_yc7vt")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_2edtk"]
-resource_local_to_scene = true
-script = ExtResource("18_7my0j")
-Name = "Rock"
-UniqueName = "item:rock"
-Type = 0
-Value = 1
-Description = "Can be ingested??"
-Icon = ExtResource("19_yc7vt")
-Sprite = ExtResource("19_yc7vt")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_ixpwr"]
-resource_local_to_scene = true
-script = ExtResource("18_7my0j")
-Name = "Rock"
-UniqueName = "item:rock"
-Type = 0
-Value = 1
-Description = "Can be ingested??"
-Icon = ExtResource("19_yc7vt")
-Sprite = ExtResource("19_yc7vt")
-Stackable = true
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0h7wc"]
 
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
@@ -248,49 +157,8 @@ script = ExtResource("3_tm1gt")
 position = Vector2(55, 108)
 DashStaminaCost = 30.0
 
-[node name="Item" parent="." instance=ExtResource("16_2no68")]
-position = Vector2(105, 123)
-ItemResource = SubResource("Resource_crcp1")
-
-[node name="Item2" parent="." instance=ExtResource("16_2no68")]
-position = Vector2(83, 151)
-ItemResource = SubResource("Resource_dbl43")
-
-[node name="Item3" parent="." instance=ExtResource("16_2no68")]
-position = Vector2(61, 157)
-ItemResource = SubResource("Resource_2j2s6")
-
-[node name="Item4" parent="." instance=ExtResource("16_2no68")]
-position = Vector2(76, 169)
-ItemResource = SubResource("Resource_6whpc")
-
-[node name="Item5" parent="." instance=ExtResource("16_2no68")]
-position = Vector2(100, 196)
-ItemResource = SubResource("Resource_l41bh")
-
-[node name="Item6" parent="." instance=ExtResource("16_2no68")]
-position = Vector2(78, 202)
-ItemResource = SubResource("Resource_2edtk")
-
-[node name="Item7" parent="." instance=ExtResource("16_2no68")]
-position = Vector2(93, 214)
-ItemResource = SubResource("Resource_ixpwr")
-
 [node name="BlackSmith" parent="." instance=ExtResource("20_0uort")]
 position = Vector2(181, 117)
-
-[node name="Area2D" type="Area2D" parent="BlackSmith"]
-
-[node name="TransitionArea" type="Area2D" parent="."]
-position = Vector2(100, 196)
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("21_8srna")
-TargetScenePath = "res://Scenes/TestArea.tscn"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
-position = Vector2(136, -133)
-shape = SubResource("RectangleShape2D_0h7wc")
 
 [node name="Dummy" parent="." instance=ExtResource("21_7ld5i")]
 position = Vector2(168, 246)

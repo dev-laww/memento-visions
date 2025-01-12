@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Components/Managers/GameManager.cs" id="1_jd26h"]
 [ext_resource type="PackedScene" uid="uid://npt6wv2s1hvr" path="res://Scenes/UI/Screens/Start.tscn" id="2_xr7b5"]
-[ext_resource type="PackedScene" uid="uid://cwuokpjg3q21s" path="res://Scenes/TestArea.tscn" id="3_8focn"]
+[ext_resource type="PackedScene" uid="uid://b4wadx6dv5aan" path="res://Scenes/World/Bar.tscn" id="3_18ebj"]
 [ext_resource type="PackedScene" uid="uid://b161abm0o6ij2" path="res://Scenes/UI/Overlays/Inventory.tscn" id="4_3s3bi"]
 [ext_resource type="PackedScene" uid="uid://dd1jerr3yxfmm" path="res://Scenes/UI/Overlays/Crafting.tscn" id="5_1xnus"]
 [ext_resource type="PackedScene" uid="uid://bkgjauxklnmyv" path="res://Scenes/Quest/QuestGui.tscn" id="6_vcj0g"]
@@ -16,7 +16,7 @@ resources = [PackedStringArray("StartScreen"), [ExtResource("2_xr7b5")]]
 
 [node name="CurrentScene" type="Node" parent="."]
 
-[node name="TestArea" parent="CurrentScene" instance=ExtResource("3_8focn")]
+[node name="Bar" parent="CurrentScene" instance=ExtResource("3_18ebj")]
 
 [node name="UserInterface" type="CanvasLayer" parent="."]
 process_mode = 3
