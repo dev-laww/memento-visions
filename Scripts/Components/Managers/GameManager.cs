@@ -17,9 +17,17 @@ public partial class GameManager : Node
     [Node] private ResourcePreloader resourcePreloader;
 
     private Overlay currentOverlay;
-    private static GameManager instance;
-    public static Node CurrentScene => instance.currentScene;
     private Overlay GetOverlay(string name) => userInterface.GetNode<Overlay>(name);
+    private static GameManager instance;
+
+    public static Node CurrentScene => instance.currentScene;
+
+    public static Overlay CurrentOverlay
+    {
+        get => instance.currentOverlay;
+        set => instance.currentOverlay = value;
+    }
+
 
     public override void _Ready()
     {
@@ -51,21 +59,13 @@ public partial class GameManager : Node
         if (overlayName == "Menu" && currentOverlay != null)
         {
             currentOverlay.Close();
-            currentOverlay = null;
             return;
         }
 
         if (currentOverlay == targetOverlay)
         {
             targetOverlay.Close();
-            currentOverlay = null;
             return;
-        }
-
-        if (currentOverlay != null)
-        {
-            currentOverlay.Close();
-            currentOverlay = null;
         }
 
         targetOverlay.Open();
@@ -92,6 +92,12 @@ public partial class GameManager : Node
     }
 
     public static void OpenOverlay(string overlayName) => instance.HandleOverlay(overlayName);
+
+    public static void CloseCurrentOverlay()
+    {
+        instance.currentOverlay?.Close();
+        instance.currentOverlay = null;
+    }
 
     public static void ChangeScene(
         string path,

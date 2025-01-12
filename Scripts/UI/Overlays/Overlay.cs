@@ -1,3 +1,4 @@
+using Game.Components.Managers;
 using Game.Utils.Extensions;
 using Godot;
 
@@ -19,6 +20,9 @@ public abstract partial class Overlay : Control
         this.GetPlayer()?.SetProcessInput(true);
         SetProcessInput(false);
         SetProcessUnhandledInput(false);
+
+        if (GameManager.CurrentOverlay == this) GameManager.CurrentOverlay = null;
+
         Hide();
     }
 
