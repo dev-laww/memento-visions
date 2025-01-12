@@ -62,7 +62,9 @@ folder_colors={
 "res://Scripts/": "pink",
 "res://addons/": "gray",
 "res://assets/": "orange",
+"res://build/": "gray",
 "res://data/": "yellow",
+"res://gdunit4_testadapter/": "gray",
 "res://resources/": "teal",
 "res://script_templates/": "gray"
 }
