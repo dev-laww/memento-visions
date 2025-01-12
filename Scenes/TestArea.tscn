@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cwuokpjg3q21s"]
+[gd_scene load_steps=22 format=4 uid="uid://cwuokpjg3q21s"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_2wwem"]
 [ext_resource type="Script" path="res://Scripts/Quests/TestArea.cs" id="1_5ueqw"]
@@ -19,7 +19,7 @@
 [ext_resource type="Resource" uid="uid://s24ahicax5gg" path="res://resources/dialogues/Test.dialogue" id="20_8mujs"]
 [ext_resource type="PackedScene" uid="uid://casihsp0usdna" path="res://Scenes/Entities/BlackSmith.tscn" id="22_eft3a"]
 
-[sub_resource type="Resource" id="Resource_v8ufm"]
+[sub_resource type="Resource" id="Resource_c7bip"]
 resource_local_to_scene = true
 script = ExtResource("14_ov4of")
 Name = "Apple"
@@ -41,6 +41,9 @@ Defense = 10.0
 Speed = 50.0
 PhysicalDamageMultiplier = 1.0
 MagicalDamageMultiplier = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pfp5o"]
+size = Vector2(32, 18)
 
 [node name="Test Area" type="Node2D"]
 script = ExtResource("1_5ueqw")
@@ -77,7 +80,7 @@ QuestTask = "kill the samurai"
 CompleteTask = "go to the godot npc"
 Gold = 11
 Experience = 10
-QuestItems = [SubResource("Resource_v8ufm")]
+QuestItems = [SubResource("Resource_c7bip")]
 
 [node name="StatsManager" parent="NPC" instance=ExtResource("5_4mm67")]
 Stats = SubResource("Resource_3i586")
@@ -85,14 +88,13 @@ Stats = SubResource("Resource_3i586")
 [node name="10 Apples" parent="NPC" instance=ExtResource("13_m1a1h")]
 
 [node name="TransitionArea" type="Area2D" parent="."]
-position = Vector2(217, -157)
+position = Vector2(984, 285)
 collision_mask = 4
 script = ExtResource("13_7uyhc")
-TargetScenePath = "res://Scenes/World/Bar.tscn"
+TargetScene = "res://Scenes/World/Bar.tscn"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TransitionArea"]
-position = Vector2(454, 598)
-polygon = PackedVector2Array(295, -135, 294, -165, 328, -165, 328, -136)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
+shape = SubResource("RectangleShape2D_pfp5o")
 
 [node name="Dummy" parent="." instance=ExtResource("16_l380o")]
 position = Vector2(738, 198)

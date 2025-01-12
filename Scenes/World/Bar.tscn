@@ -15,8 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://0r3pqmjvamym" path="res://Scenes/Decorations/Bar/Table.tscn" id="11_de4ou"]
 [ext_resource type="Texture2D" uid="uid://clnqhsnclctsb" path="res://assets/scenes/bar/painting.png" id="12_1v6r4"]
 [ext_resource type="PackedScene" uid="uid://bxq1fj8j0r0tc" path="res://Scenes/Decorations/Bar/LargeSeatBack.tscn" id="12_ktjm6"]
-[ext_resource type="PackedScene" uid="uid://casihsp0usdna" path="res://Scenes/Entities/BlackSmith.tscn" id="20_0uort"]
-[ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemy/Common/Dummy.tscn" id="21_7ld5i"]
+[ext_resource type="Script" path="res://Scripts/Components/Area/TransitionArea.cs" id="18_towvu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ervve"]
+size = Vector2(22, 12)
 
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
@@ -156,9 +158,15 @@ script = ExtResource("3_tm1gt")
 [node name="Player" parent="." instance=ExtResource("1_28rab")]
 position = Vector2(55, 108)
 DashStaminaCost = 30.0
+UniqueName = null
 
-[node name="BlackSmith" parent="." instance=ExtResource("20_0uort")]
-position = Vector2(181, 117)
+[node name="TransitionArea" type="Area2D" parent="."]
+position = Vector2(235, 57)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("18_towvu")
+TargetScene = "res://Scenes/TestArea.tscn"
+targetScene = "res://Scenes/TestArea.tscn"
 
-[node name="Dummy" parent="." instance=ExtResource("21_7ld5i")]
-position = Vector2(168, 246)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
+shape = SubResource("RectangleShape2D_ervve")
