@@ -13,7 +13,7 @@ public partial class InventoryManager : Node
     [Signal] public delegate void ItemAddEventHandler(Item item);
     [Signal] public delegate void ItemRemoveEventHandler(Item item);
 
-    public readonly List<Item> Items = new();
+    public readonly List<Item> Items = [];
 
     public Weapon CurrentWeapon => weaponManager.CurrentWeapon?.Resource;
 
