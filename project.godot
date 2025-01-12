@@ -27,7 +27,6 @@ SceneManager="*res://Scripts/Globals/SceneManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 InteractionManager="*res://Scripts/Globals/InteractionManager.cs"
 CraftingManager="*res://Scripts/Globals/RecipeManager.cs"
-TestArea="*res://Scripts/Quests/TestArea.cs"
 
 [dialogue_manager]
 
