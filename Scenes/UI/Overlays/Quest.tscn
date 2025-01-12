@@ -1,13 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkgjauxklnmyv"]
+[gd_scene load_steps=11 format=3 uid="uid://cuymxmsjlw48y"]
 
-[ext_resource type="Script" path="res://Scripts/Quests/QuestGui.cs" id="1_13ams"]
-[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_co4w4"]
-[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="2_pqwqj"]
-[ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="3_f3hhp"]
-[ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="4_i5ols"]
+[ext_resource type="Script" path="res://Scripts/UI/Overlays/Quest.cs" id="1_ivim8"]
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_y52qg"]
+[ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="3_ii4hv"]
+[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="4_gsxto"]
+[ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="5_488ye"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f2tvt"]
-atlas = ExtResource("3_f3hhp")
+atlas = ExtResource("3_ii4hv")
 region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eivkp"]
@@ -24,14 +24,14 @@ load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.c
 atlas = SubResource("CompressedTexture2D_sfl0v")
 region = Rect2(128, 32, 32, 32)
 
-[node name="Container" type="Control"]
+[node name="Quest" type="Control"]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1.0
 offset_right = 644.0
 offset_bottom = 358.0
-script = ExtResource("1_13ams")
+script = ExtResource("1_ivim8")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -56,7 +56,7 @@ alignment = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-theme = ExtResource("2_co4w4")
+theme = ExtResource("2_y52qg")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0.61339, 0.61339, 0.61339, 1)
 theme_override_font_sizes/font_size = 16
@@ -79,7 +79,7 @@ stretch_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("2_pqwqj")
+texture = ExtResource("4_gsxto")
 region_rect = Rect2(0, 0, 32, 32)
 patch_margin_left = 10
 patch_margin_top = 10
@@ -107,7 +107,7 @@ custom_minimum_size = Vector2(230, 0)
 layout_direction = 1
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_co4w4")
+theme = ExtResource("2_y52qg")
 theme_override_constants/button_margin = 10
 column_titles_visible = true
 allow_search = false
@@ -120,7 +120,7 @@ scroll_horizontal_enabled = false
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("2_pqwqj")
+texture = ExtResource("4_gsxto")
 patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 6
@@ -142,13 +142,13 @@ theme_override_constants/margin_bottom = 10
 clip_contents = true
 layout_mode = 2
 size_flags_stretch_ratio = 20.0
-theme = ExtResource("2_co4w4")
+theme = ExtResource("2_y52qg")
 theme_override_constants/separation = 10
 
 [node name="Title" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("2_co4w4")
-theme_override_fonts/font = ExtResource("4_i5ols")
+theme = ExtResource("2_y52qg")
+theme_override_fonts/font = ExtResource("5_488ye")
 theme_override_font_sizes/font_size = 26
 horizontal_alignment = 1
 uppercase = true
@@ -168,10 +168,10 @@ fit_content = true
 [node name="Status" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-theme_override_fonts/font = ExtResource("4_i5ols")
+theme_override_fonts/font = ExtResource("5_488ye")
 vertical_alignment = 2
 
 [node name="Reward" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_i5ols")
+theme_override_fonts/font = ExtResource("5_488ye")
 vertical_alignment = 2

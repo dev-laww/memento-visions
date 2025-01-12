@@ -56,20 +56,20 @@ public partial class GameManager : Node
     {
         var targetOverlay = GetOverlay(overlayName);
 
-        if (overlayName == "Menu" && currentOverlay != null)
+        if (targetOverlay == null) return;
+
+        var shouldClose = currentOverlay == targetOverlay || (overlayName == "Menu" && currentOverlay != null);
+
+        if (shouldClose)
         {
             currentOverlay.Close();
             return;
         }
 
-        if (currentOverlay == targetOverlay)
-        {
-            targetOverlay.Close();
-            return;
-        }
+        if (currentOverlay != null) return;
 
-        targetOverlay.Open();
         currentOverlay = targetOverlay;
+        currentOverlay.Open();
     }
 
     public override void _Input(InputEvent @event)
@@ -78,6 +78,8 @@ public partial class GameManager : Node
             HandleOverlay("Inventory");
         else if (@event.IsActionPressed("menu"))
             HandleOverlay("Menu");
+        else if (@event.IsActionPressed("open_quests_info"))
+            HandleOverlay("Quest");
     }
 
     public override void _Notification(int what)

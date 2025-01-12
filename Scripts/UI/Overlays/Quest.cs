@@ -1,16 +1,15 @@
-using System;
 using System.Linq;
+using Game.Quests;
 using Godot;
 using GodotUtilities;
 
-namespace Game.Quests;
+namespace Game.UI.Overlays;
 
 [Scene]
-public partial class QuestGui : Control
+public partial class Quest : Overlay
 {
     private Tree Tree;
     private TreeItem TreeRoot;
-    private bool IsVisible = false;
     private Label QuestTitle;
     private Label Task;
     private Label Subtitle;
@@ -33,20 +32,30 @@ public partial class QuestGui : Control
 
         Tree.SetColumnCustomMinimumWidth(0, 200);
         Tree.SetColumnExpand(0, true);
-        
-        QuestTitle = GetNode<Label>("MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Title");
-        Task = GetNode<Label>("MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Task");
-        Subtitle = GetNode<Label>("MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Subtitle");
-        QuestDescription = GetNode<RichTextLabel>("MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Description");
-        QuestStatus = GetNode<Label>("MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Status");
-        QuestReward = GetNode<Label>("MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Reward");
+
+        QuestTitle =
+            GetNode<Label>(
+                "MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Title");
+        Task = GetNode<Label>(
+            "MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Task");
+        Subtitle = GetNode<Label>(
+            "MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Subtitle");
+        QuestDescription =
+            GetNode<RichTextLabel>(
+                "MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Description");
+        QuestStatus =
+            GetNode<Label>(
+                "MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Status");
+        QuestReward =
+            GetNode<Label>(
+                "MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/Reward");
         CloseButton = GetNode<TextureButton>("MarginContainer/VBoxContainer/Header/CloseButton");
 
         QuestManager.OnQuestsChanged += UpdateQuestList;
         QuestManager.OnQuestsChanged += UpdateCurrentQuestDetails;
         Tree.ItemSelected += OnItemSelected;
         Visible = false;
-        CloseButton.Pressed += ToggleQuestGui;
+        CloseButton.Pressed += Close;
         QuestObjectives.OnProgressUpdated += UpdateQuestList;
         QuestObjectives.OnProgressUpdated += UpdateCurrentQuestDetails;
     }
@@ -57,8 +66,8 @@ public partial class QuestGui : Control
         Tree.SetColumnTitle(0, "ACTIVE QUESTS");
         TreeRoot = Tree.CreateItem();
         TreeRoot.SetText(0, "Quests");
-            
-        foreach (var quest in QuestManager.GetActiveQuests()) 
+
+        foreach (var quest in QuestManager.GetActiveQuests())
         {
             var item = Tree.CreateItem(TreeRoot);
             item.SetText(0, $"{quest.QuestTitle}\n{quest.QuestSubtitle.Split('.')[0]}");
@@ -68,7 +77,7 @@ public partial class QuestGui : Control
                 item.Select(0);
             }
         }
-            
+
         foreach (var quest in QuestManager.GetCompletedQuests())
         {
             var item = Tree.CreateItem(TreeRoot);
@@ -81,7 +90,7 @@ public partial class QuestGui : Control
             }
         }
     }
-    
+
     public override void _ExitTree()
     {
         QuestManager.OnQuestsChanged -= UpdateQuestList;
@@ -98,10 +107,10 @@ public partial class QuestGui : Control
         var questTitle = (string)item.GetMetadata(0);
         CurrentQuestTitle = questTitle;
         var quest = QuestManager.GetQuestByTitle(questTitle);
-        if(quest == null) return;
+        if (quest == null) return;
         UpdateQuestDetails(quest);
     }
-    
+
     private void UpdateCurrentQuestDetails()
     {
         if (string.IsNullOrEmpty(CurrentQuestTitle)) return;
@@ -111,15 +120,15 @@ public partial class QuestGui : Control
             UpdateQuestDetails(quest);
         }
     }
-    
-    private void UpdateQuestDetails(Quest quest)
+
+    private void UpdateQuestDetails(Game.Quests.Quest quest)
     {
         QuestTitle.Text = quest.QuestTitle;
-        Subtitle.Text ="Task: ${quest.QuestSubtitle}" ;
+        Subtitle.Text = "Task: ${quest.QuestSubtitle}";
         Task.Text = quest.QuestTask;
         QuestDescription.Text = quest.QuestDescription;
-    
-        
+
+
         if (quest.Objectives != null)
         {
             if (quest.Objectives is InvestigateObjectives investigateObjectives)
@@ -129,8 +138,7 @@ public partial class QuestGui : Control
                     QuestStatus.Text += $"{target}\n";
                 }
             }
-            else
-            if (quest.Status == Quest.QuestStatus.Completed)
+            else if (quest.Status == Game.Quests.Quest.QuestStatus.Completed)
             {
                 QuestStatus.Text = $"Completed ({quest.Objectives.TargetCount}/{quest.Objectives.TargetCount})";
             }
@@ -143,16 +151,16 @@ public partial class QuestGui : Control
         {
             QuestStatus.Text = quest.Status.ToString();
         }
-        
+
         var rewardText = $"Gold: {quest.Gold} Experience: {quest.Experience}";
-        
+
         if (quest.QuestItems != null && quest.QuestItems.Length > 0)
         {
             var itemNames = quest.QuestItems
                 .Where(item => item != null)
                 .Select(item => item.Name)
                 .ToList();
-            
+
             if (itemNames.Any())
             {
                 rewardText += $"\nItems: {string.Join(", ", itemNames)}";
@@ -162,19 +170,10 @@ public partial class QuestGui : Control
         QuestReward.Text = rewardText;
     }
 
-    public void ToggleQuestGui()
+    public override void Close()
     {
-        IsVisible = !IsVisible;
-        Visible = IsVisible;
+        base.Close();
         UpdateQuestList();
-        UpdateCurrentQuestDetails(); 
-    }
-
-    public override void _Input(InputEvent @event)
-    {
-        if (@event.IsActionPressed("Quest"))
-        {
-            ToggleQuestGui();
-        }
+        UpdateCurrentQuestDetails();
     }
 }

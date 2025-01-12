@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b4wadx6dv5aan" path="res://Scenes/World/Bar.tscn" id="3_18ebj"]
 [ext_resource type="PackedScene" uid="uid://b161abm0o6ij2" path="res://Scenes/UI/Overlays/Inventory.tscn" id="4_3s3bi"]
 [ext_resource type="PackedScene" uid="uid://dd1jerr3yxfmm" path="res://Scenes/UI/Overlays/Crafting.tscn" id="5_1xnus"]
-[ext_resource type="PackedScene" uid="uid://bkgjauxklnmyv" path="res://Scenes/Quest/QuestGui.tscn" id="6_vcj0g"]
+[ext_resource type="PackedScene" uid="uid://cuymxmsjlw48y" path="res://Scenes/UI/Overlays/Quest.tscn" id="6_vcj0g"]
 [ext_resource type="PackedScene" uid="uid://cptktl4hefaup" path="res://Scenes/UI/Overlays/Menu.tscn" id="7_icpvm"]
 [ext_resource type="PackedScene" uid="uid://c6kt3qbs62e4i" path="res://Scenes/UI/Overlays/HeadsUpDisplay.tscn" id="8_t6ww0"]
 [ext_resource type="Script" path="res://Scripts/UI/Overlays/HeadsUpDisplay.cs" id="9_gcq4q"]
@@ -32,7 +32,7 @@ visible = false
 [node name="Crafting" parent="UserInterface" instance=ExtResource("5_1xnus")]
 visible = false
 
-[node name="QuestGui" parent="UserInterface" instance=ExtResource("6_vcj0g")]
+[node name="Quest" parent="UserInterface" instance=ExtResource("6_vcj0g")]
 visible = false
 
 [node name="Menu" parent="UserInterface" instance=ExtResource("7_icpvm")]
