@@ -2,6 +2,7 @@ using Godot;
 using System.Threading.Tasks;
 using System.Linq;
 using Godot.Collections;
+using GodotUtilities;
 
 namespace Game.Tests;
 
@@ -56,7 +57,7 @@ public class NoiseGeneratorTest
         var worldSize = (Vector2I)settings.Get("world_size");
 
         AssertThat(values).IsEqual(worldSize.X * worldSize.Y);
-    } 
+    }
 
     // [TestCase]
     // public void TestNoiseThresholds()
@@ -108,7 +109,7 @@ public class NoiseGeneratorTest
 
     private async Task<(Array, Array)> GenerateForComparison(bool random = false)
     {
-        generator.Set("random_seed", random);
+        if (random) generator.Set("seed", MathUtil.RNG.Randi());
         generator.Call("generate");
 
         await Task.Delay(1000);
@@ -116,6 +117,7 @@ public class NoiseGeneratorTest
         var grid = (Resource)generator.Call("get_grid");
         var values = (Array)grid.Call("get_values", 0);
 
+        if (random) generator.Set("seed", MathUtil.RNG.Randi());
         generator.Call("generate");
 
         await Task.Delay(1000);
