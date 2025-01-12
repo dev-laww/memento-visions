@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://hc1bdnea1afd"]
+[gd_scene load_steps=10 format=3 uid="uid://hc1bdnea1afd"]
 
 [ext_resource type="Script" path="res://Scripts/Components/Managers/GameManager.cs" id="1_jd26h"]
 [ext_resource type="PackedScene" uid="uid://npt6wv2s1hvr" path="res://Scenes/UI/Screens/Start.tscn" id="2_xr7b5"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dd1jerr3yxfmm" path="res://Scenes/UI/Overlays/Crafting.tscn" id="5_1xnus"]
 [ext_resource type="PackedScene" uid="uid://bkgjauxklnmyv" path="res://Scenes/Quest/QuestGui.tscn" id="6_vcj0g"]
 [ext_resource type="PackedScene" uid="uid://cptktl4hefaup" path="res://Scenes/UI/Overlays/Menu.tscn" id="7_icpvm"]
+[ext_resource type="PackedScene" uid="uid://c6kt3qbs62e4i" path="res://Scenes/UI/Overlays/HeadsUpDisplay.tscn" id="8_t6ww0"]
+[ext_resource type="Script" path="res://Scripts/UI/Overlays/HeadsUpDisplay.cs" id="9_gcq4q"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_jd26h")
@@ -20,6 +22,9 @@ resources = [PackedStringArray("StartScreen"), [ExtResource("2_xr7b5")]]
 
 [node name="UserInterface" type="CanvasLayer" parent="."]
 process_mode = 3
+
+[node name="HeadsUpDisplay" parent="UserInterface" instance=ExtResource("8_t6ww0")]
+script = ExtResource("9_gcq4q")
 
 [node name="Inventory" parent="UserInterface" instance=ExtResource("4_3s3bi")]
 visible = false
