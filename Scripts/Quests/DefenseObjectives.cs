@@ -47,7 +47,7 @@ public partial class DefenseObjectives : QuestObjectives
     {
         if (targetStats != null)
         {
-            targetStats.StatsChanged += OnTargetHealthChanged;
+            targetStats.StatChanged += OnTargetHealthChanged;
         }
     }
 
@@ -98,7 +98,7 @@ public partial class DefenseObjectives : QuestObjectives
         base._ExitTree();
         if (targetStats != null)
         {
-            targetStats.StatsChanged -= OnTargetHealthChanged;
+            targetStats.StatChanged -= OnTargetHealthChanged;
         }
     }
 }

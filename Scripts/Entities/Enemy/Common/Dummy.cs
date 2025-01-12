@@ -23,7 +23,7 @@ public partial class Dummy : Entity
 
     public override void _Ready()
     {
-        StatsManager.AttackReceived += OnAttackReceived;
+        // StatsManager.AttackReceived += OnAttackReceived;
     }
 
     private void OnAttackReceived(float dmg, Attack.Type type, bool critical)

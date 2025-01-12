@@ -43,7 +43,7 @@ public partial class Samurai : Entity
             if (!attacking)
                 StateMachine.ChangeState(Walk);
         };
-        StatsManager.StatsDecreased += StatDecrease;
+        StatsManager.StatDecreased += StatDecrease;
         StateMachine.AddStates(Idle);
         StateMachine.AddStates(Walk);
         StateMachine.AddStates(Hurt);

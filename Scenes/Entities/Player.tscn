@@ -1,8 +1,7 @@
-[gd_scene load_steps=105 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=104 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Character/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_cqdhe"]
-[ext_resource type="Resource" uid="uid://diw2rt1u3pxap" path="res://resources/stats/player.tres" id="3_jlnk4"]
 [ext_resource type="Script" path="res://Scripts/Components/Movement/Velocity.cs" id="4_iaq51"]
 [ext_resource type="Script" path="res://Scripts/Components/Managers/WeaponManager.cs" id="5_3fgj7"]
 [ext_resource type="Script" path="res://Scripts/Components/Managers/InventoryManager.cs" id="5_5rnnb"]
@@ -649,7 +648,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -1670,7 +1669,7 @@ script = ExtResource("1_3hkqn")
 
 [node name="StatsManager" parent="." instance=ExtResource("2_cqdhe")]
 unique_name_in_owner = true
-Stats = ExtResource("3_jlnk4")
+Damage = 100.0
 
 [node name="Velocity" type="Node" parent="." node_paths=PackedStringArray("Stats")]
 script = ExtResource("4_iaq51")
@@ -1710,14 +1709,14 @@ script = ExtResource("9_401x2")
 
 [node name="HitBoxes" type="Node2D" parent="."]
 
-[node name="Dagger" type="Area2D" parent="HitBoxes" node_paths=PackedStringArray("StatsManager")]
+[node name="Dagger" type="Area2D" parent="HitBoxes"]
 visible = false
 position = Vector2(0.112813, 21)
 rotation = 3.14159
 collision_layer = 1024
 collision_mask = 2048
 script = ExtResource("6_ly21x")
-StatsManager = NodePath("../../StatsManager")
+Damage = 100.0
 
 [node name="DaggerCollision" type="CollisionPolygon2D" parent="HitBoxes/Dagger"]
 position = Vector2(2.86102e-06, 0)
@@ -1725,13 +1724,14 @@ scale = Vector2(0.00959646, 0.00949658)
 polygon = PackedVector2Array(-23, -424.1, -23, -422.9, -85.1, -419, -95.2, -419, -184.4, -403, -189.3, -403, -272.3, -378, -275.4, -378, -315.4, -362, -318.5, -362, -355.5, -344, -358.5, -344, -400.5, -322, -402.6, -322, -444.6, -296, -446.6, -296, -495.6, -261, -497.7, -261, -549.7, -218, -551.8, -218, -615.8, -155, -616.9, -155, -649.9, -116, -651, -116, -687, -68, -688.1, -68, -728.1, -4, -729.2, -4, -770.3, 79, -771.4, 79, -789.4, 126, -790.5, 126, -815.5, 209, -816.7, 209, -830.7, 282, -831.8, 282, -839.8, 374, -841, 374, -840, 422, -840, 425, 840, 423, 843.1, 423, 838, 328.9, 838, 321.8, 826, 253.7, 826, 247.8, 817, 210, 817, 207.7, 802, 161.7, 802, 157.6, 772, 81.5, 772, 78.5, 734, 3.40002, 734, 2.40002, 702, -46.7, 702, -48.7, 643, -124.7, 643, -126.8, 579, -192.8, 579, -193.9, 521, -243, 521, -244, 452, -292, 452, -293.2, 374, -336.3, 374, -337.3, 321, -360.3, 321, -361.4, 258, -383.5, 258, -384.6, 230, -391.6, 230, -392.6, 145, -410.7, 145, -411.8, 78, -419.8, 78, -420.9)
 disabled = true
 
-[node name="Sword" type="Area2D" parent="HitBoxes" node_paths=PackedStringArray("StatsManager")]
+[node name="Sword" type="Area2D" parent="HitBoxes"]
+visible = false
 position = Vector2(0, 23)
 rotation = 3.14159
 collision_layer = 1024
 collision_mask = 2048
 script = ExtResource("6_ly21x")
-StatsManager = NodePath("../../StatsManager")
+Damage = 100.0
 
 [node name="SwordCollision" type="CollisionPolygon2D" parent="HitBoxes/Sword"]
 position = Vector2(2.86102e-06, 0)

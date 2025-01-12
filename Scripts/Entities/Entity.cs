@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using Game.Components.Area;
 using Game.Components.Managers;
 using Godot;
@@ -67,8 +67,8 @@ public abstract partial class Entity : CharacterBody2D
         // }
         //
         // if (message != null) throw new NullReferenceException(message);
-        
-        StatsManager.StatsDepleted += OnStatsDepleted;
+
+        StatsManager.StatDepleted += OnStatsDepleted;
     }
 
     /// <summary>

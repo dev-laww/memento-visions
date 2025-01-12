@@ -44,7 +44,7 @@ public partial class HealthNumberManager : Node2D
         if (statsManager != null)
         {
             statsManager.AttackReceived += OnAttackReceived;
-            statsManager.StatsIncreased += OnStatsIncreased;
+            statsManager.StatIncreased += OnStatIncreased;
         }
 
         timer.Timeout += OnTimerTimeout;
@@ -73,7 +73,7 @@ public partial class HealthNumberManager : Node2D
         damage.Animate();
     }
 
-    private void OnStatsIncreased(float amount, StatsType type)
+    private void OnStatIncreased(float amount, StatsType type)
     {
         if (type != StatsType.Health) return;
 

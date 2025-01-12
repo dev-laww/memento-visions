@@ -1,8 +1,6 @@
 using System.Linq;
 using Game.Components.Managers;
-using Game.Entities;
 using Godot;
-using GodotUtilities;
 
 namespace Game.Quests;
 
@@ -47,7 +45,7 @@ public partial class EscortObjectives : QuestObjectives
     {
         if (targetStats != null)
         {
-            targetStats.StatsChanged += OnTargetHealthChanged;
+            targetStats.StatChanged += OnTargetHealthChanged;
         }
         
         GetTree().GetNodesInGroup("Area")
@@ -95,7 +93,7 @@ public partial class EscortObjectives : QuestObjectives
         
         if (targetStats != null)
         {
-            targetStats.StatsChanged -= OnTargetHealthChanged;
+            targetStats.StatChanged -= OnTargetHealthChanged;
         }
 
         GetTree().GetNodesInGroup("Area")

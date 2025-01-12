@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Game.Components.Battle;
 using GodotUtilities;
 
 namespace Game.Utils.Battle;
@@ -15,36 +17,20 @@ public class Attack
 
     public Type AttackType { get; }
 
-    public readonly bool IsCritical;
+    public readonly bool Critical;
 
-    private Attack(float damage, Type type, bool critical)
+    public List<StatusEffect> StatusEffects { get; } = [];
+
+    private Attack(float damage, Type type)
     {
-        Damage = damage;
         AttackType = type;
-        IsCritical = critical;
+        Critical = MathUtil.RNG.RandfRange(0, 1) < 0.2f;
+
+        // Apply damage modifiers
+        Damage = damage * (Critical ? MathUtil.RNG.RandfRange(1.5f, 2f) : 1);
+        Damage *= AttackType == Type.Physical ? 1 : 1.2f;
+        Damage = (float)Math.Round(Damage);
     }
 
-    public static Attack Physical(float damage, bool critical = false) => new(damage, Type.Physical, critical);
-
-    public static Attack Magical(float damage, bool critical = false) => new(damage, Type.Magical, critical);
-
-    public Attack Roll(float defense, float damageMultiplier = 1f)
-    {
-        var damage = Damage;
-        var critical = MathUtil.RNG.RandfRange(0, 1) < 0.2f;
-
-        if (critical)
-            damage *= MathUtil.RNG.RandfRange(1.5f, 2f);
-
-        damage -= defense * AttackType switch
-        {
-            Type.Physical => 1f,
-            Type.Magical => 0.8f,
-            _ => 1f
-        };
-        damage *= damageMultiplier;
-        damage = (float)Math.Round(damage);
-
-        return new Attack(damage, AttackType, critical);
-    }
+    public static Attack Create(float damage, Type type) => new(damage, type);
 }

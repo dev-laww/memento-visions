@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Components.Managers;
 using Game.Components.Area;
 using Game.Components.Movement;
@@ -21,11 +22,11 @@ public partial class Player : Entity
     [Node] public Velocity velocity;
     [Node] private WeaponManager weaponManager;
     [Node] public InventoryManager Inventory;
+    [Node] private Node2D hitBoxes;
 
     private string MoveDirection => GetMoveDirection();
     private Vector2 lastMoveDirection = Vector2.Down;
     private Vector2 DashVelocity { get; set; }
-    private bool CanDash { get; set; } = true;
     private bool Dashing { get; set; }
     private bool CanMove { get; set; } = true;
 
@@ -39,7 +40,31 @@ public partial class Player : Entity
     public override void _Ready()
     {
         base._Ready();
-        StatsManager.StatsChanged += StatChangeHandler;
+
+        velocity.Accelerating += () => StateMachine.ChangeState(Walk);
+        velocity.Decelerating += () => StateMachine.ChangeState(Idle);
+        velocity.DashEnded += HandleTransition;
+
+
+        hitBoxes.GetChildrenOfType<HitBox>().ToList().ForEach(box =>
+        {
+            box.Damage = StatsManager.Damage;
+
+            box.NotifyPropertyListChanged();
+        });
+
+        StatsManager.StatChanged += (value, stat) =>
+        {
+            if (stat != StatsType.Damage) return;
+
+            hitBoxes.GetChildrenOfType<HitBox>().ToList().ForEach(box =>
+            {
+                box.Damage = value;
+                box.NotifyPropertyListChanged();
+            });
+        }; 
+
+        if (Engine.IsEditorHint()) return;
 
         StateMachine.AddStates(Idle);
         StateMachine.AddStates(Walk);
@@ -47,9 +72,6 @@ public partial class Player : Entity
         StateMachine.AddStates(Attack, EnterAttack, ExitAttack);
         StateMachine.SetInitialState(Idle);
 
-        velocity.Accelerating += () => StateMachine.ChangeState(Walk);
-        velocity.Decelerating += () => StateMachine.ChangeState(Idle);
-        velocity.DashEnded += HandleTransition;
 
         // TODO: implement weapon unlocking system
         var weapons = new List<string>()
@@ -68,6 +90,8 @@ public partial class Player : Entity
 
     public override void _PhysicsProcess(double delta)
     {
+        if (Engine.IsEditorHint()) return;
+
         StateMachine.Update();
 
         if (!IsProcessingInput())
@@ -94,7 +118,7 @@ public partial class Player : Entity
     {
         if (@event.IsActionPressed("attack") && CanMove && !Dashing) StateMachine.ChangeState(Attack);
 
-        if (!@event.IsActionPressed("dash") || !CanDash || !CanMove) return;
+        if (!@event.IsActionPressed("dash") || !CanMove) return;
 
         StateMachine.ChangeState(Dash);
     }
@@ -106,7 +130,6 @@ public partial class Player : Entity
 
     private void EnterDash()
     {
-        StatsManager.ConsumeMana(DashStaminaCost);
         Dashing = true;
     }
 
@@ -179,14 +202,5 @@ public partial class Player : Entity
             return lastMoveDirection.X > 0 ? "right" : "left";
 
         return lastMoveDirection.Y < 0 ? "back" : "front";
-    }
-
-    private void StatChangeHandler(float value, StatsType stat)
-    {
-        CanDash = stat switch
-        {
-            StatsType.Mana => value >= DashStaminaCost,
-            _ => CanDash
-        };
     }
 }

@@ -37,7 +37,7 @@ public partial class Escort : Entity
     {
         base._Ready();
         ConnectSignals();
-        StatsManager.StatsDecreased += StatDecrease;
+        StatsManager.StatDecreased += StatDecrease;
         StateMachine.AddStates(Idle);
         StateMachine.AddStates(Follow);
         StateMachine.AddStates(Hurt);

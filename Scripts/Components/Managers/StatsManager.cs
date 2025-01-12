@@ -2,195 +2,137 @@ using System;
 using System.Collections.Generic;
 using Game.Utils.Battle;
 using Godot;
-using GodotUtilities;
-using StatsResource = Game.Resources.Stats;
 
 namespace Game.Components.Managers;
 
-// TODO: add methods for modifying other stats
-// TODO: Buff and debuff system maybe??
-
 public enum StatsType
 {
-    Mana,
     Speed,
-    Attack,
+    Damage,
     Defense,
-    Magic,
-    Health
+    Health,
+    Experience,
+    Level
 }
 
 [Tool]
-[Scene]
+[GlobalClass]
 public partial class StatsManager : Node
 {
-    [Export(PropertyHint.Range, "1,10")] private float StaminaRecoveryRate { get; set; } = 1;
+    [Signal] public delegate void StatChangedEventHandler(float value, StatsType stat);
+    [Signal] public delegate void StatIncreasedEventHandler(float value, StatsType stat);
+    [Signal] public delegate void StatDecreasedEventHandler(float value, StatsType stat);
+    [Signal] public delegate void StatDepletedEventHandler(StatsType stat);
+    [Signal] public delegate void AttackReceivedEventHandler(float dmg, Attack.Type type, bool critical);
 
-    [Export]
-    private StatsResource Stats
-    {
-        get => resource;
-        set
-        {
-            resource = value;
-            UpdateConfigurationWarnings();
-        }
-    }
-
-    [Node] private Timer staminaRecovery;
-
-    [Signal] public delegate void StatsChangedEventHandler(float value, StatsType stat);
-    [Signal] public delegate void StatsIncreasedEventHandler(float value, StatsType stat);
-    [Signal] public delegate void StatsDecreasedEventHandler(float value, StatsType stat);
-    [Signal] public delegate void StatsDepletedEventHandler(StatsType stat);
-    [Signal] public delegate void AttackReceivedEventHandler(float damage, Attack.Type type, bool isCritical = false);
-
-    public float Speed { get; private set; }
+    [Export] public float MaxHealth = 100;
 
     public float Health
     {
         get => health;
-        private set => health = value;
+        private set => SetStat(ref health, value, StatsType.Health);
     }
 
-    public float Magic
+    [Export]
+    public float Level
     {
-        get => magic;
-        private set => magic = value;
+        get => level;
+        private set => SetStat(ref level, value, StatsType.Level);
     }
 
+    [Export]
+    public float Experience
+    {
+        get => experience;
+        private set => SetStat(ref experience, value, StatsType.Experience);
+    }
+
+    [Export]
+    public float Speed
+    {
+        get => speed;
+        private set => SetStat(ref speed, value, StatsType.Speed);
+    }
+
+    [Export]
     public float Defense
     {
         get => defense;
-        private set => defense = value;
+        private set => SetStat(ref defense, value, StatsType.Defense);
     }
 
-    public float Attack
+    [Export]
+    public float Damage
     {
-        get => attack;
-        private set => attack = value;
+        get => damage;
+        private set => SetStat(ref damage, value, StatsType.Damage);
     }
 
-    public float Mana
-    {
-        get => mana;
-        private set => mana = value;
-    }
-
-    public float MaxHealth
-    {
-        get => maxHealth;
-        private set => maxHealth = value;
-    }
-
-    private float MaxMana
-    {
-        get => maxMana;
-        set => maxMana = value;
-    }
-
-    public Attack MagicalAttack => Utils.Battle.Attack.Magical(Magic);
-    public Attack PhysicalAttack => Utils.Battle.Attack.Physical(Attack);
-    public float PhysicalDamageMultiplier => Stats.PhysicalDamageMultiplier;
-    public float MagicalDamageMultiplier => Stats.MagicalDamageMultiplier;
+    private float speed = 100;
+    private float damage;
     private float health;
-    private float mana;
-    private float maxHealth;
-    private float maxMana;
-    private float magic;
+    private float experience;
+    private float level = 1;
     private float defense;
-    private float attack;
-    private StatsResource resource;
-
-    public override void _Notification(int what)
-    {
-        if (what != NotificationSceneInstantiated) return;
-
-        WireNodes();
-    }
+    private float totalExperience;
 
     public override void _Ready()
     {
-        InitializeStats();
-
-        staminaRecovery.Timeout += () => RecoverMana(StaminaRecoveryRate);
-        staminaRecovery.Start();
+        health = MaxHealth;
     }
 
-    private void InitializeStats()
+    public void Heal(float amount) => Health += amount;
+    public void IncreaseLevel(float amount) => Level += amount;
+
+    public void IncreaseExperience(float amount)
     {
-        if (Stats is null) return;
+        Experience += amount;
+        totalExperience += amount;
 
-        Speed = Stats.Speed;
-        MaxHealth = Stats.MaxHealth;
-        MaxMana = Stats.MaxMana;
-        Attack = Stats.Attack;
-        Magic = Stats.Magic;
-        Defense = Stats.Defense;
+        while (Experience >= CalculateRequiredExperience(Level + 1))
+        {
+            Experience -= CalculateRequiredExperience(Level + 1);
+            Level++;
 
-        Health = MaxHealth;
-        Mana = MaxMana;
+            // TODO: Add level up effects
+        }
     }
 
-    public void ReceiveAttack(Attack atk)
+    public void ReceiveAttack(Attack attack)
     {
-        EmitSignal(SignalName.AttackReceived, atk.Damage, (int)atk.AttackType, atk.IsCritical);
-        DecreaseStat(
-            stat: ref health,
-            value: atk.Damage,
-            type: StatsType.Health
-        );
+        Health -= Math.Clamp(attack.Damage - defense, 0, float.MaxValue);
+
+        // TODO: Add status effects
+        EmitSignal(SignalName.AttackReceived, attack.Damage, (int)attack.AttackType, attack.Critical);
     }
 
-    public void RecoverHealth(float amount) => IncreaseStat(
-        stat: ref health,
-        max: ref maxHealth,
-        value: amount,
-        type: StatsType.Health
-    );
-
-    public void ConsumeMana(float amount) => DecreaseStat(
-        stat: ref mana,
-        value: amount,
-        type: StatsType.Mana
-    );
-
-    public void RecoverMana(float amount) => IncreaseStat(
-        stat: ref mana,
-        max: ref maxMana,
-        value: amount,
-        type: StatsType.Mana
-    );
-
-    private void DecreaseStat(ref float stat, float value, StatsType type)
+    private void SetStat(ref float stat, float value, StatsType statType)
     {
-        stat = Math.Max(stat - value, 0);
+        const float TOLERANCE = 0.0001f;
+        if (Math.Abs(stat - value) < TOLERANCE) return;
 
-        var statType = (int)type;
-        EmitSignal(SignalName.StatsChanged, stat, statType);
-        EmitSignal(SignalName.StatsDecreased, value, statType);
+        var oldValue = stat;
+        stat = Math.Clamp(value, 0, statType switch
+        {
+            StatsType.Health => MaxHealth,
+            _ => float.MaxValue
+        });
 
-        if (stat <= 0)
-            EmitSignal(SignalName.StatsDepleted, statType);
+        EmitSignal(SignalName.StatChanged, value, (int)statType);
+        EmitSignal(value > oldValue ? SignalName.StatIncreased : SignalName.StatDecreased, value, (int)statType);
+
+        if (value <= 0)
+            EmitSignal(SignalName.StatDepleted, (int)statType);
     }
 
-    private void IncreaseStat(ref float stat, ref float max, float value, StatsType type)
-    {
-        if (stat >= max) return;
-
-        stat = Math.Min(stat + value, max);
-
-        var statType = (int)type;
-        EmitSignal(SignalName.StatsChanged, stat, statType);
-        EmitSignal(SignalName.StatsIncreased, value, statType);
-    }
+    private float CalculateRequiredExperience(float lvl) => (float)(lvl * 4 + Math.Pow(level, 1.8) + 10);
 
     public override string[] _GetConfigurationWarnings()
     {
         var warnings = new List<string>();
 
-        if (resource is null)
-            warnings.Add("Stats resource is not set.");
+        if (Owner is not CharacterBody2D)
+            warnings.Add("StatsManager must be  a child of an Entity.");
 
         return warnings.ToArray();
     }

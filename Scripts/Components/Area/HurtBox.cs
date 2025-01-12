@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Game.Utils.Battle;
 using Game.Components.Managers;
 using Godot;
 
@@ -31,26 +30,13 @@ public partial class HurtBox : Area2D
         NotifyPropertyListChanged();
     }
 
-    public void ReceiveAttack(HitBox hitBox)
-    {
-        var attack = hitBox.Attack;
-        attack = hitBox.Type switch
-        {
-            Attack.Type.Physical => attack.Roll(StatsManager.Defense, StatsManager.PhysicalDamageMultiplier),
-            Attack.Type.Magical => attack.Roll(StatsManager.Defense, StatsManager.MagicalDamageMultiplier),
-            _ => attack.Roll(StatsManager.Defense)
-        };
-
-        statsManager.ReceiveAttack(attack);
-    }
-
     private void OnHurtBoxAreaEntered(Area2D area)
     {
         if (area is not HitBox hitBox) return;
 
         if (hitBox.Owner == Owner) return;
 
-        ReceiveAttack(hitBox);
+        statsManager.ReceiveAttack(hitBox.Attack);
     }
 
     public override string[] _GetConfigurationWarnings()
