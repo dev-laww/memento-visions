@@ -37,7 +37,7 @@ public partial class Crafting : Overlay
     [Node] private AnimationPlayer animationPlayer;
 
     private Player player;
-    private Item selectedItem;
+    // private Item selectedItem;
 
 
     private List<Slot> Slots => slotsContainer.GetChildrenOfType<Slot>().ToList();
@@ -99,26 +99,26 @@ public partial class Crafting : Overlay
     // TODO: handle close when crafted item popup is visible
     private void Reset()
     {
-        var items = RecipeManager.CraftableItems;
-
-        if (!Visible) return;
-
-        ClearSlots();
-
-        items.ForEach(item =>
-        {
-            var slot = FindOrCreateSlot();
-            slot.Item = item;
-        });
+        // var items = RecipeManager.CraftableItems;
+        //
+        // if (!Visible) return;
+        //
+        // ClearSlots();
+        //
+        // items.ForEach(item =>
+        // {
+        //     var slot = FindOrCreateSlot();
+        //     slot.Item = item;
+        // });
         Slots.First().Select();
         UpdateButtonStates();
     }
 
 
-    private bool ShouldRefreshDisplayOnPickup(Item item, string currentFilter)
-    {
-        return item.Type.ToString() == currentFilter || Slots.All(slot => slot.Item == null);
-    }
+    // private bool ShouldRefreshDisplayOnPickup(Item item, string currentFilter)
+    // {
+    //     return item.Type.ToString() == currentFilter || Slots.All(slot => slot.Item == null);
+    // }
 
     private void OnVisibilityChanged()
     {
@@ -129,8 +129,8 @@ public partial class Crafting : Overlay
 
     private Slot FindOrCreateSlot()
     {
-        var existingSlot = Slots.FirstOrDefault(slot => !slot.IsOccupied);
-        if (existingSlot != null) return existingSlot;
+        // var existingSlot = Slots.FirstOrDefault(slot => !slot.IsOccupied);
+        // if (existingSlot != null) return existingSlot;
 
         var newSlot = resourcePreloader.InstanceSceneOrNull<Slot>();
         slotsContainer.AddChild(newSlot);
@@ -139,17 +139,17 @@ public partial class Crafting : Overlay
 
     private async void OnCraftButtonPress()
     {
-        if (selectedItem == null || player == null) return;
-
-        var craftedItem = RecipeManager.CreateItem(selectedItem);
-
-        craftedItemIcon.Texture = craftedItem.Icon;
-        craftedItemName.Text = craftedItem.Name;
-        craftedItemQuantity.Text = $"x{craftedItem.Value}";
-
-        animationPlayer.Play("show-popup");
-
-        await ToSignal(animationPlayer, "animation_finished");
+        // if (selectedItem == null || player == null) return;
+        //
+        // var craftedItem = RecipeManager.CreateItem(selectedItem);
+        //
+        // craftedItemIcon.Texture = craftedItem.Icon;
+        // craftedItemName.Text = craftedItem.Name;
+        // craftedItemQuantity.Text = $"x{craftedItem.Value}";
+        //
+        // animationPlayer.Play("show-popup");
+        //
+        // await ToSignal(animationPlayer, "animation_finished");
 
         Reset();
     }
@@ -165,33 +165,33 @@ public partial class Crafting : Overlay
         DeselectOtherSlots(selectedSlot);
 
         if (Engine.IsEditorHint() || player == null) return;
-
-        selectedItem = selectedSlot.Item?.Duplicate();
-        selectedItemIcon.Texture = selectedItem?.Icon;
-        selectedItemName.Text = selectedItem?.Name;
-        selectedItemType.Text = selectedItem?.Type.ToString();
-        selectedItemDescription.Text = selectedItem?.Description;
-        quantityInput.Text = selectedItem?.Value.ToString() ?? "0";
+        //
+        // selectedItem = selectedSlot.Item?.Duplicate();
+        // selectedItemIcon.Texture = selectedItem?.Icon;
+        // selectedItemName.Text = selectedItem?.Name;
+        // selectedItemType.Text = selectedItem?.Type.ToString();
+        // selectedItemDescription.Text = selectedItem?.Description;
+        // quantityInput.Text = selectedItem?.Value.ToString() ?? "0";
 
         UpdateButtonStates();
     }
 
     private void UpdateButtonStates()
     {
-        if (selectedItem == null)
-        {
-            craftButton.Disabled = true;
-            decreaseButton.Disabled = true;
-            increaseButton.Disabled = true;
-            return;
-        }
+        // if (selectedItem == null)
+        // {
+        //     craftButton.Disabled = true;
+        //     decreaseButton.Disabled = true;
+        //     increaseButton.Disabled = true;
+        //     return;
+        // }
 
-        craftButton.Disabled = !RecipeManager.CanCreateItem(selectedItem);
-        decreaseButton.Disabled = selectedItem.Value <= 1;
-
-        var nextItem = selectedItem.Duplicate();
-        nextItem++;
-        increaseButton.Disabled = !RecipeManager.CanCreateItem(nextItem);
+        // craftButton.Disabled = !RecipeManager.CanCreateItem(selectedItem);
+        // decreaseButton.Disabled = selectedItem.Value <= 1;
+        //
+        // var nextItem = selectedItem.Duplicate();
+        // nextItem++;
+        // increaseButton.Disabled = !RecipeManager.CanCreateItem(nextItem);
     }
 
     private void DeselectOtherSlots(Slot selectedSlot)
@@ -206,29 +206,29 @@ public partial class Crafting : Overlay
 
     private void IncreaseQuantity()
     {
-        if (selectedItem == null) return;
+        // if (selectedItem == null) return;
 
-        selectedItem++;
-        quantityInput.Text = selectedItem.Value.ToString();
+        // selectedItem++;
+        // quantityInput.Text = selectedItem.Value.ToString();
         UpdateButtonStates();
     }
 
     private void DecreaseQuantity()
     {
-        if (selectedItem == null) return;
+        // if (selectedItem == null) return;
 
-        selectedItem--;
-        quantityInput.Text = selectedItem.Value.ToString();
+        // selectedItem--;
+        // quantityInput.Text = selectedItem.Value.ToString();
         UpdateButtonStates();
     }
 
     private void OnQuantityInputTextChanged(string newText)
     {
-        if (selectedItem == null) return;
-
-        if (!int.TryParse(newText, out var value)) return;
-
-        selectedItem.Value = value;
+        // if (selectedItem == null) return;
+        //
+        // if (!int.TryParse(newText, out var value)) return;
+        //
+        // selectedItem.Value = value;
         UpdateButtonStates();
     }
 

@@ -1,5 +1,4 @@
 using System.Linq;
-using Game.Resources;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
@@ -25,41 +24,14 @@ public partial class Slot : Control
         }
     }
 
-    [Export]
-    public Item Item
-    {
-        get => item;
-        set
-        {
-            item = value;
-
-            if (Engine.IsEditorHint()) return;
-
-            if (item == null)
-            {
-                label.Visible = false;
-                icon.Texture = null;
-                return;
-            }
-
-            if (label == null || icon == null) return;
-
-            label.Visible = item.Value > 1;
-            label.Text = item.Value > 999 ? "999+" : item.Value.ToString();
-            icon.Texture = item.Icon;
-        }
-    }
-
     [Node] private Button button;
     [Node] private Label label;
     [Node] private TextureRect icon;
     [Node] private AnimationPlayer animationPlayer;
 
     [Signal] public delegate void SelectedEventHandler(Slot slot);
-
-    private Item item;
+    
     private bool _selected;
-    public bool IsOccupied => item != null;
 
     public override void _Notification(int what)
     {
@@ -80,7 +52,6 @@ public partial class Slot : Control
 
     public void Clear()
     {
-        Item = null;
         Deselect();
     }
 

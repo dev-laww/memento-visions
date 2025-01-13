@@ -1,7 +1,6 @@
 using Godot;
 using DialogueManagerRuntime;
 using Game.Components.Area;
-using Game.Quests;
 using Game.Utils.Extensions;
 using GodotUtilities;
 
@@ -13,7 +12,7 @@ namespace Game.Entities
         [Node] private Interaction interaction;
 
         [Export] private Resource DialogResource;
-        [Export] private Quest Quest;
+        // [Export] private Quest Quest;
 
         private bool isDialogueActive;
 
@@ -39,21 +38,21 @@ namespace Game.Entities
 
         public void GiveQuest()
         {
-            Quest.StartQuest();
-            if (Quest.Objectives is DefenseObjectives defenseObjectives)
-            {
-                defenseObjectives.StartDefense();
-            }
-            
+            // Quest.StartQuest();
+            // if (Quest.Objectives is DefenseObjectives defenseObjectives)
+            // {
+            //     defenseObjectives.StartDefense();
+            // }
+            //
         }
 
         public void CompleteQuest()
         {
-            if (Quest.Objectives is InvestigateObjectives investigateObjectives)
-            {
-                investigateObjectives.OnInteracted("NPC");
-            }
-            Quest.DeliverQuest();
+            // if (Quest.Objectives is InvestigateObjectives investigateObjectives)
+            // {
+            //     investigateObjectives.OnInteracted("NPC");
+            // }
+            // Quest.DeliverQuest();
         }
 
 

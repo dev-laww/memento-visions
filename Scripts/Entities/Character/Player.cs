@@ -1,13 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Game.Components.Managers;
 using Game.Components.Area;
 using Game.Components.Movement;
-using Game.Resources;
 using Godot;
 using GodotUtilities;
-using Variant = Game.Resources.Variant;
 
 
 namespace Game.Entities.Player;
@@ -20,8 +17,8 @@ public partial class Player : Entity
     [Node] private HurtBox hurtBox;
     [Node] private AnimationPlayer animations;
     [Node] public Velocity velocity;
-    [Node] private WeaponManager weaponManager;
-    [Node] public InventoryManager Inventory;
+    // [Node] private WeaponManager weaponManager;
+    // [Node] public InventoryManager Inventory;
     [Node] private Node2D hitBoxes;
 
     private string MoveDirection => GetMoveDirection();
@@ -74,18 +71,18 @@ public partial class Player : Entity
 
 
         // TODO: implement weapon unlocking system
-        var weapons = new List<string>()
-        {
-            "res://resources/weapons/daggers/dagger.tres",
-            "res://resources/weapons/guns/gun.tres"
-        };
-
-        weapons.ForEach(path =>
-        {
-            var res = GD.Load<Weapon>(path);
-            Inventory.AddItem(res);
-        });
-        Inventory.ChangeWeapon("weapon:dagger");
+        // var weapons = new List<string>()
+        // {
+        //     "res://resources/weapons/daggers/dagger.tres",
+        //     "res://resources/weapons/guns/gun.tres"
+        // };
+        //
+        // weapons.ForEach(path =>
+        // {
+        //     var res = GD.Load<Weapon>(path);
+        //     Inventory.AddItem(res);
+        // });
+        // Inventory.ChangeWeapon("weapon:dagger");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -143,11 +140,11 @@ public partial class Player : Entity
 
     private void EnterAttack()
     {
-        if (weaponManager.CurrentWeapon == null)
-        {
-            HandleTransition();
-            return;
-        }
+        // if (weaponManager.CurrentWeapon == null)
+        // {
+        //     HandleTransition();
+        //     return;
+        // }
 
         CanMove = false;
         velocity.Stop();
@@ -156,29 +153,29 @@ public partial class Player : Entity
     private async void Attack()
     {
         // TODO: make use of animation tree player to handle animation directions
-        switch (weaponManager.CurrentWeaponType)
-        {
-            case Variant.Gun:
-                animations.Play($"gun/{MoveDirection}");
-                break;
-            case Variant.Dagger:
-                animations.Play($"dagger/{MoveDirection}");
-                break;
-            case Variant.Sword:
-                animations.Play($"sword/{MoveDirection}");
-                break;
-            case Variant.Whip:
-                animations.Play($"dagger/{MoveDirection}");
-                break;
-            default:
-                GD.PushError("Weapon type not found");
-                break;
-        }
+        // switch (weaponManager.CurrentWeaponType)
+        // {
+        //     case Variant.Gun:
+        //         animations.Play($"gun/{MoveDirection}");
+        //         break;
+        //     case Variant.Dagger:
+        //         animations.Play($"dagger/{MoveDirection}");
+        //         break;
+        //     case Variant.Sword:
+        //         animations.Play($"sword/{MoveDirection}");
+        //         break;
+        //     case Variant.Whip:
+        //         animations.Play($"dagger/{MoveDirection}");
+        //         break;
+        //     default:
+        //         GD.PushError("Weapon type not found");
+        //         break;
+        // }
 
-        var signal = weaponManager.Animate(MoveDirection);
+        // var signal = weaponManager.Animate(MoveDirection);
 
         await ToSignal(animations, "animation_finished");
-        await signal;
+        // await signal;
 
         HandleTransition();
     }

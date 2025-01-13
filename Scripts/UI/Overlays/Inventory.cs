@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Entities.Player;
-using Game.Resources;
+// using Game.Resources;
 using Game.UI.Common;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
-using Type = Game.Resources.Type;
+// using Type = Game.Resources.Type;
 
 namespace Game.UI.Overlays;
 
@@ -37,7 +37,7 @@ public partial class Inventory : Overlay
     // State
     private Player player;
     private ButtonGroup buttonGroup;
-    private Item selectedItem;
+    // private Item selectedItem;
 
     // Properties
     private List<Slot> Slots => slotsContainer.GetChildrenOfType<Slot>().ToList();
@@ -64,9 +64,9 @@ public partial class Inventory : Overlay
     {
         // cleanup events
         Slots.ForEach(slot => slot.Selected -= OnSlotSelected);
-
-        if (player != null)
-            player.Inventory.ItemAdd -= OnItemPickup;
+        //
+        // if (player != null)
+        //     player.Inventory.ItemAdd -= OnItemPickup;
     }
 
     private void InitializeInventory()
@@ -90,8 +90,8 @@ public partial class Inventory : Overlay
         InitializeSlotEvents();
 
         // Player Events
-        if (player != null)
-            player.Inventory.ItemAdd += OnItemPickup;
+        // if (player != null)
+        //     player.Inventory.ItemAdd += OnItemPickup;
     }
 
     private void InitializeSlotEvents()
@@ -104,24 +104,24 @@ public partial class Inventory : Overlay
 
     private void Reset()
     {
-        equipButton.Visible = false;
-        materialItemsButton.ButtonPressed = true;
-        ClearSlots();
-        FilterItems(Type.Material.ToString());
+        // equipButton.Visible = false;
+        // materialItemsButton.ButtonPressed = true;
+        // ClearSlots();
+        // FilterItems(Type.Material.ToString());
     }
 
-    private void OnItemPickup(Item item)
-    {
-        var shouldRefreshDisplay = ShouldRefreshDisplayOnPickup(item, CurrentFilter);
+    // private void OnItemPickup(Item item)
+    // {
+    //     var shouldRefreshDisplay = ShouldRefreshDisplayOnPickup(item, CurrentFilter);
+    //
+    //     if (shouldRefreshDisplay)
+    //         FilterItems(CurrentFilter);
+    // }
 
-        if (shouldRefreshDisplay)
-            FilterItems(CurrentFilter);
-    }
-
-    private bool ShouldRefreshDisplayOnPickup(Item item, string currentFilter)
-    {
-        return item.Type.ToString() == currentFilter || Slots.All(slot => slot.Item == null);
-    }
+    // private bool ShouldRefreshDisplayOnPickup(Item item, string currentFilter)
+    // {
+    //     return item.Type.ToString() == currentFilter || Slots.All(slot => slot.Item == null);
+    // }
 
     private void OnVisibilityChanged()
     {
@@ -140,37 +140,37 @@ public partial class Inventory : Overlay
 
     private void DisplayFilteredItems(Type type)
     {
-        var items = player.Inventory.GetFilteredItems(type);
-
-        foreach (var item in items)
-        {
-            var slot = FindOrCreateSlot();
-
-            if (slot == null) continue;
-
-            if (item.Stackable)
-            {
-                slot.Item = item;
-                continue;
-            }
-
-            for (var i = 0; i < item.Value; i++)
-            {
-                var newSlot = FindOrCreateSlot();
-                var duplicate = item.Duplicate();
-                duplicate.Value = 1;
-                newSlot.Item = duplicate;
-            }
-        }
+        // var items = player.Inventory.GetFilteredItems(type);
+        //
+        // foreach (var item in items)
+        // {
+        //     var slot = FindOrCreateSlot();
+        //
+        //     if (slot == null) continue;
+        //
+        //     if (item.Stackable)
+        //     {
+        //         slot.Item = item;
+        //         continue;
+        //     }
+        //
+        //     for (var i = 0; i < item.Value; i++)
+        //     {
+        //         var newSlot = FindOrCreateSlot();
+        //         var duplicate = item.Duplicate();
+        //         duplicate.Value = 1;
+        //         newSlot.Item = duplicate;
+        //     }
+        // }
 
         Slots.First().Select();
     }
 
     private Slot FindOrCreateSlot()
     {
-        var existingSlot = Slots.FirstOrDefault(slot => !slot.IsOccupied);
-        if (existingSlot != null) return existingSlot;
-
+        // var existingSlot = Slots.FirstOrDefault(slot => !slot.IsOccupied);
+        // if (existingSlot != null) return existingSlot;
+        //
         var newSlot = resourcePreloader.InstanceSceneOrNull<Slot>();
         slotsContainer.AddChild(newSlot);
         return newSlot;
@@ -178,26 +178,26 @@ public partial class Inventory : Overlay
 
     private void OnEquipButtonPress()
     {
-        var isCurrentWeapon = selectedItem.UniqueName == player.Inventory.CurrentWeapon?.UniqueName;
-
-        player.Inventory.ChangeWeapon(isCurrentWeapon ? null : selectedItem.UniqueName);
+        // var isCurrentWeapon = selectedItem.UniqueName == player.Inventory.CurrentWeapon?.UniqueName;
+        //
+        // player.Inventory.ChangeWeapon(isCurrentWeapon ? null : selectedItem.UniqueName);
 
         UpdateEquipButtonState();
     }
 
     private void UpdateEquipButtonState()
     {
-        var currentWeapon = player.Inventory.CurrentWeapon;
-        var isCurrentWeapon = currentWeapon?.UniqueName == selectedItem?.UniqueName;
-        var isWeapon = selectedItem?.Type == Type.Weapon;
-
-        equipButton.Visible = isWeapon;
-
-        if (!isWeapon) return;
-
-        equipButton.ButtonPressed = isCurrentWeapon;
-        equipButton.Text = isCurrentWeapon ? "Unequip" : "Equip";
-        equipButton.Modulate = isCurrentWeapon ? Colors.Red : Colors.White;
+        // var currentWeapon = player.Inventory.CurrentWeapon;
+        // var isCurrentWeapon = currentWeapon?.UniqueName == selectedItem?.UniqueName;
+        // var isWeapon = selectedItem?.Type == Type.Weapon;
+        //
+        // equipButton.Visible = isWeapon;
+        //
+        // if (!isWeapon) return;
+        //
+        // equipButton.ButtonPressed = isCurrentWeapon;
+        // equipButton.Text = isCurrentWeapon ? "Unequip" : "Equip";
+        // equipButton.Modulate = isCurrentWeapon ? Colors.Red : Colors.White;
     }
 
     private void ClearSlots()
@@ -212,12 +212,12 @@ public partial class Inventory : Overlay
 
         if (Engine.IsEditorHint() || player == null) return;
 
-        selectedItem = selectedSlot.Item;
-        selectedItemIcon.Texture = selectedItem?.Icon;
-        selectedItemName.Text = selectedItem?.Name;
-        selectedItemType.Text = selectedItem?.Type.ToString();
-        selectedItemQuantity.Text = selectedItem != null ? $"x{selectedItem.Value}" : null;
-        selectedItemDescription.Text = selectedItem?.Description;
+        // selectedItem = selectedSlot.Item;
+        // selectedItemIcon.Texture = selectedItem?.Icon;
+        // selectedItemName.Text = selectedItem?.Name;
+        // selectedItemType.Text = selectedItem?.Type.ToString();
+        // selectedItemQuantity.Text = selectedItem != null ? $"x{selectedItem.Value}" : null;
+        // selectedItemDescription.Text = selectedItem?.Description;
 
         UpdateEquipButtonState();
     }
