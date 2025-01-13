@@ -6,5 +6,5 @@ namespace Game.Resources;
 public partial class Ingredient : Resource
 {
     [Export] public Item Item;
-    [Export] public int Quantity;
+    [Export] public int Quantity = 1;
 }

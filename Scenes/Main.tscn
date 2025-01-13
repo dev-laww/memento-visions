@@ -34,6 +34,7 @@ visible = false
 
 [node name="Quest" parent="UserInterface" instance=ExtResource("6_vcj0g")]
 visible = false
+script = null
 
 [node name="Menu" parent="UserInterface" instance=ExtResource("7_icpvm")]
 visible = false
