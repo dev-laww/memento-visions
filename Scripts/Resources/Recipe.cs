@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Godot;
 
 namespace Game.Resources;
@@ -5,29 +7,26 @@ namespace Game.Resources;
 [GlobalClass, Icon("res://assets/icons/recipe.svg")]
 public partial class Recipe : Resource
 {
-    [Export] public Item Result;
-
-    [Export]
-    public int Quantity
+    public enum Type
     {
-        get => quantity;
-        set
-        {
-            quantity = Mathf.Max(1, value);
-
-            if (Ingredients.Length == 0) return;
-
-            foreach (var ingredient in Ingredients)
-            {
-                ingredient.Quantity *= quantity;
-                ingredient.NotifyPropertyListChanged();
-            }
-            
-            NotifyPropertyListChanged();
-        }
+        Craftable,
+        Consumable,
     }
 
-    [Export] public Ingredient[] Ingredients = [];
+    [Export] public Item Result;
+    [Export] public int Quantity = 1;
+    [Export] public Type RecipeType = Type.Craftable;
+    [Export] private ItemGroup[] Ingredients = [];
 
-    private int quantity = 1;
+    public bool Unlocked;
+
+    public ItemGroup[] GetIngredients(int quantity = 1) =>
+        quantity switch
+        {
+            < 1 => throw new ArgumentOutOfRangeException(nameof(quantity), "Quantity must be greater than 0."),
+            1 => Ingredients,
+            _ => Ingredients.Select(ingredient =>
+                new ItemGroup { Item = ingredient.Item, Quantity = ingredient.Quantity * quantity }
+            ).ToArray()
+        };
 }
