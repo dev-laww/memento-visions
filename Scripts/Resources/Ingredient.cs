@@ -7,4 +7,10 @@ public partial class Ingredient : Resource
 {
     [Export] public Item Item;
     [Export] public int Quantity = 1;
+    
+    public void Deconstruct(out Item item, out int quantity)
+    {
+        item = Item;
+        quantity = Quantity;
+    }
 }
