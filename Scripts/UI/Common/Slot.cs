@@ -1,5 +1,4 @@
-using System.Linq;
-using Game.Utils.Extensions;
+using Game.Resources;
 using Godot;
 using GodotUtilities;
 
@@ -7,31 +6,37 @@ namespace Game.UI.Common;
 
 // [Tool]
 [Scene]
-public partial class Slot : Control
+public partial class Slot : Panel
 {
-    [Export]
-    public bool IsSelected
-    {
-        get => _selected;
-        private set
-        {
-            if (value)
-                Select();
-            else
-                Deselect();
-
-            NotifyPropertyListChanged();
-        }
-    }
-
-    [Node] private Button button;
     [Node] private Label label;
     [Node] private TextureRect icon;
     [Node] private AnimationPlayer animationPlayer;
 
-    [Signal] public delegate void SelectedEventHandler(Slot slot);
-    
-    private bool _selected;
+    [Signal] public delegate void UpdatedEventHandler(ItemGroup item);
+    [Signal] public delegate void PressedEventHandler();
+
+    private bool selected;
+    private ItemGroup item;
+
+    public bool Selected
+    {
+        get => selected;
+        set
+        {
+            selected = value;
+            animationPlayer.Play(selected ? "select" : "RESET");
+        }
+    }
+
+    public ItemGroup Item
+    {
+        get => item;
+        set
+        {
+            item = value;
+            UpdateSlot();
+        }
+    }
 
     public override void _Notification(int what)
     {
@@ -42,36 +47,28 @@ public partial class Slot : Control
 
     public override void _Ready()
     {
-        button.Pressed += Select;
-
-        if (this.GetPlayer() == null) return;
-
-        label.Visible = false;
-        icon.Texture = null;
+        UpdateSlot();
+        GuiInput += OnGuiInput;
     }
 
-    public void Clear()
+    private void UpdateSlot()
     {
-        Deselect();
+        label.Visible = item is not null && item.Quantity > 1;
+        icon.Texture = item?.Item.Icon;
+        label.Text = item?.Quantity > 999 ? "999+" : item?.Quantity.ToString();
+
+        EmitSignal(SignalName.Updated, item);
     }
 
-    public void Select()
+    private void OnGuiInput(InputEvent @event)
     {
-        if (animationPlayer == null || !IsInsideTree()) return;
+        if (@event is not InputEventMouseButton mouseAction) return;
 
-        var slots = GetTree().GetNodesInGroup<Slot>("Slots").Where(slot => slot != this).ToList();
+        if (!mouseAction.Pressed) return;
 
-        slots.ForEach(s => s.Deselect());
-        animationPlayer.Play("select");
-        _selected = true;
-        EmitSignal(SignalName.Selected, this);
-    }
+        Selected = !selected;
+        animationPlayer.Play(selected ? "select" : "RESET");
 
-    public void Deselect()
-    {
-        if (animationPlayer == null) return;
-
-        animationPlayer.Play("RESET");
-        _selected = false;
+        EmitSignal(SignalName.Pressed);
     }
 }
