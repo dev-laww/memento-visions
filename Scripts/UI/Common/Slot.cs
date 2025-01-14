@@ -5,7 +5,7 @@ using GodotUtilities;
 
 namespace Game.UI.Common;
 
-[Tool]
+// [Tool]
 [Scene]
 public partial class Slot : Control
 {

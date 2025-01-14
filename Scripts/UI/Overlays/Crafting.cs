@@ -11,7 +11,7 @@ using GodotUtilities;
 namespace Game.UI.Overlays;
 
 // TODO: improve popup animation
-[Tool]
+// [Tool]
 [Scene]
 public partial class Crafting : Overlay
 {

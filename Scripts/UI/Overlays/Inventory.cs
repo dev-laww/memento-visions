@@ -15,7 +15,7 @@ namespace Game.UI.Overlays;
 // Doing thesis sucks :DDD 
 // - 31/12/2024 - Lawrence
 
-[Tool]
+// [Tool]
 [Scene]
 public partial class Inventory : Overlay
 {
