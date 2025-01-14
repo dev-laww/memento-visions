@@ -2,8 +2,8 @@ using Godot;
 
 namespace Game.Resources;
 
-[GlobalClass, Icon("res://assets/icons/ingredient.svg")]
-public partial class Ingredient : Resource
+[GlobalClass, Icon("res://assets/icons/item-group.svg")]
+public partial class ItemGroup : Resource
 {
     [Export] public Item Item;
     [Export] public int Quantity = 1;
