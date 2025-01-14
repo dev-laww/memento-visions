@@ -196,7 +196,6 @@ columns = 12
 
 [node name="Slot" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
-IsSelected = true
 
 [node name="Slot2" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
