@@ -13,7 +13,7 @@ public partial class Slot : Panel
     [Node] private AnimationPlayer animationPlayer;
 
     [Signal] public delegate void UpdatedEventHandler(ItemGroup item);
-    [Signal] public delegate void PressedEventHandler();
+    [Signal] public delegate void PressedEventHandler(Slot slot);
 
     private bool selected;
     private ItemGroup item;
@@ -66,9 +66,8 @@ public partial class Slot : Panel
 
         if (!mouseAction.Pressed) return;
 
-        Selected = !selected;
         animationPlayer.Play(selected ? "select" : "RESET");
 
-        EmitSignal(SignalName.Pressed);
+        EmitSignal(SignalName.Pressed, this);
     }
 }
