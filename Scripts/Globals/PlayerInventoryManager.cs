@@ -10,6 +10,12 @@ public partial class PlayerInventoryManager : Global<PlayerInventoryManager>
 {
     [Signal] public delegate void UpdatedEventHandler(ItemGroup item);
 
+    public static event UpdatedEventHandler InventoryUpdated
+    {
+        add => Instance.Updated += value;
+        remove => Instance.Updated -= value;
+    }
+
     private readonly ReadOnlyDictionary<Item.Category, List<ItemGroup>> Inventory = new(
         new Dictionary<Item.Category, List<ItemGroup>>
         {
@@ -28,11 +34,9 @@ public partial class PlayerInventoryManager : Global<PlayerInventoryManager>
         if (itemGroup is not null)
             itemGroup.Quantity += group.Quantity;
         else
-        {
             Instance.Inventory[group.Item.ItemCategory].Add(group);
-        }
 
-        Instance.EmitSignal(SignalName.Updated, itemGroup);
+        Instance.EmitSignal(SignalName.Updated, itemGroup ?? group);
     }
 
     public static void RemoveItem(ItemGroup group)
