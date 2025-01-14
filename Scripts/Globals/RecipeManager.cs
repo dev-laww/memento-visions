@@ -60,7 +60,7 @@ public partial class RecipeManager : Global<RecipeManager>
         var keys = Instance.Recipes.Keys;
 
         return keys.Select(key => Instance.Recipes[key].Find(
-            r => r.Result.UniqueName == item.UniqueName
+            r => r.Result.Item.UniqueName == item.UniqueName
         )).FirstOrDefault(recipe => recipe is not null);
     }
 }

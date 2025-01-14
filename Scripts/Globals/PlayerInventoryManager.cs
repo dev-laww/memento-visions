@@ -6,7 +6,7 @@ using Godot;
 
 namespace Game.Globals;
 
-public partial class PlayerInventoryManager: Global<PlayerInventoryManager>
+public partial class PlayerInventoryManager : Global<PlayerInventoryManager>
 {
     [Signal] public delegate void UpdatedEventHandler(ItemGroup item);
 
@@ -20,37 +20,40 @@ public partial class PlayerInventoryManager: Global<PlayerInventoryManager>
         }
     );
 
-    public static void AddItem(Item item, int quantity = 1)
+    public static void AddItem(ItemGroup group)
     {
-        var itemGroup = Instance.Inventory[item.ItemCategory].Find(group => group.Item.UniqueName == item.UniqueName);
+        var itemGroup = Instance.Inventory[group.Item.ItemCategory]
+            .Find(g => g.Item.UniqueName == group.Item.UniqueName);
 
         if (itemGroup is not null)
-            itemGroup.Quantity += quantity;
+            itemGroup.Quantity += group.Quantity;
         else
         {
-            itemGroup = new ItemGroup { Item = item, Quantity = quantity };
-            Instance.Inventory[item.ItemCategory].Add(itemGroup);
+            Instance.Inventory[group.Item.ItemCategory].Add(group);
         }
 
         Instance.EmitSignal(SignalName.Updated, itemGroup);
     }
 
-    public static void RemoveItem(Item item, int quantity = 1)
+    public static void RemoveItem(ItemGroup group)
     {
-        var itemGroup = Instance.Inventory[item.ItemCategory].Find(group => group.Item.UniqueName == item.UniqueName);
+        var itemGroup = Instance.Inventory[group.Item.ItemCategory]
+            .Find(g => g.Item.UniqueName == group.Item.UniqueName);
 
         if (itemGroup is null) return;
 
-        itemGroup.Quantity -= quantity;
+        itemGroup.Quantity -= group.Quantity;
 
         if (itemGroup.Quantity <= 0)
-            Instance.Inventory[item.ItemCategory].Remove(itemGroup);
+            Instance.Inventory[group.Item.ItemCategory].Remove(itemGroup);
 
         Instance.EmitSignal(SignalName.Updated, itemGroup);
     }
 
-    public static IReadOnlyList<ItemGroup> GetItemsFromCategory(Item.Category category) => Instance.Inventory[category].AsReadOnly();
-    
-    public static bool HasItem(Item item, int quantity = 1) =>
-        Instance.Inventory[item.ItemCategory].Any(group => group.Item.UniqueName == item.UniqueName && group.Quantity >= quantity);
+    public static IReadOnlyList<ItemGroup> GetItemsFromCategory(Item.Category category) =>
+        Instance.Inventory[category].AsReadOnly();
+
+    public static bool HasItem(ItemGroup group) =>
+        Instance.Inventory[group.Item.ItemCategory]
+            .Any(g => g.Item.UniqueName == group.Item.UniqueName && g.Quantity >= group.Quantity);
 }

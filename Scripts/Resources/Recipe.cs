@@ -14,8 +14,7 @@ public partial class Recipe : Resource
         Consumable,
     }
 
-    [Export] public Item Result;
-    [Export] public int Quantity = 1;
+    [Export] public ItemGroup Result;
     [Export] public Type RecipeType = Type.Craftable;
     [Export] private ItemGroup[] Ingredients = [];
 
@@ -35,9 +34,7 @@ public partial class Recipe : Resource
     {
         var ingredients = GetIngredients(quantity);
         
-        return ingredients.All(ingredient =>
-            PlayerInventoryManager.HasItem(ingredient.Item, ingredient.Quantity)
-        );
+        return ingredients.All(PlayerInventoryManager.HasItem);
     }
     
     public void Create(int quantity = 1)
@@ -47,9 +44,9 @@ public partial class Recipe : Resource
         var ingredients = GetIngredients(quantity);
 
         foreach (var ingredient in ingredients)
-            PlayerInventoryManager.RemoveItem(ingredient.Item, ingredient.Quantity);
+            PlayerInventoryManager.RemoveItem(ingredient);
 
-        PlayerInventoryManager.AddItem(Result, quantity);
+        PlayerInventoryManager.AddItem(new ItemGroup { Item = Result.Item, Quantity = Result.Quantity * quantity });
     }
     
 }
