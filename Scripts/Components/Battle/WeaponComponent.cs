@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using Game.Resources;
+using Godot;
 
 namespace Game.Components.Battle;
 
@@ -7,6 +8,7 @@ namespace Game.Components.Battle;
 [GlobalClass]
 public partial class WeaponComponent : Node2D
 {
+    [Export] private Weapon Weapon;
     [Export] private SpriteFrames Animations { get; set; }
     [Export] private AudioStream AttackSound { get; set; }
     [Export] private AudioStream HitSound { get; set; }
