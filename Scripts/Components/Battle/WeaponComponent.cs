@@ -5,7 +5,7 @@ namespace Game.Components.Battle;
 
 // TODO: implement sound effects, collision shape animations, attack pattern animations
 [Tool]
-[GlobalClass]
+[GlobalClass, Icon("res://assets/icons/weapon-component.svg")]
 public partial class WeaponComponent : Node2D
 {
     [Export] private Weapon Weapon;

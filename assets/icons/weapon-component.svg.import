@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bawxjwpin4o6n"
-path="res://.godot/imported/stats-manager.svg-71c93110a418d913dc09268ed0a77777.ctex"
+uid="uid://c76bu36rjrml0"
+path="res://.godot/imported/weapon-component.svg-2b18a16a296525ee24d77d64b709641c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/stats-manager.svg"
-dest_files=["res://.godot/imported/stats-manager.svg-71c93110a418d913dc09268ed0a77777.ctex"]
+source_file="res://assets/icons/weapon-component.svg"
+dest_files=["res://.godot/imported/weapon-component.svg-2b18a16a296525ee24d77d64b709641c.ctex"]
 
 [params]
 
