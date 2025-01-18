@@ -139,6 +139,9 @@ public partial class Inventory : Overlay
             selectedItemActionButton.Text = "Unequip";
         }
         else if (SelectedItem.UniqueName == WeaponManager.CurrentWeaponResource?.UniqueName)
+        {
             WeaponManager.Unequip();
+            selectedItemActionButton.Text = "Equip";
+        }
     }
 }
