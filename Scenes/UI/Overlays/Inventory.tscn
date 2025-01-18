@@ -102,7 +102,7 @@ button_pressed = true
 action_mode = 0
 button_group = ExtResource("1_hubp2")
 icon_alignment = 1
-metadata/category = "Material"
+metadata/Category = "Material"
 
 [node name="ConsumableButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
 unique_name_in_owner = true
