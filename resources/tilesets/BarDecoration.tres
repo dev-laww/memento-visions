@@ -1,0 +1,43 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bxk3gvlgdjbhl"]
+
+[ext_resource type="Texture2D" uid="uid://ce8kps6x3fps8" path="res://assets/tilesets/bar.png" id="1_bp5tn"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hh1bi"]
+texture = ExtResource("1_bp5tn")
+texture_region_size = Vector2i(24, 24)
+6:8/size_in_atlas = Vector2i(2, 1)
+6:8/0 = 0
+6:8/0/y_sort_origin = -1
+6:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-19.799, 5.3033, -20.8596, 7.42462, -20.8596, 8.48528, -20.5061, 9.19239, -18.0312, 13.0815, -14.4957, 13.0815, -9.19239, 13.435, -3.18198, 14.1421, 3.88909, 13.7886, 12.3744, 12.3744, 18.7383, 11.6673, 20.5061, 6.71751, 17.3241, 4.59619, 12.625, 3.125, 5.625, 2.625, -8, 3, -12.125, 3.375)
+6:9/size_in_atlas = Vector2i(2, 1)
+6:9/0 = 0
+6:9/0/y_sort_origin = -3
+6:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-22.2739, 10.9602, 21.9203, 11.6673, 22.981, 2.47487, -22.6274, 2.12132)
+4:8/size_in_atlas = Vector2i(2, 1)
+4:8/0 = 0
+4:8/0/y_sort_origin = -1
+4:9/size_in_atlas = Vector2i(2, 1)
+4:9/0 = 0
+4:9/0/y_sort_origin = -1
+4:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-22.6274, 0, -22.6274, 11.3137, 22.6274, 11.3137, 23.3345, 0.353554)
+3:8/0 = 0
+3:9/0 = 0
+1:8/size_in_atlas = Vector2i(2, 2)
+1:8/0 = 0
+1:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-18.0312, 5.3033, -21.5668, 6.71751, -21.9203, 11.3137, -22.6274, 15.2028, -22.2739, 17.3241, -22.6274, 23.6881, 21.2132, 22.981, 20.8597, 16.2635, 22.2739, 10.6066, 20.8597, 7.07107, 17.6777, 5.3033)
+0:9/0 = 0
+0:9/0/y_sort_origin = 8
+0:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, 5.25, -5.375, 6.75, -5.75, 8, -4.875, 10.25, -2.625, 11, -0.25, 11.5, 2.375, 11.375, 4.375, 10.25, 5, 8, 4.625, 6.5, 2.25, 4.75)
+0:8/0 = 0
+0:8/0/y_sort_origin = 8
+18:8/size_in_atlas = Vector2i(4, 2)
+18:8/0 = 0
+18:8/0/y_sort_origin = 10
+20:2/size_in_atlas = Vector2i(2, 2)
+20:2/0 = 0
+20:0/size_in_atlas = Vector2i(2, 2)
+20:0/0 = 0
+
+[resource]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_hh1bi")
