@@ -1,152 +1,15 @@
-[gd_resource type="Resource" script_class="Weapon" load_steps=21 format=3 uid="uid://dtttc4lu3snvs"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://dtttc4lu3snvs"]
 
 [ext_resource type="Texture2D" uid="uid://dlwsy8jlu2lqy" path="res://assets/weapons/swords/sword/icon.png" id="1_2is5w"]
 [ext_resource type="Script" path="res://Scripts/Resources/Weapon.cs" id="1_6dlaw"]
-[ext_resource type="Texture2D" uid="uid://cvpvlt6bojya0" path="res://assets/weapons/swords/sword/sprite-frames.png" id="1_lk0o3"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7mnu8"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(256, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r6ble"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(320, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1llp7"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(384, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0o4lb"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(448, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tq2ob"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w3fx0"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b7nrk"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nj3st"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7dp4x"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(512, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_empcj"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(576, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4li4p"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(640, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yom5g"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(704, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qjjga"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(768, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pk0ln"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(832, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_adwmo"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(896, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jg7ym"]
-atlas = ExtResource("1_lk0o3")
-region = Rect2(960, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_smq3l"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7mnu8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r6ble")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1llp7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0o4lb")
-}],
-"loop": false,
-"name": &"back",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tq2ob")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w3fx0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b7nrk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nj3st")
-}],
-"loop": false,
-"name": &"front",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7dp4x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_empcj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4li4p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yom5g")
-}],
-"loop": false,
-"name": &"left",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qjjga")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pk0ln")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_adwmo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jg7ym")
-}],
-"loop": false,
-"name": &"right",
-"speed": 8.0
-}]
+[ext_resource type="PackedScene" uid="uid://bj127mbpsv45j" path="res://Scenes/Weapons/Swords/Sword.tscn" id="2_g5k5b"]
 
 [resource]
 script = ExtResource("1_6dlaw")
-Variant = 1
-Animations = SubResource("SpriteFrames_smq3l")
+WeaponType = 1
+Component = ExtResource("2_g5k5b")
+Icon = ExtResource("1_2is5w")
 Name = "Sword"
 UniqueName = "weapon:sword"
-Type = 2
-Value = 1
+ItemCategory = 3
 Description = "The sword is a masterpiece of balance and craftsmanship, its polished steel blade gleaming with an air of authority. Each swing is fluid, carrying both grace and devastating power. The hilt, adorned with intricate designs, fits snugly in the grip, making it a weapon that commands respect and instills fear on the battlefield."
-Icon = ExtResource("1_2is5w")
-Stackable = false
