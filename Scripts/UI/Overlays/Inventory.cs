@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Globals;
 using Game.Resources;
 using Game.UI.Common;
 using Godot;
@@ -15,6 +17,7 @@ namespace Game.UI.Overlays;
 [Scene]
 public partial class Inventory : Overlay
 {
+    [Node] private ResourcePreloader resourcePreloader;
     [Node] private TextureButton closeButton;
     [Node] private GridContainer slotsContainer;
     [Node] private Button materialButton;
@@ -26,6 +29,7 @@ public partial class Inventory : Overlay
     [Node] private Button selectedItemActionButton;
 
     private List<Slot> slots;
+    private Item.Category currentCategory = Item.Category.Material;
 
     public override void _Notification(int what)
     {
@@ -37,12 +41,16 @@ public partial class Inventory : Overlay
     public override void _Ready()
     {
         slots = slotsContainer.GetChildrenOfType<Slot>().ToList();
-        slots.ForEach(slot => slot.Pressed += OnSlotPress);
+
+        slots.ForEach(slot => slot.Pressed += SelectSlot);
         closeButton.Pressed += Close;
         materialButton.ButtonGroup.Pressed += OnItemCategoryPress;
+        PlayerInventoryManager.InventoryUpdated += OnInventoryUpdate;
+
+        PopulateSlots(currentCategory);
     }
 
-    private void OnSlotPress(Slot slot)
+    private void SelectSlot(Slot slot)
     {
         var selectedSlot = slots.FirstOrDefault(s => s.Selected);
 
@@ -56,42 +64,62 @@ public partial class Inventory : Overlay
 
         slot.Selected = true;
         selectedSlot.Selected = false;
-        
         UpdateSelectedItem(slot.Item);
     }
-    
+
     private void UpdateSelectedItem(ItemGroup item)
     {
         selectedItemIcon.Texture = item?.Item.Icon;
         selectedItemName.Text = item?.Item.Name;
         selectedItemCategory.Text = item?.Item.ItemCategory.ToString();
-        selectedItemQuantity.Text = item?.Quantity > 999 ? "999+" : item?.Quantity.ToString();
+        selectedItemQuantity.Text = item is null ? string.Empty : item.Quantity > 999 ? "x999+" : $"x{item.Quantity}";
         selectedItemDescription.Text = item?.Item.Description;
-        
-        selectedItemActionButton.Visible = item?.Item.ItemCategory is Item.Category.Material or Item.Category.Consumable;
+        selectedItemActionButton.Visible = item?.Item.ItemCategory is Item.Category.Weapon or Item.Category.Consumable;
+        selectedItemActionButton.ToggleMode = item?.Item.ItemCategory == Item.Category.Weapon;
         selectedItemActionButton.Text = item?.Item.ItemCategory switch
         {
-            Item.Category.Material => "Craft",
+            Item.Category.Weapon => "Equip",
             Item.Category.Consumable => "Use",
             _ => string.Empty
         };
     }
 
-    // TODO: Implement me
     private void OnItemCategoryPress(BaseButton button)
     {
-        // var meta = button.GetMeta("Category").AsString();
-        // var category = Enum.Parse<Item.Category>(meta);
-        //
-        // slots.ForEach(slot => slot.Item = null);
-        //
-        // var items = PlayerInventoryManager.GetItemsFromCategory(category);
-        //
-        // slots.Where(slot => slot.Item != null).ToList().ForEach(slot => slot.Item = null);
-        //
-        // for (var i = 0; i < items.Count; i++)
-        // {
-        //     slots[i].Item = items[i];
-        // }
+        var meta = button.GetMeta("Category").AsString();
+        var category = Enum.Parse<Item.Category>(meta);
+
+        if (currentCategory == category) return;
+
+        currentCategory = category;
+
+        PopulateSlots(category);
+    }
+
+    private void PopulateSlots(Item.Category category)
+    {
+        var items = PlayerInventoryManager.GetItemsFromCategory(category);
+
+        slots.Where(slot => slot.Item != null).ToList().ForEach(slot => slot.Item = null);
+
+        for (var i = 0; i < items.Count; i++)
+        {
+            slots[i].Item = items[i];
+        }
+
+        var slot = slots.First();
+        SelectSlot(slot);
+        UpdateSelectedItem(slot.Item);
+    }
+
+    private void OnInventoryUpdate(ItemGroup group)
+    {
+        var (item, _) = group;
+
+        if (item.ItemCategory != currentCategory) return;
+
+        var slot = slots.FirstOrDefault(s => s.Item?.Item.UniqueName == item.UniqueName) ?? slots.First(s => s.Item is null);
+
+        slot.Item = group;
     }
 }
