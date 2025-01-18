@@ -26,6 +26,22 @@ public partial class PlayerInventoryManager : Global<PlayerInventoryManager>
         }
     );
 
+    // TODO: Implement saving and loading of inventory
+    public override void _Ready()
+    {
+        var group = new ItemGroup();
+        group.Item = GD.Load<Item>("res://resources/items/apple.tres");
+        group.Quantity = 5;
+
+        AddItem(group);
+
+        group = new ItemGroup();
+        group.Item = GD.Load<Item>("res://resources/items/rock.tres");
+        group.Quantity = 10;
+
+        AddItem(group);
+    }
+
     public static void AddItem(ItemGroup group)
     {
         var itemGroup = Instance.Inventory[group.Item.ItemCategory]
