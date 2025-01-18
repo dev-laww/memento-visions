@@ -13,4 +13,6 @@ public partial class ItemGroup : Resource
         item = Item;
         quantity = Quantity;
     }
+
+    public override string ToString() => $"{Item.UniqueName} (x{Quantity})";
 }
