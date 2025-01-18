@@ -30,6 +30,7 @@ public partial class Inventory : Overlay
 
     private List<Slot> slots;
     private Item.Category currentCategory = Item.Category.Material;
+    private Item SelectedItem => slots.FirstOrDefault(s => s.Selected)?.Item?.Item;
 
     public override void _Notification(int what)
     {
@@ -44,6 +45,7 @@ public partial class Inventory : Overlay
 
         slots.ForEach(slot => slot.Pressed += SelectSlot);
         closeButton.Pressed += Close;
+        selectedItemActionButton.Toggled += OnButtonToggle;
         materialButton.ButtonGroup.Pressed += OnItemCategoryPress;
         PlayerInventoryManager.InventoryUpdated += OnInventoryUpdate;
 
@@ -74,11 +76,14 @@ public partial class Inventory : Overlay
         selectedItemCategory.Text = item?.Item.ItemCategory.ToString();
         selectedItemQuantity.Text = item is null ? string.Empty : item.Quantity > 999 ? "x999+" : $"x{item.Quantity}";
         selectedItemDescription.Text = item?.Item.Description;
+
         selectedItemActionButton.Visible = item?.Item.ItemCategory is Item.Category.Weapon or Item.Category.Consumable;
         selectedItemActionButton.ToggleMode = item?.Item.ItemCategory == Item.Category.Weapon;
+        selectedItemActionButton.ButtonPressed =
+            item?.Item.UniqueName == WeaponManager.CurrentWeaponResource?.UniqueName;
         selectedItemActionButton.Text = item?.Item.ItemCategory switch
         {
-            Item.Category.Weapon => "Equip",
+            Item.Category.Weapon => selectedItemActionButton.ButtonPressed ? "Unequip" : "Equip",
             Item.Category.Consumable => "Use",
             _ => string.Empty
         };
@@ -118,8 +123,22 @@ public partial class Inventory : Overlay
 
         if (item.ItemCategory != currentCategory) return;
 
-        var slot = slots.FirstOrDefault(s => s.Item?.Item.UniqueName == item.UniqueName) ?? slots.First(s => s.Item is null);
+        var slot = slots.FirstOrDefault(s => s.Item?.Item.UniqueName == item.UniqueName) ??
+                   slots.First(s => s.Item is null);
 
         slot.Item = group;
+    }
+
+    private void OnButtonToggle(bool pressed)
+    {
+        if (SelectedItem is null || SelectedItem.ItemCategory != Item.Category.Weapon) return;
+
+        if (pressed)
+        {
+            WeaponManager.Equip(SelectedItem as Weapon);
+            selectedItemActionButton.Text = "Unequip";
+        }
+        else if (SelectedItem.UniqueName == WeaponManager.CurrentWeaponResource?.UniqueName)
+            WeaponManager.Unequip();
     }
 }
