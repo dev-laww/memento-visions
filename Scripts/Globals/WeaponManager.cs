@@ -11,7 +11,7 @@ public partial class WeaponManager : Global<WeaponManager>
 {
     public static WeaponComponent CurrentWeapon { get; private set; }
     public static AnimationPlayer CurrentAnimationPlayer => CurrentWeapon.AnimationPlayer;
-    public static Weapon.Type CurrentWeaponType = Weapon.Type.Dagger;
+    public static Weapon CurrentWeaponResource { get; private set; }
     private Player Player;
 
 
@@ -30,7 +30,7 @@ public partial class WeaponManager : Global<WeaponManager>
 
         Instance.Player.AddChild(component);
         CurrentWeapon = component;
-        CurrentWeaponType = weapon.WeaponType;
+        CurrentWeaponResource = weapon;
     }
 
     public static void Attack(string direction)
@@ -42,6 +42,6 @@ public partial class WeaponManager : Global<WeaponManager>
     {
         CurrentWeapon?.QueueFree();
         CurrentWeapon = null;
-        CurrentWeaponType = Weapon.Type.Dagger;
+        CurrentWeaponResource = null;
     }
 }

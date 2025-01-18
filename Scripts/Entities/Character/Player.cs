@@ -155,7 +155,7 @@ public partial class Player : Entity
     private async void Attack()
     {
         // TODO: make use of animation tree player to handle animation directions
-        switch (WeaponManager.CurrentWeaponType)
+        switch (WeaponManager.CurrentWeaponResource.WeaponType)
         {
             case Weapon.Type.Gun:
                 animations.Play($"gun/{MoveDirection}");
