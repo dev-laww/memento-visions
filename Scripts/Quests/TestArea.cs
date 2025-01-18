@@ -17,6 +17,5 @@ public partial class TestArea : Node2D
         base._Ready();
         WireNodes();
         player = this.GetPlayer();
-        npc = this.GetNode<NPC>("/root/GameManager/CurrentScene/TestArea/NPC");
     }
 }

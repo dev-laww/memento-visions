@@ -1683,6 +1683,7 @@ script = ExtResource("5_5rnnb")
 weaponManager = NodePath("../WeaponManager")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
 position = Vector2(-1.49012e-08, 14)
 rotation = 1.58684
 shape = SubResource("CapsuleShape2D_kaamo")
