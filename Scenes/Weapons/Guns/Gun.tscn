@@ -1,7 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://btmqpd4jt4gui"]
+[gd_scene load_steps=28 format=3 uid="uid://btmqpd4jt4gui"]
 
-[ext_resource type="Script" path="res://Scripts/Components/Battle/Weapon.cs" id="1_ff1d8"]
-[ext_resource type="Resource" uid="uid://dj4fwvxem0cau" path="res://resources/weapons/guns/gun.tres" id="2_gdage"]
+[ext_resource type="Script" path="res://Scripts/Components/Battle/WeaponComponent.cs" id="1_ff1d8"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_l6mw3"]
 [ext_resource type="Script" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="3_ahu3j"]
 [ext_resource type="Texture2D" uid="uid://d1uj108kqd8jq" path="res://assets/weapons/guns/gun/sprite-frames.png" id="4_yb83n"]
@@ -339,7 +338,6 @@ _data = {
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_ff1d8")
-Resource = ExtResource("2_gdage")
 
 [node name="Assets" type="Node2D" parent="."]
 

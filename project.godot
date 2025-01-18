@@ -26,6 +26,7 @@ config/icon="res://icon.svg"
 SceneManager="*res://Scripts/Globals/SceneManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 PlayerInventoryManager="*res://Scripts/Globals/PlayerInventoryManager.cs"
+WeaponManager="*res://Scripts/Globals/WeaponManager.cs"
 
 [dialogue_manager]
 

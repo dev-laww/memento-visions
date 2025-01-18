@@ -3,6 +3,8 @@ using System.Linq;
 using Game.Components.Managers;
 using Game.Components.Area;
 using Game.Components.Movement;
+using Game.Globals;
+using Game.Resources;
 using Godot;
 using GodotUtilities;
 
@@ -140,11 +142,11 @@ public partial class Player : Entity
 
     private void EnterAttack()
     {
-        // if (weaponManager.CurrentWeapon == null)
-        // {
-        //     HandleTransition();
-        //     return;
-        // }
+        if (WeaponManager.CurrentWeapon == null)
+        {
+            HandleTransition();
+            return;
+        }
 
         CanMove = false;
         velocity.Stop();
@@ -153,29 +155,29 @@ public partial class Player : Entity
     private async void Attack()
     {
         // TODO: make use of animation tree player to handle animation directions
-        // switch (weaponManager.CurrentWeaponType)
-        // {
-        //     case Variant.Gun:
-        //         animations.Play($"gun/{MoveDirection}");
-        //         break;
-        //     case Variant.Dagger:
-        //         animations.Play($"dagger/{MoveDirection}");
-        //         break;
-        //     case Variant.Sword:
-        //         animations.Play($"sword/{MoveDirection}");
-        //         break;
-        //     case Variant.Whip:
-        //         animations.Play($"dagger/{MoveDirection}");
-        //         break;
-        //     default:
-        //         GD.PushError("Weapon type not found");
-        //         break;
-        // }
+        switch (WeaponManager.CurrentWeaponType)
+        {
+            case Weapon.Type.Gun:
+                animations.Play($"gun/{MoveDirection}");
+                break;
+            case Weapon.Type.Dagger:
+                animations.Play($"dagger/{MoveDirection}");
+                break;
+            case Weapon.Type.Sword:
+                animations.Play($"sword/{MoveDirection}");
+                break;
+            case Weapon.Type.Whip:
+                animations.Play($"dagger/{MoveDirection}");
+                break;
+            default:
+                GD.PushError("Weapon type not found");
+                break;
+        }
 
-        // var signal = weaponManager.Animate(MoveDirection);
+        WeaponManager.Attack(MoveDirection);
 
         await ToSignal(animations, "animation_finished");
-        // await signal;
+        await ToSignal(WeaponManager.CurrentAnimationPlayer, "animation_finished");
 
         HandleTransition();
     }

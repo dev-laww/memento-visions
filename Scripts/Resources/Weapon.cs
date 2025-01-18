@@ -14,4 +14,5 @@ public partial class Weapon : Item
     }
 
     [Export] public Type WeaponType;
+    [Export] public PackedScene Component;
 }

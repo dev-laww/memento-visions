@@ -1,7 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://bj127mbpsv45j"]
+[gd_scene load_steps=28 format=3 uid="uid://bj127mbpsv45j"]
 
-[ext_resource type="Script" path="res://Scripts/Components/Battle/Weapon.cs" id="1_rgxvb"]
-[ext_resource type="Resource" uid="uid://dtttc4lu3snvs" path="res://resources/weapons/swords/sword.tres" id="2_p3wt0"]
+[ext_resource type="Script" path="res://Scripts/Components/Battle/WeaponComponent.cs" id="1_rgxvb"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_y4or8"]
 [ext_resource type="Script" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="3_72hrq"]
 [ext_resource type="Texture2D" uid="uid://cvpvlt6bojya0" path="res://assets/weapons/swords/sword/sprite-frames.png" id="4_qjeyb"]
@@ -336,7 +335,6 @@ _data = {
 [node name="Sword" type="Node2D"]
 visible = false
 script = ExtResource("1_rgxvb")
-Resource = ExtResource("2_p3wt0")
 
 [node name="Assets" type="Node2D" parent="."]
 

@@ -1,5 +1,4 @@
-﻿using Game.Resources;
-using Godot;
+﻿using Godot;
 
 namespace Game.Components.Battle;
 
@@ -8,21 +7,13 @@ namespace Game.Components.Battle;
 [GlobalClass, Icon("res://assets/icons/weapon-component.svg")]
 public partial class WeaponComponent : Node2D
 {
-    [Export] private Weapon Weapon;
+    // TODO: Implement this
     [Export] private SpriteFrames Animations { get; set; }
     [Export] private AudioStream AttackSound { get; set; }
     [Export] private AudioStream HitSound { get; set; }
 
-    private AnimatedSprite2D smoothAnimatedSprite2D => GetNodeOrNull<AnimatedSprite2D>("Assets/SmoothAnimatedSprite2D");
-    private AudioStreamPlayer2D attackSfx => GetNodeOrNull<AudioStreamPlayer2D>("Assets/AttackSfx");
-    private AudioStreamPlayer2D hitSfx => GetNodeOrNull<AudioStreamPlayer2D>("Assets/HitSfx");
-    private AnimationPlayer player => GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
-
-    public SignalAwaiter Animate(string direction)
-    {
-        player.Play(direction);
-        return ToSignal(player, "animation_finished");
-    }
+    public AnimationPlayer AnimationPlayer => GetNodeOrNull<AnimationPlayer>("AnimationPlayer");
+    public void Animate(string direction) => AnimationPlayer.Play(direction);
 
     public override void _EnterTree()
     {

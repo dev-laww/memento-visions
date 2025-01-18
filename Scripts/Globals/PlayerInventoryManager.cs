@@ -40,6 +40,18 @@ public partial class PlayerInventoryManager : Global<PlayerInventoryManager>
         group.Quantity = 10;
 
         AddItem(group);
+        
+        group = new ItemGroup();
+        group.Item = GD.Load<Weapon>("res://resources/weapons/swords/sword.tres");
+        group.Quantity = 1;
+        
+        AddItem(group);
+        
+        group = new ItemGroup();
+        group.Item = GD.Load<Weapon>("res://resources/weapons/daggers/dagger.tres");
+        group.Quantity = 1;
+        
+        AddItem(group);
     }
 
     public static void AddItem(ItemGroup group)
