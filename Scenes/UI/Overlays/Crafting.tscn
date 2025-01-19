@@ -480,12 +480,12 @@ theme_override_font_sizes/font_size = 24
 text = "Item Name"
 label_settings = SubResource("LabelSettings_rusr7")
 
-[node name="SelectedItemType" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails/VBoxContainer"]
+[node name="SelectedItemCategory" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_xbes8")
 theme_override_font_sizes/font_size = 8
-text = "Item Type"
+text = "Item Category"
 
 [node name="SelectedItemDescription" type="RichTextLabel" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails"]
 unique_name_in_owner = true

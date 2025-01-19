@@ -51,9 +51,7 @@ public partial class RecipeManager : Global<RecipeManager>
         dir.ListDirEnd();
     }
 
-    public static IReadOnlyList<Recipe> GetRecipesFromType(Recipe.Type type) => Instance.Recipes[type].Where(
-        recipe => recipe.Unlocked
-    ).ToList();
+    public static IReadOnlyList<Recipe> GetRecipesFromType(Recipe.Type type) => Instance.Recipes[type].ToList();
 
     public static Recipe GetRecipeFromResult(Item item)
     {
