@@ -1,17 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
-using Game.Entities.Player;
 using Game.Globals;
 using Game.Resources;
 using Game.UI.Common;
-using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
 namespace Game.UI.Overlays;
 
-// TODO: improve popup animation
-// [Tool]
 [Scene]
 public partial class Crafting : Overlay
 {
@@ -31,6 +27,7 @@ public partial class Crafting : Overlay
 
     private List<Slot> slots;
     private Recipe selectedRecipe;
+    private int quantity = 1;
 
     public override void _Notification(int what)
     {
@@ -64,10 +61,8 @@ public partial class Crafting : Overlay
 
             slot.Item = recipe.Result;
         }
-
-        var firstSlot = slots.First();
-        SelectSlot(firstSlot);
-        UpdateSelectedItem(firstSlot.Item);
+        
+        Reset();
     }
 
     private void SelectSlot(Slot slot)
@@ -98,33 +93,40 @@ public partial class Crafting : Overlay
         if (item is null) return;
 
         selectedRecipe = RecipeManager.GetRecipeFromResult(item.Item);
-        quantityInput.Text = $"{selectedRecipe?.Result.Quantity}";
+        quantity = 1;
+        quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
     }
 
     private void OnIncreaseButtonPress()
     {
         if (selectedRecipe is null) return;
 
-        var value = int.Parse(quantityInput.Text);
-        quantityInput.Text = $"{value + 1}";
+        quantity++;
+        quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
     }
 
     private void OnDecreaseButtonPress()
     {
         if (selectedRecipe is null) return;
 
-        var value = int.Parse(quantityInput.Text);
-        quantityInput.Text = $"{value - 1}";
+        if (quantity <= 0) return;
+
+        quantity--;
+        quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
     }
 
     private void OnCraftButtonPress()
     {
-        if (selectedRecipe is null) return;
+        selectedRecipe?.Create(quantity);
+    }
 
-        var value = int.Parse(quantityInput.Text);
+    private void Reset()
+    {
+        quantity = 1;
+        quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
 
-        if (value <= 0) return;
-
-        selectedRecipe.Create(value);
+        var firstSlot = slots.First();
+        SelectSlot(firstSlot);
+        UpdateSelectedItem(firstSlot.Item);
     }
 }
