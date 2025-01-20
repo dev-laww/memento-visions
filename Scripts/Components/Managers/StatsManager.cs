@@ -74,7 +74,6 @@ public partial class StatsManager : Node
     private float experience;
     private float level = 1;
     private float defense;
-    private float totalExperience;
 
     public override void _Ready()
     {
@@ -87,7 +86,6 @@ public partial class StatsManager : Node
     public void IncreaseExperience(float amount)
     {
         Experience += amount;
-        totalExperience += amount;
 
         while (Experience >= CalculateRequiredExperience(Level + 1))
         {

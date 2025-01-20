@@ -85,8 +85,16 @@ public partial class GameManager : Node
     public override void _Notification(int what)
     {
         if (what == NotificationWMCloseRequest)
-            // TODO: save game
+        {
+            SaveManager.Save();
             return;
+        }
+
+        if (what == NotificationEnterTree)
+        {
+            SaveManager.Load();
+            return;
+        }
 
         if (what != NotificationSceneInstantiated) return;
 

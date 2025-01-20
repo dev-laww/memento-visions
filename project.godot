@@ -29,6 +29,7 @@ PlayerInventoryManager="*res://Scripts/Globals/PlayerInventoryManager.cs"
 WeaponManager="*res://Scripts/Globals/WeaponManager.cs"
 RecipeManager="*res://Scripts/Globals/RecipeManager.cs"
 InteractionManager="*res://Scripts/Globals/InteractionManager.cs"
+SaveManager="*res://Scripts/Globals/SaveManager.cs"
 
 [dialogue_manager]
 
@@ -65,7 +66,6 @@ folder_colors={
 "res://addons/": "gray",
 "res://assets/": "orange",
 "res://build/": "gray",
-"res://data/": "yellow",
 "res://gdunit4_testadapter/": "gray",
 "res://resources/": "teal",
 "res://script_templates/": "gray"
