@@ -7,7 +7,7 @@ public class InventoryData
 {
     public class Item
     {
-        [JsonProperty("resource")] public string Resource;
+        [JsonProperty("unique_name")] public string UniqueName;
         [JsonProperty("amount")] public int Amount;
     }
 

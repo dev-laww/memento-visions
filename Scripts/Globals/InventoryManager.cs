@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Game.Registry;
 using Game.Resources;
 using Game.Utils.Json.Models;
 using Godot;
@@ -52,14 +53,17 @@ public partial class InventoryManager : Global<InventoryManager>
         // group.Quantity = 1;
         //
         // AddItem(group);
-        
+
         var inventory = SaveManager.InventoryData;
 
-        foreach (var item in inventory.Items)
+        inventory.Items.ForEach(item =>
         {
-            var resource = GD.Load<Item>(item.Resource);
-            AddItem(new ItemGroup { Item = resource, Quantity = item.Amount });
-        }
+            AddItem(new ItemGroup
+            {
+                Item = ItemRegistry.Get(item.UniqueName),
+                Quantity = item.Amount
+            });
+        });
     }
 
     public static void AddItem(ItemGroup group)
@@ -96,12 +100,12 @@ public partial class InventoryManager : Global<InventoryManager>
     public static bool HasItem(ItemGroup group) =>
         Instance.Inventory[group.Item.ItemCategory]
             .Any(g => g.Item.UniqueName == group.Item.UniqueName && g.Quantity >= group.Quantity);
-    
+
     public static InventoryData ToData() => new()
     {
         Items = Instance.Inventory.SelectMany(i => i.Value).Select(item => new InventoryData.Item
         {
-            Resource = item.Item.ResourcePath,
+            UniqueName = item.Item.UniqueName,
             Amount = item.Quantity
         }).ToList()
     };
