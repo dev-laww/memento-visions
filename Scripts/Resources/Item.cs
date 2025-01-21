@@ -18,4 +18,6 @@ public partial class Item : Resource
     [Export] public string UniqueName;
     [Export] public Category ItemCategory = Category.Material;
     [Export(PropertyHint.MultilineText)] public string Description;
+
+    public override string ToString() => $"<{GetType()} ({UniqueName})>";
 }
