@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dd1jerr3yxfmm"]
+[gd_scene load_steps=26 format=3 uid="uid://dd1jerr3yxfmm"]
 
 [ext_resource type="PackedScene" uid="uid://svqrge4l63b4" path="res://Scenes/UI/Common/Slot.tscn" id="1_i0y0q"]
 [ext_resource type="Script" path="res://Scripts/UI/Overlays/Crafting.cs" id="1_xer77"]
@@ -30,10 +30,6 @@ load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.c
 [sub_resource type="AtlasTexture" id="AtlasTexture_voowc"]
 atlas = SubResource("CompressedTexture2D_a253b")
 region = Rect2(176, 32, 16, 16)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_36sp7"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7c6lm"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3foco"]
 load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
@@ -509,20 +505,16 @@ texture_normal = SubResource("AtlasTexture_jpnfh")
 texture_pressed = SubResource("AtlasTexture_fkhci")
 texture_disabled = SubResource("AtlasTexture_voowc")
 
-[node name="QuantityInput" type="LineEdit" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/QuantityControl"]
+[node name="QuantityInput" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/QuantityControl"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 1
 theme = ExtResource("2_xbes8")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 8
-theme_override_styles/focus = SubResource("StyleBoxEmpty_36sp7")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_7c6lm")
 text = "0"
-placeholder_text = "Quantity"
-alignment = 1
-expand_to_text_length = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="IncreaseButton" type="TextureButton" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/QuantityControl"]
 unique_name_in_owner = true
