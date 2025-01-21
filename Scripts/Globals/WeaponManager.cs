@@ -6,7 +6,7 @@ using Godot;
 
 namespace Game.Globals;
 
-// TODO: Cache weapon components
+// TODO: Loading weapon from save file and if player is freed, re-equip weapon
 public partial class WeaponManager : Global<WeaponManager>
 {
     public static WeaponComponent CurrentWeapon { get; private set; }
