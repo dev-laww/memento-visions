@@ -4,6 +4,7 @@ using System.Linq;
 using Game.Globals;
 using Game.Resources;
 using Game.UI.Common;
+using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
@@ -41,6 +42,8 @@ public partial class Inventory : Overlay
 
     public override void _Ready()
     {
+        if (this.GetPlayer() is null) return;
+
         slots = slotsContainer.GetChildrenOfType<Slot>().ToList();
 
         slots.ForEach(slot => slot.Pressed += SelectSlot);

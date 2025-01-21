@@ -1,4 +1,5 @@
 using Game.Resources;
+using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
@@ -47,6 +48,8 @@ public partial class Slot : Panel
 
     public override void _Ready()
     {
+        if (this.GetPlayer() is null) return;
+
         UpdateSlot();
         GuiInput += OnGuiInput;
     }
