@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Game.Resources;
+using Game.Utils.Json.Models;
 using Godot;
 
 namespace Game.Globals;
 
-public partial class PlayerInventoryManager : Global<PlayerInventoryManager>
+public partial class InventoryManager : Global<InventoryManager>
 {
     [Signal] public delegate void UpdatedEventHandler(ItemGroup item);
 
@@ -26,32 +27,39 @@ public partial class PlayerInventoryManager : Global<PlayerInventoryManager>
         }
     );
 
-    // TODO: Implement saving and loading of inventory
     public override void _Ready()
     {
-        var group = new ItemGroup();
-        group.Item = GD.Load<Item>("res://resources/items/apple.tres");
-        group.Quantity = 5;
+        // var group = new ItemGroup();
+        // group.Item = GD.Load<Item>("res://resources/items/apple.tres");
+        // group.Quantity = 5;
+        //
+        // AddItem(group);
+        //
+        // group = new ItemGroup();
+        // group.Item = GD.Load<Item>("res://resources/items/rock.tres");
+        // group.Quantity = 10;
+        //
+        // AddItem(group);
+        //
+        // group = new ItemGroup();
+        // group.Item = GD.Load<Weapon>("res://resources/weapons/swords/sword.tres");
+        // group.Quantity = 1;
+        //
+        // AddItem(group);
+        //
+        // group = new ItemGroup();
+        // group.Item = GD.Load<Weapon>("res://resources/weapons/daggers/dagger.tres");
+        // group.Quantity = 1;
+        //
+        // AddItem(group);
+        
+        var inventory = SaveManager.InventoryData;
 
-        AddItem(group);
-
-        group = new ItemGroup();
-        group.Item = GD.Load<Item>("res://resources/items/rock.tres");
-        group.Quantity = 10;
-
-        AddItem(group);
-        
-        group = new ItemGroup();
-        group.Item = GD.Load<Weapon>("res://resources/weapons/swords/sword.tres");
-        group.Quantity = 1;
-        
-        AddItem(group);
-        
-        group = new ItemGroup();
-        group.Item = GD.Load<Weapon>("res://resources/weapons/daggers/dagger.tres");
-        group.Quantity = 1;
-        
-        AddItem(group);
+        foreach (var item in inventory.Items)
+        {
+            var resource = GD.Load<Item>(item.Resource);
+            AddItem(new ItemGroup { Item = resource, Quantity = item.Amount });
+        }
     }
 
     public static void AddItem(ItemGroup group)
@@ -88,4 +96,13 @@ public partial class PlayerInventoryManager : Global<PlayerInventoryManager>
     public static bool HasItem(ItemGroup group) =>
         Instance.Inventory[group.Item.ItemCategory]
             .Any(g => g.Item.UniqueName == group.Item.UniqueName && g.Quantity >= group.Quantity);
+    
+    public static InventoryData ToData() => new()
+    {
+        Items = Instance.Inventory.SelectMany(i => i.Value).Select(item => new InventoryData.Item
+        {
+            Resource = item.Item.ResourcePath,
+            Amount = item.Quantity
+        }).ToList()
+    };
 }

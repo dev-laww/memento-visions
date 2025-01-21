@@ -47,7 +47,7 @@ public partial class Inventory : Overlay
         closeButton.Pressed += Close;
         selectedItemActionButton.Toggled += OnButtonToggle;
         materialButton.ButtonGroup.Pressed += OnItemCategoryPress;
-        PlayerInventoryManager.InventoryUpdated += OnInventoryUpdate;
+        InventoryManager.InventoryUpdated += OnInventoryUpdate;
 
         PopulateSlots(currentCategory);
     }
@@ -103,7 +103,7 @@ public partial class Inventory : Overlay
 
     private void PopulateSlots(Item.Category category)
     {
-        var items = PlayerInventoryManager.GetItemsFromCategory(category);
+        var items = InventoryManager.GetItemsFromCategory(category);
 
         slots.Where(slot => slot.Item != null).ToList().ForEach(slot => slot.Item = null);
 

@@ -34,7 +34,7 @@ public partial class Recipe : Resource
     {
         var ingredients = GetIngredients(quantity);
         
-        return ingredients.All(PlayerInventoryManager.HasItem);
+        return ingredients.All(InventoryManager.HasItem);
     }
     
     public void Create(int quantity = 1)
@@ -44,9 +44,9 @@ public partial class Recipe : Resource
         var ingredients = GetIngredients(quantity);
 
         foreach (var ingredient in ingredients)
-            PlayerInventoryManager.RemoveItem(ingredient);
+            InventoryManager.RemoveItem(ingredient);
 
-        PlayerInventoryManager.AddItem(new ItemGroup { Item = Result.Item, Quantity = Result.Quantity * quantity });
+        InventoryManager.AddItem(new ItemGroup { Item = Result.Item, Quantity = Result.Quantity * quantity });
     }
     
 }
