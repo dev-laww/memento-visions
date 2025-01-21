@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/Components/SmoothSprite2D.cs" id="5_a0tbo"]
 [ext_resource type="TileSet" uid="uid://di324xlegxgrg" path="res://resources/tilesets/bar.tres" id="7_unifd"]
 [ext_resource type="PackedScene" uid="uid://j0qixu5x2ins" path="res://Scenes/Decorations/Bar/LargeBarrel.tscn" id="8_fqy60"]
-[ext_resource type="TileSet" uid="uid://bxk3gvlgdjbhl" path="res://resources/tilesets/BarDecoration.tres" id="8_qpdtc"]
+[ext_resource type="TileSet" uid="uid://b0bp4y4xuaxog" path="res://resources/tilesets/bar-decoration.tres" id="8_qpdtc"]
 [ext_resource type="PackedScene" uid="uid://b5jpiv87dv1rl" path="res://Scenes/Decorations/Bar/Barrel.tscn" id="9_ikvjg"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/TransitionArea.cs" id="18_towvu"]
 
