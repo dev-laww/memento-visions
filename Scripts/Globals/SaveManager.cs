@@ -54,6 +54,7 @@ public partial class SaveManager : Global<SaveManager>
 
         var inventory = InventoryManager.ToData();
         Data.Inventory = inventory;
+        Data.Inventory.Equipped = WeaponManager.CurrentWeaponResource?.UniqueName;
 
         var json = JsonConvert.SerializeObject(Data, Formatting.Indented);
         file.StoreString(json);
