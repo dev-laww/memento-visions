@@ -3,6 +3,7 @@ using System.Linq;
 using Game.Registry;
 using Game.Resources;
 using Game.UI.Common;
+using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
@@ -20,7 +21,7 @@ public partial class Crafting : Overlay
     [Node] private Label selectedItemCategory;
     [Node] private RichTextLabel selectedItemDescription;
 
-    [Node] private LineEdit quantityInput;
+    [Node] private Label quantityInput;
     [Node] private TextureButton increaseButton;
     [Node] private TextureButton decreaseButton;
     [Node] private Button craftButton;
@@ -38,6 +39,8 @@ public partial class Crafting : Overlay
 
     public override void _Ready()
     {
+        if (this.GetPlayer() is null) return;
+
         slots = slotsContainer.GetChildrenOfType<Slot>().ToList();
 
         slots.ForEach(slot => slot.Pressed += SelectSlot);
@@ -103,6 +106,7 @@ public partial class Crafting : Overlay
 
         quantity++;
         quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
+        UpdateButtonState();
     }
 
     private void OnDecreaseButtonPress()
@@ -113,11 +117,13 @@ public partial class Crafting : Overlay
 
         quantity--;
         quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
+        UpdateButtonState();
     }
 
     private void OnCraftButtonPress()
     {
         selectedRecipe?.Create(quantity);
+        Reset();
     }
 
     private void Reset()
@@ -128,5 +134,15 @@ public partial class Crafting : Overlay
         var firstSlot = slots.First();
         SelectSlot(firstSlot);
         UpdateSelectedItem(firstSlot.Item);
+        UpdateButtonState();
+    }
+
+    private void UpdateButtonState()
+    {
+        craftButton.Disabled = selectedRecipe is null || !selectedRecipe.CanCreate(quantity);
+        craftButton.Text = selectedRecipe?.CanCreate(quantity) == true ? "Craft" : "Not enough resources";
+
+        increaseButton.Disabled = selectedRecipe is null || !selectedRecipe.CanCreate(quantity + 1);
+        decreaseButton.Disabled = quantity <= 1;
     }
 }
