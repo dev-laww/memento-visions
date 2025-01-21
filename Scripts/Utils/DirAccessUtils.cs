@@ -39,4 +39,14 @@ public static class DirAccessUtils
 
         return files;
     }
+
+    public static List<string> GetFilesFromDirectories(params string[] paths)
+    {
+        var files = new List<string>();
+
+        foreach (var path in paths)
+            files.AddRange(GetFilesRecursively(path));
+
+        return files;
+    }
 }
