@@ -1,3 +1,4 @@
+using Game.Utils.Extensions;
 using Game.Utils.Json.Models;
 using Godot;
 using Newtonsoft.Json;
@@ -7,13 +8,27 @@ namespace Game.Globals;
 
 public partial class SaveManager : Global<SaveManager>
 {
-    public static Save Data { get; private set; }
-
-    private static readonly string dir = OS.IsDebugBuild() ? "res://data" : "user://data";
-
+    private static SaveData Data;
+    private static readonly string dir = $"{(OS.IsDebugBuild() ? "res" : "user")}://data";
     private static readonly string path = $"{dir}/{Constants.SAVE_NAME}";
 
-    public static void Load()
+    public static PlayerData PlayerData => Data.Player;
+    public static InventoryData InventoryData => Data.Inventory;
+
+    public override void _EnterTree()
+    {
+        Load();
+        var timer = new Timer { WaitTime = 10, Autostart = true };
+        AddChild(timer);
+        timer.Timeout += Save;
+    }
+
+    public override void _ExitTree()
+    {
+        Save();
+    }
+
+    private static void Load()
     {
         if (FileAccess.FileExists(path))
         {
@@ -21,31 +36,28 @@ public partial class SaveManager : Global<SaveManager>
             var content = file.GetAsText();
             file.Close();
 
-            Data = JsonConvert.DeserializeObject<Save>(content);
+            Data = JsonConvert.DeserializeObject<SaveData>(content);
         }
         else
         {
             DirAccess.MakeDirAbsolute(dir);
-            Data = new Save();
+            Data = new SaveData();
         }
 
-        Data ??= new Save();
+        Data ??= new SaveData();
     }
 
-    public static void Save()
+    private void Save()
     {
         var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
 
+        // TODO: Implement other save data
+
+        var inventory = InventoryManager.ToData();
+        Data.Inventory = inventory;
+
         var json = JsonConvert.SerializeObject(Data, Formatting.Indented);
-
         file.StoreString(json);
-
         file.Close();
-    }
-
-    public static void Reset()
-    {
-        Data = new Save();
-        Save();
     }
 }

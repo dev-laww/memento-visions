@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Game.Utils.Battle;
+using Game.Utils.Json.Models;
 using Godot;
 
 namespace Game.Components.Managers;
@@ -134,4 +135,26 @@ public partial class StatsManager : Node
 
         return warnings.ToArray();
     }
+
+    public void Apply(StatsData data)
+    {
+        MaxHealth = data.MaxHealth;
+        Health = data.Health;
+        Level = data.Level;
+        Speed = data.Speed;
+        Experience = data.Experience;
+        Defense = data.Defense;
+        Damage = data.Damage;
+    }
+
+    public StatsData ToData() => new()
+    {
+        MaxHealth = MaxHealth,
+        Health = Health,
+        Level = Level,
+        Speed = Speed,
+        Experience = Experience,
+        Defense = Defense,
+        Damage = Damage
+    };
 }

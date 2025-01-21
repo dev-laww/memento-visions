@@ -5,6 +5,7 @@ using Game.Components.Area;
 using Game.Components.Movement;
 using Game.Globals;
 using Game.Resources;
+using Game.Utils.Json.Models;
 using Godot;
 using GodotUtilities;
 
@@ -18,9 +19,8 @@ public partial class Player : Entity
     [Export] public float DashStaminaCost { get; set; } = 10f;
     [Node] private HurtBox hurtBox;
     [Node] private AnimationPlayer animations;
+
     [Node] public Velocity velocity;
-    // [Node] private WeaponManager weaponManager;
-    // [Node] public InventoryManager Inventory;
     [Node] private Node2D hitBoxes;
 
     private string MoveDirection => GetMoveDirection();
@@ -61,7 +61,7 @@ public partial class Player : Entity
                 box.Damage = value;
                 box.NotifyPropertyListChanged();
             });
-        }; 
+        };
 
         if (Engine.IsEditorHint()) return;
 
@@ -70,21 +70,6 @@ public partial class Player : Entity
         StateMachine.AddStates(Dash, EnterDash, ExitDash);
         StateMachine.AddStates(Attack, EnterAttack, ExitAttack);
         StateMachine.SetInitialState(Idle);
-
-
-        // TODO: implement weapon unlocking system
-        // var weapons = new List<string>()
-        // {
-        //     "res://resources/weapons/daggers/dagger.tres",
-        //     "res://resources/weapons/guns/gun.tres"
-        // };
-        //
-        // weapons.ForEach(path =>
-        // {
-        //     var res = GD.Load<Weapon>(path);
-        //     Inventory.AddItem(res);
-        // });
-        // Inventory.ChangeWeapon("weapon:dagger");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -201,5 +186,19 @@ public partial class Player : Entity
             return lastMoveDirection.X > 0 ? "right" : "left";
 
         return lastMoveDirection.Y < 0 ? "back" : "front";
+    }
+
+    public PlayerData ToData() => new()
+    {
+        Position = GlobalPosition,
+        Direction = lastMoveDirection,
+        Stats = StatsManager.ToData(),
+    };
+
+    public void Apply(PlayerData data)
+    {
+        GlobalPosition = data.Position;
+        lastMoveDirection = data.Direction;
+        StatsManager.Apply(data.Stats);
     }
 }
