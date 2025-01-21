@@ -68,6 +68,8 @@ Panel/styles/panel = SubResource("StyleBoxFlat_uy0d5")
 [node name="Balloon" type="CanvasLayer"]
 layer = 100
 script = ExtResource("1_beuaf")
+NextAction = "interact"
+SkipAction = "menu"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
