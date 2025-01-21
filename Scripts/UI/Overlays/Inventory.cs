@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Game.Entities.Player;
+using Game.Globals;
 using Game.Resources;
 using Game.UI.Common;
-using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
-using Type = Game.Resources.Type;
 
 namespace Game.UI.Overlays;
 
@@ -15,34 +13,24 @@ namespace Game.UI.Overlays;
 // Doing thesis sucks :DDD 
 // - 31/12/2024 - Lawrence
 
-[Tool]
+// [Tool]
 [Scene]
 public partial class Inventory : Overlay
 {
-    // UI Components
-    [Node] private GridContainer slotsContainer;
     [Node] private ResourcePreloader resourcePreloader;
     [Node] private TextureButton closeButton;
-    [Node] private Button equipButton;
-    [Node] private Button materialItemsButton;
-    [Node] private Button weaponItemsButton;
-
-    // Selected Item Display
+    [Node] private GridContainer slotsContainer;
+    [Node] private Button materialButton;
     [Node] private TextureRect selectedItemIcon;
     [Node] private Label selectedItemName;
-    [Node] private Label selectedItemType;
+    [Node] private Label selectedItemCategory;
     [Node] private Label selectedItemQuantity;
     [Node] private RichTextLabel selectedItemDescription;
+    [Node] private Button selectedItemActionButton;
 
-    // State
-    private Player player;
-    private ButtonGroup buttonGroup;
-    private Item selectedItem;
-
-    // Properties
-    private List<Slot> Slots => slotsContainer.GetChildrenOfType<Slot>().ToList();
-    private Button SelectedFilterButton => buttonGroup?.GetPressedButton() as Button;
-    private string CurrentFilter => SelectedFilterButton?.Name.ToString().Replace("ItemsButton", "") ?? "Material";
+    private List<Slot> slots;
+    private Item.Category currentCategory = Item.Category.Material;
+    private Item SelectedItem => slots.FirstOrDefault(s => s.Selected)?.Item?.Item;
 
     public override void _Notification(int what)
     {
@@ -53,190 +41,107 @@ public partial class Inventory : Overlay
 
     public override void _Ready()
     {
-        InitializeInventory();
+        slots = slotsContainer.GetChildrenOfType<Slot>().ToList();
 
-        if (!ShouldInitializeGameplay()) return;
+        slots.ForEach(slot => slot.Pressed += SelectSlot);
+        closeButton.Pressed += Close;
+        selectedItemActionButton.Toggled += OnButtonToggle;
+        materialButton.ButtonGroup.Pressed += OnItemCategoryPress;
+        PlayerInventoryManager.InventoryUpdated += OnInventoryUpdate;
 
-        Reset();
+        PopulateSlots(currentCategory);
     }
 
-    public override void _ExitTree()
+    private void SelectSlot(Slot slot)
     {
-        // cleanup events
-        Slots.ForEach(slot => slot.Selected -= OnSlotSelected);
+        var selectedSlot = slots.FirstOrDefault(s => s.Selected);
 
-        if (player != null)
-            player.Inventory.ItemAdd -= OnItemPickup;
-    }
-
-    private void InitializeInventory()
-    {
-        player = this.GetPlayer();
-        buttonGroup = weaponItemsButton.ButtonGroup;
-        SetupEventHandlers();
-    }
-
-    private bool ShouldInitializeGameplay() => player != null && !Engine.IsEditorHint();
-
-    private void SetupEventHandlers()
-    {
-        // UI Events
-        equipButton.Pressed += OnEquipButtonPress;
-        buttonGroup.Pressed += OnFilterButtonPressed;
-        closeButton.Pressed += HandleCloseButtonPress;
-        VisibilityChanged += OnVisibilityChanged;
-
-        // Slot Events
-        InitializeSlotEvents();
-
-        // Player Events
-        if (player != null)
-            player.Inventory.ItemAdd += OnItemPickup;
-    }
-
-    private void InitializeSlotEvents()
-    {
-        Slots.ForEach(slot => slot.Selected += OnSlotSelected);
-        Slots.First().Select();
-    }
-
-    private void HandleCloseButtonPress() => GetTree().CreateTimer(0.1f).Timeout += Close;
-
-    private void Reset()
-    {
-        equipButton.Visible = false;
-        materialItemsButton.ButtonPressed = true;
-        ClearSlots();
-        FilterItems(Type.Material.ToString());
-    }
-
-    private void OnItemPickup(Item item)
-    {
-        var shouldRefreshDisplay = ShouldRefreshDisplayOnPickup(item, CurrentFilter);
-
-        if (shouldRefreshDisplay)
-            FilterItems(CurrentFilter);
-    }
-
-    private bool ShouldRefreshDisplayOnPickup(Item item, string currentFilter)
-    {
-        return item.Type.ToString() == currentFilter || Slots.All(slot => slot.Item == null);
-    }
-
-    private void OnVisibilityChanged()
-    {
-        if (!Engine.IsEditorHint() && Visible && player != null)
-            Reset();
-    }
-
-    private void FilterItems(string filter)
-    {
-        if (Engine.IsEditorHint()) return;
-
-        var type = (Type)Enum.Parse(typeof(Type), filter);
-        ClearSlots();
-        DisplayFilteredItems(type);
-    }
-
-    private void DisplayFilteredItems(Type type)
-    {
-        var items = player.Inventory.GetFilteredItems(type);
-
-        foreach (var item in items)
+        if (selectedSlot is null)
         {
-            var slot = FindOrCreateSlot();
-
-            if (slot == null) continue;
-
-            if (item.Stackable)
-            {
-                slot.Item = item;
-                continue;
-            }
-
-            for (var i = 0; i < item.Value; i++)
-            {
-                var newSlot = FindOrCreateSlot();
-                var duplicate = item.Duplicate();
-                duplicate.Value = 1;
-                newSlot.Item = duplicate;
-            }
+            slot.Selected = true;
+            return;
         }
 
-        Slots.First().Select();
+        if (selectedSlot == slot) return;
+
+        slot.Selected = true;
+        selectedSlot.Selected = false;
+        UpdateSelectedItem(slot.Item);
     }
 
-    private Slot FindOrCreateSlot()
+    private void UpdateSelectedItem(ItemGroup item)
     {
-        var existingSlot = Slots.FirstOrDefault(slot => !slot.IsOccupied);
-        if (existingSlot != null) return existingSlot;
+        selectedItemIcon.Texture = item?.Item.Icon;
+        selectedItemName.Text = item?.Item.Name;
+        selectedItemCategory.Text = item?.Item.ItemCategory.ToString();
+        selectedItemQuantity.Text = item is null ? string.Empty : item.Quantity > 999 ? "x999+" : $"x{item.Quantity}";
+        selectedItemDescription.Text = item?.Item.Description;
 
-        var newSlot = resourcePreloader.InstanceSceneOrNull<Slot>();
-        slotsContainer.AddChild(newSlot);
-        return newSlot;
+        selectedItemActionButton.Visible = item?.Item.ItemCategory is Item.Category.Weapon or Item.Category.Consumable;
+        selectedItemActionButton.ToggleMode = item?.Item.ItemCategory == Item.Category.Weapon;
+        selectedItemActionButton.ButtonPressed =
+            item?.Item.UniqueName == WeaponManager.CurrentWeaponResource?.UniqueName;
+        selectedItemActionButton.Text = item?.Item.ItemCategory switch
+        {
+            Item.Category.Weapon => selectedItemActionButton.ButtonPressed ? "Unequip" : "Equip",
+            Item.Category.Consumable => "Use",
+            _ => string.Empty
+        };
     }
 
-    private void OnEquipButtonPress()
+    private void OnItemCategoryPress(BaseButton button)
     {
-        var isCurrentWeapon = selectedItem.UniqueName == player.Inventory.CurrentWeapon?.UniqueName;
+        var meta = button.GetMeta("Category").AsString();
+        var category = Enum.Parse<Item.Category>(meta);
 
-        player.Inventory.ChangeWeapon(isCurrentWeapon ? null : selectedItem.UniqueName);
+        if (currentCategory == category) return;
 
-        UpdateEquipButtonState();
+        currentCategory = category;
+
+        PopulateSlots(category);
     }
 
-    private void UpdateEquipButtonState()
+    private void PopulateSlots(Item.Category category)
     {
-        var currentWeapon = player.Inventory.CurrentWeapon;
-        var isCurrentWeapon = currentWeapon?.UniqueName == selectedItem?.UniqueName;
-        var isWeapon = selectedItem?.Type == Type.Weapon;
+        var items = PlayerInventoryManager.GetItemsFromCategory(category);
 
-        equipButton.Visible = isWeapon;
+        slots.Where(slot => slot.Item != null).ToList().ForEach(slot => slot.Item = null);
 
-        if (!isWeapon) return;
+        for (var i = 0; i < items.Count; i++)
+        {
+            slots[i].Item = items[i];
+        }
 
-        equipButton.ButtonPressed = isCurrentWeapon;
-        equipButton.Text = isCurrentWeapon ? "Unequip" : "Equip";
-        equipButton.Modulate = isCurrentWeapon ? Colors.Red : Colors.White;
+        var slot = slots.First();
+        SelectSlot(slot);
+        UpdateSelectedItem(slot.Item);
     }
 
-    private void ClearSlots()
+    private void OnInventoryUpdate(ItemGroup group)
     {
-        Slots.ForEach(slot => slot.Clear());
-        Slots.First().Select();
+        var (item, _) = group;
+
+        if (item.ItemCategory != currentCategory) return;
+
+        var slot = slots.FirstOrDefault(s => s.Item?.Item.UniqueName == item.UniqueName) ??
+                   slots.First(s => s.Item is null);
+
+        slot.Item = group;
     }
 
-    private void OnSlotSelected(Slot selectedSlot)
+    private void OnButtonToggle(bool pressed)
     {
-        DeselectOtherSlots(selectedSlot);
+        if (SelectedItem is null || SelectedItem.ItemCategory != Item.Category.Weapon) return;
 
-        if (Engine.IsEditorHint() || player == null) return;
-
-        selectedItem = selectedSlot.Item;
-        selectedItemIcon.Texture = selectedItem?.Icon;
-        selectedItemName.Text = selectedItem?.Name;
-        selectedItemType.Text = selectedItem?.Type.ToString();
-        selectedItemQuantity.Text = selectedItem != null ? $"x{selectedItem.Value}" : null;
-        selectedItemDescription.Text = selectedItem?.Description;
-
-        UpdateEquipButtonState();
-    }
-
-    private void DeselectOtherSlots(Slot selectedSlot)
-    {
-        var unselectedSlots = Slots.Where(s => s != selectedSlot);
-
-        foreach (var slot in unselectedSlots)
-            slot.Deselect();
-
-        NotifyPropertyListChanged();
-    }
-
-    private void OnFilterButtonPressed(BaseButton button)
-    {
-        if (Engine.IsEditorHint() || player == null) return;
-
-        var filter = button.Name.ToString().Replace("ItemsButton", "");
-        FilterItems(filter);
+        if (pressed)
+        {
+            WeaponManager.Equip(SelectedItem as Weapon);
+            selectedItemActionButton.Text = "Unequip";
+        }
+        else if (SelectedItem.UniqueName == WeaponManager.CurrentWeaponResource?.UniqueName)
+        {
+            WeaponManager.Unequip();
+            selectedItemActionButton.Text = "Equip";
+        }
     }
 }

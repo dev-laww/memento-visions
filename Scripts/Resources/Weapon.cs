@@ -1,25 +1,18 @@
-﻿using Godot;
+using Godot;
 
 namespace Game.Resources;
 
-public enum Variant
-{
-    Dagger,
-    Sword,
-    Gun,
-    Whip
-}
-
-[Tool]
-[GlobalClass]
+[GlobalClass, Icon("res://assets/icons/weapon.svg")]
 public partial class Weapon : Item
 {
-    [Export] public Variant Variant { get; set; } = Variant.Dagger;
-    [Export] public SpriteFrames Animations { get; set; }
-    [Export] public AudioStream AttackSound { get; set; }
-    [Export] public AudioStream HitSound { get; set; }
+    public enum Type
+    {
+        Dagger,
+        Sword,
+        Gun,
+        Whip,
+    }
 
-    protected override bool IsStackable() => false;
-    protected override Type GetItemType() => Type.Weapon;
-    protected override void SetItemType(Type value) { }
+    [Export] public Type WeaponType;
+    [Export] public PackedScene Component;
 }

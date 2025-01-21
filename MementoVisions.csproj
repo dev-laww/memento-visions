@@ -32,7 +32,4 @@
         <PackageReference Include="gdUnit4.test.adapter" Version="2.1.0-rc2" />
         <PackageReference Include="OptimizedPriorityQueue" Version="5.1.0" />
     </ItemGroup>
-    <ItemGroup>
-        <Folder Include="Scripts\Entities\Character\" />
-    </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://svqrge4l63b4"]
+[gd_scene load_steps=18 format=3 uid="uid://svqrge4l63b4"]
 
 [ext_resource type="Texture2D" uid="uid://bhg24ad0ut6dq" path="res://assets/ui/slot.png" id="1_dwah6"]
 [ext_resource type="Script" path="res://Scripts/UI/Common/Slot.cs" id="1_qhish"]
@@ -12,28 +12,6 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b5sbs"]
 texture = ExtResource("1_dwah6")
 region_rect = Rect2(0, 0, 32, 32)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c3qap"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vxdbv"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_64emx"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_khpii"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ur5c3"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_85jku"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x3d1s"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0ng3e"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rtla1"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_er7yl"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_51nwt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vh55g"]
 atlas = ExtResource("3_o2xtx")
@@ -132,72 +110,45 @@ _data = {
 "select": SubResource("Animation_3mhtl")
 }
 
-[node name="Slot" type="Control"]
+[node name="Slot" type="Panel"]
+clip_contents = true
 custom_minimum_size = Vector2(32, 32)
-layout_mode = 3
-anchors_preset = 0
 offset_right = 32.0
 offset_bottom = 32.0
-mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_b5sbs")
 script = ExtResource("1_qhish")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_b5sbs")
-
-[node name="CenterContainer" type="CenterContainer" parent="Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Icon" type="TextureRect" parent="Panel/CenterContainer"]
+[node name="Icon" type="TextureRect" parent="CenterContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("3_xgpvm")
 
-[node name="Label" type="Label" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="Label" type="Label" parent="MarginContainer"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -7.0
-offset_top = 6.0
-offset_right = -6.0
-offset_bottom = 14.0
-grow_horizontal = 0
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
 theme = ExtResource("4_luf03")
 theme_override_font_sizes/font_size = 8
 text = "999+"
 label_settings = ExtResource("5_7i6yw")
-
-[node name="Button" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_c3qap")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_vxdbv")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_64emx")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_khpii")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ur5c3")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_85jku")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_x3d1s")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_0ng3e")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_rtla1")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_er7yl")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_51nwt")
+horizontal_alignment = 2
 
 [node name="SmoothAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false

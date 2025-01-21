@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://hc1bdnea1afd"]
+[gd_scene load_steps=11 format=3 uid="uid://hc1bdnea1afd"]
 
 [ext_resource type="Script" path="res://Scripts/Components/Managers/GameManager.cs" id="1_jd26h"]
 [ext_resource type="PackedScene" uid="uid://npt6wv2s1hvr" path="res://Scenes/UI/Screens/Start.tscn" id="2_xr7b5"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cptktl4hefaup" path="res://Scenes/UI/Overlays/Menu.tscn" id="7_icpvm"]
 [ext_resource type="PackedScene" uid="uid://c6kt3qbs62e4i" path="res://Scenes/UI/Overlays/HeadsUpDisplay.tscn" id="8_t6ww0"]
 [ext_resource type="Script" path="res://Scripts/UI/Overlays/HeadsUpDisplay.cs" id="9_gcq4q"]
+[ext_resource type="PackedScene" uid="uid://casihsp0usdna" path="res://Scenes/Entities/BlackSmith.tscn" id="10_3e7ls"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_jd26h")
@@ -37,3 +38,6 @@ visible = false
 
 [node name="Menu" parent="UserInterface" instance=ExtResource("7_icpvm")]
 visible = false
+
+[node name="BlackSmith" parent="." instance=ExtResource("10_3e7ls")]
+position = Vector2(122, 114)

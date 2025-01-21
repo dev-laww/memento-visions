@@ -6,11 +6,8 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_q1p51")
+Icon = ExtResource("1_m6vti")
 Name = "Apple"
 UniqueName = "item:apple"
-Type = 1
-Value = 1
+ItemCategory = 0
 Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("1_m6vti")
-Sprite = ExtResource("1_m6vti")
-Stackable = true

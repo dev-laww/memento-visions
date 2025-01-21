@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dd1jerr3yxfmm"]
+[gd_scene load_steps=28 format=3 uid="uid://dd1jerr3yxfmm"]
 
 [ext_resource type="PackedScene" uid="uid://svqrge4l63b4" path="res://Scenes/UI/Common/Slot.tscn" id="1_i0y0q"]
 [ext_resource type="Script" path="res://Scripts/UI/Overlays/Crafting.cs" id="1_xer77"]
@@ -7,332 +7,7 @@
 [ext_resource type="Material" uid="uid://bkm4tri52hhdr" path="res://resources/shaders/blur.tres" id="3_8o6kh"]
 [ext_resource type="PackedScene" uid="uid://cb8psn10ig05k" path="res://Scenes/UI/Common/CloseButton.tscn" id="3_pjuxn"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="5_li2ry"]
-[ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="6_ehywe"]
 [ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/inventory/items/temp/Item5.png" id="6_w3jy4"]
-
-[sub_resource type="Resource" id="Resource_fuf18"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_mg8ox"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_kyo4l"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_hble8"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_8d2va"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_fo6ng"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_b7dts"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_o273a"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_6x8nr"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_yfa5r"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_257w7"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_cqyc8"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_kwk7n"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_txp13"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_8cewa"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_iqmh8"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_b6st2"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_vlgqp"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_d12iu"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_24yae"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_yr2kf"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_q8r56"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_r5gwk"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_enq61"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_4elco"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_mhguq"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
-
-[sub_resource type="Resource" id="Resource_q2nb3"]
-resource_local_to_scene = true
-script = ExtResource("6_ehywe")
-Name = "Apple"
-UniqueName = "item:apple"
-Type = 0
-Value = 10000
-Description = "The apple gleams with a vibrant red hue, its smooth skin promising a crisp, juicy bite. Its firm shape fits perfectly in the palm, and as you bite into it, a burst of tangy-sweet flavor balances the subtle tartness with natural sugars, making each bite refreshing and satisfying."
-Icon = ExtResource("6_w3jy4")
-Sprite = ExtResource("6_w3jy4")
-Stackable = true
 
 [sub_resource type="LabelSettings" id="LabelSettings_rusr7"]
 outline_size = 8
@@ -423,45 +98,6 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_jvve5"]
-resource_name = "show-pop-up"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Control/CenterContainer:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.138696, 0.210224),
-"update": 0,
-"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Control/CenterContainer:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.241484, 0.133972),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_4i317"]
 resource_name = "close-popup"
 tracks/0/type = "value"
@@ -499,6 +135,45 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_jvve5"]
+resource_name = "show-pop-up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/CenterContainer:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.138696, 0.210224),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/CenterContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.241484, 0.133972),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7r2pd"]
@@ -586,25 +261,21 @@ columns = 13
 
 [node name="Slot" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-IsSelected = true
 
 [node name="Slot2" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_fuf18")
 
 [node name="Slot3" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot4" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_mg8ox")
 
 [node name="Slot5" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot6" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_kyo4l")
 
 [node name="Slot7" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
@@ -617,165 +288,141 @@ layout_mode = 2
 
 [node name="Slot10" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_hble8")
 
 [node name="Slot11" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot12" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_8d2va")
 
 [node name="Slot13" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot14" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_fo6ng")
 
 [node name="Slot15" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot16" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_b7dts")
 
 [node name="Slot17" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot18" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_o273a")
 
 [node name="Slot19" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot20" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_6x8nr")
 
 [node name="Slot21" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot22" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_yfa5r")
 
 [node name="Slot23" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot24" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_257w7")
 
 [node name="Slot25" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot26" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_cqyc8")
 
 [node name="Slot27" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot28" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_kwk7n")
 
 [node name="Slot29" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot30" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_txp13")
 
 [node name="Slot31" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot32" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_8cewa")
 
 [node name="Slot33" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot34" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_iqmh8")
 
 [node name="Slot35" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot36" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_b6st2")
 
 [node name="Slot37" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot38" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_vlgqp")
 
 [node name="Slot39" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot40" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_d12iu")
 
 [node name="Slot41" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot42" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_24yae")
 
 [node name="Slot43" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot44" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_yr2kf")
 
 [node name="Slot45" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot46" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_q8r56")
 
 [node name="Slot47" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot48" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_r5gwk")
 
 [node name="Slot49" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot50" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_enq61")
 
 [node name="Slot51" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot52" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_4elco")
 
 [node name="Slot53" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_mhguq")
 
 [node name="Slot54" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
 
 [node name="Slot55" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("1_i0y0q")]
 layout_mode = 2
-Item = SubResource("Resource_q2nb3")
 
 [node name="Details" type="NinePatchRect" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(170, 0)
@@ -833,12 +480,12 @@ theme_override_font_sizes/font_size = 24
 text = "Item Name"
 label_settings = SubResource("LabelSettings_rusr7")
 
-[node name="SelectedItemType" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails/VBoxContainer"]
+[node name="SelectedItemCategory" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_xbes8")
 theme_override_font_sizes/font_size = 8
-text = "Item Type"
+text = "Item Category"
 
 [node name="SelectedItemDescription" type="RichTextLabel" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails"]
 unique_name_in_owner = true

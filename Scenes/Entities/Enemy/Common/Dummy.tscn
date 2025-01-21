@@ -1,24 +1,12 @@
-[gd_scene load_steps=34 format=3 uid="uid://c7u7njt632rfb"]
+[gd_scene load_steps=32 format=3 uid="uid://c7u7njt632rfb"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Enemy/Common/Dummy.cs" id="1_nfovk"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="1_ywhg6"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/HurtBox.cs" id="2_i6lkr"]
-[ext_resource type="Script" path="res://Scripts/Resources/Stats.cs" id="2_jbplj"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="3_txlvp"]
 [ext_resource type="Texture2D" uid="uid://ci7so60mgolah" path="res://assets/entities/enemy/common/dummy/sprite.png" id="4_x85v6"]
 [ext_resource type="Script" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="5_gqlf7"]
 [ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Components/Managers/HealthNumberManager.tscn" id="7_xk10n"]
-
-[sub_resource type="Resource" id="Resource_c02qt"]
-script = ExtResource("2_jbplj")
-MaxHealth = 100.0
-MaxMana = 100.0
-Attack = 10.0
-Magic = 10.0
-Defense = 10.0
-Speed = 50.0
-PhysicalDamageMultiplier = 1.0
-MagicalDamageMultiplier = 1.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g0hd1"]
 radius = 13.0
@@ -256,7 +244,6 @@ _data = {
 script = ExtResource("1_nfovk")
 
 [node name="StatsManager" parent="." instance=ExtResource("1_ywhg6")]
-Stats = SubResource("Resource_c02qt")
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
 collision_layer = 2048

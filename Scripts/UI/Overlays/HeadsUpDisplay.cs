@@ -3,13 +3,13 @@ using GodotUtilities;
 
 namespace Game.UI.Overlays;
 
-[Scene]
+// [Scene]
 public partial class HeadsUpDisplay : Control
 {
-    public override void _Notification(int what)
-    {
-        if (what != NotificationSceneInstantiated) return;
-
-        WireNodes();
-    }
+    // public override void _Notification(int what)
+    // {
+    //     if (what != NotificationSceneInstantiated) return;
+    //
+    //     WireNodes();
+    // }
 }

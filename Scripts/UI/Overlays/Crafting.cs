@@ -1,46 +1,33 @@
 using System.Collections.Generic;
 using System.Linq;
-using Game.Entities.Player;
 using Game.Globals;
 using Game.Resources;
 using Game.UI.Common;
-using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
 namespace Game.UI.Overlays;
 
-// TODO: improve popup animation
-[Tool]
 [Scene]
 public partial class Crafting : Overlay
 {
-    [Node] private GridContainer slotsContainer;
     [Node] private ResourcePreloader resourcePreloader;
-
     [Node] private TextureButton closeButton;
-    [Node] private Button craftButton;
-
-    [Node] private TextureButton increaseButton;
-    [Node] private TextureButton decreaseButton;
-    [Node] private LineEdit quantityInput;
+    [Node] private GridContainer slotsContainer;
 
     [Node] private TextureRect selectedItemIcon;
     [Node] private Label selectedItemName;
-    [Node] private Label selectedItemType;
+    [Node] private Label selectedItemCategory;
     [Node] private RichTextLabel selectedItemDescription;
 
-    [Node] private TextureRect craftedItemIcon;
-    [Node] private Label craftedItemName;
-    [Node] private Label craftedItemQuantity;
-    [Node] private Button okayButton;
-    [Node] private AnimationPlayer animationPlayer;
+    [Node] private LineEdit quantityInput;
+    [Node] private TextureButton increaseButton;
+    [Node] private TextureButton decreaseButton;
+    [Node] private Button craftButton;
 
-    private Player player;
-    private Item selectedItem;
-
-
-    private List<Slot> Slots => slotsContainer.GetChildrenOfType<Slot>().ToList();
+    private List<Slot> slots;
+    private Recipe selectedRecipe;
+    private int quantity = 1;
 
     public override void _Notification(int what)
     {
@@ -49,196 +36,97 @@ public partial class Crafting : Overlay
         WireNodes();
     }
 
-
     public override void _Ready()
     {
-        Initialize();
+        slots = slotsContainer.GetChildrenOfType<Slot>().ToList();
 
-        if (!ShouldInitializeGameplay()) return;
-
-        Reset();
-    }
-
-    public override void _ExitTree()
-    {
-        // cleanup events
-        Slots.ForEach(slot => slot.Selected -= OnSlotSelected);
-    }
-
-    private void Initialize()
-    {
-        player = this.GetPlayer();
-        SetupEventHandlers();
-    }
-
-    private bool ShouldInitializeGameplay() => player != null && !Engine.IsEditorHint();
-
-    private void SetupEventHandlers()
-    {
-        // UI Events
-        quantityInput.TextChanged += OnQuantityInputTextChanged;
-        increaseButton.Pressed += IncreaseQuantity;
-        decreaseButton.Pressed += DecreaseQuantity;
+        slots.ForEach(slot => slot.Pressed += SelectSlot);
+        closeButton.Pressed += Close;
+        increaseButton.Pressed += OnIncreaseButtonPress;
+        decreaseButton.Pressed += OnDecreaseButtonPress;
         craftButton.Pressed += OnCraftButtonPress;
-        okayButton.Pressed += OnOkayButtonPress;
-        closeButton.Pressed += HandleCloseButtonPress;
-        VisibilityChanged += OnVisibilityChanged;
 
-        // Slot Events
-        InitializeSlotEvents();
+        PopulateSlots();
     }
 
-    private void InitializeSlotEvents()
+    private void PopulateSlots()
     {
-        Slots.ForEach(slot => slot.Selected += OnSlotSelected);
-        Slots.First().Select();
-    }
+        var recipes = RecipeManager.GetRecipesFromType(Recipe.Type.Craftable);
 
-    private void HandleCloseButtonPress() => GetTree().CreateTimer(0.1f).Timeout += Close;
 
-    // TODO: handle close when crafted item popup is visible
-    private void Reset()
-    {
-        var items = RecipeManager.CraftableItems;
-
-        if (!Visible) return;
-
-        ClearSlots();
-
-        items.ForEach(item =>
+        for (var i = 0; i < recipes.Count; i++)
         {
-            var slot = FindOrCreateSlot();
-            slot.Item = item;
-        });
-        Slots.First().Select();
-        UpdateButtonStates();
-    }
+            var slot = slots[i];
+            var recipe = recipes[i];
 
-
-    private bool ShouldRefreshDisplayOnPickup(Item item, string currentFilter)
-    {
-        return item.Type.ToString() == currentFilter || Slots.All(slot => slot.Item == null);
-    }
-
-    private void OnVisibilityChanged()
-    {
-        if (Engine.IsEditorHint() || player == null) return;
-
+            slot.Item = recipe.Result;
+        }
+        
         Reset();
     }
 
-    private Slot FindOrCreateSlot()
+    private void SelectSlot(Slot slot)
     {
-        var existingSlot = Slots.FirstOrDefault(slot => !slot.IsOccupied);
-        if (existingSlot != null) return existingSlot;
+        var selectedSlot = slots.FirstOrDefault(s => s.Selected);
 
-        var newSlot = resourcePreloader.InstanceSceneOrNull<Slot>();
-        slotsContainer.AddChild(newSlot);
-        return newSlot;
-    }
-
-    private async void OnCraftButtonPress()
-    {
-        if (selectedItem == null || player == null) return;
-
-        var craftedItem = RecipeManager.CreateItem(selectedItem);
-
-        craftedItemIcon.Texture = craftedItem.Icon;
-        craftedItemName.Text = craftedItem.Name;
-        craftedItemQuantity.Text = $"x{craftedItem.Value}";
-
-        animationPlayer.Play("show-popup");
-
-        await ToSignal(animationPlayer, "animation_finished");
-
-        Reset();
-    }
-
-    private void ClearSlots()
-    {
-        Slots.ForEach(slot => slot.Clear());
-        Slots.First().Select();
-    }
-
-    private void OnSlotSelected(Slot selectedSlot)
-    {
-        DeselectOtherSlots(selectedSlot);
-
-        if (Engine.IsEditorHint() || player == null) return;
-
-        selectedItem = selectedSlot.Item?.Duplicate();
-        selectedItemIcon.Texture = selectedItem?.Icon;
-        selectedItemName.Text = selectedItem?.Name;
-        selectedItemType.Text = selectedItem?.Type.ToString();
-        selectedItemDescription.Text = selectedItem?.Description;
-        quantityInput.Text = selectedItem?.Value.ToString() ?? "0";
-
-        UpdateButtonStates();
-    }
-
-    private void UpdateButtonStates()
-    {
-        if (selectedItem == null)
+        if (selectedSlot is null)
         {
-            craftButton.Disabled = true;
-            decreaseButton.Disabled = true;
-            increaseButton.Disabled = true;
+            slot.Selected = true;
             return;
         }
 
-        craftButton.Disabled = !RecipeManager.CanCreateItem(selectedItem);
-        decreaseButton.Disabled = selectedItem.Value <= 1;
+        if (selectedSlot == slot) return;
 
-        var nextItem = selectedItem.Duplicate();
-        nextItem++;
-        increaseButton.Disabled = !RecipeManager.CanCreateItem(nextItem);
+        slot.Selected = true;
+        selectedSlot.Selected = false;
+        UpdateSelectedItem(slot.Item);
     }
 
-    private void DeselectOtherSlots(Slot selectedSlot)
+    private void UpdateSelectedItem(ItemGroup item)
     {
-        var unselectedSlots = Slots.Where(s => s != selectedSlot);
+        selectedItemIcon.Texture = item?.Item.Icon;
+        selectedItemName.Text = item?.Item.Name;
+        selectedItemCategory.Text = item?.Item.ItemCategory.ToString();
 
-        foreach (var slot in unselectedSlots)
-            slot.Deselect();
+        selectedItemDescription.Text = item?.Item.Description;
 
-        NotifyPropertyListChanged();
+        if (item is null) return;
+
+        selectedRecipe = RecipeManager.GetRecipeFromResult(item.Item);
+        quantity = 1;
+        quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
     }
 
-    private void IncreaseQuantity()
+    private void OnIncreaseButtonPress()
     {
-        if (selectedItem == null) return;
+        if (selectedRecipe is null) return;
 
-        selectedItem++;
-        quantityInput.Text = selectedItem.Value.ToString();
-        UpdateButtonStates();
+        quantity++;
+        quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
     }
 
-    private void DecreaseQuantity()
+    private void OnDecreaseButtonPress()
     {
-        if (selectedItem == null) return;
+        if (selectedRecipe is null) return;
 
-        selectedItem--;
-        quantityInput.Text = selectedItem.Value.ToString();
-        UpdateButtonStates();
+        if (quantity <= 0) return;
+
+        quantity--;
+        quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
     }
 
-    private void OnQuantityInputTextChanged(string newText)
+    private void OnCraftButtonPress()
     {
-        if (selectedItem == null) return;
-
-        if (!int.TryParse(newText, out var value)) return;
-
-        selectedItem.Value = value;
-        UpdateButtonStates();
+        selectedRecipe?.Create(quantity);
     }
 
-    private async void OnOkayButtonPress()
+    private void Reset()
     {
-        animationPlayer.Play("hide-popup");
-        await ToSignal(animationPlayer, "animation_finished");
+        quantity = 1;
+        quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
 
-        craftedItemIcon.Texture = null;
-        craftedItemName.Text = null;
-        craftedItemQuantity.Text = null;
+        var firstSlot = slots.First();
+        SelectSlot(firstSlot);
+        UpdateSelectedItem(firstSlot.Item);
     }
 }

@@ -1,7 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://ndiysulc1a43"]
+[gd_scene load_steps=28 format=3 uid="uid://ndiysulc1a43"]
 
-[ext_resource type="Script" path="res://Scripts/Components/Battle/Weapon.cs" id="1_rp4k0"]
-[ext_resource type="Resource" uid="uid://dmxu5vr74s3ov" path="res://resources/weapons/daggers/dagger.tres" id="2_kvl18"]
+[ext_resource type="Script" path="res://Scripts/Components/Battle/WeaponComponent.cs" id="1_atv6s"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_nwftv"]
 [ext_resource type="Script" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="3_8ek50"]
 [ext_resource type="Texture2D" uid="uid://1mcfankrs1d5" path="res://assets/weapons/daggers/dagger/sprite-frames.png" id="4_m11ju"]
@@ -351,8 +350,7 @@ _data = {
 
 [node name="Dagger" type="Node2D"]
 visible = false
-script = ExtResource("1_rp4k0")
-Resource = ExtResource("2_kvl18")
+script = ExtResource("1_atv6s")
 
 [node name="Assets" type="Node2D" parent="."]
 

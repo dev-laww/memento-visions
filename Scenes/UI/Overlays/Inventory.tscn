@@ -85,7 +85,7 @@ custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="MaterialItemsButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
+[node name="MaterialButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -102,8 +102,9 @@ button_pressed = true
 action_mode = 0
 button_group = ExtResource("1_hubp2")
 icon_alignment = 1
+metadata/Category = "Material"
 
-[node name="ConsumableItemsButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
+[node name="ConsumableButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -119,8 +120,9 @@ toggle_mode = true
 action_mode = 0
 button_group = ExtResource("1_hubp2")
 icon_alignment = 1
+metadata/Category = "Consumable"
 
-[node name="WeaponItemsButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
+[node name="WeaponButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -136,8 +138,9 @@ toggle_mode = true
 action_mode = 0
 button_group = ExtResource("1_hubp2")
 icon_alignment = 1
+metadata/Category = "Weapon"
 
-[node name="QuestItemsButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
+[node name="QuestButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -153,6 +156,7 @@ toggle_mode = true
 action_mode = 0
 button_group = ExtResource("1_hubp2")
 icon_alignment = 1
+metadata/Category = "Quest"
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/Main"]
 layout_mode = 2
@@ -196,7 +200,6 @@ columns = 12
 
 [node name="Slot" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
-IsSelected = true
 
 [node name="Slot2" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("5_17bmp")]
 layout_mode = 2
@@ -420,12 +423,12 @@ label_settings = SubResource("LabelSettings_cxeph")
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="SelectedItemType" type="Label" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails/VBoxContainer/VBoxContainer"]
+[node name="SelectedItemCategory" type="Label" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_quj2b")
 theme_override_font_sizes/font_size = 8
-text = "Item Type"
+text = "Item Category"
 
 [node name="SelectedItemQuantity" type="Label" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -442,7 +445,7 @@ theme = ExtResource("2_quj2b")
 theme_override_font_sizes/normal_font_size = 8
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet urna magna. Pellentesque fermentum consectetur nisi, quis bibendum enim fringilla non. Nunc posuere nec lorem in iaculis. Sed quis velit vestibulum, molestie eros tincidunt, vulputate lectus. Integer malesuada euismod dui nec aliquam."
 
-[node name="EquipButton" type="Button" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer"]
+[node name="SelectedItemActionButton" type="Button" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
@@ -450,4 +453,4 @@ size_flags_vertical = 8
 mouse_default_cursor_shape = 2
 theme = ExtResource("2_quj2b")
 toggle_mode = true
-text = "Equip"
+text = "Equip / Use"

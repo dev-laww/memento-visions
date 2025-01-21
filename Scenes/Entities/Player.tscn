@@ -1,10 +1,8 @@
-[gd_scene load_steps=104 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=102 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Character/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_cqdhe"]
 [ext_resource type="Script" path="res://Scripts/Components/Movement/Velocity.cs" id="4_iaq51"]
-[ext_resource type="Script" path="res://Scripts/Components/Managers/WeaponManager.cs" id="5_3fgj7"]
-[ext_resource type="Script" path="res://Scripts/Components/Managers/InventoryManager.cs" id="5_5rnnb"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/HurtBox.cs" id="5_5x453"]
 [ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Components/Managers/HealthNumberManager.tscn" id="5_lfb6s"]
 [ext_resource type="Script" path="res://Scripts/Components/Area/HitBox.cs" id="6_ly21x"]
@@ -1678,9 +1676,7 @@ Acceleration = 1000.0
 Deceleration = 5.0
 DashDuration = 0.2
 
-[node name="Inventory" type="Node" parent="." node_paths=PackedStringArray("weaponManager")]
-script = ExtResource("5_5rnnb")
-weaponManager = NodePath("../WeaponManager")
+[node name="Inventory" type="Node" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
@@ -1745,7 +1741,6 @@ position = Vector2(0, -17)
 statsManager = NodePath("../StatsManager")
 
 [node name="WeaponManager" type="Node2D" parent="."]
-script = ExtResource("5_3fgj7")
 
 [node name="Animations" type="AnimationPlayer" parent="."]
 libraries = {

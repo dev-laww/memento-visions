@@ -4,10 +4,8 @@
 
 [resource]
 script = ExtResource("1_mp330")
-Variant = 0
+WeaponType = 3
 Name = "Whip"
 UniqueName = "weapon:whip"
-Type = 2
-Value = 1
+ItemCategory = 3
 Description = "The whip coils like a serpent, its leather length supple yet menacing. With a flick of the wrist, it snaps through the air, delivering a sharp crack that echoes with authority. Both a tool of intimidation and a weapon of finesse, it demands skill to wield its unpredictable power."
-Stackable = false
