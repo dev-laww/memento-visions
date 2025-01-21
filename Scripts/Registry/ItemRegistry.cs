@@ -7,9 +7,10 @@ using Godot;
 
 namespace Game.Registry;
 
-public static class ItemRegistry
+[GlobalClass]
+public partial class ItemRegistry : GodotObject
 {
-    private static readonly List<string> items = DirAccessUtils.GetFilesRecursively(
+    private static readonly List<string> items = DirAccessUtils.GetFilesFromDirectories(
         Constants.ITEMS_PATH,
         Constants.WEAPONS_PATH
     );

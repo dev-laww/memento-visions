@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using FuzzySharp;
 using Game.Resources;
@@ -8,7 +7,8 @@ using Godot;
 
 namespace Game.Registry;
 
-public static class RecipeRegistry
+[GlobalClass]
+public partial class RecipeRegistry : GodotObject
 {
     private static readonly List<string> recipes = DirAccessUtils.GetFilesRecursively(Constants.RECIPES_PATH);
 
