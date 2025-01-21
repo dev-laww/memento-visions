@@ -7,6 +7,7 @@ using GodotUtilities;
 
 namespace Game.Components.Managers;
 
+// TODO: Rethink the GameManager
 [Scene]
 public partial class GameManager : Node
 {
@@ -39,17 +40,22 @@ public partial class GameManager : Node
         currentScene.AddChild(startScreen);
     }
 
-    public override void _Process(double delta)
+    public override void _Notification(int what)
     {
-        // if (Input.MouseMode != Input.MouseModeEnum.ConfinedHidden)
-        //     Input.SetMouseMode(Input.MouseModeEnum.ConfinedHidden);
-        //
-        // if (currentOverlay == null) return;
-        //
-        // if (currentOverlay.IsVisible())
-        //     Input.SetMouseMode(Input.MouseModeEnum.Confined);
-        // else
-        //     currentOverlay = null;
+        if (what != NotificationSceneInstantiated) return;
+
+        WireNodes();
+    }
+
+    // TODO: Move to separate script
+    public override void _Input(InputEvent @event)
+    {
+        if (@event.IsActionPressed("open_inventory"))
+            HandleOverlay("Inventory");
+        else if (@event.IsActionPressed("menu"))
+            HandleOverlay("Menu");
+        else if (@event.IsActionPressed("open_quests_info"))
+            HandleOverlay("Quest");
     }
 
     private void HandleOverlay(string overlayName)
@@ -70,35 +76,6 @@ public partial class GameManager : Node
 
         currentOverlay = targetOverlay;
         currentOverlay.Open();
-    }
-
-    public override void _Input(InputEvent @event)
-    {
-        if (@event.IsActionPressed("open_inventory"))
-            HandleOverlay("Inventory");
-        else if (@event.IsActionPressed("menu"))
-            HandleOverlay("Menu");
-        else if (@event.IsActionPressed("open_quests_info"))
-            HandleOverlay("Quest");
-    }
-
-    public override void _Notification(int what)
-    {
-        if (what == NotificationWMCloseRequest)
-        {
-            SaveManager.Save();
-            return;
-        }
-
-        if (what == NotificationEnterTree)
-        {
-            SaveManager.Load();
-            return;
-        }
-
-        if (what != NotificationSceneInstantiated) return;
-
-        WireNodes();
     }
 
     public static void OpenOverlay(string overlayName) => instance.HandleOverlay(overlayName);
