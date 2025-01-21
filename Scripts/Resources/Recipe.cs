@@ -48,5 +48,6 @@ public partial class Recipe : Resource
 
         InventoryManager.AddItem(new ItemGroup { Item = Result.Item, Quantity = Result.Quantity * quantity });
     }
-    
+
+    public override string ToString() => $"<Recipe ({Result})>";
 }

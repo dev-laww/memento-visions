@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 
 namespace Game.Resources;
@@ -19,5 +20,5 @@ public partial class Item : Resource
     [Export] public Category ItemCategory = Category.Material;
     [Export(PropertyHint.MultilineText)] public string Description;
 
-    public override string ToString() => $"<{GetType()} ({UniqueName})>";
+    public override string ToString() => $"<{GetType().ToString().Split(".").Last()} ({UniqueName})>";
 }
