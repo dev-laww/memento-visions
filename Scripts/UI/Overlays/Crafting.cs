@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Game.Globals;
+using Game.Registry;
 using Game.Resources;
 using Game.UI.Common;
+using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
@@ -20,7 +21,7 @@ public partial class Crafting : Overlay
     [Node] private Label selectedItemCategory;
     [Node] private RichTextLabel selectedItemDescription;
 
-    [Node] private LineEdit quantityInput;
+    [Node] private Label quantityInput;
     [Node] private TextureButton increaseButton;
     [Node] private TextureButton decreaseButton;
     [Node] private Button craftButton;
@@ -38,6 +39,8 @@ public partial class Crafting : Overlay
 
     public override void _Ready()
     {
+        if (this.GetPlayer() is null) return;
+
         slots = slotsContainer.GetChildrenOfType<Slot>().ToList();
 
         slots.ForEach(slot => slot.Pressed += SelectSlot);
@@ -51,8 +54,7 @@ public partial class Crafting : Overlay
 
     private void PopulateSlots()
     {
-        var recipes = RecipeManager.GetRecipesFromType(Recipe.Type.Craftable);
-
+        var recipes = RecipeRegistry.GetRecipes(Recipe.Type.Craftable);
 
         for (var i = 0; i < recipes.Count; i++)
         {
@@ -61,7 +63,7 @@ public partial class Crafting : Overlay
 
             slot.Item = recipe.Result;
         }
-        
+
         Reset();
     }
 
@@ -92,7 +94,7 @@ public partial class Crafting : Overlay
 
         if (item is null) return;
 
-        selectedRecipe = RecipeManager.GetRecipeFromResult(item.Item);
+        selectedRecipe = RecipeRegistry.Get(item.Item.UniqueName);
         quantity = 1;
         quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
     }
@@ -103,6 +105,7 @@ public partial class Crafting : Overlay
 
         quantity++;
         quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
+        UpdateButtonState();
     }
 
     private void OnDecreaseButtonPress()
@@ -113,20 +116,39 @@ public partial class Crafting : Overlay
 
         quantity--;
         quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
+        UpdateButtonState();
     }
 
     private void OnCraftButtonPress()
     {
         selectedRecipe?.Create(quantity);
+        Reset();
     }
 
-    private void Reset()
+    private void Reset(bool resetQuantity = true, bool resetSlots = true)
     {
-        quantity = 1;
-        quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
+        if (resetQuantity)
+        {
+            quantity = 1;
+            quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
+        }
 
-        var firstSlot = slots.First();
-        SelectSlot(firstSlot);
-        UpdateSelectedItem(firstSlot.Item);
+        if (resetSlots)
+        {
+            var firstSlot = slots.First();
+            SelectSlot(firstSlot);
+            UpdateSelectedItem(firstSlot.Item);
+        }
+
+        UpdateButtonState();
+    }
+
+    private void UpdateButtonState()
+    {
+        craftButton.Disabled = selectedRecipe is null || !selectedRecipe.CanCreate(quantity);
+        craftButton.Text = selectedRecipe?.CanCreate(quantity) == true ? "Craft" : "Not enough resources";
+
+        increaseButton.Disabled = selectedRecipe is null || !selectedRecipe.CanCreate(quantity + 1);
+        decreaseButton.Disabled = quantity <= 1;
     }
 }

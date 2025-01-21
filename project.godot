@@ -25,9 +25,8 @@ config/icon="res://icon.svg"
 
 SceneManager="*res://Scripts/Globals/SceneManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-InventoryManager="*res://Scripts/Globals/InventoryManager.cs"
 WeaponManager="*res://Scripts/Globals/WeaponManager.cs"
-RecipeManager="*res://Scripts/Globals/RecipeManager.cs"
+InventoryManager="*res://Scripts/Globals/InventoryManager.cs"
 InteractionManager="*res://Scripts/Globals/InteractionManager.cs"
 SaveManager="*res://Scripts/Globals/SaveManager.cs"
 
@@ -56,7 +55,7 @@ naming/scene_name_casing=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AS2P/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/gaea/plugin.cfg", "res://addons/palette_importer/plugin.cfg")
+enabled=PackedStringArray("res://addons/AS2P/plugin.cfg", "res://addons/center_pivot_offset/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/gaea/plugin.cfg", "res://addons/gdUnit4/plugin.cfg", "res://addons/generate_button/plugin.cfg", "res://addons/node_library/plugin.cfg", "res://addons/palette_importer/plugin.cfg")
 
 [file_customization]
 
