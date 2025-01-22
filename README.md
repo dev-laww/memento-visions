@@ -12,3 +12,30 @@ on PC platform.
 ![Aseprite Badge](https://img.shields.io/badge/Aseprite-7D929E?logo=aseprite&logoColor=fff&style=flat-square)
 ![Audacity Badge](https://img.shields.io/badge/Audacity-00C?logo=audacity&logoColor=fff&style=for-the-badge)
 
+### Prerequisites
+
+-   Godot Engine
+-   Aseprite
+-   Audacity
+
+## Getting Started
+
+To get a local copy up and running follow these simple steps.
+
+
+1. Clone the repo
+
+    ```sh
+    git clone https://github.com/dev-laww/memento-visions.git
+    ```
+2. Change directory to the project folder
+
+    ```sh
+    cd memento-visions
+    ```
+3. Copy the .runsettings file and edit for testing purposes, fields are specified in the file
+
+    ```sh
+    cp .runsettings.example .runsettings
+    ```
+4. Start developing

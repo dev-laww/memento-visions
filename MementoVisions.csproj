@@ -29,6 +29,7 @@
         <PackageReference Include="Delaunator" Version="1.0.10" />
         <PackageReference Include="Firebelley.GodotUtilities" Version="5.0.0" />
         <PackageReference Include="FuzzySharp" Version="2.0.2" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
         <PackageReference Include="gdUnit4.api" Version="4.4.0-rc6" />
         <PackageReference Include="gdUnit4.test.adapter" Version="2.1.0-rc2" />
         <PackageReference Include="OptimizedPriorityQueue" Version="5.1.0" />
