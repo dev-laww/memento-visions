@@ -129,7 +129,12 @@ public partial class Inventory : Overlay
         var slot = slots.FirstOrDefault(s => s.Item?.Item.UniqueName == item.UniqueName) ??
                    slots.First(s => s.Item is null);
 
-        slot.Item = group;
+        slot.Item = group.Quantity > 0 ? group : null;
+
+        if (slot.Selected)
+        {
+            UpdateSelectedItem(slot.Item);
+        }
     }
 
     private void OnButtonToggle(bool pressed)
