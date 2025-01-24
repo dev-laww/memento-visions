@@ -7,7 +7,7 @@ using Godot;
 namespace Game.Globals;
 
 // TODO: Add a way to connect to ui and not use print
-public partial class Command : Global<Command>
+public partial class Commands : Global<Commands>
 {
     public delegate void CommandExecutedEventHandler(string command, object[] args);
     public delegate void CommandErrorEventHandler(Exception exception);
@@ -26,18 +26,14 @@ public partial class Command : Global<Command>
     private const int MAX_HISTORY_SIZE = 100;
     private static readonly List<(string, DateTime)> commandHistory = [];
 
-
     private static readonly Dictionary<string, (Delegate, string)> commands = [];
 
     public override void _Ready()
     {
-        // Register all commands
         Register("help", Help, description: "Prints a list of all available commands.");
-        Register("echo", Echo, description: "Prints a message to the console.");
         Register("quit", Quit, description: "Quits the game.");
         Register("history", History, description: "Prints the command history.");
         Register("clear", Clear, description: "Clears the console.");
-        Register("history_clear", ClearHistory, description: "Clears the command history.");
     }
 
     public static void Register(string name, Delegate command, string description = null)
@@ -65,30 +61,34 @@ public partial class Command : Global<Command>
 
     public static async void Execute(string command)
     {
-        var name = command.Split(' ', StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
-
-        if (!commands.TryGetValue(name, out var value))
-        {
-            CommandNotFound?.Invoke(name);
-            return;
-        }
-
-        var (deleg, args) = ParseCommand(command);
-
-        commandHistory.Add((command, DateTime.Now));
-        HistoryChanged?.Invoke();
-        CommandExecuted?.Invoke(command, args);
-
-        if (commandHistory.Count > MAX_HISTORY_SIZE)
-            commandHistory.RemoveAt(0);
-
         try
         {
+            var name = command.Split(' ', StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
+
+            if (!commands.TryGetValue(name ?? "", out var value))
+            {
+                CommandNotFound?.Invoke(name);
+                return;
+            }
+
+            var (deleg, args) = ParseCommand(command);
+
+            commandHistory.Add((command, DateTime.Now));
+            HistoryChanged?.Invoke();
+            CommandExecuted?.Invoke(command, args);
+
+            if (commandHistory.Count > MAX_HISTORY_SIZE)
+                commandHistory.RemoveAt(0);
+
             var returnType = deleg.Method.ReturnType;
 
-            if (returnType == typeof(Task) || (returnType.IsGenericType && returnType.GetGenericTypeDefinition() == typeof(Task<>)))
+            if (returnType == typeof(Task) ||
+                (returnType.IsGenericType && returnType.GetGenericTypeDefinition() == typeof(Task<>))
+               )
             {
-                var task = (Task)deleg.DynamicInvoke(args);
+                dynamic task = (Task)deleg.DynamicInvoke(args);
+
+                if (task is null) return;
 
                 await task;
 
@@ -122,7 +122,7 @@ public partial class Command : Global<Command>
         }
     }
 
-    private void Echo(object obj) => GD.Print(obj);
+    private void Echo(string obj) => GD.Print(obj);
 
     private void Quit() => GetTree().Quit();
 
@@ -140,7 +140,8 @@ public partial class Command : Global<Command>
         var (action, _) = commands[name];
 
         if (parts.Length - 1 != action.Method.GetParameters().Length)
-            ThrowException(new InvalidOperationException($"Command '{name}' expects {action.Method.GetParameters().Length} arguments, but {parts.Length - 1} were provided."));
+            ThrowException(new InvalidOperationException(
+                $"Command '{name}' expects {action.Method.GetParameters().Length} arguments, but {parts.Length - 1} were provided."));
 
 
         var args = parts.Skip(1).Select((arg, i) =>
@@ -151,12 +152,15 @@ public partial class Command : Global<Command>
                 return arg;
 
             var parser = paramType.GetMethod("TryParse", [typeof(string), paramType.MakeByRefType()]) ??
-                            paramType.GetMethod("Parse", [typeof(string)]);
+                         paramType.GetMethod("Parse", [typeof(string)]);
 
             if (parser == null)
-                ThrowException(new InvalidOperationException($"No suitable parser found for argument '{arg}' of type '{paramType.Name}'."));
+                ThrowException(
+                    new InvalidOperationException(
+                        $"No suitable parser found for argument '{arg}' of type '{paramType.Name}'.")
+                    );
 
-            return parser.Invoke(null, [arg]);
+            return parser!.Invoke(null, [arg]);
         }).ToArray();
 
         return (action, args);
@@ -170,7 +174,6 @@ public partial class Command : Global<Command>
 
         foreach (var (command, time) in commandHistory)
         {
-
             GD.Print($"[{time}] - {command}");
         }
 
@@ -181,7 +184,6 @@ public partial class Command : Global<Command>
     private static void Clear()
     {
         // TODO: Clear UI
-
     }
 
     private static void ClearHistory()
