@@ -35,6 +35,7 @@ public partial class InventoryManager : Global<InventoryManager>
 
         CommandInterpreter.Register("add item", AddItemCommand, "Adds an item to the inventory. Usage: add item [uniqueName] [quantity]");
         CommandInterpreter.Register("remove item", RemoveItemCommand, "Removes an item from the inventory. Usage: remove item [uniqueName] [quantity]");
+        CommandInterpreter.Register("clear inventory", ClearInventory, "Clears the inventory.");
     }
 
     public override void _ExitTree()
@@ -43,6 +44,7 @@ public partial class InventoryManager : Global<InventoryManager>
 
         CommandInterpreter.Unregister("add item");
         CommandInterpreter.Unregister("remove item");
+        CommandInterpreter.Unregister("clear inventory");
     }
 
     public override void _Ready()
@@ -123,5 +125,11 @@ public partial class InventoryManager : Global<InventoryManager>
             Item = item,
             Quantity = quantity
         });
+    }
+
+    private static void ClearInventory()
+    {
+        foreach (var category in Instance.Inventory.Keys)
+            Instance.Inventory[category].Clear();
     }
 }
