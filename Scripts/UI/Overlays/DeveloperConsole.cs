@@ -104,5 +104,12 @@ public partial class DeveloperConsole : Overlay
 
         commandInput.Text = string.Empty;
     }
+
+    public override void Open()
+    {
+        base.Open();
+
+        commandInput.GrabFocus();
+    }
 }
 
