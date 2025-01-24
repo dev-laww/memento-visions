@@ -21,6 +21,8 @@ public partial class GameManager : Node
     private Overlay GetOverlay(string name) => userInterface.GetNode<Overlay>(name);
     private static GameManager instance;
 
+    private bool isDevConsoleOpen;
+
     public static Node CurrentScene => instance.currentScene;
 
     public static Overlay CurrentOverlay
@@ -56,6 +58,8 @@ public partial class GameManager : Node
             HandleOverlay("Menu");
         else if (@event.IsActionPressed("open_quests_info"))
             HandleOverlay("Quest");
+        else if (@event.IsActionPressed("open_dev_console"))
+            HandleOverlay("DeveloperConsole");
     }
 
     private void HandleOverlay(string overlayName)

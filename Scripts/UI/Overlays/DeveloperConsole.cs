@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using Game.Exceptions.Command;
 using Game.Globals;
-using Game.Utils.Extensions;
+using Game.UI.Overlays;
 using Godot;
 using GodotUtilities;
 
 namespace Game;
 
 [Scene]
-public partial class DeveloperConsole : CanvasLayer
+public partial class DeveloperConsole : Overlay
 {
     [Node] LineEdit commandInput;
     [Node] CodeEdit output;
@@ -46,24 +46,6 @@ public partial class DeveloperConsole : CanvasLayer
         commandInput.TextSubmitted += OnCommandInputSubmit;
         CommandInterpreter.CommandExecuted += OnCommandExecuted;
         output.Text = string.Empty;
-        Hide();
-    }
-
-    public override void _Input(InputEvent @event)
-    {
-        if (!@event.IsActionPressed("open_dev_console")) return;
-
-        if (Visible)
-        {
-            Hide();
-        }
-        else
-        {
-            Show();
-            commandInput.GrabFocus();
-        }
-
-        GetTree().Paused = Visible;
     }
 
     private void OnCommandInputSubmit(string text)
@@ -115,5 +97,12 @@ public partial class DeveloperConsole : CanvasLayer
     }
 
     private void Help() { }
+
+    public override void Close()
+    {
+        base.Close();
+
+        commandInput.Text = string.Empty;
+    }
 }
 
