@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Game.Exceptions.Command;
 using Game.Registry;
 using Game.Resources;
 using Game.Utils.Json.Models;
@@ -28,32 +29,24 @@ public partial class InventoryManager : Global<InventoryManager>
         }
     );
 
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+
+        CommandInterpreter.Register("add item", AddItemCommand, "Adds an item to the inventory. Usage: add item [uniqueName] [quantity]");
+        CommandInterpreter.Register("remove item", RemoveItemCommand, "Removes an item from the inventory. Usage: remove item [uniqueName] [quantity]");
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+
+        CommandInterpreter.Unregister("add item");
+        CommandInterpreter.Unregister("remove item");
+    }
+
     public override void _Ready()
     {
-        // var group = new ItemGroup();
-        // group.Item = GD.Load<Item>("res://resources/items/apple.tres");
-        // group.Quantity = 5;
-        //
-        // AddItem(group);
-        //
-        // group = new ItemGroup();
-        // group.Item = GD.Load<Item>("res://resources/items/rock.tres");
-        // group.Quantity = 10;
-        //
-        // AddItem(group);
-        //
-        // group = new ItemGroup();
-        // group.Item = GD.Load<Weapon>("res://resources/weapons/swords/sword.tres");
-        // group.Quantity = 1;
-        //
-        // AddItem(group);
-        //
-        // group = new ItemGroup();
-        // group.Item = GD.Load<Weapon>("res://resources/weapons/daggers/dagger.tres");
-        // group.Quantity = 1;
-        //
-        // AddItem(group);
-
         var inventory = SaveManager.InventoryData;
 
         inventory.Items.ForEach(item =>
@@ -109,4 +102,26 @@ public partial class InventoryManager : Global<InventoryManager>
             Amount = item.Quantity
         }).ToList()
     };
+
+    private static void AddItemCommand(string uniqueName, int quantity = 1)
+    {
+        var item = ItemRegistry.Get(uniqueName) ?? throw new CommandException($"Item '{uniqueName}' not found.");
+
+        AddItem(new ItemGroup
+        {
+            Item = item,
+            Quantity = quantity
+        });
+    }
+
+    private static void RemoveItemCommand(string uniqueName, int quantity = 1)
+    {
+        var item = ItemRegistry.Get(uniqueName) ?? throw new CommandException($"Item '{uniqueName}' not found.");
+
+        RemoveItem(new ItemGroup
+        {
+            Item = item,
+            Quantity = quantity
+        });
+    }
 }
