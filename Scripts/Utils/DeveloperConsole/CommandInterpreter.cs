@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Game.Exceptions.Command;
 
 namespace Game.Globals;
 
@@ -17,9 +18,10 @@ public static class CommandInterpreter
 
     private const int MaxHistorySize = 100;
     private static readonly List<(string Command, DateTime Timestamp, Exception Exception)> history = [];
-    private static readonly Dictionary<string, (Delegate Handler, string Description)> commands = [];
+    private static readonly Dictionary<string, (Delegate Action, string Description)> commands = [];
 
     public static IReadOnlyList<(string Command, DateTime Timestampm, Exception Exception)> History => history;
+    public static IReadOnlyDictionary<string, (Delegate Action, string Description)> Commands => commands;
 
 
     public static void Register(string name, Delegate command, string description = null)
@@ -47,22 +49,19 @@ public static class CommandInterpreter
     public static async void Execute(string commandInput)
     {
         (string Command, DateTime Timestamp, Exception Exception) historyEntry = (commandInput, DateTime.Now, null);
+
         try
         {
-            var commandParts = commandInput.Split([' '], StringSplitOptions.RemoveEmptyEntries);
-            var commandName = commandParts.FirstOrDefault();
+            var (name, action, args) = ParseCommand(commandInput);
 
-            if (string.IsNullOrEmpty(commandName) || !commands.TryGetValue(commandName, out var command))
+            await InvokeHandlerAsync(action, args);
+
+            if (!name.Equals("clear"))
             {
-                throw new InvalidOperationException($"Command '{commandName}' does not exist.");
+                history.Add(historyEntry);
+                TrimHistory();
             }
 
-            var (handler, args) = ParseCommand(commandInput, command.Handler);
-
-            await InvokeHandlerAsync(handler, args);
-
-            history.Add(historyEntry);
-            TrimHistory();
             CommandExecuted?.Invoke(commandInput, args);
         }
         catch (Exception e)
@@ -72,7 +71,7 @@ public static class CommandInterpreter
             TrimHistory();
             CommandExecuted?.Invoke(commandInput, null);
 
-            if (e is not FormatException and not InvalidOperationException)
+            if (e is not CommandException)
                 throw;
         }
     }
@@ -89,21 +88,37 @@ public static class CommandInterpreter
                 ];
     }
 
-    private static (Delegate Handler, object[] Args) ParseCommand(string commandInput, Delegate handler)
+    private static (string Name, Delegate action, object[] args) ParseCommand(string input)
     {
-        var parts = commandInput.Split([' '], StringSplitOptions.RemoveEmptyEntries);
-        var parameters = handler.Method.GetParameters();
+        var name = commands.Keys.OrderByDescending(k => k.Length).FirstOrDefault(input.StartsWith) ?? input;
 
-        if (parts.Length - 1 != parameters.Length)
+        if (string.IsNullOrEmpty(name) || !commands.TryGetValue(name, out var command))
+            throw new CommandException($"Command '{name}' does not exist.");
+
+        var parts = input.Replace(name, string.Empty).Split([' '], StringSplitOptions.RemoveEmptyEntries);
+
+        var action = command.Action;
+        var parameters = action.Method.GetParameters();
+
+        var args = new object[parameters.Length];
+
+        for (var i = 0; i < parameters.Length; i++)
         {
-            throw new InvalidOperationException($"Command '{parts[0]}' expects {parameters.Length} arguments, but {parts.Length - 1} were provided.");
+            if (i >= parts.Length)
+            {
+                if (parameters[i].HasDefaultValue)
+                {
+                    args[i] = parameters[i].DefaultValue;
+                    continue;
+                }
+
+                throw new CommandException($"Missing argument '{parameters[i].Name}'.");
+            }
+
+            args[i] = ParseArgument(parts[i].Trim(), parameters[i].ParameterType);
         }
 
-        var args = parts.Skip(1)
-            .Select((arg, i) => ParseArgument(arg, parameters[i].ParameterType))
-            .ToArray();
-
-        return (handler, args);
+        return (name, action, args);
     }
 
     private static object ParseArgument(string argument, Type targetType)
@@ -120,16 +135,16 @@ public static class CommandInterpreter
             {
                 var parameters = new object[] { argument, null };
                 var success = (bool)tryParseMethod.Invoke(null, parameters);
-                return success ? parameters[1] : throw new FormatException($"Failed to parse '{argument}' as {targetType.Name}.");
+                return success ? parameters[1] : throw new UnsupportedArgument($"Failed to parse '{argument}' as {targetType.Name}.");
             }
 
             // Fallback to Parse method
             var parseMethod = targetType.GetMethod("Parse", [typeof(string)]);
-            return parseMethod?.Invoke(null, [argument]) ?? throw new FormatException($"Failed to parse '{argument}' as {targetType.Name}.");
+            return parseMethod?.Invoke(null, [argument]) ?? throw new UnsupportedArgument($"Failed to parse '{argument}' as {targetType.Name}.");
         }
         catch (Exception e)
         {
-            throw new FormatException($"Failed to parse '{argument}' as {targetType.Name}.", e);
+            throw new UnsupportedArgument($"Failed to parse '{argument}' as {targetType.Name}.", e);
         }
     }
 
@@ -161,4 +176,6 @@ public static class CommandInterpreter
         while (history.Count > MaxHistorySize)
             history.RemoveAt(0);
     }
+
+    public static void ClearHistory() => history.Clear();
 }
