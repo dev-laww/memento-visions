@@ -49,10 +49,12 @@ public static class CommandInterpreter
     public static async void Execute(string commandInput)
     {
         (string Command, DateTime Timestamp, Exception Exception) historyEntry = (commandInput, DateTime.Now, null);
+        object[] args = [];
 
         try
         {
-            var (name, action, args) = ParseCommand(commandInput);
+            var (name, action, parsedArgs) = ParseCommand(commandInput);
+            args = parsedArgs;
 
             await InvokeHandlerAsync(action, args);
 
@@ -66,12 +68,12 @@ public static class CommandInterpreter
         }
         catch (Exception e)
         {
-            historyEntry.Exception = e;
+            historyEntry.Exception = e.InnerException ?? e;
             history.Add(historyEntry);
             TrimHistory();
-            CommandExecuted?.Invoke(commandInput, null);
+            CommandExecuted?.Invoke(commandInput, args);
 
-            if (e is not CommandException)
+            if (historyEntry.Exception is not CommandException)
                 throw;
         }
     }
