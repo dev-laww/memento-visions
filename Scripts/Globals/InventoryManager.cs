@@ -130,6 +130,10 @@ public partial class InventoryManager : Global<InventoryManager>
     private static void ClearInventory()
     {
         foreach (var category in Instance.Inventory.Keys)
-            Instance.Inventory[category].Clear();
+        {
+            var items = Instance.Inventory[category].ToList();
+
+            items.ForEach(RemoveItem);
+        }
     }
 }
