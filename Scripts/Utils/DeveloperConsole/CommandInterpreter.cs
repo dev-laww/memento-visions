@@ -10,12 +10,10 @@ public static class CommandInterpreter
     public delegate void CommandExecutedEventHandler(string command, object[] args);
     public delegate void CommandRegisteredEventHandler(string command, string description);
     public delegate void CommandUnregisteredEventHandler(string command);
-    public delegate void HistoryChangedEventHandler();
 
     public static event CommandExecutedEventHandler CommandExecuted;
     public static event CommandRegisteredEventHandler CommandRegistered;
     public static event CommandUnregisteredEventHandler CommandUnregistered;
-    public static event HistoryChangedEventHandler HistoryChanged;
 
     private const int MaxHistorySize = 100;
     private static readonly List<(string Command, DateTime Timestamp, Exception Exception)> history = [];
@@ -61,19 +59,17 @@ public static class CommandInterpreter
 
             var (handler, args) = ParseCommand(commandInput, command.Handler);
 
+            await InvokeHandlerAsync(handler, args);
+
             history.Add(historyEntry);
             TrimHistory();
-            HistoryChanged?.Invoke();
             CommandExecuted?.Invoke(commandInput, args);
-
-            await InvokeHandlerAsync(handler, args);
         }
         catch (Exception e)
         {
             historyEntry.Exception = e;
             history.Add(historyEntry);
             TrimHistory();
-            HistoryChanged?.Invoke();
             CommandExecuted?.Invoke(commandInput, null);
 
             if (e is not FormatException and not InvalidOperationException)

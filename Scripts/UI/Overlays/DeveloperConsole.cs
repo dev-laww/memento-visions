@@ -22,7 +22,6 @@ public partial class DeveloperConsole : Control
     public override void _Ready()
     {
         CommandInterpreter.Register("quit", Quit, "Quits the game.");
-        CommandInterpreter.Register("hi", Hi, "Prints 'Hello, World!'");
 
         commandInput.TextSubmitted += OnCommandInputSubmit;
         CommandInterpreter.CommandExecuted += OnCommandExecuted;
@@ -64,7 +63,5 @@ public partial class DeveloperConsole : Control
     {
         GetTree().Quit();
     }
-
-    private void Hi() => GD.Print("Hello, World!");
 }
 
