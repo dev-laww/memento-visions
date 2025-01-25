@@ -142,16 +142,16 @@ public partial class Player : Entity
         // TODO: make use of animation tree player to handle animation directions
         switch (WeaponManager.CurrentWeaponResource.WeaponType)
         {
-            case Weapon.Type.Gun:
+            case Item.Type.Gun:
                 animations.Play($"gun/{MoveDirection}");
                 break;
-            case Weapon.Type.Dagger:
+            case Item.Type.Dagger:
                 animations.Play($"dagger/{MoveDirection}");
                 break;
-            case Weapon.Type.Sword:
+            case Item.Type.Sword:
                 animations.Play($"sword/{MoveDirection}");
                 break;
-            case Weapon.Type.Whip:
+            case Item.Type.Whip:
                 animations.Play($"dagger/{MoveDirection}");
                 break;
             default:

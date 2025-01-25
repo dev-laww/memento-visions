@@ -11,16 +11,15 @@ public partial class WeaponManager : Global<WeaponManager>
 {
     public static WeaponComponent CurrentWeapon { get; private set; }
     public static AnimationPlayer CurrentAnimationPlayer => CurrentWeapon.AnimationPlayer;
-    public static Weapon CurrentWeaponResource { get; private set; }
+    public static Item CurrentWeaponResource { get; private set; }
     private Player Player;
-
 
     public override void _Ready()
     {
         Player = this.GetPlayer();
     }
 
-    public static void Equip(Weapon weapon)
+    public static void Equip(Item weapon)
     {
         if (Instance.Player == null || weapon.Component.ResourcePath == CurrentWeapon?.SceneFilePath) return;
 
