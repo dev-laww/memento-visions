@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bxgw165vramlx"]
 
 [ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/inventory/items/temp/Item5.png" id="1_m6vti"]
-[ext_resource type="Script" path="res://Scripts/Resources/Item.cs" id="1_q1p51"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Resources/Item.cs" id="1_q1p51"]
 
 [resource]
 resource_local_to_scene = true
