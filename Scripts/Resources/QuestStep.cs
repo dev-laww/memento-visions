@@ -20,9 +20,9 @@ public partial class QuestStep : Resource
         }
     }
 
-    [Export] public string Description { get; set; }
+    [Export(PropertyHint.MultilineText)] public string Description { get; set; }
 
-    public ItemGroup Item { get; set; }
+    public ItemGroup[] Items = [];
 
     // TODO: add properties for enemy
 
@@ -37,9 +37,11 @@ public partial class QuestStep : Resource
             case StepType.GiveItem:
                 properties.Add(new Dictionary
                 {
-                    { "name", nameof(Item) },
-                    { "type", (int)Variant.Type.String },
-                    { "usage", (int)PropertyUsageFlags.Default }
+                    { "name", nameof(Items) },
+                    { "type", (int)Variant.Type.Array },
+                    { "usage", (int)PropertyUsageFlags.Default },
+                    { "hint", (int)PropertyHint.ArrayType },
+                    { "hint_string", $"24/17:ItemGroup" }
                 });
                 break;
         }
