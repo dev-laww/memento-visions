@@ -11,13 +11,14 @@ namespace Game.Globals;
 
 public partial class InventoryManager : Global<InventoryManager>
 {
-    [Signal] public delegate void UpdatedEventHandler(ItemGroup item);
+    public delegate void UpdatedEventHandler(ItemGroup item);
+    public delegate void PickupEventHandler(ItemGroup item);
+    public delegate void RemoveEventHandler(ItemGroup item);
 
-    public static event UpdatedEventHandler InventoryUpdated
-    {
-        add => Instance.Updated += value;
-        remove => Instance.Updated -= value;
-    }
+    public static event UpdatedEventHandler Updated;
+    public static event PickupEventHandler Pickup;
+    public static event RemoveEventHandler Remove;
+
 
     private readonly ReadOnlyDictionary<Item.Category, List<ItemGroup>> Inventory = new(
         new Dictionary<Item.Category, List<ItemGroup>>
@@ -33,8 +34,10 @@ public partial class InventoryManager : Global<InventoryManager>
     {
         base._EnterTree();
 
-        CommandInterpreter.Register("add item", AddItemCommand, "Adds an item to the inventory. Usage: add item [uniqueName] [quantity]");
-        CommandInterpreter.Register("remove item", RemoveItemCommand, "Removes an item from the inventory. Usage: remove item [uniqueName] [quantity]");
+        CommandInterpreter.Register("add item", AddItemCommand,
+            "Adds an item to the inventory. Usage: add item [uniqueName] [quantity]");
+        CommandInterpreter.Register("remove item", RemoveItemCommand,
+            "Removes an item from the inventory. Usage: remove item [uniqueName] [quantity]");
         CommandInterpreter.Register("clear inventory", ClearInventory, "Clears the inventory.");
     }
 
@@ -71,7 +74,8 @@ public partial class InventoryManager : Global<InventoryManager>
         else
             Instance.Inventory[group.Item.ItemCategory].Add(group);
 
-        Instance.EmitSignal(SignalName.Updated, itemGroup ?? group);
+        Updated?.Invoke(itemGroup ?? group);
+        Pickup?.Invoke(group);
     }
 
     public static void RemoveItem(ItemGroup group)
@@ -86,7 +90,8 @@ public partial class InventoryManager : Global<InventoryManager>
         if (itemGroup.Quantity <= 0)
             Instance.Inventory[group.Item.ItemCategory].Remove(itemGroup);
 
-        Instance.EmitSignal(SignalName.Updated, itemGroup);
+        Remove?.Invoke(itemGroup);
+        Updated?.Invoke(itemGroup);
     }
 
     public static IReadOnlyList<ItemGroup> GetItemsFromCategory(Item.Category category) =>

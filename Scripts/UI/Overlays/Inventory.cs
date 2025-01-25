@@ -50,7 +50,7 @@ public partial class Inventory : Overlay
         closeButton.Pressed += Close;
         selectedItemActionButton.Toggled += OnButtonToggle;
         materialButton.ButtonGroup.Pressed += OnItemCategoryPress;
-        InventoryManager.InventoryUpdated += OnInventoryUpdate;
+        InventoryManager.Updated += OnInventoryUpdate;
 
         PopulateSlots(currentCategory);
     }
