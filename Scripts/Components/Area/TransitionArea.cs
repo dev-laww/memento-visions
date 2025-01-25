@@ -9,7 +9,7 @@ namespace Game.Components.Area;
 [GlobalClass]
 public partial class TransitionArea : Area2D
 {
-    [Export]
+    [Export(PropertyHint.File, "*.tscn")]
     public string TargetScene
     {
         get => targetScene;
