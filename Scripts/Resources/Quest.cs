@@ -12,9 +12,10 @@ public partial class Quest : Resource
     [Export] public string Id { get; private set; } = Guid.NewGuid().ToString();
     [Export] public string Title;
     [Export(PropertyHint.MultilineText)] public string Description;
-    [Export] private QuestStep[] steps = [];
+    [Export] private QuestObjective[] objectives = [];
+    [Export] public bool Ordered;
 
-    public IReadOnlyList<QuestStep> Steps => [.. steps];
+    public List<QuestObjective> Objectives => [.. objectives];
 
     public override void _ValidateProperty(Dictionary property)
     {
