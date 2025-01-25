@@ -24,7 +24,7 @@ public partial class StatsManager : Node
     [Signal] public delegate void StatIncreasedEventHandler(float value, StatsType stat);
     [Signal] public delegate void StatDecreasedEventHandler(float value, StatsType stat);
     [Signal] public delegate void StatDepletedEventHandler(StatsType stat);
-    [Signal] public delegate void AttackReceivedEventHandler(float dmg, Attack.Type type, bool critical);
+    [Signal] public delegate void AttackReceivedEventHandler(Attack attack);
 
     [Export] public float MaxHealth = 100;
 
@@ -102,7 +102,7 @@ public partial class StatsManager : Node
         Health -= Math.Clamp(attack.Damage - defense, 0, float.MaxValue);
 
         // TODO: Add status effects
-        EmitSignal(SignalName.AttackReceived, attack.Damage, (int)attack.AttackType, attack.Critical);
+        EmitSignal(SignalName.AttackReceived, attack);
     }
 
     private void SetStat(ref float stat, float value, StatsType statType)

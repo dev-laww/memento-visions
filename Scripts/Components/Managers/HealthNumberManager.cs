@@ -51,10 +51,10 @@ public partial class HealthNumberManager : Node2D
         timer.Timeout += OnTimerTimeout;
     }
 
-    private void OnAttackReceived(float dmg, Attack.Type type, bool critical)
+    private void OnAttackReceived(Attack attack)
     {
         timer.Reset();
-        damageReceived += dmg;
+        damageReceived += attack.Damage;
 
         if (damage == null)
         {
@@ -63,9 +63,9 @@ public partial class HealthNumberManager : Node2D
         }
 
         damage!.Text = $"{damageReceived}";
-        damage!.DamageType = type;
+        damage!.DamageType = attack.AttackType;
 
-        if (critical)
+        if (attack.Critical)
         {
             damage.Critical();
             return;

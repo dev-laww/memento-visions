@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using Game.Components.Battle;
+using Godot;
 using GodotUtilities;
 
 namespace Game.Utils.Battle;
 
-public class Attack
+public partial class Attack : RefCounted
 {
     public enum Type
     {
@@ -20,6 +21,8 @@ public class Attack
     public readonly bool Critical;
 
     public List<StatusEffect> StatusEffects { get; } = [];
+
+    private Attack() { }
 
     private Attack(float damage, Type type)
     {
