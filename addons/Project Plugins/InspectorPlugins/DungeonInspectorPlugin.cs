@@ -1,8 +1,7 @@
-#if TOOLS
-using Game.Levels.Dungeon;
 using Godot;
+using Game.Levels.Dungeon;
 
-namespace Plugin;
+namespace ProjectPlugin.InspectorPlugin;
 
 [Tool]
 public partial class DungeonInspectorPlugin : EditorInspectorPlugin
@@ -35,21 +34,3 @@ public partial class DungeonInspectorPlugin : EditorInspectorPlugin
         dungeon?.Generate();
     }
 }
-
-[Tool]
-public partial class GenerateButton : EditorPlugin
-{
-    private DungeonInspectorPlugin _inspectorPlugin;
-
-    public override void _EnterTree()
-    {
-        _inspectorPlugin = new DungeonInspectorPlugin();
-        AddInspectorPlugin(_inspectorPlugin);
-    }
-
-    public override void _ExitTree()
-    {
-        RemoveInspectorPlugin(_inspectorPlugin);
-    }
-}
-#endif
