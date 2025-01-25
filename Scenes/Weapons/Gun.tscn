@@ -1,9 +1,9 @@
 [gd_scene load_steps=28 format=3 uid="uid://btmqpd4jt4gui"]
 
-[ext_resource type="Script" path="res://Scripts/Components/Battle/WeaponComponent.cs" id="1_ff1d8"]
+[ext_resource type="Script" uid="uid://dqgmaq0t8abpt" path="res://Scripts/Components/Battle/WeaponComponent.cs" id="1_ff1d8"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_l6mw3"]
-[ext_resource type="Script" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="3_ahu3j"]
-[ext_resource type="Texture2D" uid="uid://d1uj108kqd8jq" path="res://assets/weapons/guns/gun/sprite-frames.png" id="4_yb83n"]
+[ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="3_ahu3j"]
+[ext_resource type="Texture2D" uid="uid://d1uj108kqd8jq" path="res://assets/weapons/gun/sprite-frames.png" id="4_yb83n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tutkl"]
 atlas = ExtResource("4_yb83n")

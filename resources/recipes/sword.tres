@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="Recipe" load_steps=7 format=3 uid="uid://bdhmxvnyd26nq"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/Recipe.cs" id="1_6loic"]
-[ext_resource type="Resource" uid="uid://c71am62dl1cq6" path="res://resources/items/rock.tres" id="1_deiu3"]
-[ext_resource type="Script" path="res://Scripts/Resources/ItemGroup.cs" id="2_adp58"]
-[ext_resource type="Resource" uid="uid://dtttc4lu3snvs" path="res://resources/weapons/swords/sword.tres" id="3_334rb"]
+[ext_resource type="Script" uid="uid://djs3qll7uwkya" path="res://Scripts/Resources/Recipe.cs" id="1_6loic"]
+[ext_resource type="Resource" uid="uid://c71am62dl1cq6" path="res://resources/items/material/rock.tres" id="1_deiu3"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Resources/ItemGroup.cs" id="2_adp58"]
+[ext_resource type="Resource" path="res://resources/items/weapon/sword.tres" id="3_334rb"]
 
 [sub_resource type="Resource" id="Resource_vlgld"]
 script = ExtResource("2_adp58")

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://6ty60drhh82w"]
+
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Resources/Item.cs" id="1_wtqwt"]
+[ext_resource type="PackedScene" uid="uid://btmqpd4jt4gui" path="res://Scenes/Weapons/Gun.tscn" id="1_wtxhx"]
+[ext_resource type="Texture2D" uid="uid://cvsxqb1aw8lo3" path="res://assets/weapons/gun/icon.png" id="2_es2we"]
+
+[resource]
+script = ExtResource("1_wtqwt")
+Icon = ExtResource("2_es2we")
+Name = "Gun"
+UniqueName = "weapon:gun"
+ItemCategory = 3
+WeaponType = 2
+Component = ExtResource("1_wtxhx")
+Description = ""
+metadata/_custom_type_script = ExtResource("1_wtqwt")

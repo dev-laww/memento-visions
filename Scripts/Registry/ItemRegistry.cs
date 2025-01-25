@@ -10,10 +10,7 @@ namespace Game.Registry;
 [GlobalClass]
 public partial class ItemRegistry : GodotObject
 {
-    private static readonly List<string> items = DirAccessUtils.GetFilesFromDirectories(
-        Constants.ITEMS_PATH,
-        Constants.WEAPONS_PATH
-    );
+    private static readonly List<string> items = DirAccessUtils.GetFilesRecursively(Constants.ITEMS_PATH);
 
     public static Item Get(string uniqueName) => (
         from item in items.Where(item => Fuzz.PartialRatio(
