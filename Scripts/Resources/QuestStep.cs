@@ -22,8 +22,7 @@ public partial class QuestStep : Resource
 
     [Export] public string Description { get; set; }
 
-    public Item Item { get; set; }
-    public int Count { get; set; } = 1;
+    public ItemGroup Item { get; set; }
 
     // TODO: add properties for enemy
 
@@ -40,13 +39,6 @@ public partial class QuestStep : Resource
                 {
                     { "name", nameof(Item) },
                     { "type", (int)Variant.Type.String },
-                    { "usage", (int)PropertyUsageFlags.Default }
-                });
-
-                properties.Add(new Dictionary
-                {
-                    { "name", nameof(Count) },
-                    { "type", (int)Variant.Type.Int },
                     { "usage", (int)PropertyUsageFlags.Default }
                 });
                 break;
