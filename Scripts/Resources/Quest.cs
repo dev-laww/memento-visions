@@ -6,7 +6,7 @@ using Godot.Collections;
 namespace Game.Resources;
 
 [Tool]
-[GlobalClass]
+[GlobalClass, Icon("res://assets/icons/quest.svg")]
 public partial class Quest : Resource
 {
     [Export] public string Id { get; private set; } = Guid.NewGuid().ToString();
