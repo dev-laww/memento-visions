@@ -10,6 +10,7 @@ namespace Game.Effects.HealthNumbers;
 
 [Tool]
 [Scene]
+[Icon("res://assets/icons/health-number-manager.svg")]
 public partial class HealthNumberManager : Node2D
 {
     [Export]
