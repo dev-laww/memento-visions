@@ -15,9 +15,7 @@ public partial class ItemRegistry : GodotObject
         Constants.WEAPONS_PATH
     );
 
-    public static Item Get(string uniqueName) => Get<Item>(uniqueName);
-
-    public static T Get<T>(string uniqueName) where T : Item => (
+    public static Item Get(string uniqueName) => (
         from item in items.Where(item => Fuzz.PartialRatio(
             item.Split("/").Last(),
             uniqueName.Split(":").Last()) >= 80
@@ -25,6 +23,6 @@ public partial class ItemRegistry : GodotObject
         select ResourceLoader.Load<Item>(item)
         into resource
         where resource.UniqueName == uniqueName
-        select resource as T
+        select resource
     ).FirstOrDefault();
 }
