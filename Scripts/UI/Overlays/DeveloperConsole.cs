@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using Game.Exceptions.Command;
 using Game.Globals;
 using Game.UI.Overlays;
@@ -50,8 +50,11 @@ public partial class DeveloperConsole : Overlay
 
     private void OnCommandInputSubmit(string text)
     {
+        if (string.IsNullOrWhiteSpace(text)) return;
+
         CommandInterpreter.Execute(text);
         commandInput.Clear();
+        commandInput.GrabFocus();
     }
 
     // TODO: Implement more gracefull printing
@@ -61,7 +64,7 @@ public partial class DeveloperConsole : Overlay
 
         var lines = new List<string>();
 
-        foreach (var (command, Timestamp, Exception) in history)
+        foreach (var (command, Timestamp, Exception) in history.Reverse())
         {
             lines.Add($"{Timestamp:HH:mm} > {command}");
 
