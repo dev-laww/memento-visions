@@ -18,7 +18,7 @@ public partial class GameManager : Node
     [Node] private ResourcePreloader resourcePreloader;
 
     private Overlay currentOverlay;
-    private Overlay GetOverlay(string name) => userInterface.GetNode<Overlay>(name);
+    private Overlay GetOverlay(string name) => userInterface.GetNodeOrNull<Overlay>(name);
     private static GameManager instance;
 
     private bool isDevConsoleOpen;
