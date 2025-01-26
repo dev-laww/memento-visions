@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://dd1jerr3yxfmm"]
 
 [ext_resource type="PackedScene" uid="uid://svqrge4l63b4" path="res://Scenes/UI/Common/Slot.tscn" id="1_i0y0q"]
-[ext_resource type="Script" path="res://Scripts/UI/Overlays/Crafting.cs" id="1_xer77"]
+[ext_resource type="Script" uid="uid://5dxhed46evr" path="res://Scripts/UI/Overlays/Crafting.cs" id="1_xer77"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_xbes8"]
 [ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="3_5klxs"]
 [ext_resource type="Material" uid="uid://bkm4tri52hhdr" path="res://resources/shaders/blur.tres" id="3_8o6kh"]
@@ -174,9 +174,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7r2pd"]
 _data = {
-"RESET": SubResource("Animation_1xted"),
-"hide-popup": SubResource("Animation_4i317"),
-"show-popup": SubResource("Animation_jvve5")
+&"RESET": SubResource("Animation_1xted"),
+&"hide-popup": SubResource("Animation_4i317"),
+&"show-popup": SubResource("Animation_jvve5")
 }
 
 [node name="Crafting" type="Control"]
@@ -495,6 +495,7 @@ Another Ingredient x3
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet urna magna. Pellentesque fermentum consectetur nisi, quis bibendum enim fringilla non. Nunc posuere nec lorem in iaculis."
 
 [node name="QuantityControl" type="HBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
@@ -630,5 +631,5 @@ text = "Okay"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_7r2pd")
+&"": SubResource("AnimationLibrary_7r2pd")
 }

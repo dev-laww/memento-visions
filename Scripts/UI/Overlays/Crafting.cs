@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Game.Globals;
 using Game.Registry;
 using Game.Resources;
 using Game.UI.Common;
@@ -25,6 +26,7 @@ public partial class Crafting : Overlay
     [Node] private TextureButton increaseButton;
     [Node] private TextureButton decreaseButton;
     [Node] private Button craftButton;
+    [Node] private HBoxContainer quantityControl;
 
     private List<Slot> slots;
     private Recipe selectedRecipe;
@@ -48,6 +50,7 @@ public partial class Crafting : Overlay
         increaseButton.Pressed += OnIncreaseButtonPress;
         decreaseButton.Pressed += OnDecreaseButtonPress;
         craftButton.Pressed += OnCraftButtonPress;
+        InventoryManager.Updated += _ => Reset();
 
         PopulateSlots();
     }
@@ -93,11 +96,10 @@ public partial class Crafting : Overlay
 
         selectedItemDescription.Text = item?.Item.Description;
 
-        if (item is null) return;
-
-        selectedRecipe = RecipeRegistry.Get(item.Item.Id);
+        selectedRecipe = item is not null ? RecipeRegistry.Get(item.Item.Id) : null;
         quantity = 1;
         quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
+        UpdateButtonState();
     }
 
     private void OnIncreaseButtonPress()
@@ -139,6 +141,9 @@ public partial class Crafting : Overlay
 
     private void UpdateButtonState()
     {
+        quantityControl.Visible = selectedRecipe is not null;
+        craftButton.Visible = selectedRecipe is not null;
+
         craftButton.Disabled = selectedRecipe is null || !selectedRecipe.CanCreate(quantity);
         craftButton.Text = selectedRecipe?.CanCreate(quantity) == true ? "Craft" : "Not enough resources";
 

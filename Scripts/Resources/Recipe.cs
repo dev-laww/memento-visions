@@ -25,9 +25,9 @@ public partial class Recipe : Resource
         {
             < 1 => throw new ArgumentOutOfRangeException(nameof(quantity), "Quantity must be greater than 0."),
             1 => Ingredients,
-            _ => Ingredients.Select(ingredient =>
+            _ => [.. Ingredients.Select(ingredient =>
                 new ItemGroup { Item = ingredient.Item, Quantity = ingredient.Quantity * quantity }
-            ).ToArray()
+            )]
         };
 
     public bool CanCreate(int quantity = 1)
