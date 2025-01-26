@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using Game.Globals;
 using Godot;
 using Godot.Collections;
 
@@ -31,27 +30,13 @@ public partial class QuestObjective : Resource
 
     [Export(PropertyHint.MultilineText)] public string Description { get; set; }
 
+    public ItemRequirement[] Items = [];
+
     public bool Completed;
-
-
-    public QuestObjective()
-    {
-        if (Engine.IsEditorHint()) return;
-
-        InventoryManager.Pickup += OnItemPickup;
-    }
-
-    ~QuestObjective()
-    {
-        if (Engine.IsEditorHint()) return;
-
-        InventoryManager.Pickup -= OnItemPickup;
-    }
 
     // TODO: add properties for enemy
 
     private ObjectiveType type;
-    public ItemGroup[] Items = [];
 
     public override Array<Dictionary> _GetPropertyList()
     {
@@ -67,7 +52,7 @@ public partial class QuestObjective : Resource
                     { "type", (int)Variant.Type.Array },
                     { "usage", (int)PropertyUsageFlags.Default },
                     { "hint", (int)PropertyHint.ArrayType },
-                    { "hint_string", $"24/17:ItemGroup" }
+                    { "hint_string", $"24/17:ItemRequirement" }
                 });
                 break;
             case ObjectiveType.Navigate:
@@ -80,27 +65,24 @@ public partial class QuestObjective : Resource
         return properties;
     }
 
-    private void OnItemPickup(ItemGroup item) => ProcessItem(item, ObjectiveType.Collect);
-
-    private void ProcessItem(ItemGroup item, ObjectiveType type)
+    public void UpdateItemProgress(ItemGroup group)
     {
+        if (Type != ObjectiveType.Collect && Type != ObjectiveType.Deliver)
+        {
+            GD.PushWarning($"{this} does not require items. Use the appropriate method instead.");
+            throw new InvalidOperationException();
+        }
+
         if (Completed) return;
 
-        if (Type != type) return;
+        foreach (var requirement in Items)
+        {
+            if (requirement.Item.Id != group.Item.Id) continue;
 
-        var items = Items.ToList();
+            requirement.Quantity = Mathf.Min(requirement.Required, requirement.Quantity + group.Quantity);
+        }
 
-        var group = items.Find(i => i.Item.Id == item.Item.Id);
-
-        if (group is null) return;
-
-        group.Quantity -= item.Quantity;
-
-        if (group.Quantity <= 0)
-            items.Remove(group);
-
-        if (items.Count == 0) Completed = true;
-
-        Items = [.. items];
+        Completed = Items.ToList().All(requirement => requirement.Quantity >= requirement.Required);
     }
+    public override string ToString() => $"<QuestObjective ({Type} {GetHashCode()})>";
 }

@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Game.Registry;
+using Game.Globals;
 using Godot;
-using Godot.Collections;
 
 namespace Game.Resources;
 
-[Tool]
 [GlobalClass, Icon("res://assets/icons/quest.svg")]
 public partial class Quest : Resource
 {
@@ -17,18 +15,29 @@ public partial class Quest : Resource
     [Export(PropertyHint.MultilineText)] public string Description;
     [Export] private QuestObjective[] objectives = [];
 
-    [ExportCategory("Rewards")]
-    [Export] private int Experience;
+    [ExportCategory("Rewards")] [Export] private int Experience;
     [Export] private ItemGroup[] Items = [];
 
     public bool Completed { get; private set; }
     public List<QuestObjective> Objectives => [.. objectives];
     private int currentStep;
 
+    public Quest()
+    {
+        if (Engine.IsEditorHint()) return;
+
+        InventoryManager.Pickup += OnItemPickup;
+    }
+
+    ~Quest()
+    {
+        if (Engine.IsEditorHint()) return;
+
+        InventoryManager.Pickup -= OnItemPickup;
+    }
+
     public void Update()
     {
-        if (Completed || Engine.IsEditorHint()) return;
-
         var completed = true;
 
         if (Ordered)
@@ -55,6 +64,7 @@ public partial class Quest : Resource
 
         Completed = true;
         GiveRewards();
+        GD.Print($"{this} completed.");
 
         // TODO: save progress
     }
@@ -65,4 +75,33 @@ public partial class Quest : Resource
 
         // TODO: give rewards
     }
+
+    private void OnItemPickup(ItemGroup item)
+    {
+        if (Completed) return;
+
+        if (Ordered)
+        {
+            var objective = objectives[currentStep];
+
+            if (objective.Type != QuestObjective.ObjectiveType.Collect) return;
+
+            objective.UpdateItemProgress(item);
+        }
+        else
+        {
+            var objectives = Objectives.Where(objective => objective.Type == QuestObjective.ObjectiveType.Collect);
+
+            foreach (var objective in objectives)
+            {
+                if (objective.Type != QuestObjective.ObjectiveType.Collect) continue;
+
+                objective.UpdateItemProgress(item);
+            }
+        }
+
+        Update();
+    }
+
+    public override string ToString() => $"<Quest ({Id})>";
 }
