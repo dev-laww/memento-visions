@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Game.Registry;
 using Godot;
 using Godot.Collections;
 
@@ -23,19 +25,6 @@ public partial class Quest : Resource
     public List<QuestObjective> Objectives => [.. objectives];
     private int currentStep;
 
-    public override void _ValidateProperty(Dictionary property)
-    {
-        base._ValidateProperty(property);
-
-        if (property["name"].AsString() != PropertyName.Id) return;
-
-        var usage = property["usage"].As<PropertyUsageFlags>();
-
-        usage |= PropertyUsageFlags.ReadOnly;
-
-        property["usage"] = (int)usage;
-    }
-
     public void Update()
     {
         if (Completed || Engine.IsEditorHint()) return;
@@ -51,14 +40,8 @@ public partial class Quest : Resource
         }
         else
         {
-            foreach (var objective in objectives)
-            {
-                if (!objective.Completed)
-                {
-                    completed = false;
-                    break;
-                }
-            }
+            if (objectives.Any(objective => !objective.Completed))
+                completed = false;
         }
 
         if (!completed) return;
