@@ -2,7 +2,6 @@ using Godot;
 
 namespace Game.Resources;
 
-[Tool]
 [GlobalClass, Icon("res://assets/icons/item-group.svg")]
 public partial class ItemGroup : Resource
 {
