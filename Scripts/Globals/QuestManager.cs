@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Resources;
+using Godot;
 
 namespace Game.Globals;
 
@@ -9,111 +10,57 @@ public partial class QuestManager : Global<QuestManager>
     public delegate void AddedEventHandler(Quest quest);
     public delegate void UpdatedEventHandler(Quest quest);
     public delegate void CompletedEventHandler(Quest quest);
+    public delegate void RemovedEventHandler(Quest quest);
 
     public static event AddedEventHandler Added;
     public static event UpdatedEventHandler Updated;
+    public static event RemovedEventHandler Removed;
     public static event CompletedEventHandler Completed;
 
-    private readonly Dictionary<string, Quest> activeQuests = new();
+    private List<Quest> quests = [];
 
-    public static IReadOnlyDictionary<string, Quest> ActiveQuests => Instance.activeQuests;
+    public static IReadOnlyList<Quest> ActiveQuests => Instance.quests;
 
-    public override void _Ready()
+    public override void _Process(double delta)
     {
-        InventoryManager.Pickup += OnItemPickup;
+        if (Engine.IsEditorHint()) return;
+
+        var completedQuests = new List<Quest>();
+
+        foreach (var quest in quests)
+        {
+            quest.Update();
+
+            if (quest.Completed)
+            {
+                Completed?.Invoke(quest);
+                completedQuests.Add(quest);
+            }
+            else
+            {
+                Updated?.Invoke(quest);
+            }
+        }
+
+        foreach (var quest in completedQuests)
+        {
+            Remove(quest.Id);
+        }
     }
 
     public static void Add(Quest quest)
     {
-        if (!Instance.activeQuests.TryAdd(quest.Id, quest)) return;
-
+        Instance.quests.Add(quest);
         Added?.Invoke(quest);
     }
 
     public static void Remove(string id)
     {
-        if (!Instance.activeQuests.Remove(id, out var quest)) return;
+        var quest = Instance.quests.FirstOrDefault(q => q.Id == id);
 
-        Updated?.Invoke(quest);
-    }
+        if (quest == null) return;
 
-    // TODO: Implement the rest of the QuestManager class
-
-    private void OnItemPickup(ItemGroup item)
-    {
-        //     var quests = activeQuests.Values;
-        //
-        //     foreach (var quest in quests)
-        //     {
-        //         var objectives = quest.Objectives;
-        //
-        //         if (quest.Ordered)
-        //         {
-        //             if (objectives.Count == 0 || objectives[0] is not { } objective) continue;
-        //
-        //             if (objective.Type is not (QuestObjective.ObjectiveType.Collect or QuestObjective.ObjectiveType.Give) ||
-        //                 objective.Items.All(itemGroup => itemGroup.Item.UniqueName != item.Item.UniqueName)) continue;
-        //
-        //             var objItem = objective.Items.First(itemGroup => itemGroup.Item.UniqueName == item.Item.UniqueName);
-        //
-        //             if (objItem.Quantity > item.Quantity)
-        //                 objItem.Quantity -= item.Quantity;
-        //             else
-        //                 objective.Items.Remove(objItem);
-        //
-        //             if (objective.Items.Count == 0)
-        //             {
-        //                 objectives.RemoveAt(0);
-        //
-        //                 if (objectives.Count == 0)
-        //                 {
-        //                     activeQuests.Remove(quest.Id);
-        //                     Completed?.Invoke(quest);
-        //                 }
-        //                 else
-        //                 {
-        //                     Updated?.Invoke(quest);
-        //                 }
-        //             }
-        //             else
-        //             {
-        //                 Updated?.Invoke(quest);
-        //             }
-        //         }
-        //         else
-        //         {
-        //             var objective = objectives.FirstOrDefault(o =>
-        //                 o.Type is QuestObjective.ObjectiveType.Collect or QuestObjective.ObjectiveType.Give &&
-        //                 o.Items.Any(itemGroup => itemGroup.Item.UniqueName == item.Item.UniqueName));
-        //
-        //             if (objective is null) continue;
-        //
-        //             var objItem = objective.Items.First(itemGroup => itemGroup.Item.UniqueName == item.Item.UniqueName);
-        //
-        //             if (objItem.Quantity > item.Quantity)
-        //                 objItem.Quantity -= item.Quantity;
-        //             else
-        //                 objective.Items.Remove(objItem);
-        //
-        //             if (objective.Items.Count == 0)
-        //             {
-        //                 objectives.RemoveAt(0);
-        //
-        //                 if (objectives.Count == 0)
-        //                 {
-        //                     activeQuests.Remove(quest.Id);
-        //                     Completed?.Invoke(quest);
-        //                 }
-        //                 else
-        //                 {
-        //                     Updated?.Invoke(quest);
-        //                 }
-        //             }
-        //             else
-        //             {
-        //                 Updated?.Invoke(quest);
-        //             }
-        //         }
-        //     }
+        Instance.quests.Remove(quest);
+        Removed?.Invoke(quest);
     }
 }

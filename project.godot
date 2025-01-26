@@ -29,6 +29,7 @@ WeaponManager="*res://Scripts/Globals/WeaponManager.cs"
 InventoryManager="*res://Scripts/Globals/InventoryManager.cs"
 InteractionManager="*res://Scripts/Globals/InteractionManager.cs"
 SaveManager="*res://Scripts/Globals/SaveManager.cs"
+QuestManager="*res://Scripts/Globals/QuestManager.cs"
 
 [dialogue_manager]
 
