@@ -11,9 +11,13 @@ public partial class Quest : Resource
 {
     [Export] public string Id { get; private set; } = Guid.NewGuid().ToString();
     [Export] public string Title;
+    [Export] private bool Ordered;
     [Export(PropertyHint.MultilineText)] public string Description;
     [Export] private QuestObjective[] objectives = [];
-    [Export] public bool Ordered;
+
+    [ExportCategory("Rewards")]
+    [Export] private int Experience;
+    [Export] private ItemGroup[] Items = [];
 
     public bool Completed { get; private set; }
     public List<QuestObjective> Objectives => [.. objectives];
@@ -59,6 +63,23 @@ public partial class Quest : Resource
 
         if (!completed) return;
 
+        Complete();
+    }
+
+    public void Complete()
+    {
+        if (Completed) return;
+
         Completed = true;
+        GiveRewards();
+
+        // TODO: save progress
+    }
+
+    private void GiveRewards()
+    {
+        if (!Completed) return;
+
+        // TODO: give rewards
     }
 }
