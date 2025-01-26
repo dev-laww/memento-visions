@@ -150,4 +150,11 @@ public partial class Crafting : Overlay
         increaseButton.Disabled = selectedRecipe is null || !selectedRecipe.CanCreate(quantity + 1);
         decreaseButton.Disabled = quantity <= 1;
     }
+
+    public override void Close()
+    {
+        base.Close();
+        
+        Reset();
+    }
 }
