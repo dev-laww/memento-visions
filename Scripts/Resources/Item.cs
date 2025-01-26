@@ -1,4 +1,4 @@
-using System.Linq;
+using System;
 using Godot;
 using Godot.Collections;
 
@@ -24,12 +24,12 @@ public partial class Item : Resource
         Whip
     }
 
-    public Texture2D Icon;
-    public string Name;
-    public string UniqueName;
-    public Type WeaponType;
-    public PackedScene Component;
-    public string Description;
+    public Texture2D Icon { get; private set; }
+    public string Name { get; private set; }
+    public string Id { get; private set; } = Guid.NewGuid().ToString();
+    public Type WeaponType { get; private set; }
+    public PackedScene Component { get; private set; }
+    public string Description { get; private set; }
 
     public Category ItemCategory
     {
@@ -41,53 +41,44 @@ public partial class Item : Resource
         }
     }
 
-
-
     private Category category;
 
-    public override string ToString() => $"<Item ({UniqueName})>";
+    public override string ToString() => $"<Item ({Id})>";
 
     public override Array<Dictionary> _GetPropertyList()
     {
-        var properties = new Array<Dictionary>();
-
-        // Add Icon property
-        properties.Add(new Dictionary
+        var properties = new Array<Dictionary>
         {
-            { "name", nameof(Icon) },
-            { "type", (int)Variant.Type.Object },
-            { "usage", (int)PropertyUsageFlags.Default },
-            { "hint", (int)PropertyHint.ResourceType },
-            { "hint_string", "Texture2D" }
-        });
+            new()
+            {
+                { "name", nameof(Id) },
+                { "type", (int)Variant.Type.String },
+                { "usage", (int)PropertyUsageFlags.Default }
+            },
+            new()
+            {
+                { "name", nameof(Icon) },
+                { "type", (int)Variant.Type.Object },
+                { "usage", (int)PropertyUsageFlags.Default },
+                { "hint", (int)PropertyHint.ResourceType },
+                { "hint_string", "Texture2D" }
+            },
+            new()
+            {
+                { "name", nameof(Name) },
+                { "type", (int)Variant.Type.String },
+                { "usage", (int)PropertyUsageFlags.Default }
+            },
+            new()
+            {
+                { "name", nameof(ItemCategory) },
+                { "type", (int)Variant.Type.Int },
+                { "usage", (int)PropertyUsageFlags.Default },
+                { "hint", (int)PropertyHint.Enum },
+                { "hint_string", "Consumable,Material,Quest,Weapon" }
+            }
+        };
 
-        // Add Name property
-        properties.Add(new Dictionary
-        {
-            { "name", nameof(Name) },
-            { "type", (int)Variant.Type.String },
-            { "usage", (int)PropertyUsageFlags.Default }
-        });
-
-        // Add UniqueName property
-        properties.Add(new Dictionary
-        {
-            { "name", nameof(UniqueName) },
-            { "type", (int)Variant.Type.String },
-            { "usage", (int)PropertyUsageFlags.Default }
-        });
-
-        // Add ItemCategory property
-        properties.Add(new Dictionary
-        {
-            { "name", nameof(ItemCategory) },
-            { "type", (int)Variant.Type.Int },
-            { "usage", (int)PropertyUsageFlags.Default },
-            { "hint", (int)PropertyHint.Enum },
-            { "hint_string", "Consumable,Material,Quest,Weapon" }
-        });
-
-        // Add WeaponType and Component properties if ItemCategory is Weapon
         if (ItemCategory == Category.Weapon)
         {
             properties.Add(new Dictionary
@@ -109,7 +100,6 @@ public partial class Item : Resource
             });
         }
 
-        // Add Description property
         properties.Add(new Dictionary
         {
             { "name", nameof(Description) },

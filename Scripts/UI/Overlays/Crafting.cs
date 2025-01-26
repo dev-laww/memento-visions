@@ -95,7 +95,7 @@ public partial class Crafting : Overlay
 
         if (item is null) return;
 
-        selectedRecipe = RecipeRegistry.Get(item.Item.UniqueName);
+        selectedRecipe = RecipeRegistry.Get(item.Item.Id);
         quantity = 1;
         quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
     }

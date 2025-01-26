@@ -12,20 +12,19 @@ public partial class RecipeRegistry : GodotObject
 {
     private static readonly List<string> recipes = DirAccessUtils.GetFilesRecursively(Constants.RECIPES_PATH);
 
-    public static Recipe Get(string uniqueName) => (
-        from recipe in recipes.Where(recipe => Fuzz.PartialRatio(
-            recipe.Split("/").Last(),
-            uniqueName.Split(":").Last()) >= 80
-        )
+    public static Recipe Get(string id) => (
+        from recipe in Engine.IsEditorHint() ? DirAccessUtils.GetFilesRecursively(Constants.RECIPES_PATH) : recipes
+        where Fuzz.PartialRatio(recipe.Split("/").Last(), id.Split(":").Last()) >= 80
         select ResourceLoader.Load<Recipe>(recipe)
         into resource
-        where resource.Result.Item.UniqueName == uniqueName
+        where resource.Result.Item.Id == id
         select resource
     ).FirstOrDefault();
 
-    public static List<Recipe> GetRecipes(Recipe.Type? type = null) => recipes.Select(
-        recipe => ResourceLoader.Load<Recipe>(recipe)
-    ).Where(
-        resource => type == null || resource.RecipeType == type
-    ).ToList();
+    public static List<Recipe> GetRecipes(Recipe.Type? type = null) =>
+    [
+        .. recipes.Select(
+            recipe => ResourceLoader.Load<Recipe>(recipe)
+        ).Where(resource => type == null || resource.RecipeType == type)
+    ];
 }

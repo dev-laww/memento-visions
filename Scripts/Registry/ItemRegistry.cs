@@ -10,16 +10,14 @@ namespace Game.Registry;
 [GlobalClass]
 public partial class ItemRegistry : GodotObject
 {
-    private static readonly List<string> items = DirAccessUtils.GetFilesRecursively(Constants.ITEMS_PATH);
+    private static List<string> Items => DirAccessUtils.GetFilesRecursively(Constants.ITEMS_PATH);
 
-    public static Item Get(string uniqueName) => (
-        from item in items.Where(item => Fuzz.PartialRatio(
-            item.Split("/").Last(),
-            uniqueName.Split(":").Last()) >= 80
-        )
+    public static Item Get(string id) => (
+        from item in Engine.IsEditorHint() ? DirAccessUtils.GetFilesRecursively(Constants.ITEMS_PATH) : Items
+        where Fuzz.PartialRatio(item.Split("/").Last(), id.Split(":").Last()) >= 80
         select ResourceLoader.Load<Item>(item)
         into resource
-        where resource.UniqueName == uniqueName
+        where resource.Id == id
         select resource
     ).FirstOrDefault();
 }

@@ -15,5 +15,5 @@ public partial class ItemGroup : Resource
         quantity = Quantity;
     }
 
-    public override string ToString() => $"{Item.UniqueName} (x{Quantity})";
+    public override string ToString() => $"<{Item.Id} (x{Quantity})>";
 }

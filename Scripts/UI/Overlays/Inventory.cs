@@ -83,7 +83,7 @@ public partial class Inventory : Overlay
         selectedItemActionButton.Visible = item?.Item.ItemCategory is Item.Category.Weapon or Item.Category.Consumable;
         selectedItemActionButton.ToggleMode = item?.Item.ItemCategory == Item.Category.Weapon;
         selectedItemActionButton.ButtonPressed =
-            item?.Item.UniqueName == WeaponManager.CurrentWeaponResource?.UniqueName;
+            item?.Item.Id == WeaponManager.CurrentWeaponResource?.Id;
         selectedItemActionButton.Text = item?.Item.ItemCategory switch
         {
             Item.Category.Weapon => selectedItemActionButton.ButtonPressed ? "Unequip" : "Equip",
@@ -126,7 +126,7 @@ public partial class Inventory : Overlay
 
         if (item.ItemCategory != currentCategory) return;
 
-        var slot = slots.FirstOrDefault(s => s.Item?.Item.UniqueName == item.UniqueName) ??
+        var slot = slots.FirstOrDefault(s => s.Item?.Item.Id == item.Id) ??
                    slots.First(s => s.Item is null);
 
         slot.Item = group.Quantity > 0 ? group : null;
@@ -146,7 +146,7 @@ public partial class Inventory : Overlay
             WeaponManager.Equip(SelectedItem);
             selectedItemActionButton.Text = "Unequip";
         }
-        else if (SelectedItem.UniqueName == WeaponManager.CurrentWeaponResource?.UniqueName)
+        else if (SelectedItem.Id == WeaponManager.CurrentWeaponResource?.Id)
         {
             WeaponManager.Unequip();
             selectedItemActionButton.Text = "Equip";

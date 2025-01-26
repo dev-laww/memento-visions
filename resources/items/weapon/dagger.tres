@@ -6,9 +6,9 @@
 
 [resource]
 script = ExtResource("1_hu4ji")
+Id = "weapon:dagger"
 Icon = ExtResource("2_bpntj")
 Name = "Dagger"
-UniqueName = "weapon:dagger"
 ItemCategory = 3
 WeaponType = 0
 Component = ExtResource("1_jhfva")

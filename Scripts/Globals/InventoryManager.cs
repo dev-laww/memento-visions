@@ -58,7 +58,7 @@ public partial class InventoryManager : Global<InventoryManager>
         {
             AddItem(new ItemGroup
             {
-                Item = ItemRegistry.Get(item.UniqueName),
+                Item = ItemRegistry.Get(item.Id),
                 Quantity = item.Amount
             });
         });
@@ -67,7 +67,7 @@ public partial class InventoryManager : Global<InventoryManager>
     public static void AddItem(ItemGroup group)
     {
         var itemGroup = Instance.Inventory[group.Item.ItemCategory]
-            .Find(g => g.Item.UniqueName == group.Item.UniqueName);
+            .Find(g => g.Item.Id == group.Item.Id);
 
         if (itemGroup is not null)
             itemGroup.Quantity += group.Quantity;
@@ -81,7 +81,7 @@ public partial class InventoryManager : Global<InventoryManager>
     public static void RemoveItem(ItemGroup group)
     {
         var itemGroup = Instance.Inventory[group.Item.ItemCategory]
-            .Find(g => g.Item.UniqueName == group.Item.UniqueName);
+            .Find(g => g.Item.Id == group.Item.Id);
 
         if (itemGroup is null) return;
 
@@ -99,13 +99,13 @@ public partial class InventoryManager : Global<InventoryManager>
 
     public static bool HasItem(ItemGroup group) =>
         Instance.Inventory[group.Item.ItemCategory]
-            .Any(g => g.Item.UniqueName == group.Item.UniqueName && g.Quantity >= group.Quantity);
+            .Any(g => g.Item.Id == group.Item.Id && g.Quantity >= group.Quantity);
 
     public static InventoryData ToData() => new()
     {
         Items = Instance.Inventory.SelectMany(i => i.Value).Select(item => new InventoryData.Item
         {
-            UniqueName = item.Item.UniqueName,
+            Id = item.Item.Id,
             Amount = item.Quantity
         }).ToList()
     };

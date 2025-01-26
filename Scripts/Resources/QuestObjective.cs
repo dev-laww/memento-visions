@@ -90,7 +90,7 @@ public partial class QuestObjective : Resource
 
         var items = Items.ToList();
 
-        var group = items.Find(i => i.Item.UniqueName == item.Item.UniqueName);
+        var group = items.Find(i => i.Item.Id == item.Item.Id);
 
         if (group is null) return;
 

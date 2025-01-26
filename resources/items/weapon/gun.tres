@@ -6,9 +6,9 @@
 
 [resource]
 script = ExtResource("1_wtqwt")
+Id = "weapon:gun"
 Icon = ExtResource("2_es2we")
 Name = "Gun"
-UniqueName = "weapon:gun"
 ItemCategory = 3
 WeaponType = 2
 Component = ExtResource("1_wtxhx")
