@@ -6,6 +6,7 @@ using Godot;
 
 namespace Game.Resources;
 
+[Tool]
 [GlobalClass, Icon("res://assets/icons/quest.svg")]
 public partial class Quest : Resource
 {
@@ -15,7 +16,7 @@ public partial class Quest : Resource
     [Export(PropertyHint.MultilineText)] public string Description;
     [Export] private QuestObjective[] objectives = [];
 
-    [ExportCategory("Rewards")] [Export] private int Experience;
+    [ExportCategory("Rewards")][Export] private int Experience;
     [Export] private ItemGroup[] Items = [];
 
     public bool Completed { get; private set; }
