@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Game.Registry;
 using Game.Resources;
 using Godot;
 
@@ -17,7 +18,7 @@ public partial class QuestManager : Global<QuestManager>
     public static event RemovedEventHandler Removed;
     public static event CompletedEventHandler Completed;
 
-    private List<Quest> quests = [];
+    private readonly List<Quest> quests = [];
 
     public static IReadOnlyList<Quest> ActiveQuests => Instance.quests;
 
