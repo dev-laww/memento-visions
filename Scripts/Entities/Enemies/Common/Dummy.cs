@@ -7,7 +7,7 @@ using GodotUtilities;
 namespace Game.Entities.Enemies.Common;
 
 [Scene]
-public partial class Dummy : Entity
+public partial class Dummy : Enemy
 {
     [Node] private AnimationPlayer animationPlayer;
     [Node] private HealthNumberManager healthNumberManager;

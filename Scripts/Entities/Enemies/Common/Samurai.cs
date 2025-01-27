@@ -1,6 +1,5 @@
 using Game.Components.Managers;
 using Game.Components.Movement;
-using Game.Entities;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
@@ -8,7 +7,7 @@ using GodotUtilities;
 namespace Game.Entities.Enemies.Common;
 
 [Scene]
-public partial class Samurai : Entity
+public partial class Samurai : Enemy
 {
     [Node] private Velocity velocity;
     [Node] private Area2D Range;
@@ -17,7 +16,7 @@ public partial class Samurai : Entity
     private bool inRange;
     private bool attacking;
     private string attackDirection;
-    
+
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
@@ -109,12 +108,11 @@ public partial class Samurai : Entity
 
         StateMachine.ChangeState(Walk);
     }
-    
+
     private void StatDecrease(float value, StatsType stat)
     {
         if (stat != StatsType.Health || attacking) return;
 
         StateMachine.ChangeState(Hurt);
     }
-    
 }
