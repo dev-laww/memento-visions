@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Game.Entities.Enemies;
 using Godot;
 using Godot.Collections;
 
@@ -31,10 +32,9 @@ public partial class QuestObjective : Resource
     [Export(PropertyHint.MultilineText)] public string Description { get; set; }
 
     public ItemRequirement[] Items = [];
+    public KillRequirement[] Enemies = [];
 
     public bool Completed;
-
-    // TODO: add properties for enemy
 
     private ObjectiveType type;
 
@@ -56,7 +56,16 @@ public partial class QuestObjective : Resource
                 });
                 break;
             case ObjectiveType.Navigate:
+                break;
             case ObjectiveType.Kill:
+                properties.Add(new Dictionary
+                {
+                    { "name", nameof(Enemies) },
+                    { "type", (int)Variant.Type.Array },
+                    { "usage", (int)PropertyUsageFlags.Default },
+                    { "hint", (int)PropertyHint.ArrayType },
+                    { "hint_string", $"24/17:KillRequirement" }
+                });
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -67,22 +76,65 @@ public partial class QuestObjective : Resource
 
     public void UpdateItemProgress(ItemGroup group)
     {
-        if (Type != ObjectiveType.Collect && Type != ObjectiveType.Deliver)
-        {
-            GD.PushWarning($"{this} does not require items. Use the appropriate method instead.");
-            throw new InvalidOperationException();
-        }
-
+        ValidateType(ObjectiveType.Collect, ObjectiveType.Deliver);
         if (Completed) return;
 
-        foreach (var requirement in Items)
+        UpdateRequirements(
+            Items,
+            req => req.Item.Id,
+            group.Item.Id,
+            group.Quantity
+        );
+
+        Completed = CheckCompletion(Items);
+    }
+
+    public void UpdateKillProgress(Enemy enemy)
+    {
+        ValidateType(ObjectiveType.Kill);
+        if (Completed) return;
+
+        UpdateRequirements(
+            Enemies,
+            req => req.Id,
+            enemy.Id,
+            1
+        );
+
+        Completed = CheckCompletion(Enemies);
+    }
+
+    private void ValidateType(params ObjectiveType[] allowedTypes)
+    {
+        if (allowedTypes.Contains(Type)) return;
+
+        GD.PushWarning($"{this} does not require this type of objective. Use the appropriate method instead.");
+        throw new InvalidOperationException();
+    }
+
+    private static bool CheckCompletion<T>(T[] requirements) where T : class => requirements.All(r =>
+        (int)r.GetType().GetProperty("Quantity")?.GetValue(r)! >=
+        (int)r.GetType().GetProperty("Amount")?.GetValue(r)!
+    );
+
+    private static void UpdateRequirements<T>(
+        T[] requirements,
+        Func<T, string> getId,
+        string targetId,
+        int amount
+    )
+    {
+        foreach (var req in requirements)
         {
-            if (requirement.Item.Id != group.Item.Id) continue;
+            if (getId(req) != targetId) continue;
+            var quantity = (int)req.GetType().GetProperty("Quantity")?.GetValue(req)!;
+            var amountProp = (int)req.GetType().GetProperty("Amount")?.GetValue(req)!;
 
-            requirement.Quantity = Mathf.Min(requirement.Amount, requirement.Quantity + group.Quantity);
+            req.GetType().GetProperty("Quantity")?.SetValue(
+                req,
+                Mathf.Min(amountProp, quantity + amount)
+            );
         }
-
-        Completed = Items.ToList().All(requirement => requirement.Quantity >= requirement.Amount);
     }
 
     public override string ToString() => $"<QuestObjective ({Type} {GetHashCode()})>";

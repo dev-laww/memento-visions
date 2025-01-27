@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Globals;
+using Game.Registry;
 using Godot;
 
 namespace Game.Resources;
@@ -16,7 +17,7 @@ public partial class Quest : Resource
     [Export(PropertyHint.MultilineText)] public string Description;
     [Export] private QuestObjective[] objectives = [];
 
-    [ExportCategory("Rewards")][Export] private int Experience;
+    [ExportCategory("Rewards")] [Export] private int Experience;
     [Export] private ItemGroup[] Items = [];
 
     public bool Completed { get; private set; }
@@ -28,6 +29,7 @@ public partial class Quest : Resource
         if (Engine.IsEditorHint()) return;
 
         InventoryManager.Pickup += OnItemPickup;
+        EnemyManager.EnemyDied += OnEnemyDied;
     }
 
     ~Quest()
@@ -35,6 +37,7 @@ public partial class Quest : Resource
         if (Engine.IsEditorHint()) return;
 
         InventoryManager.Pickup -= OnItemPickup;
+        EnemyManager.EnemyDied -= OnEnemyDied;
     }
 
     public void Update()
@@ -77,32 +80,42 @@ public partial class Quest : Resource
         // TODO: give rewards
     }
 
-    private void OnItemPickup(ItemGroup item)
+    private void OnItemPickup(ItemGroup item) => ProcessObjectives(
+        QuestObjective.ObjectiveType.Collect,
+        objective => objective.UpdateItemProgress(item)
+    );
+
+    private void OnEnemyDied(Game.Entities.Enemies.Enemy enemy) => ProcessObjectives(
+        QuestObjective.ObjectiveType.Kill,
+        objective => objective.UpdateKillProgress(EnemyRegistry.Get(enemy.Id))
+    );
+
+    private void ProcessObjectives(
+        QuestObjective.ObjectiveType type,
+        Action<QuestObjective> processAction
+    )
     {
         if (Completed) return;
 
-        if (Ordered)
-        {
-            var objective = objectives[currentStep];
+        var targets = GetObjectives(type).ToList();
 
-            if (objective.Type != QuestObjective.ObjectiveType.Collect) return;
-
-            objective.UpdateItemProgress(item);
-        }
-        else
-        {
-            var objectives = Objectives.Where(objective => objective.Type == QuestObjective.ObjectiveType.Collect);
-
-            foreach (var objective in objectives)
-            {
-                if (objective.Type != QuestObjective.ObjectiveType.Collect) continue;
-
-                objective.UpdateItemProgress(item);
-            }
-        }
+        targets.ForEach(processAction);
 
         Update();
     }
 
-    public override string ToString() => $"<Quest ({Id})>";
+    private IEnumerable<QuestObjective> GetObjectives(QuestObjective.ObjectiveType type)
+    {
+        if (Ordered)
+        {
+            if (currentStep >= objectives.Length) yield break;
+            var currentObjective = objectives[currentStep];
+            if (currentObjective.Type == type)
+                yield return currentObjective;
+        }
+        else
+            foreach (var objective in objectives)
+                if (objective.Type == type)
+                    yield return objective;
+    }
 }
