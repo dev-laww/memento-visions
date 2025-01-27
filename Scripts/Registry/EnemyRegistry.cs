@@ -1,4 +1,4 @@
-﻿using Game.Resources;
+﻿using Game.Entities.Enemies;
 using Game.Utils;
 using Godot;
 

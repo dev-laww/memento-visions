@@ -8,7 +8,7 @@ using Godot;
 namespace Game.Registry;
 
 public abstract partial class Registry<T, TRegistry> : GodotObject
-    where T : Resource
+    where T : GodotObject
     where TRegistry : Registry<T, TRegistry>, new()
 {
     private static readonly Lazy<TRegistry> _instance = new(() => new TRegistry());
