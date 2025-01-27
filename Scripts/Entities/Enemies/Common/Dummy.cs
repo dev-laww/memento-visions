@@ -4,7 +4,7 @@ using Game.Utils.Battle;
 using Godot;
 using GodotUtilities;
 
-namespace Game.Enemies.Common;
+namespace Game.Entities.Enemies.Common;
 
 [Scene]
 public partial class Dummy : Entity

@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=4 uid="uid://b4wadx6dv5aan"]
 
-[ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Player.tscn" id="1_28rab"]
+[ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="1_28rab"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_7gq68"]
 [ext_resource type="Texture2D" uid="uid://bld0optmgxhyy" path="res://assets/scenes/bar/door.png" id="3_iihhm"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_tm1gt"]
@@ -9,8 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://j0qixu5x2ins" path="res://Scenes/Decorations/Bar/LargeBarrel.tscn" id="8_fqy60"]
 [ext_resource type="TileSet" uid="uid://b0bp4y4xuaxog" path="res://resources/tilesets/bar-decoration.tres" id="8_qpdtc"]
 [ext_resource type="PackedScene" uid="uid://b5jpiv87dv1rl" path="res://Scenes/Decorations/Bar/Barrel.tscn" id="9_ikvjg"]
-[ext_resource type="PackedScene" uid="uid://casihsp0usdna" path="res://Scenes/Entities/BlackSmith.tscn" id="11_cu4de"]
-[ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemy/Common/Dummy.tscn" id="12_no76d"]
+[ext_resource type="PackedScene" uid="uid://casihsp0usdna" path="res://Scenes/Entities/Characters/BlackSmith.tscn" id="11_cu4de"]
+[ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemies/Common/Dummy.tscn" id="12_no76d"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="18_towvu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ervve"]
