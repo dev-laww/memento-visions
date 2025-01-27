@@ -5,7 +5,7 @@ using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
-namespace Game.Enemy.Common;
+namespace Game.Enemies.Common;
 
 [Scene]
 public partial class Samurai : Entity
