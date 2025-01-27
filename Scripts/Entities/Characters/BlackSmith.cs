@@ -3,10 +3,10 @@ using Game.Components.Managers;
 using Godot;
 using GodotUtilities;
 
-namespace Game;
+namespace Game.Entities.Characters;
 
 [Scene]
-public partial class BlackSmith : CharacterBody2D
+public partial class BlackSmith : Entity
 {
     [Node] private Interaction interaction;
 
@@ -19,6 +19,8 @@ public partial class BlackSmith : CharacterBody2D
 
     public override void _Ready()
     {
+        base._Ready();
+
         interaction.Interacted += OnInteracted;
     }
 

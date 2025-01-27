@@ -1,5 +1,5 @@
 using Game.Components.Battle;
-using Game.Entities.Player;
+using Game.Entities.Characters;
 using Game.Resources;
 using Game.Utils.Extensions;
 using Godot;

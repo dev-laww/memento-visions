@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using Game.Entities.Player;
-using Godot;
-using GodotUtilities;
+﻿using Godot;
 
 namespace Game.Utils.Extensions;
 

@@ -10,7 +10,7 @@ using Godot;
 using GodotUtilities;
 
 
-namespace Game.Entities.Player;
+namespace Game.Entities.Characters;
 
 [Scene]
 [GlobalClass]

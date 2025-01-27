@@ -1,11 +1,11 @@
 [gd_scene load_steps=32 format=3 uid="uid://c7u7njt632rfb"]
 
-[ext_resource type="Script" path="res://Scripts/Entities/Enemy/Common/Dummy.cs" id="1_nfovk"]
+[ext_resource type="Script" uid="uid://c6u1j8efnlsyy" path="res://Scripts/Entities/Enemies/Common/Dummy.cs" id="1_nfovk"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="1_ywhg6"]
-[ext_resource type="Script" path="res://Scripts/Components/Area/HurtBox.cs" id="2_i6lkr"]
+[ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="2_i6lkr"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="3_txlvp"]
 [ext_resource type="Texture2D" uid="uid://ci7so60mgolah" path="res://assets/entities/enemy/common/dummy/sprite.png" id="4_x85v6"]
-[ext_resource type="Script" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="5_gqlf7"]
+[ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="5_gqlf7"]
 [ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Components/Managers/HealthNumberManager.tscn" id="7_xk10n"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g0hd1"]
