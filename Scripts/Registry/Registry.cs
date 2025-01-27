@@ -7,16 +7,17 @@ using Godot;
 
 namespace Game.Registry;
 
-public abstract partial class Registry<T> : GodotObject where T : Resource
+public abstract partial class Registry<T, TRegistry> : GodotObject
+    where T : Resource
+    where TRegistry : Registry<T, TRegistry>, new()
 {
-    // Cache files per resource path using a static dictionary
+    private static readonly Lazy<TRegistry> _instance = new(() => new TRegistry());
     private static readonly Dictionary<string, List<string>> _fileCache = new();
     private readonly string _resourcePath;
 
     protected Registry(string resourcePath)
     {
         _resourcePath = resourcePath;
-        // Initialize cache for this resource path
         if (!_fileCache.ContainsKey(_resourcePath))
         {
             _fileCache[_resourcePath] = DirAccessUtils.GetFilesRecursively(_resourcePath);
@@ -37,13 +38,12 @@ public abstract partial class Registry<T> : GodotObject where T : Resource
     {
         var targetIdPart = id.Split(":").Last();
 
-        // First pass: Try exact match
-        var exactMatch = GetFiles(Engine.IsEditorHint()).FirstOrDefault(file => file.Split("/").Last().Equals(targetIdPart));
+        var exactMatch = GetFiles(Engine.IsEditorHint())
+            .FirstOrDefault(file => file.Split("/").Last().Equals(targetIdPart));
 
         if (exactMatch != null && ResourceLoaderUtils.Load<T>(exactMatch, out var res))
             return res;
 
-        // Second pass: Fuzzy match if exact not found
         return (
             from file in GetFiles()
             let filename = file.Split("/").Last()
@@ -57,6 +57,7 @@ public abstract partial class Registry<T> : GodotObject where T : Resource
         ).FirstOrDefault();
     }
 
-    // Optional: Add cache invalidation method
+    public static T Get(string id) => _instance.Value.GetResource(id);
+
     public void InvalidateCache() => _fileCache.Remove(_resourcePath);
 }
