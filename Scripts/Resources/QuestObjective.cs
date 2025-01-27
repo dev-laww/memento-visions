@@ -13,7 +13,7 @@ public partial class QuestObjective : Resource
     {
         Collect,
         Navigate,
-        KillEnemy,
+        Kill,
         Deliver
     }
 
@@ -56,7 +56,7 @@ public partial class QuestObjective : Resource
                 });
                 break;
             case ObjectiveType.Navigate:
-            case ObjectiveType.KillEnemy:
+            case ObjectiveType.Kill:
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -79,10 +79,11 @@ public partial class QuestObjective : Resource
         {
             if (requirement.Item.Id != group.Item.Id) continue;
 
-            requirement.Quantity = Mathf.Min(requirement.Required, requirement.Quantity + group.Quantity);
+            requirement.Quantity = Mathf.Min(requirement.Amount, requirement.Quantity + group.Quantity);
         }
 
-        Completed = Items.ToList().All(requirement => requirement.Quantity >= requirement.Required);
+        Completed = Items.ToList().All(requirement => requirement.Quantity >= requirement.Amount);
     }
+
     public override string ToString() => $"<QuestObjective ({Type} {GetHashCode()})>";
 }

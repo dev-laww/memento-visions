@@ -8,6 +8,6 @@ namespace Game.Resources;
 public partial class ItemRequirement : Resource
 { 
     [Export] public Item Item;
-    [Export] public int Required;
+    [Export] public int Amount;
     public int Quantity;
 }
