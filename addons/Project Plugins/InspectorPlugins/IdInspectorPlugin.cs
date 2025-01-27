@@ -28,6 +28,10 @@ public partial class IdInspectorPlugin : EditorInspectorPlugin
             SizeFlagsHorizontal = Control.SizeFlags.ExpandFill
         };
 
+        var margin = new MarginContainer();
+
+        margin.AddThemeConstantOverride("margin_left", 5);
+
         Button createButton()
         {
             var button = new Button { Text = "Reset" };
@@ -88,7 +92,9 @@ public partial class IdInspectorPlugin : EditorInspectorPlugin
 
         editor.AddChild(lineEdit);
 
-        AddCustomControl(hbox);
+        margin.AddChild(hbox);
+
+        AddCustomControl(margin);
 
         return true;
     }
