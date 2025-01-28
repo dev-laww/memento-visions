@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Game.Components.Area;
 using Game.Components.Managers;
 using Godot;
@@ -51,7 +53,7 @@ public abstract partial class Entity : CharacterBody2D
     {
         if (Engine.IsEditorHint()) return;
 
-        StateMachine = new();
+        StateMachine = new DelegateStateMachine();
         StatsManager.StatDepleted += OnStatsDepleted;
         OnReady();
     }
@@ -111,6 +113,15 @@ public abstract partial class Entity : CharacterBody2D
         OnInput(@event);
     }
 
+    public override void _EnterTree()
+    {
+        if (IsConnected(SignalName.ChildEnteredTree, new Callable(this, "NotifyChange"))) return;
+
+        ChildEnteredTree += NotifyChange;
+        ChildExitingTree += NotifyChange;
+        ChildOrderChanged += NotifyPropertyListChanged;
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         if (Engine.IsEditorHint()) return;
@@ -125,4 +136,26 @@ public abstract partial class Entity : CharacterBody2D
 
         OnProcess(delta);
     }
+
+    public override void _Notification(int what)
+    {
+        if (what != NotificationSceneInstantiated) return;
+
+        WireNodes();
+    }
+
+    public override string[] _GetConfigurationWarnings()
+    {
+        var warnings = new List<string>();
+
+        if (GetChildren().OfType<HurtBox>().FirstOrDefault() == null)
+            warnings.Add("Entity should have a HurtBox node.");
+
+        if (GetChildren().OfType<StatsManager>().FirstOrDefault() == null)
+            warnings.Add("Entity should have a StatsManager node.");
+
+        return [..warnings];
+    }
+
+    private void NotifyChange(Node _) => NotifyPropertyListChanged();
 }
