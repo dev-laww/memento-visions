@@ -9,7 +9,7 @@ namespace Game.Entities.Enemies.Common;
 [Scene]
 public partial class Samurai : Enemy
 {
-    [Node] private Velocity velocity;
+    [Node] private VelocityManager VelocityManager;
     [Node] private Area2D Range;
     [Node] private AnimationPlayer Animation;
 
@@ -48,12 +48,10 @@ public partial class Samurai : Enemy
         StateMachine.SetInitialState(Walk);
     }
 
-    public override void _PhysicsProcess(double delta) => StateMachine.Update();
-
 
     private void Idle()
     {
-        velocity.Decelerate();
+        VelocityManager.Decelerate();
         Animation.Play("idle");
     }
 
@@ -61,9 +59,9 @@ public partial class Samurai : Enemy
     {
         var player = this.GetPlayer();
 
-        var direction = (player.GlobalPosition - GlobalPosition).Normalized();
+        var direction = (player?.GlobalPosition - GlobalPosition)?.Normalized() ?? Vector2.Zero;
 
-        velocity.Accelerate(direction);
+        VelocityManager.Accelerate(direction);
         Animation.Play("walk");
     }
 
@@ -77,7 +75,7 @@ public partial class Samurai : Enemy
 
     private async void Attack()
     {
-        velocity.Decelerate();
+        VelocityManager.Decelerate();
 
         Animation.Play($"attack_{attackDirection}");
 

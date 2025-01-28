@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_mtcb3"]
 [ext_resource type="Texture2D" uid="uid://cnvissmtvmaii" path="res://assets/entities/enemy/common/samurai/attack-left.png" id="2_3vakn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_lv6q4"]
-[ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Movement/Velocity.cs" id="3_4gowe"]
+[ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Managers/VelocityManager.cs" id="3_4gowe"]
 [ext_resource type="Texture2D" uid="uid://dxhvlup6gwbpe" path="res://assets/entities/enemy/common/samurai/attack-right.png" id="3_f74rq"]
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="4_5v2fo"]
 [ext_resource type="Texture2D" uid="uid://dvfyiekl3kiqi" path="res://assets/entities/enemy/common/samurai/idle.png" id="4_7fj1g"]
@@ -409,14 +409,14 @@ _data = {
 }
 
 [node name="Samurai" type="CharacterBody2D" groups=["Enemy"]]
-velocity = null
 script = ExtResource("1_lsnvf")
 
-[node name="Velocity" type="Node" parent="." node_paths=PackedStringArray("Stats")]
+[node name="StatsManager" parent="." instance=ExtResource("2_lv6q4")]
+MaxHealth = 1000.0
+
+[node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("Stats")]
 script = ExtResource("3_4gowe")
 Stats = NodePath("../StatsManager")
-
-[node name="StatsManager" parent="." instance=ExtResource("2_lv6q4")]
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
 collision_layer = 2048

@@ -13,14 +13,13 @@ using GodotUtilities;
 namespace Game.Entities.Characters;
 
 [Scene]
-[GlobalClass]
 public partial class Player : Entity
 {
     [Export] public float DashStaminaCost { get; set; } = 10f;
     [Node] private HurtBox hurtBox;
     [Node] private AnimationPlayer animations;
 
-    [Node] public Velocity velocity;
+    [Node] public VelocityManager VelocityManager;
     [Node] private Node2D hitBoxes;
 
     private string MoveDirection => GetMoveDirection();
@@ -36,13 +35,11 @@ public partial class Player : Entity
         WireNodes();
     }
 
-    public override void _Ready()
+    protected override void OnReady()
     {
-        base._Ready();
-
-        velocity.Accelerating += () => StateMachine.ChangeState(Walk);
-        velocity.Decelerating += () => StateMachine.ChangeState(Idle);
-        velocity.DashEnded += HandleTransition;
+        VelocityManager.Accelerating += () => StateMachine.ChangeState(Walk);
+        VelocityManager.Decelerating += () => StateMachine.ChangeState(Idle);
+        VelocityManager.DashEnded += HandleTransition;
 
 
         hitBoxes.GetChildrenOfType<HitBox>().ToList().ForEach(box =>
@@ -72,7 +69,7 @@ public partial class Player : Entity
         StateMachine.SetInitialState(Idle);
     }
 
-    public override void _PhysicsProcess(double delta)
+    protected override void OnProcess(double delta)
     {
         if (Engine.IsEditorHint()) return;
 
@@ -81,7 +78,7 @@ public partial class Player : Entity
         if (!IsProcessingInput())
         {
             StateMachine.ChangeState(Idle);
-            velocity.Decelerate();
+            VelocityManager.Decelerate();
             return;
         }
 
@@ -95,10 +92,10 @@ public partial class Player : Entity
 
         if (Dashing) return;
 
-        velocity.Accelerate(input);
+        VelocityManager.Accelerate(input);
     }
 
-    public override void _Input(InputEvent @event)
+    protected override void OnInput(InputEvent @event)
     {
         if (@event.IsActionPressed("attack") && CanMove && !Dashing) StateMachine.ChangeState(Attack);
 
@@ -119,7 +116,7 @@ public partial class Player : Entity
 
     private void Dash()
     {
-        velocity.Dash(lastMoveDirection);
+        VelocityManager.Dash(lastMoveDirection);
         animations.Play($"walk_{MoveDirection}");
     }
 
@@ -134,7 +131,7 @@ public partial class Player : Entity
         }
 
         CanMove = false;
-        velocity.Stop();
+        VelocityManager.Stop();
     }
 
     private async void Attack()

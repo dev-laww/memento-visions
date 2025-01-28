@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bbhesrdqhrnnb" path="res://Scripts/Entities/Characters/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_cqdhe"]
-[ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Movement/Velocity.cs" id="4_iaq51"]
+[ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Managers/VelocityManager.cs" id="4_iaq51"]
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="5_5x453"]
 [ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Components/Managers/HealthNumberManager.tscn" id="5_lfb6s"]
 [ext_resource type="Script" uid="uid://dkgndduo4d7p4" path="res://Scripts/Components/Area/HitBox.cs" id="6_ly21x"]
@@ -899,15 +899,15 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bjmy2"]
 _data = {
-"RESET": SubResource("Animation_iq5xj"),
-"idle_back": SubResource("Animation_gdwx2"),
-"idle_front": SubResource("Animation_v1sad"),
-"idle_left": SubResource("Animation_hkc6p"),
-"idle_right": SubResource("Animation_g5oao"),
-"walk_back": SubResource("Animation_wyfox"),
-"walk_front": SubResource("Animation_sjxgk"),
-"walk_left": SubResource("Animation_k76lm"),
-"walk_right": SubResource("Animation_ar7pn")
+&"RESET": SubResource("Animation_iq5xj"),
+&"idle_back": SubResource("Animation_gdwx2"),
+&"idle_front": SubResource("Animation_v1sad"),
+&"idle_left": SubResource("Animation_hkc6p"),
+&"idle_right": SubResource("Animation_g5oao"),
+&"walk_back": SubResource("Animation_wyfox"),
+&"walk_front": SubResource("Animation_sjxgk"),
+&"walk_left": SubResource("Animation_k76lm"),
+&"walk_right": SubResource("Animation_ar7pn")
 }
 
 [sub_resource type="Animation" id="Animation_doxvx"]
@@ -1220,10 +1220,10 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_epg1c"]
 _data = {
-"back": SubResource("Animation_doxvx"),
-"front": SubResource("Animation_epg6o"),
-"left": SubResource("Animation_smb0o"),
-"right": SubResource("Animation_qj3am")
+&"back": SubResource("Animation_doxvx"),
+&"front": SubResource("Animation_epg6o"),
+&"left": SubResource("Animation_smb0o"),
+&"right": SubResource("Animation_qj3am")
 }
 
 [sub_resource type="Animation" id="Animation_c6omj"]
@@ -1340,10 +1340,10 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hjmv8"]
 _data = {
-"back": SubResource("Animation_c6omj"),
-"front": SubResource("Animation_8rwoq"),
-"left": SubResource("Animation_d4my0"),
-"right": SubResource("Animation_4rsr2")
+&"back": SubResource("Animation_c6omj"),
+&"front": SubResource("Animation_8rwoq"),
+&"left": SubResource("Animation_d4my0"),
+&"right": SubResource("Animation_4rsr2")
 }
 
 [sub_resource type="Animation" id="Animation_n8uvp"]
@@ -1654,10 +1654,10 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ehmqt"]
 _data = {
-"back": SubResource("Animation_n8uvp"),
-"front": SubResource("Animation_gbifl"),
-"left": SubResource("Animation_q4trg"),
-"right": SubResource("Animation_1q70k")
+&"back": SubResource("Animation_n8uvp"),
+&"front": SubResource("Animation_gbifl"),
+&"left": SubResource("Animation_q4trg"),
+&"right": SubResource("Animation_1q70k")
 }
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
@@ -1669,14 +1669,12 @@ script = ExtResource("1_3hkqn")
 unique_name_in_owner = true
 Damage = 100.0
 
-[node name="Velocity" type="Node" parent="." node_paths=PackedStringArray("Stats")]
+[node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("Stats")]
 script = ExtResource("4_iaq51")
 Stats = NodePath("../StatsManager")
 Acceleration = 1000.0
 Deceleration = 5.0
 DashDuration = 0.2
-
-[node name="Inventory" type="Node" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
@@ -1744,8 +1742,8 @@ statsManager = NodePath("../StatsManager")
 
 [node name="Animations" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_bjmy2"),
-"dagger": SubResource("AnimationLibrary_epg1c"),
-"gun": SubResource("AnimationLibrary_hjmv8"),
-"sword": SubResource("AnimationLibrary_ehmqt")
+&"": SubResource("AnimationLibrary_bjmy2"),
+&"dagger": SubResource("AnimationLibrary_epg1c"),
+&"gun": SubResource("AnimationLibrary_hjmv8"),
+&"sword": SubResource("AnimationLibrary_ehmqt")
 }
