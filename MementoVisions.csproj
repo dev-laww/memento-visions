@@ -31,5 +31,9 @@
         <PackageReference Include="gdUnit4.api" Version="4.4.0-rc6" />
         <PackageReference Include="gdUnit4.test.adapter" Version="2.1.0-rc2" />
         <PackageReference Include="OptimizedPriorityQueue" Version="5.1.0" />
+
+    </ItemGroup>
+    <ItemGroup>
+        <Analyzer Include="lib\SourceGenerator.dll" />
     </ItemGroup>
 </Project>
