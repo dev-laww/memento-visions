@@ -1,4 +1,3 @@
-using System;
 using Game.Effects.HealthNumbers;
 using Game.Utils.Battle;
 using Godot;
