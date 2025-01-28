@@ -9,10 +9,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <!-- Remove unnecessary items -->
         <Content Remove="script_templates\**;**\*.uid" />
         <Compile Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**" />
-        <EmbeddedResource Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**" />
+        <EmbeddedResource Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**;**\*.uid" />
         <None Remove="script_templates\**;**\*.uid" />
 
         <Compile Update="gdunit4_testadapter\**;addons\**;**\*.uid">
@@ -23,14 +22,12 @@
             <Namespace>Game</Namespace>
         </Compile>
 
-        <!-- Hide source generator implementation -->
         <Compile Update="Game.SourceGenerators\**">
             <Visible>false</Visible>
         </Compile>
     </ItemGroup>
 
     <ItemGroup>
-        <!-- Package references -->
         <PackageReference Include="Delaunator" Version="1.0.10" />
         <PackageReference Include="Firebelley.GodotUtilities" Version="5.0.0" />
         <PackageReference Include="FuzzySharp" Version="2.0.2" />
@@ -41,7 +38,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <!-- Source generator reference -->
         <ProjectReference Include="Game.SourceGenerators\Game.SourceGenerators.csproj"
             OutputItemType="Analyzer"
             ReferenceOutputAssembly="false" />

@@ -13,7 +13,7 @@
         <None Remove="**\*.uid" />
         <Compile Remove="**\*.uid" />
         <EmbeddedResource Remove="**\*.uid" />
-        <None Include="**\*.uid">
+        <None Include="**\*.uid" Exclude="**\*.uid">
             <Visible>false</Visible>
         </None>
     </ItemGroup>
