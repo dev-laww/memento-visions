@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Game.Components.Managers;
+using Game.Entities;
 using Game.Utils.Extensions;
 using Godot;
 
@@ -8,7 +9,7 @@ namespace Game.Components.Movement;
 
 [Tool]
 [GlobalClass]
-public partial class Velocity : Node
+public partial class VelocityManager : Node
 {
     [Export]
     private StatsManager Stats
@@ -123,9 +124,9 @@ public partial class Velocity : Node
 
     private void ApplyMovement()
     {
-        if (Parent is CharacterBody2D)
+        if (Owner is Entity)
         {
-            var character = GetParent<CharacterBody2D>();
+            var character = Owner as Entity;
 
             character.Velocity = velocity;
             character.MoveAndSlide();
