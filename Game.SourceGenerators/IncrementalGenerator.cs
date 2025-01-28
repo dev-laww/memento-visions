@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 
 #nullable enable
-namespace MementoVisions.SourceGenerator
+namespace Game.SourceGenerator
 {
     [Generator]
     public class IncrementalGenerator : IIncrementalGenerator
@@ -15,8 +15,8 @@ namespace MementoVisions.SourceGenerator
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
             var classDeclarations = context.SyntaxProvider.CreateSyntaxProvider(
-                predicate: (s, _) => s is ClassDeclarationSyntax,
-                transform: (ctx, _) => GetClassDeclarationSyntax(ctx))
+                    predicate: (s, _) => s is ClassDeclarationSyntax,
+                    transform: (ctx, _) => GetClassDeclarationSyntax(ctx))
                 .Where(classDecl => classDecl != null) // Filter out null values
                 .Collect();
 
@@ -67,7 +67,6 @@ namespace MementoVisions.SourceGenerator
 
             sb.AppendLine("using Godot;");
             sb.AppendLine();
-            sb.AppendLine("[Tool]");
             sb.AppendLine("[Icon(\"res://assets/icons/enemy.svg\")]");
             sb.AppendLine($"public partial class {className};");
 
@@ -99,6 +98,5 @@ namespace MementoVisions.SourceGenerator
 
             return nameSpace;
         }
-
     }
 }
