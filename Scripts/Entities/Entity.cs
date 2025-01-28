@@ -83,7 +83,7 @@ public abstract partial class Entity : CharacterBody2D
         QueueFree();
     }
 
-    protected abstract void OnReady();
+    protected virtual void OnReady() { }
 
     /// <summary>
     /// Called when the entity's stats are depleted.

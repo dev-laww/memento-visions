@@ -17,3 +17,7 @@ GdUnit*
 data
 results
 .runsettings
+
+bin
+obj
+Generated

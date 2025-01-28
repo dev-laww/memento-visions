@@ -2,6 +2,7 @@
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <EnableDynamicLoading>true</EnableDynamicLoading>
+        <RootNamespace>Game</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
         <Content Remove="script_templates\**" />
@@ -19,8 +20,10 @@
         </Compile>
         <Compile Remove="Scenes\**" />
         <EmbeddedResource Remove="Scenes\**" />
-        <Compile Update="Scripts\Utils\Battle\IEnemy.cs">
-            <Namespace>Game</Namespace>
+        <Compile Remove="Game.SourceGenerators\**" />
+        <EmbeddedResource Remove="Game.SourceGenerators\**" />
+        <Compile Update="Game.SourceGenerators\**">
+            <Visible>false</Visible>
         </Compile>
     </ItemGroup>
     <ItemGroup>
@@ -31,9 +34,12 @@
         <PackageReference Include="gdUnit4.api" Version="4.4.0-rc6" />
         <PackageReference Include="gdUnit4.test.adapter" Version="2.1.0-rc2" />
         <PackageReference Include="OptimizedPriorityQueue" Version="5.1.0" />
-
     </ItemGroup>
     <ItemGroup>
-        <Analyzer Include="lib\SourceGenerator.dll" />
+        <ProjectReference Include="Game.SourceGenerators\Game.SourceGenerators.csproj"
+            OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
+    <!-- <ItemGroup>
+        <Analyzer Include="lib\SourceGenerator.dll" />
+    </ItemGroup> -->
 </Project>
