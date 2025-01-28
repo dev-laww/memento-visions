@@ -3,30 +3,34 @@
         <TargetFramework>net8.0</TargetFramework>
         <EnableDynamicLoading>true</EnableDynamicLoading>
         <RootNamespace>Game</RootNamespace>
+
+        <!-- <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+        <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath> -->
     </PropertyGroup>
+
     <ItemGroup>
-        <Content Remove="script_templates\**" />
-        <Compile Remove="script_templates\**" />
-        <EmbeddedResource Remove="script_templates\**" />
-        <None Remove="script_templates\**" />
-        <Compile Update="gdunit4_testadapter\**">
+        <!-- Remove unnecessary items -->
+        <Content Remove="script_templates\**;**\*.uid" />
+        <Compile Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**" />
+        <EmbeddedResource Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**" />
+        <None Remove="script_templates\**;**\*.uid" />
+
+        <Compile Update="gdunit4_testadapter\**;addons\**;**\*.uid">
             <Visible>false</Visible>
         </Compile>
-        <Compile Update="addons\**">
-            <Visible>false</Visible>
-        </Compile>
+
         <Compile Update="Scripts\**\*.cs">
             <Namespace>Game</Namespace>
         </Compile>
-        <Compile Remove="Scenes\**" />
-        <EmbeddedResource Remove="Scenes\**" />
-        <Compile Remove="Game.SourceGenerators\**" />
-        <EmbeddedResource Remove="Game.SourceGenerators\**" />
+
+        <!-- Hide source generator implementation -->
         <Compile Update="Game.SourceGenerators\**">
             <Visible>false</Visible>
         </Compile>
     </ItemGroup>
+
     <ItemGroup>
+        <!-- Package references -->
         <PackageReference Include="Delaunator" Version="1.0.10" />
         <PackageReference Include="Firebelley.GodotUtilities" Version="5.0.0" />
         <PackageReference Include="FuzzySharp" Version="2.0.2" />
@@ -35,10 +39,11 @@
         <PackageReference Include="gdUnit4.test.adapter" Version="2.1.0-rc2" />
         <PackageReference Include="OptimizedPriorityQueue" Version="5.1.0" />
     </ItemGroup>
+
     <ItemGroup>
+        <!-- Source generator reference -->
         <ProjectReference Include="Game.SourceGenerators\Game.SourceGenerators.csproj"
             OutputItemType="Analyzer"
-            ReferenceOutputAssembly="false"
-        />
+            ReferenceOutputAssembly="false" />
     </ItemGroup>
 </Project>

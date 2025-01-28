@@ -5,6 +5,7 @@ build/
 
 workspace.xml
 .idea/
+.vs
 
 MementoVisions.sln.DotSettings.user
 

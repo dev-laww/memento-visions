@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 
 namespace Game.SourceGenerators;
@@ -25,19 +26,23 @@ public static class SymbolExtensions
     public static string ClassDef(this INamedTypeSymbol symbol)
         => symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat);
 
-    public static string GeneratePartialClass(this INamedTypeSymbol symbol, IEnumerable<string> content,
-        IEnumerable<string> usings = null)
+    public static string GeneratePartialClass(
+        this INamedTypeSymbol symbol,
+        IEnumerable<string> content = null,
+        IEnumerable<string> usings = null,
+        IEnumerable<string> attributes = null
+    )
     {
         var (nsOpen, nsClose, nsIndent) = symbol.GetNamespaceDeclaration();
 
         return $$"""
-
-                 {{(usings is null ? "" : string.Join("\n", usings))}}
+                 {{(usings is null ? "" : string.Join("\n", usings.Select(u => $"using {u};")))}}
 
                  {{nsOpen?.Trim()}}
+                 {{nsIndent}}{{(attributes is null ? "" : string.Join("\n", attributes.Select(a => $"[{a}]")))}}
                  {{nsIndent}}partial class {{symbol.ClassDef()}}
                  {{nsIndent}}{
-                 {{nsIndent}}    {{string.Join($"\n{nsIndent}    ", content)}}
+                 {{nsIndent}}    {{string.Join($"\n{nsIndent}    ", content ?? [])}}
                  {{nsIndent}}}
                  {{nsClose?.Trim()}}
 

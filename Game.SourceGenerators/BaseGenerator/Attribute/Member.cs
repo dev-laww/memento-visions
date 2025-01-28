@@ -123,8 +123,7 @@ public abstract class Member<TAttribute, TDeclarationSyntax> : IIncrementalGener
             return (null, InternalError(e));
         }
 
-        static DiagnosticDetail InternalError(Exception e)
-            => new() { Title = "Internal Error", Message = e.Message };
+        static DiagnosticDetail InternalError(Exception e) => new() { Title = "Internal Error", Message = e.Message };
     }
 
     protected virtual string GenerateFilename(ISymbol symbol) =>
