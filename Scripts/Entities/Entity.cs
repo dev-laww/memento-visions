@@ -41,7 +41,7 @@ public abstract partial class Entity : CharacterBody2D
     /// <summary>
     /// State machine for managing entity states.
     /// </summary>
-    protected DelegateStateMachine StateMachine = new();
+    protected DelegateStateMachine StateMachine;
 
     /// <summary>
     /// Called when the node is added to the scene.
@@ -49,24 +49,9 @@ public abstract partial class Entity : CharacterBody2D
     /// </summary>
     public override void _Ready()
     {
-        // string message = null;
-        //
-        // switch (HurtBox)
-        // {
-        //     case null when StatsManager == null:
-        //         message = "Entity must have a HurtBox and StatsManager node";
-        //         break;
-        //     case null:
-        //         message = "Entity must have a HurtBox node";
-        //         break;
-        //     default:
-        //         if (StatsManager == null)
-        //             message = "Entity must have a StatsManager node";
-        //         break;
-        // }
-        //
-        // if (message != null) throw new NullReferenceException(message);
+        if (Engine.IsEditorHint()) return;
 
+        StateMachine = new();
         StatsManager.StatDepleted += OnStatsDepleted;
         OnReady();
     }
@@ -83,7 +68,6 @@ public abstract partial class Entity : CharacterBody2D
         QueueFree();
     }
 
-    protected virtual void OnReady() { }
 
     /// <summary>
     /// Called when the entity's stats are depleted.
@@ -95,5 +79,50 @@ public abstract partial class Entity : CharacterBody2D
         if (type != StatsType.Health) return;
 
         Die(this);
+    }
+
+    /// <summary>
+    ///  Called when the node enters the scene tree for the first time.
+    /// </summary>
+    protected virtual void OnReady() { }
+
+    /// <summary>
+    /// Handles input events.
+    /// </summary>
+    /// <param name="event">The input event.</param>
+    protected virtual void OnInput(InputEvent @event) { }
+
+    /// <summary>
+    /// Handles physics processing.
+    /// </summary>
+    /// <param name="delta">The time since the last physics update.</param>
+    protected virtual void OnPhysicsProcess(double delta) { }
+
+    /// <summary>
+    /// Handles processing.
+    /// </summary>
+    /// <param name="delta">The time since the last update.</param>
+    protected virtual void OnProcess(double delta) { }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (Engine.IsEditorHint()) return;
+
+        OnInput(@event);
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        if (Engine.IsEditorHint()) return;
+
+        StateMachine.Update();
+        OnPhysicsProcess(delta);
+    }
+
+    public override void _Process(double delta)
+    {
+        if (Engine.IsEditorHint()) return;
+
+        OnProcess(delta);
     }
 }
