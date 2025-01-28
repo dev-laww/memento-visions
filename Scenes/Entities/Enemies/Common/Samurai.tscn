@@ -409,9 +409,7 @@ _data = {
 }
 
 [node name="Samurai" type="CharacterBody2D" groups=["Enemy"]]
-velocity = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","script":ExtResource("3_4gowe"),"Stats":Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"physics_interpolation_mode":0,"auto_translate_mode":0,"editor_description":"","script":Resource("res://Scripts/Components/Managers/StatsManager.cs"),"MaxHealth":100.0,"Level":1.0,"Experience":0.0,"Speed":100.0,"Defense":0.0,"Damage":0.0)
-,"Acceleration":100.0,"Deceleration":6.0,"DashDuration":0.1)
-
+velocity = null
 script = ExtResource("1_lsnvf")
 
 [node name="Velocity" type="Node" parent="." node_paths=PackedStringArray("Stats")]

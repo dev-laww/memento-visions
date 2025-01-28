@@ -21,10 +21,10 @@ public partial class Dummy : Enemy
 
     protected override void OnReady()
     {
-        GD.Print(Attribute.IsDefined(typeof(Dummy), typeof(IconAttribute)));
-
         StatsManager.AttackReceived += OnAttackReceived;
     }
+
+    protected override void Die(Entity killer) { }
 
     private void OnAttackReceived(Attack attack)
     {

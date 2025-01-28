@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Game.Components.Area;
 using Game.Components.Managers;
 using Godot;
@@ -76,10 +75,11 @@ public abstract partial class Entity : CharacterBody2D
     /// Handles the entity's death.
     /// Emits the Death signal and frees the entity.
     /// </summary>
-    /// <param name="entity">The entity that died.</param>
-    protected virtual void Die(Entity entity)
+    /// <param name="killer">The killer entity.</param>
+    // TODO: Add killer parameter
+    protected virtual void Die(Entity killer)
     {
-        EmitSignal(SignalName.Death, entity);
+        EmitSignal(SignalName.Death, this);
         QueueFree();
     }
 
