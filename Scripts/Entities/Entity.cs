@@ -18,7 +18,7 @@ public abstract partial class Entity : CharacterBody2D
     /// Unique name of the entity.
     /// </summary>
     [Export]
-    public string UniqueName;
+    public string Id;
 
     /// <summary>
     /// Reference to the StatsManager node.
@@ -69,6 +69,7 @@ public abstract partial class Entity : CharacterBody2D
         // if (message != null) throw new NullReferenceException(message);
 
         StatsManager.StatDepleted += OnStatsDepleted;
+        OnReady();
     }
 
     /// <summary>
@@ -81,6 +82,8 @@ public abstract partial class Entity : CharacterBody2D
         EmitSignal(SignalName.Death, entity);
         QueueFree();
     }
+
+    protected abstract void OnReady();
 
     /// <summary>
     /// Called when the entity's stats are depleted.

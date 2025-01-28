@@ -3,8 +3,6 @@ using Godot;
 
 namespace Game.Entities.Enemies;
 
-[Tool]
-[Icon("res://assets/icons/enemy.svg")]
 public abstract partial class Enemy : Entity
 {
     public enum EnemyType
@@ -13,7 +11,6 @@ public abstract partial class Enemy : Entity
         Boss
     }
 
-    [Export] public string Id;
     [Export] private EnemyType Type;
 
     public override void _Ready()

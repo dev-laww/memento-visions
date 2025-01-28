@@ -235,9 +235,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xtspj"]
 _data = {
-"crit": SubResource("Animation_xtp4x"),
-"hit": SubResource("Animation_e53oq"),
-"idle": SubResource("Animation_w8it0")
+&"crit": SubResource("Animation_xtp4x"),
+&"hit": SubResource("Animation_e53oq"),
+&"idle": SubResource("Animation_w8it0")
 }
 
 [node name="Dummy" type="CharacterBody2D"]
@@ -275,6 +275,6 @@ statsManager = NodePath("../StatsManager")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_xtspj")
+&"": SubResource("AnimationLibrary_xtspj")
 }
 autoplay = "idle"

@@ -24,9 +24,8 @@ public partial class Samurai : Enemy
         WireNodes();
     }
 
-    public override void _Ready()
+    protected override void OnReady()
     {
-        base._Ready();
         Range.BodyEntered += body =>
         {
             inRange = true;

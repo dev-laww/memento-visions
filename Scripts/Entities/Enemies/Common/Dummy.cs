@@ -1,5 +1,5 @@
+using System;
 using Game.Effects.HealthNumbers;
-using Game.Entities;
 using Game.Utils.Battle;
 using Godot;
 using GodotUtilities;
@@ -19,8 +19,10 @@ public partial class Dummy : Enemy
         WireNodes();
     }
 
-    public override void _Ready()
+    protected override void OnReady()
     {
+        GD.Print(Attribute.IsDefined(typeof(Dummy), typeof(IconAttribute)));
+
         StatsManager.AttackReceived += OnAttackReceived;
     }
 
