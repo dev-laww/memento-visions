@@ -5,6 +5,8 @@
         <LangVersion>latest</LangVersion>
         <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
         <RootNamespace>SourceGenerator</RootNamespace>
+        <IsRoslynComponent>true</IsRoslynComponent>
+        <DebugSourceGenerators>true</DebugSourceGenerators>
     </PropertyGroup>
 
     <ItemGroup>
@@ -23,9 +25,5 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Generators\" />
     </ItemGroup>
 </Project>
