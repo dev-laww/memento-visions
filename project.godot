@@ -30,6 +30,7 @@ InventoryManager="*res://Scripts/Globals/InventoryManager.cs"
 InteractionManager="*res://Scripts/Globals/InteractionManager.cs"
 SaveManager="*res://Scripts/Globals/SaveManager.cs"
 QuestManager="*res://Scripts/Globals/QuestManager.cs"
+EnemyManager="*res://Scripts/Globals/EnemyManager.cs"
 
 [dialogue_manager]
 
