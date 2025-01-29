@@ -21,6 +21,10 @@ run/main_scene="res://Scenes/Main.tscn"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://resources/misc/default_bus_layout.tres"
+
 [autoload]
 
 SceneManager="*res://Scripts/Globals/SceneManager.cs"
