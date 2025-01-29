@@ -17,7 +17,8 @@ public partial class Quest : Resource
     [Export(PropertyHint.MultilineText)] public string Description;
     [Export] private QuestObjective[] objectives = [];
 
-    [ExportCategory("Rewards")][Export] private int Experience;
+    [ExportCategory("Rewards")]
+    [Export] private int Experience;
     [Export] private ItemGroup[] Items = [];
 
     public bool Completed { get; private set; }
@@ -72,6 +73,8 @@ public partial class Quest : Resource
 
         // TODO: save progress
     }
+
+    public void Start() => QuestManager.Add(this);
 
     private void GiveRewards()
     {
