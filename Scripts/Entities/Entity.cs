@@ -117,7 +117,7 @@ public abstract partial class Entity : CharacterBody2D
     {
         if (IsConnected(SignalName.ChildEnteredTree, new Callable(this, "NotifyChange"))) return;
 
-        ChildEnteredTree += NotifyChange;
+        Connect(SignalName.ChildEnteredTree, new Callable(this, "NotifyChange"));
         ChildExitingTree += NotifyChange;
         ChildOrderChanged += NotifyPropertyListChanged;
     }
@@ -154,7 +154,7 @@ public abstract partial class Entity : CharacterBody2D
         if (GetChildren().OfType<StatsManager>().FirstOrDefault() == null)
             warnings.Add("Entity should have a StatsManager node.");
 
-        return [..warnings];
+        return [.. warnings];
     }
 
     private void NotifyChange(Node _) => NotifyPropertyListChanged();
