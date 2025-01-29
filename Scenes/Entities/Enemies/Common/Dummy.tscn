@@ -242,6 +242,7 @@ _data = {
 
 [node name="Dummy" type="CharacterBody2D"]
 script = ExtResource("1_nfovk")
+Id = "enemy:dummy"
 
 [node name="StatsManager" parent="." instance=ExtResource("1_ywhg6")]
 

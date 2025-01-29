@@ -1664,6 +1664,7 @@ _data = {
 collision_layer = 4
 collision_mask = 1019
 script = ExtResource("1_3hkqn")
+Id = "player"
 
 [node name="StatsManager" parent="." instance=ExtResource("2_cqdhe")]
 unique_name_in_owner = true
