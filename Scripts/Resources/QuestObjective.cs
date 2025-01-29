@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Game.Entities.Enemies;
+using Game.Globals;
 using Godot;
 using Godot.Collections;
 
@@ -108,32 +109,25 @@ public partial class QuestObjective : Resource
     {
         if (allowedTypes.Contains(Type)) return;
 
-        GD.PushWarning($"{this} does not require this type of objective. Use the appropriate method instead.");
         throw new InvalidOperationException();
     }
 
-    private static bool CheckCompletion<T>(T[] requirements) where T : class => requirements.All(r =>
-        (int)r.GetType().GetProperty("Quantity")?.GetValue(r)! >=
-        (int)r.GetType().GetProperty("Amount")?.GetValue(r)!
-    );
+    private static bool CheckCompletion<T>(T[] requirements) where T : GodotObject => requirements.All(r => r.Get("Quantity").As<int>() >= r.Get("Amount").As<int>());
 
     private static void UpdateRequirements<T>(
         T[] requirements,
         Func<T, string> getId,
         string targetId,
         int amount
-    )
+    ) where T : GodotObject
     {
         foreach (var req in requirements)
         {
             if (getId(req) != targetId) continue;
-            var quantity = (int)req.GetType().GetProperty("Quantity")?.GetValue(req)!;
-            var amountProp = (int)req.GetType().GetProperty("Amount")?.GetValue(req)!;
+            var quantity = req.Get("Quantity").As<int>();
+            var amountProp = req.Get("Amount").As<int>();
 
-            req.GetType().GetProperty("Quantity")?.SetValue(
-                req,
-                Mathf.Min(amountProp, quantity + amount)
-            );
+            req.Set("Quantity", Mathf.Min(quantity + amount, amountProp));
         }
     }
 

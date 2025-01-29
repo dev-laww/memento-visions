@@ -34,7 +34,7 @@ public partial class EnemyManager : Global<EnemyManager>
 
     public static void Unregister(Enemy enemy)
     {
-        Instance.enemies.Remove(enemy);
         Instance.EmitSignal(SignalName.Died, enemy);
+        Instance.enemies.Remove(enemy);
     }
 }

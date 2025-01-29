@@ -26,8 +26,8 @@ public abstract partial class Enemy : Entity
     {
         if (Engine.IsEditorHint()) return;
 
-        base.Die(entity);
-
         EnemyManager.Unregister(this);
+
+        base.Die(entity);
     }
 }

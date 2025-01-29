@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Entities.Enemies;
 using Game.Globals;
-using Game.Registry;
 using Godot;
 
 namespace Game.Resources;
@@ -17,7 +17,7 @@ public partial class Quest : Resource
     [Export(PropertyHint.MultilineText)] public string Description;
     [Export] private QuestObjective[] objectives = [];
 
-    [ExportCategory("Rewards")] [Export] private int Experience;
+    [ExportCategory("Rewards")][Export] private int Experience;
     [Export] private ItemGroup[] Items = [];
 
     public bool Completed { get; private set; }
@@ -85,9 +85,9 @@ public partial class Quest : Resource
         objective => objective.UpdateItemProgress(item)
     );
 
-    private void OnEnemyDied(Game.Entities.Enemies.Enemy enemy) => ProcessObjectives(
+    private void OnEnemyDied(Enemy enemy) => ProcessObjectives(
         QuestObjective.ObjectiveType.Kill,
-        objective => objective.UpdateKillProgress(EnemyRegistry.Get(enemy.Id))
+        objective => objective.UpdateKillProgress(enemy)
     );
 
     private void ProcessObjectives(
@@ -118,4 +118,6 @@ public partial class Quest : Resource
                 if (objective.Type == type)
                     yield return objective;
     }
+
+    public override string ToString() => $"<Quest ({Id} {GetHashCode()})>";
 }

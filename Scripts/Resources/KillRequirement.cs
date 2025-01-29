@@ -2,6 +2,7 @@
 
 namespace Game.Resources;
 
+[Tool]
 [GlobalClass]
 public partial class KillRequirement : Resource
 {
