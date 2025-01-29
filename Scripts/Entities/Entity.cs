@@ -19,7 +19,15 @@ public abstract partial class Entity : CharacterBody2D
     /// Unique name of the entity.
     /// </summary>
     [Export]
-    public string Id;
+    public string Id
+    {
+        get => id;
+        set
+        {
+            SetId(value);
+            NotifyPropertyListChanged();
+        }
+    }
 
     /// <summary>
     /// Reference to the StatsManager node.
@@ -106,6 +114,14 @@ public abstract partial class Entity : CharacterBody2D
     /// <param name="delta">The time since the last update.</param>
     protected virtual void OnProcess(double delta) { }
 
+    /// <summary>
+    /// Sets the entity's Id.
+    /// </summary>
+    /// <param name="value">The new Id.</param>
+    protected virtual void SetId(string value) => id = value;
+
+    private string id;
+
     public override void _Input(InputEvent @event)
     {
         if (Engine.IsEditorHint()) return;
@@ -148,11 +164,18 @@ public abstract partial class Entity : CharacterBody2D
     {
         var warnings = new List<string>();
 
-        if (GetChildren().OfType<HurtBox>().FirstOrDefault() == null)
-            warnings.Add("Entity should have a HurtBox node.");
+        var statsManagers = GetChildren().OfType<StatsManager>().Count();
 
-        if (GetChildren().OfType<StatsManager>().FirstOrDefault() == null)
-            warnings.Add("Entity should have a StatsManager node.");
+        if (statsManagers != 1)
+            warnings.Add($"Entity should have {(statsManagers == 0 ? "a" : "only one")} StatsManager node.");
+
+        var hurtBoxes = GetChildren().OfType<HurtBox>().Count();
+
+        if (hurtBoxes != 1)
+            warnings.Add($"Entity should have {(hurtBoxes == 0 ? "a" : "only one")} HurtBox node.");
+
+        if (Id == null || Id == string.Empty)
+            warnings.Add("Entity should have a unique Id.");
 
         return [.. warnings];
     }
