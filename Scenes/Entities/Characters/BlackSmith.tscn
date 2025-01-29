@@ -1,18 +1,13 @@
-[gd_scene load_steps=26 format=3 uid="uid://casihsp0usdna"]
+[gd_scene load_steps=24 format=3 uid="uid://casihsp0usdna"]
 
 [ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="1_hw0pw"]
 [ext_resource type="Script" uid="uid://dlhoi4y35jo82" path="res://Scripts/Entities/Characters/BlackSmith.cs" id="1_m0lkp"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_fbx4l"]
 [ext_resource type="Texture2D" uid="uid://dyxsacj8kktd1" path="res://assets/icons/f.png" id="2_lunr2"]
-[ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="3_3kde4"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="3_kip8c"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="4_iumo3"]
 [ext_resource type="Texture2D" uid="uid://cedupdnagtvrd" path="res://assets/entities/npc/black-smith.png" id="5_eh65q"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="6_j0jn0"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ej0f5"]
-radius = 9.0
-height = 26.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rtbut"]
 radius = 4.0
@@ -119,16 +114,6 @@ script = ExtResource("1_m0lkp")
 [node name="StatsManager" type="Node" parent="."]
 script = ExtResource("2_fbx4l")
 metadata/_custom_type_script = ExtResource("2_fbx4l")
-
-[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
-collision_layer = 2048
-collision_mask = 1024
-script = ExtResource("3_3kde4")
-StatsManager = NodePath("../StatsManager")
-metadata/_custom_type_script = ExtResource("3_3kde4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource("CapsuleShape2D_ej0f5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 11)
