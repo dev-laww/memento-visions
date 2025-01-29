@@ -18,7 +18,7 @@ public partial class SaveManager : Global<SaveManager>
     public override void _EnterTree()
     {
         Load();
-        var timer = new Timer { WaitTime = 10, Autostart = true };
+        var timer = new Timer { WaitTime = OS.IsDebugBuild() ? 15 : 60, Autostart = true };
         AddChild(timer);
         timer.Timeout += Save;
     }
@@ -33,7 +33,7 @@ public partial class SaveManager : Global<SaveManager>
         Log.Debug("Loading save data...");
         if (FileAccess.FileExists(path))
         {
-            Log.Debug("Save data found.");
+            Log.Debug("Save data not found creating new save data...");
             var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
             var content = file.GetAsText();
             file.Close();
