@@ -30,4 +30,6 @@ public abstract partial class Enemy : Entity
 
         base.Die(entity);
     }
+
+    public override string ToString() => $"<Enemy ({Id})>";
 }

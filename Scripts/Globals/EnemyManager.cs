@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Game.Entities.Enemies;
+using Game.Utils;
 using Godot;
 
 namespace Game.Globals;
@@ -30,11 +31,13 @@ public partial class EnemyManager : Global<EnemyManager>
     {
         Instance.enemies.Add(enemy);
         Instance.EmitSignal(SignalName.Spawned, enemy);
+        Log.Debug($"${enemy} spawned.");
     }
 
     public static void Unregister(Enemy enemy)
     {
         Instance.EmitSignal(SignalName.Died, enemy);
         Instance.enemies.Remove(enemy);
+        Log.Debug($"{enemy} died.");
     }
 }

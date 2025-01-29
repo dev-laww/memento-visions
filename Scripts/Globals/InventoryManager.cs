@@ -4,6 +4,7 @@ using System.Linq;
 using Game.Exceptions.Command;
 using Game.Registry;
 using Game.Resources;
+using Game.Utils;
 using Game.Utils.Json.Models;
 using Godot;
 
@@ -54,6 +55,7 @@ public partial class InventoryManager : Global<InventoryManager>
     {
         var inventory = SaveManager.InventoryData;
 
+        Log.Info("Loading inventory...");
         inventory.Items.ForEach(item =>
         {
             AddItem(new ItemGroup
@@ -76,6 +78,7 @@ public partial class InventoryManager : Global<InventoryManager>
 
         Updated?.Invoke(itemGroup ?? group);
         Pickup?.Invoke(group);
+        Log.Debug($"Added {group} to the inventory.");
     }
 
     public static void RemoveItem(ItemGroup group)
@@ -92,6 +95,7 @@ public partial class InventoryManager : Global<InventoryManager>
 
         Remove?.Invoke(itemGroup);
         Updated?.Invoke(itemGroup);
+        Log.Debug($"Removed {group} from the inventory.");
     }
 
     public static IReadOnlyList<ItemGroup> GetItemsFromCategory(Item.Category category) =>

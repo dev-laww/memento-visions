@@ -119,5 +119,5 @@ public partial class Quest : Resource
                     yield return objective;
     }
 
-    public override string ToString() => $"<Quest ({Id} {GetHashCode()})>";
+    public override string ToString() => $"<Quest ({Id})>";
 }

@@ -1,3 +1,4 @@
+using Game.Utils;
 using Game.Utils.Json.Models;
 using Godot;
 using Newtonsoft.Json;
@@ -29,8 +30,10 @@ public partial class SaveManager : Global<SaveManager>
 
     private static void Load()
     {
+        Log.Debug("Loading save data...");
         if (FileAccess.FileExists(path))
         {
+            Log.Debug("Save data found.");
             var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
             var content = file.GetAsText();
             file.Close();
@@ -48,6 +51,7 @@ public partial class SaveManager : Global<SaveManager>
 
     private void Save()
     {
+        Log.Debug("Saving data...");
         var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
 
         // TODO: Implement other save data

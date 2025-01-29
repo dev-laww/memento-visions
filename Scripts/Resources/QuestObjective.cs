@@ -131,5 +131,5 @@ public partial class QuestObjective : Resource
         }
     }
 
-    public override string ToString() => $"<QuestObjective ({Type} {GetHashCode()})>";
+    public override string ToString() => $"<QuestObjective ({Type})>";
 }

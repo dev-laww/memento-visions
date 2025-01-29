@@ -158,4 +158,6 @@ public abstract partial class Entity : CharacterBody2D
     }
 
     private void NotifyChange(Node _) => NotifyPropertyListChanged();
+
+    public override string ToString() => $"<Entity ({Id})>";
 }
