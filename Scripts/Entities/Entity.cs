@@ -19,15 +19,7 @@ public abstract partial class Entity : CharacterBody2D
     /// Unique name of the entity.
     /// </summary>
     [Export]
-    public string Id
-    {
-        get => id;
-        set
-        {
-            SetId(value);
-            NotifyPropertyListChanged();
-        }
-    }
+    public string Id;
 
     /// <summary>
     /// Reference to the StatsManager node.
@@ -114,14 +106,6 @@ public abstract partial class Entity : CharacterBody2D
     /// <param name="delta">The time since the last update.</param>
     protected virtual void OnProcess(double delta) { }
 
-    /// <summary>
-    /// Sets the entity's Id.
-    /// </summary>
-    /// <param name="value">The new Id.</param>
-    protected virtual void SetId(string value) => id = value;
-
-    private string id;
-
     public override void _Input(InputEvent @event)
     {
         if (Engine.IsEditorHint()) return;
@@ -174,7 +158,7 @@ public abstract partial class Entity : CharacterBody2D
         if (hurtBoxes != 1)
             warnings.Add($"Entity should have {(hurtBoxes == 0 ? "a" : "only one")} HurtBox node.");
 
-        if (Id == null || Id == string.Empty)
+        if (Id is null or "")
             warnings.Add("Entity should have a unique Id.");
 
         return [.. warnings];
