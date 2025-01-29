@@ -21,6 +21,8 @@ public partial class Player : Entity
 
     [Node] public VelocityManager VelocityManager;
     [Node] private Node2D hitBoxes;
+    [Node] private AudioStreamPlayer2D SwordSlash;
+    [Node] private AudioStreamPlayer2D Gunshot;
 
     private string MoveDirection => GetMoveDirection();
     private Vector2 lastMoveDirection = Vector2.Down;
@@ -140,12 +142,14 @@ public partial class Player : Entity
         switch (WeaponManager.CurrentWeaponResource.WeaponType)
         {
             case Item.Type.Gun:
+                Gunshot.Play(1);
                 animations.Play($"gun/{MoveDirection}");
                 break;
             case Item.Type.Dagger:
                 animations.Play($"dagger/{MoveDirection}");
                 break;
             case Item.Type.Sword:
+                SwordSlash.Play(1);
                 animations.Play($"sword/{MoveDirection}");
                 break;
             case Item.Type.Whip:
@@ -155,7 +159,7 @@ public partial class Player : Entity
                 GD.PushError("Weapon type not found");
                 break;
         }
-
+       
         WeaponManager.Attack(MoveDirection);
 
         await ToSignal(animations, "animation_finished");

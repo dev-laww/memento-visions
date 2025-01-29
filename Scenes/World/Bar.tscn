@@ -1,7 +1,9 @@
-[gd_scene load_steps=15 format=4 uid="uid://b4wadx6dv5aan"]
+[gd_scene load_steps=17 format=4 uid="uid://b4wadx6dv5aan"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="1_28rab"]
+[ext_resource type="Script" uid="uid://b7tipxnk0uqml" path="res://Scripts/Levels/Bar.cs" id="1_u221d"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_7gq68"]
+[ext_resource type="AudioStream" uid="uid://yvlm18fmqdjv" path="res://assets/SFX/Music/relaxing-piano-music-291015.mp3" id="2_j24d5"]
 [ext_resource type="Texture2D" uid="uid://bld0optmgxhyy" path="res://assets/scenes/bar/door.png" id="3_iihhm"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_tm1gt"]
 [ext_resource type="Script" uid="uid://58jqrupdcss0" path="res://Scripts/Components/SmoothSprite2D.cs" id="5_a0tbo"]
@@ -19,6 +21,8 @@ size = Vector2(22, 12)
 
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_u221d")
+music = ExtResource("2_j24d5")
 
 [node name="Art" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -88,4 +92,3 @@ position = Vector2(94, 199)
 
 [node name="Samurai" parent="." instance=ExtResource("13_1awp1")]
 position = Vector2(381, 174)
-velocity = Vector2(0, 0)
