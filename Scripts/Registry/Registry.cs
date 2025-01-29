@@ -11,8 +11,8 @@ public abstract partial class Registry<T, TRegistry> : GodotObject
     where T : GodotObject
     where TRegistry : Registry<T, TRegistry>, new()
 {
-    private static readonly Lazy<TRegistry> _instance = new(() => new TRegistry());
-    private static readonly Dictionary<string, List<string>> _fileCache = new();
+    protected static readonly Lazy<TRegistry> _instance = new(() => new TRegistry());
+    private static readonly Dictionary<string, List<string>> _fileCache = [];
     private readonly string _resourcePath;
 
     protected Registry(string resourcePath)
@@ -34,7 +34,7 @@ public abstract partial class Registry<T, TRegistry> : GodotObject
         return value;
     }
 
-    public T GetResource(string id)
+    protected virtual T GetResource(string id)
     {
         var targetIdPart = id.Split(":").Last();
 
