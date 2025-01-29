@@ -22,7 +22,7 @@ public partial class Player : Entity
     [Node] public VelocityManager VelocityManager;
     [Node] private Node2D hitBoxes;
     [Node] private AudioStreamPlayer2D SwordSlash;
-    [Node] private AudioStreamPlayer2D Gunshot;
+    [Node] private AudioStreamPlayer2D GunShot;
 
     private string MoveDirection => GetMoveDirection();
     private Vector2 lastMoveDirection = Vector2.Down;
@@ -142,7 +142,7 @@ public partial class Player : Entity
         switch (WeaponManager.CurrentWeaponResource.WeaponType)
         {
             case Item.Type.Gun:
-                Gunshot.Play(1);
+                GunShot.Play(1);
                 animations.Play($"gun/{MoveDirection}");
                 break;
             case Item.Type.Dagger:
