@@ -30,7 +30,7 @@ public partial class SaveManager : Global<SaveManager>
 
     private static void Load()
     {
-        Log.Debug("Loading save data...");
+        Log.Info("Loading save data...");
         if (FileAccess.FileExists(path))
         {
             Log.Debug("Save data not found creating new save data...");
@@ -51,7 +51,7 @@ public partial class SaveManager : Global<SaveManager>
 
     private void Save()
     {
-        Log.Debug("Saving data...");
+        Log.Info("Saving data...");
         var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
 
         // TODO: Implement other save data
