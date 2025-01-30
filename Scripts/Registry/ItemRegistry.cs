@@ -1,4 +1,5 @@
 using Game.Common;
+using Game.Common.Abstract;
 using Game.Resources;
 using Godot;
 

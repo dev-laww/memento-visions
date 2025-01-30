@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FuzzySharp;
+﻿using FuzzySharp;
 using Game.Common.Utilities;
-using Game.Utils;
 using Godot;
 
-namespace Game.Registry;
+namespace Game.Common.Abstract;
 
 public abstract partial class Registry<T, TRegistry> : GodotObject
     where T : GodotObject
@@ -35,7 +31,7 @@ public abstract partial class Registry<T, TRegistry> : GodotObject
         return value;
     }
 
-    protected virtual T GetResource(string id)
+    protected virtual T? GetResource(string id)
     {
         var targetIdPart = id.Split(":").Last();
 
@@ -58,7 +54,7 @@ public abstract partial class Registry<T, TRegistry> : GodotObject
         ).FirstOrDefault();
     }
 
-    public static T Get(string id) => _instance.Value.GetResource(id);
+    public static T? Get(string id) => _instance.Value.GetResource(id);
 
     public void InvalidateCache() => _fileCache.Remove(_resourcePath);
 }
