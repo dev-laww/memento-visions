@@ -10,8 +10,10 @@
 
     <ItemGroup>
         <Content Remove="script_templates\**;**\*.uid" />
-        <Compile Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**" />
-        <EmbeddedResource Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**;**\*.uid" />
+        <Compile
+            Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**;Game.Common\**" />
+        <EmbeddedResource
+            Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**;**\*.uid;Game.Common\**" />
         <None Remove="script_templates\**;**\*.uid" />
 
         <Compile Update="gdunit4_testadapter\**;addons\**;**\*.uid">
@@ -22,7 +24,7 @@
             <Namespace>Game</Namespace>
         </Compile>
 
-        <Compile Update="Game.SourceGenerators\**">
+        <Compile Update="Game.SourceGenerators\**;Game.Common\**">
             <Visible>false</Visible>
         </Compile>
     </ItemGroup>
@@ -38,8 +40,15 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="Game.Common\Game.Common.csproj" />
         <ProjectReference Include="Game.SourceGenerators\Game.SourceGenerators.csproj"
             OutputItemType="Analyzer"
             ReferenceOutputAssembly="false" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Scripts\Tests\" />
+        <Folder Include="Scripts\Utils\DeveloperConsole\" />
+        <Folder Include="Scripts\Utils\Extensions\" />
     </ItemGroup>
 </Project>

@@ -37,7 +37,7 @@ public partial class Player : Entity
         WireNodes();
     }
 
-    protected override void OnReady()
+    public override void OnReady()
     {
         VelocityManager.Accelerating += () => StateMachine.ChangeState(Walk);
         VelocityManager.Decelerating += () => StateMachine.ChangeState(Idle);
@@ -71,7 +71,7 @@ public partial class Player : Entity
         StateMachine.SetInitialState(Idle);
     }
 
-    protected override void OnProcess(double delta)
+    public override void OnProcess(double delta)
     {
         if (Engine.IsEditorHint()) return;
 
@@ -97,7 +97,7 @@ public partial class Player : Entity
         VelocityManager.Accelerate(input);
     }
 
-    protected override void OnInput(InputEvent @event)
+    public override void OnInput(InputEvent @event)
     {
         if (@event.IsActionPressed("attack") && CanMove && !Dashing) StateMachine.ChangeState(Attack);
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using Game.Common;
 using Game.Entities.Enemies;
-using Game.Utils;
 using Godot;
 
 namespace Game.Globals;

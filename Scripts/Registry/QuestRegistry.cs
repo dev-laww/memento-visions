@@ -1,6 +1,5 @@
-using System;
+using Game.Common;
 using Game.Resources;
-using Game.Utils;
 using Godot;
 
 namespace Game.Registry;

@@ -18,7 +18,7 @@ public partial class Dummy : Enemy
         WireNodes();
     }
 
-    protected override void OnReady()
+    public override void OnReady()
     {
         StatsManager.AttackReceived += OnAttackReceived;
     }

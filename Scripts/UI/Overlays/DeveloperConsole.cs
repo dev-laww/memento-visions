@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Game.Exceptions.Command;
-using Game.Globals;
+using Game.Common;
+using Game.Common.Utilities;
+using Game.Exceptions;
 using Game.UI.Overlays;
-using Game.Utils;
 using Godot;
 using GodotUtilities;
 

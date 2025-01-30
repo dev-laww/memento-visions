@@ -1,8 +1,7 @@
-using Game.Utils;
+using Game.Common;
 using Game.Utils.Json.Models;
 using Godot;
 using Newtonsoft.Json;
-using Constants = Game.Utils.Constants;
 
 namespace Game.Globals;
 

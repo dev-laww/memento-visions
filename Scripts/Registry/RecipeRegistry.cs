@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using FuzzySharp;
+using Game.Common;
+using Game.Common.Utilities;
 using Game.Resources;
-using Game.Utils;
 using Godot;
 
 namespace Game.Registry;

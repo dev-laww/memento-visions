@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Game.Common.Interfaces;
 using Game.Components.Area;
 using Game.Components.Managers;
 using Godot;
@@ -13,7 +14,7 @@ namespace Game.Entities;
 /// Inherits from CharacterBody2D.
 /// </summary>
 [Scene]
-public abstract partial class Entity : CharacterBody2D
+public abstract partial class Entity : CharacterBody2D, IEntity
 {
     /// <summary>
     /// Unique name of the entity.
@@ -86,25 +87,25 @@ public abstract partial class Entity : CharacterBody2D
     /// <summary>
     ///  Called when the node enters the scene tree for the first time.
     /// </summary>
-    protected virtual void OnReady() { }
+    public virtual void OnReady() { }
 
     /// <summary>
     /// Handles input events.
     /// </summary>
     /// <param name="event">The input event.</param>
-    protected virtual void OnInput(InputEvent @event) { }
+    public virtual void OnInput(InputEvent @event) { }
 
     /// <summary>
     /// Handles physics processing.
     /// </summary>
     /// <param name="delta">The time since the last physics update.</param>
-    protected virtual void OnPhysicsProcess(double delta) { }
+    public virtual void OnPhysicsProcess(double delta) { }
 
     /// <summary>
     /// Handles processing.
     /// </summary>
     /// <param name="delta">The time since the last update.</param>
-    protected virtual void OnProcess(double delta) { }
+    public virtual void OnProcess(double delta) { }
 
     public override void _Input(InputEvent @event)
     {

@@ -17,7 +17,7 @@ public partial class BlackSmith : Entity
         WireNodes();
     }
 
-    protected override void OnReady()
+    public override void OnReady()
     {
         interaction.Interacted += OnInteracted;
     }

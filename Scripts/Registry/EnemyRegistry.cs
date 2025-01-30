@@ -1,6 +1,6 @@
 ﻿using Game.Entities.Enemies;
-using Game.Utils;
 using Godot;
+using Constants = Game.Common.Constants;
 
 namespace Game.Registry;
 
