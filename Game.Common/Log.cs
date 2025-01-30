@@ -90,7 +90,7 @@ public static class Log
         {
             try
             {
-                Console.Write(msg);
+                GD.Print(msg.Replace("\n", ""));
                 File.AppendAllText(LogFile, $"{msg}");
             }
             catch (Exception e)
