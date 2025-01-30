@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace Game.Utils;
+namespace Game.Common.Utilities;
 
 public static class ResourceLoaderUtils
 {

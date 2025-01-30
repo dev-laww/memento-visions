@@ -1,6 +1,6 @@
 using System;
 
-namespace Game.Exceptions.Command;
+namespace Game.Exceptions;
 
 public class UnsupportedArgument : FormatException
 {

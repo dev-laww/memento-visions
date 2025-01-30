@@ -1,5 +1,3 @@
-using System;
-
-namespace Game.Exceptions.Command;
+namespace Game.Exceptions;
 
 public class CommandException(string message) : Exception(message);

@@ -1,31 +1,26 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Game.Exceptions.Command;
-using Game.Utils;
+using Game.Exceptions;
 
-namespace Game.Globals;
+namespace Game.Common.Utilities;
 
 public static class CommandInterpreter
 {
     public delegate void CommandExecutedEventHandler(string command, object[] args);
-    public delegate void CommandRegisteredEventHandler(string command, string description);
+    public delegate void CommandRegisteredEventHandler(string command, string? description);
     public delegate void CommandUnregisteredEventHandler(string command);
 
-    public static event CommandExecutedEventHandler CommandExecuted;
-    public static event CommandRegisteredEventHandler CommandRegistered;
-    public static event CommandUnregisteredEventHandler CommandUnregistered;
+    public static event CommandExecutedEventHandler? CommandExecuted;
+    public static event CommandRegisteredEventHandler? CommandRegistered;
+    public static event CommandUnregisteredEventHandler? CommandUnregistered;
 
     private const int MaxHistorySize = 100;
     private static readonly List<(string Command, DateTime Timestamp, Exception Exception)> history = [];
-    private static readonly Dictionary<string, (Delegate Action, string Description)> commands = [];
+    private static readonly Dictionary<string, (Delegate? Action, string? Description)> commands = [];
 
     public static IReadOnlyList<(string Command, DateTime Timestampm, Exception Exception)> History => history;
-    public static IReadOnlyDictionary<string, (Delegate Action, string Description)> Commands => commands;
+    public static IReadOnlyDictionary<string, (Delegate? Action, string? Description)> Commands => commands;
 
 
-    public static void Register(string name, Delegate command, string description = null)
+    public static void Register(string name, Delegate command, string? description = null)
     {
         if (commands.ContainsKey(name))
         {
@@ -51,7 +46,7 @@ public static class CommandInterpreter
 
     public static async void Execute(string commandInput)
     {
-        (string Command, DateTime Timestamp, Exception Exception) historyEntry = (commandInput, DateTime.Now, null);
+        (string Command, DateTime Timestamp, Exception Exception) historyEntry = (commandInput!, DateTime.Now!, null!);
         object[] args = [];
 
         try
@@ -109,7 +104,7 @@ public static class CommandInterpreter
         var parts = input.Replace(name, string.Empty).Split([' '], StringSplitOptions.RemoveEmptyEntries);
 
         var action = command.Action;
-        var parameters = action.Method.GetParameters();
+        var parameters = action!.Method.GetParameters();
 
         var args = new object[parameters.Length];
 
@@ -144,7 +139,7 @@ public static class CommandInterpreter
 
             if (tryParseMethod != null)
             {
-                var parameters = new object[] { argument, null };
+                var parameters = new object[] { argument, null! };
                 var success = (bool?)tryParseMethod.Invoke(null, parameters) ?? false;
                 return success
                     ? parameters[1]

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Godot;
 using Environment = System.Environment;
 
-namespace Game.Utils;
+namespace Game.Common;
 
 public static class Log
 {
@@ -21,41 +19,41 @@ public static class Log
 
     [Conditional("DEBUG")]
     public static void Debug(
-        object msg = null,
-        [CallerFilePath] string filePath = null,
-        [CallerMemberName] string memberName = null
+        object? msg = null,
+        [CallerFilePath] string? filePath = null,
+        [CallerMemberName] string? memberName = null
     ) => Print(Level.Debug, Format(filePath, memberName, $"[Debug] {msg}"));
 
     public static void Info(
-        object msg = null,
-        [CallerFilePath] string filePath = null,
-        [CallerMemberName] string memberName = null
+        object? msg = null,
+        [CallerFilePath] string? filePath = null,
+        [CallerMemberName] string? memberName = null
     ) => Print(Level.Info, Format(filePath, memberName, $"[Info] {msg}"));
 
     public static void Warn(
-        object msg = null,
-        [CallerFilePath] string filePath = null,
-        [CallerMemberName] string memberName = null
+        object? msg = null,
+        [CallerFilePath] string? filePath = null,
+        [CallerMemberName] string? memberName = null
     ) => Print(Level.Warn, Format(filePath, memberName, $"[Warn] {msg}"));
 
     public static void Error(
         Exception e,
-        [CallerFilePath] string filePath = null,
-        [CallerMemberName] string memberName = null
+        [CallerFilePath] string? filePath = null,
+        [CallerMemberName] string? memberName = null
     ) => Print(Level.Error, Format(filePath, memberName, e));
 
     private static string Format(
-        string filePath,
-        string memberName,
-        object msg
+        string? filePath,
+        string? memberName,
+        object? msg
     ) => msg is null
         ? Environment.NewLine
         : $"{Timestamp()}{Runtime()}{FileName(filePath)}{(memberName is not null ? $"::{MemberName(memberName)}" : "]")}{msg}{Environment.NewLine}";
 
     private static string Timestamp() => DateTime.Now.ToString("[HH:mm:ss.fff]");
     private static string Runtime() => $"[{Stopwatch.Elapsed.Format()}]";
-    private static string FileName(string x) => $"[{Path.GetFileNameWithoutExtension(x)}";
-    private static string MemberName(string x) => x is not null ? $"{x}]" : null;
+    private static string FileName(string? x) => $"[{Path.GetFileNameWithoutExtension(x)}";
+    private static string? MemberName(string? x) => x is not null ? $"{x}]" : null;
 
     private static string Format(this TimeSpan value, string noTimeStr = "0ms")
     {

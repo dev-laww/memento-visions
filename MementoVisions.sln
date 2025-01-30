@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MementoVisions", "MementoVi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game.SourceGenerators", "Game.SourceGenerators\Game.SourceGenerators.csproj", "{DE46DAD1-B269-4EE0-AE2B-476AB78A3FF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game.Common", "Game.Common\Game.Common.csproj", "{2CA7A169-46BC-4E7B-858C-D5E33DAC5143}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,5 +25,11 @@ Global
 		{DE46DAD1-B269-4EE0-AE2B-476AB78A3FF3}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
 		{DE46DAD1-B269-4EE0-AE2B-476AB78A3FF3}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
 		{DE46DAD1-B269-4EE0-AE2B-476AB78A3FF3}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
+		{2CA7A169-46BC-4E7B-858C-D5E33DAC5143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CA7A169-46BC-4E7B-858C-D5E33DAC5143}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CA7A169-46BC-4E7B-858C-D5E33DAC5143}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CA7A169-46BC-4E7B-858C-D5E33DAC5143}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{2CA7A169-46BC-4E7B-858C-D5E33DAC5143}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CA7A169-46BC-4E7B-858C-D5E33DAC5143}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal

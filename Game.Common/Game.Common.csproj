@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="GodotSharp" Version="4.4.0-beta.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="**\*.uid" />
+        <Compile Remove="**\*.uid" />
+        <EmbeddedResource Remove="**\*.uid" />
+        <None Include="**\*.uid" Exclude="**\*.uid">
+            <Visible>false</Visible>
+        </None>
+    </ItemGroup>
+</Project>
