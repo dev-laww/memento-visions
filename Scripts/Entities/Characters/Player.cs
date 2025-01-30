@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
+using Game.Common.Models;
 using Game.Components.Managers;
 using Game.Components.Area;
 using Game.Components.Movement;
 using Game.Globals;
 using Game.Resources;
-using Game.Utils.Json.Models;
 using Godot;
 using GodotUtilities;
 

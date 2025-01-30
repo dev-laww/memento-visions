@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Game.Common;
+using Game.Common.Models;
 using Game.Common.Utilities;
 using Game.Exceptions;
 using Game.Registry;
 using Game.Resources;
-using Game.Utils.Json.Models;
 
 namespace Game.Globals;
 

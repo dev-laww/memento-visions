@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Game.Utils.Json.Models;
+namespace Game.Common.Models;
 
 public class InventoryData
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Game.Common.Models;
 using Game.Utils.Battle;
-using Game.Utils.Json.Models;
 using Godot;
 
 namespace Game.Components.Managers;

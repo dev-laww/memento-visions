@@ -1,5 +1,5 @@
 using Game.Common;
-using Game.Utils.Json.Models;
+using Game.Common.Models;
 using Godot;
 using Newtonsoft.Json;
 

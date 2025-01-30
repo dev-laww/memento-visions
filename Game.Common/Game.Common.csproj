@@ -8,6 +8,7 @@
 
     <ItemGroup>
         <PackageReference Include="GodotSharp" Version="4.4.0-beta.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
     <ItemGroup>

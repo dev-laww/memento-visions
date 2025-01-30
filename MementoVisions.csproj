@@ -45,10 +45,4 @@
             OutputItemType="Analyzer"
             ReferenceOutputAssembly="false" />
     </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="Scripts\Tests\" />
-        <Folder Include="Scripts\Utils\DeveloperConsole\" />
-        <Folder Include="Scripts\Utils\Extensions\" />
-    </ItemGroup>
 </Project>
