@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Common;
 using Game.Entities.Enemies;
 using Game.Globals;
 using Godot;
+using Timer = System.Timers.Timer;
 
 namespace Game.Resources;
 
@@ -24,13 +26,21 @@ public partial class Quest : Resource
     public bool Completed { get; private set; }
     public List<QuestObjective> Objectives => [.. objectives];
     private int currentStep;
+    public bool IsActive => QuestManager.ActiveQuests.Contains(this);
 
     public Quest()
     {
         if (Engine.IsEditorHint()) return;
 
-        InventoryManager.Pickup += OnItemPickup;
-        EnemyManager.EnemyDied += OnEnemyDied;
+        var timer = new Timer(1000);
+        timer.Elapsed += (_, _) =>
+        {
+            InventoryManager.Pickup += OnItemPickup;
+            EnemyManager.EnemyDied += OnEnemyDied;
+            timer.Dispose();
+        };
+        timer.AutoReset = false;
+        timer.Start();
     }
 
     ~Quest()
@@ -69,12 +79,17 @@ public partial class Quest : Resource
 
         Completed = true;
         GiveRewards();
-        GD.Print($"{this} completed.");
+        Log.Info($"{this} completed.");
 
         // TODO: save progress
     }
 
-    public void Start() => QuestManager.Add(this);
+    public void Start()
+    {
+        if (Completed || IsActive) return;
+
+        QuestManager.Add(this);
+    }
 
     private void GiveRewards()
     {
@@ -98,7 +113,7 @@ public partial class Quest : Resource
         Action<QuestObjective> processAction
     )
     {
-        if (Completed) return;
+        if (Completed || !IsActive) return;
 
         var targets = GetObjectives(type).ToList();
 

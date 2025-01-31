@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Game.Common;
 using Game.Entities.Enemies;
 using Godot;
 using Godot.Collections;
@@ -38,7 +39,13 @@ public partial class QuestObjective : Resource
 
     private ObjectiveType type;
 
-    public void Complete() => Completed = true;
+    public void Complete()
+    {
+        if (Completed) return;
+
+        Completed = true;
+        Log.Debug($"Completed {this}.");
+    }
 
     public void UpdateItemProgress(ItemGroup group)
     {
@@ -52,7 +59,7 @@ public partial class QuestObjective : Resource
             group.Quantity
         );
 
-        Completed = CheckCompletion(Items);
+        CheckCompletion(Items);
     }
 
     public void UpdateKillProgress(Enemy enemy)
@@ -67,7 +74,7 @@ public partial class QuestObjective : Resource
             1
         );
 
-        Completed = CheckCompletion(Enemies);
+        CheckCompletion(Enemies);
     }
 
     private void ValidateType(params ObjectiveType[] allowedTypes)
@@ -77,8 +84,14 @@ public partial class QuestObjective : Resource
         throw new InvalidOperationException();
     }
 
-    private static bool CheckCompletion<T>(T[] requirements) where T : GodotObject =>
-        requirements.All(r => r.Get("Quantity").As<int>() >= r.Get("Amount").As<int>());
+    private void CheckCompletion<T>(T[] requirements) where T : GodotObject
+    {
+        var complete = requirements.All(req => req.Get("Quantity").As<int>() >= req.Get("Amount").As<int>());
+
+        if (!complete) return;
+
+        Complete();
+    }
 
     private static void UpdateRequirements<T>(
         T[] requirements,
@@ -94,6 +107,7 @@ public partial class QuestObjective : Resource
             var amountProp = req.Get("Amount").As<int>();
 
             req.Set("Quantity", Mathf.Min(quantity + amount, amountProp));
+            Log.Debug($"Updated {req} progress to {req.Get("Quantity")}/{amountProp}.");
         }
     }
 
