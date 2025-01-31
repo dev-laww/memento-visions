@@ -21,8 +21,11 @@ public partial class Player : Entity
 
     [Node] public VelocityManager VelocityManager;
     [Node] private Node2D hitBoxes;
-    [Node] private AudioStreamPlayer2D SwordSlash;
-    [Node] private AudioStreamPlayer2D GunShot;
+    private bool canAttack = true;
+    private float attackCooldown = 0.3f;
+    private const string SwordSlash = "sword_slash";
+    private const string Gunshot = "gunshot";
+    private const string walking = "walking";
 
     private string MoveDirection => GetMoveDirection();
     private Vector2 lastMoveDirection = Vector2.Down;
@@ -142,14 +145,14 @@ public partial class Player : Entity
         switch (WeaponManager.CurrentWeaponResource.WeaponType)
         {
             case Item.Type.Gun:
-                GunShot.Play(1);
+                SoundManager.Instance.PlaySound(Gunshot);
                 animations.Play($"gun/{MoveDirection}");
                 break;
             case Item.Type.Dagger:
                 animations.Play($"dagger/{MoveDirection}");
                 break;
             case Item.Type.Sword:
-                SwordSlash.Play(1);
+                SoundManager.Instance.PlaySound(SwordSlash);
                 animations.Play($"sword/{MoveDirection}");
                 break;
             case Item.Type.Whip:
@@ -166,6 +169,9 @@ public partial class Player : Entity
         await ToSignal(WeaponManager.CurrentAnimationPlayer, "animation_finished");
 
         HandleTransition();
+        
+        await ToSignal(GetTree().CreateTimer(attackCooldown), "timeout");
+        canAttack = true;
     }
 
     private void ExitAttack() => CanMove = true;
