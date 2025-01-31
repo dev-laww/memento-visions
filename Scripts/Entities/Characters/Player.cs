@@ -3,7 +3,6 @@ using System.Linq;
 using Game.Common.Models;
 using Game.Components.Managers;
 using Game.Components.Area;
-using Game.Components.Movement;
 using Game.Globals;
 using Game.Resources;
 using Godot;
@@ -42,11 +41,6 @@ public partial class Player : Entity
 
     public override void OnReady()
     {
-        VelocityManager.Accelerating += () => StateMachine.ChangeState(Walk);
-        VelocityManager.Decelerating += () => StateMachine.ChangeState(Idle);
-        VelocityManager.DashEnded += HandleTransition;
-
-
         hitBoxes.GetChildrenOfType<HitBox>().ToList().ForEach(box =>
         {
             box.Damage = StatsManager.Damage;
@@ -121,7 +115,7 @@ public partial class Player : Entity
 
     private void Dash()
     {
-        VelocityManager.Dash(lastMoveDirection);
+        // VelocityManager.Dash(lastMoveDirection);
         animations.Play($"walk_{MoveDirection}");
     }
 
@@ -136,7 +130,7 @@ public partial class Player : Entity
         }
 
         CanMove = false;
-        VelocityManager.Stop();
+        VelocityManager.Decelerate(force: true);
     }
 
     private async void Attack()
@@ -162,14 +156,14 @@ public partial class Player : Entity
                 GD.PushError("Weapon type not found");
                 break;
         }
-       
+
         WeaponManager.Attack(MoveDirection);
 
         await ToSignal(animations, "animation_finished");
         await ToSignal(WeaponManager.CurrentAnimationPlayer, "animation_finished");
 
         HandleTransition();
-        
+
         await ToSignal(GetTree().CreateTimer(attackCooldown), "timeout");
         canAttack = true;
     }
@@ -177,7 +171,7 @@ public partial class Player : Entity
     private void ExitAttack() => CanMove = true;
 
     // Helpers
-    private void HandleTransition()
+    private void HandleTransition(Vector2 _ = default)
     {
         var input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 

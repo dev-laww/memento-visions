@@ -1,153 +1,59 @@
-using System.Collections.Generic;
-using Game.Components.Managers;
-using Game.Entities;
 using Game.Utils.Extensions;
 using Godot;
 
-
-namespace Game.Components.Movement;
+namespace Game.Components.Managers;
 
 [Tool]
 [GlobalClass]
 public partial class VelocityManager : Node
 {
-    [Export]
-    private StatsManager Stats
-    {
-        get => resource;
-        set
-        {
-            resource = value;
-            UpdateConfigurationWarnings();
-        }
-    }
+    [Export] public StatsManager StatsManager;
+    [Export] public float AccelerationCoefficient = 10;
 
-    [Export] private float Acceleration { get; set; } = 100f;
-    [Export] private float Deceleration { get; set; } = 6f;
-    [Export] private float DashDuration { get; set; } = 0.1f;
+    public Vector2 Velocity { get; private set; }
+    private float MaxSpeed => StatsManager.Speed;
+    private bool signalEmitted;
 
-    [Signal] public delegate void DeceleratingEventHandler();
     [Signal] public delegate void AcceleratingEventHandler();
-    [Signal] public delegate void DashStartedEventHandler();
-    [Signal] public delegate void DashEndedEventHandler();
-
-    private Vector2 velocity
-    {
-        get => v;
-        set => v = value.SnapToGrid();
-    }
-
-    public bool IsOwnerMoving => !velocity.IsZeroApprox();
-    private Node2D Parent => GetParent() as Node2D;
-
-    private StatsManager resource;
-    private Vector2 v = Vector2.Zero;
-    private bool accelerating;
-    private bool dashing;
-    private Timer dashTimer;
+    [Signal] public delegate void DeceleratingEventHandler();
 
     public override void _Ready()
     {
-        // Setup dash duration timer
-        dashTimer = new Timer
-        {
-            WaitTime = DashDuration,
-            OneShot = true
-        };
-        AddChild(dashTimer);
-        dashTimer.Timeout += EndDash;
+        SetProcess(false);
     }
 
-    public void Accelerate(Vector2 direction)
-    {
-        if (dashing) return;
+    public void Accelerate(Vector2 direction) => AccelerateToVelocity(direction.TryNormalize() * MaxSpeed);
 
-        if (direction.IsZeroApprox())
+    public void Decelerate(bool force = false)
+    {
+        if (signalEmitted)
         {
-            Decelerate();
+            EmitSignal(SignalName.Decelerating);
+            signalEmitted = true;
+        }
+
+        if (force)
+        {
+            Velocity = Vector2.Zero;
             return;
         }
 
-        if (!accelerating)
-        {
-            accelerating = true;
-            EmitSignal(SignalName.Accelerating);
-        }
-
-        velocity = velocity.MoveToward(direction.Normalized() * Stats.Speed, Acceleration);
-
-        ApplyMovement();
+        AccelerateToVelocity(Vector2.Zero);
     }
 
-    public void Decelerate()
+    public void AccelerateToVelocity(Vector2 velocity)
     {
-        if (dashing) return;
-
-        if (accelerating)
-        {
-            accelerating = false;
-            EmitSignal(SignalName.Decelerating);
-        }
-
-        velocity = velocity.IndependentMoveToward(Vector2.Zero, Deceleration);
-
+        var delta = (float)GetProcessDeltaTime();
+        var weight = 1f - Mathf.Exp(-AccelerationCoefficient * delta);
+        Velocity = Velocity.Lerp(velocity, weight);
         ApplyMovement();
-    }
-
-    public void Stop()
-    {
-        velocity = Vector2.Zero;
-        ApplyMovement();
-    }
-
-    public void Dash(Vector2 direction, float multiplier = 2.25f)
-    {
-        if (direction.IsZeroApprox()) return;
-
-        if (!dashing)
-        {
-            dashing = true;
-            dashTimer.Start();
-            EmitSignal(SignalName.DashStarted);
-        }
-
-        velocity = direction * (Stats.Speed * multiplier);
-        ApplyMovement();
-    }
-
-    private void EndDash()
-    {
-        dashing = false;
-        velocity = Vector2.Zero;
-        EmitSignal(SignalName.DashEnded);
     }
 
     private void ApplyMovement()
     {
-        if (Owner is Entity)
-        {
-            var character = Owner as Entity;
+        if (Owner is not CharacterBody2D owner) return;
 
-            character.Velocity = velocity;
-            character.MoveAndSlide();
-            return;
-        }
-
-        var body = GetParent<RigidBody2D>();
-        body.LinearVelocity = velocity;
-    }
-
-    public void Teleport(Vector2 targetPosition) => Parent.GlobalPosition = targetPosition;
-
-    public override string[] _GetConfigurationWarnings()
-    {
-        var warnings = new List<string>();
-
-        if (Parent is not (CharacterBody2D or RigidBody2D))
-            warnings.Add("Velocity component should be attached to a CharacterBody2D or RigidBody2D node.");
-
-        if (Stats == null) warnings.Add("StatsManager is not set.");
-
-        return warnings.ToArray();
+        owner.Velocity = Velocity;
+        owner.MoveAndSlide();
     }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://b4wadx6dv5aan"]
+[gd_scene load_steps=23 format=4 uid="uid://b4wadx6dv5aan"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="1_28rab"]
 [ext_resource type="Script" uid="uid://b7tipxnk0uqml" path="res://Scripts/Levels/Bar.cs" id="1_u221d"]
@@ -16,10 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://d1gnxumr8r1hu" path="res://Scenes/Entities/Enemies/Common/Samurai.tscn" id="13_1awp1"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="16_fjgj2"]
 [ext_resource type="Resource" uid="uid://b68babfd4dju" path="res://resources/quests/test.tres" id="17_e5pbf"]
-[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="18_t4i44"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="18_towvu"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Resources/QuestObjective.cs" id="18_xlj0l"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="19_xlj0l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ervve"]
 size = Vector2(22, 12)
@@ -124,13 +122,7 @@ metadata/_custom_type_script = ExtResource("16_fjgj2")
 shape = SubResource("CircleShape2D_fjgj2")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
-[node name="Node2D" type="Node2D" parent="QuestTrigger"]
-
-[node name="InteractionUI" type="Control" parent="QuestTrigger/Node2D" instance=ExtResource("18_t4i44")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("19_xlj0l")
+[node name="Node2D2" type="Node2D" parent="QuestTrigger"]
 
 [node name="QuestTrigger2" type="Area2D" parent="."]
 position = Vector2(96, 241)
@@ -149,10 +141,4 @@ metadata/_custom_type_script = ExtResource("16_fjgj2")
 shape = SubResource("RectangleShape2D_t4i44")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
-[node name="Node2D" type="Node2D" parent="QuestTrigger2"]
-
-[node name="InteractionUI" type="Control" parent="QuestTrigger2/Node2D" instance=ExtResource("18_t4i44")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("19_xlj0l")
+[node name="Node2D2" type="Node2D" parent="QuestTrigger2"]

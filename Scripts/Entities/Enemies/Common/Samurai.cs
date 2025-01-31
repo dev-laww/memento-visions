@@ -1,5 +1,4 @@
 using Game.Components.Managers;
-using Game.Components.Movement;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;

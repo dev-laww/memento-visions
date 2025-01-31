@@ -60,4 +60,6 @@ public static class Vector2Extensions
 
         return new Vector2(newX, newY);
     }
+
+    public static Vector2 TryNormalize(this Vector2 vector) => vector.IsNormalized() ? vector : vector.Normalized();
 }

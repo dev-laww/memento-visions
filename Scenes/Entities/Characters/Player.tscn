@@ -1670,12 +1670,9 @@ Id = "player"
 unique_name_in_owner = true
 Damage = 100.0
 
-[node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("Stats")]
+[node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
 script = ExtResource("4_iaq51")
-Stats = NodePath("../StatsManager")
-Acceleration = 1000.0
-Deceleration = 5.0
-DashDuration = 0.2
+StatsManager = NodePath("../StatsManager")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true

@@ -415,9 +415,9 @@ Id = "enemy:samurai"
 [node name="StatsManager" parent="." instance=ExtResource("2_lv6q4")]
 MaxHealth = 1000.0
 
-[node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("Stats")]
+[node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
 script = ExtResource("3_4gowe")
-Stats = NodePath("../StatsManager")
+StatsManager = NodePath("../StatsManager")
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
 collision_layer = 2048
