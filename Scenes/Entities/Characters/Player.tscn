@@ -1747,9 +1747,3 @@ libraries = {
 &"gun": SubResource("AnimationLibrary_hjmv8"),
 &"sword": SubResource("AnimationLibrary_ehmqt")
 }
-
-[node name="SwordSlash" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
-
-[node name="GunShot" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true

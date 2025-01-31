@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SceneManager="*res://Scripts/Globals/SceneManager.cs"
+SoundManger="*res://Scenes/Components/Managers/SoundManger.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 WeaponManager="*res://Scripts/Globals/WeaponManager.cs"
 InventoryManager="*res://Scripts/Globals/InventoryManager.cs"
