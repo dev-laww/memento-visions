@@ -1,4 +1,3 @@
-using Game.Common;
 using Game.Common.Extensions;
 using Game.Common.Interfaces;
 using Game.Globals;
@@ -27,13 +26,23 @@ public partial class Interaction : Area2D, IInteractable
 
     [Signal] public delegate void InteractedEventHandler();
 
-    private InteractionUI InteractionUI => GetNodeOrNull<InteractionUI>("%InteractionUI");
+    private InteractionUI InteractionUI => GetNodeOrNull<InteractionUI>("Node2D/InteractionUI");
 
     private string interactionLabel;
 
     public override void _EnterTree()
     {
-        if (GetNodeOrNull("Node2D") != null) return;
+        if (GetNodeOrNull("CollisionShape2D") != null)
+        {
+            var collision = new CollisionShape2D
+            {
+                Name = "CollisionShape2D",
+                DebugColor = new Color(0.88f, 0.525f, 0.898f, 0.42f)
+            };
+
+            AddChild(collision);
+            collision.SetOwner(GetTree().GetEditedSceneRoot());
+        }
 
         this.AddInteractionUI();
     }
