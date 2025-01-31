@@ -14,6 +14,7 @@ public partial class QuestObjective : Resource
     public enum ObjectiveType
     {
         Collect,
+        Use,
         Navigate,
         Kill,
         Deliver
@@ -32,8 +33,8 @@ public partial class QuestObjective : Resource
 
     [Export(PropertyHint.MultilineText)] public string Description { get; set; }
 
-    public ItemRequirement[] Items = [];
-    public KillRequirement[] Enemies = [];
+    public ItemRequirement[] Items;
+    public KillRequirement[] Enemies;
 
     public bool Completed;
 

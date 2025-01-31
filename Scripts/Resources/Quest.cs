@@ -17,7 +17,7 @@ public partial class Quest : Resource
     [Export] public string Title;
     [Export] private bool Ordered;
     [Export(PropertyHint.MultilineText)] public string Description;
-    [Export] private QuestObjective[] objectives = [];
+    [Export] private QuestObjective[] objectives;
 
     [ExportCategory("Rewards")] [Export] private int Experience;
     [Export] private ItemGroup[] Items = [];
@@ -35,6 +35,7 @@ public partial class Quest : Resource
         timer.Elapsed += (_, _) =>
         {
             InventoryManager.Pickup += OnItemPickup;
+            InventoryManager.Remove += OnItemRemoved;
             EnemyManager.EnemyDied += OnEnemyDied;
             timer.Dispose();
         };
@@ -46,6 +47,7 @@ public partial class Quest : Resource
     {
         if (Engine.IsEditorHint()) return;
 
+        InventoryManager.Remove -= OnItemRemoved;
         InventoryManager.Pickup -= OnItemPickup;
         EnemyManager.EnemyDied -= OnEnemyDied;
     }
@@ -117,6 +119,11 @@ public partial class Quest : Resource
     private void OnEnemyDied(Enemy enemy) => ProcessObjectives(
         QuestObjective.ObjectiveType.Kill,
         objective => objective.UpdateKillProgress(enemy)
+    );
+
+    private void OnItemRemoved(ItemGroup item) => ProcessObjectives(
+        QuestObjective.ObjectiveType.Use,
+        objective => objective.UpdateItemProgress(item)
     );
 
     private void ProcessObjectives(
