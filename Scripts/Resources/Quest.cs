@@ -19,8 +19,7 @@ public partial class Quest : Resource
     [Export(PropertyHint.MultilineText)] public string Description;
     [Export] private QuestObjective[] objectives = [];
 
-    [ExportCategory("Rewards")]
-    [Export] private int Experience;
+    [ExportCategory("Rewards")] [Export] private int Experience;
     [Export] private ItemGroup[] Items = [];
 
     public bool Completed { get; private set; }
@@ -71,6 +70,18 @@ public partial class Quest : Resource
         if (!completed) return;
 
         Complete();
+    }
+
+    public void CompleteObjective(int index)
+    {
+        if (Completed || !IsActive) return;
+
+        if (index < 0 || index >= objectives.Length) return;
+
+        if (Ordered && index != currentStep) return;
+
+        objectives[index].Complete();
+        Update();
     }
 
     public void Complete()

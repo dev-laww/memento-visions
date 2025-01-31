@@ -150,12 +150,12 @@ public partial class QuestTrigger : Area2D, IInteractable
         switch (Mode)
         {
             case TriggerMode.Start:
-                if (Quest.IsActive) return;
+                if (Quest?.IsActive ?? false) return;
                 Quest?.Start();
                 break;
             case TriggerMode.Complete:
-                if (!Quest.IsActive) return;
-                Objective?.Complete();
+                if (!Quest?.IsActive ?? false) return;
+                Quest?.CompleteObjective(ObjectiveIndex);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
