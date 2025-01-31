@@ -14,19 +14,19 @@ namespace Game.Components.Area;
 [GlobalClass]
 public partial class QuestTrigger : Area2D, IInteractable
 {
-    private enum TriggerType
+    private enum TriggerMode
     {
         Start,
         Complete
     }
 
     [Export]
-    private TriggerType Type
+    private TriggerMode Mode
     {
-        get => _type;
+        get => mode;
         set
         {
-            _type = value;
+            mode = value;
             NotifyPropertyListChanged();
         }
     }
@@ -93,7 +93,7 @@ public partial class QuestTrigger : Area2D, IInteractable
     private InteractionUI InteractionUI => GetNodeOrNull<InteractionUI>("Node2D/InteractionUI");
     private Quest _quest;
     private int _objectiveIndex;
-    private TriggerType _type;
+    private TriggerMode mode;
 
     public override void _Ready()
     {
@@ -116,12 +116,12 @@ public partial class QuestTrigger : Area2D, IInteractable
     {
         if (!ShouldInteract)
         {
-            switch (Type)
+            switch (Mode)
             {
-                case TriggerType.Start:
+                case TriggerMode.Start:
                     Quest?.Start();
                     break;
-                case TriggerType.Complete:
+                case TriggerMode.Complete:
                     if (!Quest.IsActive) return;
                     Objective?.Complete();
                     break;
@@ -146,13 +146,13 @@ public partial class QuestTrigger : Area2D, IInteractable
 
     public void Interact()
     {
-        switch (Type)
+        switch (Mode)
         {
-            case TriggerType.Start:
+            case TriggerMode.Start:
                 if (Quest.IsActive) return;
                 Quest?.Start();
                 break;
-            case TriggerType.Complete:
+            case TriggerMode.Complete:
                 if (!Quest.IsActive) return;
                 Objective?.Complete();
                 break;
@@ -202,7 +202,7 @@ public partial class QuestTrigger : Area2D, IInteractable
             { "hint_string", "Quest" }
         });
 
-        if (Type != TriggerType.Complete) return properties;
+        if (Mode != TriggerMode.Complete) return properties;
 
         properties.Add(new Dictionary
         {
