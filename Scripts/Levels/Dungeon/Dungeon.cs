@@ -4,6 +4,7 @@ using System.Linq;
 using DelaunatorSharp;
 using Game.Generation.Dungeon;
 using Game.Utils.Extensions;
+using Game.Common.Extensions;
 using Godot;
 using Godot.Collections;
 using GodotUtilities;

@@ -1,6 +1,6 @@
-﻿using Godot;
+﻿using Timer = Godot.Timer;
 
-namespace Game.Utils.Extensions;
+namespace Game.Common.Extensions;
 
 public static class TimerExtensions
 {

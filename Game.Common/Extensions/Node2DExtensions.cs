@@ -1,8 +1,7 @@
 ﻿using Godot;
 
-namespace Game.Utils.Extensions;
+namespace Game.Common.Extensions;
 
-#nullable enable
 public static class Node2DExtensions
 {
     public static void ApplyShader(this Node2D node)

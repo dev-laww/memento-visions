@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.Common.Interfaces;
 using Game.Resources;
 using Godot;
 
@@ -6,11 +7,11 @@ namespace Game.Components.Area;
 
 [Tool]
 [GlobalClass]
-public partial class QuestTrigger : Area2D
+public partial class QuestTrigger : Area2D, IInteractable
 {
     private enum TriggerType
     {
-        Give,
+        Start,
         Complete
     }
 
@@ -28,8 +29,6 @@ public partial class QuestTrigger : Area2D
     [Export] private TriggerType Type;
     [Export] private bool ShouldInteract;
 
-    // TODO: implement quest interaction and triggering, objective completion
-
     private Quest _quest;
 
     public override string[] _GetConfigurationWarnings()
@@ -40,5 +39,19 @@ public partial class QuestTrigger : Area2D
             warnings.Add("Quest is not set.");
 
         return [..warnings];
+    }
+    
+    public Vector2 InteractionPosition => GlobalPosition;
+    public void Interact()
+    {
+        throw new System.NotImplementedException();
+    }
+    public void ShowUI()
+    {
+        throw new System.NotImplementedException();
+    }
+    public void HideUI()
+    {
+        throw new System.NotImplementedException();
     }
 }

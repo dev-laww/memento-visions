@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Godot;
 
-namespace Game.Utils.Extensions;
+namespace Game.Common.Extensions;
 
 public static class Rect2IExtensions
 {

@@ -1,4 +1,4 @@
-﻿using Game.Utils.Extensions;
+﻿using Game.Common.Extensions;
 using Godot;
 
 namespace Game.Components;
