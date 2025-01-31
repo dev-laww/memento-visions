@@ -1,7 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Game.Common.Extensions;
 using Game.Common.Interfaces;
+using Game.Globals;
 using Game.Resources;
+using Game.UI.Common;
 using Godot;
+using Godot.Collections;
 
 namespace Game.Components.Area;
 
@@ -16,20 +21,205 @@ public partial class QuestTrigger : Area2D, IInteractable
     }
 
     [Export]
+    private TriggerType Type
+    {
+        get => _type;
+        set
+        {
+            _type = value;
+            NotifyPropertyListChanged();
+        }
+    }
+
     public Quest Quest
     {
         get => _quest;
         set
         {
             _quest = value;
+            Objective = value?.Objectives[ObjectiveIndex];
+            NotifyPropertyListChanged();
+            UpdateConfigurationWarnings();
+        }
+    }
+
+    private QuestObjective Objective;
+
+    private int ObjectiveIndex
+    {
+        get => _objectiveIndex;
+        set
+        {
+            var index = Math.Max(0, Math.Min(value, Quest?.Objectives.Count - 1 ?? 0));
+            _objectiveIndex = index;
+            Objective = Quest?.Objectives[index];
             NotifyPropertyListChanged();
         }
     }
 
-    [Export] private TriggerType Type;
-    [Export] private bool ShouldInteract;
+    private bool ShouldInteract
+    {
+        get => shouldInteract;
+        set
+        {
+            shouldInteract = value;
+            NotifyPropertyListChanged();
 
+            if (!value)
+            {
+                GetNodeOrNull("Node2D")?.QueueFree();
+                return;
+            }
+
+            this.AddInteractionUI();
+        }
+    }
+
+    private string InteractionLabel
+    {
+        get => InteractionUI?.Text ?? string.Empty;
+        set
+        {
+            interactionLabel = value;
+
+            if (InteractionUI == null) return;
+
+            InteractionUI.Text = value;
+        }
+    }
+
+    private bool shouldInteract;
+    private string interactionLabel;
+    private InteractionUI InteractionUI => GetNodeOrNull<InteractionUI>("Node2D/InteractionUI");
     private Quest _quest;
+    private int _objectiveIndex;
+    private TriggerType _type;
+
+    public override void _Ready()
+    {
+        CollisionLayer = 1 << 4;
+        CollisionMask = 1 << 2;
+        NotifyPropertyListChanged();
+
+        if (InteractionUI != null && ShouldInteract)
+            InteractionUI.Text = interactionLabel;
+
+        if (Engine.IsEditorHint()) return;
+
+        BodyEntered += OnBodyEntered;
+        BodyExited += OnBodyExited;
+
+        InteractionUI?.Hide();
+    }
+
+    private void OnBodyEntered(Node2D body)
+    {
+        if (!ShouldInteract)
+        {
+            switch (Type)
+            {
+                case TriggerType.Start:
+                    Quest?.Start();
+                    break;
+                case TriggerType.Complete:
+                    if (!Quest.IsActive) return;
+                    Objective?.Complete();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            return;
+        }
+
+        if (!Quest.IsActive) return;
+        InteractionManager.Register(this);
+    }
+
+    private void OnBodyExited(Node2D body)
+    {
+        if (!ShouldInteract || !Quest.IsActive) return;
+        InteractionManager.Unregister(this);
+    }
+
+    public Vector2 InteractionPosition => GlobalPosition;
+
+    public void Interact()
+    {
+        switch (Type)
+        {
+            case TriggerType.Start:
+                if (Quest.IsActive) return;
+                Quest?.Start();
+                break;
+            case TriggerType.Complete:
+                if (!Quest.IsActive) return;
+                Objective?.Complete();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    public void ShowUI() => InteractionUI?.Show();
+    public void HideUI() => InteractionUI?.Hide();
+
+
+    public override void _ValidateProperty(Dictionary property)
+    {
+        var name = property["name"].ToString();
+
+        if (name != PropertyName.ObjectiveIndex) return;
+
+        property["hint_string"] = $"0,{Quest?.Objectives.Count - 1},1";
+    }
+
+    public override Array<Dictionary> _GetPropertyList()
+    {
+        var properties = new Array<Dictionary>
+        {
+            new()
+            {
+                { "name", PropertyName.ShouldInteract },
+                { "type", (int)Variant.Type.Bool },
+                { "usage", (int)PropertyUsageFlags.Default }
+            }
+        };
+
+        if (ShouldInteract)
+            properties.Add(new Dictionary
+            {
+                { "name", PropertyName.InteractionLabel },
+                { "type", (int)Variant.Type.String },
+                { "usage", (int)PropertyUsageFlags.Default }
+            });
+
+        properties.Add(new Dictionary
+        {
+            { "name", PropertyName.Quest },
+            { "type", (int)Variant.Type.Object },
+            { "usage", (int)PropertyUsageFlags.Default },
+            { "hint_string", "Quest" }
+        });
+
+        if (Type != TriggerType.Complete) return properties;
+
+        properties.Add(new Dictionary
+        {
+            { "name", PropertyName.Objective },
+            { "type", (int)Variant.Type.Object },
+            { "usage", (int)(PropertyUsageFlags.Default | PropertyUsageFlags.ReadOnly) },
+            { "hint_string", "QuestObjective" }
+        });
+        properties.Add(new Dictionary
+        {
+            { "name", PropertyName.ObjectiveIndex },
+            { "type", (int)Variant.Type.Int },
+            { "usage", (int)PropertyUsageFlags.Default }
+        });
+
+        return properties;
+    }
 
     public override string[] _GetConfigurationWarnings()
     {
@@ -40,18 +230,23 @@ public partial class QuestTrigger : Area2D, IInteractable
 
         return [..warnings];
     }
-    
-    public Vector2 InteractionPosition => GlobalPosition;
-    public void Interact()
+
+    public override void _EnterTree()
     {
-        throw new System.NotImplementedException();
-    }
-    public void ShowUI()
-    {
-        throw new System.NotImplementedException();
-    }
-    public void HideUI()
-    {
-        throw new System.NotImplementedException();
+        if (GetNodeOrNull("CollisionShape2D") == null)
+        {
+            var collision = new CollisionShape2D
+            {
+                Name = "CollisionShape2D",
+                DebugColor = new Color(0.88f, 0.525f, 0.898f, 0.42f)
+            };
+
+            AddChild(collision);
+            collision.SetOwner(GetTree().GetEditedSceneRoot());
+        }
+
+        if (!ShouldInteract) return;
+
+        this.AddInteractionUI();
     }
 }

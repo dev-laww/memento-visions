@@ -1,14 +1,22 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=7 format=3 uid="uid://b68babfd4dju"]
+[gd_resource type="Resource" script_class="Quest" load_steps=11 format=3 uid="uid://b68babfd4dju"]
 
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Resources/Quest.cs" id="1_eps0w"]
+[ext_resource type="Resource" uid="uid://c71am62dl1cq6" path="res://resources/items/material/rock.tres" id="2_468va"]
 [ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Resources/KillRequirement.cs" id="3_ag3wa"]
+[ext_resource type="Script" uid="uid://btqj20rwc4vb" path="res://Scripts/Resources/ItemRequirement.cs" id="3_e6t7b"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Resources/QuestObjective.cs" id="4_e6t7b"]
+
+[sub_resource type="Resource" id="Resource_bii86"]
+script = ExtResource("3_e6t7b")
+Item = ExtResource("2_468va")
+Amount = 1
+metadata/_custom_type_script = ExtResource("3_e6t7b")
 
 [sub_resource type="Resource" id="Resource_fxpm0"]
 script = ExtResource("4_e6t7b")
 Type = 0
 Description = ""
-Items = []
+Items = [SubResource("Resource_bii86")]
 metadata/_custom_type_script = ExtResource("4_e6t7b")
 
 [sub_resource type="Resource" id="Resource_t47vq"]
@@ -24,13 +32,19 @@ Description = ""
 Enemies = [SubResource("Resource_t47vq")]
 metadata/_custom_type_script = ExtResource("4_e6t7b")
 
+[sub_resource type="Resource" id="Resource_468va"]
+script = ExtResource("4_e6t7b")
+Type = 1
+Description = ""
+metadata/_custom_type_script = ExtResource("4_e6t7b")
+
 [resource]
 script = ExtResource("1_eps0w")
 Id = "quest:test"
 Title = "Test"
-Ordered = true
+Ordered = false
 Description = ""
-objectives = [SubResource("Resource_fxpm0"), SubResource("Resource_sphcv")]
+objectives = [SubResource("Resource_fxpm0"), SubResource("Resource_sphcv"), SubResource("Resource_468va")]
 Experience = 0
 Items = []
 metadata/_custom_type_script = ExtResource("1_eps0w")
