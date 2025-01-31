@@ -1,18 +1,17 @@
-using System.Collections.Generic;
 using Godot;
 
 namespace Game.Common.Utilities;
 
 public static class DirAccessUtils
 {
-    public static List<string> GetFilesRecursively(string path, string extension = null)
+    public static List<string> GetFilesRecursively(string path, string? extension = null)
     {
         var files = new List<string>();
 
         if (!DirAccess.DirExistsAbsolute(path))
         {
             GD.PrintErr($"Directory does not exist: {path}");
-            return null;
+            return [];
         }
 
         var dir = DirAccess.Open(path);
@@ -25,7 +24,7 @@ public static class DirAccessUtils
         {
             if (DirAccess.DirExistsAbsolute($"{path}/{file}"))
             {
-                files.AddRange(GetFilesRecursively($"{path}/{file}", extension));
+                files.AddRange(GetFilesRecursively($"{path}/{file}", extension) ?? []);
             }
             else if (extension == null || file.EndsWith(extension))
             {
@@ -45,7 +44,7 @@ public static class DirAccessUtils
         var files = new List<string>();
 
         foreach (var path in paths)
-            files.AddRange(GetFilesRecursively(path));
+            files.AddRange(GetFilesRecursively(path) ?? []);
 
         return files;
     }

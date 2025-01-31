@@ -7,10 +7,7 @@ using GodotUtilities;
 
 namespace Game.Components.Area;
 
-// TODO: add animations for showing and hiding the interaction UI
-
 [Tool]
-[Scene]
 [GlobalClass]
 public partial class Interaction : Area2D, IInteractable
 {

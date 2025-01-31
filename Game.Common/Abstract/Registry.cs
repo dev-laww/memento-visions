@@ -4,12 +4,12 @@ using Godot;
 
 namespace Game.Common.Abstract;
 
-public abstract partial class Registry<T, TRegistry> : GodotObject
+public abstract class Registry<T, TRegistry> : GodotObject
     where T : GodotObject
     where TRegistry : Registry<T, TRegistry>, new()
 {
     protected static readonly Lazy<TRegistry> _instance = new(() => new TRegistry());
-    private static readonly Dictionary<string, List<string>> _fileCache = [];
+    private readonly Dictionary<string, List<string>> _fileCache = [];
     private readonly string _resourcePath;
 
     protected Registry(string resourcePath)
@@ -21,7 +21,7 @@ public abstract partial class Registry<T, TRegistry> : GodotObject
         }
     }
 
-    protected List<string> GetFiles(bool forceReload = false)
+    private List<string> GetFiles(bool forceReload = false)
     {
         if (!forceReload && _fileCache.TryGetValue(_resourcePath, out var value)) return value;
 

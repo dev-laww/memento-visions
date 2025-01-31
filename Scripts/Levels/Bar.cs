@@ -4,7 +4,6 @@ using Game.Components.Managers;
 
 namespace Game.Levels;
 
-[Scene]
 public partial class Bar : Node2D
 {
     [Export] AudioStream music;

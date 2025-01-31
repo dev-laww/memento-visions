@@ -112,13 +112,11 @@ public static class CommandInterpreter
         {
             if (i >= parts.Length)
             {
-                if (parameters[i].HasDefaultValue)
-                {
-                    args[i] = parameters[i].DefaultValue;
-                    continue;
-                }
+                if (!parameters[i].HasDefaultValue)
+                    throw new CommandException($"Missing argument '{parameters[i].Name}'.");
 
-                throw new CommandException($"Missing argument '{parameters[i].Name}'.");
+                args[i] = parameters[i].DefaultValue ?? throw new InvalidOperationException();
+                continue;
             }
 
             args[i] = ParseArgument(parts[i].Trim(), parameters[i].ParameterType);
