@@ -132,13 +132,14 @@ public partial class QuestTrigger : Area2D, IInteractable
             return;
         }
 
-        if (!Quest.IsActive) return;
+        if (!Quest.IsActive && Mode == TriggerMode.Complete) return;
+
         InteractionManager.Register(this);
     }
 
     private void OnBodyExited(Node2D body)
     {
-        if (!ShouldInteract || !Quest.IsActive) return;
+        if (!ShouldInteract || (!Quest.IsActive && Mode == TriggerMode.Complete)) return;
         InteractionManager.Unregister(this);
     }
 
@@ -228,7 +229,7 @@ public partial class QuestTrigger : Area2D, IInteractable
         if (Quest == null)
             warnings.Add("Quest is not set.");
 
-        return [..warnings];
+        return [.. warnings];
     }
 
     public override void _EnterTree()
