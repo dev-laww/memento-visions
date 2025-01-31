@@ -2,9 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
 using Game.Resources;
-using Game.Utils;
 using Godot;
-using GodotUtilities.Util;
 
 namespace Game.Globals;
 
@@ -56,7 +54,7 @@ public partial class QuestManager : Global<QuestManager>
     {
         Instance.quests.Add(quest);
         Added?.Invoke(quest);
-        Logger.Info($"{quest} added.");
+        Log.Info($"{quest} added.");
     }
 
     public static void Remove(string id)
@@ -67,6 +65,6 @@ public partial class QuestManager : Global<QuestManager>
 
         Instance.quests.Remove(quest);
         Removed?.Invoke(quest);
-        Logger.Info($"{quest} removed.");
+        Log.Info($"{quest} removed.");
     }
 }
