@@ -3,6 +3,7 @@ using System.Linq;
 using Game.Exceptions.Command;
 using Game.Globals;
 using Game.UI.Overlays;
+using Game.Utils;
 using Godot;
 using GodotUtilities;
 
@@ -71,20 +72,21 @@ public partial class DeveloperConsole : Overlay
             if (Exception != null && Exception is not CommandException)
             {
                 lines.Add($"{Exception}");
-                lines.Add("\t" + string.Join("\n\t", Exception.StackTrace.Split('\n')));
+
+                if (Exception.StackTrace != null)
+                    lines.Add("\t" + string.Join("\n\t", Exception.StackTrace.Split('\n')));
             }
             else if (Exception != null)
             {
                 lines.Add($"{Exception.Message}");
             }
 
-            if (command == "help" || command == "?")
+            if (command != "help" && command != "?") continue;
+
+            lines.Add("Available commands:");
+            foreach (var (name, (_, description)) in CommandInterpreter.Commands)
             {
-                lines.Add("Available commands:");
-                foreach (var (name, (_, description)) in CommandInterpreter.Commands)
-                {
-                    lines.Add($"\t{name} - {description}");
-                }
+                lines.Add($"\t{name} - {description}");
             }
         }
 
@@ -97,9 +99,10 @@ public partial class DeveloperConsole : Overlay
     {
         output.Text = string.Empty;
         CommandInterpreter.ClearHistory();
+        Log.Debug("Console history cleared.");
     }
 
-    private void Help() { }
+    private static void Help() { }
 
     public override void Close()
     {
@@ -115,4 +118,3 @@ public partial class DeveloperConsole : Overlay
         commandInput.GrabFocus();
     }
 }
-

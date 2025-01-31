@@ -1,3 +1,4 @@
+using Game.Utils;
 using Game.Utils.Json.Models;
 using Godot;
 using Newtonsoft.Json;
@@ -17,7 +18,7 @@ public partial class SaveManager : Global<SaveManager>
     public override void _EnterTree()
     {
         Load();
-        var timer = new Timer { WaitTime = 10, Autostart = true };
+        var timer = new Timer { WaitTime = OS.IsDebugBuild() ? 15 : 60, Autostart = true };
         AddChild(timer);
         timer.Timeout += Save;
     }
@@ -29,8 +30,10 @@ public partial class SaveManager : Global<SaveManager>
 
     private static void Load()
     {
+        Log.Debug("Loading save data...");
         if (FileAccess.FileExists(path))
         {
+            Log.Debug("Save data not found creating new save data...");
             var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
             var content = file.GetAsText();
             file.Close();
@@ -48,6 +51,7 @@ public partial class SaveManager : Global<SaveManager>
 
     private void Save()
     {
+        Log.Debug("Saving data...");
         var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
 
         // TODO: Implement other save data

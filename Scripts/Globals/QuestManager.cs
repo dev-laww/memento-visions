@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Registry;
 using Game.Resources;
+using Game.Utils;
 using Godot;
 
 namespace Game.Globals;
@@ -36,6 +37,7 @@ public partial class QuestManager : Global<QuestManager>
             {
                 Completed?.Invoke(quest);
                 completedQuests.Add(quest);
+                Log.Debug($"{quest} completed.");
             }
             else
             {

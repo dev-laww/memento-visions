@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Game.Globals;
+using Game.Utils;
 using Godot;
 
 namespace Game.Resources;
@@ -46,7 +47,9 @@ public partial class Recipe : Resource
         foreach (var ingredient in ingredients)
             InventoryManager.RemoveItem(ingredient);
 
-        InventoryManager.AddItem(new ItemGroup { Item = Result.Item, Quantity = Result.Quantity * quantity });
+        var item = new ItemGroup { Item = Result.Item, Quantity = Result.Quantity * quantity };
+        InventoryManager.AddItem(item);
+        Log.Debug($"Created {item}.");
     }
 
     public override string ToString() => $"<Recipe ({Result})>";

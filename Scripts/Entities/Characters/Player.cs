@@ -141,10 +141,7 @@ public partial class Player : Entity
 
     private async void Attack()
     {
-        if (!canAttack) return;
-
-        canAttack = false;
-
+        // TODO: make use of animation tree player to handle animation directions
         switch (WeaponManager.CurrentWeaponResource.WeaponType)
         {
             case Item.Type.Gun:
@@ -165,7 +162,7 @@ public partial class Player : Entity
                 GD.PushError("Weapon type not found");
                 break;
         }
-
+       
         WeaponManager.Attack(MoveDirection);
 
         await ToSignal(animations, "animation_finished");

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Game.Exceptions.Command;
+using Game.Utils;
 
 namespace Game.Globals;
 
@@ -33,6 +34,7 @@ public static class CommandInterpreter
 
         commands[name] = (command, description);
         CommandRegistered?.Invoke(name, description);
+        Log.Debug($"Command '{name}' registered.");
     }
 
     public static void Unregister(string name)
@@ -44,6 +46,7 @@ public static class CommandInterpreter
 
         commands.Remove(name);
         CommandUnregistered?.Invoke(name);
+        Log.Debug($"Command '{name}' unregistered.");
     }
 
     public static async void Execute(string commandInput)
@@ -65,6 +68,7 @@ public static class CommandInterpreter
             }
 
             CommandExecuted?.Invoke(commandInput, args);
+            Log.Debug($"Command '{name}' executed.");
         }
         catch (Exception e)
         {
@@ -74,7 +78,10 @@ public static class CommandInterpreter
             CommandExecuted?.Invoke(commandInput, args);
 
             if (historyEntry.Exception is not CommandException)
+            {
+                Log.Error(historyEntry.Exception);
                 throw;
+            }
         }
     }
 
@@ -83,11 +90,13 @@ public static class CommandInterpreter
         var parts = input.Split([' '], StringSplitOptions.RemoveEmptyEntries);
         return parts.Length == 0
             ? []
-            : [.. history
-                .Where(entry => entry.Command.StartsWith(parts[0]))
-                .Select(entry => entry.Command)
-                .Distinct()
-                ];
+            :
+            [
+                .. history
+                    .Where(entry => entry.Command.StartsWith(parts[0]))
+                    .Select(entry => entry.Command)
+                    .Distinct()
+            ];
     }
 
     private static (string Name, Delegate action, object[] args) ParseCommand(string input)
@@ -136,16 +145,20 @@ public static class CommandInterpreter
             if (tryParseMethod != null)
             {
                 var parameters = new object[] { argument, null };
-                var success = (bool)tryParseMethod.Invoke(null, parameters);
-                return success ? parameters[1] : throw new UnsupportedArgument($"Failed to parse '{argument}' as {targetType.Name}.");
+                var success = (bool?)tryParseMethod.Invoke(null, parameters) ?? false;
+                return success
+                    ? parameters[1]
+                    : throw new UnsupportedArgument($"Failed to parse '{argument}' as {targetType.Name}.");
             }
 
             // Fallback to Parse method
             var parseMethod = targetType.GetMethod("Parse", [typeof(string)]);
-            return parseMethod?.Invoke(null, [argument]) ?? throw new UnsupportedArgument($"Failed to parse '{argument}' as {targetType.Name}.");
+            return parseMethod?.Invoke(null, [argument]) ??
+                   throw new UnsupportedArgument($"Failed to parse '{argument}' as {targetType.Name}.");
         }
         catch (Exception e)
         {
+            Log.Error(e);
             throw new UnsupportedArgument($"Failed to parse '{argument}' as {targetType.Name}.", e);
         }
     }

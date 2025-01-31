@@ -148,14 +148,23 @@ public abstract partial class Entity : CharacterBody2D
     {
         var warnings = new List<string>();
 
-        if (GetChildren().OfType<HurtBox>().FirstOrDefault() == null)
-            warnings.Add("Entity should have a HurtBox node.");
+        var statsManagers = GetChildren().OfType<StatsManager>().Count();
 
-        if (GetChildren().OfType<StatsManager>().FirstOrDefault() == null)
-            warnings.Add("Entity should have a StatsManager node.");
+        if (statsManagers != 1)
+            warnings.Add($"Entity should have {(statsManagers == 0 ? "a" : "only one")} StatsManager node.");
+
+        var hurtBoxes = GetChildren().OfType<HurtBox>().Count();
+
+        if (hurtBoxes != 1)
+            warnings.Add($"Entity should have {(hurtBoxes == 0 ? "a" : "only one")} HurtBox node.");
+
+        if (Id is null or "")
+            warnings.Add("Entity should have a unique Id.");
 
         return [.. warnings];
     }
 
     private void NotifyChange(Node _) => NotifyPropertyListChanged();
+
+    public override string ToString() => $"<Entity ({Id})>";
 }

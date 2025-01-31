@@ -1,6 +1,7 @@
 using Game.Components.Battle;
 using Game.Entities.Characters;
 using Game.Resources;
+using Game.Utils;
 using Game.Utils.Extensions;
 using Godot;
 
@@ -30,6 +31,7 @@ public partial class WeaponManager : Global<WeaponManager>
         Instance.Player.AddChild(component);
         CurrentWeapon = component;
         CurrentWeaponResource = weapon;
+        Log.Debug($"{weapon} equipped.");
     }
 
     public static void Attack(string direction)
@@ -39,6 +41,7 @@ public partial class WeaponManager : Global<WeaponManager>
 
     public static void Unequip()
     {
+        Log.Debug($"{CurrentWeaponResource} unequipped.");
         CurrentWeapon?.QueueFree();
         CurrentWeapon = null;
         CurrentWeaponResource = null;

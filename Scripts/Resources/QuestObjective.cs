@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using Game.Entities.Enemies;
-using Game.Globals;
 using Godot;
 using Godot.Collections;
 
@@ -39,41 +38,7 @@ public partial class QuestObjective : Resource
 
     private ObjectiveType type;
 
-    public override Array<Dictionary> _GetPropertyList()
-    {
-        var properties = new Array<Dictionary>();
-
-        switch (Type)
-        {
-            case ObjectiveType.Collect:
-            case ObjectiveType.Deliver:
-                properties.Add(new Dictionary
-                {
-                    { "name", nameof(Items) },
-                    { "type", (int)Variant.Type.Array },
-                    { "usage", (int)PropertyUsageFlags.Default },
-                    { "hint", (int)PropertyHint.ArrayType },
-                    { "hint_string", $"24/17:ItemRequirement" }
-                });
-                break;
-            case ObjectiveType.Navigate:
-                break;
-            case ObjectiveType.Kill:
-                properties.Add(new Dictionary
-                {
-                    { "name", nameof(Enemies) },
-                    { "type", (int)Variant.Type.Array },
-                    { "usage", (int)PropertyUsageFlags.Default },
-                    { "hint", (int)PropertyHint.ArrayType },
-                    { "hint_string", $"24/17:KillRequirement" }
-                });
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-
-        return properties;
-    }
+    public void Complete() => Completed = true;
 
     public void UpdateItemProgress(ItemGroup group)
     {
@@ -112,7 +77,8 @@ public partial class QuestObjective : Resource
         throw new InvalidOperationException();
     }
 
-    private static bool CheckCompletion<T>(T[] requirements) where T : GodotObject => requirements.All(r => r.Get("Quantity").As<int>() >= r.Get("Amount").As<int>());
+    private static bool CheckCompletion<T>(T[] requirements) where T : GodotObject =>
+        requirements.All(r => r.Get("Quantity").As<int>() >= r.Get("Amount").As<int>());
 
     private static void UpdateRequirements<T>(
         T[] requirements,
@@ -131,5 +97,41 @@ public partial class QuestObjective : Resource
         }
     }
 
-    public override string ToString() => $"<QuestObjective ({Type} {GetHashCode()})>";
+    public override string ToString() => $"<QuestObjective ({Type})>";
+
+    public override Array<Dictionary> _GetPropertyList()
+    {
+        var properties = new Array<Dictionary>();
+
+        switch (Type)
+        {
+            case ObjectiveType.Collect:
+            case ObjectiveType.Deliver:
+                properties.Add(new Dictionary
+                {
+                    { "name", nameof(Items) },
+                    { "type", (int)Variant.Type.Array },
+                    { "usage", (int)PropertyUsageFlags.Default },
+                    { "hint", (int)PropertyHint.ArrayType },
+                    { "hint_string", $"24/17:ItemRequirement" }
+                });
+                break;
+            case ObjectiveType.Navigate:
+                break;
+            case ObjectiveType.Kill:
+                properties.Add(new Dictionary
+                {
+                    { "name", nameof(Enemies) },
+                    { "type", (int)Variant.Type.Array },
+                    { "usage", (int)PropertyUsageFlags.Default },
+                    { "hint", (int)PropertyHint.ArrayType },
+                    { "hint_string", $"24/17:KillRequirement" }
+                });
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        return properties;
+    }
 }
