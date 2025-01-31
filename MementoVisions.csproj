@@ -10,10 +10,8 @@
 
     <ItemGroup>
         <Content Remove="script_templates\**;**\*.uid" />
-        <Compile
-            Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**;Game.Common\**" />
-        <EmbeddedResource
-            Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**;**\*.uid;Game.Common\**" />
+        <Compile Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**;Game.Common\**" />
+        <EmbeddedResource Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**;**\*.uid;Game.Common\**" />
         <None Remove="script_templates\**;**\*.uid" />
 
         <Compile Update="gdunit4_testadapter\**;addons\**;**\*.uid">
@@ -32,7 +30,6 @@
     <ItemGroup>
         <PackageReference Include="Delaunator" Version="1.0.10" />
         <PackageReference Include="Firebelley.GodotUtilities" Version="5.0.0" />
-        <PackageReference Include="FuzzySharp" Version="2.0.2" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
         <PackageReference Include="gdUnit4.api" Version="4.4.0-rc6" />
         <PackageReference Include="gdUnit4.test.adapter" Version="2.1.0-rc2" />
@@ -41,8 +38,6 @@
 
     <ItemGroup>
         <ProjectReference Include="Game.Common\Game.Common.csproj" />
-        <ProjectReference Include="Game.SourceGenerators\Game.SourceGenerators.csproj"
-            OutputItemType="Analyzer"
-            ReferenceOutputAssembly="false" />
+        <ProjectReference Include="Game.SourceGenerators\Game.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 </Project>
