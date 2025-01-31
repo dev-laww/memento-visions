@@ -1,9 +1,9 @@
 using Game.Common;
+using Game.Common.Extensions;
 using Game.Common.Interfaces;
 using Game.Globals;
 using Game.UI.Common;
 using Godot;
-using GodotUtilities;
 
 namespace Game.Components.Area;
 
@@ -35,34 +35,7 @@ public partial class Interaction : Area2D, IInteractable
     {
         if (GetNodeOrNull("Node2D") != null) return;
 
-        var node = new Node2D { Name = "Node2D" };
-
-        var collision = new CollisionShape2D
-        {
-            Name = "CollisionShape2D",
-            DebugColor = new Color(0.88f, 0.525f, 0.898f, 0.42f)
-        };
-        var scene = ResourceLoader.Load<PackedScene>("res://Scenes/UI/Common/InteractionUI.tscn");
-        var ui = scene.Instantiate<InteractionUI>();
-        ui.UniqueNameInOwner = true;
-
-        ui.SetOwner(GetTree().GetEditedSceneRoot());
-        node.SetOwner(GetTree().GetEditedSceneRoot());
-        node.AddChild(ui);
-
-        AddChild(collision);
-        AddChild(node);
-
-        node.SetDisplayFolded(true);
-        collision.NotifyPropertyListChanged();
-        ui.NotifyPropertyListChanged();
-        node.NotifyPropertyListChanged();
-
-        collision.SetOwner(GetTree().GetEditedSceneRoot());
-        ui.SetOwner(GetTree().GetEditedSceneRoot());
-        node.SetOwner(GetTree().GetEditedSceneRoot());
-
-        Log.Debug(ui.Owner.Name);
+        this.AddInteractionUI();
     }
 
     public override void _Ready()
