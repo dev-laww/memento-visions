@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://j0qixu5x2ins" path="res://Scenes/Decorations/Bar/LargeBarrel.tscn" id="8_fqy60"]
 [ext_resource type="TileSet" uid="uid://b0bp4y4xuaxog" path="res://resources/tilesets/bar-decoration.tres" id="8_qpdtc"]
 [ext_resource type="PackedScene" uid="uid://b5jpiv87dv1rl" path="res://Scenes/Decorations/Bar/Barrel.tscn" id="9_ikvjg"]
-[ext_resource type="PackedScene" uid="uid://casihsp0usdna" path="res://Scenes/Entities/Characters/BlackSmith.tscn" id="11_cu4de"]
+[ext_resource type="PackedScene" uid="uid://dgqrvixy2ocww" path="res://Scenes/Entities/Characters/BlackSmith.tscn" id="11_cu4de"]
 [ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemies/Common/Dummy.tscn" id="12_no76d"]
 [ext_resource type="PackedScene" uid="uid://d1gnxumr8r1hu" path="res://Scenes/Entities/Enemies/Common/Samurai.tscn" id="13_1awp1"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="18_towvu"]
@@ -85,7 +85,7 @@ TargetScene = "res://Scenes/TestArea.tscn"
 shape = SubResource("RectangleShape2D_ervve")
 
 [node name="BlackSmith" parent="." instance=ExtResource("11_cu4de")]
-position = Vector2(112, 120)
+position = Vector2(116, 119)
 
 [node name="Dummy" parent="." instance=ExtResource("12_no76d")]
 position = Vector2(94, 199)

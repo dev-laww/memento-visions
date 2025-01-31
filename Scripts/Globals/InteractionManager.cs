@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Game.Components.Area;
+using Game.Common.Interfaces;
 using Game.Utils.Extensions;
 using Godot;
 
@@ -8,8 +8,8 @@ namespace Game.Globals;
 
 public partial class InteractionManager : Global<InteractionManager>
 {
-    private readonly List<Interaction> areas = new();
-    private Interaction lastClosest;
+    private readonly List<IInteractable> areas = [];
+    private IInteractable lastClosest;
 
     public override void _Process(double delta)
     {
@@ -35,10 +35,10 @@ public partial class InteractionManager : Global<InteractionManager>
         closest.Interact();
     }
 
-    public static void Register(Interaction area) => Instance.areas.Add(area);
+    public static void Register(IInteractable area) => Instance.areas.Add(area);
     
 
-    public static void Unregister(Interaction area)
+    public static void Unregister(IInteractable area)
     {
         if (area == Instance.lastClosest)
             Instance.lastClosest = null;
@@ -47,15 +47,15 @@ public partial class InteractionManager : Global<InteractionManager>
         area.HideUI();
     }
 
-    private Interaction GetClosest()
+    private IInteractable GetClosest()
     {
         if (areas.Count == 0) return null;
 
         areas.Sort((a, b) =>
         {
             var player = this.GetPlayer();
-            var aDistance = a.GlobalPosition.DistanceTo(player.GlobalPosition);
-            var bDistance = b.GlobalPosition.DistanceTo(player.GlobalPosition);
+            var aDistance = a.InteractionPosition.DistanceTo(player?.GlobalPosition ?? Vector2.Zero);
+            var bDistance = b.InteractionPosition.DistanceTo(player?.GlobalPosition ?? Vector2.Zero);
 
             return aDistance.CompareTo(bDistance);
         });

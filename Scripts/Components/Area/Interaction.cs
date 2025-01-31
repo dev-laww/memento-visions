@@ -1,4 +1,7 @@
+using Game.Common;
+using Game.Common.Interfaces;
 using Game.Globals;
+using Game.UI.Common;
 using Godot;
 using GodotUtilities;
 
@@ -7,74 +10,62 @@ namespace Game.Components.Area;
 // TODO: add animations for showing and hiding the interaction UI
 
 [Tool]
+[Scene]
 [GlobalClass]
-public partial class Interaction : Area2D
+public partial class Interaction : Area2D, IInteractable
 {
     [Export(PropertyHint.MultilineText)]
     public string InteractionLabel
     {
-        get
-        {
-            var label = GetNodeOrNull<Label>("InteractionUI/HBoxContainer/Label");
-
-            return label != null ? label.Text : string.Empty;
-        }
+        get => InteractionUI?.Text ?? string.Empty;
         set
         {
-            var label = GetNodeOrNull<Label>("InteractionUI/HBoxContainer/Label");
+            interactionLabel = value;
 
-            if (label == null) return;
+            if (InteractionUI == null) return;
 
-            label.Text = value;
-            label.NotifyPropertyListChanged();
+            InteractionUI.Text = value;
         }
     }
 
-    private Node2D interactionUI => GetNode<Node2D>("InteractionUI");
-
     [Signal] public delegate void InteractedEventHandler();
+
+    private InteractionUI InteractionUI => GetNodeOrNull<InteractionUI>("%InteractionUI");
+
+    private string interactionLabel;
 
     public override void _EnterTree()
     {
-        if (GetNodeOrNull("InteractionUI") != null) return;
+        if (GetNodeOrNull("Node2D") != null) return;
 
-        var ui = new Node2D();
-        ui.Name = "InteractionUI";
+        var node = new Node2D { Name = "Node2D" };
 
-        var container = new HBoxContainer();
-        var texture = new TextureRect();
-        var label = new Label();
-
-        container.AddChild(texture);
-        container.AddChild(label);
-        ui.AddChild(container);
-        AddChild(ui);
-
-        container.Name = nameof(HBoxContainer);
-        texture.Name = nameof(TextureRect);
-        texture.Texture = GD.Load<Texture2D>("res://assets/icons/f.png");
-        label.Name = nameof(Label);
-        label.Text = "Interact";
-        label.Theme = GD.Load<Theme>("res://resources/ui/theme.tres");
-        ui.Scale = new Vector2(0.5f, 0.5f);
-
-        container.SetVSizeFlags(Control.SizeFlags.ShrinkCenter);
-        container.SetHSizeFlags(Control.SizeFlags.ShrinkCenter);
-        container.SetAnchorsPreset(Control.LayoutPreset.Center);
-        container.SetHGrowDirection(Control.GrowDirection.Both);
-        container.SetVGrowDirection(Control.GrowDirection.Both);
-        texture.SetVSizeFlags(Control.SizeFlags.ShrinkCenter);
-        texture.SetHSizeFlags(Control.SizeFlags.ShrinkCenter);
-
-        ui.SetDisplayFolded(true);
-        ui.NotifyPropertyListChanged();
-        container.NotifyPropertyListChanged();
-        texture.NotifyPropertyListChanged();
+        var collision = new CollisionShape2D
+        {
+            Name = "CollisionShape2D",
+            DebugColor = new Color(0.88f, 0.525f, 0.898f, 0.42f)
+        };
+        var scene = ResourceLoader.Load<PackedScene>("res://Scenes/UI/Common/InteractionUI.tscn");
+        var ui = scene.Instantiate<InteractionUI>();
+        ui.UniqueNameInOwner = true;
 
         ui.SetOwner(GetTree().GetEditedSceneRoot());
-        container.SetOwner(GetTree().GetEditedSceneRoot());
-        texture.SetOwner(GetTree().GetEditedSceneRoot());
-        label.SetOwner(GetTree().GetEditedSceneRoot());
+        node.SetOwner(GetTree().GetEditedSceneRoot());
+        node.AddChild(ui);
+
+        AddChild(collision);
+        AddChild(node);
+
+        node.SetDisplayFolded(true);
+        collision.NotifyPropertyListChanged();
+        ui.NotifyPropertyListChanged();
+        node.NotifyPropertyListChanged();
+
+        collision.SetOwner(GetTree().GetEditedSceneRoot());
+        ui.SetOwner(GetTree().GetEditedSceneRoot());
+        node.SetOwner(GetTree().GetEditedSceneRoot());
+
+        Log.Debug(ui.Owner.Name);
     }
 
     public override void _Ready()
@@ -83,17 +74,23 @@ public partial class Interaction : Area2D
         CollisionMask = 1 << 2;
         NotifyPropertyListChanged();
 
-        BodyEntered += body => InteractionManager.Register(this);
-        BodyExited += body => InteractionManager.Unregister(this);
+        if (InteractionUI == null) return;
+
+        InteractionUI.Text = interactionLabel;
 
         if (Engine.IsEditorHint()) return;
 
-        interactionUI.Hide();
+        BodyEntered += _ => InteractionManager.Register(this);
+        BodyExited += _ => InteractionManager.Unregister(this);
+
+        InteractionUI.Hide();
     }
+
+    public Vector2 InteractionPosition => GlobalPosition;
 
     public void Interact() => EmitSignal(SignalName.Interacted);
 
-    public void HideUI() => interactionUI.Hide();
+    public void HideUI() => InteractionUI?.Hide();
 
-    public void ShowUI() => interactionUI.Show();
+    public void ShowUI() => InteractionUI?.Show();
 }
