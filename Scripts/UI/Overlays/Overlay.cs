@@ -20,6 +20,9 @@ public abstract partial class Overlay : Control
         this.GetPlayer()?.SetProcessInput(true);
         SetProcessInput(false);
         SetProcessUnhandledInput(false);
+        MouseFilter = MouseFilterEnum.Pass;
+        // Make it Passthrough so the player can interact with the game
+
 
         if (GameManager.CurrentOverlay == this) GameManager.CurrentOverlay = null;
 
@@ -32,5 +35,7 @@ public abstract partial class Overlay : Control
         Show();
         SetProcessInput(true);
         SetProcessUnhandledInput(true);
+
+        MouseFilter = MouseFilterEnum.Stop;
     }
 }
