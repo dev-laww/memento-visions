@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Game.Common;
 using Game.Utils.Extensions;
 using Godot;
@@ -5,6 +8,12 @@ using Godot.Collections;
 using GodotUtilities;
 
 namespace Game.Components.Managers;
+
+internal class TemporarySpeed
+{
+    public float Speed;
+    public float Duration;
+}
 
 [Tool]
 [Scene]
@@ -34,13 +43,13 @@ public partial class VelocityManager : Node
     [Export]
     private float DashCoolDown
     {
-        get => (float?)dashCoolDownTimer?.WaitTime ?? 0;
+        get => (float?)dashCooldownTimer?.WaitTime ?? 0;
         set
         {
-            if (dashCoolDownTimer == null) return;
-            
-            dashCoolDownTimer.WaitTime = value;
-            dashCoolDownTimer.NotifyPropertyListChanged();
+            if (dashCooldownTimer == null) return;
+
+            dashCooldownTimer.WaitTime = value;
+            dashCooldownTimer.NotifyPropertyListChanged();
         }
     }
 
@@ -48,10 +57,11 @@ public partial class VelocityManager : Node
     [Export] private float DashAccelerationCoefficient = 150;
 
     [Node] private Timer dashDurationTimer;
-    [Node] private Timer dashCoolDownTimer;
+    [Node] private Timer dashCooldownTimer;
 
     [Signal] public delegate void DashedEventHandler(Vector2 position);
     [Signal] public delegate void DashFreedEventHandler(Vector2 position);
+    [Signal] public delegate void TeleportedEventHandler(Vector2 origin, Vector2 destination);
 
     public Vector2 Velocity { get; private set; }
     public CharacterBody2D Body => Owner as CharacterBody2D;
@@ -72,8 +82,14 @@ public partial class VelocityManager : Node
     }
 
     private Array<Vector2> dashQueue = [];
-    private float MaxSpeed => StatsManager.Speed;
+    private List<TemporarySpeed> temporarySpeeds = [];
     private bool isDashing;
+
+    private float CalculatedMaxSpeed => Math.Max(
+        0,
+        temporarySpeeds.Aggregate(0f, (acc, x) => acc + x.Speed) + StatsManager.Speed
+    );
+
 
     public override void _Notification(int what)
     {
@@ -90,7 +106,7 @@ public partial class VelocityManager : Node
     public VelocityManager Accelerate(Vector2 direction)
     {
         LastFacedDirection = direction;
-        return AccelerateToVelocity(direction.TryNormalize() * MaxSpeed);
+        return AccelerateToVelocity(direction.TryNormalize() * CalculatedMaxSpeed);
     }
 
     public VelocityManager Decelerate(bool force = false)
@@ -115,18 +131,51 @@ public partial class VelocityManager : Node
     {
         if (direction == default) direction = LastFacedDirection;
         if (!CanDash) return this;
-
         LastFacedDirection = direction;
         IsDashing = true;
         AccelerateToVelocity(direction.TryNormalize() * DashSpeed, DashAccelerationCoefficient);
 
         dashQueue.Add(Body.GlobalPosition);
         dashDurationTimer.Start();
-        dashCoolDownTimer.Start();
+        dashCooldownTimer.Start();
 
         return this;
     }
-    
+
+    public VelocityManager Knockback(Vector2 direction, float force)
+    {
+        Log.Debug($"{Body} knocked back to {direction} with force {force}");
+        Velocity = direction.TryNormalize() * force;
+
+        return this;
+    }
+
+    public VelocityManager Teleport(Vector2 destination)
+    {
+        Log.Debug($"{Body} teleported from {Body.GlobalPosition} to {destination}");
+        EmitSignal(SignalName.Teleported, Body.GlobalPosition, destination);
+        Body.GlobalPosition = destination;
+        return this;
+    }
+
+    public VelocityManager ApplyTemporarySpeed(float speed, float duration = 0)
+    {
+        var temporarySpeed = new TemporarySpeed { Speed = speed, Duration = duration };
+
+        temporarySpeeds.Add(temporarySpeed);
+        Log.Debug($"Temporary speed {speed} applied for {duration} seconds");
+        Log.Debug($"Current speed: {CalculatedMaxSpeed}");
+
+        GetTree().CreateTimer(duration).Timeout += () =>
+        {
+            temporarySpeeds.Remove(temporarySpeed);
+            Log.Debug($"Temporary speed {speed} removed after {duration} seconds");
+            Log.Debug($"Current speed: {CalculatedMaxSpeed}");
+        };
+
+        return this;
+    }
+
     public VelocityManager OverrideLastFacedDirection(Vector2 direction)
     {
         LastFacedDirection = direction;

@@ -7,19 +7,15 @@ script = ExtResource("1_5egor")
 DashDuration = 0.3
 DashCoolDown = 3.0
 
-[node name="TemporartSpeedTimer" type="Timer" parent="."]
-process_callback = 0
-one_shot = true
-
 [node name="DashDurationTimer" type="Timer" parent="."]
 process_callback = 0
 wait_time = 0.3
 one_shot = true
 
-[node name="DashCoolDownTimer" type="Timer" parent="."]
+[node name="DashCooldownTimer" type="Timer" parent="."]
 process_callback = 0
 wait_time = 3.0
 one_shot = true
 
 [connection signal="timeout" from="DashDurationTimer" to="." method="OnDashDurationTimeout"]
-[connection signal="timeout" from="DashCoolDownTimer" to="." method="OnDashCooldownTimeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="OnDashCooldownTimeout"]
