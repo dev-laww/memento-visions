@@ -1,7 +1,10 @@
 using System;
 using System.Linq;
+using Game.Common.Models;
 using Game.Components.Managers;
 using Game.Components.Area;
+using Game.Globals;
+using Game.Resources;
 using Godot;
 using GodotUtilities;
 
@@ -64,8 +67,8 @@ public partial class Player : Entity
 
         StateMachine.AddStates(Idle);
         StateMachine.AddStates(Walk);
-        StateMachine.AddStates(Dash, EnterDash, ExitDash);
-        StateMachine.AddStates(Attack, EnterAttack, ExitAttack);
+        StateMachine.AddStates(Dash, EnterDash);
+        StateMachine.AddStates(Attack, EnterAttack);
         StateMachine.SetInitialState(Idle);
     }
 
@@ -102,19 +105,81 @@ public partial class Player : Entity
         VelocityManager.Accelerate(inputDirection);
     }
 
-    private void EnterDash() { }
-    private void Dash() { }
-    private void ExitDash() { }
+    private void EnterDash()
+    {
+        if (!VelocityManager.CanDash) return;
 
-    private void EnterAttack() { }
-    private void Attack() { }
-    private void ExitAttack() { }
+        VelocityManager.Dash(inputDirection);
+        animations.Play($"walk_{LastFacedDirection}");
+    }
+
+    private void Dash()
+    {
+        if (VelocityManager.IsDashing) return;
+
+        StateMachine.ChangeState(inputDirection.IsZeroApprox() ? Idle : Walk);
+    }
+
+    private void EnterAttack()
+    {
+        if (WeaponManager.CanAttack) return;
+
+        StateMachine.ChangeState(inputDirection.IsZeroApprox() ? Idle : Walk);
+    }
+
+    private async void Attack()
+    {
+        VelocityManager.Decelerate();
+        switch (WeaponManager.CurrentWeaponResource.WeaponType)
+        {
+            case Item.Type.Gun:
+                animations.Play($"gun/{LastFacedDirection}");
+                break;
+            case Item.Type.Dagger:
+                animations.Play($"dagger/{LastFacedDirection}");
+                break;
+            case Item.Type.Sword:
+                animations.Play($"sword/{LastFacedDirection}");
+                break;
+            case Item.Type.Whip:
+                animations.Play($"dagger/{LastFacedDirection}");
+                break;
+            default:
+                GD.PushError("Weapon type not found");
+                break;
+        }
+
+        WeaponManager.Attack(LastFacedDirection);
+
+        await ToSignal(animations, "animation_finished");
+        await ToSignal(WeaponManager.CurrentAnimationPlayer, "animation_finished");
+
+        StateMachine.ChangeState(inputDirection.IsZeroApprox() ? Idle : Walk);
+    }
 
 
     private void ProcessInput()
     {
         inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
-        // add dash input and attack input
+        var dash = Input.IsActionJustPressed("dash");
+        var attack = Input.IsActionJustPressed("attack");
+
+        if (dash) StateMachine.ChangeState(Dash);
+        if (attack) StateMachine.ChangeState(Attack);
+    }
+    
+    public PlayerData ToData() => new()
+    {
+        Position = GlobalPosition,
+        Direction = VelocityManager.LastFacedDirection,
+        Stats = StatsManager.ToData(),
+    };
+
+    public void Apply(PlayerData data)
+    {
+        GlobalPosition = data.Position;
+        StatsManager.Apply(data.Stats);
+        VelocityManager.OverrideLastFacedDirection(data.Direction);
     }
 }

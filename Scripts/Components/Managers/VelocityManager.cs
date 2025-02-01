@@ -1,10 +1,13 @@
+using Game.Common;
 using Game.Utils.Extensions;
 using Godot;
 using Godot.Collections;
+using GodotUtilities;
 
 namespace Game.Components.Managers;
 
 [Tool]
+[Scene]
 [GlobalClass]
 public partial class VelocityManager : Node
 {
@@ -15,8 +18,37 @@ public partial class VelocityManager : Node
     [Export(PropertyHint.Range, "0,5,1")]
     private int TimesCanDash = 1;
 
+    [Export]
+    private float DashDuration
+    {
+        get => (float?)dashDurationTimer?.WaitTime ?? 0;
+        set
+        {
+            if (dashDurationTimer == null) return;
+
+            dashDurationTimer.WaitTime = value;
+            dashDurationTimer.NotifyPropertyListChanged();
+        }
+    }
+
+    [Export]
+    private float DashCoolDown
+    {
+        get => (float?)dashCoolDownTimer?.WaitTime ?? 0;
+        set
+        {
+            if (dashCoolDownTimer == null) return;
+            
+            dashCoolDownTimer.WaitTime = value;
+            dashCoolDownTimer.NotifyPropertyListChanged();
+        }
+    }
+
     [Export] private float DashSpeed = 200;
-    [Export] private float DashAccelerationCoefficient = 20;
+    [Export] private float DashAccelerationCoefficient = 150;
+
+    [Node] private Timer dashDurationTimer;
+    [Node] private Timer dashCoolDownTimer;
 
     [Signal] public delegate void DashedEventHandler(Vector2 position);
     [Signal] public delegate void DashFreedEventHandler(Vector2 position);
@@ -42,6 +74,13 @@ public partial class VelocityManager : Node
     private Array<Vector2> dashQueue = [];
     private float MaxSpeed => StatsManager.Speed;
     private bool isDashing;
+
+    public override void _Notification(int what)
+    {
+        if (what != NotificationSceneInstantiated) return;
+
+        WireNodes();
+    }
 
     public override void _Ready()
     {
@@ -77,9 +116,20 @@ public partial class VelocityManager : Node
         if (direction == default) direction = LastFacedDirection;
         if (!CanDash) return this;
 
-        dashQueue.Add(direction);
+        LastFacedDirection = direction;
         IsDashing = true;
+        AccelerateToVelocity(direction.TryNormalize() * DashSpeed, DashAccelerationCoefficient);
 
+        dashQueue.Add(Body.GlobalPosition);
+        dashDurationTimer.Start();
+        dashCoolDownTimer.Start();
+
+        return this;
+    }
+    
+    public VelocityManager OverrideLastFacedDirection(Vector2 direction)
+    {
+        LastFacedDirection = direction;
         return this;
     }
 
@@ -93,6 +143,7 @@ public partial class VelocityManager : Node
 
     private void OnDashCooldownTimeout()
     {
+        Log.Debug("Dash cooldown ended");
         if (dashQueue.Count == 0) return;
 
         var direction = dashQueue[^1];
@@ -102,6 +153,7 @@ public partial class VelocityManager : Node
 
     private void OnDashDurationTimeout()
     {
+        IsDashing = false;
         var lastDash = dashQueue.Count > 0 ? dashQueue[^1] : Vector2.Zero;
         EmitSignal(SignalName.Dashed, lastDash);
     }

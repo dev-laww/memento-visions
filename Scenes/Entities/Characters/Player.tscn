@@ -1672,6 +1672,7 @@ Damage = 100.0
 
 [node name="VelocityManager" parent="." node_paths=PackedStringArray("StatsManager") instance=ExtResource("3_lmufy")]
 StatsManager = NodePath("../StatsManager")
+AccelerationCoefficient = 12.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
