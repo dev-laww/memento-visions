@@ -1,3 +1,5 @@
+#if TOOLS
+
 using Godot;
 using ProjectPlugin.InspectorPlugin;
 
@@ -25,3 +27,5 @@ public partial class ProjectPlugin : EditorPlugin
         RemoveInspectorPlugin(_idInspectorPlugin);
     }
 }
+
+#endif

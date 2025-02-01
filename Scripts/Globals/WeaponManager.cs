@@ -15,22 +15,17 @@ public partial class WeaponManager : Global<WeaponManager>
     public static WeaponComponent CurrentWeapon { get; private set; }
     public static AnimationPlayer CurrentAnimationPlayer => CurrentWeapon.AnimationPlayer;
     public static Item CurrentWeaponResource { get; private set; }
-    private Player Player;
-
-    public override void _Ready()
-    {
-        Player = this.GetPlayer();
-    }
 
     public static void Equip(Item weapon)
     {
-        if (Instance.Player == null || weapon.Component.ResourcePath == CurrentWeapon?.SceneFilePath) return;
+        var player = Instance.GetPlayer();
+
+        if (player == null || weapon.Component.ResourcePath == CurrentWeapon?.SceneFilePath) return;
 
         var component = weapon.Component.Instantiate<WeaponComponent>();
 
         CurrentWeapon?.QueueFree();
-
-        Instance.Player.AddChild(component);
+        player.AddChild(component);
         CurrentWeapon = component;
         CurrentWeaponResource = weapon;
         Log.Debug($"{weapon} equipped.");

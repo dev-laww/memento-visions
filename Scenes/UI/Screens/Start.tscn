@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://npt6wv2s1hvr"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Screens/Start.cs" id="1_lnnf6"]
+[ext_resource type="Script" uid="uid://op6hdnwikw18" path="res://Scripts/UI/Screens/Start.cs" id="1_lnnf6"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="1_nfvvw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o7oht"]
@@ -39,8 +39,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dxm81"]
 _data = {
-"RESET": SubResource("Animation_6862x"),
-"blink": SubResource("Animation_y1r0u")
+&"RESET": SubResource("Animation_6862x"),
+&"blink": SubResource("Animation_y1r0u")
 }
 
 [node name="Start" type="Control"]
@@ -91,6 +91,6 @@ grow_vertical = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_dxm81")
+&"": SubResource("AnimationLibrary_dxm81")
 }
 autoplay = "blink"

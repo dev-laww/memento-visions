@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bt4ok8sg4whcf" path="res://Scripts/Components/Managers/GameManager.cs" id="1_jd26h"]
 [ext_resource type="PackedScene" uid="uid://npt6wv2s1hvr" path="res://Scenes/UI/Screens/Start.tscn" id="2_xr7b5"]
-[ext_resource type="PackedScene" uid="uid://b4wadx6dv5aan" path="res://Scenes/World/Bar.tscn" id="3_18ebj"]
+[ext_resource type="PackedScene" uid="uid://d0qr3o1nxmcpe" path="res://Scenes/World/Bar.tscn" id="3_18ebj"]
 [ext_resource type="PackedScene" uid="uid://b161abm0o6ij2" path="res://Scenes/UI/Overlays/Inventory.tscn" id="4_3s3bi"]
 [ext_resource type="PackedScene" uid="uid://dd1jerr3yxfmm" path="res://Scenes/UI/Overlays/Crafting.tscn" id="5_1xnus"]
 [ext_resource type="PackedScene" uid="uid://cuymxmsjlw48y" path="res://Scenes/UI/Overlays/Quest.tscn" id="6_vcj0g"]
@@ -13,6 +13,7 @@
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_jd26h")
+showStartScreen = true
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
 resources = [PackedStringArray("StartScreen"), [ExtResource("2_xr7b5")]]
@@ -25,19 +26,25 @@ resources = [PackedStringArray("StartScreen"), [ExtResource("2_xr7b5")]]
 process_mode = 3
 
 [node name="HeadsUpDisplay" parent="UserInterface" instance=ExtResource("8_t6ww0")]
+mouse_filter = 2
 script = ExtResource("9_gcq4q")
 
 [node name="Inventory" parent="UserInterface" instance=ExtResource("4_3s3bi")]
 visible = false
+mouse_filter = 2
 
 [node name="Crafting" parent="UserInterface" instance=ExtResource("5_1xnus")]
 visible = false
+mouse_filter = 2
 
 [node name="Quest" parent="UserInterface" instance=ExtResource("6_vcj0g")]
 visible = false
+mouse_filter = 2
 
 [node name="Menu" parent="UserInterface" instance=ExtResource("7_icpvm")]
 visible = false
+mouse_filter = 2
 
 [node name="DeveloperConsole" parent="UserInterface" instance=ExtResource("10_xgi0l")]
 visible = false
+mouse_filter = 2

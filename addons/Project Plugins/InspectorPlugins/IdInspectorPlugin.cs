@@ -1,3 +1,5 @@
+#if TOOLS
+
 using Game.Registry;
 using Game.Resources;
 using Godot;
@@ -99,3 +101,5 @@ public partial class IdInspectorPlugin : EditorInspectorPlugin
         return true;
     }
 }
+
+#endif

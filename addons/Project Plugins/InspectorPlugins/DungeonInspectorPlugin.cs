@@ -1,3 +1,5 @@
+#if TOOLS
+
 using Godot;
 using Game.Levels.Dungeon;
 
@@ -22,3 +24,5 @@ public partial class DungeonInspectorPlugin : EditorInspectorPlugin
     }
     private static void OnGenerateButtonPressed(Dungeon dungeon) => dungeon.Generate();
 }
+
+# endif
