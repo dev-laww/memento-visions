@@ -5,7 +5,6 @@ using Game.Common;
 using Game.Utils.Extensions;
 using Godot;
 using Godot.Collections;
-using GodotUtilities;
 
 namespace Game.Components.Managers;
 
@@ -16,62 +15,42 @@ internal class TemporarySpeed
 }
 
 [Tool]
-[Scene]
 [GlobalClass]
 public partial class VelocityManager : Node
 {
-    [Export] private StatsManager StatsManager;
-    [Export] private float AccelerationCoefficient = 10;
+    [Export]
+    private StatsManager StatsManager
+    {
+        get => statsManager;
+        set
+        {
+            statsManager = value;
+            UpdateConfigurationWarnings();
+        }
+    }
+
+    [Export] private float AccelerationCoefficient = 10f;
 
     [ExportCategory("Dash")]
     [Export(PropertyHint.Range, "0,5,1")]
     private int TimesCanDash = 1;
 
-    [Export]
-    private float DashDuration
-    {
-        get => (float?)dashDurationTimer?.WaitTime ?? 0;
-        set
-        {
-            if (dashDurationTimer == null) return;
-
-            dashDurationTimer.WaitTime = value;
-            dashDurationTimer.NotifyPropertyListChanged();
-        }
-    }
-
-    [Export]
-    private float DashCoolDown
-    {
-        get => (float?)dashCooldownTimer?.WaitTime ?? 0;
-        set
-        {
-            if (dashCooldownTimer == null) return;
-
-            dashCooldownTimer.WaitTime = value;
-            dashCooldownTimer.NotifyPropertyListChanged();
-        }
-    }
-
+    [Export] private bool CanDashWhileDashing;
     [Export] private float DashSpeed = 200;
-    [Export] private float DashAccelerationCoefficient = 150;
-
-    [Node] private Timer dashDurationTimer;
-    [Node] private Timer dashCooldownTimer;
+    [Export] private float DashDuration = 0.3f;
+    [Export] private float DashCoolDown = 4f;
 
     [Signal] public delegate void DashedEventHandler(Vector2 position);
     [Signal] public delegate void DashFreedEventHandler(Vector2 position);
     [Signal] public delegate void TeleportedEventHandler(Vector2 origin, Vector2 destination);
 
     public Vector2 Velocity { get; private set; }
-    public CharacterBody2D Body => Owner as CharacterBody2D;
     public Vector2 LastFacedDirection { get; private set; } = Vector2.Down;
-    public bool CanDash => dashQueue.Count < TimesCanDash;
 
     public bool IsDashing
     {
         get => isDashing;
-        set
+        private set
         {
             if (isDashing == value) return;
 
@@ -81,42 +60,74 @@ public partial class VelocityManager : Node
         }
     }
 
+    private CharacterBody2D Body => GetParent() as CharacterBody2D;
     private Array<Vector2> dashQueue = [];
-    private List<TemporarySpeed> temporarySpeeds = [];
+    private readonly List<TemporarySpeed> temporarySpeeds = [];
     private bool isDashing;
+    private StatsManager statsManager;
 
     private float CalculatedMaxSpeed => Math.Max(
         0,
         temporarySpeeds.Aggregate(0f, (acc, x) => acc + x.Speed) + StatsManager.Speed
     );
 
-
-    public override void _Notification(int what)
-    {
-        if (what != NotificationSceneInstantiated) return;
-
-        WireNodes();
-    }
-
+    /// <summary>
+    /// Called when the node is added to the scene. Disables processing until movement is explicitly applied.
+    /// </summary>
     public override void _Ready()
     {
         SetProcess(false);
+        SetPhysicsProcess(false);
     }
 
+    /// <summary>
+    /// Accelerates the entity in the specified direction.
+    /// </summary>
+    /// <param name="direction">The direction vector to accelerate towards. This vector is normalized internally.</param>
+    /// <returns>
+    /// Returns the current instance (<see cref="VelocityManager"/>) to allow method chaining.
+    /// </returns>
+    /// <remarks>
+    /// The acceleration is calculated using the current <see cref="CalculatedMaxSpeed"/>, which factors in base speed and any temporary modifiers.
+    /// </remarks>
     public VelocityManager Accelerate(Vector2 direction)
     {
         LastFacedDirection = direction;
         return AccelerateToVelocity(direction.TryNormalize() * CalculatedMaxSpeed);
     }
 
+    /// <summary>
+    /// Decelerates the entity.
+    /// </summary>
+    /// <param name="force">
+    /// If set to <c>true</c>, the entity's velocity is immediately set to zero.
+    /// Otherwise, the entity gradually decelerates to zero using the current acceleration parameters.
+    /// </param>
+    /// <returns>
+    /// Returns the current instance (<see cref="VelocityManager"/>) to allow method chaining.
+    /// </returns>
     public VelocityManager Decelerate(bool force = false)
     {
-        if (!force) return AccelerateToVelocity(Vector2.Zero);
+        if (!force)
+            return AccelerateToVelocity(Vector2.Zero);
 
         Velocity = Vector2.Zero;
         return this;
     }
 
+    /// <summary>
+    /// Smoothly accelerates the entity toward a target velocity.
+    /// </summary>
+    /// <param name="velocity">The target velocity to approach.</param>
+    /// <param name="accelerationCoefficient">
+    /// The acceleration coefficient to use. If set to zero, the default <see cref="AccelerationCoefficient"/> is used.
+    /// </param>
+    /// <returns>
+    /// Returns the current instance (<see cref="VelocityManager"/>) to allow method chaining.
+    /// </returns>
+    /// <remarks>
+    /// The method uses an exponential decay formula to calculate the interpolation weight based on the elapsed time.
+    /// </remarks>
     public VelocityManager AccelerateToVelocity(Vector2 velocity, float accelerationCoefficient = 0)
     {
         accelerationCoefficient = accelerationCoefficient == 0 ? AccelerationCoefficient : accelerationCoefficient;
@@ -127,21 +138,54 @@ public partial class VelocityManager : Node
         return this;
     }
 
+    /// <summary>
+    /// Initiates a dash action in the specified direction.
+    /// </summary>
+    /// <param name="direction">
+    /// The direction vector in which to dash.
+    /// If not provided (or default), the last faced direction (<see cref="LastFacedDirection"/>) is used.
+    /// </param>
+    /// <returns>
+    /// Returns the current instance (<see cref="VelocityManager"/>) to allow method chaining.
+    /// </returns>
+    /// <remarks>
+    /// This method checks if the dash can be executed using <see cref="CanDash(Vector2)"/>.
+    /// If the dash is allowed, it sets the velocity based on <see cref="DashSpeed"/> and a multiplier determined by the current dash queue length.
+    /// Timers are then created to handle the dash duration and cooldown, emitting corresponding signals when each period ends.
+    /// </remarks>
     public VelocityManager Dash(Vector2 direction = default)
     {
-        if (direction == default) direction = LastFacedDirection;
-        if (!CanDash) return this;
+        if (!CanDash(direction) || IsDashing)
+            return this;
+
+        if (direction == default)
+            direction = LastFacedDirection;
+
         LastFacedDirection = direction;
         IsDashing = true;
-        AccelerateToVelocity(direction.TryNormalize() * DashSpeed, DashAccelerationCoefficient);
+
+        var multiplier = 1f + dashQueue.Count * 0.1f;
+        Velocity = direction.TryNormalize() * DashSpeed * multiplier;
 
         dashQueue.Add(Body.GlobalPosition);
-        dashDurationTimer.Start();
-        dashCooldownTimer.Start();
+
+        GetTree().CreateTimer(DashDuration).Timeout += OnDashDurationTimeout;
+        GetTree().CreateTimer(DashCoolDown).Timeout += OnDashCooldownTimeout;
 
         return this;
     }
 
+    /// <summary>
+    /// Applies a knockback force to the entity in the specified direction.
+    /// </summary>
+    /// <param name="direction">The direction in which to apply the knockback force. The direction is normalized internally.</param>
+    /// <param name="force">The magnitude of the knockback force.</param>
+    /// <returns>
+    /// Returns the current instance (<see cref="VelocityManager"/>) to allow method chaining.
+    /// </returns>
+    /// <remarks>
+    /// Knockback immediately sets the entity's velocity based on the provided direction and force.
+    /// </remarks>
     public VelocityManager Knockback(Vector2 direction, float force)
     {
         Log.Debug($"{Body} knocked back to {direction} with force {force}");
@@ -150,6 +194,17 @@ public partial class VelocityManager : Node
         return this;
     }
 
+    /// <summary>
+    /// Teleports the entity to a new position.
+    /// </summary>
+    /// <param name="destination">The target position to which the entity should be teleported.</param>
+    /// <returns>
+    /// Returns the current instance (<see cref="VelocityManager"/>) to allow method chaining.
+    /// </returns>
+    /// <remarks>
+    /// This method emits the <see cref="TeleportedEventHandler"/> signal with both the original and destination positions,
+    /// and then updates the entity's global position.
+    /// </remarks>
     public VelocityManager Teleport(Vector2 destination)
     {
         Log.Debug($"{Body} teleported from {Body.GlobalPosition} to {destination}");
@@ -158,6 +213,21 @@ public partial class VelocityManager : Node
         return this;
     }
 
+    /// <summary>
+    /// Applies a temporary speed modifier (boost or slow effect) to the entity.
+    /// </summary>
+    /// <param name="speed">The speed modifier to apply. This value is added to the base speed from <see cref="StatsManager"/>.</param>
+    /// <param name="duration">
+    /// The duration in seconds for which the temporary speed effect is active.
+    /// After the duration expires, the modifier is removed automatically.
+    /// </param>
+    /// <returns>
+    /// Returns the current instance (<see cref="VelocityManager"/>) to allow method chaining.
+    /// </returns>
+    /// <remarks>
+    /// The temporary speed is stored in a list and the <see cref="CalculatedMaxSpeed"/> is recalculated to include this effect.
+    /// A timer is created that removes the temporary speed effect after the specified duration.
+    /// </remarks>
     public VelocityManager ApplyTemporarySpeed(float speed, float duration = 0)
     {
         var temporarySpeed = new TemporarySpeed { Speed = speed, Duration = duration };
@@ -168,6 +238,9 @@ public partial class VelocityManager : Node
 
         GetTree().CreateTimer(duration).Timeout += () =>
         {
+            if (!temporarySpeeds.Contains(temporarySpeed))
+                return;
+
             temporarySpeeds.Remove(temporarySpeed);
             Log.Debug($"Temporary speed {speed} removed after {duration} seconds");
             Log.Debug($"Current speed: {CalculatedMaxSpeed}");
@@ -176,11 +249,65 @@ public partial class VelocityManager : Node
         return this;
     }
 
+    /// <summary>
+    /// Moves the entity's body based on the current velocity and the provided time delta.
+    /// </summary>
+    /// <param name="delta">
+    /// The time interval over which to move the entity.
+    /// If set to zero, the current process delta time is used.
+    /// </param>
+    /// <returns>
+    /// Returns a <see cref="KinematicCollision2D"/> object containing collision details if a collision occurs during movement;
+    /// otherwise, returns <c>null</c>.
+    /// </returns>
+    /// <remarks>
+    /// This method updates the <see cref="CharacterBody2D"/>'s velocity and calls <see cref="CharacterBody2D.MoveAndCollide(Vector2)"/>
+    /// to handle collision detection. It is designed to be frame rate independent.
+    /// </remarks>
+    public KinematicCollision2D MoveAndCollide(float delta = 0f)
+    {
+        if (delta == 0f)
+            delta = (float)GetProcessDeltaTime();
+
+        Body.Velocity = Velocity;
+
+        return Body.MoveAndCollide(Velocity * delta);
+    }
+
+    /// <summary>
+    /// Overrides the entity's last faced direction.
+    /// </summary>
+    /// <param name="direction">The new direction to assign as the last faced direction.</param>
+    /// <returns>
+    /// Returns the current instance (<see cref="VelocityManager"/>) to allow method chaining.
+    /// </returns>
+    /// <remarks>
+    /// This method is useful for updating the directional state of the entity independently from its movement.
+    /// </remarks>
     public VelocityManager OverrideLastFacedDirection(Vector2 direction)
     {
         LastFacedDirection = direction;
         return this;
     }
+
+    /// <summary>
+    /// Determines whether the entity can perform a dash in the specified direction.
+    /// </summary>
+    /// <param name="direction">
+    /// The direction vector to check. A non-zero vector is required to perform a dash.
+    /// If not provided, the method will consider the default value.
+    /// </param>
+    /// <returns>
+    /// Returns <c>true</c> if the entity is allowed to dash (i.e., the dash count has not been exceeded, a valid direction is provided,
+    /// and the entity is not already dashing unless <see cref="CanDashWhileDashing"/> is enabled); otherwise, returns <c>false</c>.
+    /// </returns>
+    public bool CanDash(Vector2 direction = default)
+    {
+        var available = TimesCanDash > dashQueue.Count && !direction.IsZeroApprox();
+        var whileDashing = CanDashWhileDashing || (!CanDashWhileDashing && !IsDashing);
+        return available && whileDashing;
+    }
+
 
     public void ApplyMovement()
     {
@@ -192,7 +319,7 @@ public partial class VelocityManager : Node
 
     private void OnDashCooldownTimeout()
     {
-        Log.Debug("Dash cooldown ended");
+        Log.Debug($"{Body} cooldown ended");
         if (dashQueue.Count == 0) return;
 
         var direction = dashQueue[^1];
@@ -205,5 +332,18 @@ public partial class VelocityManager : Node
         IsDashing = false;
         var lastDash = dashQueue.Count > 0 ? dashQueue[^1] : Vector2.Zero;
         EmitSignal(SignalName.Dashed, lastDash);
+    }
+
+    public override string[] _GetConfigurationWarnings()
+    {
+        var warnings = new List<string>();
+
+        if (StatsManager == null)
+            warnings.Add("StatsManager is not set.");
+
+        if (GetParent() is not CharacterBody2D)
+            warnings.Add("VelocityManager should be a child of a CharacterBody2D node.");
+
+        return [..warnings];
     }
 }

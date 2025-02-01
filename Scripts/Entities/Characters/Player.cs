@@ -107,9 +107,9 @@ public partial class Player : Entity
 
     private void EnterDash()
     {
-        if (!VelocityManager.CanDash) return;
+        if (!VelocityManager.CanDash(VelocityManager.LastFacedDirection)) return;
 
-        VelocityManager.Dash(inputDirection);
+        VelocityManager.Dash(VelocityManager.LastFacedDirection);
         animations.Play($"walk_{LastFacedDirection}");
     }
 
@@ -168,7 +168,7 @@ public partial class Player : Entity
         if (dash) StateMachine.ChangeState(Dash);
         if (attack) StateMachine.ChangeState(Attack);
     }
-    
+
     public PlayerData ToData() => new()
     {
         Position = GlobalPosition,

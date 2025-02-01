@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bbhesrdqhrnnb" path="res://Scripts/Entities/Characters/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_cqdhe"]
-[ext_resource type="PackedScene" uid="uid://blsrsli6kdvsf" path="res://Scenes/Components/Managers/VelocityManager.tscn" id="3_lmufy"]
+[ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Managers/VelocityManager.cs" id="3_lmufy"]
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="5_5x453"]
 [ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Components/Managers/HealthNumberManager.tscn" id="5_lfb6s"]
 [ext_resource type="Script" uid="uid://dkgndduo4d7p4" path="res://Scripts/Components/Area/HitBox.cs" id="6_ly21x"]
@@ -1670,9 +1670,11 @@ Id = "player"
 unique_name_in_owner = true
 Damage = 100.0
 
-[node name="VelocityManager" parent="." node_paths=PackedStringArray("StatsManager") instance=ExtResource("3_lmufy")]
+[node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
+script = ExtResource("3_lmufy")
 StatsManager = NodePath("../StatsManager")
-AccelerationCoefficient = 12.0
+AccelerationCoefficient = 10.0
+metadata/_custom_type_script = ExtResource("3_lmufy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
