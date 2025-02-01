@@ -64,14 +64,7 @@ public partial class QuestTrigger : Area2D, IInteractable
         {
             shouldInteract = value;
             NotifyPropertyListChanged();
-
-            if (!value)
-            {
-                GetNodeOrNull("Node2D")?.QueueFree();
-                return;
-            }
-
-            this.AddInteractionUI();
+            InitializeUI();
         }
     }
 
@@ -100,9 +93,7 @@ public partial class QuestTrigger : Area2D, IInteractable
         CollisionLayer = 1 << 4;
         CollisionMask = 1 << 2;
         NotifyPropertyListChanged();
-
-        if (InteractionUI != null && ShouldInteract)
-            InteractionUI.Text = interactionLabel;
+        var node = GetNodeOrNull("Node2D");
 
         if (Engine.IsEditorHint()) return;
 
@@ -249,5 +240,25 @@ public partial class QuestTrigger : Area2D, IInteractable
         if (!ShouldInteract) return;
 
         this.AddInteractionUI();
+    }
+
+    private void InitializeUI()
+    {
+        var node = GetNodeOrNull("Node2D");
+
+        if (!IsNodeReady()) return;
+
+        if (!ShouldInteract)
+        {
+            node?.QueueFree();
+            return;
+        }
+
+        if (node != null) return;
+
+        this.AddInteractionUI();
+
+        if (InteractionUI != null && ShouldInteract)
+            InteractionUI.Text = interactionLabel;
     }
 }
