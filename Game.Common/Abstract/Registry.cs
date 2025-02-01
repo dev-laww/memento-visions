@@ -9,7 +9,7 @@ public abstract class Registry<T, TRegistry> : GodotObject
     where TRegistry : Registry<T, TRegistry>, new()
 {
     protected static readonly Lazy<TRegistry> _instance = new(() => new TRegistry());
-    private readonly Dictionary<string, List<string>> _fileCache = [];
+    protected readonly Dictionary<string, List<string>> _fileCache = [];
     private readonly string _resourcePath;
 
     protected Registry(string resourcePath)
@@ -57,4 +57,6 @@ public abstract class Registry<T, TRegistry> : GodotObject
     public static T? Get(string id) => _instance.Value.GetResource(id);
 
     public void InvalidateCache() => _fileCache.Remove(_resourcePath);
+    
+    public static Dictionary<string, List<string>> GetFileCache() => _instance.Value._fileCache;
 }

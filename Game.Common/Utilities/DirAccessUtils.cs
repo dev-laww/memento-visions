@@ -18,7 +18,7 @@ public static class DirAccessUtils
 
         dir.ListDirBegin();
 
-        var file = dir.GetNext();
+        var file = dir.GetNext().TrimSuffix(".remap");
 
         while (file != string.Empty)
         {
@@ -31,7 +31,7 @@ public static class DirAccessUtils
                 files.Add($"{path}/{file}");
             }
 
-            file = dir.GetNext();
+            file = dir.GetNext().TrimSuffix(".remap");
         }
 
         dir.ListDirEnd();
