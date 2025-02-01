@@ -1,10 +1,7 @@
 using System;
 using System.Linq;
-using Game.Common.Models;
 using Game.Components.Managers;
 using Game.Components.Area;
-using Game.Globals;
-using Game.Resources;
 using Godot;
 using GodotUtilities;
 
@@ -14,23 +11,27 @@ namespace Game.Entities.Characters;
 [Scene]
 public partial class Player : Entity
 {
-    [Export] public float DashStaminaCost { get; set; } = 10f;
     [Node] private HurtBox hurtBox;
     [Node] private AnimationPlayer animations;
-
     [Node] public VelocityManager VelocityManager;
     [Node] private Node2D hitBoxes;
-    private bool canAttack = true;
-    private float attackCooldown = 0.3f;
-    private const string SwordSlash = "sword_slash";
-    private const string Gunshot = "gunshot";
-    private const string walking = "walking";
 
-    private string MoveDirection => GetMoveDirection();
-    private Vector2 lastMoveDirection = Vector2.Down;
-    private Vector2 DashVelocity { get; set; }
-    private bool Dashing { get; set; }
-    private bool CanMove { get; set; } = true;
+    private Vector2 inputDirection;
+
+    private string LastFacedDirection
+    {
+        get
+        {
+            var lastMoveDirection = VelocityManager.LastFacedDirection;
+
+            if (lastMoveDirection == Vector2.Zero) return "front";
+
+            if (Math.Abs(lastMoveDirection.X) > Math.Abs(lastMoveDirection.Y))
+                return lastMoveDirection.X > 0 ? "right" : "left";
+
+            return lastMoveDirection.Y < 0 ? "back" : "front";
+        }
+    }
 
     public override void _Notification(int what)
     {
@@ -68,138 +69,52 @@ public partial class Player : Entity
         StateMachine.SetInitialState(Idle);
     }
 
-    public override void OnProcess(double delta)
+    public override void OnPhysicsProcess(double delta)
     {
-        if (Engine.IsEditorHint()) return;
-
+        ProcessInput();
         StateMachine.Update();
+        VelocityManager.ApplyMovement();
+    }
 
-        if (!IsProcessingInput())
+    private void Idle()
+    {
+        animations.Play($"idle_{LastFacedDirection}");
+
+        if (inputDirection.IsZeroApprox())
         {
-            StateMachine.ChangeState(Idle);
             VelocityManager.Decelerate();
             return;
         }
 
-        if (!CanMove || !IsProcessingInput()) return;
-
-        // TODO: Clean movement system, make it handle this
-        var input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-
-        if (!input.IsZeroApprox())
-            lastMoveDirection = input;
-
-        if (Dashing) return;
-
-        VelocityManager.Accelerate(input);
+        StateMachine.ChangeState(Walk);
     }
 
-    public override void OnInput(InputEvent @event)
+    private void Walk()
     {
-        if (@event.IsActionPressed("attack") && CanMove && !Dashing) StateMachine.ChangeState(Attack);
+        animations.Play($"walk_{LastFacedDirection}");
 
-        if (!@event.IsActionPressed("dash") || !CanMove) return;
-
-        StateMachine.ChangeState(Dash);
-    }
-
-    // States
-    private void Idle() => animations.Play($"idle_{MoveDirection}");
-
-    private void Walk() => animations.Play($"walk_{MoveDirection}");
-
-    private void EnterDash()
-    {
-        Dashing = true;
-    }
-
-    private void Dash()
-    {
-        // VelocityManager.Dash(lastMoveDirection);
-        animations.Play($"walk_{MoveDirection}");
-    }
-
-    private void ExitDash() => Dashing = false;
-
-    private void EnterAttack()
-    {
-        if (WeaponManager.CurrentWeapon == null)
+        if (inputDirection.IsZeroApprox())
         {
-            HandleTransition();
+            StateMachine.ChangeState(Idle);
             return;
         }
 
-        CanMove = false;
-        VelocityManager.Decelerate(force: true);
+        VelocityManager.Accelerate(inputDirection);
     }
 
-    private async void Attack()
+    private void EnterDash() { }
+    private void Dash() { }
+    private void ExitDash() { }
+
+    private void EnterAttack() { }
+    private void Attack() { }
+    private void ExitAttack() { }
+
+
+    private void ProcessInput()
     {
-        // TODO: make use of animation tree player to handle animation directions
-        switch (WeaponManager.CurrentWeaponResource.WeaponType)
-        {
-            case Item.Type.Gun:
-                SoundManager.Instance.PlaySound(Gunshot);
-                animations.Play($"gun/{MoveDirection}");
-                break;
-            case Item.Type.Dagger:
-                animations.Play($"dagger/{MoveDirection}");
-                break;
-            case Item.Type.Sword:
-                SoundManager.Instance.PlaySound(SwordSlash);
-                animations.Play($"sword/{MoveDirection}");
-                break;
-            case Item.Type.Whip:
-                animations.Play($"dagger/{MoveDirection}");
-                break;
-            default:
-                GD.PushError("Weapon type not found");
-                break;
-        }
+        inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
-        WeaponManager.Attack(MoveDirection);
-
-        await ToSignal(animations, "animation_finished");
-        await ToSignal(WeaponManager.CurrentAnimationPlayer, "animation_finished");
-
-        HandleTransition();
-
-        await ToSignal(GetTree().CreateTimer(attackCooldown), "timeout");
-        canAttack = true;
-    }
-
-    private void ExitAttack() => CanMove = true;
-
-    // Helpers
-    private void HandleTransition(Vector2 _ = default)
-    {
-        var input = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-
-        if (input.Length() > 0) StateMachine.ChangeState(Walk);
-        else StateMachine.ChangeState(Idle);
-    }
-
-    private string GetMoveDirection()
-    {
-        if (lastMoveDirection == Vector2.Zero) return "front";
-
-        if (Math.Abs(lastMoveDirection.X) > Math.Abs(lastMoveDirection.Y))
-            return lastMoveDirection.X > 0 ? "right" : "left";
-
-        return lastMoveDirection.Y < 0 ? "back" : "front";
-    }
-
-    public PlayerData ToData() => new()
-    {
-        Position = GlobalPosition,
-        Direction = lastMoveDirection,
-        Stats = StatsManager.ToData(),
-    };
-
-    public void Apply(PlayerData data)
-    {
-        GlobalPosition = data.Position;
-        lastMoveDirection = data.Direction;
-        StatsManager.Apply(data.Stats);
+        // add dash input and attack input
     }
 }
