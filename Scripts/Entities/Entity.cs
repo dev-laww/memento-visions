@@ -124,7 +124,6 @@ public abstract partial class Entity : CharacterBody2D, IEntity
     {
         if (Engine.IsEditorHint()) return;
 
-        StateMachine.Update();
         OnPhysicsProcess(delta);
     }
 
@@ -132,6 +131,7 @@ public abstract partial class Entity : CharacterBody2D, IEntity
     {
         if (Engine.IsEditorHint()) return;
 
+        StateMachine.Update();
         OnProcess(delta);
     }
 

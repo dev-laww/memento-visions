@@ -75,7 +75,6 @@ public partial class Player : Entity
     public override void OnPhysicsProcess(double delta)
     {
         ProcessInput();
-        StateMachine.Update();
         VelocityManager.ApplyMovement();
     }
 

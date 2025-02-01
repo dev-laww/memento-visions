@@ -47,9 +47,8 @@ public partial class Samurai : Enemy
         StateMachine.SetInitialState(Walk);
     }
 
-    public override void OnProcess(double delta)
+    public override void OnPhysicsProcess(double delta)
     {
-        StateMachine.Update();
         VelocityManager.ApplyMovement();
     }
 
@@ -72,8 +71,6 @@ public partial class Samurai : Enemy
     private void EnterAttacking()
     {
         attacking = true;
-
-        VelocityManager.MoveAndCollide();
 
         var player = this.GetPlayer();
         attackDirection = player?.GlobalPosition.X > GlobalPosition.X ? "right" : "left";
