@@ -13,12 +13,8 @@ public abstract partial class Enemy : Entity
 
     [Export] private EnemyType Type;
 
-    public override void _Ready()
+    public override void OnReady()
     {
-        if (Engine.IsEditorHint()) return;
-
-        base._Ready();
-
         EnemyManager.Register(this);
     }
 

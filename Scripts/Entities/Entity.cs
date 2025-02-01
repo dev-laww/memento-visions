@@ -47,19 +47,6 @@ public abstract partial class Entity : CharacterBody2D, IEntity
     protected DelegateStateMachine StateMachine;
 
     /// <summary>
-    /// Called when the node is added to the scene.
-    /// Initializes the entity and checks for required nodes.
-    /// </summary>
-    public override void _Ready()
-    {
-        if (Engine.IsEditorHint()) return;
-
-        StateMachine = new DelegateStateMachine();
-        StatsManager.StatDepleted += OnStatsDepleted;
-        OnReady();
-    }
-
-    /// <summary>
     /// Handles the entity's death.
     /// Emits the Death signal and frees the entity.
     /// </summary>
@@ -106,6 +93,16 @@ public abstract partial class Entity : CharacterBody2D, IEntity
     /// </summary>
     /// <param name="delta">The time since the last update.</param>
     public virtual void OnProcess(double delta) { }
+
+    public sealed override void _Ready()
+    {
+        if (Engine.IsEditorHint()) return;
+
+        StateMachine = new DelegateStateMachine();
+        StatsManager.StatDepleted += OnStatsDepleted;
+        OnReady();
+    }
+
 
     public sealed override void _Input(InputEvent @event)
     {
