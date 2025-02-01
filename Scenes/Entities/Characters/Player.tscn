@@ -1673,7 +1673,7 @@ Damage = 100.0
 [node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
 script = ExtResource("3_lmufy")
 StatsManager = NodePath("../StatsManager")
-AccelerationCoefficient = 10.0
+AccelerationCoefficient = 13.0
 metadata/_custom_type_script = ExtResource("3_lmufy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
