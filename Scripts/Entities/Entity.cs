@@ -107,7 +107,7 @@ public abstract partial class Entity : CharacterBody2D, IEntity
     /// <param name="delta">The time since the last update.</param>
     public virtual void OnProcess(double delta) { }
 
-    public override void _Input(InputEvent @event)
+    public sealed override void _Input(InputEvent @event)
     {
         if (Engine.IsEditorHint()) return;
 
@@ -123,7 +123,7 @@ public abstract partial class Entity : CharacterBody2D, IEntity
         ChildOrderChanged += NotifyPropertyListChanged;
     }
 
-    public override void _PhysicsProcess(double delta)
+    public sealed override void _PhysicsProcess(double delta)
     {
         if (Engine.IsEditorHint()) return;
 
@@ -131,7 +131,7 @@ public abstract partial class Entity : CharacterBody2D, IEntity
         OnPhysicsProcess(delta);
     }
 
-    public override void _Process(double delta)
+    public sealed override void _Process(double delta)
     {
         if (Engine.IsEditorHint()) return;
 
