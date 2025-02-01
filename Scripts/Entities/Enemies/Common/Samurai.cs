@@ -25,14 +25,14 @@ public partial class Samurai : Enemy
 
     public override void OnReady()
     {
-        Range.BodyEntered += body =>
+        Range.BodyEntered += _ =>
         {
             inRange = true;
 
             if (!attacking)
                 StateMachine.ChangeState(Attack);
         };
-        Range.BodyExited += body =>
+        Range.BodyExited += _ =>
         {
             inRange = false;
 
@@ -47,6 +47,11 @@ public partial class Samurai : Enemy
         StateMachine.SetInitialState(Walk);
     }
 
+    public override void OnProcess(double delta)
+    {
+        StateMachine.Update();
+        VelocityManager.ApplyMovement();
+    }
 
     private void Idle()
     {
@@ -68,8 +73,10 @@ public partial class Samurai : Enemy
     {
         attacking = true;
 
+        VelocityManager.MoveAndCollide();
+
         var player = this.GetPlayer();
-        attackDirection = player.GlobalPosition.X > GlobalPosition.X ? "right" : "left";
+        attackDirection = player?.GlobalPosition.X > GlobalPosition.X ? "right" : "left";
     }
 
     private async void Attack()
