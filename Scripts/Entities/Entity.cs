@@ -4,6 +4,8 @@ using Game.Common;
 using Game.Common.Interfaces;
 using Game.Components.Area;
 using Game.Components.Managers;
+using Game.Entities.Enemies;
+using Game.Globals;
 using Game.Utils.Battle;
 using Godot;
 using GodotUtilities;
@@ -133,6 +135,10 @@ public abstract partial class Entity : CharacterBody2D, IEntity
         TreeExiting += EmitDeath;
         StateMachine = new DelegateStateMachine();
         StatsManager.AttackReceived += AttackReceived;
+
+        if (this is Enemy enemy)
+            EnemyManager.Register(new SpawnInfo(enemy));
+
         OnReady();
     }
 
@@ -178,6 +184,10 @@ public abstract partial class Entity : CharacterBody2D, IEntity
     private void EmitDeath()
     {
         if (deathInfo is null) return;
+
+        if (this is Enemy)
+            EnemyManager.Unregister(deathInfo);
+
         EmitSignalDeath(deathInfo);
     }
 
