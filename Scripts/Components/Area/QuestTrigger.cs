@@ -20,7 +20,6 @@ public partial class QuestTrigger : Area2D, IInteractable
         Complete
     }
 
-    [Export]
     private TriggerMode Mode
     {
         get => mode;
@@ -57,7 +56,7 @@ public partial class QuestTrigger : Area2D, IInteractable
         }
     }
 
-    private bool ShouldInteract
+    protected bool ShouldInteract
     {
         get => shouldInteract;
         set
@@ -103,7 +102,7 @@ public partial class QuestTrigger : Area2D, IInteractable
         InteractionUI?.Hide();
     }
 
-    private void OnBodyEntered(Node2D body)
+    protected virtual void OnBodyEntered(Node2D body)
     {
         if (!ShouldInteract)
         {
@@ -136,7 +135,7 @@ public partial class QuestTrigger : Area2D, IInteractable
 
     public Vector2 InteractionPosition => GlobalPosition;
 
-    public void Interact()
+    public virtual void Interact()
     {
         switch (Mode)
         {
@@ -172,6 +171,21 @@ public partial class QuestTrigger : Area2D, IInteractable
         {
             new()
             {
+                { "name", PropertyName.Quest },
+                { "type", (int)Variant.Type.Object },
+                { "usage", (int)PropertyUsageFlags.Default },
+                { "hint_string", "Quest" }
+            },
+            new()
+            {
+                { "name", PropertyName.Mode },
+                { "type", (int)Variant.Type.Int },
+                { "usage", (int)PropertyUsageFlags.Default },
+                { "hint", (int)PropertyHint.Enum },
+                { "hint_string", "Start,Complete" }
+            },
+            new()
+            {
                 { "name", PropertyName.ShouldInteract },
                 { "type", (int)Variant.Type.Bool },
                 { "usage", (int)PropertyUsageFlags.Default }
@@ -186,15 +200,7 @@ public partial class QuestTrigger : Area2D, IInteractable
                 { "usage", (int)PropertyUsageFlags.Default }
             });
 
-        properties.Add(new Dictionary
-        {
-            { "name", PropertyName.Quest },
-            { "type", (int)Variant.Type.Object },
-            { "usage", (int)PropertyUsageFlags.Default },
-            { "hint_string", "Quest" }
-        });
-
-        if (Mode != TriggerMode.Complete) return properties;
+        if (Mode == TriggerMode.Start) return properties;
 
         properties.Add(new Dictionary
         {
