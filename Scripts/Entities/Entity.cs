@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using Game.Common;
 using Game.Common.Interfaces;
 using Game.Components.Area;
 using Game.Components.Managers;
+using Game.Utils.Battle;
 using Godot;
 using GodotUtilities;
 using GodotUtilities.Logic;
@@ -16,6 +18,37 @@ namespace Game.Entities;
 [Scene]
 public abstract partial class Entity : CharacterBody2D, IEntity
 {
+    /// <summary>
+    /// Contains information about the entity that spawned.
+    /// </summary>
+    public partial class SpawnInfo : GodotObject
+    {
+        public Entity Entity;
+        public Vector2 Position;
+
+        public SpawnInfo() { }
+
+        public SpawnInfo(Entity entity)
+        {
+            Entity = entity;
+            Position = entity.GlobalPosition;
+        }
+
+        public override string ToString() => $"<SpawnInfo ({Entity.Id} at {Position})>";
+    }
+
+    /// <summary>
+    /// Contains information about the entity that died.
+    /// </summary>
+    public partial class DeathInfo : GodotObject
+    {
+        public Entity Victim;
+        public Entity Killer;
+        public Vector2 Position;
+
+        public override string ToString() => $"<DeathInfo ({Victim.Id} killed by {Killer.Id} at {Position})>";
+    }
+
     /// <summary>
     /// Unique name of the entity.
     /// </summary>
@@ -37,9 +70,9 @@ public abstract partial class Entity : CharacterBody2D, IEntity
     /// <summary>
     /// Signal emitted when the entity dies.
     /// </summary>
-    /// <param name="entity">The entity that died.</param>
+    /// <param name="info">The death info.Contains the victim and the killer.</param>
     [Signal]
-    public delegate void DeathEventHandler(Entity entity);
+    public delegate void DeathEventHandler(DeathInfo info);
 
     /// <summary>
     /// State machine for managing entity states.
@@ -50,25 +83,12 @@ public abstract partial class Entity : CharacterBody2D, IEntity
     /// Handles the entity's death.
     /// Emits the Death signal and frees the entity.
     /// </summary>
-    /// <param name="killer">The killer entity.</param>
-    // TODO: Add killer parameter
-    protected virtual void Die(Entity killer)
+    /// <param name="info">The killer entity.</param>
+    protected virtual void Die(DeathInfo info)
     {
-        EmitSignal(SignalName.Death, this);
+        EmitSignal(SignalName.Death, info);
         QueueFree();
-    }
-
-
-    /// <summary>
-    /// Called when the entity's stats are depleted.
-    /// If health is depleted, the entity dies.
-    /// </summary>
-    /// <param name="type">The type of stat that was depleted.</param>
-    protected virtual void OnStatsDepleted(StatsType type)
-    {
-        if (type != StatsType.Health) return;
-
-        Die(this);
+        Log.Debug($"{info.Victim} killed by {info.Killer}.");
     }
 
     /// <summary>
@@ -94,12 +114,20 @@ public abstract partial class Entity : CharacterBody2D, IEntity
     /// <param name="delta">The time since the last update.</param>
     public virtual void OnProcess(double delta) { }
 
+    private void AttackReceived(Attack attack)
+    {
+        Log.Debug($"{this} received {(attack.Fatal ? "a fatal" : "an")} attack from {attack.Attacker}.");
+        if (!attack.Fatal) return;
+
+        Die(new DeathInfo { Victim = this, Killer = attack.Attacker as Entity, Position = GlobalPosition });
+    }
+
     public sealed override void _Ready()
     {
         if (Engine.IsEditorHint()) return;
 
         StateMachine = new DelegateStateMachine();
-        StatsManager.StatDepleted += OnStatsDepleted;
+        StatsManager.AttackReceived += AttackReceived;
         OnReady();
     }
 

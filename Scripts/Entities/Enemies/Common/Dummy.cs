@@ -23,7 +23,7 @@ public partial class Dummy : Enemy
         StatsManager.AttackReceived += OnAttackReceived;
     }
 
-    protected override void Die(Entity killer) { }
+    protected override void Die(DeathInfo info) { }
 
     private void OnAttackReceived(Attack attack)
     {

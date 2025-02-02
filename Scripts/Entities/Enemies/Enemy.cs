@@ -15,16 +15,16 @@ public abstract partial class Enemy : Entity
 
     public override void OnReady()
     {
-        EnemyManager.Register(this);
+        EnemyManager.Register(new SpawnInfo(this));
     }
 
-    protected override void Die(Entity entity)
+    protected override void Die(DeathInfo info)
     {
         if (Engine.IsEditorHint()) return;
 
-        EnemyManager.Unregister(this);
+        EnemyManager.Unregister(info);
 
-        base.Die(entity);
+        base.Die(info);
     }
 
     public override string ToString() => $"<Enemy ({Id})>";

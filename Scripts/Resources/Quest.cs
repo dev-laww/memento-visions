@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
+using Game.Entities;
+using Game.Entities.Characters;
 using Game.Entities.Enemies;
 using Game.Globals;
 using Godot;
@@ -58,6 +60,7 @@ public partial class Quest : Resource
 
         if (Ordered)
         {
+            Log.Debug($"Current step: {currentStep}");
             if (currentStep < objectives.Length && objectives[currentStep].Completed)
                 currentStep++;
 
@@ -116,10 +119,15 @@ public partial class Quest : Resource
         objective => objective.UpdateItemProgress(item)
     );
 
-    private void OnEnemyDied(Enemy enemy) => ProcessObjectives(
-        QuestObjective.ObjectiveType.Kill,
-        objective => objective.UpdateKillProgress(enemy)
-    );
+    private void OnEnemyDied(Entity.DeathInfo info)
+    {
+        if (info.Killer is not Player) return;
+
+        ProcessObjectives(
+            QuestObjective.ObjectiveType.Kill,
+            objective => objective.UpdateKillProgress(info.Victim as Enemy)
+        );
+    }
 
     private void OnItemRemoved(ItemGroup item) => ProcessObjectives(
         QuestObjective.ObjectiveType.Use,

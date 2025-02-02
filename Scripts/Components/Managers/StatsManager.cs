@@ -100,6 +100,7 @@ public partial class StatsManager : Node
     public void ReceiveAttack(Attack attack)
     {
         Health -= Math.Clamp(attack.Damage - defense, 0, float.MaxValue);
+        attack.Fatal = Health <= 0;
 
         // TODO: Add status effects
         EmitSignal(SignalName.AttackReceived, attack);

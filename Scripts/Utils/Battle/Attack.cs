@@ -18,16 +18,21 @@ public partial class Attack : RefCounted
 
     public Type AttackType { get; }
 
+    public Node2D Attacker { get; }
+
+    public bool Fatal { get; set; }
+
     public readonly bool Critical;
 
     public List<StatusEffect> StatusEffects { get; } = [];
 
     private Attack() { }
 
-    private Attack(float damage, Type type)
+    private Attack(float damage, Type type, Node2D attacker)
     {
         AttackType = type;
         Critical = MathUtil.RNG.RandfRange(0, 1) < 0.2f;
+        Attacker = attacker;
 
         // Apply damage modifiers
         Damage = damage * (Critical ? MathUtil.RNG.RandfRange(1.5f, 2f) : 1);
@@ -35,5 +40,5 @@ public partial class Attack : RefCounted
         Damage = (float)Math.Round(Damage);
     }
 
-    public static Attack Create(float damage, Type type) => new(damage, type);
+    public static Attack Create(float damage, Type type, Node2D attacker) => new(damage, type, attacker);
 }

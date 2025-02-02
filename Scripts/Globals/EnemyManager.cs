@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Game.Common;
+using Game.Entities;
 using Game.Entities.Enemies;
 using Godot;
 
@@ -8,7 +9,7 @@ namespace Game.Globals;
 public partial class EnemyManager : Global<EnemyManager>
 {
     [Signal] public delegate void SpawnedEventHandler(Enemy enemy);
-    [Signal] public delegate void DiedEventHandler(Enemy enemy);
+    [Signal] public delegate void DiedEventHandler(Entity.DeathInfo info);
 
     public static event SpawnedEventHandler EnemySpawned
     {
@@ -27,17 +28,24 @@ public partial class EnemyManager : Global<EnemyManager>
     public static IReadOnlyList<Enemy> Enemies => Instance.enemies;
     public static int EnemyCount => Instance.enemies.Count;
 
-    public static void Register(Enemy enemy)
+    public static void Register(Entity.SpawnInfo info)
     {
+        if (info.Entity is not Enemy enemy)
+        {
+            Log.Error($"Cannot register {info.Entity} as an enemy.");
+            return;
+        }
+
         Instance.enemies.Add(enemy);
         Instance.EmitSignal(SignalName.Spawned, enemy);
-        Log.Debug($"{enemy} registered.");
+
+        Log.Debug($"{enemy} added to the registry. {info}");
     }
 
-    public static void Unregister(Enemy enemy)
+    public static void Unregister(Entity.DeathInfo info)
     {
-        Instance.EmitSignal(SignalName.Died, enemy);
-        Instance.enemies.Remove(enemy);
-        Log.Debug($"{enemy} unregistered.");
+        Instance.enemies.Remove(info.Victim as Enemy);
+        Instance.EmitSignal(SignalName.Died, info);
+        Log.Debug($"{info.Victim} removed from the registry. {info}");
     }
 }

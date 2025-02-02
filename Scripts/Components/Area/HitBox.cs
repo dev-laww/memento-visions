@@ -11,7 +11,7 @@ public partial class HitBox : Area2D
 
     [Export] public float Damage;
 
-    public Attack Attack => Attack.Create(Damage, Type);
+    public Attack Attack => Attack.Create(Damage, Type, Owner as Node2D);
 
     public override void _Ready()
     {
