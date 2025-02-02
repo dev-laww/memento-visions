@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cdv77aloiaimk"]
 
-[ext_resource type="Script" uid="uid://cff3ikpbxtl5c" path="res://Scripts/World/Interactable/ItemQuestTrigger.cs" id="1_cvllp"]
+[ext_resource type="Script" uid="uid://cff3ikpbxtl5c" path="res://Scripts/World/Objects/ItemQuestTrigger.cs" id="1_cvllp"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="1_svmnr"]
 [ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Resources/ItemGroup.cs" id="3_g4oya"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="3_vv0yy"]
