@@ -1,7 +1,7 @@
 using Godot;
 using Game.Components.Managers;
 
-namespace Game.Levels;
+namespace Game.World;
 
 public partial class Bar : Node2D
 {
