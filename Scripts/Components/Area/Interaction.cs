@@ -10,7 +10,7 @@ namespace Game.Components.Area;
 [GlobalClass]
 public partial class Interaction : Area2D, IInteractable
 {
-    [Export(PropertyHint.MultilineText)]
+    [Export]
     public string InteractionLabel
     {
         get => InteractionUI?.Text ?? string.Empty;

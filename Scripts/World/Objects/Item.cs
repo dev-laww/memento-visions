@@ -9,7 +9,8 @@ namespace Game.World.Interactable;
 
 [Tool]
 [Scene]
-public partial class Item : Area2D
+[Icon("res://assets/icons/item-component.svg")]
+public partial class Item : Node2D
 {
     [Export]
     private ItemGroup ItemGroup
