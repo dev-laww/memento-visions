@@ -42,6 +42,47 @@ public static class Log
         [CallerMemberName] string? memberName = null
     ) => Print(Level.Error, Format(filePath, memberName, e));
 
+    public static void Error(
+        object? msg = null,
+        [CallerFilePath] string? filePath = null,
+        [CallerMemberName] string? memberName = null
+    ) => Print(Level.Error, Format(filePath, memberName, $"[Error] {msg}"));
+
+    public static void I(
+        object? msg = null,
+        [CallerFilePath] string? filePath = null,
+        [CallerMemberName] string? memberName = null
+    ) => Print(Level.Info, Format(filePath, memberName, msg));
+
+    public static void W(
+        object? msg = null,
+        [CallerFilePath] string? filePath = null,
+        [CallerMemberName] string? memberName = null
+    ) => Print(Level.Warn, Format(filePath, memberName, msg));
+
+    public static void E(
+        object? msg = null,
+        [CallerFilePath] string? filePath = null,
+        [CallerMemberName] string? memberName = null
+    ) => Print(Level.Error, Format(filePath, memberName, msg));
+
+    public static void E(
+        Exception e,
+        [CallerFilePath] string? filePath = null,
+        [CallerMemberName] string? memberName = null
+    ) => Print(Level.Error, Format(filePath, memberName, e));
+
+    public static void D(
+        object? msg = null,
+        [CallerFilePath] string? filePath = null,
+        [CallerMemberName] string? memberName = null
+    ) => Print(Level.Debug, Format(filePath, memberName, msg));
+    
+    public static void PrintStackTrace(
+        [CallerFilePath] string? filePath = null,
+        [CallerMemberName] string? memberName = null
+    ) => Print(Level.Debug, Format(filePath, memberName, new StackTrace().ToString()));
+
     private static string Format(
         string? filePath,
         string? memberName,
