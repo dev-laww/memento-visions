@@ -1,11 +1,11 @@
 [gd_scene load_steps=18 format=3 uid="uid://svqrge4l63b4"]
 
 [ext_resource type="Texture2D" uid="uid://bhg24ad0ut6dq" path="res://assets/ui/slot.png" id="1_dwah6"]
-[ext_resource type="Script" path="res://Scripts/UI/Common/Slot.cs" id="1_qhish"]
+[ext_resource type="Script" uid="uid://0vf4miewd40t" path="res://Scripts/UI/Common/Slot.cs" id="1_qhish"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_eu5ef"]
 [ext_resource type="Texture2D" uid="uid://drys52s61n2w" path="res://assets/ui/selector.png" id="3_o2xtx"]
-[ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/inventory/items/temp/Item5.png" id="3_xgpvm"]
-[ext_resource type="Script" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="4_8s03u"]
+[ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/items/temp/Item5.png" id="3_xgpvm"]
+[ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="4_8s03u"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="4_luf03"]
 [ext_resource type="LabelSettings" uid="uid://cktp08gmb038p" path="res://resources/misc/normal-text.tres" id="5_7i6yw"]
 
