@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqfo5xopr1hc2"]
+
+[ext_resource type="Script" uid="uid://d4g5oc5dcy3r4" path="res://Scripts/World/Objects/InteractableItem.cs" id="1_sme32"]
+[ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="1_wvyqs"]
+[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="2_sme32"]
+[ext_resource type="Texture2D" uid="uid://g1s1srd24m2s" path="res://assets/items/unknown.png" id="4_sme32"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wvyqs"]
+radius = 12.0
+
+[node name="InteractableItem" type="Node2D"]
+script = ExtResource("1_sme32")
+
+[node name="Interaction" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("1_wvyqs")
+InteractionLabel = "Pickup"
+metadata/_custom_type_script = ExtResource("1_wvyqs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+shape = SubResource("CircleShape2D_wvyqs")
+debug_color = Color(0.384314, 0.6, 0.698039, 0.419608)
+
+[node name="Node2D" type="Node2D" parent="Interaction"]
+position = Vector2(0, 17)
+
+[node name="InteractionUI" parent="Interaction/Node2D" instance=ExtResource("2_sme32")]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("4_sme32")
+
+[connection signal="Interacted" from="Interaction" to="." method="Pickup"]
