@@ -130,6 +130,7 @@ public abstract partial class Entity : CharacterBody2D, IEntity
     {
         if (Engine.IsEditorHint()) return;
 
+        TreeExiting += EmitDeath;
         StateMachine = new DelegateStateMachine();
         StatsManager.AttackReceived += AttackReceived;
         OnReady();
@@ -174,11 +175,9 @@ public abstract partial class Entity : CharacterBody2D, IEntity
         WireNodes();
     }
 
-    public override void _ExitTree()
+    private void EmitDeath()
     {
         if (deathInfo is null) return;
-
-        Log.Debug($"{deathInfo}");
         EmitSignalDeath(deathInfo);
     }
 
