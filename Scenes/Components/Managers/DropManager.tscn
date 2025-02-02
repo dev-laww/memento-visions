@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://t7im5teuo2bt"]
+
+[ext_resource type="Script" uid="uid://d4io668qmblcf" path="res://Scripts/Components/Managers/DropManager.cs" id="1_ylfd6"]
+[ext_resource type="PackedScene" uid="uid://c8v00fl5calo2" path="res://Scenes/World/Objects/Item.tscn" id="2_3o2qe"]
+
+[node name="DropManager" type="Node"]
+script = ExtResource("1_ylfd6")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("Item"), [ExtResource("2_3o2qe")]]
