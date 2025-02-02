@@ -90,7 +90,6 @@ public partial class ItemQuestTrigger : QuestTrigger
 
     private void Initialize()
     {
-        GD.Print(Sprite is null);
         if (!IsNodeReady() || Sprite is null) return;
 
         Sprite.Texture = ItemGroup?.Item?.Icon ?? ResourceLoader.Load<Texture2D>("res://assets/items/unknown.png");
