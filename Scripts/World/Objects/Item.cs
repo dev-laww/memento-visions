@@ -5,7 +5,7 @@ using GodotUtilities;
 using Game.Resources;
 using Game.Utils.Extensions;
 
-namespace Game.World.Interactable;
+namespace Game.World.Objects;
 
 [Tool]
 [Scene]
@@ -13,7 +13,7 @@ namespace Game.World.Interactable;
 public partial class Item : Node2D
 {
     [Export]
-    private ItemGroup ItemGroup
+    public ItemGroup ItemGroup
     {
         get => itemGroup;
         set
