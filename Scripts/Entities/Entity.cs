@@ -86,9 +86,9 @@ public abstract partial class Entity : CharacterBody2D, IEntity
     /// <param name="info">The killer entity.</param>
     protected virtual void Die(DeathInfo info)
     {
-        EmitSignal(SignalName.Death, info);
-        QueueFree();
         Log.Debug($"{info.Victim} killed by {info.Killer}.");
+
+        QueueFree();
     }
 
     /// <summary>
@@ -114,12 +114,16 @@ public abstract partial class Entity : CharacterBody2D, IEntity
     /// <param name="delta">The time since the last update.</param>
     public virtual void OnProcess(double delta) { }
 
+    private DeathInfo deathInfo;
+
     private void AttackReceived(Attack attack)
     {
         Log.Debug($"{this} received {(attack.Fatal ? "a fatal" : "an")} attack from {attack.Attacker}.");
         if (!attack.Fatal) return;
 
-        Die(new DeathInfo { Victim = this, Killer = attack.Attacker as Entity, Position = GlobalPosition });
+        deathInfo = new DeathInfo { Victim = this, Killer = attack.Attacker as Entity, Position = GlobalPosition };
+
+        Die(deathInfo);
     }
 
     public sealed override void _Ready()
@@ -168,6 +172,14 @@ public abstract partial class Entity : CharacterBody2D, IEntity
         if (what != NotificationSceneInstantiated) return;
 
         WireNodes();
+    }
+
+    public override void _ExitTree()
+    {
+        if (deathInfo is null) return;
+
+        Log.Debug($"{deathInfo}");
+        EmitSignalDeath(deathInfo);
     }
 
     public override string[] _GetConfigurationWarnings()

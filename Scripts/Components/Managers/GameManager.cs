@@ -23,7 +23,7 @@ public partial class GameManager : Node
 
     private bool isDevConsoleOpen;
 
-    public static Node CurrentScene => instance.currentScene;
+    public static Node CurrentScene => instance.currentScene.GetChildren().FirstOrDefault();
 
     public static Overlay CurrentOverlay
     {

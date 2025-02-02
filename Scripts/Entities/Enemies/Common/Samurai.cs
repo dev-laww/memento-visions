@@ -1,3 +1,4 @@
+using Game.Common;
 using Game.Components.Managers;
 using Game.Utils.Extensions;
 using Godot;
@@ -11,6 +12,7 @@ public partial class Samurai : Enemy
     [Node] private VelocityManager VelocityManager;
     [Node] private Area2D Range;
     [Node] private AnimationPlayer Animation;
+    [Node] private DropManager DropManager;
 
     private bool inRange;
     private bool attacking;

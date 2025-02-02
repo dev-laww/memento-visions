@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Game.Common;
+using Game.Entities;
 using Game.Resources;
 using Godot;
 using GodotUtilities;
@@ -42,23 +45,38 @@ public partial class DropManager : Node
         }
     }
 
+    private void SpawnDrops(Entity.DeathInfo info) => SpawnDrops(info.Position);
 
     // TODO: Balance this
     public void SpawnDrops(Vector2 position)
     {
         var dropItemCount = MathUtil.RNG.RandiRange(0, Drops.Length);
+        var droppedItems = new HashSet<Item>();
+
+        Log.Debug($"Dropping {dropItemCount} items");
 
         for (var i = 0; i < dropItemCount; i++)
         {
             var drop = lootTable.PickItem();
 
-            if (drop is null) continue;
+            while (droppedItems.Contains(drop.Item))
+            {
+                if (droppedItems.Count == Drops.Length) return;
 
+                drop = lootTable.PickItem();
+            }
+
+            droppedItems.Add(drop.Item);
             var item = resourcePreloader.InstanceSceneOrNull<WorldItem>("Item");
             item.ItemGroup = new ItemGroup { Item = drop.Item, Quantity = MathUtil.RNG.RandiRange(drop.Min, drop.Max) };
-            item.GlobalPosition = position;
+            item.GlobalPosition = new Vector2(
+                position.X + MathUtil.RNG.RandfRange(-16, 16),
+                position.Y + MathUtil.RNG.RandfRange(-16, 16)
+            );
 
-            GameManager.CurrentScene.AddChild(item);
+            GameManager.CurrentScene?.CallDeferred("add_child", item);
+
+            Log.Debug($"Dropped {item.ItemGroup}");
         }
     }
 }
