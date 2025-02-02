@@ -15,7 +15,7 @@ internal class TemporarySpeed
 }
 
 [Tool]
-[GlobalClass]
+[GlobalClass, Icon("res://assets/icons/velocity-manager.svg")]
 public partial class VelocityManager : Node
 {
     [Export]
@@ -344,6 +344,6 @@ public partial class VelocityManager : Node
         if (GetParent() is not CharacterBody2D)
             warnings.Add("VelocityManager should be a child of a CharacterBody2D node.");
 
-        return [..warnings];
+        return [.. warnings];
     }
 }
