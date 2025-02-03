@@ -37,7 +37,7 @@ public partial class EnemyManager : Global<EnemyManager>
         }
 
         Instance.enemies.Add(enemy);
-        Instance.EmitSignal(SignalName.Spawned, enemy);
+        Instance.EmitSignalSpawned(enemy);
 
         Log.Debug($"{enemy} added to the registry. {info}");
     }
@@ -45,7 +45,7 @@ public partial class EnemyManager : Global<EnemyManager>
     public static void Unregister(Entity.DeathInfo info)
     {
         Instance.enemies.Remove(info.Victim as Enemy);
-        Instance.EmitSignal(SignalName.Died, info);
+        Instance.EmitSignalDied(info);
         Log.Debug($"{info.Victim} removed from the registry. {info}");
     }
 }

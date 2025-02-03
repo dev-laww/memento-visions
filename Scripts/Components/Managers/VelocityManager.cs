@@ -49,7 +49,7 @@ public partial class VelocityManager : Node
 
             isDashing = value;
 
-            if (value) EmitSignal(SignalName.Dashed, Body.GlobalPosition);
+            if (value) EmitSignalDashed(Body.GlobalPosition);
         }
     }
 
@@ -194,7 +194,7 @@ public partial class VelocityManager : Node
     public VelocityManager Teleport(Vector2 destination)
     {
         Log.Debug($"{Body} teleported from {Body.GlobalPosition} to {destination}");
-        EmitSignal(SignalName.Teleported, Body.GlobalPosition, destination);
+        EmitSignalTeleported(Body.GlobalPosition, destination);
         Body.GlobalPosition = destination;
         return this;
     }
@@ -274,14 +274,14 @@ public partial class VelocityManager : Node
 
         var direction = dashQueue[^1];
         dashQueue.RemoveAt(dashQueue.Count - 1);
-        EmitSignal(SignalName.DashFreed, direction);
+        EmitSignalDashFreed(direction);
     }
 
     private void OnDashDurationTimeout()
     {
         IsDashing = false;
         var lastDash = dashQueue.Count > 0 ? dashQueue[^1] : Vector2.Zero;
-        EmitSignal(SignalName.Dashed, lastDash);
+        EmitSignalDashFreed(lastDash);
     }
 
     public override string[] _GetConfigurationWarnings()

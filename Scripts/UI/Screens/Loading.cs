@@ -58,5 +58,5 @@ public partial class Loading : CanvasLayer
         tween.TweenProperty(progressBar, "value", value, 0.2f);
     }
 
-    public void ReportMidpoint() => EmitSignal(SignalName.TransitionInComplete);
+    public void ReportMidpoint() => EmitSignalTransitionInComplete();
 }

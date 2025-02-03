@@ -60,7 +60,7 @@ public partial class Slot : Panel
         icon.Texture = item?.Item.Icon;
         label.Text = item?.Quantity > 999 ? "999+" : item?.Quantity.ToString();
 
-        EmitSignal(SignalName.Updated, item);
+        EmitSignalUpdated(item);
     }
 
     private void OnGuiInput(InputEvent @event)
@@ -71,6 +71,6 @@ public partial class Slot : Panel
 
         animationPlayer.Play(selected ? "select" : "RESET");
 
-        EmitSignal(SignalName.Pressed, this);
+        EmitSignalPressed(this);
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using Game.Common;
 using Game.Common.Models;
 using Game.Components.Battle;
+using Game.Entities;
 using Game.Utils.Battle;
 using Godot;
 
@@ -86,10 +87,12 @@ public partial class StatsManager : Node
     private float defense;
     private readonly Dictionary<string, float> speedModifiers = [];
     private readonly Dictionary<string, StatusEffect> statusEffects = [];
+    private Entity Entity;
 
     public override void _Ready()
     {
         health = MaxHealth;
+        Entity = GetParent() as Entity;
 
         var effects = GetParent().GetChildren().OfType<StatusEffect>();
 
@@ -118,7 +121,7 @@ public partial class StatsManager : Node
         Health -= Math.Clamp(attack.Damage - defense, 0, float.MaxValue);
         attack.Fatal = Health <= 0;
 
-        EmitSignal(SignalName.AttackReceived, attack);
+        EmitSignalAttackReceived(attack);
 
         if (!attack.HasStatusEffects) return;
 
@@ -128,24 +131,25 @@ public partial class StatsManager : Node
 
     public void AddStatusEffect(StatusEffect effect)
     {
-        EmitSignal(SignalName.StatusEffectAdded, effect);
 
         // TODO: Add status effect stacking
         if (!statusEffects.TryAdd(effect.Id, effect)) return;
 
         effect.Apply();
+        Entity.AddChild(effect);
+        EmitSignalStatusEffectAdded(effect);
     }
 
     public void RemoveStatusEffect(string id)
     {
         if (!statusEffects.TryGetValue(id, out var effect)) return;
 
-        EmitSignal(SignalName.StatusEffectRemoved, effect);
-
         effect.Remove();
         effect.QueueFree();
 
         statusEffects.Remove(id);
+
+        EmitSignalStatusEffectRemoved(effect);
     }
 
     public void Cleanse()
@@ -161,14 +165,12 @@ public partial class StatsManager : Node
         else
             speedModifiers.Add(id, modifier);
 
-        EmitSignal(SignalName.StatChanged, CalculatedMaxSpeed, (int)StatsType.Speed);
+        EmitSignalStatChanged(CalculatedMaxSpeed, StatsType.Speed);
     }
 
     public void RemoveSpeedModifier(string id, float modifier = 0)
     {
         if (!speedModifiers.TryGetValue(id, out var value)) return;
-
-        Log.Debug($"Removing {modifier} from {id}.");
 
         value = modifier > 0 ? value - modifier : value + Math.Abs(modifier);
 
@@ -177,7 +179,7 @@ public partial class StatsManager : Node
         else
             speedModifiers[id] = value;
 
-        SetStat(ref speed, CalculatedMaxSpeed, StatsType.Speed);
+        EmitSignalStatChanged(CalculatedMaxSpeed, StatsType.Speed);
     }
 
     private void SetStat(ref float stat, float value, StatsType statType)
@@ -192,11 +194,11 @@ public partial class StatsManager : Node
             _ => float.MaxValue
         });
 
-        EmitSignal(SignalName.StatChanged, value, (int)statType);
+        EmitSignalStatChanged(value, statType);
         EmitSignal(value > oldValue ? SignalName.StatIncreased : SignalName.StatDecreased, value, (int)statType);
 
         if (value <= 0)
-            EmitSignal(SignalName.StatDepleted, (int)statType);
+            EmitSignalStatDepleted(statType);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -217,7 +219,7 @@ public partial class StatsManager : Node
     {
         var warnings = new List<string>();
 
-        if (Owner is not CharacterBody2D)
+        if (GetParent() is not Entities.Entity)
             warnings.Add("StatsManager must be  a child of an Entity.");
 
         return [.. warnings];
