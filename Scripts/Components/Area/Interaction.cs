@@ -27,8 +27,8 @@ public partial class Interaction : Area2D, IInteractable
     [Signal] public delegate void InteractedEventHandler();
 
     private InteractionUI InteractionUI => GetNodeOrNull<InteractionUI>("Node2D/InteractionUI");
-
     private string interactionLabel;
+    private bool isInteractable = true;
 
     public override void _EnterTree()
     {
@@ -47,17 +47,39 @@ public partial class Interaction : Area2D, IInteractable
 
         if (Engine.IsEditorHint()) return;
 
-        BodyEntered += _ => InteractionManager.Register(this);
-        BodyExited += _ => InteractionManager.Unregister(this);
+        BodyEntered += OnBodyEntered;
+        BodyExited += OnBodyExited;
 
         InteractionUI.Hide();
     }
 
     public Vector2 InteractionPosition => GlobalPosition;
 
-    public void Interact() => EmitSignal(SignalName.Interacted);
+    public void Interact()
+    {
+        if (!isInteractable) return;
 
-    public void HideUI() => InteractionUI?.Hide();
+        EmitSignalInteracted();
+        HideUI();
+    }
 
-    public void ShowUI() => InteractionUI?.Show();
+    public void Toggle(bool value) => isInteractable = value;
+
+    public void HideUI() => InteractionUI.Hide();
+
+    public void ShowUI() => InteractionUI.Show();
+
+    private void OnBodyEntered(Node _)
+    {
+        if (!isInteractable) return;
+
+        InteractionManager.Register(this);
+    }
+
+    private void OnBodyExited(Node _)
+    {
+        if (!isInteractable) return;
+
+        InteractionManager.Unregister(this);
+    }
 }
