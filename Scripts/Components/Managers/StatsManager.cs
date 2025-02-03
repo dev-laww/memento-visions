@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Game.Common;
 using Game.Common.Models;
 using Game.Utils.Battle;
 using Godot;
@@ -69,6 +71,10 @@ public partial class StatsManager : Node
         private set => SetStat(ref damage, value, StatsType.Damage);
     }
 
+    public float CalculatedMaxSpeed => speed * (1f + speedModifiers.Values.Sum());
+
+    public Godot.Collections.Dictionary<string, float> speedModifiers = [];
+
     private float speed = 100;
     private float damage;
     private float health;
@@ -106,6 +112,34 @@ public partial class StatsManager : Node
         EmitSignal(SignalName.AttackReceived, attack);
     }
 
+    public void ApplySpeedModifier(string id, float modifier)
+    {
+        if (speedModifiers.TryGetValue(id, out var value))
+            speedModifiers[id] = value + modifier;
+        else
+            speedModifiers.Add(id, modifier);
+
+        Log.Debug($"Adding {CalculatedMaxSpeed}.");
+
+        EmitSignal(SignalName.StatChanged, CalculatedMaxSpeed, (int)StatsType.Speed);
+    }
+
+    public void RemoveSpeedModifier(string id, float modifier = 0)
+    {
+        if (!speedModifiers.TryGetValue(id, out var value)) return;
+
+        Log.Debug($"Removing {modifier} from {id}.");
+
+        value = modifier > 0 ? value - modifier : value + Math.Abs(modifier);
+
+        if (value == 0 || modifier == 0)
+            speedModifiers.Remove(id);
+        else
+            speedModifiers[id] = value;
+
+        SetStat(ref speed, CalculatedMaxSpeed, StatsType.Speed);
+    }
+
     private void SetStat(ref float stat, float value, StatsType statType)
     {
         const float TOLERANCE = 0.0001f;
@@ -134,7 +168,7 @@ public partial class StatsManager : Node
         if (Owner is not CharacterBody2D)
             warnings.Add("StatsManager must be  a child of an Entity.");
 
-        return warnings.ToArray();
+        return [.. warnings];
     }
 
     public void Apply(StatsData data)

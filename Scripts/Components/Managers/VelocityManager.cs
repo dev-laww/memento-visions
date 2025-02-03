@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Game.Common;
 using Game.Utils.Extensions;
 using Godot;
@@ -8,11 +6,6 @@ using Godot.Collections;
 
 namespace Game.Components.Managers;
 
-internal class TemporarySpeed
-{
-    public float Speed;
-    public float Duration;
-}
 
 [Tool]
 [GlobalClass, Icon("res://assets/icons/velocity-manager.svg")]
@@ -62,14 +55,8 @@ public partial class VelocityManager : Node
 
     private CharacterBody2D Body => GetParent() as CharacterBody2D;
     private Array<Vector2> dashQueue = [];
-    private readonly List<TemporarySpeed> temporarySpeeds = [];
     private bool isDashing;
     private StatsManager statsManager;
-
-    private float CalculatedMaxSpeed => Math.Max(
-        0,
-        temporarySpeeds.Aggregate(0f, (acc, x) => acc + x.Speed) + StatsManager.Speed
-    );
 
     /// <summary>
     /// Called when the node is added to the scene. Disables processing until movement is explicitly applied.
@@ -93,7 +80,7 @@ public partial class VelocityManager : Node
     public VelocityManager Accelerate(Vector2 direction)
     {
         LastFacedDirection = direction;
-        return AccelerateToVelocity(direction.TryNormalize() * CalculatedMaxSpeed);
+        return AccelerateToVelocity(direction.TryNormalize() * StatsManager.CalculatedMaxSpeed);
     }
 
     /// <summary>
@@ -134,7 +121,6 @@ public partial class VelocityManager : Node
         var delta = (float)GetProcessDeltaTime();
         var weight = 1f - Mathf.Exp(-accelerationCoefficient * delta);
         Velocity = Velocity.Lerp(velocity, weight);
-
         return this;
     }
 
@@ -210,42 +196,6 @@ public partial class VelocityManager : Node
         Log.Debug($"{Body} teleported from {Body.GlobalPosition} to {destination}");
         EmitSignal(SignalName.Teleported, Body.GlobalPosition, destination);
         Body.GlobalPosition = destination;
-        return this;
-    }
-
-    /// <summary>
-    /// Applies a temporary speed modifier (boost or slow effect) to the entity.
-    /// </summary>
-    /// <param name="speed">The speed modifier to apply. This value is added to the base speed from <see cref="StatsManager"/>.</param>
-    /// <param name="duration">
-    /// The duration in seconds for which the temporary speed effect is active.
-    /// After the duration expires, the modifier is removed automatically.
-    /// </param>
-    /// <returns>
-    /// Returns the current instance (<see cref="VelocityManager"/>) to allow method chaining.
-    /// </returns>
-    /// <remarks>
-    /// The temporary speed is stored in a list and the <see cref="CalculatedMaxSpeed"/> is recalculated to include this effect.
-    /// A timer is created that removes the temporary speed effect after the specified duration.
-    /// </remarks>
-    public VelocityManager ApplyTemporarySpeed(float speed, float duration = 0)
-    {
-        var temporarySpeed = new TemporarySpeed { Speed = speed, Duration = duration };
-
-        temporarySpeeds.Add(temporarySpeed);
-        Log.Debug($"Temporary speed {speed} applied for {duration} seconds");
-        Log.Debug($"Current speed: {CalculatedMaxSpeed}");
-
-        GetTree().CreateTimer(duration).Timeout += () =>
-        {
-            if (!temporarySpeeds.Contains(temporarySpeed))
-                return;
-
-            temporarySpeeds.Remove(temporarySpeed);
-            Log.Debug($"Temporary speed {speed} removed after {duration} seconds");
-            Log.Debug($"Current speed: {CalculatedMaxSpeed}");
-        };
-
         return this;
     }
 
