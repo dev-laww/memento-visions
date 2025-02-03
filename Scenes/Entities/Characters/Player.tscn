@@ -1691,7 +1691,7 @@ StatsManager = NodePath("../StatsManager")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_n7xh7")
-debug_color = Color(0.996578, 0.311043, 0.384733, 0.42)
+debug_color = Color(1, 0.3, 0.4, 0.4)
 
 [node name="Sprites" type="AnimatedSprite2D" parent="."]
 texture_filter = 2

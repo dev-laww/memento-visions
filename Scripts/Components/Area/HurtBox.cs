@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Game.Common.Extensions;
 using Game.Components.Managers;
 using Godot;
 
@@ -20,6 +22,13 @@ public partial class HurtBox : Area2D
     }
 
     private StatsManager statsManager;
+
+    public override void _EnterTree()
+    {
+        if (GetChildren().OfType<CollisionShape2D>().Any()) return;
+
+        this.EditorAddChild(new CollisionShape2D { Name = "CollisionShape2D", DebugColor = new Color(1f, 0.3f, 0.4f, 0.4f) });
+    }
 
     public override void _Ready()
     {
@@ -46,6 +55,6 @@ public partial class HurtBox : Area2D
         if (statsManager == null)
             warnings.Add("StatsManager is not set.");
 
-        return warnings.ToArray();
+        return [.. warnings];
     }
 }

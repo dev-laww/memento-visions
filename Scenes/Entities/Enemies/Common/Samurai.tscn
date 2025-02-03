@@ -188,12 +188,12 @@ _data = {
 &"walk": SubResource("Animation_s2d88")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2unvb"]
+radius = 43.0465
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m6lc7"]
 radius = 16.0
 height = 44.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_2unvb"]
-radius = 43.0465
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jvuhv"]
 radius = 8.0
@@ -459,6 +459,13 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_2unvb")
+
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
 collision_layer = 2048
 collision_mask = 1024
@@ -467,14 +474,7 @@ StatsManager = NodePath("../StatsManager")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CapsuleShape2D_m6lc7")
-debug_color = Color(0.994106, 0, 0.227366, 0.42)
-
-[node name="Range" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
-shape = SubResource("CircleShape2D_2unvb")
+debug_color = Color(1, 0.3, 0.4, 0.4)
 
 [node name="HealthNumberManager" parent="." node_paths=PackedStringArray("statsManager") instance=ExtResource("6_erfge")]
 position = Vector2(0, -22)
