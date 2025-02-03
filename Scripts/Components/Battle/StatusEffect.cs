@@ -1,32 +1,41 @@
-using Game.Components.Managers;
+using Game.Common;
 using Game.Entities;
 using Godot;
 
 namespace Game.Components.Battle;
 
-public abstract partial class StatusEffect : Node
+[GlobalClass]
+public partial class StatusEffect : Node
 {
+    [Export] public string Id;
+    [Export] public string StatusEffectName;
     [Export] public float Duration { get; private set; }
+    [Export(PropertyHint.MultilineText)] public string Description;
 
-    public StatsManager Target { get; private set; }
-    public float RemainingTime { get; private set; }
-    public bool IsActive => RemainingTime > 0;
+#nullable enable
+    protected Entity? Target => GetParent() as Entity;
+#nullable disable
 
-    public virtual void Apply(StatsManager target)
+    public override void _Ready()
     {
-        RemainingTime = Duration;
-        Target = target;
+        if (Target != null) return;
+
+        Log.Error($"{this} must be a child of an Entity. Disabling...");
+        QueueFree();
     }
 
-    public abstract void Remove();
-
-    public virtual void Update(double delta)
+    public void Update()
     {
-        if (!IsActive) return;
-
-        RemainingTime -= (float)delta;
-        OnTick(delta);
+        Duration -= (float)GetProcessDeltaTime();
+        Tick();
     }
 
-    public abstract void OnTick(double delta);
+    protected virtual void Tick() { }
+
+    public virtual void Apply() { }
+
+    public virtual void Remove() { }
+
+
+    public override string ToString() => $"<StatusEffect ({Id} on {Target?.Id})>";
 }

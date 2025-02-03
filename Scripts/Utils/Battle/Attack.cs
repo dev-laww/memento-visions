@@ -24,7 +24,11 @@ public partial class Attack : RefCounted
 
     public readonly bool Critical;
 
-    public List<StatusEffect> StatusEffects { get; } = [];
+    public IReadOnlyList<StatusEffect> StatusEffects => statusEffects;
+
+    public bool HasStatusEffects => statusEffects.Count > 0;
+
+    private readonly List<StatusEffect> statusEffects = [];
 
     private Attack() { }
 
@@ -39,6 +43,8 @@ public partial class Attack : RefCounted
         Damage *= AttackType == Type.Physical ? 1 : 1.2f;
         Damage = (float)Math.Round(Damage);
     }
+
+    public void AddStatusEffect(StatusEffect effect) => statusEffects.Add(effect);
 
     public static Attack Create(float damage, Type type, Node2D attacker) => new(damage, type, attacker);
 }

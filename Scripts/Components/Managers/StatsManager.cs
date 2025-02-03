@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
 using Game.Common.Models;
+using Game.Components.Battle;
 using Game.Utils.Battle;
 using Godot;
 
@@ -27,6 +28,8 @@ public partial class StatsManager : Node
     [Signal] public delegate void StatDecreasedEventHandler(float value, StatsType stat);
     [Signal] public delegate void StatDepletedEventHandler(StatsType stat);
     [Signal] public delegate void AttackReceivedEventHandler(Attack attack);
+    [Signal] public delegate void StatusEffectAddedEventHandler(StatusEffect effect);
+    [Signal] public delegate void StatusEffectRemovedEventHandler(StatusEffect effect);
 
     [Export] public float MaxHealth = 100;
 
@@ -71,9 +74,9 @@ public partial class StatsManager : Node
         private set => SetStat(ref damage, value, StatsType.Damage);
     }
 
-    public float CalculatedMaxSpeed => speed * (1f + speedModifiers.Values.Sum());
-
-    public Godot.Collections.Dictionary<string, float> speedModifiers = [];
+    public float SpeedModifier => speedModifiers.Values.Sum();
+    public float CalculatedMaxSpeed => speed * (1f + SpeedModifier);
+    public IReadOnlyDictionary<string, StatusEffect> StatusEffects => statusEffects;
 
     private float speed = 100;
     private float damage;
@@ -81,10 +84,17 @@ public partial class StatsManager : Node
     private float experience;
     private float level = 1;
     private float defense;
+    private readonly Dictionary<string, float> speedModifiers = [];
+    private readonly Dictionary<string, StatusEffect> statusEffects = [];
 
     public override void _Ready()
     {
         health = MaxHealth;
+
+        var effects = GetParent().GetChildren().OfType<StatusEffect>();
+
+        foreach (var effect in effects)
+            AddStatusEffect(effect);
     }
 
     public void Heal(float amount) => Health += amount;
@@ -108,8 +118,40 @@ public partial class StatsManager : Node
         Health -= Math.Clamp(attack.Damage - defense, 0, float.MaxValue);
         attack.Fatal = Health <= 0;
 
-        // TODO: Add status effects
         EmitSignal(SignalName.AttackReceived, attack);
+
+        if (!attack.HasStatusEffects) return;
+
+        foreach (var effect in attack.StatusEffects)
+            AddStatusEffect(effect);
+    }
+
+    public void AddStatusEffect(StatusEffect effect)
+    {
+        EmitSignal(SignalName.StatusEffectAdded, effect);
+
+        // TODO: Add status effect stacking
+        if (!statusEffects.TryAdd(effect.Id, effect)) return;
+
+        effect.Apply();
+    }
+
+    public void RemoveStatusEffect(string id)
+    {
+        if (!statusEffects.TryGetValue(id, out var effect)) return;
+
+        EmitSignal(SignalName.StatusEffectRemoved, effect);
+
+        effect.Remove();
+        effect.QueueFree();
+
+        statusEffects.Remove(id);
+    }
+
+    public void Cleanse()
+    {
+        foreach (var effect in statusEffects.Values)
+            RemoveStatusEffect(effect.Id);
     }
 
     public void ApplySpeedModifier(string id, float modifier)
@@ -118,8 +160,6 @@ public partial class StatsManager : Node
             speedModifiers[id] = value + modifier;
         else
             speedModifiers.Add(id, modifier);
-
-        Log.Debug($"Adding {CalculatedMaxSpeed}.");
 
         EmitSignal(SignalName.StatChanged, CalculatedMaxSpeed, (int)StatsType.Speed);
     }
@@ -157,6 +197,18 @@ public partial class StatsManager : Node
 
         if (value <= 0)
             EmitSignal(SignalName.StatDepleted, (int)statType);
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        foreach (var effect in statusEffects.Values)
+        {
+            effect.Update();
+
+            if (effect.Duration > 0) continue;
+
+            RemoveStatusEffect(effect.Id);
+        }
     }
 
     private float CalculateRequiredExperience(float lvl) => (float)(lvl * 4 + Math.Pow(level, 1.8) + 10);

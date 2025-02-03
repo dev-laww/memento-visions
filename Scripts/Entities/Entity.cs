@@ -61,7 +61,7 @@ public abstract partial class Entity : CharacterBody2D, IEntity
     /// Reference to the StatsManager node.
     /// </summary>
     [Node]
-    protected StatsManager StatsManager;
+    public StatsManager StatsManager;
 
     /// <summary>
     /// Reference to the HurtBox node.
