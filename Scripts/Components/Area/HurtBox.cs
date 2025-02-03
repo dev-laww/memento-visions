@@ -7,7 +7,7 @@ using Godot;
 namespace Game.Components.Area;
 
 [Tool]
-[GlobalClass]
+[GlobalClass, Icon("res://assets/icons/hurtbox.svg")]
 public partial class HurtBox : Area2D
 {
     [Export]
