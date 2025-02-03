@@ -151,7 +151,7 @@ public partial class Player : Entity
         WeaponManager.Attack(LastFacedDirection);
 
         await ToSignal(animations, "animation_finished");
-        await ToSignal(WeaponManager.CurrentAnimationPlayer, "animation_finished");
+        await WeaponManager.AnimationFinished;
 
         StateMachine.ChangeState(inputDirection.IsZeroApprox() ? Idle : Walk);
     }

@@ -13,7 +13,7 @@ public partial class WeaponManager : Global<WeaponManager>
 {
     public static bool CanAttack => CurrentWeapon != null;
     public static WeaponComponent CurrentWeapon { get; private set; }
-    public static AnimationPlayer CurrentAnimationPlayer => CurrentWeapon.AnimationPlayer;
+    public static SignalAwaiter AnimationFinished => CurrentWeapon?.AnimationFinished ?? default;
     public static Item CurrentWeaponResource { get; private set; }
 
     public static void Equip(Item weapon)

@@ -157,7 +157,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Assets/SmoothAnimatedSprite2D:animation")
+tracks/1/path = NodePath("Assets/AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -172,7 +172,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Assets/SmoothAnimatedSprite2D:frame")
+tracks/0/path = NodePath("Assets/AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -184,7 +184,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Assets/SmoothAnimatedSprite2D:animation")
+tracks/1/path = NodePath("Assets/AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -211,7 +211,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Assets/SmoothAnimatedSprite2D:frame")
+tracks/0/path = NodePath("Assets/AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -223,7 +223,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Assets/SmoothAnimatedSprite2D:animation")
+tracks/1/path = NodePath("Assets/AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -250,7 +250,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Assets/SmoothAnimatedSprite2D:frame")
+tracks/0/path = NodePath("Assets/AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -262,7 +262,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Assets/SmoothAnimatedSprite2D:animation")
+tracks/1/path = NodePath("Assets/AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -289,7 +289,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Assets/SmoothAnimatedSprite2D:frame")
+tracks/0/path = NodePath("Assets/AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -301,7 +301,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Assets/SmoothAnimatedSprite2D:animation")
+tracks/1/path = NodePath("Assets/AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -325,20 +325,22 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d0irt"]
 _data = {
-"RESET": SubResource("Animation_ctckp"),
-"back": SubResource("Animation_yphef"),
-"front": SubResource("Animation_m02av"),
-"left": SubResource("Animation_fo5y0"),
-"right": SubResource("Animation_nc51f")
+&"RESET": SubResource("Animation_ctckp"),
+&"back": SubResource("Animation_yphef"),
+&"front": SubResource("Animation_m02av"),
+&"left": SubResource("Animation_fo5y0"),
+&"right": SubResource("Animation_nc51f")
 }
 
 [node name="Sword" type="Node2D"]
 visible = false
 script = ExtResource("1_rgxvb")
+Animations = SubResource("SpriteFrames_smq3l")
 
 [node name="Assets" type="Node2D" parent="."]
 
-[node name="SmoothAnimatedSprite2D" type="AnimatedSprite2D" parent="Assets"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Assets"]
+unique_name_in_owner = true
 texture_filter = 2
 material = ExtResource("2_y4or8")
 sprite_frames = SubResource("SpriteFrames_smq3l")
@@ -346,10 +348,12 @@ animation = &"front"
 script = ExtResource("3_72hrq")
 
 [node name="AttackSfx" type="AudioStreamPlayer2D" parent="Assets"]
+unique_name_in_owner = true
 
 [node name="HitSfx" type="AudioStreamPlayer2D" parent="Assets"]
+unique_name_in_owner = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_d0irt")
+&"": SubResource("AnimationLibrary_d0irt")
 }

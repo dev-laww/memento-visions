@@ -169,7 +169,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Assets/SmoothAnimatedSprite2D:animation")
+tracks/1/path = NodePath("Assets/AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -185,7 +185,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Assets/SmoothAnimatedSprite2D:frame")
+tracks/0/path = NodePath("Assets/AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -197,7 +197,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Assets/SmoothAnimatedSprite2D:animation")
+tracks/1/path = NodePath("Assets/AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -225,7 +225,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Assets/SmoothAnimatedSprite2D:frame")
+tracks/0/path = NodePath("Assets/AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -237,7 +237,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Assets/SmoothAnimatedSprite2D:animation")
+tracks/1/path = NodePath("Assets/AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -265,7 +265,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Assets/SmoothAnimatedSprite2D:frame")
+tracks/0/path = NodePath("Assets/AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -277,7 +277,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Assets/SmoothAnimatedSprite2D:animation")
+tracks/1/path = NodePath("Assets/AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -305,7 +305,7 @@ step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Assets/SmoothAnimatedSprite2D:frame")
+tracks/0/path = NodePath("Assets/AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -317,7 +317,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Assets/SmoothAnimatedSprite2D:animation")
+tracks/1/path = NodePath("Assets/AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -351,10 +351,12 @@ _data = {
 [node name="Dagger" type="Node2D"]
 visible = false
 script = ExtResource("1_atv6s")
+Animations = SubResource("SpriteFrames_d1y8w")
 
 [node name="Assets" type="Node2D" parent="."]
 
-[node name="SmoothAnimatedSprite2D" type="AnimatedSprite2D" parent="Assets"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Assets"]
+unique_name_in_owner = true
 texture_filter = 2
 material = ExtResource("2_nwftv")
 sprite_frames = SubResource("SpriteFrames_d1y8w")
@@ -362,8 +364,10 @@ animation = &"front"
 script = ExtResource("3_8ek50")
 
 [node name="AttackSfx" type="AudioStreamPlayer2D" parent="Assets"]
+unique_name_in_owner = true
 
 [node name="HitSfx" type="AudioStreamPlayer2D" parent="Assets"]
+unique_name_in_owner = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
