@@ -151,7 +151,7 @@ public partial class VelocityManager : Node
         IsDashing = true;
 
         var multiplier = 1f + dashQueue.Count * 0.1f;
-        Velocity = direction.TryNormalize() * DashSpeed * multiplier;
+        Velocity = direction.TryNormalize() * DashSpeed * multiplier * (1f + StatsManager.SpeedModifier);
 
         dashQueue.Add(Body.GlobalPosition);
 
