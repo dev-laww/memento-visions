@@ -10,19 +10,15 @@ else
     exit 1
 fi
 
-
 OS=$(uname -s)
 case "$OS" in
     Linux|Darwin)
-        # Run Godot in a subshell using nohup with full redirection:
-        (
-          nohup "$GODOT_CMD" . --editor </dev/null >/dev/null 2>&1 &
-          disown
-        )
+        # On Unix-like systems, detach using setsid and nohup:
+        setsid nohup "$GODOT_CMD" . --editor </dev/null >/dev/null 2>&1 &
         ;;
     CYGWIN*|MINGW*|MSYS*)
-        # On Windows (Git Bash, MSYS), backgrounding is usually sufficient.
-        "$GODOT_CMD" . --editor </dev/null >/dev/null 2>&1 &
+        # On Windows, use the Windows 'start' command to detach the process:
+        start "" "$GODOT_CMD" . --editor
         ;;
     *)
         # Fallback for unknown OS: try backgrounding the process.
