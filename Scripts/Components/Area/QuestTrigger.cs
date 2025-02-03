@@ -232,16 +232,7 @@ public partial class QuestTrigger : Area2D, IInteractable
     public override void _EnterTree()
     {
         if (GetNodeOrNull("CollisionShape2D") == null)
-        {
-            var collision = new CollisionShape2D
-            {
-                Name = "CollisionShape2D",
-                DebugColor = new Color(0.88f, 0.525f, 0.898f, 0.42f)
-            };
-
-            AddChild(collision);
-            collision.SetOwner(GetTree().GetEditedSceneRoot());
-        }
+            this.EditorAddChild(new CollisionShape2D { Name = "CollisionShape2D", DebugColor = new Color(0.88f, 0.525f, 0.898f, 0.42f) });
 
         if (!ShouldInteract) return;
 
