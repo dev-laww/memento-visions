@@ -17,7 +17,8 @@ public abstract partial class Overlay : Control
 
     public virtual void Close()
     {
-        this.GetPlayer()?.SetProcessInput(true);
+        this.GetPlayer()?.SetPhysicsProcess(true);
+
         SetProcessInput(false);
         SetProcessUnhandledInput(false);
         MouseFilter = MouseFilterEnum.Pass;
@@ -31,7 +32,8 @@ public abstract partial class Overlay : Control
 
     public virtual void Open()
     {
-        this.GetPlayer()?.SetProcessInput(false);
+        this.GetPlayer()?.SetPhysicsProcess(false);
+
         Show();
         SetProcessInput(true);
         SetProcessUnhandledInput(true);
