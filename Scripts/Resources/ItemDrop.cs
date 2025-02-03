@@ -7,15 +7,15 @@ namespace Game.Resources;
 public partial class ItemDrop : Resource
 {
     [Export] public Item Item;
-    [Export] public int MinAmount;
-    [Export] public int MaxAmount;
+    [Export] public int Min;
+    [Export] public int Max;
     [Export] public int Weight;
 
-    public void Deconstruct(out Item item, out int minAmount, out int maxAmount, out int weight)
+    public void Deconstruct(out Item item, out int min, out int max, out int weight)
     {
         item = Item;
-        minAmount = MinAmount;
-        maxAmount = MaxAmount;
+        min = Min;
+        max = Max;
         weight = Weight;
     }
 }
