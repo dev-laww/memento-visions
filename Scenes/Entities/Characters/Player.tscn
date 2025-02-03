@@ -1738,8 +1738,6 @@ disabled = true
 position = Vector2(0, -17)
 statsManager = NodePath("../StatsManager")
 
-[node name="WeaponManager" type="Node2D" parent="."]
-
 [node name="Animations" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_bjmy2"),
