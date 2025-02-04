@@ -32,7 +32,7 @@ public partial class StatusEffect : Node
 
     public void Update()
     {
-        Duration -= (float)GetProcessDeltaTime();
+        RemainingDuration -= (float)GetPhysicsProcessDeltaTime();
         Tick();
     }
 
