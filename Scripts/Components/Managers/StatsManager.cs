@@ -136,8 +136,13 @@ public partial class StatsManager : Node
         if (!statusEffects.TryAdd(effect.Id, effect)) return;
 
         effect.Apply();
-        Entity.AddChild(effect);
+
+        if (Entity.GetChildren().OfType<StatusEffect>().All(e => e.Id != effect.Id))
+            Entity.AddChild(effect);
+
         EmitSignalStatusEffectAdded(effect);
+
+        Log.Debug($"{effect} added to {Entity}");
     }
 
     public void RemoveStatusEffect(string id)
@@ -150,6 +155,8 @@ public partial class StatsManager : Node
         statusEffects.Remove(id);
 
         EmitSignalStatusEffectRemoved(effect);
+
+        Log.Debug($"{effect} removed from {Entity}");
     }
 
     public void Cleanse()

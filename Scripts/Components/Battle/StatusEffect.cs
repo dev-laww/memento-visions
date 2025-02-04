@@ -37,5 +37,5 @@ public partial class StatusEffect : Node
     public virtual void Remove() { }
 
 
-    public override string ToString() => $"<StatusEffect ({Id} on {Target?.Id})>";
+    public override string ToString() => $"<StatusEffect ({Id})>";
 }
