@@ -1,3 +1,4 @@
+using Game.Common;
 using Game.Components.Battle;
 using Godot;
 
@@ -15,6 +16,13 @@ public partial class Slow : StatusEffect
     public override void Remove()
     {
         Target?.StatsManager?.RemoveSpeedModifier(Id, -SlowAmount);
+    }
+
+    public override void Stack(int amount = 1)
+    {
+        StackCount += amount;
+        RemainingDuration += Duration * amount;
+        Log.Debug($"{this} stacked to {StackCount} {RemainingDuration}");
     }
 }
 

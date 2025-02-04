@@ -131,14 +131,14 @@ public partial class StatsManager : Node
 
     public void AddStatusEffect(StatusEffect effect)
     {
-
-        // TODO: Add status effect stacking
         if (!statusEffects.TryAdd(effect.Id, effect)) return;
 
         effect.Apply();
 
         if (Entity.GetChildren().OfType<StatusEffect>().All(e => e.Id != effect.Id))
             Entity.AddChild(effect);
+        else if (!effect.EditorAdded)
+            effect.Stack(effect.StackCount);
 
         EmitSignalStatusEffectAdded(effect);
 
@@ -214,7 +214,7 @@ public partial class StatsManager : Node
         {
             effect.Update();
 
-            if (effect.Duration > 0) continue;
+            if (effect.RemainingDuration > 0) continue;
 
             RemoveStatusEffect(effect.Id);
         }
