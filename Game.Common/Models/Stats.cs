@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Game.Common.Models;
 
-public class StatsData
+public class Stats
 {
     [JsonProperty("max_health")] public float MaxHealth;
     [JsonProperty("health")] public float Health;

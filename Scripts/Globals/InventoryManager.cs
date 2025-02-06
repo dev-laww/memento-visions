@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Game.Common;
-using Game.Common.Models;
 using Game.Common.Utilities;
 using Game.Exceptions;
 using Game.Registry;
 using Game.Resources;
+using Item = Game.Resources.Item;
 
 namespace Game.Globals;
 
@@ -35,28 +35,49 @@ public partial class InventoryManager : Global<InventoryManager>
     {
         base._EnterTree();
 
-        CommandInterpreter.Register("add item", AddItemCommand,
-            "Adds an item to the inventory. Usage: add item [uniqueName] [quantity]");
-        CommandInterpreter.Register("remove item", RemoveItemCommand,
-            "Removes an item from the inventory. Usage: remove item [uniqueName] [quantity]");
-        CommandInterpreter.Register("clear inventory", ClearInventory, "Clears the inventory.");
+        CommandInterpreter.Register(
+            "give",
+            AddItemCommand,
+            "Adds an item to the inventory. Usage: give [uniqueName] [quantity]"
+        );
+        CommandInterpreter.Register(
+            "take",
+            RemoveItemCommand,
+            "Removes an item from the inventory. Usage: take [uniqueName] [quantity]"
+        );
+        CommandInterpreter.Register(
+            "clear inventory",
+            ClearInventory,
+            "Clears the inventory."
+        );
     }
 
     public override void _ExitTree()
     {
         base._ExitTree();
 
-        CommandInterpreter.Unregister("add item");
-        CommandInterpreter.Unregister("remove item");
+        CommandInterpreter.Unregister("give");
+        CommandInterpreter.Unregister("take");
         CommandInterpreter.Unregister("clear inventory");
+
+        var items = Inventory.Values
+            .SelectMany(i => i)
+            .Select(i => new Game.Common.Models.Item
+            {
+                Id = i.Item.Id,
+                Amount = i.Quantity
+            })
+            .ToList();
+
+        SaveManager.Data.SetItemsData(items);
     }
 
     public override void _Ready()
     {
-        var inventory = SaveManager.InventoryData;
+        var items = SaveManager.Data.Items;
 
         Log.Info("Loading inventory...");
-        inventory.Items.ForEach(item =>
+        items.ForEach(item =>
         {
             AddItem(new ItemGroup
             {
@@ -104,15 +125,6 @@ public partial class InventoryManager : Global<InventoryManager>
     public static bool HasItem(ItemGroup group) =>
         Instance.Inventory[group.Item.ItemCategory]
             .Any(g => g.Item.Id == group.Item.Id && g.Quantity >= group.Quantity);
-
-    public static InventoryData ToData() => new()
-    {
-        Items = Instance.Inventory.SelectMany(i => i.Value).Select(item => new InventoryData.Item
-        {
-            Id = item.Item.Id,
-            Amount = item.Quantity
-        }).ToList()
-    };
 
     private static void AddItemCommand(string uniqueName, int quantity = 1)
     {

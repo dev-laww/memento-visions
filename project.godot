@@ -27,12 +27,12 @@ buses/default_bus_layout="res://resources/misc/default_bus_layout.tres"
 
 [autoload]
 
+SaveManager="*res://Scripts/Globals/SaveManager.cs"
 SceneManager="*res://Scripts/Globals/SceneManager.cs"
-SoundManger="*res://Scenes/Components/Managers/SoundManger.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+SoundManger="*res://Scenes/Components/Managers/SoundManger.tscn"
 InventoryManager="*res://Scripts/Globals/InventoryManager.cs"
 InteractionManager="*res://Scripts/Globals/InteractionManager.cs"
-SaveManager="*res://Scripts/Globals/SaveManager.cs"
 QuestManager="*res://Scripts/Globals/QuestManager.cs"
 EnemyManager="*res://Scripts/Globals/EnemyManager.cs"
 MusicManager="*res://Scripts/Components/Managers/MusicManager.cs"

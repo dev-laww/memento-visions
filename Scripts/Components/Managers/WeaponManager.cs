@@ -6,6 +6,7 @@ using Godot;
 
 namespace Game.Components.Managers;
 
+[Tool]
 [GlobalClass]
 public partial class WeaponManager : Node
 {

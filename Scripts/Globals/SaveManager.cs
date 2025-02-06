@@ -7,12 +7,9 @@ namespace Game.Globals;
 
 public partial class SaveManager : Global<SaveManager>
 {
-    private static SaveData Data;
+    public static Save Data { get; private set; }
     private static readonly string dir = $"{(OS.IsDebugBuild() ? "res" : "user")}://data";
     private static readonly string path = $"{dir}/{Constants.SAVE_NAME}";
-
-    public static PlayerData PlayerData => Data.Player;
-    public static InventoryData InventoryData => Data.Inventory;
 
     public override void _EnterTree()
     {
@@ -27,7 +24,7 @@ public partial class SaveManager : Global<SaveManager>
         Save();
     }
 
-    private static void Load()
+    public static void Load()
     {
         Log.Info("Loading save data...");
         if (FileAccess.FileExists(path))
@@ -37,26 +34,18 @@ public partial class SaveManager : Global<SaveManager>
             var content = file.GetAsText();
             file.Close();
 
-            Data = JsonConvert.DeserializeObject<SaveData>(content);
+            Data = JsonConvert.DeserializeObject<Save>(content);
         }
         else
-        {
             DirAccess.MakeDirAbsolute(dir);
-            Data = new SaveData();
-        }
 
-        Data ??= new SaveData();
+        Data ??= new Save();
     }
 
-    private void Save()
+    public static void Save()
     {
         Log.Info("Saving data...");
         var file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
-
-        // TODO: Implement other save data
-
-        var inventory = InventoryManager.ToData();
-        Data.Inventory = inventory;
 
         var json = JsonConvert.SerializeObject(Data, Formatting.Indented);
         file.StoreString(json);

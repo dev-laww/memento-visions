@@ -144,12 +144,12 @@ public partial class Inventory : Overlay
 
         if (pressed)
         {
-            player.Equip(SelectedItem);
+            player.WeaponManager.Equip(SelectedItem);
             selectedItemActionButton.Text = "Unequip";
         }
         else if (SelectedItem.Id == player.WeaponManager.Weapon?.Id)
         {
-            player.Unequip();
+            player.WeaponManager.Unequip();
             selectedItemActionButton.Text = "Equip";
         }
     }

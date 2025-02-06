@@ -168,8 +168,4 @@ public partial class Player : Entity
         if (dash) StateMachine.ChangeState(Dash);
         if (attack) StateMachine.ChangeState(Attack);
     }
-
-    public void Equip(Item weapon) => WeaponManager.Equip(weapon);
-
-    public void Unequip() => WeaponManager.Unequip();
 }

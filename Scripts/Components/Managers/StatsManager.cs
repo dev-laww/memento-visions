@@ -232,7 +232,7 @@ public partial class StatsManager : Node
         return [.. warnings];
     }
 
-    public void Apply(StatsData data)
+    public void Apply(Stats data)
     {
         MaxHealth = data.MaxHealth;
         Health = data.Health;
@@ -243,7 +243,7 @@ public partial class StatsManager : Node
         Damage = data.Damage;
     }
 
-    public StatsData ToData() => new()
+    public Stats ToData() => new()
     {
         MaxHealth = MaxHealth,
         Health = Health,
