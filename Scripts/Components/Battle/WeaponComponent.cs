@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Game.Common.Extensions;
+using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
@@ -58,7 +59,7 @@ public partial class WeaponComponent : Node2D
 
     public SignalAwaiter AnimationFinished => ToSignal(animationPlayer, "animation_finished");
 
-    public void Animate(string direction) => animationPlayer.Play(direction);
+    public void Animate() => animationPlayer.Play(this.GetPlayer()?.LastFacedDirection ?? "front");
 
     public override void _Notification(int what)
     {
@@ -89,9 +90,9 @@ public partial class WeaponComponent : Node2D
 
         var assets = new Node2D { Name = "Assets" };
         var sprite = new SmoothAnimatedSprite2D { Name = "AnimatedSprite2D" };
-        var animationPlayer = new AnimationPlayer { Name = "AnimationPlayer" };
-        var attackSfx = new AudioStreamPlayer2D { Name = "AttackSfx" };
-        var hitSfx = new AudioStreamPlayer2D { Name = "HitSfx" };
+        var player = new AnimationPlayer { Name = "AnimationPlayer" };
+        var atkSfx = new AudioStreamPlayer2D { Name = "AttackSfx" };
+        var htSfx = new AudioStreamPlayer2D { Name = "HitSfx" };
 
         var library = new AnimationLibrary();
 
@@ -100,18 +101,18 @@ public partial class WeaponComponent : Node2D
         library.AddAnimation("left", new Animation());
         library.AddAnimation("right", new Animation());
 
-        animationPlayer.AddAnimationLibrary("", library);
+        player.AddAnimationLibrary("", library);
 
         assets.AddChild(sprite);
-        assets.AddChild(attackSfx);
-        assets.AddChild(hitSfx);
+        assets.AddChild(atkSfx);
+        assets.AddChild(htSfx);
         assets.SetDisplayFolded(true);
 
         sprite.UniqueNameInOwner = true;
-        attackSfx.UniqueNameInOwner = true;
-        hitSfx.UniqueNameInOwner = true;
+        atkSfx.UniqueNameInOwner = true;
+        htSfx.UniqueNameInOwner = true;
 
         this.EditorAddChild(assets);
-        this.EditorAddChild(animationPlayer);
+        this.EditorAddChild(player);
     }
 }

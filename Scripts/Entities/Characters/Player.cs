@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using Game.Common.Models;
 using Game.Components.Managers;
 using Game.Components.Area;
+using Game.Components.Battle;
 using Game.Globals;
 using Game.Resources;
 using Godot;
@@ -20,8 +20,10 @@ public partial class Player : Entity
     [Node] private Node2D hitBoxes;
 
     private Vector2 inputDirection;
+    public WeaponComponent WeaponComponent { get; private set; }
+    public Item Weapon { get; private set; }
 
-    private string LastFacedDirection
+    public string LastFacedDirection
     {
         get
         {
@@ -121,7 +123,7 @@ public partial class Player : Entity
 
     private void EnterAttack()
     {
-        if (WeaponManager.CanAttack) return;
+        if (Weapon != null) return;
 
         StateMachine.ChangeState(inputDirection.IsZeroApprox() ? Idle : Walk);
     }
@@ -129,7 +131,8 @@ public partial class Player : Entity
     private async void Attack()
     {
         VelocityManager.Decelerate();
-        switch (WeaponManager.CurrentWeaponResource.WeaponType)
+
+        switch (Weapon.WeaponType)
         {
             case Item.Type.Gun:
                 animations.Play($"gun/{LastFacedDirection}");
@@ -148,10 +151,10 @@ public partial class Player : Entity
                 break;
         }
 
-        WeaponManager.Attack(LastFacedDirection);
+        WeaponComponent.Animate();
 
         await ToSignal(animations, "animation_finished");
-        await WeaponManager.AnimationFinished;
+        await WeaponComponent.AnimationFinished;
 
         StateMachine.ChangeState(inputDirection.IsZeroApprox() ? Idle : Walk);
     }
@@ -168,17 +171,26 @@ public partial class Player : Entity
         if (attack) StateMachine.ChangeState(Attack);
     }
 
-    public PlayerData ToData() => new()
+    public void Equip(Item weapon)
     {
-        Position = GlobalPosition,
-        Direction = VelocityManager.LastFacedDirection,
-        Stats = StatsManager.ToData(),
-    };
+        if (weapon.Id == Weapon?.Id) return;
 
-    public void Apply(PlayerData data)
+        Weapon = weapon;
+        WeaponComponent?.QueueFree();
+
+        var component = weapon.Component.Instantiate<WeaponComponent>();
+
+        WeaponComponent = component;
+
+        AddChild(component);
+    }
+
+    public void Unequip()
     {
-        GlobalPosition = data.Position;
-        StatsManager.Apply(data.Stats);
-        VelocityManager.OverrideLastFacedDirection(data.Direction);
+        if (WeaponComponent == null) return;
+
+        WeaponComponent.QueueFree();
+        WeaponComponent = null;
+        Weapon = null;
     }
 }
