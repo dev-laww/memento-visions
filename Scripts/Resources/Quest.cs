@@ -29,31 +29,6 @@ public partial class Quest : Resource
     private int currentStep;
     public bool IsActive => QuestManager.ActiveQuests.Contains(this);
 
-    public Quest()
-    {
-        if (Engine.IsEditorHint()) return;
-
-        var timer = new Timer(1000);
-        timer.Elapsed += (_, _) =>
-        {
-            InventoryManager.Pickup += OnItemPickup;
-            InventoryManager.Remove += OnItemRemoved;
-            EnemyManager.EnemyDied += OnEnemyDied;
-            timer.Dispose();
-        };
-        timer.AutoReset = false;
-        timer.Start();
-    }
-
-    ~Quest()
-    {
-        if (Engine.IsEditorHint()) return;
-
-        InventoryManager.Remove -= OnItemRemoved;
-        InventoryManager.Pickup -= OnItemPickup;
-        EnemyManager.EnemyDied -= OnEnemyDied;
-    }
-
     public void Update()
     {
         var completed = true;
@@ -114,12 +89,12 @@ public partial class Quest : Resource
         // TODO: give rewards
     }
 
-    private void OnItemPickup(ItemGroup item) => ProcessObjectives(
+    public void OnItemPickup(ItemGroup item) => ProcessObjectives(
         QuestObjective.ObjectiveType.Collect,
         objective => objective.UpdateItemProgress(item)
     );
 
-    private void OnEnemyDied(Entity.DeathInfo info)
+    public void OnEnemyDied(Entity.DeathInfo info)
     {
         if (info.Killer is not Player) return;
 
@@ -129,7 +104,7 @@ public partial class Quest : Resource
         );
     }
 
-    private void OnItemRemoved(ItemGroup item) => ProcessObjectives(
+    public void OnItemRemoved(ItemGroup item) => ProcessObjectives(
         QuestObjective.ObjectiveType.Use,
         objective => objective.UpdateItemProgress(item)
     );

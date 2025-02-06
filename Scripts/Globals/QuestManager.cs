@@ -54,6 +54,9 @@ public partial class QuestManager : Global<QuestManager>
     {
         Instance.quests.Add(quest);
         Added?.Invoke(quest);
+
+        EnemyManager.EnemyDied += quest.OnEnemyDied;
+
         Log.Info($"{quest} added.");
     }
 
@@ -65,6 +68,9 @@ public partial class QuestManager : Global<QuestManager>
 
         Instance.quests.Remove(quest);
         Removed?.Invoke(quest);
+
+        EnemyManager.EnemyDied -= quest.OnEnemyDied;
+
         Log.Info($"{quest} removed.");
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Game.Globals;
 using Godot;
 using GodotUtilities;
 using Game.Resources;
@@ -55,9 +54,10 @@ public partial class Item : Node2D
 
     private void OnBodyEntered(Node _)
     {
-        if (this.GetPlayer() is null || Engine.IsEditorHint() || ItemGroup is null) return;
+        var player = this.GetPlayer();
+        if (player is null || Engine.IsEditorHint() || ItemGroup is null) return;
 
-        InventoryManager.AddItem(ItemGroup);
+        player.InventoryManager.AddItem(ItemGroup);
         QueueFree();
     }
 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Game.Common;
 using Game.Globals;
 using Game.Registry;
 using Game.Resources;
@@ -41,7 +42,8 @@ public partial class Crafting : Overlay
 
     public override void _Ready()
     {
-        if (this.GetPlayer() is null) return;
+        var player = this.GetPlayer();
+        if (player is null) return;
 
         slots = slotsContainer.GetChildrenOfType<Slot>().ToList();
 
@@ -50,7 +52,7 @@ public partial class Crafting : Overlay
         increaseButton.Pressed += OnIncreaseButtonPress;
         decreaseButton.Pressed += OnDecreaseButtonPress;
         craftButton.Pressed += OnCraftButtonPress;
-        InventoryManager.Updated += _ => Reset();
+        player.InventoryManager.Updated += _ => Reset();
 
         PopulateSlots();
     }
@@ -124,7 +126,10 @@ public partial class Crafting : Overlay
 
     private void OnCraftButtonPress()
     {
-        selectedRecipe?.Create(quantity);
+        if (selectedRecipe is null) return;
+
+        Create(quantity);
+
         Reset();
     }
 
@@ -144,17 +149,49 @@ public partial class Crafting : Overlay
         quantityControl.Visible = selectedRecipe is not null;
         craftButton.Visible = selectedRecipe is not null;
 
-        craftButton.Disabled = selectedRecipe is null || !selectedRecipe.CanCreate(quantity);
-        craftButton.Text = selectedRecipe?.CanCreate(quantity) == true ? "Craft" : "Not enough resources";
+        craftButton.Disabled = selectedRecipe is null || !CanCreate(quantity);
+        craftButton.Text = CanCreate(quantity) == true ? "Craft" : "Not enough resources";
 
-        increaseButton.Disabled = selectedRecipe is null || !selectedRecipe.CanCreate(quantity + 1);
+        increaseButton.Disabled = selectedRecipe is null || !CanCreate(quantity + 1);
         decreaseButton.Disabled = quantity <= 1;
     }
 
     public override void Close()
     {
         base.Close();
-        
+
         Reset();
+    }
+
+    private bool CanCreate(int qty = 1)
+    {
+        var player = this.GetPlayer();
+
+        if (player is null) return false;
+
+        var ingredients = selectedRecipe?.GetIngredients(qty);
+
+        return ingredients != null && ingredients.All(player.InventoryManager.HasItem);
+    }
+
+    private void Create(int qty = 1)
+    {
+        var player = this.GetPlayer();
+
+        if (player is null || !CanCreate(qty) || selectedRecipe is null) return;
+
+        var ingredients = selectedRecipe.GetIngredients(qty);
+
+        foreach (var ingredient in ingredients)
+            player.InventoryManager.RemoveItem(ingredient);
+
+        var item = new ItemGroup
+        {
+            Item = selectedRecipe.Result.Item,
+            Quantity = selectedRecipe.Result.Quantity * qty
+        };
+
+        player.InventoryManager.AddItem(item);
+        Log.Debug($"Created {item}.");
     }
 }

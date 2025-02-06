@@ -4,22 +4,20 @@ using System.Linq;
 using Game.Common;
 using Game.Common.Utilities;
 using Game.Exceptions;
+using Game.Globals;
 using Game.Registry;
 using Game.Resources;
+using Godot;
 using Item = Game.Resources.Item;
 
-namespace Game.Globals;
+namespace Game.Components.Managers;
 
-public partial class InventoryManager : Global<InventoryManager>
+[GlobalClass]
+public partial class InventoryManager : Node
 {
-    public delegate void UpdatedEventHandler(ItemGroup item);
-    public delegate void PickupEventHandler(ItemGroup item);
-    public delegate void RemoveEventHandler(ItemGroup item);
-
-    public static event UpdatedEventHandler Updated;
-    public static event PickupEventHandler Pickup;
-    public static event RemoveEventHandler Remove;
-
+    [Signal] public delegate void UpdatedEventHandler(ItemGroup item);
+    [Signal] public delegate void PickupEventHandler(ItemGroup item);
+    [Signal] public delegate void RemoveEventHandler(ItemGroup item);
 
     private readonly ReadOnlyDictionary<Item.Category, List<ItemGroup>> Inventory = new(
         new Dictionary<Item.Category, List<ItemGroup>>
@@ -87,24 +85,24 @@ public partial class InventoryManager : Global<InventoryManager>
         });
     }
 
-    public static void AddItem(ItemGroup group)
+    public void AddItem(ItemGroup group)
     {
-        var itemGroup = Instance.Inventory[group.Item.ItemCategory]
+        var itemGroup = Inventory[group.Item.ItemCategory]
             .Find(g => g.Item.Id == group.Item.Id);
 
         if (itemGroup is not null)
             itemGroup.Quantity += group.Quantity;
         else
-            Instance.Inventory[group.Item.ItemCategory].Add(group);
+            Inventory[group.Item.ItemCategory].Add(group);
 
-        Updated?.Invoke(itemGroup ?? group);
-        Pickup?.Invoke(group);
-        Log.Debug($"Added {group} to the inventory.");
+        EmitSignalPickup(itemGroup ?? group);
+        EmitSignalUpdated(itemGroup ?? group);
+        Log.Debug($"Added {itemGroup ?? group} to the inventory.");
     }
 
-    public static void RemoveItem(ItemGroup group)
+    public void RemoveItem(ItemGroup group)
     {
-        var itemGroup = Instance.Inventory[group.Item.ItemCategory]
+        var itemGroup = Inventory[group.Item.ItemCategory]
             .Find(g => g.Item.Id == group.Item.Id);
 
         if (itemGroup is null) return;
@@ -112,21 +110,20 @@ public partial class InventoryManager : Global<InventoryManager>
         itemGroup.Quantity -= group.Quantity;
 
         if (itemGroup.Quantity <= 0)
-            Instance.Inventory[group.Item.ItemCategory].Remove(itemGroup);
+            Inventory[group.Item.ItemCategory].Remove(itemGroup);
 
-        Remove?.Invoke(itemGroup);
-        Updated?.Invoke(itemGroup);
-        Log.Debug($"Removed {group} from the inventory.");
+        EmitSignalRemove(itemGroup);
+        EmitSignalUpdated(itemGroup);
+        Log.Debug($"Removed {itemGroup} from the inventory.");
     }
 
-    public static IReadOnlyList<ItemGroup> GetItemsFromCategory(Item.Category category) =>
-        Instance.Inventory[category].AsReadOnly();
+    public IReadOnlyList<ItemGroup> GetItemsFromCategory(Item.Category category) =>
+        Inventory[category].AsReadOnly();
 
-    public static bool HasItem(ItemGroup group) =>
-        Instance.Inventory[group.Item.ItemCategory]
-            .Any(g => g.Item.Id == group.Item.Id && g.Quantity >= group.Quantity);
+    public bool HasItem(ItemGroup group) => Inventory[group.Item.ItemCategory]
+        .Any(g => g.Item.Id == group.Item.Id && g.Quantity >= group.Quantity);
 
-    private static void AddItemCommand(string uniqueName, int quantity = 1)
+    private void AddItemCommand(string uniqueName, int quantity = 1)
     {
         var item = ItemRegistry.Get(uniqueName) ?? throw new CommandException($"Item '{uniqueName}' not found.");
 
@@ -137,7 +134,7 @@ public partial class InventoryManager : Global<InventoryManager>
         });
     }
 
-    private static void RemoveItemCommand(string uniqueName, int quantity = 1)
+    private void RemoveItemCommand(string uniqueName, int quantity = 1)
     {
         var item = ItemRegistry.Get(uniqueName) ?? throw new CommandException($"Item '{uniqueName}' not found.");
 
@@ -148,11 +145,11 @@ public partial class InventoryManager : Global<InventoryManager>
         });
     }
 
-    private static void ClearInventory()
+    private void ClearInventory()
     {
-        foreach (var category in Instance.Inventory.Keys)
+        foreach (var category in Inventory.Keys)
         {
-            var items = Instance.Inventory[category].ToList();
+            var items = Inventory[category].ToList();
 
             items.ForEach(RemoveItem);
         }

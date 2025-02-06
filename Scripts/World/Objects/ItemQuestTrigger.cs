@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Game.Components.Area;
-using Game.Globals;
 using Game.Resources;
 using Game.Utils.Extensions;
 using Godot;
@@ -110,9 +109,10 @@ public partial class ItemQuestTrigger : QuestTrigger
 
     private void Pick()
     {
-        if (this.GetPlayer() is null || Engine.IsEditorHint() || ItemGroup is null) return;
+        var player = this.GetPlayer();
+        if (player is null || Engine.IsEditorHint() || ItemGroup is null) return;
 
-        InventoryManager.AddItem(ItemGroup);
+        player.InventoryManager.AddItem(ItemGroup);
         QueueFree();
     }
 }

@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using Game.Components.Managers;
 using Game.Components.Area;
-using Game.Components.Battle;
 using Game.Resources;
 using Godot;
 using GodotUtilities;
@@ -15,8 +14,10 @@ public partial class Player : Entity
 {
     [Node] private HurtBox hurtBox;
     [Node] private AnimationPlayer animations;
-    [Node] public VelocityManager VelocityManager;
     [Node] private Node2D hitBoxes;
+
+    [Node] public InventoryManager InventoryManager;
+    [Node] public VelocityManager VelocityManager;
     [Node] public WeaponManager WeaponManager;
 
     private Vector2 inputDirection;
@@ -38,7 +39,7 @@ public partial class Player : Entity
 
     public override void _Notification(int what)
     {
-        if (what != NotificationSceneInstantiated) return;
+        if (what != NotificationSceneInstantiated || Engine.IsEditorHint()) return;
 
         WireNodes();
     }

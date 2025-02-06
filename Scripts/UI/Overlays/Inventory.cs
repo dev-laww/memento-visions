@@ -42,7 +42,8 @@ public partial class Inventory : Overlay
 
     public override void _Ready()
     {
-        if (this.GetPlayer() is null) return;
+        var player = this.GetPlayer();
+        if (player is null) return;
 
         slots = slotsContainer.GetChildrenOfType<Slot>().ToList();
 
@@ -50,7 +51,7 @@ public partial class Inventory : Overlay
         closeButton.Pressed += Close;
         selectedItemActionButton.Toggled += OnButtonToggle;
         materialButton.ButtonGroup.Pressed += OnItemCategoryPress;
-        InventoryManager.Updated += OnInventoryUpdate;
+        player.InventoryManager.Updated += OnInventoryUpdate;
 
         PopulateSlots(currentCategory);
     }
@@ -105,7 +106,11 @@ public partial class Inventory : Overlay
 
     private void PopulateSlots(Item.Category category)
     {
-        var items = InventoryManager.GetItemsFromCategory(category);
+        var player = this.GetPlayer();
+
+        if (player is null) return;
+
+        var items = player.InventoryManager.GetItemsFromCategory(category);
 
         slots.Where(slot => slot.Item != null).ToList().ForEach(slot => slot.Item = null);
 
