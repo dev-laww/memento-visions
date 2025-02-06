@@ -3,7 +3,6 @@ using System.Linq;
 using Game.Components.Managers;
 using Game.Components.Area;
 using Game.Components.Battle;
-using Game.Globals;
 using Game.Resources;
 using Godot;
 using GodotUtilities;
@@ -18,10 +17,9 @@ public partial class Player : Entity
     [Node] private AnimationPlayer animations;
     [Node] public VelocityManager VelocityManager;
     [Node] private Node2D hitBoxes;
+    [Node] public WeaponManager WeaponManager;
 
     private Vector2 inputDirection;
-    public WeaponComponent WeaponComponent { get; private set; }
-    public Item Weapon { get; private set; }
 
     public string LastFacedDirection
     {
@@ -123,7 +121,7 @@ public partial class Player : Entity
 
     private void EnterAttack()
     {
-        if (Weapon != null) return;
+        if (WeaponManager.CanAttack) return;
 
         StateMachine.ChangeState(inputDirection.IsZeroApprox() ? Idle : Walk);
     }
@@ -132,7 +130,7 @@ public partial class Player : Entity
     {
         VelocityManager.Decelerate();
 
-        switch (Weapon.WeaponType)
+        switch (WeaponManager.Weapon.WeaponType)
         {
             case Item.Type.Gun:
                 animations.Play($"gun/{LastFacedDirection}");
@@ -151,10 +149,10 @@ public partial class Player : Entity
                 break;
         }
 
-        WeaponComponent.Animate();
+        WeaponManager.Animate();
 
         await ToSignal(animations, "animation_finished");
-        await WeaponComponent.AnimationFinished;
+        await WeaponManager.AnimationFinished;
 
         StateMachine.ChangeState(inputDirection.IsZeroApprox() ? Idle : Walk);
     }
@@ -171,26 +169,7 @@ public partial class Player : Entity
         if (attack) StateMachine.ChangeState(Attack);
     }
 
-    public void Equip(Item weapon)
-    {
-        if (weapon.Id == Weapon?.Id) return;
+    public void Equip(Item weapon) => WeaponManager.Equip(weapon);
 
-        Weapon = weapon;
-        WeaponComponent?.QueueFree();
-
-        var component = weapon.Component.Instantiate<WeaponComponent>();
-
-        WeaponComponent = component;
-
-        AddChild(component);
-    }
-
-    public void Unequip()
-    {
-        if (WeaponComponent == null) return;
-
-        WeaponComponent.QueueFree();
-        WeaponComponent = null;
-        Weapon = null;
-    }
+    public void Unequip() => WeaponManager.Unequip();
 }
