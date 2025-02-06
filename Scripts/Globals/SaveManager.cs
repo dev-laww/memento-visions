@@ -29,7 +29,6 @@ public partial class SaveManager : Global<SaveManager>
         Log.Info("Loading save data...");
         if (FileAccess.FileExists(path))
         {
-            Log.Debug("Save data not found creating new save data...");
             var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
             var content = file.GetAsText();
             file.Close();
@@ -37,7 +36,10 @@ public partial class SaveManager : Global<SaveManager>
             Data = JsonConvert.DeserializeObject<Save>(content);
         }
         else
+        {
+            Log.Debug("Save data not found creating new save data...");
             DirAccess.MakeDirAbsolute(dir);
+        }
 
         Data ??= new Save();
     }
