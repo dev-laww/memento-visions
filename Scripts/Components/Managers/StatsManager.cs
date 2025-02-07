@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
-using Game.Common.Models;
 using Game.Components.Battle;
 using Game.Entities;
 using Game.Utils.Battle;
@@ -101,6 +100,7 @@ public partial class StatsManager : Node
     }
 
     public void Heal(float amount) => Health += amount;
+    public void TakeDamage(float amount) => Health -= amount;
     public void IncreaseLevel(float amount) => Level += amount;
 
     public void IncreaseExperience(float amount)
@@ -231,26 +231,4 @@ public partial class StatsManager : Node
 
         return [.. warnings];
     }
-
-    public void Apply(Stats data)
-    {
-        MaxHealth = data.MaxHealth;
-        Health = data.Health;
-        Level = data.Level;
-        Speed = data.Speed;
-        Experience = data.Experience;
-        Defense = data.Defense;
-        Damage = data.Damage;
-    }
-
-    public Stats ToData() => new()
-    {
-        MaxHealth = MaxHealth,
-        Health = Health,
-        Level = Level,
-        Speed = Speed,
-        Experience = Experience,
-        Defense = Defense,
-        Damage = Damage
-    };
 }

@@ -77,6 +77,8 @@ public partial class InventoryManager : Node
         Log.Info("Loading inventory...");
         items.ForEach(item =>
         {
+            if (item.Amount <= 0) return;
+
             AddItem(new ItemGroup
             {
                 Item = ItemRegistry.Get(item.Id),

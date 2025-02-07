@@ -11,4 +11,5 @@ public class Stats
     [JsonProperty("experience")] public float Experience;
     [JsonProperty("defense")] public float Defense;
     [JsonProperty("damage")] public float Damage;
+    [JsonProperty("status_effects")] public StatusEffect[] StatusEffects = [];
 }
