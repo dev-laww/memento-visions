@@ -14,7 +14,7 @@ public partial class Quest : Resource
 {
     [Export] public string Id { get; private set; } = Guid.NewGuid().ToString();
     [Export] public string Title;
-    [Export] private bool Ordered;
+    [Export] public bool Ordered;
     [Export(PropertyHint.MultilineText)] public string Description;
     [Export] private QuestObjective[] objectives;
 
@@ -24,6 +24,7 @@ public partial class Quest : Resource
 
     public bool Completed { get; private set; }
     public List<QuestObjective> Objectives => [.. objectives];
+    public QuestObjective CurrentObjective => objectives[currentStep];
     private int currentStep;
 
     public void Update()

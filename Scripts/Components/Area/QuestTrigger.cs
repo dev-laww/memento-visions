@@ -147,7 +147,7 @@ public partial class QuestTrigger : Area2D, IInteractable
                 player.QuestManager.Add(Quest);
                 break;
             case TriggerMode.Complete:
-                if (!isActive) return;
+                if (!isActive || (Quest.Ordered && Quest.CurrentObjective != Objective)) return;
                 Objective?.Complete();
                 break;
             default:
