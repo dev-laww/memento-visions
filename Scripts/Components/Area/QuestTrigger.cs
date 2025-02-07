@@ -94,7 +94,8 @@ public partial class QuestTrigger : Area2D, IInteractable
         CollisionMask = 1 << 2;
         NotifyPropertyListChanged();
 
-        InteractionUI.Text = InteractionLabel;
+        if (ShouldInteract && InteractionUI != null)
+            InteractionUI.Text = InteractionLabel;
 
         if (Engine.IsEditorHint()) return;
 
