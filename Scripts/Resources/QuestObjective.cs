@@ -122,6 +122,7 @@ public partial class QuestObjective : Resource
         {
             case ObjectiveType.Collect:
             case ObjectiveType.Deliver:
+            case ObjectiveType.Use:
                 properties.Add(new Dictionary
                 {
                     { "name", nameof(Items) },
