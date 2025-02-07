@@ -59,7 +59,7 @@ public partial class QuestManager : Node
     {
         var player = this.GetPlayer();
 
-        if (player is null) return;
+        if (player is null || player.QuestManager.IsActive(quest)) return;
 
         player.InventoryManager.Pickup += quest.OnItemPickup;
         player.InventoryManager.Remove += quest.OnItemRemoved;

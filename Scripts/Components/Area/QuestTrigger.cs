@@ -70,7 +70,7 @@ public partial class QuestTrigger : Area2D, IInteractable
 
     private string InteractionLabel
     {
-        get => InteractionUI?.Text ?? string.Empty;
+        get => interactionLabel;
         set
         {
             interactionLabel = value;
@@ -93,7 +93,8 @@ public partial class QuestTrigger : Area2D, IInteractable
         CollisionLayer = 1 << 4;
         CollisionMask = 1 << 2;
         NotifyPropertyListChanged();
-        var node = GetNodeOrNull("Node2D");
+
+        InteractionUI.Text = InteractionLabel;
 
         if (Engine.IsEditorHint()) return;
 
@@ -105,29 +106,9 @@ public partial class QuestTrigger : Area2D, IInteractable
 
     protected virtual void OnBodyEntered(Node2D body)
     {
-        var player = this.GetPlayer();
-
-        if (player is null) return;
-
-        var isActive = player.QuestManager.IsActive(Quest);
-
-        if (!isActive) return;
-
         if (!ShouldInteract)
         {
-            switch (Mode)
-            {
-                case TriggerMode.Start:
-                    player.QuestManager.Add(Quest);
-                    break;
-                case TriggerMode.Complete:
-                    if (!isActive) return;
-                    Objective?.Complete();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
+            TriggerQuest();
             return;
         }
 
@@ -143,20 +124,21 @@ public partial class QuestTrigger : Area2D, IInteractable
         var isActive = player.QuestManager.IsActive(Quest);
 
         if (!ShouldInteract || (!isActive && Mode == TriggerMode.Complete)) return;
+
         InteractionManager.Unregister(this);
     }
 
     public Vector2 InteractionPosition => GlobalPosition;
 
-    public virtual void Interact()
+    public virtual void Interact() => TriggerQuest();
+
+    private void TriggerQuest()
     {
         var player = this.GetPlayer();
 
         if (player is null) return;
 
         var isActive = player.QuestManager.IsActive(Quest);
-
-        if (!isActive) return;
 
         switch (Mode)
         {
@@ -170,8 +152,6 @@ public partial class QuestTrigger : Area2D, IInteractable
             default:
                 throw new ArgumentOutOfRangeException();
         }
-
-        return;
     }
 
     public void ShowUI() => InteractionUI?.Show();
