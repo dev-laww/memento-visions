@@ -1,0 +1,61 @@
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://bs4fpw3cbw5se"]
+
+[ext_resource type="Texture2D" uid="uid://d2giocwwcmiir" path="res://assets/tilesets/manila-city-tileset.png" id="1_43lc1"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bgq48"]
+resource_name = "animated"
+texture = ExtResource("1_43lc1")
+texture_region_size = Vector2i(48, 48)
+11:4/size_in_atlas = Vector2i(1, 2)
+11:4/animation_columns = 3
+11:4/animation_frame_0/duration = 0.2
+11:4/animation_frame_1/duration = 0.2
+11:4/animation_frame_2/duration = 0.2
+11:4/0 = 0
+11:2/size_in_atlas = Vector2i(1, 2)
+11:2/animation_columns = 3
+11:2/animation_frame_0/duration = 0.2
+11:2/animation_frame_1/duration = 0.2
+11:2/animation_frame_2/duration = 0.2
+11:2/0 = 0
+11:0/size_in_atlas = Vector2i(1, 2)
+11:0/animation_columns = 3
+11:0/animation_frame_0/duration = 0.2
+11:0/animation_frame_1/duration = 0.2
+11:0/animation_frame_2/duration = 0.2
+11:0/0 = 0
+11:6/size_in_atlas = Vector2i(1, 2)
+11:6/animation_columns = 3
+11:6/animation_frame_0/duration = 0.2
+11:6/animation_frame_1/duration = 0.2
+11:6/animation_frame_2/duration = 0.2
+11:6/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_43lc1"]
+resource_name = "decoration"
+texture = ExtResource("1_43lc1")
+texture_region_size = Vector2i(48, 48)
+7:17/0 = 0
+9:13/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+10:5/0 = 0
+9:5/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+8:6/0 = 0
+8:5/0 = 0
+7:5/0 = 0
+6:5/0 = 0
+7:6/0 = 0
+6:6/0 = 0
+5:6/0 = 0
+5:5/0 = 0
+8:7/0 = 0
+7:7/0 = 0
+6:7/0 = 0
+5:7/0 = 0
+
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_bgq48")
+sources/1 = SubResource("TileSetAtlasSource_43lc1")
