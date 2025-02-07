@@ -7,7 +7,6 @@ using Game.Entities.Characters;
 using Game.Entities.Enemies;
 using Game.Globals;
 using Godot;
-using Timer = System.Timers.Timer;
 
 namespace Game.Resources;
 
@@ -21,7 +20,8 @@ public partial class Quest : Resource
     [Export(PropertyHint.MultilineText)] public string Description;
     [Export] private QuestObjective[] objectives;
 
-    [ExportCategory("Rewards")] [Export] private int Experience;
+    [ExportCategory("Rewards")]
+    [Export] private int Experience;
     [Export] private ItemGroup[] Items = [];
 
     public bool Completed { get; private set; }
@@ -35,7 +35,6 @@ public partial class Quest : Resource
 
         if (Ordered)
         {
-            Log.Debug($"Current step: {currentStep}");
             if (currentStep < objectives.Length && objectives[currentStep].Completed)
                 currentStep++;
 
@@ -73,6 +72,7 @@ public partial class Quest : Resource
         Log.Info($"{this} completed.");
 
         // TODO: save progress
+        SaveManager.Save();
     }
 
     public void Start()
@@ -87,6 +87,7 @@ public partial class Quest : Resource
         if (!Completed) return;
 
         // TODO: give rewards
+        Log.Info($"{this} rewards given.");
     }
 
     public void OnItemPickup(ItemGroup item) => ProcessObjectives(
