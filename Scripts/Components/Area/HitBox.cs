@@ -1,7 +1,7 @@
 ﻿using Game.Utils.Battle;
 using Godot;
 
-namespace Game.Components.Area;
+namespace Game.Components;
 
 [Tool]
 [GlobalClass]

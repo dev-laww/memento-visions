@@ -5,7 +5,7 @@ using Game.Common.Extensions;
 using Godot;
 using GodotUtilities;
 
-namespace Game.Components.Managers;
+namespace Game.Components;
 
 // TODO: Rethink the GameManager
 [Scene]

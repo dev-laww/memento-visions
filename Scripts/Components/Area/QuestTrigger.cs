@@ -9,7 +9,7 @@ using Game.Utils.Extensions;
 using Godot;
 using Godot.Collections;
 
-namespace Game.Components.Area;
+namespace Game.Components;
 
 [Tool]
 [GlobalClass]

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
-namespace Game.Components.Managers;
+namespace Game.Components;
 
 [GlobalClass]
 public partial class InputManager : Node

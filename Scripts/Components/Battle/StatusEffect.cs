@@ -2,7 +2,7 @@ using Game.Common;
 using Game.Entities;
 using Godot;
 
-namespace Game.Components.Battle;
+namespace Game.Components;
 
 [GlobalClass]
 public partial class StatusEffect : Node

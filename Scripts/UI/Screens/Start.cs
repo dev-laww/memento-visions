@@ -1,7 +1,8 @@
+using Game.Components;
 using Godot;
 using GodotUtilities;
 
-namespace Game.Components.Managers;
+namespace Game.UI;
 
 [Scene]
 public partial class Start : Control

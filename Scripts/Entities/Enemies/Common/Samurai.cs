@@ -1,4 +1,4 @@
-using Game.Components.Managers;
+using Game.Components;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;

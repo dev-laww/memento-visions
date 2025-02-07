@@ -4,7 +4,7 @@ using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
-namespace Game.Components.Battle;
+namespace Game.Components;
 
 // TODO: implement sound effects, collision shape animations, attack pattern animations
 [Tool]

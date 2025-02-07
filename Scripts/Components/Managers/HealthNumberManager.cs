@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Utils.Battle;
-using Game.Components.Managers;
 using Game.Common.Extensions;
+using Game.Effects.HealthNumbers;
 using Godot;
 using GodotUtilities;
 
-namespace Game.Effects.HealthNumbers;
+namespace Game.Components;
 
 [Tool]
 [Scene]

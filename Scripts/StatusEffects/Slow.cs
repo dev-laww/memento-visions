@@ -1,5 +1,5 @@
 using Game.Common;
-using Game.Components.Battle;
+using Game.Components;
 using Godot;
 
 namespace Game;

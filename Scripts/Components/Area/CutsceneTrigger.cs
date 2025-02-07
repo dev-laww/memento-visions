@@ -3,7 +3,7 @@ using Godot;
 using DialogueManagerRuntime;
 using Game.Utils.Extensions;
 
-namespace Game.Components.Area;
+namespace Game.Components;
 
 [Tool]
 [GlobalClass]

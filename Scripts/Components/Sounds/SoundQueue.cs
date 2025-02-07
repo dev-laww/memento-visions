@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
-namespace Game.Components.Sounds;
+namespace Game.Components;
 
 [Tool]
 [GlobalClass]

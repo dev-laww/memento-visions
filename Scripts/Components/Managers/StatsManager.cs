@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
-using Game.Components.Battle;
 using Game.Entities;
 using Game.Utils.Battle;
 using Godot;
 
-namespace Game.Components.Managers;
+namespace Game.Components;
 
 public enum StatsType
 {

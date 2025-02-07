@@ -1,4 +1,4 @@
-using Game.Effects.HealthNumbers;
+using Game.Components;
 using Game.Utils.Battle;
 using Godot;
 using GodotUtilities;

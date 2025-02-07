@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Common.Extensions;
-using Game.Components.Managers;
 using Godot;
 
-namespace Game.Components.Area;
+namespace Game.Components;
 
 [Tool]
 [GlobalClass, Icon("res://assets/icons/hurtbox.svg")]

@@ -1,8 +1,7 @@
 using Godot;
 using System.Collections.Generic;
-using Game.Components.Sounds;
 
-namespace Game.Components.Managers;
+namespace Game.Components;
 
 [Tool]
 public partial class SoundManager : Node

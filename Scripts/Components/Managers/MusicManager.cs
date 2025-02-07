@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Game.Resources;
 using GodotUtilities;
 
-namespace Game.Components.Managers;
+namespace Game.Components;
 
 [GlobalClass]
 public partial class MusicManager : Node2D

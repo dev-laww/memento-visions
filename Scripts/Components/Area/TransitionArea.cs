@@ -1,9 +1,8 @@
 using Godot;
-using Game.Components.Managers;
 using Game.Entities;
 
 
-namespace Game.Components.Area;
+namespace Game.Components;
 
 [Tool]
 [GlobalClass]

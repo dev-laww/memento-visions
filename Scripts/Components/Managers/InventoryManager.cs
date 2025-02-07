@@ -10,7 +10,7 @@ using Game.Resources;
 using Godot;
 using Item = Game.Resources.Item;
 
-namespace Game.Components.Managers;
+namespace Game.Components;
 
 [GlobalClass]
 public partial class InventoryManager : Node

@@ -7,7 +7,7 @@ using GodotUtilities;
 using GodotUtilities.Logic;
 using WorldItem = Game.World.Objects.Item;
 
-namespace Game.Components.Managers;
+namespace Game.Components;
 
 [Tool]
 [Scene]

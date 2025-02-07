@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
-using Game.Components.Managers;
-using Game.Components.Area;
+using Game.Components;
 using Game.Resources;
 using Godot;
 using GodotUtilities;

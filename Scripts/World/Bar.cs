@@ -1,5 +1,5 @@
 using Godot;
-using Game.Components.Managers;
+using Game.Components;
 
 namespace Game.World;
 

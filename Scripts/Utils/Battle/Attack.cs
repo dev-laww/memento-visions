@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Game.Components.Battle;
+using Game.Components;
 using Godot;
 using GodotUtilities;
 

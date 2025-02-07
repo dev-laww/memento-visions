@@ -1,10 +1,9 @@
 ﻿using System.Linq;
 using Game.Common;
-using Game.Components.Battle;
 using Game.Resources;
 using Godot;
 
-namespace Game.Components.Managers;
+namespace Game.Components;
 
 [GlobalClass]
 public partial class WeaponManager : Node

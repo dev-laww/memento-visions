@@ -6,7 +6,7 @@ using Game.Resources;
 using Game.Utils.Extensions;
 using Godot;
 
-namespace Game.Components.Managers;
+namespace Game.Components;
 
 [GlobalClass]
 public partial class QuestManager : Node
