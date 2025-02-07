@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Utils.Battle;
 using Game.Common.Extensions;
-using Game.Effects.HealthNumbers;
+using Game.Effects;
 using Godot;
 using GodotUtilities;
 
