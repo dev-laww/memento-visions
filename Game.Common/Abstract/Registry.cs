@@ -21,7 +21,7 @@ public abstract class Registry<T, TRegistry> : GodotObject
         }
     }
 
-    private List<string> GetFiles(bool forceReload = false)
+    protected List<string> GetFiles(bool forceReload = false)
     {
         if (!forceReload && _fileCache.TryGetValue(_resourcePath, out var value)) return value;
 
@@ -35,8 +35,8 @@ public abstract class Registry<T, TRegistry> : GodotObject
     {
         var targetIdPart = id.Split(":").Last();
 
-        var exactMatch = GetFiles(Engine.IsEditorHint())
-            .FirstOrDefault(file => file.Split("/").Last().Equals(targetIdPart));
+        var exactMatch = GetFiles(OS.IsDebugBuild())
+            .FirstOrDefault(file => file.Split("/").Last().Contains(targetIdPart));
 
         if (exactMatch != null && ResourceLoaderUtils.Load<T>(exactMatch, out var res))
             return res;
@@ -57,6 +57,6 @@ public abstract class Registry<T, TRegistry> : GodotObject
     public static T? Get(string id) => _instance.Value.GetResource(id);
 
     public void InvalidateCache() => _fileCache.Remove(_resourcePath);
-    
+
     public static Dictionary<string, List<string>> GetFileCache() => _instance.Value._fileCache;
 }
