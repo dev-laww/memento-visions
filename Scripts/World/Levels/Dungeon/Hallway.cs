@@ -1,7 +1,7 @@
 using Godot;
 using GodotUtilities;
 
-namespace Game;
+namespace Game.Levels;
 
 [Tool]
 [Scene]

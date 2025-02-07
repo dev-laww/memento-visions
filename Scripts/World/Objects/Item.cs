@@ -4,7 +4,7 @@ using GodotUtilities;
 using Game.Resources;
 using Game.Utils.Extensions;
 
-namespace Game.World.Objects;
+namespace Game.World;
 
 [Tool]
 [Scene]

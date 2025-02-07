@@ -6,7 +6,7 @@ using Godot;
 using Godot.Collections;
 using GodotUtilities;
 
-namespace Game.World.Objects;
+namespace Game.World;
 
 [Tool]
 [Scene, Icon("res://assets/icons/item-component.svg")]

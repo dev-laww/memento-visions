@@ -4,7 +4,7 @@ using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
-namespace Game.World.Objects;
+namespace Game.World;
 
 [Tool]
 [Scene, Icon("res://assets/icons/item-component.svg")]

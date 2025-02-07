@@ -2,7 +2,7 @@ using Game.Generation.Dungeon;
 using Godot;
 using GodotUtilities;
 
-namespace Game.Levels.Dungeon;
+namespace Game.Levels;
 
 [Tool]
 [Scene]

@@ -1,7 +1,7 @@
 #if TOOLS
 
 using Godot;
-using Game.Levels.Dungeon;
+using Game.Levels;
 
 namespace ProjectPlugin.InspectorPlugin;
 

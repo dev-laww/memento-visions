@@ -9,7 +9,7 @@ using Godot;
 using Godot.Collections;
 using GodotUtilities;
 
-namespace Game.Levels.Dungeon;
+namespace Game.Levels;
 
 // TODO: Add doors
 // TODO: Add enemy spawn system

@@ -5,7 +5,7 @@ using Game.Resources;
 using Godot;
 using GodotUtilities;
 using GodotUtilities.Logic;
-using WorldItem = Game.World.Objects.Item;
+using WorldItem = Game.World.Item;
 
 namespace Game.Components;
 
