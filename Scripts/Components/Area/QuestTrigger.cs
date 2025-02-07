@@ -82,7 +82,7 @@ public partial class QuestTrigger : Area2D, IInteractable
     }
 
     private bool shouldInteract;
-    private string interactionLabel;
+    private string interactionLabel = "Interact";
     private InteractionUI InteractionUI => GetNodeOrNull<InteractionUI>("Node2D/InteractionUI");
     private Quest _quest;
     private int _objectiveIndex;
@@ -237,7 +237,14 @@ public partial class QuestTrigger : Area2D, IInteractable
         if (GetNodeOrNull("CollisionShape2D") == null)
             this.EditorAddChild(new CollisionShape2D { Name = "CollisionShape2D", DebugColor = new Color(0.88f, 0.525f, 0.898f, 0.42f) });
 
-        if (!ShouldInteract) return;
+        if (!ShouldInteract)
+        {
+            var node = GetNodeOrNull("Node2D");
+
+            node?.QueueFree();
+
+            return;
+        }
 
         this.AddInteractionUI();
     }

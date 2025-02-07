@@ -50,7 +50,7 @@ public partial class QuestObjective : Resource
 
     public void UpdateItemProgress(ItemGroup group)
     {
-        ValidateType(ObjectiveType.Collect, ObjectiveType.Deliver);
+        ValidateType(ObjectiveType.Collect, ObjectiveType.Deliver, ObjectiveType.Use);
         if (Completed) return;
 
         UpdateRequirements(
