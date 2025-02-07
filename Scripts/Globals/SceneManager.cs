@@ -1,4 +1,5 @@
 using System;
+using Game.Common.Abstract;
 using Godot;
 using Array = Godot.Collections.Array;
 
@@ -189,7 +190,7 @@ public partial class SceneManager : Global<SceneManager>
         {
             loadingScreen.FinishTransition();
             await ToSignal(loadingScreen.animationPlayer, "animation_finished");
-            loadingScreen = null; 
+            loadingScreen = null;
         }
 
         EmitSignal(SignalName.LoadComplete, content);
