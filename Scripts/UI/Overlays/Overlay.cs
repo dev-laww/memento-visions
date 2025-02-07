@@ -17,13 +17,11 @@ public abstract partial class Overlay : Control
 
     public virtual void Close()
     {
-        this.GetPlayer()?.SetPhysicsProcess(true);
+        this.GetPlayer()?.InputManager.RemoveLock();
 
         SetProcessInput(false);
         SetProcessUnhandledInput(false);
         MouseFilter = MouseFilterEnum.Pass;
-        // Make it Passthrough so the player can interact with the game
-
 
         if (GameManager.CurrentOverlay == this) GameManager.CurrentOverlay = null;
 
@@ -32,7 +30,7 @@ public abstract partial class Overlay : Control
 
     public virtual void Open()
     {
-        this.GetPlayer()?.SetPhysicsProcess(false);
+        this.GetPlayer()?.InputManager.AddLock();
 
         Show();
         SetProcessInput(true);

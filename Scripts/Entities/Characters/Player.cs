@@ -20,6 +20,7 @@ public partial class Player : Entity
     [Node] public VelocityManager VelocityManager;
     [Node] public WeaponManager WeaponManager;
     [Node] public QuestManager QuestManager;
+    [Node] public InputManager InputManager;
 
     private Vector2 inputDirection;
 
@@ -74,9 +75,13 @@ public partial class Player : Entity
         StateMachine.SetInitialState(Idle);
     }
 
-    public override void OnPhysicsProcess(double delta)
+    public override void OnProcess(double delta)
     {
         ProcessInput();
+    }
+
+    public override void OnPhysicsProcess(double delta)
+    {
         VelocityManager.ApplyMovement();
     }
 
@@ -162,10 +167,10 @@ public partial class Player : Entity
 
     private void ProcessInput()
     {
-        inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+        inputDirection = InputManager.GetVector();
 
-        var dash = Input.IsActionJustPressed("dash");
-        var attack = Input.IsActionJustPressed("attack");
+        var dash = InputManager.IsActionJustPressed("dash");
+        var attack = InputManager.IsActionJustPressed("attack");
 
         if (dash) StateMachine.ChangeState(Dash);
         if (attack) StateMachine.ChangeState(Attack);
