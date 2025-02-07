@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Game.Common;
 using Game.Entities;
 using Game.Entities.Characters;
 using Game.Entities.Enemies;
-using Game.Globals;
 using Godot;
 
 namespace Game.Resources;
@@ -27,7 +25,6 @@ public partial class Quest : Resource
     public bool Completed { get; private set; }
     public List<QuestObjective> Objectives => [.. objectives];
     private int currentStep;
-    public bool IsActive => QuestManager.ActiveQuests.Contains(this);
 
     public void Update()
     {
@@ -53,7 +50,7 @@ public partial class Quest : Resource
 
     public void CompleteObjective(int index)
     {
-        if (Completed || !IsActive) return;
+        if (Completed) return;
 
         if (index < 0 || index >= objectives.Length) return;
 
@@ -68,26 +65,6 @@ public partial class Quest : Resource
         if (Completed) return;
 
         Completed = true;
-        GiveRewards();
-        Log.Info($"{this} completed.");
-
-        // TODO: save progress
-        SaveManager.Save();
-    }
-
-    public void Start()
-    {
-        if (Completed || IsActive) return;
-
-        QuestManager.Add(this);
-    }
-
-    private void GiveRewards()
-    {
-        if (!Completed) return;
-
-        // TODO: give rewards
-        Log.Info($"{this} rewards given.");
     }
 
     public void OnItemPickup(ItemGroup item) => ProcessObjectives(
@@ -115,7 +92,7 @@ public partial class Quest : Resource
         Action<QuestObjective> processAction
     )
     {
-        if (Completed || !IsActive) return;
+        if (Completed) return;
 
         var targets = GetObjectives(type).ToList();
 

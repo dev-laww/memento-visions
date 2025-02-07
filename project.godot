@@ -32,7 +32,6 @@ SceneManager="*res://Scripts/Globals/SceneManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 SoundManger="*res://Scenes/Components/Managers/SoundManger.tscn"
 InteractionManager="*res://Scripts/Globals/InteractionManager.cs"
-QuestManager="*res://Scripts/Globals/QuestManager.cs"
 EnemyManager="*res://Scripts/Globals/EnemyManager.cs"
 MusicManager="*res://Scripts/Components/Managers/MusicManager.cs"
 

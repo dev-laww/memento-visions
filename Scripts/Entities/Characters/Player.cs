@@ -19,6 +19,7 @@ public partial class Player : Entity
     [Node] public InventoryManager InventoryManager;
     [Node] public VelocityManager VelocityManager;
     [Node] public WeaponManager WeaponManager;
+    [Node] public QuestManager QuestManager;
 
     private Vector2 inputDirection;
 

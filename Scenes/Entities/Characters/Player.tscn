@@ -1,10 +1,11 @@
-[gd_scene load_steps=104 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=105 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" uid="uid://bbhesrdqhrnnb" path="res://Scripts/Entities/Characters/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_cqdhe"]
 [ext_resource type="Script" uid="uid://cwq8sbj55gxb6" path="res://Scripts/Components/Managers/InventoryManager.cs" id="3_5oqto"]
 [ext_resource type="Script" uid="uid://dq1u7skg2nopr" path="res://Scripts/Components/Managers/WeaponManager.cs" id="3_65tgk"]
 [ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Managers/VelocityManager.cs" id="3_lmufy"]
+[ext_resource type="Script" uid="uid://cy0j5540bkg11" path="res://Scripts/Components/Managers/QuestManager.cs" id="4_1ij2i"]
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="5_5x453"]
 [ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Components/Managers/HealthNumberManager.tscn" id="5_lfb6s"]
 [ext_resource type="Script" uid="uid://dkgndduo4d7p4" path="res://Scripts/Components/Area/HitBox.cs" id="6_ly21x"]
@@ -1675,6 +1676,10 @@ Damage = 100.0
 [node name="InventoryManager" type="Node" parent="."]
 script = ExtResource("3_5oqto")
 metadata/_custom_type_script = ExtResource("3_5oqto")
+
+[node name="QuestManager" type="Node" parent="."]
+script = ExtResource("4_1ij2i")
+metadata/_custom_type_script = ExtResource("4_1ij2i")
 
 [node name="WeaponManager" type="Node" parent="."]
 script = ExtResource("3_65tgk")

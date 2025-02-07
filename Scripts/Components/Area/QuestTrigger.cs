@@ -5,6 +5,7 @@ using Game.Common.Interfaces;
 using Game.Globals;
 using Game.Resources;
 using Game.UI.Common;
+using Game.Utils.Extensions;
 using Godot;
 using Godot.Collections;
 
@@ -104,15 +105,23 @@ public partial class QuestTrigger : Area2D, IInteractable
 
     protected virtual void OnBodyEntered(Node2D body)
     {
+        var player = this.GetPlayer();
+
+        if (player is null) return;
+
+        var isActive = player.QuestManager.IsActive(Quest);
+
+        if (!isActive) return;
+
         if (!ShouldInteract)
         {
             switch (Mode)
             {
                 case TriggerMode.Start:
-                    Quest?.Start();
+                    player.QuestManager.Add(Quest);
                     break;
                 case TriggerMode.Complete:
-                    if (!Quest.IsActive) return;
+                    if (!isActive) return;
                     Objective?.Complete();
                     break;
                 default:
@@ -122,14 +131,18 @@ public partial class QuestTrigger : Area2D, IInteractable
             return;
         }
 
-        if (!Quest.IsActive && Mode == TriggerMode.Complete) return;
-
         InteractionManager.Register(this);
     }
 
     private void OnBodyExited(Node2D body)
     {
-        if (!ShouldInteract || (!Quest.IsActive && Mode == TriggerMode.Complete)) return;
+        var player = this.GetPlayer();
+
+        if (player is null) return;
+
+        var isActive = player.QuestManager.IsActive(Quest);
+
+        if (!ShouldInteract || (!isActive && Mode == TriggerMode.Complete)) return;
         InteractionManager.Unregister(this);
     }
 
@@ -137,19 +150,28 @@ public partial class QuestTrigger : Area2D, IInteractable
 
     public virtual void Interact()
     {
+        var player = this.GetPlayer();
+
+        if (player is null) return;
+
+        var isActive = player.QuestManager.IsActive(Quest);
+
+        if (!isActive) return;
+
         switch (Mode)
         {
             case TriggerMode.Start:
-                if (Quest?.IsActive ?? false) return;
-                Quest?.Start();
+                player.QuestManager.Add(Quest);
                 break;
             case TriggerMode.Complete:
-                if (!Quest?.IsActive ?? false) return;
-                Quest?.CompleteObjective(ObjectiveIndex);
+                if (!isActive) return;
+                Objective?.Complete();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
+
+        return;
     }
 
     public void ShowUI() => InteractionUI?.Show();

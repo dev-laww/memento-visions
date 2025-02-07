@@ -1,27 +1,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
+using Game.Globals;
 using Game.Resources;
 using Game.Utils.Extensions;
 using Godot;
 
-namespace Game.Globals;
+namespace Game.Components.Managers;
 
-public partial class QuestManager : Global<QuestManager>
+[GlobalClass]
+public partial class QuestManager : Node
 {
-    public delegate void AddedEventHandler(Quest quest);
-    public delegate void UpdatedEventHandler(Quest quest);
-    public delegate void CompletedEventHandler(Quest quest);
-    public delegate void RemovedEventHandler(Quest quest);
-
-    public static event AddedEventHandler Added;
-    public static event UpdatedEventHandler Updated;
-    public static event RemovedEventHandler Removed;
-    public static event CompletedEventHandler Completed;
+    [Signal] public delegate void AddedEventHandler(Quest quest);
+    [Signal] public delegate void UpdatedEventHandler(Quest quest);
+    [Signal] public delegate void CompletedEventHandler(Quest quest);
+    [Signal] public delegate void RemovedEventHandler(Quest quest);
 
     private readonly List<Quest> quests = [];
 
-    public static IReadOnlyList<Quest> ActiveQuests => Instance.quests;
+    public IReadOnlyList<Quest> Quests => quests;
+
+    public override void _Ready()
+    {
+        // TODO: load quests from save file
+    }
 
     public override void _Process(double delta)
     {
@@ -35,13 +37,13 @@ public partial class QuestManager : Global<QuestManager>
 
             if (quest.Completed)
             {
-                Completed?.Invoke(quest);
+                EmitSignalCompleted(quest);
                 completedQuests.Add(quest);
                 Log.Debug($"{quest} completed.");
             }
             else
             {
-                Updated?.Invoke(quest);
+                EmitSignalUpdated(quest);
             }
         }
 
@@ -51,38 +53,38 @@ public partial class QuestManager : Global<QuestManager>
         }
     }
 
-    public static void Add(Quest quest)
+    public bool IsActive(Quest quest) => quests.Contains(quest);
+
+    public void Add(Quest quest)
     {
-        Instance.quests.Add(quest);
-        Added?.Invoke(quest);
+        var player = this.GetPlayer();
 
-        var player = Instance.GetPlayer();
-
-        if (player == null) return;
+        if (player is null) return;
 
         player.InventoryManager.Pickup += quest.OnItemPickup;
         player.InventoryManager.Remove += quest.OnItemRemoved;
         EnemyManager.EnemyDied += quest.OnEnemyDied;
 
+        quests.Add(quest);
+        EmitSignalAdded(quest);
+
         Log.Info($"{quest} added.");
     }
 
-    public static void Remove(string id)
+    public void Remove(string id)
     {
-        var quest = Instance.quests.FirstOrDefault(q => q.Id == id);
+        var quest = quests.FirstOrDefault(q => q.Id == id);
+        var player = this.GetPlayer();
 
-        if (quest == null) return;
+        if (player is null || quest is null) return;
 
-        Instance.quests.Remove(quest);
-        Removed?.Invoke(quest);
-
-        var player = Instance.GetPlayer();
-
-        if (player == null) return;
 
         player.InventoryManager.Pickup -= quest.OnItemPickup;
         player.InventoryManager.Remove -= quest.OnItemRemoved;
         EnemyManager.EnemyDied -= quest.OnEnemyDied;
+
+        quests.Remove(quest);
+        EmitSignalRemoved(quest);
 
         Log.Info($"{quest} removed.");
     }
