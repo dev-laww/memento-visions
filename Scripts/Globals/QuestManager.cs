@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
 using Game.Resources;
+using Game.Utils.Extensions;
 using Godot;
 
 namespace Game.Globals;
@@ -55,6 +56,12 @@ public partial class QuestManager : Global<QuestManager>
         Instance.quests.Add(quest);
         Added?.Invoke(quest);
 
+        var player = Instance.GetPlayer();
+
+        if (player == null) return;
+
+        player.InventoryManager.Pickup += quest.OnItemPickup;
+        player.InventoryManager.Remove += quest.OnItemRemoved;
         EnemyManager.EnemyDied += quest.OnEnemyDied;
 
         Log.Info($"{quest} added.");
@@ -69,6 +76,12 @@ public partial class QuestManager : Global<QuestManager>
         Instance.quests.Remove(quest);
         Removed?.Invoke(quest);
 
+        var player = Instance.GetPlayer();
+
+        if (player == null) return;
+
+        player.InventoryManager.Pickup -= quest.OnItemPickup;
+        player.InventoryManager.Remove -= quest.OnItemRemoved;
         EnemyManager.EnemyDied -= quest.OnEnemyDied;
 
         Log.Info($"{quest} removed.");
