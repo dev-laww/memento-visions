@@ -1,7 +1,6 @@
-﻿using Game.Globals;
-using Godot;
+﻿using Godot;
 
-namespace Game.Entities.Enemies;
+namespace Game.Entities;
 
 public abstract partial class Enemy : Entity
 {

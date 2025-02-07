@@ -1,6 +1,6 @@
 ﻿using Game.Common;
 using Game.Common.Abstract;
-using Game.Entities.Enemies;
+using Game.Entities;
 using Godot;
 
 namespace Game.Registry;

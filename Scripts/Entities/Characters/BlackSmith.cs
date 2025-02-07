@@ -2,7 +2,7 @@ using Game.Components.Area;
 using Game.Components.Managers;
 using GodotUtilities;
 
-namespace Game.Entities.Characters;
+namespace Game.Entities;
 
 [Scene]
 public partial class BlackSmith : Entity

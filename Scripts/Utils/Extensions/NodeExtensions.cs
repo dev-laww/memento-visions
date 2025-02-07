@@ -1,5 +1,5 @@
 using System.Linq;
-using Game.Entities.Characters;
+using Game.Entities;
 using Godot;
 
 namespace Game.Utils.Extensions;

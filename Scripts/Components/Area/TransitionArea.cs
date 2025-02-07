@@ -1,6 +1,6 @@
 using Godot;
 using Game.Components.Managers;
-using Game.Entities.Characters;
+using Game.Entities;
 
 
 namespace Game.Components.Area;

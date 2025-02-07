@@ -2,7 +2,6 @@
 using Game.Common;
 using Game.Common.Abstract;
 using Game.Entities;
-using Game.Entities.Enemies;
 using Godot;
 
 namespace Game.Globals;
@@ -24,7 +23,7 @@ public partial class EnemyManager : Global<EnemyManager>
         remove => Instance.Died -= value;
     }
 
-    public readonly List<Enemy> enemies = [];
+    private readonly List<Enemy> enemies = [];
 
     public static IReadOnlyList<Enemy> Enemies => Instance.enemies;
     public static int EnemyCount => Instance.enemies.Count;

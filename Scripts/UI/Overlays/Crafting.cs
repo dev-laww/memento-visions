@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
-using Game.Globals;
 using Game.Registry;
 using Game.Resources;
 using Game.UI.Common;
@@ -150,7 +149,7 @@ public partial class Crafting : Overlay
         craftButton.Visible = selectedRecipe is not null;
 
         craftButton.Disabled = selectedRecipe is null || !CanCreate(quantity);
-        craftButton.Text = CanCreate(quantity) == true ? "Craft" : "Not enough resources";
+        craftButton.Text = CanCreate(quantity) ? "Craft" : "Not enough resources";
 
         increaseButton.Disabled = selectedRecipe is null || !CanCreate(quantity + 1);
         decreaseButton.Disabled = quantity <= 1;

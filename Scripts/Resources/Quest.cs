@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Entities;
-using Game.Entities.Characters;
-using Game.Entities.Enemies;
 using Godot;
 
 namespace Game.Resources;
@@ -18,8 +16,7 @@ public partial class Quest : Resource
     [Export(PropertyHint.MultilineText)] public string Description;
     [Export] private QuestObjective[] objectives;
 
-    [ExportCategory("Rewards")]
-    [Export] private int Experience;
+    [ExportCategory("Rewards")] [Export] private int Experience;
     [Export] private ItemGroup[] Items = [];
 
     public bool Completed { get; private set; }

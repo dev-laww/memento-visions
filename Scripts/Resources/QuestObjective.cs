@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using Game.Common;
-using Game.Entities.Enemies;
+using Game.Entities;
 using Godot;
 using Godot.Collections;
 

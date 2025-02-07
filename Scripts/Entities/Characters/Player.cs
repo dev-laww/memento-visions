@@ -7,7 +7,7 @@ using Godot;
 using GodotUtilities;
 
 
-namespace Game.Entities.Characters;
+namespace Game.Entities;
 
 [Scene]
 public partial class Player : Entity
