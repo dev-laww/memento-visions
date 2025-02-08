@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DelaunatorSharp;
 using Game.Generation.Dungeon;
+using Game.Generation;
 using Game.Utils.Extensions;
 using Game.Common.Extensions;
 using Godot;
@@ -73,19 +74,19 @@ public partial class Dungeon : Node2D
         PathFindHallways();
         TileMap.SetCellsTerrainConnect(terrain, 0, 0);
         for (var i = 0; i < gridSize.X; i++)
-        for (var j = 0; j < gridSize.Y; j++)
-        {
-            var cell = new Vector2I(i, j);
+            for (var j = 0; j < gridSize.Y; j++)
+            {
+                var cell = new Vector2I(i, j);
 
-            Ground.SetCell(cell, atlasCoords: new Vector2I(0, 4), sourceId: 4);
+                Ground.SetCell(cell, atlasCoords: new Vector2I(0, 4), sourceId: 4);
 
 
-            if (grid[i, j] != CellType.None) continue;
+                if (grid[i, j] != CellType.None) continue;
 
-            var atlas = new Vector2I(0, 0);
+                var atlas = new Vector2I(0, 0);
 
-            TileMap.SetCell(cell, atlasCoords: atlas, sourceId: 4);
-        }
+                TileMap.SetCell(cell, atlasCoords: atlas, sourceId: 4);
+            }
     }
 
     private void PlaceRooms()

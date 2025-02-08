@@ -1,20 +1,13 @@
 ﻿using Godot;
 
-namespace Game.Generation.Dungeon;
+namespace Game.Generation;
 
-public class Grid<T>
+public class Grid<T>(Vector2I size, Vector2I offset)
 {
-    private T[] data;
+    private readonly T[] data = new T[size.X * size.Y];
 
-    public Vector2I Size { get; private set; }
-    public Vector2I Offset { get; set; }
-
-    public Grid(Vector2I size, Vector2I offset)
-    {
-        Size = size;
-        Offset = offset;
-        data = new T[size.X * size.Y];
-    }
+    public Vector2I Size { get; private set; } = size;
+    public Vector2I Offset { get; set; } = offset;
 
     public int GetIndex(Vector2I pos) => pos.X + Size.X * pos.Y;
 
