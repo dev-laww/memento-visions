@@ -482,5 +482,6 @@ texture = ExtResource("2_k6rka")
 
 [resource]
 physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 1
 sources/1 = SubResource("TileSetAtlasSource_k6rka")
 sources/2 = SubResource("TileSetAtlasSource_pvb80")
