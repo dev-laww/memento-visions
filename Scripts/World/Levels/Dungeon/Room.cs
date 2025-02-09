@@ -23,7 +23,7 @@ public partial class Room : Node2D
 
     public static Room Create(Vector2I position, Vector2I size, Bounds bounds)
     {
-        var room = GD.Load<PackedScene>("res://Scenes/Levels/Dungeon/Room.tscn").Instantiate<Room>();
+        var room = GD.Load<PackedScene>("res://Scenes/World/Levels/Dungeon/Room.tscn").Instantiate<Room>();
 
         room.Position = position;
         room.Bounds = bounds;
