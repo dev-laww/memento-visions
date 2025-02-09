@@ -1,8 +1,137 @@
-[gd_scene load_steps=3 format=3 uid="uid://hnk75yq7ovn3"]
+[gd_scene load_steps=27 format=3 uid="uid://hnk75yq7ovn3"]
 
 [ext_resource type="Script" uid="uid://c8olx0ab2hc37" path="res://Scripts/World/Levels/WaveFunctionCollapse/WaveFunctionCollapse.cs" id="1_sxdet"]
-[ext_resource type="Resource" uid="uid://cptrdb0xglwg5" path="res://Scenes/World/Levels/WaveFunctionCollapse/settings.tres" id="2_4dtow"]
+[ext_resource type="PackedScene" uid="uid://bk513scvcpla3" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/Empty.tscn" id="2_oj6ub"]
+[ext_resource type="Script" uid="uid://ky5xget0fajt" path="res://Scripts/World/Levels/WaveFunctionCollapse/WaveFunctionCollapseEntry.cs" id="3_0bpo3"]
+[ext_resource type="PackedScene" uid="uid://cl11bc8lux4tl" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/Vertical.tscn" id="4_etea5"]
+[ext_resource type="PackedScene" uid="uid://b8fwe8jelapyc" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/Cross.tscn" id="5_8j88n"]
+[ext_resource type="PackedScene" uid="uid://sw1n3scmb4ad" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/JunctionUp.tscn" id="6_v5byw"]
+[ext_resource type="PackedScene" uid="uid://36bw13543e44" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/JunctionDown.tscn" id="7_b3u7i"]
+[ext_resource type="PackedScene" uid="uid://bg4wdcl6d484t" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/Horizontal.tscn" id="8_frlk2"]
+[ext_resource type="PackedScene" uid="uid://bkqvffqu4jfdl" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/JunctionRight.tscn" id="9_ghvp3"]
+[ext_resource type="PackedScene" uid="uid://i4hvpfta6arm" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/JunctionLeft.tscn" id="10_j4t7t"]
+[ext_resource type="PackedScene" uid="uid://bv540ks582u0h" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/CornerTopLeft.tscn" id="11_o653j"]
+[ext_resource type="PackedScene" uid="uid://c4p7kn072p3fy" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/CornerTopRight.tscn" id="12_hhtg0"]
+[ext_resource type="PackedScene" uid="uid://dfdmp8jpxja1u" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/CornerBottomLeft.tscn" id="13_j80su"]
+[ext_resource type="PackedScene" uid="uid://ekenskrdc0m8" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/CornerBottomRight.tscn" id="14_5wl3d"]
+[ext_resource type="Script" uid="uid://gu1jo2ump6dj" path="res://Scripts/World/Levels/WaveFunctionCollapse/WaveFuncitonCollapseSettings.cs" id="15_td385"]
+
+[sub_resource type="Resource" id="Resource_k8riw"]
+resource_name = "Empty"
+script = ExtResource("3_0bpo3")
+Scene = ExtResource("2_oj6ub")
+Weight = 10
+Up = [ExtResource("2_oj6ub"), ExtResource("13_j80su"), ExtResource("14_5wl3d"), ExtResource("11_o653j"), ExtResource("12_hhtg0"), ExtResource("5_8j88n"), ExtResource("8_frlk2"), ExtResource("7_b3u7i"), ExtResource("10_j4t7t"), ExtResource("9_ghvp3"), ExtResource("6_v5byw"), ExtResource("4_etea5")]
+Down = [ExtResource("2_oj6ub"), ExtResource("13_j80su"), ExtResource("14_5wl3d"), ExtResource("11_o653j"), ExtResource("12_hhtg0"), ExtResource("5_8j88n"), ExtResource("8_frlk2"), ExtResource("7_b3u7i"), ExtResource("10_j4t7t"), ExtResource("9_ghvp3"), ExtResource("6_v5byw"), ExtResource("4_etea5")]
+Left = [ExtResource("2_oj6ub"), ExtResource("13_j80su"), ExtResource("14_5wl3d"), ExtResource("11_o653j"), ExtResource("12_hhtg0"), ExtResource("5_8j88n"), ExtResource("8_frlk2"), ExtResource("7_b3u7i"), ExtResource("10_j4t7t"), ExtResource("9_ghvp3"), ExtResource("6_v5byw"), ExtResource("4_etea5")]
+Right = [ExtResource("2_oj6ub"), ExtResource("13_j80su"), ExtResource("14_5wl3d"), ExtResource("11_o653j"), ExtResource("12_hhtg0"), ExtResource("5_8j88n"), ExtResource("8_frlk2"), ExtResource("7_b3u7i"), ExtResource("10_j4t7t"), ExtResource("9_ghvp3"), ExtResource("6_v5byw"), ExtResource("4_etea5")]
+metadata/_custom_type_script = ExtResource("3_0bpo3")
+
+[sub_resource type="Resource" id="Resource_hej7c"]
+resource_name = "Vertical"
+script = ExtResource("3_0bpo3")
+Scene = ExtResource("4_etea5")
+Weight = 15
+Up = [ExtResource("4_etea5"), ExtResource("5_8j88n"), ExtResource("7_b3u7i")]
+Down = [ExtResource("4_etea5"), ExtResource("5_8j88n"), ExtResource("6_v5byw")]
+Left = []
+Right = []
+metadata/_custom_type_script = ExtResource("3_0bpo3")
+
+[sub_resource type="Resource" id="Resource_c377g"]
+resource_name = "Horizontal"
+script = ExtResource("3_0bpo3")
+Scene = ExtResource("8_frlk2")
+Weight = 15
+Up = []
+Down = []
+Left = [ExtResource("8_frlk2"), ExtResource("9_ghvp3")]
+Right = [ExtResource("8_frlk2"), ExtResource("10_j4t7t")]
+metadata/_custom_type_script = ExtResource("3_0bpo3")
+
+[sub_resource type="Resource" id="Resource_d4jhf"]
+resource_name = "CornerTopLeft"
+script = ExtResource("3_0bpo3")
+Scene = ExtResource("11_o653j")
+Weight = 8
+Up = []
+Down = [ExtResource("4_etea5"), ExtResource("6_v5byw"), ExtResource("5_8j88n")]
+Left = []
+Right = [ExtResource("8_frlk2"), ExtResource("10_j4t7t"), ExtResource("5_8j88n")]
+metadata/_custom_type_script = ExtResource("3_0bpo3")
+
+[sub_resource type="Resource" id="Resource_oj6ub"]
+resource_name = "CornerTopRight"
+script = ExtResource("3_0bpo3")
+Scene = ExtResource("12_hhtg0")
+Weight = 8
+Up = []
+Down = [ExtResource("4_etea5"), ExtResource("6_v5byw"), ExtResource("5_8j88n")]
+Left = [ExtResource("8_frlk2"), ExtResource("9_ghvp3"), ExtResource("5_8j88n")]
+Right = [ExtResource("2_oj6ub")]
+metadata/_custom_type_script = ExtResource("3_0bpo3")
+
+[sub_resource type="Resource" id="Resource_0bpo3"]
+resource_name = "CornerBottomLeft"
+script = ExtResource("3_0bpo3")
+Scene = ExtResource("13_j80su")
+Weight = 8
+Up = [ExtResource("4_etea5"), ExtResource("7_b3u7i"), ExtResource("5_8j88n")]
+Down = []
+Left = []
+Right = [ExtResource("8_frlk2"), ExtResource("10_j4t7t"), ExtResource("5_8j88n")]
+metadata/_custom_type_script = ExtResource("3_0bpo3")
+
+[sub_resource type="Resource" id="Resource_etea5"]
+resource_name = "CornerBottomRight"
+script = ExtResource("3_0bpo3")
+Scene = ExtResource("14_5wl3d")
+Weight = 8
+Up = [ExtResource("4_etea5"), ExtResource("7_b3u7i")]
+Down = []
+Left = [ExtResource("8_frlk2"), ExtResource("9_ghvp3")]
+Right = []
+metadata/_custom_type_script = ExtResource("3_0bpo3")
+
+[sub_resource type="Resource" id="Resource_8j88n"]
+resource_name = "JunctionUp"
+script = ExtResource("3_0bpo3")
+Scene = ExtResource("6_v5byw")
+Weight = 9
+Up = [ExtResource("4_etea5"), ExtResource("7_b3u7i")]
+Down = []
+Left = [ExtResource("9_ghvp3"), ExtResource("8_frlk2")]
+Right = [ExtResource("10_j4t7t"), ExtResource("8_frlk2")]
+metadata/_custom_type_script = ExtResource("3_0bpo3")
+
+[sub_resource type="Resource" id="Resource_v5byw"]
+resource_name = "JunctionDown"
+script = ExtResource("3_0bpo3")
+Scene = ExtResource("7_b3u7i")
+Weight = 9
+Up = []
+Down = [ExtResource("6_v5byw"), ExtResource("4_etea5")]
+Left = [ExtResource("8_frlk2"), ExtResource("9_ghvp3")]
+Right = [ExtResource("10_j4t7t"), ExtResource("8_frlk2")]
+metadata/_custom_type_script = ExtResource("3_0bpo3")
+
+[sub_resource type="Resource" id="Resource_b3u7i"]
+resource_name = "JunctionLeft"
+script = ExtResource("3_0bpo3")
+Scene = ExtResource("10_j4t7t")
+Weight = 9
+Up = [ExtResource("4_etea5"), ExtResource("7_b3u7i")]
+Down = [ExtResource("6_v5byw"), ExtResource("8_frlk2")]
+Left = [ExtResource("9_ghvp3"), ExtResource("8_frlk2")]
+Right = []
+metadata/_custom_type_script = ExtResource("3_0bpo3")
+
+[sub_resource type="Resource" id="Resource_xayni"]
+script = ExtResource("15_td385")
+gridSize = Vector2i(8, 8)
+Entries = [SubResource("Resource_k8riw"), SubResource("Resource_hej7c"), SubResource("Resource_c377g"), SubResource("Resource_d4jhf"), SubResource("Resource_oj6ub"), SubResource("Resource_0bpo3"), SubResource("Resource_etea5"), SubResource("Resource_8j88n"), SubResource("Resource_v5byw"), SubResource("Resource_b3u7i")]
+metadata/_custom_type_script = ExtResource("15_td385")
 
 [node name="WaveFunctionCollapse" type="Node2D"]
 script = ExtResource("1_sxdet")
-settings = ExtResource("2_4dtow")
+settings = SubResource("Resource_xayni")
