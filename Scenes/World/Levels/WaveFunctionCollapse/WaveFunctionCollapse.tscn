@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://hnk75yq7ovn3"]
+
+[ext_resource type="Script" uid="uid://c8olx0ab2hc37" path="res://Scripts/World/Levels/WaveFunctionCollapse/WaveFunctionCollapse.cs" id="1_sxdet"]
+[ext_resource type="Resource" uid="uid://cptrdb0xglwg5" path="res://Scenes/World/Levels/WaveFunctionCollapse/settings.tres" id="2_4dtow"]
+
+[node name="WaveFunctionCollapse" type="Node2D"]
+script = ExtResource("1_sxdet")
+settings = ExtResource("2_4dtow")

@@ -2,27 +2,50 @@
 
 using Godot;
 using Game.Levels;
+using Game.Common;
+using System.Linq;
 
 namespace ProjectPlugin.InspectorPlugin;
 
 [Tool]
 public partial class DungeonInspectorPlugin : EditorInspectorPlugin
 {
-    public override bool _CanHandle(GodotObject @object) => @object is Dungeon;
+    public override bool _CanHandle(GodotObject @object) => @object is Dungeon or WaveFunctionCollapse;
 
     public override void _ParseCategory(GodotObject @object, string category)
     {
+        // Create a new generate
+        var generate = new Button { Text = "Generate" };
+
+        // Add the generate to the inspector
+        AddCustomControl(generate);
+
         // Cast the object to Dungeon
-        if (@object is not Dungeon dungeon || category != "Dungeon") return;
+        if (@object is Dungeon dungeon)
+        {
+            if (category != "Dungeon")
+            {
+                return;
+            }
 
-        // Create a new button
-        var button = new Button { Text = "Generate" };
-        button.Pressed += () => OnGenerateButtonPressed(dungeon);
+            generate.Pressed += dungeon.Generate;
+        }
+        else if (@object is WaveFunctionCollapse wave)
+        {
+            if (category != "WaveFunctionCollapse")
+            {
+                return;
+            }
 
-        // Add the button to the inspector
-        AddCustomControl(button);
+            var clear = new Button { Text = "Clear" };
+
+            AddCustomControl(clear);
+
+            generate.Pressed += wave.Generate;
+            clear.Pressed += () => wave.GetChildren().ToList().ForEach(c => c.QueueFree());
+        }
+
+
     }
-    private static void OnGenerateButtonPressed(Dungeon dungeon) => dungeon.Generate();
 }
-
-# endif
+#endif

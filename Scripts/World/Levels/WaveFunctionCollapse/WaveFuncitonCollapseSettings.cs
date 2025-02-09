@@ -2,6 +2,7 @@ using Godot;
 
 namespace Game.Levels;
 
+[Tool]
 [GlobalClass]
 public partial class WaveFuncitonCollapseSettings : Resource
 {

@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Common.Extensions;
 using Game.Generation;
 using Godot;
-using GodotUtilities.Logic;
+using GodotUtilities;
 
 namespace Game.Levels;
 
-// TODO: Check if the algorithm is working correctly
+[Tool]
 public partial class WaveFunctionCollapse : Node2D
 {
     [Export] private WaveFuncitonCollapseSettings settings;
@@ -21,35 +22,40 @@ public partial class WaveFunctionCollapse : Node2D
         { Vector2I.Down, "Down" }
     };
 
-    private Dictionary<Vector2I, List<WaveFunctionCollapseEntry>> waveFunction = new();
-    private LootTable<WaveFunctionCollapseEntry> table = new();
-    private Grid<string> grid;
-    private Random random = new();
+    private readonly Dictionary<Vector2I, List<WaveFunctionCollapseEntry>> waveFunction = [];
+
+    private Grid<PackedScene> grid;
 
     public override void _Ready()
     {
-        foreach (var entry in settings.Entries)
-            table.AddItem(entry, entry.Weight);
-
-        grid = new Grid<string>(settings.gridSize, Vector2I.Zero);
-        InitializeWaveFunction();
         Generate();
     }
 
     private void InitializeWaveFunction()
     {
+        grid = new Grid<PackedScene>(settings.gridSize, Vector2I.Zero);
+
         waveFunction.Clear();
+
         for (int x = 0; x < settings.gridSize.X; x++)
         {
             for (int y = 0; y < settings.gridSize.Y; y++)
             {
-                waveFunction[new Vector2I(x, y)] = settings.Entries.ToList();
+                waveFunction[new Vector2I(x, y)] = [.. settings.Entries];
             }
+        }
+
+        foreach (Node child in GetChildren())
+        {
+            child.QueueFree();
         }
     }
 
-    private void Generate()
+    public void Generate()
     {
+        // Initialize wave function
+        InitializeWaveFunction();
+
         int iterations = 0;
         while (!IsCollapsed() && iterations < MAX_ITERATIONS)
         {
@@ -66,11 +72,24 @@ public partial class WaveFunctionCollapse : Node2D
         }
 
         // Apply final state to grid
-        foreach (var cell in waveFunction)
+        foreach (var (pos, v) in waveFunction)
         {
-            if (cell.Value.Count > 0)
+            if (v.Count <= 0) continue;
+
+            grid[pos] = v[0].Scene;
+        }
+
+        // place the packed scenes in the world
+        for (int x = 0; x < settings.gridSize.X; x++)
+        {
+            for (int y = 0; y < settings.gridSize.Y; y++)
             {
-                // grid.Set(cell.Key, cell.Value[0].Scene.ResourcePath);
+                var scene = grid[new Vector2I(x, y)];
+                if (scene is null) continue;
+
+                var instance = scene.Instantiate() as Node2D;
+                instance.Position = new Vector2(x * 256, y * 256);
+                this.EditorAddChild(instance);
             }
         }
     }
@@ -81,7 +100,7 @@ public partial class WaveFunctionCollapse : Node2D
         if (entries.Count == 0) return;
 
         float totalWeight = entries.Sum(e => e.Weight);
-        float rand = (float)(random.NextDouble() * totalWeight);
+        float rand = MathUtil.RNG.Randf() * totalWeight;
 
         WaveFunctionCollapseEntry chosen = null;
 
@@ -124,9 +143,7 @@ public partial class WaveFunctionCollapse : Node2D
                 var otherPossibleEntries = waveFunction[otherCoords].ToList();
                 var prevCount = otherPossibleEntries.Count;
 
-                waveFunction[otherCoords] = otherPossibleEntries
-                    .Where(e => possibleNeighbors.Contains(e))
-                    .ToList();
+                waveFunction[otherCoords] = [.. otherPossibleEntries.Where(possibleNeighbors.Contains)];
 
                 if (prevCount != waveFunction[otherCoords].Count && !stack.Contains(otherCoords))
                 {
@@ -142,7 +159,7 @@ public partial class WaveFunctionCollapse : Node2D
         var directionKey = directions[direction];
         var neighborCoords = coords + direction;
 
-        if (!waveFunction.ContainsKey(neighborCoords)) return possibleNeighbors;
+        if (!waveFunction.TryGetValue(neighborCoords, out List<WaveFunctionCollapseEntry> value)) return possibleNeighbors;
 
         foreach (var entry in waveFunction[coords])
         {
@@ -152,10 +169,10 @@ public partial class WaveFunctionCollapse : Node2D
                 "Left" => entry.Left,
                 "Up" => entry.Up,
                 "Down" => entry.Down,
-                _ => Array.Empty<PackedScene>()
+                _ => []
             };
 
-            foreach (var otherEntry in waveFunction[neighborCoords])
+            foreach (var otherEntry in value)
             {
                 if (validNeighbors.Any(n => n.ResourcePath == otherEntry.Scene.ResourcePath))
                 {
@@ -176,8 +193,7 @@ public partial class WaveFunctionCollapse : Node2D
         {
             if (entries.Count == 1) continue;
 
-            // Add small random noise to break ties
-            var entropy = entries.Count + (float)(random.NextDouble() / 1000);
+            var entropy = entries.Count + (MathUtil.RNG.Randf() / 1000);
             if (entropy >= lowestEntropy) continue;
 
             lowestEntropy = entropy;
