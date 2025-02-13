@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Game.Common.Extensions;
 using Game.Generation;
 using Godot;
 using GodotUtilities;
@@ -9,9 +8,12 @@ using GodotUtilities;
 namespace Game.Levels;
 
 [Tool]
+[Scene]
 public partial class WaveFunctionCollapse : Node2D
 {
     [Export] private WaveFuncitonCollapseSettings settings;
+
+    [Node] private Node2D map;
 
     private const int MAX_ITERATIONS = 10000;
     private readonly Dictionary<Vector2I, string> directions = new()
@@ -26,6 +28,13 @@ public partial class WaveFunctionCollapse : Node2D
 
     private Grid<PackedScene> grid;
 
+    public override void _Notification(int what)
+    {
+        if (what != NotificationSceneInstantiated) return;
+
+        WireNodes();
+    }
+
     public override void _Ready()
     {
         Generate();
@@ -33,6 +42,8 @@ public partial class WaveFunctionCollapse : Node2D
 
     private void InitializeWaveFunction()
     {
+        Clear();
+
         grid = new Grid<PackedScene>(settings.gridSize, Vector2I.Zero);
 
         waveFunction.Clear();
@@ -43,11 +54,6 @@ public partial class WaveFunctionCollapse : Node2D
             {
                 waveFunction[new Vector2I(x, y)] = [.. settings.Entries];
             }
-        }
-
-        foreach (Node child in GetChildren())
-        {
-            child.QueueFree();
         }
     }
 
@@ -89,8 +95,18 @@ public partial class WaveFunctionCollapse : Node2D
 
                 var instance = scene.Instantiate() as Node2D;
                 instance.Position = new Vector2(x * 256, y * 256);
-                this.EditorAddChild(instance);
+
+                map.AddChild(instance);
+                instance.SetOwner(GetTree().GetEditedSceneRoot());
             }
+        }
+    }
+
+    public void Clear()
+    {
+        foreach (var child in map.GetChildren())
+        {
+            child.QueueFree();
         }
     }
 

@@ -42,10 +42,8 @@ public partial class DungeonInspectorPlugin : EditorInspectorPlugin
             AddCustomControl(clear);
 
             generate.Pressed += wave.Generate;
-            clear.Pressed += () => wave.GetChildren().ToList().ForEach(c => c.QueueFree());
+            clear.Pressed += wave.Clear;
         }
-
-
     }
 }
 #endif
