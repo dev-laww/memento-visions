@@ -4,12 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using Game.Common.Extensions;
 using Godot;
-using GodotUtilities;
 
 namespace Game.Components;
 
 [Tool]
-[Scene]
 [GlobalClass]
 public partial class NavigationManager : Polygon2D
 {
@@ -53,13 +51,6 @@ public partial class NavigationManager : Polygon2D
     private Node2D _parseRootNode;
     private NavigationPolygon _navigationPolygon;
 
-    public override void _Notification(int what)
-    {
-        if (what != NotificationSceneInstantiated) return;
-
-        WireNodes();
-    }
-
     public override void _Ready()
     {
         ZIndex = 1000;
@@ -72,6 +63,12 @@ public partial class NavigationManager : Polygon2D
         if (ParseRootNode is null || NavigationPolygon is null)
         {
             GD.PushWarning("Parse Root Node or Navigation Polygon is not set.");
+            return;
+        }
+
+        if (Polygon.Length < 3)
+        {
+            GD.PushWarning("Polygon must have at least 3 points.");
             return;
         }
 
@@ -91,7 +88,7 @@ public partial class NavigationManager : Polygon2D
 
         if (OS.IsDebugBuild())
         {
-            GD.Print($"Navigation regions placed in {stopwatch.ElapsedMilliseconds}ms");
+            GD.Print($"Navigation generation took {stopwatch.ElapsedMilliseconds}ms");
         }
     }
 
@@ -133,11 +130,9 @@ public partial class NavigationManager : Polygon2D
         {
             for (var x = startChunk.X; x <= endChunk.X; x++)
             {
-                var chunkId = new Vector2I(x, y);
-
                 var chunkBounds = new Rect2(
-                    new Vector2(x * chunkSize, y * chunkSize),
-                    new Vector2(chunkSize, chunkSize)
+                  new Vector2(x * chunkSize, y * chunkSize),
+                  new Vector2(chunkSize, chunkSize)
                 );
 
                 var bakingBounds = chunkBounds.Grow(chunkSize);
