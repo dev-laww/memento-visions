@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using Game.Components;
 using Game.Generation;
 using Godot;
 using GodotUtilities;
@@ -14,6 +16,8 @@ public partial class WaveFunctionCollapse : Node2D
     [Export] private WaveFuncitonCollapseSettings settings;
 
     [Node] private Node2D map;
+
+    [Node] private NavigationManager navigationManager;
 
     private const int MAX_ITERATIONS = 10000;
     private readonly Dictionary<Vector2I, string> directions = new()
@@ -59,7 +63,9 @@ public partial class WaveFunctionCollapse : Node2D
 
     public void Generate()
     {
-        // Initialize wave function
+        var stopwatch = new Stopwatch();
+        stopwatch.Start();
+
         InitializeWaveFunction();
 
         int iterations = 0;
@@ -77,7 +83,6 @@ public partial class WaveFunctionCollapse : Node2D
             return;
         }
 
-        // Apply final state to grid
         foreach (var (pos, v) in waveFunction)
         {
             if (v.Count <= 0) continue;
@@ -100,6 +105,15 @@ public partial class WaveFunctionCollapse : Node2D
                 instance.SetOwner(GetTree().GetEditedSceneRoot());
             }
         }
+
+        stopwatch.Stop();
+
+        if (OS.IsDebugBuild())
+        {
+            GD.Print($"Generation took {stopwatch.ElapsedMilliseconds}ms");
+        }
+
+        GetTree().CreateTimer(0.2).Timeout += navigationManager.PlaceNavigationRegions;
     }
 
     public void Clear()
@@ -108,6 +122,8 @@ public partial class WaveFunctionCollapse : Node2D
         {
             child.QueueFree();
         }
+
+        navigationManager.Clear();
     }
 
     private void Collapse(Vector2I coords)
