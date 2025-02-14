@@ -29,6 +29,7 @@ public partial class StatsManager : Node
     [Signal] public delegate void AttackReceivedEventHandler(Attack attack);
     [Signal] public delegate void StatusEffectAddedEventHandler(StatusEffect effect);
     [Signal] public delegate void StatusEffectRemovedEventHandler(StatusEffect effect);
+    [Signal] public delegate void DamageTakenEventHandler(float damage);
 
     [Export] public float MaxHealth = 100;
 
@@ -99,7 +100,11 @@ public partial class StatsManager : Node
     }
 
     public void Heal(float amount) => Health += amount;
-    public void TakeDamage(float amount) => Health -= amount;
+    public void TakeDamage(float amount)
+    {
+        Health -= amount;
+        EmitSignalDamageTaken(amount);
+    }
     public void IncreaseLevel(float amount) => Level += amount;
 
     public void IncreaseExperience(float amount)
@@ -200,8 +205,10 @@ public partial class StatsManager : Node
             _ => float.MaxValue
         });
 
+        var diff = Math.Abs(value - oldValue);
+
         EmitSignalStatChanged(value, statType);
-        EmitSignal(value > oldValue ? SignalName.StatIncreased : SignalName.StatDecreased, value, (int)statType);
+        EmitSignal(value > oldValue ? SignalName.StatIncreased : SignalName.StatDecreased, diff, (int)statType);
 
         if (value <= 0)
             EmitSignalStatDepleted(statType);

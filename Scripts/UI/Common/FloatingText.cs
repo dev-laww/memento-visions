@@ -16,6 +16,8 @@ public partial class FloatingText : Node2D
 
     private Tween tween;
     private Tween positionTween;
+    private Tween colorTween;
+    private Color originalColor;
 
     public override void _Notification(int what)
     {
@@ -54,6 +56,15 @@ public partial class FloatingText : Node2D
         label.Text = text;
     }
 
+    public void ApplyTemporaryColor(Color color, float duration = 1f)
+    {
+        colorTween?.KillIfValid();
+        colorTween = CreateTween();
+
+        colorTween.TweenProperty(label, "self_modulate", color, duration).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+        colorTween.TweenProperty(label, "self_modulate", originalColor, duration * 2).SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Cubic);
+    }
+
     private void OnTweenCompleted()
     {
         tween?.KillIfValid();
@@ -65,6 +76,7 @@ public partial class FloatingText : Node2D
     public void SetColor(Color color)
     {
         label.SelfModulate = color;
+        originalColor = color;
     }
 }
 
