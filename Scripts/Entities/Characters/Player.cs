@@ -66,6 +66,7 @@ public partial class Player : Entity
 
     public override void OnReady()
     {
+        // TODO: Move the hitboxes to weapon components
         hitBoxes.GetChildrenOfType<HitBox>().ToList().ForEach(box =>
         {
             box.Damage = StatsManager.Damage;
@@ -142,7 +143,6 @@ public partial class Player : Entity
 
     private void Dash()
     {
-
         if (VelocityManager.IsDashing) return;
 
         StateMachine.ChangeState(inputDirection.IsZeroApprox() ? Idle : Walk);

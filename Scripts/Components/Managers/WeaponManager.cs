@@ -1,5 +1,8 @@
 ﻿using System.Linq;
 using Game.Common;
+using Game.Entities;
+using Game.Globals;
+using Game.Registry;
 using Game.Resources;
 using Godot;
 
@@ -11,26 +14,60 @@ public partial class WeaponManager : Node
     public WeaponComponent WeaponComponent { get; private set; }
     public Item Weapon { get; private set; }
     public bool CanAttack => Weapon != null && WeaponComponent != null;
+    private Entity parent;
     public SignalAwaiter AnimationFinished => WeaponComponent.AnimationFinished;
+
+    public override void _Ready()
+    {
+        parent = GetParent<Entity>();
+
+        if (SaveManager.Data.Player.Equipped != string.Empty)
+        {
+            var weapon = ItemRegistry.Get(SaveManager.Data.Player.Equipped);
+
+            if (weapon == null) return;
+
+            Equip(weapon);
+        }
+    }
+
+    public override void _ExitTree()
+    {
+        if (Weapon == null) return;
+
+        SaveManager.Data.Player.Equipped = Weapon.Id;
+        SaveManager.Save();
+    }
 
     public void Equip(Item weapon)
     {
-        if (weapon == null || weapon.Id == Weapon?.Id) return;
+        if (weapon == null || weapon.Id == Weapon?.Id || weapon.ItemCategory != Item.Category.Weapon) return;
 
         WeaponComponent?.QueueFree();
+
+        if (Weapon != null)
+            parent.StatsManager.DecreaseDamage(Weapon.Damage);
 
         Weapon = weapon;
         WeaponComponent = weapon.Component.Instantiate<WeaponComponent>();
 
-        Owner.AddChild(WeaponComponent);
+        SaveManager.Data.Player.Equipped = Weapon.Id;
+
+        parent.StatsManager.IncreasDamage(weapon.Damage);
+        parent.CallDeferred("add_child", WeaponComponent);
         Log.Debug($"Equipped {weapon}");
     }
 
     public void Unequip()
     {
+        parent.StatsManager.DecreaseDamage(Weapon.Damage);
+
         WeaponComponent?.QueueFree();
         Weapon = null;
-        Weapon = null;
+        WeaponComponent = null;
+
+        SaveManager.Data.Player.Equipped = string.Empty;
+
         Log.Debug($"Unequipped {Weapon}");
     }
 

@@ -1701,7 +1701,6 @@ Id = "player"
 
 [node name="StatsManager" parent="." instance=ExtResource("2_cqdhe")]
 unique_name_in_owner = true
-Damage = 100.0
 
 [node name="HealthNumberManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
 script = ExtResource("3_0iqml")
@@ -1771,7 +1770,6 @@ rotation = 3.14159
 collision_layer = 1024
 collision_mask = 2048
 script = ExtResource("6_ly21x")
-Damage = 100.0
 
 [node name="DaggerCollision" type="CollisionPolygon2D" parent="HitBoxes/Dagger"]
 position = Vector2(2.86102e-06, 0)
@@ -1786,7 +1784,6 @@ rotation = 3.14159
 collision_layer = 1024
 collision_mask = 2048
 script = ExtResource("6_ly21x")
-Damage = 100.0
 
 [node name="SwordCollision" type="CollisionPolygon2D" parent="HitBoxes/Sword"]
 position = Vector2(2.86102e-06, 0)

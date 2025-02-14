@@ -120,6 +120,11 @@ public partial class StatsManager : Node
         }
     }
 
+    public void IncreasDamage(float amount) => Damage += amount;
+    public void DecreaseDamage(float amount) => Damage -= amount;
+    public void IncreaseDefense(float amount) => Defense += amount;
+    public void DecreaseDefense(float amount) => Defense -= amount;
+
     public void ReceiveAttack(Attack attack)
     {
         Health -= Math.Clamp(attack.Damage - defense, 0, float.MaxValue);
