@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=114 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" uid="uid://bbhesrdqhrnnb" path="res://Scripts/Entities/Characters/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_cqdhe"]
@@ -13,14 +13,14 @@
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="7_s1dwx"]
 [ext_resource type="Texture2D" uid="uid://crm174xl683eq" path="res://assets/entities/player.png" id="9_2exdb"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="9_401x2"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kaamo"]
-radius = 4.98331
-height = 15.9979
+[ext_resource type="Texture2D" uid="uid://bbaj1lmrgykxu" path="res://assets/effects/dash-trail.png" id="13_c8fx8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7xh7"]
 radius = 9.0
 height = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c8fx8"]
+radius = 5.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_il706"]
 atlas = ExtResource("9_2exdb")
@@ -552,6 +552,35 @@ animations = [{
 "name": &"walk_right",
 "speed": 8.0
 }]
+
+[sub_resource type="Curve" id="Curve_srhpj"]
+_data = [Vector2(0, 1), 0.0, -1.86194, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fqtcb"]
+curve = SubResource("Curve_srhpj")
+
+[sub_resource type="Gradient" id="Gradient_c8fx8"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_srhpj"]
+gradient = SubResource("Gradient_c8fx8")
+
+[sub_resource type="Curve" id="Curve_c8fx8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.273684), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_srhpj"]
+curve = SubResource("Curve_c8fx8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fqtcb"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector3(0, -50, 0)
+scale_curve = SubResource("CurveTexture_srhpj")
+color_ramp = SubResource("GradientTexture1D_srhpj")
+alpha_curve = SubResource("CurveTexture_fqtcb")
 
 [sub_resource type="Animation" id="Animation_iq5xj"]
 length = 0.001
@@ -1701,12 +1730,6 @@ StatsManager = NodePath("../StatsManager")
 AccelerationCoefficient = 13.0
 metadata/_custom_type_script = ExtResource("3_lmufy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-y_sort_enabled = true
-position = Vector2(-1.49012e-08, 14)
-rotation = 1.58684
-shape = SubResource("CapsuleShape2D_kaamo")
-
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
 collision_layer = 2048
 collision_mask = 1024
@@ -1718,6 +1741,10 @@ position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_n7xh7")
 debug_color = Color(1, 0.3, 0.4, 0.4)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13)
+shape = SubResource("CircleShape2D_c8fx8")
+
 [node name="Sprites" type="AnimatedSprite2D" parent="."]
 texture_filter = 2
 material = ExtResource("7_s1dwx")
@@ -1726,6 +1753,14 @@ animation = &"idle_front"
 autoplay = "idle_front"
 frame = 1
 script = ExtResource("9_401x2")
+
+[node name="Trail" type="GPUParticles2D" parent="."]
+position = Vector2(0, 13)
+emitting = false
+amount = 60
+texture = ExtResource("13_c8fx8")
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_fqtcb")
 
 [node name="HitBoxes" type="Node2D" parent="."]
 

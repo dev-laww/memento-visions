@@ -22,6 +22,7 @@ public partial class Player : Entity
     [Node] public WeaponManager WeaponManager;
     [Node] public QuestManager QuestManager;
     [Node] public InputManager InputManager;
+    [Node] private GpuParticles2D trail;
 
     private Vector2 inputDirection;
 
@@ -87,7 +88,7 @@ public partial class Player : Entity
 
         StateMachine.AddStates(Idle);
         StateMachine.AddStates(Walk);
-        StateMachine.AddStates(Dash, EnterDash);
+        StateMachine.AddStates(Dash, EnterDash, ExitDash);
         StateMachine.AddStates(Attack, EnterAttack);
         StateMachine.SetInitialState(Idle);
     }
@@ -134,13 +135,22 @@ public partial class Player : Entity
 
         VelocityManager.Dash(VelocityManager.LastFacedDirection);
         animations.Play($"walk_{LastFacedDirection}");
+
+        trail.ShowBehindParent = VelocityManager.LastFacedDirection.Y > 0;
+        trail.Emitting = true;
     }
 
     private void Dash()
     {
+
         if (VelocityManager.IsDashing) return;
 
         StateMachine.ChangeState(inputDirection.IsZeroApprox() ? Idle : Walk);
+    }
+
+    private void ExitDash()
+    {
+        trail.Emitting = false;
     }
 
     private void EnterAttack()
