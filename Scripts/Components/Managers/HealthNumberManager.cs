@@ -1,20 +1,20 @@
 using System.Collections.Generic;
-using System.Linq;
 using Game.Utils.Battle;
-using Game.Common.Extensions;
-using Game.Effects;
 using Godot;
 using GodotUtilities;
+using Game.Globals;
+using Game.Entities;
+using Game.Common;
 
 namespace Game.Components;
 
 [Tool]
 [Scene]
-[Icon("res://assets/icons/health-number-manager.svg")]
-public partial class HealthNumberManager : Node2D
+[GlobalClass, Icon("res://assets/icons/health-number-manager.svg")]
+public partial class HealthNumberManager : Node
 {
     [Export]
-    private StatsManager statsManager
+    private StatsManager StatsManager
     {
         get => manager;
         set
@@ -24,75 +24,25 @@ public partial class HealthNumberManager : Node2D
         }
     }
 
-    [Node] private Marker2D numberSpawn;
-    [Node] private ResourcePreloader resourcePreloader;
-    [Node] private Timer timer;
-    [Node] private Node2D regenSpawns;
-
     private StatsManager manager;
-    private DamageNumber damage => numberSpawn.GetChildrenOfType<DamageNumber>().FirstOrDefault();
-    private float damageReceived;
-
-    public override void _Notification(int what)
-    {
-        if (what != NotificationSceneInstantiated) return;
-
-        WireNodes();
-    }
 
     public override void _Ready()
     {
-        if (statsManager != null)
-        {
-            statsManager.AttackReceived += OnAttackReceived;
-            statsManager.StatIncreased += OnStatIncreased;
-        }
-
-        timer.Timeout += OnTimerTimeout;
+        if (StatsManager != null)
+            StatsManager.AttackReceived += OnAttackReceived;
     }
 
     private void OnAttackReceived(Attack attack)
     {
-        timer.Reset();
-        damageReceived += attack.Damage;
+        Log.Debug($"Attack received: {attack} from {attack.Attacker}");
+        var floatingText = FloatingTextManager.SpawnDamageText(Owner, (Owner as Node2D).GlobalPosition, attack.Damage);
 
-        if (damage == null)
+        floatingText.SetColor(attack.Critical ? new Color(1, 0.5f, 0.5f) : attack.AttackType switch
         {
-            var num = resourcePreloader.InstanceSceneOrNull<DamageNumber>("damage");
-            numberSpawn.AddChild(num);
-        }
-
-        damage!.Text = $"{damageReceived}";
-        damage!.DamageType = attack.AttackType;
-
-        if (attack.Critical)
-        {
-            damage.Critical();
-            return;
-        }
-
-        damage.Animate();
-    }
-
-    private void OnStatIncreased(float amount, StatsType type)
-    {
-        if (type != StatsType.Health) return;
-
-        var num = resourcePreloader.InstanceSceneOrNull<RegenNumber>("regen");
-        var spawn = regenSpawns.GetChildrenOfType<Node2D>().ToArray()[MathUtil.RNG.RandiRange(0, 7)];
-
-        num.Text = $"+{amount}";
-
-        spawn.AddChild(num);
-    }
-
-    private async void OnTimerTimeout()
-    {
-        damageReceived = 0;
-
-        if (damage == null) return;
-
-        await damage.Exit();
+            Attack.Type.Physical => Colors.White,
+            Attack.Type.Magical => new Color(0.5f, 0.5f, 1),
+            _ => Colors.White
+        });
     }
 
     public override string[] _GetConfigurationWarnings()
@@ -102,7 +52,9 @@ public partial class HealthNumberManager : Node2D
         if (manager == null)
             warnings.Add("StatsManager is not set.");
 
+        if (GetParent() is not Entity)
+            warnings.Add("HealthNumberManager should be a child of an Entity.");
 
-        return warnings.ToArray();
+        return [.. warnings];
     }
 }

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cnvissmtvmaii" path="res://assets/entities/enemy/common/samurai/attack-left.png" id="2_3vakn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_lv6q4"]
 [ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Managers/VelocityManager.cs" id="3_0ykwq"]
+[ext_resource type="Script" uid="uid://cpwyjck8klk35" path="res://Scripts/Components/Managers/HealthNumberManager.cs" id="3_7qk8a"]
 [ext_resource type="Texture2D" uid="uid://dxhvlup6gwbpe" path="res://assets/entities/enemy/common/samurai/attack-right.png" id="3_f74rq"]
 [ext_resource type="PackedScene" uid="uid://t7im5teuo2bt" path="res://Scenes/Components/Managers/DropManager.tscn" id="3_quh3n"]
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="4_5v2fo"]
@@ -14,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://dsjee5nlrwo87" path="res://assets/entities/enemy/common/samurai/walk.png" id="5_4afnw"]
 [ext_resource type="Resource" uid="uid://c71am62dl1cq6" path="res://resources/items/material/rock.tres" id="6_1moht"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="6_bv0hl"]
-[ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Components/Managers/HealthNumberManager.tscn" id="6_erfge"]
 [ext_resource type="Resource" uid="uid://bnk1v4rxbspqe" path="res://resources/items/weapon/dagger.tres" id="7_3pn6t"]
 [ext_resource type="Texture2D" uid="uid://b58rckgt1wu0u" path="res://assets/entities/enemy/common/samurai/hit.png" id="9_a8nl6"]
 
@@ -444,6 +444,11 @@ Id = "enemy:samurai"
 [node name="StatsManager" parent="." instance=ExtResource("2_lv6q4")]
 MaxHealth = 500.0
 
+[node name="HealthNumberManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
+script = ExtResource("3_7qk8a")
+StatsManager = NodePath("../StatsManager")
+metadata/_custom_type_script = ExtResource("3_7qk8a")
+
 [node name="DropManager" parent="." instance=ExtResource("3_quh3n")]
 Drops = [SubResource("Resource_r8ale"), SubResource("Resource_xc158"), SubResource("Resource_oeodv")]
 
@@ -475,10 +480,6 @@ StatsManager = NodePath("../StatsManager")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CapsuleShape2D_m6lc7")
 debug_color = Color(1, 0.3, 0.4, 0.4)
-
-[node name="HealthNumberManager" parent="." node_paths=PackedStringArray("statsManager") instance=ExtResource("6_erfge")]
-position = Vector2(0, -22)
-statsManager = NodePath("../StatsManager")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 12)

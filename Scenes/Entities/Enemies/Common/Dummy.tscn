@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://c6u1j8efnlsyy" path="res://Scripts/Entities/Enemies/Common/Dummy.cs" id="1_nfovk"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="1_ywhg6"]
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="2_i6lkr"]
+[ext_resource type="Script" uid="uid://cpwyjck8klk35" path="res://Scripts/Components/Managers/HealthNumberManager.cs" id="3_cxjkr"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="3_txlvp"]
 [ext_resource type="Texture2D" uid="uid://ci7so60mgolah" path="res://assets/entities/enemy/common/dummy/sprite.png" id="4_x85v6"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="5_gqlf7"]
-[ext_resource type="PackedScene" uid="uid://do4ijtd5xbu2c" path="res://Scenes/Components/Managers/HealthNumberManager.tscn" id="7_xk10n"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g0hd1"]
 radius = 13.0
@@ -246,6 +246,11 @@ Id = "enemy:dummy"
 
 [node name="StatsManager" parent="." instance=ExtResource("1_ywhg6")]
 
+[node name="HealthNumberManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
+script = ExtResource("3_cxjkr")
+StatsManager = NodePath("../StatsManager")
+metadata/_custom_type_script = ExtResource("3_cxjkr")
+
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
 collision_layer = 2048
 collision_mask = 1024
@@ -269,10 +274,6 @@ sprite_frames = SubResource("SpriteFrames_e6i7r")
 animation = &"idle"
 autoplay = "idle"
 script = ExtResource("5_gqlf7")
-
-[node name="HealthNumberManager" parent="." node_paths=PackedStringArray("statsManager") instance=ExtResource("7_xk10n")]
-position = Vector2(0, -16)
-statsManager = NodePath("../StatsManager")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
