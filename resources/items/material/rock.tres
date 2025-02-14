@@ -5,9 +5,10 @@
 
 [resource]
 resource_local_to_scene = true
+resource_name = "Rock"
 script = ExtResource("2_jifhb")
+Id = "item:rock"
 Icon = ExtResource("1_le0yr")
 Name = "Rock"
-Id = "item:rock"
 ItemCategory = 1
 Description = "Can it be ingested??"

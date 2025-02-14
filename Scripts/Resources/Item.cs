@@ -25,11 +25,21 @@ public partial class Item : Resource
     }
 
     public Texture2D Icon { get; private set; }
-    public string Name { get; private set; }
+
+    public string Name
+    {
+        get => ResourceName;
+        private set
+        {
+            ResourceName = value;
+        }
+    }
+
     public string Id { get; private set; } = Guid.NewGuid().ToString();
     public Type WeaponType { get; private set; }
     public PackedScene Component { get; private set; }
     public string Description { get; private set; }
+    public float Damage { get; private set; }
 
     public Category ItemCategory
     {
@@ -51,13 +61,13 @@ public partial class Item : Resource
         {
             new()
             {
-                { "name", nameof(Id) },
+                { "name", PropertyName.Id },
                 { "type", (int)Variant.Type.String },
                 { "usage", (int)PropertyUsageFlags.Default }
             },
             new()
             {
-                { "name", nameof(Icon) },
+                { "name", PropertyName.Icon },
                 { "type", (int)Variant.Type.Object },
                 { "usage", (int)PropertyUsageFlags.Default },
                 { "hint", (int)PropertyHint.ResourceType },
@@ -65,13 +75,13 @@ public partial class Item : Resource
             },
             new()
             {
-                { "name", nameof(Name) },
+                { "name", PropertyName.Name },
                 { "type", (int)Variant.Type.String },
                 { "usage", (int)PropertyUsageFlags.Default }
             },
             new()
             {
-                { "name", nameof(ItemCategory) },
+                { "name", PropertyName.ItemCategory },
                 { "type", (int)Variant.Type.Int },
                 { "usage", (int)PropertyUsageFlags.Default },
                 { "hint", (int)PropertyHint.Enum },
@@ -83,7 +93,7 @@ public partial class Item : Resource
         {
             properties.Add(new Dictionary
             {
-                { "name", nameof(WeaponType) },
+                { "name", PropertyName.WeaponType },
                 { "type", (int)Variant.Type.Int },
                 { "usage", (int)PropertyUsageFlags.Default },
                 { "hint", (int)PropertyHint.Enum },
@@ -92,17 +102,24 @@ public partial class Item : Resource
 
             properties.Add(new Dictionary
             {
-                { "name", nameof(Component) },
+                { "name", PropertyName.Component },
                 { "type", (int)Variant.Type.Object },
                 { "usage", (int)PropertyUsageFlags.Default },
                 { "hint", (int)PropertyHint.ResourceType },
                 { "hint_string", "PackedScene" }
             });
+
+            properties.Add(new Dictionary
+            {
+                { "name", PropertyName.Damage },
+                { "type", (int)Variant.Type.Float },
+                { "usage", (int)PropertyUsageFlags.Default }
+            });
         }
 
         properties.Add(new Dictionary
         {
-            { "name", nameof(Description) },
+            { "name", PropertyName.Description },
             { "type", (int)Variant.Type.String },
             { "usage", (int)PropertyUsageFlags.Default },
             { "hint", (int)PropertyHint.MultilineText }

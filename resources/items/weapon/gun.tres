@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cvsxqb1aw8lo3" path="res://assets/weapons/gun/icon.png" id="2_es2we"]
 
 [resource]
+resource_name = "Gun"
 script = ExtResource("1_wtqwt")
 Id = "weapon:gun"
 Icon = ExtResource("2_es2we")

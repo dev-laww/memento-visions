@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dlwsy8jlu2lqy" path="res://assets/weapons/sword/icon.png" id="2_y64f0"]
 
 [resource]
+resource_name = "Sword"
 script = ExtResource("1_gsd8o")
 Id = "weapon:sword"
 Icon = ExtResource("2_y64f0")
@@ -12,5 +13,6 @@ Name = "Sword"
 ItemCategory = 3
 WeaponType = 1
 Component = ExtResource("1_3sg1w")
+DamageIncrease = 250.0
 Description = ""
 metadata/_custom_type_script = ExtResource("1_gsd8o")

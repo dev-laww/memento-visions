@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bhcc617yhnh4v" path="res://assets/weapons/dagger/icon.png" id="2_bpntj"]
 
 [resource]
+resource_name = "Dagger"
 script = ExtResource("1_hu4ji")
 Id = "weapon:dagger"
 Icon = ExtResource("2_bpntj")
@@ -12,5 +13,6 @@ Name = "Dagger"
 ItemCategory = 3
 WeaponType = 0
 Component = ExtResource("1_jhfva")
+DamageIncrease = 100.0
 Description = ""
 metadata/_custom_type_script = ExtResource("1_hu4ji")
