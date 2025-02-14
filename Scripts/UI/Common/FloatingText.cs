@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using GodotUtilities;
 
@@ -8,6 +9,10 @@ public partial class FloatingText : Node2D
 {
     [Node] private CenterContainer centerContainer;
     [Node] private Label label;
+
+    [Signal] public delegate void FinishedEventHandler();
+
+    private float accumulatedDamage;
 
     private Tween tween;
     private Tween positionTween;
@@ -33,6 +38,33 @@ public partial class FloatingText : Node2D
         positionTween = CreateTween();
         positionTween.TweenProperty(this, "global_position", GlobalPosition + (Vector2.Up * 16), 0.3f).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
         positionTween.TweenProperty(this, "global_position", GlobalPosition + (Vector2.Up * 48), duration - 0.3f).SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Circ);
+
+        positionTween.TweenCallback(Callable.From(OnTweenCompleted));
+    }
+
+    public void AddDamage(float damage)
+    {
+        accumulatedDamage += damage;
+        var displayValue = accumulatedDamage < 1 ? string.Format("{0:0.00}", accumulatedDamage) : $"{Math.Floor(accumulatedDamage)}";
+        SetText(displayValue);
+    }
+
+    public void SetText(string text)
+    {
+        label.Text = text;
+    }
+
+    private void OnTweenCompleted()
+    {
+        tween?.KillIfValid();
+        positionTween?.KillIfValid();
+        accumulatedDamage = 0;
+        EmitSignalFinished();
+    }
+
+    public void SetColor(Color color)
+    {
+        label.SelfModulate = color;
     }
 }
 

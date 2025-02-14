@@ -34,6 +34,7 @@ SoundManger="*res://Scenes/Components/Managers/SoundManger.tscn"
 InteractionManager="*res://Scripts/Globals/InteractionManager.cs"
 EnemyManager="*res://Scripts/Globals/EnemyManager.cs"
 MusicManager="*res://Scripts/Components/Managers/MusicManager.cs"
+FloatingTextManager="*res://Scenes/Globals/FloatingTextManager.tscn"
 
 [dialogue_manager]
 
