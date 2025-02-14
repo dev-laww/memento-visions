@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using Game.Common;
+using Game.Common.Utilities;
 using Game.Components;
 using Game.Resources;
 using Godot;
@@ -36,6 +38,22 @@ public partial class Player : Entity
 
             return lastMoveDirection.Y < 0 ? "back" : "front";
         }
+    }
+
+    public override void _EnterTree()
+    {
+        if (Engine.IsEditorHint()) return;
+
+        CommandInterpreter.Register("heal", AddHealth, "Adds health to the player. Usage: heal [value]");
+        CommandInterpreter.Register("damage", Damage, "Removes health from the player. Usage: damage [value]");
+    }
+
+    public override void _ExitTree()
+    {
+        if (Engine.IsEditorHint()) return;
+
+        CommandInterpreter.Unregister("heal");
+        CommandInterpreter.Unregister("damage");
     }
 
     public override void _Notification(int what)
@@ -173,5 +191,21 @@ public partial class Player : Entity
 
         if (dash) StateMachine.ChangeState(Dash);
         if (attack) StateMachine.ChangeState(Attack);
+    }
+
+    private void AddHealth(float value = 1000)
+    {
+        StatsManager.Heal(value);
+
+        Log.Debug($"Health increased by {value}");
+        Log.Debug($"Current health: {StatsManager.Health}");
+    }
+
+    private void Damage(float value = 10)
+    {
+        StatsManager.TakeDamage(value);
+
+        Log.Debug($"Health decreased by {value}");
+        Log.Debug($"Current health: {StatsManager.Health}");
     }
 }
