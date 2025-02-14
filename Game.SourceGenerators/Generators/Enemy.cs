@@ -7,7 +7,7 @@ namespace Game.SourceGenerators.Generators;
 [Generator]
 public class Enemy : Inheritance
 {
-    protected override string BaseClassName => "Game.Entities.Enemies.Enemy";
+    protected override string BaseClassName => "Game.Entities.Enemy";
 
     protected override string GenerateCode(INamedTypeSymbol symbol, ClassDeclarationSyntax classDecl) =>
         symbol.GeneratePartialClass(
