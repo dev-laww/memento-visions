@@ -8,7 +8,7 @@ using Godot;
 
 namespace Game.Components;
 
-[GlobalClass]
+[GlobalClass, Icon("res://assets/icons/quest-manager.svg")]
 public partial class QuestManager : Node
 {
     [Signal] public delegate void AddedEventHandler(Quest quest);

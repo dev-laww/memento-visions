@@ -4,7 +4,7 @@ using Godot;
 namespace Game.Components;
 
 [Tool]
-[GlobalClass]
+[GlobalClass, Icon("res://assets/icons/hitbox.svg")]
 public partial class HitBox : Area2D
 {
     [Export] public Attack.Type Type { get; set; } = Attack.Type.Physical;

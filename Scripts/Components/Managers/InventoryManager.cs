@@ -12,7 +12,7 @@ using Item = Game.Resources.Item;
 
 namespace Game.Components;
 
-[GlobalClass]
+[GlobalClass, Icon("res://assets/icons/inventory-manager.svg")]
 public partial class InventoryManager : Node
 {
     [Signal] public delegate void UpdatedEventHandler(ItemGroup item);

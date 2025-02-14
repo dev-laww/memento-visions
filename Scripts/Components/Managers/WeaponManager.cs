@@ -5,7 +5,7 @@ using Godot;
 
 namespace Game.Components;
 
-[GlobalClass]
+[GlobalClass, Icon("res://assets/icons/weapon-manager.svg")]
 public partial class WeaponManager : Node
 {
     public WeaponComponent WeaponComponent { get; private set; }

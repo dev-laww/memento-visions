@@ -3,7 +3,7 @@ using Godot;
 
 namespace Game.Components;
 
-[GlobalClass]
+[GlobalClass, Icon("res://assets/icons/input-manager.svg")]
 public partial class InputManager : Node
 {
     // TODO: Make keybinds rebindable
