@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhtpeegdbdo3h"]
+
+[ext_resource type="LabelSettings" uid="uid://cktp08gmb038p" path="res://resources/misc/normal-text.tres" id="1_5dp15"]
+[ext_resource type="Script" uid="uid://dgypubaxirxnf" path="res://Scripts/UI/Common/FloatingText.cs" id="1_parg8"]
+
+[node name="FloatingText" type="Node2D"]
+script = ExtResource("1_parg8")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -216.0
+offset_top = -20.0
+offset_right = 216.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(216, 20)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "69"
+label_settings = ExtResource("1_5dp15")
