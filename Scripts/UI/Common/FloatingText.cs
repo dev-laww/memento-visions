@@ -12,13 +12,6 @@ public partial class FloatingText : Node2D
     private Tween tween;
     private Tween positionTween;
 
-    public override void _Ready()
-    {
-        Start();
-
-        GetTree().CreateTimer(0.3f).Timeout += () => Animate(10);
-    }
-
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
@@ -40,16 +33,6 @@ public partial class FloatingText : Node2D
         positionTween = CreateTween();
         positionTween.TweenProperty(this, "global_position", GlobalPosition + (Vector2.Up * 16), 0.3f).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
         positionTween.TweenProperty(this, "global_position", GlobalPosition + (Vector2.Up * 48), duration - 0.3f).SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Circ);
-    }
-
-    private void Animate(int times = 1)
-    {
-        Start();
-
-        if (times > 1)
-        {
-            GetTree().CreateTimer(0.3f).Timeout += () => Animate(times - 1);
-        }
     }
 }
 
