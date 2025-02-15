@@ -1296,3 +1296,5 @@ libraries = {
 &"walk": SubResource("AnimationLibrary_70mij")
 }
 autoplay = "idle/front"
+
+[connection signal="LevelUp" from="StatsManager" to="." method="OnLevelUp"]

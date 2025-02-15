@@ -3,6 +3,7 @@ using System.Linq;
 using Game.Common;
 using Game.Common.Utilities;
 using Game.Components;
+using Game.Globals;
 using Game.Resources;
 using Godot;
 using GodotUtilities;
@@ -46,6 +47,7 @@ public partial class Player : Entity
 
         CommandInterpreter.Register("heal", AddHealth, "Adds health to the player. Usage: heal [value]");
         CommandInterpreter.Register("damage", Damage, "Removes health from the player. Usage: damage [value]");
+        CommandInterpreter.Register("levelup", LevelUp, "Increases the player's level. Usage: levelup [level]");
     }
 
     public override void _ExitTree()
@@ -198,4 +200,19 @@ public partial class Player : Entity
         Log.Debug($"Health decreased by {value}");
         Log.Debug($"Current health: {StatsManager.Health}");
     }
+
+    private void OnLevelUp(float level)
+    {
+        Log.Debug($"Player leveled up to {level}");
+        var text = FloatingTextManager.SpawnFloatingText(new FloatingTextManager.FloatingTextSpawnAgrs
+        {
+            Text = $"Level up to {level}!",
+            Position = GlobalPosition,
+            Parent = GetParent(),
+            Color = new Color(1f, 1f, 0.5f),
+        });
+        text.Finished += text.QueueFree;
+    }
+
+    private void LevelUp(float level = 1) => StatsManager.IncreaseLevel(level);
 }
