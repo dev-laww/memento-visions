@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dgypubaxirxnf" path="res://Scripts/UI/Common/FloatingText.cs" id="1_parg8"]
 
 [node name="FloatingText" type="Node2D"]
+top_level = true
 script = ExtResource("1_parg8")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
