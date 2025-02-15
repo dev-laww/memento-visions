@@ -30,6 +30,7 @@ public partial class StatsManager : Node
     [Signal] public delegate void StatusEffectAddedEventHandler(StatusEffect effect);
     [Signal] public delegate void StatusEffectRemovedEventHandler(StatusEffect effect);
     [Signal] public delegate void DamageTakenEventHandler(float damage);
+    [Signal] public delegate void LevelUpEventHandler(float level);
 
     [Export] public float MaxHealth = 100;
 
@@ -105,19 +106,34 @@ public partial class StatsManager : Node
         Health -= amount;
         EmitSignalDamageTaken(amount);
     }
-    public void IncreaseLevel(float amount) => Level += amount;
+    public void IncreaseLevel(float amount)
+    {
+        Level += amount;
+        EmitSignalLevelUp(Level);
+    }
 
     public void IncreaseExperience(float amount)
     {
         Experience += amount;
 
-        while (Experience >= CalculateRequiredExperience(Level + 1))
+        var requiredExperience = CalculateRequiredExperience(Level + 1);
+
+        while (Experience >= requiredExperience)
         {
-            Experience -= CalculateRequiredExperience(Level + 1);
+            Experience -= requiredExperience;
             Level++;
 
-            // TODO: Add level up effects
+            EmitSignalLevelUp(Level);
+            // TODO: Implement level up effects
+            SetLevel(Level);
         }
+    }
+
+    public void SetLevel(float value)
+    {
+        Level = value;
+
+        // TODO: Apply level up stats
     }
 
     public void IncreasDamage(float amount) => Damage += amount;
