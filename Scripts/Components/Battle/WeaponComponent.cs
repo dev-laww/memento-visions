@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Game.Common.Extensions;
 using Game.Utils.Extensions;
 using Godot;
@@ -56,10 +57,25 @@ public partial class WeaponComponent : Node2D
     [Node] private AudioStreamPlayer2D attackSfx;
     [Node] private AudioStreamPlayer2D hitSfx;
 
-
     public SignalAwaiter AnimationFinished => ToSignal(animationPlayer, "animation_finished");
 
     public void Animate() => animationPlayer.Play(this.GetPlayer()?.LastFacedDirection ?? "front");
+
+    public override void _Ready()
+    {
+        var hitBoxes = GetChildren().OfType<HitBox>();
+
+        if (Engine.IsEditorHint() || !hitBoxes.Any()) return;
+
+        var player = this.GetPlayer();
+
+        foreach (var box in hitBoxes)
+        {
+            box.Owner = player;
+            box.Damage = player.StatsManager.Damage;
+
+        }
+    }
 
     public override void _Notification(int what)
     {

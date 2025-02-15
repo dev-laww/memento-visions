@@ -15,7 +15,6 @@ public partial class Player : Entity
 {
     [Node] private HurtBox hurtBox;
     [Node] private AnimationPlayer animations;
-    [Node] private Node2D hitBoxes;
 
     [Node] public InventoryManager InventoryManager;
     [Node] public VelocityManager VelocityManager;
@@ -66,25 +65,6 @@ public partial class Player : Entity
 
     public override void OnReady()
     {
-        // TODO: Move the hitboxes to weapon components
-        hitBoxes.GetChildrenOfType<HitBox>().ToList().ForEach(box =>
-        {
-            box.Damage = StatsManager.Damage;
-
-            box.NotifyPropertyListChanged();
-        });
-
-        StatsManager.StatChanged += (value, stat) =>
-        {
-            if (stat != StatsType.Damage) return;
-
-            hitBoxes.GetChildrenOfType<HitBox>().ToList().ForEach(box =>
-            {
-                box.Damage = value;
-                box.NotifyPropertyListChanged();
-            });
-        };
-
         if (Engine.IsEditorHint()) return;
 
         StateMachine.AddStates(Idle);
@@ -106,7 +86,7 @@ public partial class Player : Entity
 
     private void Idle()
     {
-        animations.Play($"idle_{LastFacedDirection}");
+        animations.Play($"idle/{LastFacedDirection}");
 
         if (inputDirection.IsZeroApprox())
         {
@@ -119,7 +99,7 @@ public partial class Player : Entity
 
     private void Walk()
     {
-        animations.Play($"walk_{LastFacedDirection}");
+        animations.Play($"walk/{LastFacedDirection}");
 
         if (inputDirection.IsZeroApprox())
         {
@@ -135,7 +115,7 @@ public partial class Player : Entity
         if (!VelocityManager.CanDash(VelocityManager.LastFacedDirection)) return;
 
         VelocityManager.Dash(VelocityManager.LastFacedDirection);
-        animations.Play($"walk_{LastFacedDirection}");
+        animations.Play($"walk/{LastFacedDirection}");
 
         trail.ShowBehindParent = VelocityManager.LastFacedDirection.Y > 0;
         trail.Emitting = true;

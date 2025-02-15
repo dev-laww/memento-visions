@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Game.Common;
+using Game.Common.Utilities;
 using Game.Entities;
 using Game.Globals;
 using Game.Registry;
@@ -31,8 +32,17 @@ public partial class WeaponManager : Node
         }
     }
 
+    public override void _EnterTree()
+    {
+        CommandInterpreter.Register("equip", EquipCommand, "Equips a weapon. Usage: equip [weaponId]");
+        CommandInterpreter.Register("unequip", UnequipCommand, "Unequips the current weapon.");
+    }
+
+
     public override void _ExitTree()
     {
+        CommandInterpreter.Unregister("equip");
+        CommandInterpreter.Unregister("unequip");
         if (Weapon == null) return;
 
         SaveManager.Data.Player.Equipped = Weapon.Id;
@@ -50,6 +60,7 @@ public partial class WeaponManager : Node
 
         Weapon = weapon;
         WeaponComponent = weapon.Component.Instantiate<WeaponComponent>();
+        WeaponComponent.Visible = false;
 
         SaveManager.Data.Player.Equipped = Weapon.Id;
 
@@ -81,4 +92,8 @@ public partial class WeaponManager : Node
 
         WeaponComponent?.Animate();
     }
+
+    public void EquipCommand(string weaponId) => Equip(ItemRegistry.Get(weaponId));
+
+    public void UnequipCommand() => Unequip();
 }

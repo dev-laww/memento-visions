@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://bj127mbpsv45j"]
+[gd_scene load_steps=29 format=3 uid="uid://bj127mbpsv45j"]
 
 [ext_resource type="Script" uid="uid://dqgmaq0t8abpt" path="res://Scripts/Components/Battle/WeaponComponent.cs" id="1_rgxvb"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_y4or8"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="3_72hrq"]
+[ext_resource type="Script" uid="uid://dkgndduo4d7p4" path="res://Scripts/Components/Area/HitBox.cs" id="3_akyv1"]
 [ext_resource type="Texture2D" uid="uid://cvpvlt6bojya0" path="res://assets/weapons/sword/sprite-frames.png" id="4_qjeyb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7mnu8"]
@@ -152,7 +153,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -165,6 +166,42 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"front"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitBox:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 22)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitBox:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.14159]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitBox/DaggerCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_yphef"]
@@ -205,6 +242,42 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitBox:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitBox:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -18)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HitBox/DaggerCollision:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.252664, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_m02av"]
 length = 0.5
@@ -243,6 +316,42 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitBox:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 22)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitBox:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.14159]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HitBox/DaggerCollision:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.252664, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_fo5y0"]
@@ -283,6 +392,42 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitBox:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-18, 7)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitBox:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HitBox/DaggerCollision:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.252664, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_nc51f"]
 length = 0.5
@@ -322,6 +467,42 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitBox:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(18, 7)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitBox:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HitBox/DaggerCollision:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.252664, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d0irt"]
 _data = {
@@ -333,9 +514,21 @@ _data = {
 }
 
 [node name="Sword" type="Node2D"]
-visible = false
 script = ExtResource("1_rgxvb")
 Animations = SubResource("SpriteFrames_smq3l")
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(0, 22)
+rotation = 3.14159
+collision_layer = 1024
+collision_mask = 2048
+script = ExtResource("3_akyv1")
+
+[node name="DaggerCollision" type="CollisionPolygon2D" parent="HitBox"]
+position = Vector2(2.86102e-06, 0)
+scale = Vector2(0.015, 0.014)
+polygon = PackedVector2Array(-23, -424.1, -23, -422.9, -85.1, -419, -95.2, -419, -184.4, -403, -189.3, -403, -272.3, -378, -275.4, -378, -315.4, -362, -318.5, -362, -355.5, -344, -358.5, -344, -400.5, -322, -402.6, -322, -444.6, -296, -446.6, -296, -495.6, -261, -497.7, -261, -549.7, -218, -551.8, -218, -615.8, -155, -616.9, -155, -649.9, -116, -651, -116, -687, -68, -688.1, -68, -728.1, -4, -729.2, -4, -770.3, 79, -771.4, 79, -789.4, 126, -790.5, 126, -815.5, 209, -816.7, 209, -830.7, 282, -831.8, 282, -839.8, 374, -841, 374, -840, 422, -840, 425, 840, 423, 843.1, 423, 838, 328.9, 838, 321.8, 826, 253.7, 826, 247.8, 817, 210, 817, 207.7, 802, 161.7, 802, 157.6, 772, 81.5, 772, 78.5, 734, 3.40002, 734, 2.40002, 702, -46.7, 702, -48.7, 643, -124.7, 643, -126.8, 579, -192.8, 579, -193.9, 521, -243, 521, -244, 452, -292, 452, -293.2, 374, -336.3, 374, -337.3, 321, -360.3, 321, -361.4, 258, -383.5, 258, -384.6, 230, -391.6, 230, -392.6, 145, -410.7, 145, -411.8, 78, -419.8, 78, -420.9)
+disabled = true
 
 [node name="Assets" type="Node2D" parent="."]
 

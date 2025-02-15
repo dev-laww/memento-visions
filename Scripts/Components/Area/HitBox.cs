@@ -1,4 +1,6 @@
-﻿using Game.Utils.Battle;
+﻿using System;
+using Game.Entities;
+using Game.Utils.Battle;
 using Godot;
 
 namespace Game.Components;
@@ -11,7 +13,9 @@ public partial class HitBox : Area2D
 
     [Export] public float Damage;
 
-    public Attack Attack => Attack.Create(Damage, Type, Owner as Node2D);
+    [Signal] public delegate void HitEventHandler();
+
+    public Attack Attack => Attack.Create(Damage, Type, Owner as Entity);
 
     public override void _Ready()
     {
@@ -19,4 +23,6 @@ public partial class HitBox : Area2D
         CollisionMask = 1 << 11;
         NotifyPropertyListChanged();
     }
+
+    public void EmitHit() => EmitSignalHit();
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Common.Extensions;
+using Game.Entities;
 using Godot;
 
 namespace Game.Components;
@@ -42,9 +43,10 @@ public partial class HurtBox : Area2D
     {
         if (area is not HitBox hitBox) return;
 
-        if (hitBox.Owner == Owner) return;
+        if (hitBox.Owner == StatsManager.Owner) return;
 
         statsManager.ReceiveAttack(hitBox.Attack);
+        hitBox.EmitHit();
     }
 
     public override string[] _GetConfigurationWarnings()
@@ -53,6 +55,9 @@ public partial class HurtBox : Area2D
 
         if (statsManager == null)
             warnings.Add("StatsManager is not set.");
+
+        if (Owner as Entity is null)
+            warnings.Add("Owner is not an Entity.");
 
         return [.. warnings];
     }
