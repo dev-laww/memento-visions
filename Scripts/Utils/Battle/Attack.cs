@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Game.Components;
+using Game.Entities;
 using Godot;
 using GodotUtilities;
 
@@ -18,7 +19,7 @@ public partial class Attack : RefCounted
 
     public Type AttackType { get; }
 
-    public Node2D Attacker { get; }
+    public Entity Source { get; }
 
     public bool Fatal { get; set; }
 
@@ -32,11 +33,11 @@ public partial class Attack : RefCounted
 
     private Attack() { }
 
-    private Attack(float damage, Type type, Node2D attacker)
+    private Attack(float damage, Type type, Entity source)
     {
         AttackType = type;
         Critical = MathUtil.RNG.RandfRange(0, 1) < 0.2f;
-        Attacker = attacker;
+        Source = source;
 
         // Apply damage modifiers
         Damage = damage * (Critical ? MathUtil.RNG.RandfRange(1.5f, 2f) : 1);
@@ -46,5 +47,5 @@ public partial class Attack : RefCounted
 
     public void AddStatusEffect(StatusEffect effect) => statusEffects.Add(effect);
 
-    public static Attack Create(float damage, Type type, Node2D attacker) => new(damage, type, attacker);
+    public static Attack Create(float damage, Type type, Entity source) => new(damage, type, source);
 }

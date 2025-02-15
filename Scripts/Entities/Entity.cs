@@ -118,10 +118,10 @@ public abstract partial class Entity : CharacterBody2D, IEntity
 
     private void AttackReceived(Attack attack)
     {
-        Log.Debug($"{this} received {(attack.Fatal ? "a fatal" : "an")} attack from {attack.Attacker}.");
+        Log.Debug($"{this} received {(attack.Fatal ? "a fatal" : "an")} attack from {attack.Source}.");
         if (!attack.Fatal) return;
 
-        deathInfo = new DeathInfo { Victim = this, Killer = attack.Attacker as Entity, Position = GlobalPosition };
+        deathInfo = new DeathInfo { Victim = this, Killer = attack.Source, Position = GlobalPosition };
 
         Die(deathInfo);
     }
