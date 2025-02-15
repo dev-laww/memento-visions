@@ -9,6 +9,18 @@ namespace Game.Utils.Battle;
 
 public partial class Attack : RefCounted
 {
+    public class KnockbackInfo
+    {
+        public Vector2 Direction;
+        public float Force;
+
+        public void Deconstruct(out Vector2 direction, out float force)
+        {
+            direction = Direction;
+            force = Force;
+        }
+    }
+
     public enum Type
     {
         Physical,
@@ -23,6 +35,8 @@ public partial class Attack : RefCounted
 
     public bool Fatal { get; set; }
 
+    public KnockbackInfo Knockback { get; }
+
     public readonly bool Critical;
 
     public IReadOnlyList<StatusEffect> StatusEffects => statusEffects;
@@ -33,11 +47,12 @@ public partial class Attack : RefCounted
 
     private Attack() { }
 
-    private Attack(float damage, Type type, Entity source)
+    private Attack(float damage, Type type, Entity source, KnockbackInfo knockback = null)
     {
         AttackType = type;
         Critical = MathUtil.RNG.RandfRange(0, 1) < 0.2f;
         Source = source;
+        Knockback = knockback;
 
         // Apply damage modifiers
         Damage = damage * (Critical ? MathUtil.RNG.RandfRange(1.5f, 2f) : 1);
@@ -47,5 +62,5 @@ public partial class Attack : RefCounted
 
     public void AddStatusEffect(StatusEffect effect) => statusEffects.Add(effect);
 
-    public static Attack Create(float damage, Type type, Entity source) => new(damage, type, source);
+    public static Attack Create(float damage, Type type, Entity source, KnockbackInfo knockback = null) => new(damage, type, source, knockback);
 }
