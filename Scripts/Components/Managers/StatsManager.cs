@@ -122,6 +122,8 @@ public partial class StatsManager : Node
 
     public void IncreasDamage(float amount) => Damage += amount;
     public void DecreaseDamage(float amount) => Damage -= amount;
+    public void IncreaseDamagePercentage(float percentage) => Damage *= 1 + percentage;
+    public void DecreaseDamagePercentage(float percentage) => Damage *= 1 - percentage;
     public void IncreaseDefense(float amount) => Defense += amount;
     public void DecreaseDefense(float amount) => Defense -= amount;
 

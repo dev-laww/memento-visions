@@ -13,6 +13,6 @@ Name = "Gun"
 ItemCategory = 3
 WeaponType = 2
 Component = ExtResource("1_wtxhx")
-Damage = 100.0
+DamagePercentBuff = 0
 Description = ""
 metadata/_custom_type_script = ExtResource("1_wtqwt")

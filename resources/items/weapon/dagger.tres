@@ -13,6 +13,6 @@ Name = "Dagger"
 ItemCategory = 3
 WeaponType = 0
 Component = ExtResource("1_jhfva")
-Damage = 100.0
+DamagePercentBuff = 10
 Description = ""
 metadata/_custom_type_script = ExtResource("1_hu4ji")

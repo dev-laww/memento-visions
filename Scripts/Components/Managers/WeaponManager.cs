@@ -56,7 +56,7 @@ public partial class WeaponManager : Node
         WeaponComponent?.QueueFree();
 
         if (Weapon != null)
-            parent.StatsManager.DecreaseDamage(Weapon.Damage);
+            parent.StatsManager.DecreaseDamagePercentage(Weapon.DamagePercentBuff / 100f);
 
         Weapon = weapon;
         WeaponComponent = weapon.Component.Instantiate<WeaponComponent>();
@@ -64,14 +64,14 @@ public partial class WeaponManager : Node
 
         SaveManager.Data.Player.Equipped = Weapon.Id;
 
-        parent.StatsManager.IncreasDamage(weapon.Damage);
+        parent.StatsManager.IncreaseDamagePercentage(weapon.DamagePercentBuff / 100f);
         parent.CallDeferred("add_child", WeaponComponent);
         Log.Debug($"Equipped {weapon}");
     }
 
     public void Unequip()
     {
-        parent.StatsManager.DecreaseDamage(Weapon.Damage);
+        parent.StatsManager.DecreaseDamagePercentage(Weapon.DamagePercentBuff / 100f);
 
         WeaponComponent?.QueueFree();
         Weapon = null;

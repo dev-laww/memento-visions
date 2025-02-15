@@ -1220,6 +1220,9 @@ Id = "player"
 
 [node name="StatsManager" parent="." instance=ExtResource("2_cqdhe")]
 unique_name_in_owner = true
+Speed = 80.0
+Defense = 10.0
+Damage = 100.0
 
 [node name="HealthNumberManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
 script = ExtResource("3_0iqml")
@@ -1245,7 +1248,10 @@ metadata/_custom_type_script = ExtResource("3_65tgk")
 [node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
 script = ExtResource("3_lmufy")
 StatsManager = NodePath("../StatsManager")
-AccelerationCoefficient = 13.0
+AccelerationCoefficient = 12.0
+TimesCanDash = 2
+CanDashWhileDashing = true
+DashSpeed = 150.0
 metadata/_custom_type_script = ExtResource("3_lmufy")
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]

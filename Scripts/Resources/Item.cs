@@ -39,7 +39,7 @@ public partial class Item : Resource
     public Type WeaponType { get; private set; }
     public PackedScene Component { get; private set; }
     public string Description { get; private set; }
-    public float Damage { get; private set; }
+    public int DamagePercentBuff { get; private set; }
 
     public Category ItemCategory
     {
@@ -111,8 +111,8 @@ public partial class Item : Resource
 
             properties.Add(new Dictionary
             {
-                { "name", PropertyName.Damage },
-                { "type", (int)Variant.Type.Float },
+                { "name", PropertyName.DamagePercentBuff },
+                { "type", (int)Variant.Type.Int },
                 { "usage", (int)PropertyUsageFlags.Default }
             });
         }
