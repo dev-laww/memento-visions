@@ -1,14 +1,12 @@
 using System.Collections.Generic;
 using Game.Utils.Battle;
 using Godot;
-using GodotUtilities;
 using Game.Globals;
 using Game.Entities;
 
 namespace Game.Components;
 
 [Tool]
-[Scene]
 [GlobalClass, Icon("res://assets/icons/health-number-manager.svg")]
 public partial class HealthNumberManager : Node
 {
