@@ -179,7 +179,7 @@ public partial class StatsManager : Node
 
         while (Experience >= requiredExperience)
         {
-            Experience -= requiredExperience;
+            Experience -= requiredExperience; 
             Level++;
 
             EmitSignalLevelUp(Level);
