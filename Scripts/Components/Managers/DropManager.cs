@@ -11,7 +11,7 @@ namespace Game.Components;
 
 [Tool]
 [Scene]
-[GlobalClass]
+[GlobalClass, Icon("res://assets/icons/drop-manager.svg")]
 public partial class DropManager : Node
 {
     private class Drop
