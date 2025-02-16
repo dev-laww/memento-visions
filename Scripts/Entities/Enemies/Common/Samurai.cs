@@ -12,6 +12,7 @@ public partial class Samurai : Enemy
     [Node] private Area2D Range;
     [Node] private AnimationPlayer Animation;
     [Node] private DropManager DropManager;
+    [Node] private PathFindManager PathFindManager;
 
     private bool inRange;
     private bool attacking;
@@ -55,17 +56,13 @@ public partial class Samurai : Enemy
 
     private void Idle()
     {
-        VelocityManager.Decelerate();
         Animation.Play("idle");
     }
 
     private void Walk()
     {
-        var player = this.GetPlayer();
-
-        var direction = (player?.GlobalPosition - GlobalPosition)?.Normalized() ?? Vector2.Zero;
-
-        VelocityManager.Accelerate(direction);
+        PathFindManager.SetTargetPosition(this.GetPlayer().GlobalPosition);
+        PathFindManager.Follow();
         Animation.Play("walk");
     }
 
@@ -79,8 +76,6 @@ public partial class Samurai : Enemy
 
     private async void Attack()
     {
-        VelocityManager.Decelerate();
-
         Animation.Play($"attack_{attackDirection}");
 
         await ToSignal(Animation, "animation_finished");
