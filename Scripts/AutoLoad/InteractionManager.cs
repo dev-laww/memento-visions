@@ -4,7 +4,7 @@ using Game.Common.Interfaces;
 using Game.Utils.Extensions;
 using Godot;
 
-namespace Game.Globals;
+namespace Game.AutoLoad;
 
 public partial class InteractionManager : Global<InteractionManager>
 {

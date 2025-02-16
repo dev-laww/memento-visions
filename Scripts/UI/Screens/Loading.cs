@@ -1,4 +1,4 @@
-using Game.Globals;
+using Game.AutoLoad;
 using Godot;
 using GodotUtilities;
 

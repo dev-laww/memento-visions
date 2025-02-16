@@ -3,7 +3,7 @@ using Game.UI.Screens;
 using Godot;
 using Array = Godot.Collections.Array;
 
-namespace Game.Globals;
+namespace Game.AutoLoad;
 
 public enum Transition
 {

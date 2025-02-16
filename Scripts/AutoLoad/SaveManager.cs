@@ -1,10 +1,9 @@
 using Game.Common;
 using Game.Common.Models;
-using Game.Data;
 using Godot;
 using Newtonsoft.Json;
 
-namespace Game.Globals;
+namespace Game.AutoLoad;
 
 public partial class SaveManager : Global<SaveManager>
 {

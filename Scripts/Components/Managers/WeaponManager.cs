@@ -2,8 +2,7 @@
 using Game.Common;
 using Game.Common.Utilities;
 using Game.Entities;
-using Game.Globals;
-using Game.Data;
+using Game.AutoLoad;
 using Game.Data;
 using Godot;
 

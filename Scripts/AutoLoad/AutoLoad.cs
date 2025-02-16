@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Game.Globals;
+namespace Game.AutoLoad;
 
 public abstract partial class Global<T> : Node where T : Global<T>
 {
@@ -15,7 +15,7 @@ public abstract partial class Global<T> : Node where T : Global<T>
 
     public override void _ExitTree()
     {
-        Instance.QueueFree();
+        Instance?.QueueFree();
         Instance = null;
     }
 }

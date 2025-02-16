@@ -27,14 +27,12 @@ buses/default_bus_layout="res://resources/misc/default_bus_layout.tres"
 
 [autoload]
 
-SaveManager="*res://Scripts/Globals/SaveManager.cs"
-SceneManager="*res://Scripts/Globals/SceneManager.cs"
+SaveManager="*res://Scripts/AutoLoad/SaveManager.cs"
+SceneManager="*res://Scripts/AutoLoad/SceneManager.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-SoundManger="*res://Scenes/Components/Managers/SoundManger.tscn"
-InteractionManager="*res://Scripts/Globals/InteractionManager.cs"
-EnemyManager="*res://Scripts/Globals/EnemyManager.cs"
-MusicManager="*res://Scripts/Components/Managers/MusicManager.cs"
-FloatingTextManager="*res://Scenes/Globals/FloatingTextManager.tscn"
+InteractionManager="*res://Scripts/AutoLoad/InteractionManager.cs"
+EnemyManager="*res://Scripts/AutoLoad/EnemyManager.cs"
+FloatingTextManager="*res://Scenes/AutoLoad/FloatingTextManager.tscn"
 
 [dialogue_manager]
 

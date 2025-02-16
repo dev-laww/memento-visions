@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using Game.Common;
-using Game.Globals;
+using Game.AutoLoad;
 using Godot;
 
 namespace Game.Data;

@@ -3,7 +3,7 @@ using System.Linq;
 using Game.Common;
 using Game.Common.Interfaces;
 using Game.Components;
-using Game.Globals;
+using Game.AutoLoad;
 using Game.Utils.Battle;
 using Godot;
 using GodotUtilities;

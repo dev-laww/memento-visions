@@ -3,7 +3,7 @@ using Game.Common;
 using Game.Entities;
 using Godot;
 
-namespace Game.Globals;
+namespace Game.AutoLoad;
 
 public partial class EnemyManager : Global<EnemyManager>
 {

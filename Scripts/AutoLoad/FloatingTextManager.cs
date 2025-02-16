@@ -3,7 +3,7 @@ using Game.Components;
 using Godot;
 using GodotUtilities;
 
-namespace Game.Globals;
+namespace Game.AutoLoad;
 
 [Scene]
 public partial class FloatingTextManager : Global<FloatingTextManager>
