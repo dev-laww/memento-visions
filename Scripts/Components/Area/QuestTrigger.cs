@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Game.Common.Extensions;
 using Game.Common.Interfaces;
 using Game.Globals;
-using Game.Resources;
+using Game.Data;
 using Game.UI.Common;
 using Game.Utils.Extensions;
 using Godot;

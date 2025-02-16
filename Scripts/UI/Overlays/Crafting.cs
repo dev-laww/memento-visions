@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
-using Game.Registry;
-using Game.Resources;
+using Game.Data;
+using Game.Data;
 using Game.UI.Common;
 using Game.Utils.Extensions;
 using Godot;

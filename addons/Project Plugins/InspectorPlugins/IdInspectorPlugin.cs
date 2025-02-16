@@ -1,7 +1,7 @@
 #if TOOLS
 
-using Game.Registry;
-using Game.Resources;
+using Game.Data;
+using Game.Data;
 using Godot;
 
 namespace ProjectPlugin.InspectorPlugin;

@@ -2,7 +2,7 @@ using System;
 using Godot;
 using Godot.Collections;
 
-namespace Game.Resources;
+namespace Game.Data;
 
 [Tool]
 [GlobalClass, Icon("res://assets/icons/item.svg")]

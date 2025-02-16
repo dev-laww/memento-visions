@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Game.Common;
 using Game.Entities;
-using Game.Resources;
+using Game.Data;
 using Godot;
 using GodotUtilities;
 using GodotUtilities.Logic;

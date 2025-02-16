@@ -4,7 +4,7 @@ using Game.Common;
 using Game.Globals;
 using Godot;
 
-namespace Game.Resources;
+namespace Game.Data;
 
 [GlobalClass, Icon("res://assets/icons/recipe.svg")]
 public partial class Recipe : Resource

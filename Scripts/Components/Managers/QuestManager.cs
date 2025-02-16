@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
 using Game.Globals;
-using Game.Resources;
+using Game.Data;
 using Game.Utils.Extensions;
 using Godot;
 

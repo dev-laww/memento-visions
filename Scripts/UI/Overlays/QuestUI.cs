@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GodotUtilities;
 using Game.Components;
-using Game.Resources;
+using Game.Data;
 using Game.Utils.Extensions;
 
 namespace Game.UI.Overlays;

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Game.Resources;
+namespace Game.Data;
 
 [Tool]
 [GlobalClass, Icon("res://assets/icons/item-group.svg")]

@@ -3,8 +3,8 @@ using Game.Common;
 using Game.Common.Utilities;
 using Game.Entities;
 using Game.Globals;
-using Game.Registry;
-using Game.Resources;
+using Game.Data;
+using Game.Data;
 using Godot;
 
 namespace Game.Components;

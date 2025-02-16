@@ -5,7 +5,7 @@ using Game.Entities;
 using Godot;
 using Godot.Collections;
 
-namespace Game.Resources;
+namespace Game.Data;
 
 [Tool]
 [GlobalClass, Icon("res://assets/icons/quest-step.svg")]

@@ -4,7 +4,7 @@ using System.Linq;
 using Game.Entities;
 using Godot;
 
-namespace Game.Resources;
+namespace Game.Data;
 
 [Tool]
 [GlobalClass, Icon("res://assets/icons/quest.svg")]

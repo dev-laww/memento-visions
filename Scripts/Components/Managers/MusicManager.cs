@@ -1,6 +1,6 @@
 using Godot;
 using System.Collections.Generic;
-using Game.Resources;
+using Game.Data;
 using GodotUtilities;
 
 namespace Game.Components;
