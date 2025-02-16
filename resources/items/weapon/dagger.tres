@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://bnk1v4rxbspqe"]
 
-[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Resources/Item.cs" id="1_hu4ji"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="1_hu4ji"]
 [ext_resource type="PackedScene" uid="uid://ndiysulc1a43" path="res://Scenes/Weapons/Dagger.tscn" id="1_jhfva"]
 [ext_resource type="Texture2D" uid="uid://bhcc617yhnh4v" path="res://assets/weapons/dagger/icon.png" id="2_bpntj"]
 
