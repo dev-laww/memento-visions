@@ -6,4 +6,7 @@ using Godot;
 namespace Game.Registry;
 
 [GlobalClass]
-public partial class QuestRegistry() : Registry<Quest, QuestRegistry>(Constants.QUESTS_PATH);
+public partial class QuestRegistry : Registry<Quest, QuestRegistry>
+{
+    protected override string ResourcePath => Constants.QUESTS_PATH;
+}

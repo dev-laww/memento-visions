@@ -1,6 +1,7 @@
-﻿using FuzzySharp;
-using Game.Common.Utilities;
+﻿using Game.Common.Utilities;
 using Godot;
+using System;
+using FuzzySharp;
 
 namespace Game.Common.Abstract;
 
@@ -8,55 +9,50 @@ public abstract class Registry<T, TRegistry> : GodotObject
     where T : GodotObject
     where TRegistry : Registry<T, TRegistry>, new()
 {
-    protected static readonly Lazy<TRegistry> _instance = new(() => new TRegistry());
-    protected readonly Dictionary<string, List<string>> _fileCache = [];
-    private readonly string _resourcePath;
+    private static readonly Lazy<TRegistry> Instance = new(() => new TRegistry());
 
-    protected Registry(string resourcePath)
+    protected abstract string ResourcePath { get; }
+
+    protected static readonly Dictionary<string, T> Resources = [];
+
+    static Registry()
     {
-        _resourcePath = resourcePath;
-        if (!_fileCache.ContainsKey(_resourcePath))
+        Instance.Value.LoadResources();
+    }
+
+    public static T? Get(string id)
+    {
+        // Fuzzy matching
+        Resources.TryGetValue(id, out var resource);
+
+        if (resource != null) return resource;
+
+        var matches = Process.ExtractOne(id, Resources.Keys.ToArray());
+
+        if (matches.Score < 80) return null;
+
+        Resources.TryGetValue(matches.Value, out resource);
+
+        return resource;
+    }
+
+    protected virtual void LoadResources()
+    {
+        var files = DirAccessUtils.GetFilesRecursively(Instance.Value.ResourcePath);
+
+        foreach (var file in files)
         {
-            _fileCache[_resourcePath] = DirAccessUtils.GetFilesRecursively(_resourcePath);
+            if (!file.EndsWith(".tres") && !file.EndsWith(".tres.remap")) continue;
+
+            var resource = ResourceLoader.Load<T>(file);
+
+            if (resource == null) continue;
+
+            var id = resource.Get("Id").AsString();
+
+            if (id == string.Empty) continue;
+
+            Resources[id] = resource;
         }
     }
-
-    protected List<string> GetFiles(bool forceReload = false)
-    {
-        if (!forceReload && _fileCache.TryGetValue(_resourcePath, out var value)) return value;
-
-        value = DirAccessUtils.GetFilesRecursively(_resourcePath);
-        _fileCache[_resourcePath] = value;
-
-        return value;
-    }
-
-    protected virtual T? GetResource(string id)
-    {
-        var targetIdPart = id.Split(":").Last();
-
-        var exactMatch = GetFiles(OS.IsDebugBuild())
-            .FirstOrDefault(file => file.Split("/").Last().Contains(targetIdPart));
-
-        if (exactMatch != null && ResourceLoaderUtils.Load<T>(exactMatch, out var res))
-            return res;
-
-        return (
-            from file in GetFiles()
-            let filename = file.Split("/").Last()
-            let similarity = Fuzz.PartialRatio(filename, targetIdPart)
-            where similarity >= 80
-            orderby similarity descending
-            select ResourceLoader.Load<T>(file)
-            into resource
-            where resource.Get("Id").ToString() == id
-            select resource
-        ).FirstOrDefault();
-    }
-
-    public static T? Get(string id) => _instance.Value.GetResource(id);
-
-    public void InvalidateCache() => _fileCache.Remove(_resourcePath);
-
-    public static Dictionary<string, List<string>> GetFileCache() => _instance.Value._fileCache;
 }
