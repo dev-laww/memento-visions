@@ -100,12 +100,71 @@ public partial class StatsManager : Node
             AddStatusEffect(effect);
     }
 
-    public void Heal(float amount) => Health += amount;
-    public void TakeDamage(float amount)
+    // Health
+    public void Heal(float amount, ModifyMode mode = ModifyMode.Value)
     {
-        Health -= amount;
+        Health += mode switch
+        {
+            ModifyMode.Percentage => MaxHealth * (amount / 100f),
+            ModifyMode.Value => amount,
+            _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
+        };
+    }
+
+    public void TakeDamage(float amount, ModifyMode mode = ModifyMode.Value)
+    {
+        Health -= mode switch
+        {
+            ModifyMode.Percentage => MaxHealth * (amount / 100f),
+            ModifyMode.Value => amount,
+            _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
+        };
+
         EmitSignalDamageTaken(amount);
     }
+
+    // Damage
+    public void IncreaseDamage(float amount, ModifyMode mode = ModifyMode.Value)
+    {
+        Damage += mode switch
+        {
+            ModifyMode.Percentage => Damage * (amount / 100f),
+            ModifyMode.Value => amount,
+            _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
+        };
+    }
+
+    public void DecreaseDamage(float amount, ModifyMode mode = ModifyMode.Value)
+    {
+        Damage -= mode switch
+        {
+            ModifyMode.Percentage => Damage * (amount / 100f),
+            ModifyMode.Value => amount,
+            _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
+        };
+    }
+
+    // Defense
+    public void IncreaseDefense(float amount, ModifyMode mode = ModifyMode.Value)
+    {
+        Defense += mode switch
+        {
+            ModifyMode.Percentage => Damage * (amount / 100f),
+            ModifyMode.Value => amount,
+            _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
+        };
+    }
+
+    public void DecreaseDefense(float amount, ModifyMode mode = ModifyMode.Value)
+    {
+        Defense -= mode switch
+        {
+            ModifyMode.Percentage => Damage * (amount / 100f),
+            ModifyMode.Value => amount,
+            _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
+        };
+    }
+
     public void IncreaseLevel(float amount)
     {
         Level += amount;
@@ -136,13 +195,6 @@ public partial class StatsManager : Node
         // TODO: Apply level up stats
     }
 
-    public void IncreaseDamage(float amount) => Damage += amount;
-    public void DecreaseDamage(float amount) => Damage -= amount;
-    public void IncreaseDamagePercentage(float percentage) => Damage *= 1 + percentage;
-    public void DecreaseDamagePercentage(float percentage) => Damage *= 1 - percentage;
-    public void IncreaseDefense(float amount) => Defense += amount;
-    public void DecreaseDefense(float amount) => Defense -= amount;
-
     public void ReceiveAttack(Attack attack)
     {
         Health -= Math.Clamp(attack.Damage - defense, 0, float.MaxValue);
@@ -156,16 +208,16 @@ public partial class StatsManager : Node
             AddStatusEffect(effect);
     }
 
+    // TODO: Revalidate this method
     public void AddStatusEffect(StatusEffect effect)
     {
-        if (!statusEffects.TryAdd(effect.Id, effect)) return;
-
-        effect.Apply();
-
-        if (Entity.GetChildren().OfType<StatusEffect>().All(e => e.Id != effect.Id))
+        if (!statusEffects.TryGetValue(effect.Id, out var existing))
+        {
             Entity.AddChild(effect);
+            effect.Apply();
+        }
         else if (!effect.EditorAdded)
-            effect.Stack(effect.StackCount);
+            existing.Stack(effect.StackCount);
 
         EmitSignalStatusEffectAdded(effect);
 
@@ -259,5 +311,11 @@ public partial class StatsManager : Node
             warnings.Add("StatsManager must be  a child of an Entity.");
 
         return [.. warnings];
+    }
+
+    public enum ModifyMode
+    {
+        Percentage,
+        Value
     }
 }

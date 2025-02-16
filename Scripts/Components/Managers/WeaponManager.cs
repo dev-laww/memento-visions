@@ -21,14 +21,13 @@ public partial class WeaponManager : Node
     {
         parent = GetParent<Entity>();
 
-        if (SaveManager.Data.Player.Equipped != string.Empty)
-        {
-            var weapon = ItemRegistry.Get(SaveManager.Data.Player.Equipped);
+        if (SaveManager.Data.Player.Equipped == string.Empty) return;
 
-            if (weapon == null) return;
+        var weapon = ItemRegistry.Get(SaveManager.Data.Player.Equipped);
 
-            Equip(weapon);
-        }
+        if (weapon == null) return;
+
+        Equip(weapon);
     }
 
     public override void _EnterTree()
@@ -55,7 +54,7 @@ public partial class WeaponManager : Node
         WeaponComponent?.QueueFree();
 
         if (Weapon != null)
-            parent.StatsManager.DecreaseDamagePercentage(Weapon.DamagePercentBuff / 100f);
+            parent.StatsManager.DecreaseDamage(Weapon.DamagePercentBuff, StatsManager.ModifyMode.Percentage);
 
         Weapon = weapon;
         WeaponComponent = weapon.Component.Instantiate<WeaponComponent>();
@@ -63,14 +62,14 @@ public partial class WeaponManager : Node
 
         SaveManager.Data.Player.Equipped = Weapon.Id;
 
-        parent.StatsManager.IncreaseDamagePercentage(weapon.DamagePercentBuff / 100f);
+        parent.StatsManager.IncreaseDamage(weapon.DamagePercentBuff, StatsManager.ModifyMode.Percentage);
         parent.CallDeferred("add_child", WeaponComponent);
         Log.Debug($"Equipped {weapon}");
     }
 
     public void Unequip()
     {
-        parent.StatsManager.DecreaseDamagePercentage(Weapon.DamagePercentBuff / 100f);
+        parent.StatsManager.DecreaseDamage(Weapon.DamagePercentBuff, StatsManager.ModifyMode.Percentage);
 
         WeaponComponent?.QueueFree();
         Weapon = null;
