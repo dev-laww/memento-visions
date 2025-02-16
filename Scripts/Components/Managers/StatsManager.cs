@@ -136,7 +136,7 @@ public partial class StatsManager : Node
         // TODO: Apply level up stats
     }
 
-    public void IncreasDamage(float amount) => Damage += amount;
+    public void IncreaseDamage(float amount) => Damage += amount;
     public void DecreaseDamage(float amount) => Damage -= amount;
     public void IncreaseDamagePercentage(float percentage) => Damage *= 1 + percentage;
     public void DecreaseDamagePercentage(float percentage) => Damage *= 1 - percentage;
