@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cup5c3p5fcfyu"]
+
+[ext_resource type="Script" uid="uid://yom8wiwcvt10" path="res://Scripts/Components/Managers/PathFindManager.cs" id="1_tv2j5"]
+[ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_sywbf"]
+
+[node name="PathFindManager" type="Node2D"]
+script = ExtResource("1_tv2j5")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="IntervalTimer" type="Timer" parent="."]
+one_shot = true
+script = ExtResource("2_sywbf")
+min_wait_time = 0.3
+max_wait_time = 0.8
+metadata/_custom_type_script = ExtResource("2_sywbf")
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="OnVelocityComputed"]
