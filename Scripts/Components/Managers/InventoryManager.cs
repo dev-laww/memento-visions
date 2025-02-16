@@ -99,7 +99,7 @@ public partial class InventoryManager : Node
 
         EmitSignalPickup(itemGroup ?? group);
         EmitSignalUpdated(itemGroup ?? group);
-        Log.Debug($"Added {itemGroup ?? group} to the inventory.");
+        Log.Debug($"Added {group} to the inventory.");
     }
 
     public void RemoveItem(ItemGroup group)
@@ -125,9 +125,9 @@ public partial class InventoryManager : Node
     public bool HasItem(ItemGroup group) => Inventory[group.Item.ItemCategory]
         .Any(g => g.Item.Id == group.Item.Id && g.Quantity >= group.Quantity);
 
-    private void AddItemCommand(string uniqueName, int quantity = 1)
+    private void AddItemCommand(string id, int quantity = 1)
     {
-        var item = ItemRegistry.Get(uniqueName) ?? throw new CommandException($"Item '{uniqueName}' not found.");
+        var item = ItemRegistry.Get(id) ?? throw new CommandException($"Item '{id}' not found.");
 
         AddItem(new ItemGroup
         {
@@ -136,9 +136,9 @@ public partial class InventoryManager : Node
         });
     }
 
-    private void RemoveItemCommand(string uniqueName, int quantity = 1)
+    private void RemoveItemCommand(string id, int quantity = 1)
     {
-        var item = ItemRegistry.Get(uniqueName) ?? throw new CommandException($"Item '{uniqueName}' not found.");
+        var item = ItemRegistry.Get(id) ?? throw new CommandException($"Item '{id}' not found.");
 
         RemoveItem(new ItemGroup
         {
