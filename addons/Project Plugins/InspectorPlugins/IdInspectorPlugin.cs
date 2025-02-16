@@ -1,13 +1,14 @@
 #if TOOLS
 
 using Game.Data;
+using Game.Entities;
 using Godot;
 
 namespace ProjectPlugin.InspectorPlugin;
 
 public partial class IdInspectorPlugin : EditorInspectorPlugin
 {
-    public override bool _CanHandle(GodotObject @object) => @object is Quest or Item;
+    public override bool _CanHandle(GodotObject @object) => @object is Quest or Item or Entity;
 
     public override bool _ParseProperty(GodotObject @object, Variant.Type type, string name, PropertyHint hintType, string hintString, PropertyUsageFlags usageFlags, bool wide)
     {
