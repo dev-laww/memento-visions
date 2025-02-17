@@ -7,20 +7,8 @@ namespace Game.AutoLoad;
 
 public partial class EnemyManager : AutoLoad<EnemyManager>
 {
-    [Signal] public delegate void SpawnedEventHandler(Enemy enemy);
-    [Signal] public delegate void DiedEventHandler(Entity.DeathInfo info);
-
-    public static event SpawnedEventHandler EnemySpawned
-    {
-        add => Instance.Spawned += value;
-        remove => Instance.Spawned -= value;
-    }
-
-    public static event DiedEventHandler EnemyDied
-    {
-        add => Instance.Died += value;
-        remove => Instance.Died -= value;
-    }
+    [Signal] public delegate void EnemySpawnedEventHandler(Entity.SpawnInfo info);
+    [Signal] public delegate void EnemyDiedEventHandler(Entity.DeathInfo info);
 
     private readonly List<Enemy> enemies = [];
 
@@ -36,7 +24,7 @@ public partial class EnemyManager : AutoLoad<EnemyManager>
         }
 
         Instance.enemies.Add(enemy);
-        Instance.EmitSignalSpawned(enemy);
+        Instance.EmitSignalEnemySpawned(info);
 
         Log.Debug($"{enemy} added to the registry. {info}");
     }
@@ -44,7 +32,8 @@ public partial class EnemyManager : AutoLoad<EnemyManager>
     public static void Unregister(Entity.DeathInfo info)
     {
         Instance.enemies.Remove(info.Victim as Enemy);
-        Instance.EmitSignalDied(info);
+        Instance.EmitSignalEnemyDied(info);
+
         Log.Debug($"{info.Victim} removed from the registry. {info}");
     }
 }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
 using Game.AutoLoad;
+using Game.Common.Utilities;
 using Game.Data;
 using Game.Utils.Extensions;
 using Godot;
@@ -63,7 +64,11 @@ public partial class QuestManager : Node
 
         player.InventoryManager.Pickup += quest.OnItemPickup;
         player.InventoryManager.Remove += quest.OnItemRemoved;
-        EnemyManager.EnemyDied += quest.OnEnemyDied;
+
+        EnemyManager.ConnectToSignal(
+            EnemyManager.SignalName.EnemyDied,
+            CallableUtils.FromMethod(quest.OnEnemyDied)
+        );
 
         quests.Add(quest);
         EmitSignalAdded(quest);
@@ -81,7 +86,11 @@ public partial class QuestManager : Node
 
         player.InventoryManager.Pickup -= quest.OnItemPickup;
         player.InventoryManager.Remove -= quest.OnItemRemoved;
-        EnemyManager.EnemyDied -= quest.OnEnemyDied;
+
+        EnemyManager.DisconnectFromSignal(
+            EnemyManager.SignalName.EnemyDied,
+            CallableUtils.FromMethod(quest.OnEnemyDied)
+        );
 
         quests.Remove(quest);
         EmitSignalRemoved(quest);
