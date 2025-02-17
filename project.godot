@@ -29,6 +29,7 @@ buses/default_bus_layout="res://resources/misc/default_bus_layout.tres"
 
 SaveManager="*res://Scripts/AutoLoad/SaveManager.cs"
 SceneManager="*res://Scripts/AutoLoad/SceneManager.cs"
+GameCamera="*res://Scenes/AutoLoad/GameCamera.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 InteractionManager="*res://Scripts/AutoLoad/InteractionManager.cs"
 EnemyManager="*res://Scripts/AutoLoad/EnemyManager.cs"
