@@ -8,12 +8,12 @@ public partial class InputManager : Node
 {
     // TODO: Make keybinds rebindable
 
-    private readonly StringName moveLeft = new("move_left");
-    private readonly StringName moveRight = new("move_right");
-    private readonly StringName moveUp = new("move_up");
-    private readonly StringName moveDown = new("move_down");
-    private readonly StringName attack = new("attack");
-    private readonly StringName dash = new("dash");
+    private readonly StringName moveLeft = "move_left";
+    private readonly StringName moveRight = "move_right";
+    private readonly StringName moveUp = "move_up";
+    private readonly StringName moveDown = "move_down";
+    private readonly StringName attack = "attack";
+    private readonly StringName dash = "dash";
 
 
     private readonly HashSet<string> justPressed = [];
@@ -54,7 +54,6 @@ public partial class InputManager : Node
         {
             pressed.Add(name);
             justPressed.Add(name);
-
         }
         else if (@event.IsActionReleased(name) && pressed.Contains(name))
         {
@@ -63,24 +62,7 @@ public partial class InputManager : Node
         }
     }
 
-    public Vector2 GetVector()
-    {
-        var vector = Vector2.Zero;
-
-        if (lockCount > 0)
-            return vector;
-
-        if (IsActionPressed(moveLeft))
-            vector += Vector2.Left;
-        if (IsActionPressed(moveRight))
-            vector += Vector2.Right;
-        if (IsActionPressed(moveUp))
-            vector += Vector2.Up;
-        if (IsActionPressed(moveDown))
-            vector += Vector2.Down;
-
-        return vector;
-    }
+    public Vector2 GetVector() => lockCount > 0 ? Vector2.Zero : Input.GetVector(moveLeft, moveRight, moveUp, moveDown);
 
     public bool IsActionPressed(StringName name) => pressed.Contains(name);
 
