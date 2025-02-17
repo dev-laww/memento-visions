@@ -1,6 +1,5 @@
 ﻿using Game.Common.Utilities;
 using Godot;
-using System;
 using FuzzySharp;
 
 namespace Game.Common.Abstract;
@@ -9,7 +8,7 @@ public abstract class Registry<T, TRegistry> : GodotObject
     where T : GodotObject
     where TRegistry : Registry<T, TRegistry>, new()
 {
-    private static readonly Lazy<TRegistry> Instance = new(() => new TRegistry());
+    protected static readonly Lazy<TRegistry> Instance = new(() => new TRegistry());
 
     protected abstract string ResourcePath { get; }
 
@@ -27,7 +26,7 @@ public abstract class Registry<T, TRegistry> : GodotObject
 
         if (resource != null) return resource;
 
-        var matches = Process.ExtractOne(id, Resources.Keys.ToArray());
+        var matches = Process.ExtractOne(id, [.. Resources.Keys]);
 
         if (matches.Score < 80) return null;
 
