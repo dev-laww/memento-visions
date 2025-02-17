@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cwy8dccrfrdby"]
 
-[ext_resource type="Script" uid="uid://cby25tfdw2ktv" path="res://Scripts/Globals/FloatingTextManager.cs" id="1_gp6i4"]
+[ext_resource type="Script" uid="uid://cby25tfdw2ktv" path="res://Scripts/AutoLoad/FloatingTextManager.cs" id="1_gp6i4"]
 [ext_resource type="PackedScene" uid="uid://bhtpeegdbdo3h" path="res://Scenes/UI/Common/FloatingText.tscn" id="2_0afsm"]
 
 [node name="FloatingTextManager" type="Node"]
