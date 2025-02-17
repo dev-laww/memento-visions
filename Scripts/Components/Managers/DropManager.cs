@@ -37,6 +37,8 @@ public partial class DropManager : Node
 
     public override void _Ready()
     {
+        if (Engine.IsEditorHint()) return;
+
         foreach (var (item, min, max, weight) in Drops)
         {
             var drop = new Drop { Item = item, Min = min, Max = max };
