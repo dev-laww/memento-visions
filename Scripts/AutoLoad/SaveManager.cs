@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Game.AutoLoad;
 
-public partial class SaveManager : Global<SaveManager>
+public partial class SaveManager : AutoLoad<SaveManager>
 {
     public static Save Data { get; private set; }
     private static readonly string dir = $"{(OS.IsDebugBuild() ? "res" : "user")}://data";

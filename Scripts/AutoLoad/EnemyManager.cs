@@ -5,7 +5,7 @@ using Godot;
 
 namespace Game.AutoLoad;
 
-public partial class EnemyManager : Global<EnemyManager>
+public partial class EnemyManager : AutoLoad<EnemyManager>
 {
     [Signal] public delegate void SpawnedEventHandler(Enemy enemy);
     [Signal] public delegate void DiedEventHandler(Entity.DeathInfo info);

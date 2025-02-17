@@ -31,7 +31,7 @@ public static class TransitionExtensions
 }
 
 // TODO: Add wipe direction to Transition.Wipe
-public partial class SceneManager : Global<SceneManager>
+public partial class SceneManager : AutoLoad<SceneManager>
 {
     [Signal] public delegate void LoadStartEventHandler(Loading loadingScreen);
     [Signal] public delegate void SceneAddedEventHandler(Node node, Loading loadingScreen);

@@ -2,7 +2,7 @@ using Godot;
 
 namespace Game.AutoLoad;
 
-public abstract partial class Global<T> : Node where T : Global<T>
+public abstract partial class AutoLoad<T> : Node where T : AutoLoad<T>
 {
     protected static T Instance { get; private set; }
 

@@ -6,7 +6,7 @@ using Godot;
 
 namespace Game.AutoLoad;
 
-public partial class InteractionManager : Global<InteractionManager>
+public partial class InteractionManager : AutoLoad<InteractionManager>
 {
     private readonly List<IInteractable> areas = [];
     private IInteractable lastClosest;

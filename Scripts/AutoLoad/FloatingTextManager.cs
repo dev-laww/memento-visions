@@ -6,7 +6,7 @@ using GodotUtilities;
 namespace Game.AutoLoad;
 
 [Scene]
-public partial class FloatingTextManager : Global<FloatingTextManager>
+public partial class FloatingTextManager : AutoLoad<FloatingTextManager>
 {
     [Node] private ResourcePreloader resourcePreloader;
 
