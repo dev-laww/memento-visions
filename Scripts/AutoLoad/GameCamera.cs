@@ -1,5 +1,3 @@
-using System;
-using Game.Common;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
