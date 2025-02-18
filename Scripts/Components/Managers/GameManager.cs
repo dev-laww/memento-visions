@@ -4,6 +4,10 @@ using Game.UI.Overlays;
 using Game.Common.Extensions;
 using Godot;
 using GodotUtilities;
+using Game.Common.Utilities;
+using Game.Data;
+using Game.Exceptions;
+using Game.Utils.Extensions;
 
 namespace Game.Components;
 
@@ -47,6 +51,16 @@ public partial class GameManager : Node
         if (what != NotificationSceneInstantiated) return;
 
         WireNodes();
+    }
+
+    public override void _EnterTree()
+    {
+        CommandInterpreter.Register("spawn", Spawn, "Spawns an entity at the given position. Usage: spawn [entity_id] [x] [y]");
+    }
+
+    public override void _ExitTree()
+    {
+        CommandInterpreter.Unregister("spawn");
     }
 
     // TODO: Move to separate script
@@ -103,5 +117,19 @@ public partial class GameManager : Node
             loadInTo: instance.currentScene,
             moveDirection: direction
         );
+    }
+
+    private void Spawn(string id, float x = 0, float y = 0)
+    {
+        if (id.ToLower().Contains("player"))
+            throw new CommandException("Cannot spawn player entity.");
+
+        var entity = EntityRegistry.GetAsEntity(id) ?? throw new CommandException($"Entity with id {id} not found.");
+
+        var position = new Vector2(x, y);
+        position = position == Vector2.Zero ? this.GetPlayer()?.GlobalPosition ?? Vector2.Zero : position;
+
+        CurrentScene.AddChild(entity);
+        entity.GlobalPosition = position;
     }
 }
