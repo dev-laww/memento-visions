@@ -39,6 +39,11 @@ public partial class DropManager : Node
     {
         if (Engine.IsEditorHint()) return;
 
+        if (GetParent() is Entity parent)
+        {
+            parent.Death += SpawnDrops;
+        }
+
         foreach (var (item, min, max, weight) in Drops)
         {
             var drop = new Drop { Item = item, Min = min, Max = max };

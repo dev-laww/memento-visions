@@ -461,7 +461,7 @@ metadata/_custom_type_script = ExtResource("3_0ykwq")
 
 [node name="PathFindManager" parent="." node_paths=PackedStringArray("VelocityManager") instance=ExtResource("4_1moht")]
 VelocityManager = NodePath("../VelocityManager")
-DebugEnabled = true
+DebugEnabled = null
 
 [node name="Range" type="Area2D" parent="."]
 collision_layer = 0
