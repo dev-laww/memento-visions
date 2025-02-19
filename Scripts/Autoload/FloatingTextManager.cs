@@ -12,7 +12,7 @@ public partial class FloatingTextManager : Autoload<FloatingTextManager>
 
     private static readonly Dictionary<Node, FloatingText> floatingTexts = [];
 
-    public class FloatingTextSpawnAgrs
+    public class FloatingTextSpawnArgs
     {
         public Node Parent;
         public Vector2 Position;
@@ -28,7 +28,7 @@ public partial class FloatingTextManager : Autoload<FloatingTextManager>
 
         var wasNull = floatingText is null;
 
-        floatingText ??= SpawnFloatingText(new FloatingTextSpawnAgrs { Parent = owner });
+        floatingText ??= SpawnFloatingText(new FloatingTextSpawnArgs { Parent = owner });
 
         if (wasNull)
             floatingText.Finished += () => OnFloatingTextFinished(owner, floatingText);
@@ -42,7 +42,7 @@ public partial class FloatingTextManager : Autoload<FloatingTextManager>
         return floatingText;
     }
 
-    public static FloatingText SpawnFloatingText(FloatingTextSpawnAgrs args)
+    public static FloatingText SpawnFloatingText(FloatingTextSpawnArgs args)
     {
         var parent = args.Parent ?? GameManager.CurrentScene ?? Instance.GetTree().CurrentScene;
 

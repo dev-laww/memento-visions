@@ -38,7 +38,7 @@ public partial class HealthNumberManager : Node
         if (type != StatsType.Health)
             return;
 
-        var args = new FloatingTextManager.FloatingTextSpawnAgrs
+        var args = new FloatingTextManager.FloatingTextSpawnArgs
         {
             Text = $"+{value}",
             Position = (Owner as Node2D).GlobalPosition,
@@ -53,7 +53,7 @@ public partial class HealthNumberManager : Node
 
     private void OnDamageTaken(float value)
     {
-        var args = new FloatingTextManager.FloatingTextSpawnAgrs
+        var args = new FloatingTextManager.FloatingTextSpawnArgs
         {
             Text = $"-{value}",
             Position = (Owner as Node2D).GlobalPosition,

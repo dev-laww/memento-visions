@@ -203,7 +203,7 @@ public partial class Player : Entity
     private void OnLevelUp(float level)
     {
         Log.Debug($"Player leveled up to {level}");
-        var text = FloatingTextManager.SpawnFloatingText(new FloatingTextManager.FloatingTextSpawnAgrs
+        var text = FloatingTextManager.SpawnFloatingText(new FloatingTextManager.FloatingTextSpawnArgs
         {
             Text = $"Level up to {level}!",
             Position = GlobalPosition,
