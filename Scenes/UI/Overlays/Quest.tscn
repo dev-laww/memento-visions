@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cuymxmsjlw48y"]
 
-[ext_resource type="Script" uid="uid://d11g3gbjm7cot" path="res://Scripts/UI/Overlays/QuestUI.cs" id="1_18xdc"]
+[ext_resource type="Script" uid="uid://d11g3gbjm7cot" path="res://Scripts/UI/Overlays/Quest.cs" id="1_18xdc"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_y52qg"]
 [ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="3_ii4hv"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="4_gsxto"]
@@ -24,17 +24,10 @@ load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.c
 atlas = SubResource("CompressedTexture2D_sfl0v")
 region = Rect2(128, 32, 32, 32)
 
-[node name="Quest" type="Control"]
-clip_contents = true
-layout_mode = 3
-anchors_preset = 0
-offset_left = 1.0
-offset_right = 644.0
-offset_bottom = 358.0
+[node name="Quest" type="CanvasLayer"]
 script = ExtResource("1_18xdc")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

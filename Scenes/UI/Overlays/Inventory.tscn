@@ -30,14 +30,8 @@ region_rect = Rect2(0, 0, 32, 32)
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Inventory" type="Control"]
+[node name="Inventory" type="CanvasLayer"]
 process_mode = 3
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("1_7jd4f")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
@@ -45,7 +39,6 @@ resources = [PackedStringArray("slot"), [ExtResource("5_17bmp")]]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = ExtResource("3_jakka")
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -54,7 +47,6 @@ grow_vertical = 2
 scale = Vector2(1.00141, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
