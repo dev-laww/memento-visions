@@ -9,6 +9,7 @@ using GodotUtilities;
 
 namespace Game;
 
+// TODO: fix console problem
 [Scene]
 public partial class DeveloperConsole : Overlay
 {
@@ -47,6 +48,7 @@ public partial class DeveloperConsole : Overlay
         commandInput.TextSubmitted += OnCommandInputSubmit;
         CommandInterpreter.CommandExecuted += OnCommandExecuted;
         output.Text = string.Empty;
+        commandInput.GrabFocus();
     }
 
     private void OnCommandInputSubmit(string text)
@@ -109,12 +111,5 @@ public partial class DeveloperConsole : Overlay
         base.Close();
 
         commandInput.Text = string.Empty;
-    }
-
-    public override void Open()
-    {
-        base.Open();
-
-        commandInput.GrabFocus();
     }
 }

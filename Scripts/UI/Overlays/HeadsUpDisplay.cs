@@ -12,18 +12,4 @@ public partial class HeadsUpDisplay : Overlay
     //
     //     WireNodes();
     // }
-
-    public override void Close()
-    {
-        base.Close();
-
-        MouseFilter = MouseFilterEnum.Ignore;
-    }
-
-    public override void Open()
-    {
-        base.Open();
-
-        MouseFilter = MouseFilterEnum.Ignore;
-    }
 }

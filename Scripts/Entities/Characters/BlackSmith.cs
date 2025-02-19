@@ -1,3 +1,4 @@
+using Game.Autoload;
 using Game.Components;
 using GodotUtilities;
 
@@ -22,6 +23,6 @@ public partial class BlackSmith : Entity
 
     private static void OnInteracted()
     {
-        GameManager.OpenOverlay("Crafting");
+        OverlayManager.ShowOverlay(OverlayManager.CRAFTING);
     }
 }

@@ -1,16 +1,15 @@
 using Godot;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using GodotUtilities;
 using Game.Components;
-using Game.Data;
 using Game.Utils.Extensions;
+using QuestResource = Game.Data.Quest;
 
 namespace Game.UI.Overlays;
 
+
 [Scene]
-public partial class QuestUI : Overlay
+public partial class Quest : Overlay
 {
     [Node] public Tree QuestTree;
     [Node] public RichTextLabel Description;
@@ -46,25 +45,25 @@ public partial class QuestUI : Overlay
         TreeRoot = QuestTree.CreateItem();
     }
 
-    private void OnQuestAdded(Quest quest)
+    private void OnQuestAdded(QuestResource quest)
     {
         var questItem = QuestTree.CreateItem(TreeRoot);
         questItem.SetText(0, quest.Title);
         questItem.SetMetadata(0, quest); 
     }
 
-    private void OnQuestUpdated(Quest quest)
+    private void OnQuestUpdated(QuestResource quest)
     {
         foreach (TreeItem item in TreeRoot.GetChildren())
         {
-            if ((Quest)item.GetMetadata(0) != quest) continue;
+            if ((QuestResource)item.GetMetadata(0) != quest) continue;
             item.SetText(0, quest.Title);
             UpdateQuestDetails(quest);
             break;
         }
     }
 
-    private void UpdateQuestDetails(Quest quest)
+    private void UpdateQuestDetails(QuestResource quest)
     {
         Title.Text = quest.Title;
         Description.Text = quest.Description;
@@ -77,11 +76,11 @@ public partial class QuestUI : Overlay
         }));
     }
 
-    private void OnQuestRemoved(Quest quest)
+    private void OnQuestRemoved(QuestResource quest)
     {
         foreach (TreeItem item in TreeRoot.GetChildren())
         {
-            if ((Quest)item.GetMetadata(0) != quest) continue;
+            if ((QuestResource)item.GetMetadata(0) != quest) continue;
             item.Free();
             break;
         }
@@ -92,7 +91,7 @@ public partial class QuestUI : Overlay
         var selectedItem = QuestTree.GetSelected();
         if (selectedItem == null) return;
 
-        var quest = (Quest)selectedItem.GetMetadata(0);
+        var quest = (QuestResource)selectedItem.GetMetadata(0);
         if (quest == null) return;
 
         UpdateQuestDetails(quest);

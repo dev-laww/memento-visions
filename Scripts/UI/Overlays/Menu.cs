@@ -26,20 +26,9 @@ public partial class Menu : Overlay
         quitButton.Pressed += () => GetTree().Quit();
     }
 
-    public override void Open()
-    {
-        base.Open();
-
-        tween = CreateTween();
-
-        tween.TweenProperty(Engine.Singleton, "time_scale", 0.5, 0.5);
-        tween.SetParallel().TweenProperty(GetTree(), "paused", true, 20);
-    }
-
     public override void Close()
     {
         base.Close();
-        tween.KillIfValid();
 
         Engine.TimeScale = 1;
         GetTree().Paused = false;
