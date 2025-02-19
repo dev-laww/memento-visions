@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Game.Utils.Battle;
 using Godot;
-using Game.AutoLoad;
+using Game.Autoload;
 using Game.Entities;
 
 namespace Game.Components;

@@ -1,5 +1,5 @@
 using System.Linq;
-using Game.AutoLoad;
+using Game.Autoload;
 using Game.UI.Overlays;
 using Game.Common.Extensions;
 using Godot;

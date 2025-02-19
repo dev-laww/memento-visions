@@ -1,6 +1,6 @@
 using Game.Common.Extensions;
 using Game.Common.Interfaces;
-using Game.AutoLoad;
+using Game.Autoload;
 using Game.UI.Common;
 using Godot;
 

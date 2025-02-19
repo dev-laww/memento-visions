@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
-using Game.AutoLoad;
+using Game.Autoload;
 using Game.Common.Utilities;
 using Game.Data;
 using Game.Utils.Extensions;

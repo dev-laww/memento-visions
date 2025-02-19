@@ -4,7 +4,7 @@ using System.Linq;
 using Game.Common;
 using Game.Common.Utilities;
 using Game.Exceptions;
-using Game.AutoLoad;
+using Game.Autoload;
 using Game.Data;
 using Godot;
 using Item = Game.Data.Item;

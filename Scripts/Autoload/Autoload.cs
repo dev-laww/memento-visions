@@ -1,9 +1,9 @@
 using Game.Common;
 using Godot;
 
-namespace Game.AutoLoad;
+namespace Game.Autoload;
 
-public abstract partial class AutoLoad<T> : Node where T : AutoLoad<T>
+public abstract partial class Autoload<T> : Node where T : Autoload<T>
 {
     public static T Instance { get; private set; }
 
