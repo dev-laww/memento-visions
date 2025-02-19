@@ -1,0 +1,15 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsmme5xlgs3wi"]
+
+[ext_resource type="Script" uid="uid://bd4th0nixbur3" path="res://Scripts/Autoload/OverlayManager.cs" id="1_qmxs7"]
+[ext_resource type="PackedScene" uid="uid://dd1jerr3yxfmm" path="res://Scenes/UI/Overlays/Crafting.tscn" id="2_kg6mn"]
+[ext_resource type="PackedScene" uid="uid://dmijoehq6y18t" path="res://Scenes/UI/Overlays/DeveloperConsole.tscn" id="3_rcr8j"]
+[ext_resource type="PackedScene" uid="uid://c6kt3qbs62e4i" path="res://Scenes/UI/Overlays/HeadsUpDisplay.tscn" id="4_4pl1h"]
+[ext_resource type="PackedScene" uid="uid://b161abm0o6ij2" path="res://Scenes/UI/Overlays/Inventory.tscn" id="5_snhm1"]
+[ext_resource type="PackedScene" uid="uid://cptktl4hefaup" path="res://Scenes/UI/Overlays/Menu.tscn" id="6_4coeh"]
+[ext_resource type="PackedScene" uid="uid://cuymxmsjlw48y" path="res://Scenes/UI/Overlays/Quest.tscn" id="7_j8p2r"]
+
+[node name="OverlayManager" type="Node"]
+script = ExtResource("1_qmxs7")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("Crafting", "DeveloperConsole", "HeadsUpDisplay", "Inventory", "Menu", "Quest"), [ExtResource("2_kg6mn"), ExtResource("3_rcr8j"), ExtResource("4_4pl1h"), ExtResource("5_snhm1"), ExtResource("6_4coeh"), ExtResource("7_j8p2r")]]

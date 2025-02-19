@@ -1,15 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://hc1bdnea1afd"]
+[gd_scene load_steps=4 format=3 uid="uid://hc1bdnea1afd"]
 
 [ext_resource type="Script" uid="uid://bt4ok8sg4whcf" path="res://Scripts/Components/Managers/GameManager.cs" id="1_jd26h"]
 [ext_resource type="PackedScene" uid="uid://npt6wv2s1hvr" path="res://Scenes/UI/Screens/Start.tscn" id="2_xr7b5"]
 [ext_resource type="PackedScene" uid="uid://d0qr3o1nxmcpe" path="res://Scenes/World/Bar.tscn" id="3_18ebj"]
-[ext_resource type="PackedScene" uid="uid://b161abm0o6ij2" path="res://Scenes/UI/Overlays/Inventory.tscn" id="4_3s3bi"]
-[ext_resource type="PackedScene" uid="uid://dd1jerr3yxfmm" path="res://Scenes/UI/Overlays/Crafting.tscn" id="5_1xnus"]
-[ext_resource type="PackedScene" uid="uid://cuymxmsjlw48y" path="res://Scenes/UI/Overlays/Quest.tscn" id="6_vcj0g"]
-[ext_resource type="PackedScene" uid="uid://cptktl4hefaup" path="res://Scenes/UI/Overlays/Menu.tscn" id="7_icpvm"]
-[ext_resource type="PackedScene" uid="uid://c6kt3qbs62e4i" path="res://Scenes/UI/Overlays/HeadsUpDisplay.tscn" id="8_t6ww0"]
-[ext_resource type="Script" uid="uid://xxp0gu26j6fh" path="res://Scripts/UI/Overlays/HeadsUpDisplay.cs" id="9_gcq4q"]
-[ext_resource type="PackedScene" uid="uid://dmijoehq6y18t" path="res://Scenes/UI/Overlays/DeveloperConsole.tscn" id="10_xgi0l"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_jd26h")
@@ -20,30 +13,3 @@ resources = [PackedStringArray("StartScreen"), [ExtResource("2_xr7b5")]]
 [node name="CurrentScene" type="Node" parent="."]
 
 [node name="Bar" parent="CurrentScene" instance=ExtResource("3_18ebj")]
-
-[node name="UserInterface" type="CanvasLayer" parent="."]
-process_mode = 3
-
-[node name="HeadsUpDisplay" parent="UserInterface" instance=ExtResource("8_t6ww0")]
-mouse_filter = 2
-script = ExtResource("9_gcq4q")
-
-[node name="Inventory" parent="UserInterface" instance=ExtResource("4_3s3bi")]
-visible = false
-mouse_filter = 2
-
-[node name="Crafting" parent="UserInterface" instance=ExtResource("5_1xnus")]
-visible = false
-mouse_filter = 2
-
-[node name="Quest" parent="UserInterface" instance=ExtResource("6_vcj0g")]
-visible = false
-mouse_filter = 2
-
-[node name="Menu" parent="UserInterface" instance=ExtResource("7_icpvm")]
-visible = false
-mouse_filter = 2
-
-[node name="DeveloperConsole" parent="UserInterface" instance=ExtResource("10_xgi0l")]
-visible = false
-mouse_filter = 2

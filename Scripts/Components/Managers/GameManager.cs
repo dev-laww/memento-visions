@@ -17,12 +17,11 @@ public partial class GameManager : Node
 {
     [Export] private bool showStartScreen;
 
-    [Node] private CanvasLayer userInterface;
     [Node] private Node currentScene;
     [Node] private ResourcePreloader resourcePreloader;
 
     private Overlay currentOverlay;
-    private Overlay GetOverlay(string name) => userInterface.GetNodeOrNull<Overlay>(name);
+
     private static GameManager instance;
 
     private bool isDevConsoleOpen;
@@ -61,47 +60,6 @@ public partial class GameManager : Node
     public override void _ExitTree()
     {
         CommandInterpreter.Unregister("spawn");
-    }
-
-    // TODO: Move to separate script
-    public override void _Input(InputEvent @event)
-    {
-        if (@event.IsActionPressed("open_inventory"))
-            HandleOverlay("Inventory");
-        else if (@event.IsActionPressed("menu"))
-            HandleOverlay("Menu");
-        else if (@event.IsActionPressed("open_quests_info"))
-            HandleOverlay("Quest");
-        else if (@event.IsActionPressed("open_dev_console"))
-            HandleOverlay("DeveloperConsole");
-    }
-
-    private void HandleOverlay(string overlayName)
-    {
-        var targetOverlay = GetOverlay(overlayName);
-
-        if (targetOverlay == null) return;
-
-        var shouldClose = currentOverlay == targetOverlay || (overlayName == "Menu" && currentOverlay != null);
-
-        if (shouldClose)
-        {
-            currentOverlay.Close();
-            return;
-        }
-
-        if (currentOverlay != null) return;
-
-        currentOverlay = targetOverlay;
-        currentOverlay.Open();
-    }
-
-    public static void OpenOverlay(string overlayName) => instance.HandleOverlay(overlayName);
-
-    public static void CloseCurrentOverlay()
-    {
-        instance.currentOverlay?.Close();
-        instance.currentOverlay = null;
     }
 
     public static void ChangeScene(
