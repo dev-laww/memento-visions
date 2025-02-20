@@ -44,7 +44,7 @@ public partial class Inventory : Overlay
         var player = this.GetPlayer();
         if (player is null) return;
 
-        slots = slotsContainer.GetChildrenOfType<Slot>().ToList();
+        slots = [.. slotsContainer.GetChildrenOfType<Slot>()];
 
         slots.ForEach(slot => slot.Pressed += SelectSlot);
         closeButton.Pressed += Close;
@@ -53,6 +53,18 @@ public partial class Inventory : Overlay
         player.InventoryManager.Updated += OnInventoryUpdate;
 
         PopulateSlots(currentCategory);
+    }
+
+    public override void _ExitTree()
+    {
+        var player = this.GetPlayer();
+        if (player is null) return;
+
+        slots.ForEach(slot => slot.Pressed -= SelectSlot);
+        closeButton.Pressed -= Close;
+        selectedItemActionButton.Toggled -= OnButtonToggle;
+        materialButton.ButtonGroup.Pressed -= OnItemCategoryPress;
+        player.InventoryManager.Updated -= OnInventoryUpdate;
     }
 
     private void SelectSlot(Slot slot)
