@@ -28,6 +28,9 @@ public partial class DeveloperConsole : Overlay
         CommandInterpreter.Register("quit", Quit, "Quits the game.");
         CommandInterpreter.Register("clear", ClearOutput, "Clears the console output.");
         CommandInterpreter.Register("help", Help, "Displays all available commands.");
+
+        commandInput.TextSubmitted += OnCommandInputSubmit;
+        CommandInterpreter.CommandExecuted += OnCommandExecuted;
     }
 
     public override void _ExitTree()
@@ -35,6 +38,9 @@ public partial class DeveloperConsole : Overlay
         CommandInterpreter.Unregister("quit");
         CommandInterpreter.Unregister("clear");
         CommandInterpreter.Unregister("help");
+
+        commandInput.TextSubmitted -= OnCommandInputSubmit;
+        CommandInterpreter.CommandExecuted -= OnCommandExecuted;
     }
 
     public override void _Ready()
@@ -45,10 +51,9 @@ public partial class DeveloperConsole : Overlay
             return;
         }
 
-        commandInput.TextSubmitted += OnCommandInputSubmit;
-        CommandInterpreter.CommandExecuted += OnCommandExecuted;
         output.Text = string.Empty;
         commandInput.GrabFocus();
+        OnCommandExecuted(string.Empty, []);
     }
 
     private void OnCommandInputSubmit(string text)
