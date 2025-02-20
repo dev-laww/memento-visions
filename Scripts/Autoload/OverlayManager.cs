@@ -49,8 +49,6 @@ public partial class OverlayManager : Autoload<OverlayManager>
 
         Instance.AddChild(currentOverlay);
         Instance.GetPlayer()?.InputManager.AddLock();
-
-        GD.Print($"Showing overlay: {name}");
     }
 
     public static void HideOverlay()

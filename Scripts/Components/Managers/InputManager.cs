@@ -74,8 +74,6 @@ public partial class InputManager : Node
     {
         lockCount++;
 
-        GD.Print($"Input lock count: {lockCount}");
-
         if (lockCount == 1)
         {
             pressed.Clear();
