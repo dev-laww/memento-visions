@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dpda8p54wl0y7"]
 
 [ext_resource type="PackedScene" uid="uid://bj127mbpsv45j" path="res://Scenes/Weapons/Sword.tscn" id="1_3sg1w"]
-[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Resources/Item.cs" id="1_gsd8o"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="1_gsd8o"]
 [ext_resource type="Texture2D" uid="uid://dlwsy8jlu2lqy" path="res://assets/weapons/sword/icon.png" id="2_y64f0"]
 
 [resource]
