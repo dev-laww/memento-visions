@@ -65,8 +65,8 @@ public partial class QuestManager : Node
         player.InventoryManager.Pickup += quest.OnItemPickup;
         player.InventoryManager.Remove += quest.OnItemRemoved;
 
-        EnemyManager.ConnectToSignal(
-            EnemyManager.SignalName.EnemyDied,
+        GameEvents.ConnectToSignal(
+            GameEvents.SignalName.EntityDied,
             CallableUtils.FromMethod(quest.OnEnemyDied)
         );
 
@@ -87,8 +87,8 @@ public partial class QuestManager : Node
         player.InventoryManager.Pickup -= quest.OnItemPickup;
         player.InventoryManager.Remove -= quest.OnItemRemoved;
 
-        EnemyManager.DisconnectFromSignal(
-            EnemyManager.SignalName.EnemyDied,
+        GameEvents.DisconnectFromSignal(
+            GameEvents.SignalName.EntityDied,
             CallableUtils.FromMethod(quest.OnEnemyDied)
         );
 

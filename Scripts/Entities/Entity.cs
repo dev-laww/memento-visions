@@ -115,6 +115,7 @@ public abstract partial class Entity : CharacterBody2D, IEntity
     public virtual void OnProcess(double delta) { }
 
     private DeathInfo deathInfo;
+    private SpawnInfo spawnInfo;
 
     private void AttackReceived(Attack attack)
     {
@@ -142,9 +143,12 @@ public abstract partial class Entity : CharacterBody2D, IEntity
         TreeExiting += EmitDeath;
         StateMachine = new DelegateStateMachine();
         StatsManager.AttackReceived += AttackReceived;
+        spawnInfo = new SpawnInfo(this);
+
+        GameEvents.EmitEntitySpawned(spawnInfo);
 
         if (this is Enemy enemy)
-            EnemyManager.Register(new SpawnInfo(enemy));
+            EnemyManager.Register(spawnInfo);
 
         OnReady();
     }
@@ -196,6 +200,7 @@ public abstract partial class Entity : CharacterBody2D, IEntity
             EnemyManager.Unregister(deathInfo);
 
         EmitSignalDeath(deathInfo);
+        GameEvents.EmitEntityDied(deathInfo);
     }
 
     public override string[] _GetConfigurationWarnings()

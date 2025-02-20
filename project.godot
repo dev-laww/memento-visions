@@ -27,6 +27,7 @@ buses/default_bus_layout="res://resources/misc/default_bus_layout.tres"
 
 [autoload]
 
+GameEvents="*res://Scripts/Autoload/GameEvents.cs"
 SaveManager="*res://Scripts/Autoload/SaveManager.cs"
 SceneManager="*res://Scripts/Autoload/SceneManager.cs"
 GameCamera="*res://Scenes/Autoload/GameCamera.tscn"

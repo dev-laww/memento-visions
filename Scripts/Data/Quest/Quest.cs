@@ -16,7 +16,7 @@ public partial class Quest : Resource
     [Export(PropertyHint.MultilineText)] public string Description;
     [Export] private QuestObjective[] objectives;
 
-    [ExportCategory("Rewards")] [Export] private int Experience;
+    [ExportCategory("Rewards")][Export] private int Experience;
     [Export] private ItemGroup[] Items = [];
 
     public bool Completed { get; private set; }
@@ -72,7 +72,7 @@ public partial class Quest : Resource
 
     public void OnEnemyDied(Entity.DeathInfo info)
     {
-        if (info.Killer is not Player) return;
+        if (info.Killer is not Player || info.Victim is not Enemy) return;
 
         ProcessObjectives(
             QuestObjective.ObjectiveType.Kill,
