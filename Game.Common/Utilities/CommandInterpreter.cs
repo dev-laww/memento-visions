@@ -1,189 +1,127 @@
-using Game.Exceptions;
+using System.CommandLine;
+using System.CommandLine.NamingConventionBinder;
+using System.Reflection;
 
 namespace Game.Common.Utilities;
 
 public static class CommandInterpreter
 {
-    public delegate void CommandExecutedEventHandler(string command, object[] args);
-    public delegate void CommandRegisteredEventHandler(string command, string? description);
-    public delegate void CommandUnregisteredEventHandler(string command);
-
-    public static event CommandExecutedEventHandler? CommandExecuted;
-    public static event CommandRegisteredEventHandler? CommandRegistered;
-    public static event CommandUnregisteredEventHandler? CommandUnregistered;
-
-    private const int MaxHistorySize = 100;
-    private static readonly List<(string Command, DateTime Timestamp, Exception Exception)> history = [];
-    private static readonly Dictionary<string, (Delegate? Action, string? Description)> commands = [];
-
-    public static IReadOnlyList<(string Command, DateTime Timestampm, Exception Exception)> History => history;
-    public static IReadOnlyDictionary<string, (Delegate? Action, string? Description)> Commands => commands;
-
-
-    public static void Register(string name, Delegate command, string? description = null)
+    private static class Helper
     {
-        if (commands.ContainsKey(name))
+        public static Option CreateOption(ParameterInfo parameter, CommandOptionAttribute attribute)
         {
-            throw new InvalidOperationException($"Command '{name}' already exists.");
-        }
+            var generic = typeof(Option<>).MakeGenericType(parameter.ParameterType);
+            var instance = Activator.CreateInstance(generic, attribute.Name, attribute.Description);
 
-        commands[name] = (command, description);
-        CommandRegistered?.Invoke(name, description);
-        Log.Debug($"Command '{name}' registered.");
-    }
+            if (instance is not Option option) throw new InvalidOperationException("Failed to create option.");
 
-    public static void Unregister(string name)
-    {
-        if (!commands.ContainsKey(name))
-        {
-            throw new InvalidOperationException($"Command '{name}' does not exist.");
-        }
-
-        commands.Remove(name);
-        CommandUnregistered?.Invoke(name);
-        Log.Debug($"Command '{name}' unregistered.");
-    }
-
-    public static async void Execute(string commandInput)
-    {
-        (string Command, DateTime Timestamp, Exception Exception) historyEntry = (commandInput!, DateTime.Now!, null!);
-        object[] args = [];
-
-        try
-        {
-            var (name, action, parsedArgs) = ParseCommand(commandInput);
-            args = parsedArgs;
-
-            await InvokeHandlerAsync(action, args);
-
-            if (!name.Equals("clear"))
+            if (parameter.HasDefaultValue)
             {
-                history.Add(historyEntry);
-                TrimHistory();
+                option.SetDefaultValue(parameter.DefaultValue);
             }
 
-            CommandExecuted?.Invoke(commandInput, args);
-            Log.Debug($"Command '{name}' executed.");
+            return option;
         }
-        catch (Exception e)
+
+        public static Argument CreateArgument(ParameterInfo parameter)
         {
-            historyEntry.Exception = e.InnerException ?? e;
-            history.Add(historyEntry);
-            TrimHistory();
-            CommandExecuted?.Invoke(commandInput, args);
+            var generic = typeof(Argument<>).MakeGenericType(parameter.ParameterType);
+            var instance = Activator.CreateInstance(generic);
 
-            if (historyEntry.Exception is not CommandException)
-            {
-                Log.Error(historyEntry.Exception);
-                throw;
-            }
-        }
-    }
+            if (instance is not Argument argument) throw new InvalidOperationException("Failed to create argument.");
 
-    public static string[] AutoComplete(string input)
-    {
-        var parts = input.Split([' '], StringSplitOptions.RemoveEmptyEntries);
-        return parts.Length == 0
-            ? []
-            :
-            [
-                .. history
-                    .Where(entry => entry.Command.StartsWith(parts[0]))
-                    .Select(entry => entry.Command)
-                    .Distinct()
-            ];
-    }
+            argument.Name = parameter.Name ?? string.Empty;
+            argument.Description = parameter.Name;
 
-    private static (string Name, Delegate action, object[] args) ParseCommand(string input)
-    {
-        var name = commands.Keys.OrderByDescending(k => k.Length).FirstOrDefault(input.StartsWith) ?? input;
+            if (!parameter.HasDefaultValue) return argument;
 
-        if (string.IsNullOrEmpty(name) || !commands.TryGetValue(name, out var command))
-            throw new CommandException($"Command '{name}' does not exist.");
+            argument.Arity = ArgumentArity.ZeroOrOne;
+            argument.SetDefaultValue(parameter.DefaultValue);
 
-        var parts = input.Replace(name, string.Empty).Split([' '], StringSplitOptions.RemoveEmptyEntries);
-
-        var action = command.Action;
-        var parameters = action!.Method.GetParameters();
-
-        var args = new object[parameters.Length];
-
-        for (var i = 0; i < parameters.Length; i++)
-        {
-            if (i >= parts.Length)
-            {
-                if (!parameters[i].HasDefaultValue)
-                    throw new CommandException($"Missing argument '{parameters[i].Name}'.");
-
-                args[i] = parameters[i].DefaultValue ?? throw new InvalidOperationException();
-                continue;
-            }
-
-            args[i] = ParseArgument(parts[i].Trim(), parameters[i].ParameterType);
-        }
-
-        return (name, action, args);
-    }
-
-    private static object ParseArgument(string argument, Type targetType)
-    {
-        if (targetType == typeof(string))
             return argument;
-
-        try
-        {
-            // Try to find TryParse method
-            var tryParseMethod = targetType.GetMethod("TryParse", [typeof(string), targetType.MakeByRefType()]);
-
-            if (tryParseMethod != null)
-            {
-                var parameters = new object[] { argument, null! };
-                var success = (bool?)tryParseMethod.Invoke(null, parameters) ?? false;
-                return success
-                    ? parameters[1]
-                    : throw new UnsupportedArgument($"Failed to parse '{argument}' as {targetType.Name}.");
-            }
-
-            // Fallback to Parse method
-            var parseMethod = targetType.GetMethod("Parse", [typeof(string)]);
-            return parseMethod?.Invoke(null, [argument]) ??
-                   throw new UnsupportedArgument($"Failed to parse '{argument}' as {targetType.Name}.");
-        }
-        catch (Exception e)
-        {
-            Log.Error(e);
-            throw new UnsupportedArgument($"Failed to parse '{argument}' as {targetType.Name}.", e);
         }
     }
 
-    private static async Task InvokeHandlerAsync(Delegate handler, object[] args)
+    private static RootCommand rootCommand = new("Game Commands");
+    private static readonly List<Command> commands = [];
+
+    public static void Register(object obj)
     {
-        var result = handler.DynamicInvoke(args);
+        var type = obj.GetType();
 
-        if (result is Task task)
+        var methods = type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+        foreach (var method in methods)
         {
-            await task;
+            var attribute = method.GetCustomAttribute<CommandAttribute>();
 
-            if (task.Exception == null) return;
+            if (attribute == null) continue;
 
-            var exception = task.Exception.InnerException ?? task.Exception;
-
-            if (exception is AggregateException aggregateException)
-            {
-                exception = aggregateException.InnerExceptions.Count == 1
-                    ? aggregateException.InnerExceptions[0]
-                    : aggregateException;
-            }
-
-            throw exception;
+            RegisterCommand(attribute, method, obj);
         }
     }
 
-    private static void TrimHistory()
+    private static void RegisterCommand(CommandAttribute attribute, MethodInfo method, object target)
     {
-        while (history.Count > MaxHistorySize)
-            history.RemoveAt(0);
+        var command = new Command(attribute.Name, attribute.Description);
+
+        var parameters = method.GetParameters();
+
+        foreach (var parameter in parameters)
+        {
+            var optionAttribute = parameter.GetCustomAttribute<CommandOptionAttribute>();
+
+            if (optionAttribute == null)
+            {
+                var argument = Helper.CreateArgument(parameter);
+
+                command.AddArgument(argument);
+            }
+            else
+            {
+                var option = Helper.CreateOption(parameter, optionAttribute);
+
+                command.AddOption(option);
+            }
+        }
+
+        command.Handler = CommandHandler.Create(method, target); // how about async methods?
+
+        commands.Add(command);
+        rootCommand.AddCommand(command);
     }
 
-    public static void ClearHistory() => history.Clear();
+    public static void Unregister(object obj)
+    {
+        var type = obj.GetType();
+
+        var methods = type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+        foreach (var method in methods)
+        {
+            var attribute = method.GetCustomAttribute<CommandAttribute>();
+
+            if (attribute == null) continue;
+
+            commands.RemoveAll(command => command.Name == attribute.Name);
+        }
+
+        RebuildRootCommand();
+    }
+
+    private static void RebuildRootCommand()
+    {
+        rootCommand = new RootCommand("Game Commands");
+
+        foreach (var command in commands)
+        {
+            rootCommand.AddCommand(command);
+        }
+    }
+
+    public static void Execute(string command, IConsole? console = null)
+    {
+        var args = command.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        rootCommand.Invoke(args, console);
+    }
 }
