@@ -1,3 +1,4 @@
+using Game.Common;
 using Game.UI.Overlays;
 using Game.Utils.Extensions;
 using Godot;
@@ -49,6 +50,7 @@ public partial class OverlayManager : Autoload<OverlayManager>
 
         Instance.AddChild(currentOverlay);
         Instance.GetPlayer()?.InputManager.AddLock();
+        Log.Debug($"Overlay {name} opended.");
     }
 
     public static void HideOverlay()
