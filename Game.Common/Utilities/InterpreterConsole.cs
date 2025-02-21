@@ -15,10 +15,10 @@ public class InterpreterConsole : IConsole
 
     public bool IsInputRedirected => false;
 
-    public InterpreterConsole(IStandardStreamWriter outWriter, IStandardStreamWriter errorWriter)
+    public InterpreterConsole(Action<string?> outWriter, Action<string?> errorWriter)
     {
-        Out = outWriter;
-        Error = errorWriter;
+        Out = InterpreterConsoleWriter.Create(outWriter);
+        Error = InterpreterConsoleWriter.Create(errorWriter);
     }
 
     public InterpreterConsole()
