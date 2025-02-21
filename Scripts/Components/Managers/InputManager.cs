@@ -44,6 +44,8 @@ public partial class InputManager : Node
         Track(moveDown, @event);
         Track(attack, @event);
         Track(dash, @event);
+
+        GetViewport().SetInputAsHandled();
     }
 
     private void Track(StringName name, InputEvent @event)
