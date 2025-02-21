@@ -32,15 +32,14 @@ public partial class WeaponManager : Node
 
     public override void _EnterTree()
     {
-        CommandInterpreter.Register("equip", EquipCommand, "Equips a weapon. Usage: equip [weaponId]");
-        CommandInterpreter.Register("unequip", UnequipCommand, "Unequips the current weapon.");
+        CommandInterpreter.Register(this);
     }
 
 
     public override void _ExitTree()
     {
-        CommandInterpreter.Unregister("equip");
-        CommandInterpreter.Unregister("unequip");
+        CommandInterpreter.Unregister(this);
+
         if (Weapon == null) return;
 
         SaveManager.Data.Player.Equipped = Weapon.Id;

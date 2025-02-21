@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Common;
+using Game.Common.Utilities;
 using Game.Entities;
+using Godot;
 
 namespace Game.Autoload;
 
@@ -29,5 +32,11 @@ public partial class EnemyManager : Autoload<EnemyManager>
         Instance.enemies.Remove(info.Victim as Enemy);
 
         Log.Debug($"{info.Victim} removed from the registry. {info}");
+    }
+
+    [Command(Name = "test", Description = "Test command.")]
+    private void Test(string name)
+    {
+        GD.Print($"Hello, {name}!");
     }
 }

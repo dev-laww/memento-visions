@@ -44,17 +44,14 @@ public partial class Player : Entity
     {
         if (Engine.IsEditorHint()) return;
 
-        CommandInterpreter.Register("heal", AddHealth, "Adds health to the player. Usage: heal [value]");
-        CommandInterpreter.Register("damage", Damage, "Removes health from the player. Usage: damage [value]");
-        CommandInterpreter.Register("levelup", LevelUp, "Increases the player's level. Usage: levelup [level]");
+        CommandInterpreter.Register(this);
     }
 
     public override void _ExitTree()
     {
         if (Engine.IsEditorHint()) return;
 
-        CommandInterpreter.Unregister("heal");
-        CommandInterpreter.Unregister("damage");
+        CommandInterpreter.Register(this);
     }
 
     public override void _Notification(int what)
@@ -184,7 +181,9 @@ public partial class Player : Entity
         if (attack) StateMachine.ChangeState(Attack);
     }
 
-    private void AddHealth(float value = 1000)
+
+    [Command(Name = "heal", Description = "Adds health to the player")]
+    private void AddHealth(float value = 100)
     {
         StatsManager.Heal(value);
 
@@ -192,6 +191,7 @@ public partial class Player : Entity
         Log.Debug($"Current health: {StatsManager.Health}");
     }
 
+    [Command(Name = "damage", Description = "Damages the player")]
     private void Damage(float value = 10)
     {
         StatsManager.TakeDamage(value);
@@ -213,5 +213,6 @@ public partial class Player : Entity
         text.Finished += text.QueueFree;
     }
 
+    [Command(Name = "levelup", Description = "Increases the player's level")]
     private void LevelUp(float level = 1) => StatsManager.IncreaseLevel(level);
 }

@@ -32,30 +32,14 @@ public partial class InventoryManager : Node
     {
         base._EnterTree();
 
-        CommandInterpreter.Register(
-            "give",
-            AddItemCommand,
-            "Adds an item to the inventory. Usage: give [uniqueName] [quantity]"
-        );
-        CommandInterpreter.Register(
-            "take",
-            RemoveItemCommand,
-            "Removes an item from the inventory. Usage: take [uniqueName] [quantity]"
-        );
-        CommandInterpreter.Register(
-            "clear inventory",
-            ClearInventory,
-            "Clears the inventory."
-        );
+        CommandInterpreter.Register(this);
     }
 
     public override void _ExitTree()
     {
         base._ExitTree();
 
-        CommandInterpreter.Unregister("give");
-        CommandInterpreter.Unregister("take");
-        CommandInterpreter.Unregister("clear inventory");
+        CommandInterpreter.Unregister(this);
 
         var items = Inventory.Values
             .SelectMany(i => i)
@@ -124,6 +108,7 @@ public partial class InventoryManager : Node
     public bool HasItem(ItemGroup group) => Inventory[group.Item.ItemCategory]
         .Any(g => g.Item.Id == group.Item.Id && g.Quantity >= group.Quantity);
 
+    [Command(Name = "give", Description = "Adds an item to the inventory.")]
     private void AddItemCommand(string id, int quantity = 1)
     {
         var item = ItemRegistry.Get(id) ?? throw new CommandException($"Item '{id}' not found.");
@@ -135,6 +120,7 @@ public partial class InventoryManager : Node
         });
     }
 
+    [Command(Name = "take", Description = "Removes an item from the inventory.")]
     private void RemoveItemCommand(string id, int quantity = 1)
     {
         var item = ItemRegistry.Get(id) ?? throw new CommandException($"Item '{id}' not found.");
@@ -146,6 +132,7 @@ public partial class InventoryManager : Node
         });
     }
 
+    [Command(Name = "clear-inventory", Description = "Clears the inventory.")]
     private void ClearInventory()
     {
         foreach (var category in Inventory.Keys)
