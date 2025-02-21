@@ -15,7 +15,8 @@ public static class Log
         Error
     }
 
-    public static Level LogLevel = OS.IsDebugBuild() ? Level.Debug : Level.Info;
+    public static bool Enabled { get; private set; } = !OS.IsDebugBuild();
+    public static Level LogLevel { get; set; } = OS.IsDebugBuild() ? Level.Debug : Level.Info;
 
     [Conditional("DEBUG")]
     public static void Debug(
@@ -77,11 +78,13 @@ public static class Log
         [CallerFilePath] string? filePath = null,
         [CallerMemberName] string? memberName = null
     ) => Print(Level.Debug, Format(filePath, memberName, msg));
-    
+
     public static void PrintStackTrace(
         [CallerFilePath] string? filePath = null,
         [CallerMemberName] string? memberName = null
     ) => Print(Level.Debug, Format(filePath, memberName, new StackTrace().ToString()));
+
+    public static void SetEnabled(bool enabled) => Enabled = enabled;
 
     private static string Format(
         string? filePath,
@@ -125,6 +128,8 @@ public static class Log
 
     private static void Print(Level level, string msg)
     {
+        if (!Enabled) return;
+
         if (level < LogLevel) return;
 
         lock (LogFile)
