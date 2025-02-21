@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://ce8t2napfsiwi"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Dialogue/Balloon.cs" id="1_beuaf"]
+[ext_resource type="Script" uid="uid://i16nus4kwdxl" path="res://Scripts/UI/Dialogue/Balloon.cs" id="1_beuaf"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="2_l1cmb"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_rrnqr"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="3_qk1gj"]
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="4_7lmc0"]
+[ext_resource type="Script" uid="uid://205y5dhortj1" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="4_7lmc0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -79,6 +79,7 @@ offset_top = 159.0
 offset_right = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_rrnqr")
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 10
@@ -115,10 +116,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -6.0
-offset_top = -3.0
-offset_right = -2.0
-offset_bottom = 21.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_rrnqr")
