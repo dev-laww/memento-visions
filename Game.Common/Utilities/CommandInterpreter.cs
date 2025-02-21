@@ -121,7 +121,6 @@ public static class CommandInterpreter
 
     public static void Execute(string command, IConsole? console = null)
     {
-        var args = command.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        rootCommand.Invoke(args, console);
+        rootCommand.Invoke(command, console);
     }
 }
