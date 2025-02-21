@@ -99,7 +99,7 @@ public partial class InventoryManager : Node
 
         EmitSignalRemove(itemGroup);
         EmitSignalUpdated(itemGroup);
-        Log.Debug($"Removed {itemGroup} from the inventory.");
+        Log.Debug($"Removed {group} from the inventory.");
     }
 
     public IReadOnlyList<ItemGroup> GetItemsFromCategory(Item.Category category) =>
