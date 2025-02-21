@@ -1,8 +1,8 @@
 namespace Game.Common.Utilities;
 
-[AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
+[AttributeUsage(AttributeTargets.Parameter, AllowMultiple = true, Inherited = false)]
 public class CommandOptionAttribute : Attribute
 {
     public required string Name;
-    public required string Description;
+    public string? Description;
 }

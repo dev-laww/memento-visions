@@ -8,10 +8,17 @@ public static class CommandInterpreter
 {
     private static class Helper
     {
-        public static Option CreateOption(ParameterInfo parameter, CommandOptionAttribute attribute)
+        public static Option? CreateOption(ParameterInfo parameter)
         {
+            var attributes = parameter.GetCustomAttributes<CommandOptionAttribute>();
+
+            if (!attributes.Any()) return null;
+
+            var aliases = attributes.Select(attribute => attribute.Name).ToArray();
+            var description = attributes.Select(attribute => attribute.Description).FirstOrDefault();
+
             var generic = typeof(Option<>).MakeGenericType(parameter.ParameterType);
-            var instance = Activator.CreateInstance(generic, attribute.Name, attribute.Description);
+            var instance = Activator.CreateInstance(generic, [aliases, description]);
 
             if (instance is not Option option) throw new InvalidOperationException("Failed to create option.");
 
@@ -69,20 +76,14 @@ public static class CommandInterpreter
 
         foreach (var parameter in parameters)
         {
-            var optionAttribute = parameter.GetCustomAttribute<CommandOptionAttribute>();
-
-            if (optionAttribute == null)
+            if (Helper.CreateOption(parameter) is Option option)
             {
-                var argument = Helper.CreateArgument(parameter);
-
-                command.AddArgument(argument);
-            }
-            else
-            {
-                var option = Helper.CreateOption(parameter, optionAttribute);
-
                 command.AddOption(option);
+                continue;
             }
+
+            var argument = Helper.CreateArgument(parameter);
+            command.AddArgument(argument);
         }
 
         command.Handler = CommandHandler.Create(method, target); // how about async methods?
