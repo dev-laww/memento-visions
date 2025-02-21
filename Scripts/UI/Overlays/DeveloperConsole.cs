@@ -71,12 +71,12 @@ public partial class DeveloperConsole : Overlay
         var args = string.Join(" ", text.Split(" ").Skip(1).Select(x => x.StartsWith('-') ? $"[color=#989898]{x}[/color]" : x));
 
         output.Text += $"> [color=#ffff00]{command}[/color] {args}\n";
+        output.ScrollToLine(output.GetLineCount());
 
         CommandInterpreter.Execute(text, Console);
         commandInput.Clear();
         commandInput.GrabFocus();
 
-        output.ScrollToLine(output.GetLineCount());
         commandHistory.Add(text);
     }
 
