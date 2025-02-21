@@ -169,11 +169,4 @@ public partial class Inventory : Overlay
             selectedItemActionButton.Text = "Equip";
         }
     }
-
-    public override void Close()
-    {
-        base.Close();
-
-        materialButton.ButtonPressed = true;
-    }
 }
