@@ -46,6 +46,7 @@ public partial class OverlayManager : Autoload<OverlayManager>
         if (currentOverlay != null) return;
 
         currentOverlay = targetOverlay;
+        targetOverlay.TreeExiting += OnOverlayClosed;
         currentOverlayName = name;
 
         Instance.AddChild(currentOverlay);
@@ -56,10 +57,16 @@ public partial class OverlayManager : Autoload<OverlayManager>
     public static void HideOverlay()
     {
         currentOverlay?.Close();
+        OnOverlayClosed();
+    }
+
+    private static void OnOverlayClosed()
+    {
         currentOverlay = null;
         currentOverlayName = null;
 
         Instance.GetPlayer()?.InputManager.RemoveLock();
+        Log.Debug($"Overlay {currentOverlayName} closed.");
     }
 
     public override void _Input(InputEvent @event)
