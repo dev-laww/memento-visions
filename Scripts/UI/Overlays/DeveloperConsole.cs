@@ -1,20 +1,24 @@
 using System.Collections.Generic;
+using System.CommandLine;
 using System.Linq;
 using Game.Common;
 using Game.Common.Utilities;
-using Game.Exceptions;
 using Game.UI.Overlays;
 using Godot;
 using GodotUtilities;
 
 namespace Game;
 
-// TODO: fix console problem
 [Scene]
 public partial class DeveloperConsole : Overlay
 {
     [Node] LineEdit commandInput;
-    [Node] CodeEdit output;
+    [Node] RichTextLabel output;
+
+    public static InterpreterConsole Console { get; private set; }
+
+    // TODO: use up and down arrow keys to cycle through command history
+    private readonly List<string> commandHistory = [];
 
     public override void _Notification(int what)
     {
@@ -25,22 +29,12 @@ public partial class DeveloperConsole : Overlay
 
     public override void _EnterTree()
     {
-        CommandInterpreter.Register("quit", Quit, "Quits the game.");
-        CommandInterpreter.Register("clear", ClearOutput, "Clears the console output.");
-        CommandInterpreter.Register("help", Help, "Displays all available commands.");
-
-        commandInput.TextSubmitted += OnCommandInputSubmit;
-        CommandInterpreter.CommandExecuted += OnCommandExecuted;
+        CommandInterpreter.Register(this);
     }
 
     public override void _ExitTree()
     {
-        CommandInterpreter.Unregister("quit");
-        CommandInterpreter.Unregister("clear");
-        CommandInterpreter.Unregister("help");
-
-        commandInput.TextSubmitted -= OnCommandInputSubmit;
-        CommandInterpreter.CommandExecuted -= OnCommandExecuted;
+        CommandInterpreter.Unregister(this);
     }
 
     public override void _Ready()
@@ -53,68 +47,48 @@ public partial class DeveloperConsole : Overlay
 
         output.Text = string.Empty;
         commandInput.GrabFocus();
-        OnCommandExecuted(string.Empty, []);
+        commandInput.TextSubmitted += OnCommandInputSubmit;
+        Console = new InterpreterConsole(WriteOutput, WriteError);
+    }
+
+    private void WriteOutput(string text)
+    {
+        output.Text += text;
+        Log.Info(text);
+    }
+
+    private void WriteError(string text)
+    {
+        WriteOutput($"[color=#ff0000]{text}[/color]");
+        Log.Error(text);
     }
 
     private void OnCommandInputSubmit(string text)
     {
         if (string.IsNullOrWhiteSpace(text)) return;
 
-        CommandInterpreter.Execute(text);
+        var command = text.Split(" ").First();
+        var args = string.Join(" ", text.Split(" ").Skip(1).Select(x => x.StartsWith('-') ? $"[color=#989898]{x}[/color]" : x));
+
+        output.Text += $"> [color=#ffff00]{command}[/color] {args}\n";
+
+        CommandInterpreter.Execute(text, Console);
         commandInput.Clear();
+        commandInput.GrabFocus();
+
+        output.ScrollToLine(output.GetLineCount());
+        commandHistory.Add(text);
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (!@event.IsActionPressed("ui_up") || commandHistory.Count == 0) return;
+
+        commandInput.Text = commandHistory[^1];
         commandInput.GrabFocus();
     }
 
-    // TODO: Implement more gracefull printing
-    private void OnCommandExecuted(string _command, object[] _args)
-    {
-        var history = CommandInterpreter.History;
+    [Command(Name = "clear", Description = "Clears the console output.")]
+    private void Clear() => output.Text = string.Empty;
 
-        var lines = new List<string>();
-
-        foreach (var (command, Timestamp, Exception) in history.Reverse())
-        {
-            lines.Add($"{Timestamp:HH:mm} > {command}");
-
-            if (Exception != null && Exception is not CommandException)
-            {
-                lines.Add($"{Exception}");
-
-                if (Exception.StackTrace != null)
-                    lines.Add("\t" + string.Join("\n\t", Exception.StackTrace.Split('\n')));
-            }
-            else if (Exception != null)
-            {
-                lines.Add($"{Exception.Message}");
-            }
-
-            if (command != "help" && command != "?") continue;
-
-            lines.Add("Available commands:");
-            foreach (var (name, (_, description)) in CommandInterpreter.Commands)
-            {
-                lines.Add($"\t{name} - {description}");
-            }
-        }
-
-        output.Text = string.Join("\n", lines);
-    }
-
-    private void Quit() => GetTree().Quit();
-
-    private void ClearOutput()
-    {
-        output.Text = string.Empty;
-        CommandInterpreter.ClearHistory();
-        Log.Debug("Console history cleared.");
-    }
-
-    private static void Help() { }
-
-    public override void Close()
-    {
-        base.Close();
-
-        commandInput.Text = string.Empty;
-    }
 }
