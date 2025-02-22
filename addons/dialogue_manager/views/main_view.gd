@@ -8,7 +8,8 @@ const DialogueResource = preload("../dialogue_resource.gd")
 const DialogueManagerParser = preload("../components/parser.gd")
 
 const OPEN_OPEN = 100
-const OPEN_CLEAR = 101
+const OPEN_QUICK = 101
+const OPEN_CLEAR = 102
 
 const TRANSLATIONS_GENERATE_LINE_IDS = 100
 const TRANSLATIONS_SAVE_CHARACTERS_TO_CSV = 201
@@ -38,6 +39,8 @@ signal confirmation_closed()
 @onready var new_dialog: FileDialog = $NewDialog
 @onready var save_dialog: FileDialog = $SaveDialog
 @onready var open_dialog: FileDialog = $OpenDialog
+@onready var quick_open_dialog: ConfirmationDialog = $QuickOpenDialog
+@onready var quick_open_files_list: VBoxContainer = $QuickOpenDialog/QuickOpenFilesList
 @onready var export_dialog: FileDialog = $ExportDialog
 @onready var import_dialog: FileDialog = $ImportDialog
 @onready var errors_dialog: AcceptDialog = $ErrorsDialog
@@ -79,7 +82,7 @@ var current_file_path: String = "":
 	set(next_current_file_path):
 		current_file_path = next_current_file_path
 		files_list.current_file_path = current_file_path
-		if current_file_path == "":
+		if current_file_path == "" or not open_buffers.has(current_file_path):
 			save_all_button.disabled = true
 			test_button.disabled = true
 			search_button.disabled = true
@@ -292,7 +295,7 @@ func save_files() -> void:
 		save_file(path, false)
 
 	if saved_files.size() > 0:
-		Engine.get_meta("DialogueCache").reimport_files(saved_files)
+		Engine.get_meta("DialogueCache").mark_files_for_reimport(saved_files)
 
 
 # Save a file
@@ -446,6 +449,7 @@ func apply_theme() -> void:
 		new_dialog.min_size = Vector2(600, 500) * scale
 		save_dialog.min_size = Vector2(600, 500) * scale
 		open_dialog.min_size = Vector2(600, 500) * scale
+		quick_open_dialog.min_size = Vector2(400, 600) * scale
 		export_dialog.min_size = Vector2(600, 500) * scale
 		import_dialog.min_size = Vector2(600, 500) * scale
 		settings_dialog.min_size = Vector2(1000, 600) * scale
@@ -461,6 +465,7 @@ func build_open_menu() -> void:
 	var menu = open_button.get_popup()
 	menu.clear()
 	menu.add_icon_item(get_theme_icon("Load", "EditorIcons"), DialogueConstants.translate(&"open.open"), OPEN_OPEN)
+	menu.add_icon_item(get_theme_icon("Load", "EditorIcons"), DialogueConstants.translate(&"open.quick_open"), OPEN_QUICK)
 	menu.add_separator()
 
 	var recent_files = DialogueSettings.get_recent_files()
@@ -497,6 +502,8 @@ func parse() -> void:
 	code_edit.errors = errors
 	errors_panel.errors = errors
 	parser.free()
+
+	title_list.titles = code_edit.get_titles()
 
 
 func show_build_error_dialog() -> void:
@@ -557,7 +564,10 @@ func generate_translations_keys() -> void:
 		else:
 			text = l.substr(l.find(":") + 1)
 
-		lines[i] = line.replace(text, text + " [ID:%s]" % key)
+		text = text.replace("\n", "!NEWLINE!")
+		line = line.replace("\\n", "!NEWLINE!")
+
+		lines[i] = line.replace(text, text + " [ID:%s]" % key).replace("!NEWLINE!", "\\n")
 		known_keys[key] = text
 
 	code_edit.text = "\n".join(lines)
@@ -823,6 +833,7 @@ func _on_cache_file_content_changed(path: String, new_content: String) -> void:
 			buffer.text = new_content
 			buffer.pristine_text = new_content
 			code_edit.text = new_content
+			title_list.titles = code_edit.get_titles()
 
 
 func _on_editor_settings_changed() -> void:
@@ -836,6 +847,10 @@ func _on_open_menu_id_pressed(id: int) -> void:
 	match id:
 		OPEN_OPEN:
 			open_dialog.popup_centered()
+		OPEN_QUICK:
+			quick_open_files_list.files = Engine.get_meta("DialogueCache").get_files()
+			quick_open_dialog.popup_centered()
+			quick_open_files_list.focus_filter()
 		OPEN_CLEAR:
 			DialogueSettings.clear_recent_files()
 			build_open_menu()
@@ -925,8 +940,15 @@ func _on_main_view_visibility_changed() -> void:
 
 
 func _on_new_button_pressed() -> void:
-	new_dialog.current_file = ""
+	new_dialog.current_file = "dialogue"
 	new_dialog.popup_centered()
+
+
+func _on_new_dialog_confirmed() -> void:
+	if new_dialog.current_file.get_basename() == "":
+		var path = "res://untitled.dialogue"
+		new_file(path)
+		open_file(path)
 
 
 func _on_new_dialog_file_selected(path: String) -> void:
@@ -935,6 +957,8 @@ func _on_new_dialog_file_selected(path: String) -> void:
 
 
 func _on_save_dialog_file_selected(path: String) -> void:
+	if path == "": path = "res://untitled.dialogue"
+
 	new_file(path, code_edit.text)
 	open_file(path)
 
@@ -947,6 +971,16 @@ func _on_open_dialog_file_selected(path: String) -> void:
 	open_file(path)
 
 
+func _on_quick_open_files_list_file_double_clicked(file_path: String) -> void:
+	quick_open_dialog.hide()
+	open_file(file_path)
+
+
+func _on_quick_open_dialog_confirmed() -> void:
+	if quick_open_files_list.current_file_path:
+		open_file(quick_open_files_list.current_file_path)
+
+
 func _on_save_all_button_pressed() -> void:
 	save_files()
 
@@ -957,8 +991,6 @@ func _on_find_in_files_button_pressed() -> void:
 
 
 func _on_code_edit_text_changed() -> void:
-	title_list.titles = code_edit.get_titles()
-
 	var buffer = open_buffers[current_file_path]
 	buffer.text = code_edit.text
 
@@ -1022,7 +1054,8 @@ func _on_settings_view_script_button_pressed(path: String) -> void:
 
 
 func _on_test_button_pressed() -> void:
-	save_file(current_file_path)
+	save_file(current_file_path, false)
+	Engine.get_meta("DialogueCache").reimport_files([current_file_path])
 
 	if errors_panel.errors.size() > 0:
 		errors_dialog.popup_centered()
