@@ -220,19 +220,26 @@ namespace DialogueManagerRuntime
             if (result is Task taskResult)
             {
                 await taskResult;
-                try 
+                try
                 {
                     Variant value = (Variant)taskResult.GetType().GetProperty("Result").GetValue(taskResult);
                     EmitSignal(SignalName.Resolved, value);
-                } 
-                catch (Exception err) 
+                }
+                catch (Exception err)
                 {
                     EmitSignal(SignalName.Resolved);
                 }
             }
             else
             {
-                EmitSignal(SignalName.Resolved, (Variant)result);
+                if (result != null)
+                {
+                    EmitSignal(SignalName.Resolved, (Variant)result);
+                }
+                else
+                {
+                    EmitSignal(SignalName.Resolved);
+                }
             }
         }
 #nullable enable
