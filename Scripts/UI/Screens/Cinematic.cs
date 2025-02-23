@@ -20,11 +20,6 @@ public partial class Cinematic : CanvasLayer
         WireNodes();
     }
 
-    public override void _Ready()
-    {
-        DialogueManager.ShowDialogueBalloon(GD.Load<Resource>("res://resources/dialogues/Test.dialogue"), key: "Start");
-    }
-
     public void Start()
     {
         animationPlayer.Play(ANIM_IN);

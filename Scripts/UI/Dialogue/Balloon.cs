@@ -3,7 +3,7 @@ using Godot.Collections;
 using DialogueManagerRuntime;
 using GodotUtilities;
 using System.Threading.Tasks;
-using Game.Common.Utilities;
+using Game.Utils.Extensions;
 
 namespace Game.UI.Common;
 
@@ -21,8 +21,8 @@ public partial class Balloon : CanvasLayer
 
     private Resource resource;
     private Array<Variant> temporaryGameStates = [];
-    bool isWaitingForInput;
-    bool willHideBalloon;
+    private bool isWaitingForInput;
+    private bool willHideBalloon;
 
     private DialogueLine dialogueLine;
     private DialogueLine DialogueLine
@@ -33,6 +33,7 @@ public partial class Balloon : CanvasLayer
             if (value == null)
             {
                 QueueFree();
+                this.GetPlayer()?.InputManager.RemoveLock();
                 return;
             }
 
@@ -44,12 +45,6 @@ public partial class Balloon : CanvasLayer
     public override void _Ready()
     {
         balloon.Hide();
-        balloon.GuiInput += OnGuiInput;
-
-        if (string.IsNullOrEmpty((string)responsesMenu.Get("next_action")))
-            responsesMenu.Set("next_action", NextAction);
-
-        responsesMenu.Connect("response_selected", CallableUtils.FromMethod(OnResponseSelected));
         DialogueManager.Mutated += OnMutated;
     }
 
@@ -82,6 +77,7 @@ public partial class Balloon : CanvasLayer
         resource = dialogueResource;
 
         DialogueLine = await Next(title);
+        this.GetPlayer()?.InputManager.AddLock();
     }
 
     public async Task<DialogueLine> Next(string nextId)

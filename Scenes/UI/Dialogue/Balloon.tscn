@@ -175,5 +175,5 @@ layout_mode = 2
 theme = ExtResource("2_rrnqr")
 text = "Response example"
 
-[connection signal="gui_input" from="MarginContainer/Balloon" to="." method="_on_balloon_gui_input"]
-[connection signal="response_selected" from="MarginContainer/Balloon/Responses/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]
+[connection signal="gui_input" from="MarginContainer/Balloon" to="." method="OnGuiInput"]
+[connection signal="response_selected" from="MarginContainer/Balloon/Responses/ResponsesMenu" to="." method="OnResponseSelected"]
