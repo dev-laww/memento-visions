@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
-using Game.Common.Interfaces;
 using Game.Components;
 using Game.Autoload;
 using Game.Utils.Battle;
@@ -16,7 +15,7 @@ namespace Game.Entities;
 /// Inherits from CharacterBody2D.
 /// </summary>
 [Scene]
-public abstract partial class Entity : CharacterBody2D, IEntity
+public abstract partial class Entity : CharacterBody2D
 {
     /// <summary>
     /// Contains information about the entity that spawned.
