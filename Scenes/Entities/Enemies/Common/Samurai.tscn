@@ -439,6 +439,7 @@ _data = {
 }
 
 [node name="Samurai" type="CharacterBody2D" groups=["Enemy"]]
+collision_mask = 15
 script = ExtResource("1_lsnvf")
 Id = "enemy:samurai"
 
@@ -461,7 +462,6 @@ metadata/_custom_type_script = ExtResource("3_0ykwq")
 
 [node name="PathFindManager" parent="." node_paths=PackedStringArray("VelocityManager") instance=ExtResource("4_1moht")]
 VelocityManager = NodePath("../VelocityManager")
-DebugEnabled = null
 
 [node name="Range" type="Area2D" parent="."]
 collision_layer = 0

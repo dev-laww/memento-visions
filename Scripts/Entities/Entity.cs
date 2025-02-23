@@ -137,6 +137,12 @@ public abstract partial class Entity : CharacterBody2D
 
     public sealed override void _Ready()
     {
+        if (this is not Player)
+        {
+            CollisionMask = 1 << 0 | 1 << 1 | 1 << 2 | 1 << 3;
+            NotifyPropertyListChanged();
+        }
+
         if (Engine.IsEditorHint()) return;
 
         TreeExiting += EmitDeath;
@@ -146,8 +152,9 @@ public abstract partial class Entity : CharacterBody2D
 
         GameEvents.EmitEntitySpawned(spawnInfo);
 
-        if (this is Enemy enemy)
+        if (this is Enemy)
             EnemyManager.Register(spawnInfo);
+
 
         OnReady();
     }
