@@ -5,7 +5,9 @@ Nathan: Here are some choices.
 	Nathan: You picked the first one.
 - Second one
 	Nathan: You picked the second one.
+	=> start
 - Start again => start
-- End the conversation => END
+- End the conversation
+	=> END
 Nathan: For more information see the online documentation.
 => END
