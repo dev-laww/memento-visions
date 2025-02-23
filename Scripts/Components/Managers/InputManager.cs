@@ -44,8 +44,6 @@ public partial class InputManager : Node
         Track(moveDown, @event);
         Track(attack, @event);
         Track(dash, @event);
-
-        GetViewport().SetInputAsHandled();
     }
 
     private void Track(StringName name, InputEvent @event)
@@ -62,6 +60,8 @@ public partial class InputManager : Node
             pressed.Remove(name);
             justReleased.Add(name);
         }
+
+        GetViewport().SetInputAsHandled();
     }
 
     public Vector2 GetVector() => lockCount > 0 ? Vector2.Zero : Input.GetVector(moveLeft, moveRight, moveUp, moveDown);
