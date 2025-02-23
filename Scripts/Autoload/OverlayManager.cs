@@ -69,11 +69,13 @@ public partial class OverlayManager : Autoload<OverlayManager>
         Log.Debug($"Overlay {currentOverlayName} closed.");
     }
 
-    public override void _Input(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
         if (@event.IsActionPressed("open_inventory")) ShowOverlay(INVENTORY);
         else if (@event.IsActionPressed("menu")) ShowOverlay(MENU);
         else if (@event.IsActionPressed("open_active_quest")) ShowOverlay(QUEST);
         else if (@event.IsActionPressed("open_dev_console")) ShowOverlay(DEVELOPER_CONSOLE);
+
+        GetViewport().SetInputAsHandled();
     }
 }
