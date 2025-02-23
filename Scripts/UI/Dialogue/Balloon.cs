@@ -4,6 +4,7 @@ using DialogueManagerRuntime;
 using GodotUtilities;
 using System.Threading.Tasks;
 using Game.Utils.Extensions;
+using Game.Autoload;
 
 namespace Game.UI.Common;
 
@@ -16,7 +17,7 @@ public partial class Balloon : CanvasLayer
     [Node] private Control balloon;
     [Node] private RichTextLabel characterLabel;
     [Node] private RichTextLabel dialogueLabel;
-    [Node] private VBoxContainer responsesMenu;
+    [Node] private ResponseMenu responsesMenu;
     [Node] private Timer mutationCooldown = new();
 
     private Resource resource;
@@ -106,7 +107,7 @@ public partial class Balloon : CanvasLayer
 
         // Set up the responses
         responsesMenu.Hide();
-        responsesMenu.Set("responses", dialogueLine.Responses);
+        responsesMenu.Responses = dialogueLine.Responses;
 
         // Type out the text
         balloon.Show();

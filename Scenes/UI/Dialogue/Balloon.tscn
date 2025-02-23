@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://i16nus4kwdxl" path="res://Scripts/UI/Dialogue/Balloon.cs" id="1_exrlr"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="2_l1cmb"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_rrnqr"]
-[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="4_7lmc0"]
 [ext_resource type="Script" uid="uid://g32um0mltv5d" path="res://addons/dialogue_manager/dialogue_label.gd" id="4_exrlr"]
+[ext_resource type="Script" uid="uid://bya5v7wgp08bo" path="res://Scripts/UI/Dialogue/ResponseMenu.cs" id="5_exrlr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -166,9 +166,9 @@ metadata/_edit_use_anchors_ = true
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_constants/separation = 2
-script = ExtResource("4_7lmc0")
-response_template = NodePath("ResponseExample")
+theme_override_constants/separation = 3
+script = ExtResource("5_exrlr")
+responseTemplate = NodePath("ResponseExample")
 
 [node name="ResponseExample" type="Button" parent="MarginContainer/Balloon/Responses/ResponsesMenu"]
 layout_mode = 2
@@ -176,4 +176,4 @@ theme = ExtResource("2_rrnqr")
 text = "Response example"
 
 [connection signal="gui_input" from="MarginContainer/Balloon" to="." method="OnGuiInput"]
-[connection signal="response_selected" from="MarginContainer/Balloon/Responses/ResponsesMenu" to="." method="OnResponseSelected"]
+[connection signal="ResponseSelected" from="MarginContainer/Balloon/Responses/ResponsesMenu" to="." method="OnResponseSelected"]
