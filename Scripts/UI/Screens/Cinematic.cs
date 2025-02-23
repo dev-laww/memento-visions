@@ -1,3 +1,4 @@
+using DialogueManagerRuntime;
 using Godot;
 using GodotUtilities;
 
@@ -17,6 +18,11 @@ public partial class Cinematic : CanvasLayer
         if (what != NotificationSceneInstantiated) return;
 
         WireNodes();
+    }
+
+    public override void _Ready()
+    {
+        DialogueManager.ShowDialogueBalloon(GD.Load<Resource>("res://resources/dialogues/Test.dialogue"), key: "Start");
     }
 
     public void Start()

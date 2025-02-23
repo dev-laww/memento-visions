@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://ce8t2napfsiwi"]
 
-[ext_resource type="Script" uid="uid://i16nus4kwdxl" path="res://Scripts/UI/Dialogue/Balloon.cs" id="1_beuaf"]
+[ext_resource type="Script" uid="uid://i16nus4kwdxl" path="res://Scripts/UI/Dialogue/Balloon.cs" id="1_exrlr"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="2_l1cmb"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_rrnqr"]
-[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="3_qk1gj"]
-[ext_resource type="Script" uid="uid://205y5dhortj1" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="4_7lmc0"]
+[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="4_7lmc0"]
+[ext_resource type="Script" uid="uid://g32um0mltv5d" path="res://addons/dialogue_manager/dialogue_label.gd" id="4_exrlr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -67,9 +67,7 @@ Panel/styles/panel = SubResource("StyleBoxFlat_uy0d5")
 
 [node name="Balloon" type="CanvasLayer"]
 layer = 100
-script = ExtResource("1_beuaf")
-NextAction = "interact"
-SkipAction = "menu"
+script = ExtResource("1_exrlr")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -135,12 +133,14 @@ text = "Character"
 fit_content = true
 scroll_active = false
 
-[node name="DialogueLabel" parent="MarginContainer/Balloon/Panel/Dialogue/VBoxContainer" instance=ExtResource("3_qk1gj")]
+[node name="DialogueLabel" type="RichTextLabel" parent="MarginContainer/Balloon/Panel/Dialogue/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme = ExtResource("2_rrnqr")
-text = "Dialogue..."
+text = "Dialogue"
+script = ExtResource("4_exrlr")
+skip_pause_at_abbreviations = PackedStringArray("Mr", "Mrs", "Ms", "Dr", "etc", "eg", "ex")
+metadata/_custom_type_script = ExtResource("4_exrlr")
 
 [node name="Responses" type="MarginContainer" parent="MarginContainer/Balloon"]
 layout_mode = 1
