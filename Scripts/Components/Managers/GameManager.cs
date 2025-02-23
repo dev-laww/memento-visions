@@ -7,6 +7,7 @@ using GodotUtilities;
 using Game.Common.Utilities;
 using Game.Data;
 using Game.Utils.Extensions;
+using Game.Entities;
 
 namespace Game.Components;
 
@@ -79,6 +80,7 @@ public partial class GameManager : Node
     [Command(Name = "spawn", Description = "Spawns an entity at the given position.")]
     private void Spawn(
         string id,
+        int amount = 1,
         [CommandOption(Name = "-x", Description = "X position")]
         float x = 0,
         [CommandOption(Name = "-y", Description = "Y position")]
@@ -88,12 +90,16 @@ public partial class GameManager : Node
         if (id.Contains("player", System.StringComparison.CurrentCultureIgnoreCase))
             throw new System.Exception("Cannot spawn player entity.");
 
-        var entity = EntityRegistry.GetAsEntity(id) ?? throw new System.Exception($"Entity with id {id} not found.");
+        var entity = EntityRegistry.Get(id) ?? throw new System.Exception($"Entity with id {id} not found.");
 
         var position = new Vector2(x, y);
         position = position == Vector2.Zero ? this.GetPlayer()?.GlobalPosition ?? Vector2.Zero : position;
 
-        CurrentScene.AddChild(entity);
-        entity.GlobalPosition = position;
+        for (var i = 0; i < amount; i++)
+        {
+            var instance = entity.Instantiate<Enemy>();
+            instance.GlobalPosition = position + (Vector2.One * MathUtil.RNG.RandfRange(-10, 10));
+            CurrentScene.AddChild(instance);
+        }
     }
 }
