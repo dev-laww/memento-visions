@@ -18,6 +18,7 @@ public partial class GameCamera : Autoload<GameCamera>
 
     public static Vector2? TargetPositionOverride { get; private set; }
     private static Vector2 targetPosition;
+    private static Node2D followingNode;
 
     public override void _Notification(int what)
     {
@@ -29,18 +30,27 @@ public partial class GameCamera : Autoload<GameCamera>
     public override void _Ready()
     {
         Instance.shakyCamera2d.MakeCurrent();
-        Callable.From(() => shakyCamera2d.GlobalPosition = this.GetPlayer()?.GlobalPosition ?? Vector2.Zero).CallDeferred();
     }
 
     public override void _Process(double delta)
     {
-        targetPosition = TargetPositionOverride ?? this.GetPlayer()?.GlobalPosition ?? targetPosition;
+        targetPosition = followingNode?.GlobalPosition ?? TargetPositionOverride ?? this.GetPlayer()?.GlobalPosition ?? targetPosition;
         shakyCamera2d.GlobalPosition = shakyCamera2d.GlobalPosition.Lerp(targetPosition, 1f - Mathf.Exp(-10f * (float)delta));
     }
 
     public static void SetTargetPositionOverride(Vector2 position)
     {
         TargetPositionOverride = position;
+    }
+
+    public static void FollowNode(Node2D node)
+    {
+        followingNode = node;
+    }
+
+    public static void StopFollowingNode()
+    {
+        followingNode = null;
     }
 
     public static void ClearTargetPositionOverride()
