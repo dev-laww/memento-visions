@@ -162,7 +162,7 @@ grow_vertical = 0
 theme = ExtResource("2_rrnqr")
 metadata/_edit_use_anchors_ = true
 
-[node name="ResponsesMenu" type="VBoxContainer" parent="MarginContainer/Balloon/Responses" node_paths=PackedStringArray("response_template")]
+[node name="ResponsesMenu" type="VBoxContainer" parent="MarginContainer/Balloon/Responses" node_paths=PackedStringArray("responseTemplate")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
