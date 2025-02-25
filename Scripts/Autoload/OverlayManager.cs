@@ -51,6 +51,7 @@ public partial class OverlayManager : Autoload<OverlayManager>
 
         Instance.AddChild(currentOverlay);
         Instance.GetPlayer()?.InputManager.AddLock();
+        Instance.GetViewport().SetInputAsHandled();
         Log.Debug($"Overlay {name} opended.");
     }
 
@@ -75,7 +76,5 @@ public partial class OverlayManager : Autoload<OverlayManager>
         else if (@event.IsActionPressed("menu")) ShowOverlay(MENU);
         else if (@event.IsActionPressed("open_active_quest")) ShowOverlay(QUEST);
         else if (@event.IsActionPressed("open_dev_console")) ShowOverlay(DEVELOPER_CONSOLE);
-
-        GetViewport().SetInputAsHandled();
     }
 }
