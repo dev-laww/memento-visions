@@ -13,10 +13,11 @@ public static class CommandInterpreter
         {
             var attributes = parameter.GetCustomAttributes<CommandOptionAttribute>();
 
-            if (!attributes.Any()) return null;
+            var commandOptionAttributes = attributes as CommandOptionAttribute[] ?? [.. attributes];
+            if (commandOptionAttributes.Length == 0) return null;
 
-            var aliases = attributes.Select(attribute => attribute.Name).ToArray();
-            var description = attributes.Select(attribute => attribute.Description).FirstOrDefault();
+            var aliases = commandOptionAttributes.Select(attribute => attribute.Name).ToArray();
+            var description = commandOptionAttributes.Select(attribute => attribute.Description).FirstOrDefault();
 
             var generic = typeof(Option<>).MakeGenericType(parameter.ParameterType);
             var instance = Activator.CreateInstance(generic, [aliases, description]);
@@ -78,7 +79,7 @@ public static class CommandInterpreter
 
         foreach (var parameter in parameters)
         {
-            if (Helper.CreateOption(parameter) is Option option)
+            if (Helper.CreateOption(parameter) is { } option)
             {
                 command.AddOption(option);
                 continue;
