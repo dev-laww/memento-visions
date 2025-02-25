@@ -161,7 +161,7 @@ size_flags_vertical = 3
 text = "Dialogue"
 script = ExtResource("4_exrlr")
 skip_pause_at_abbreviations = PackedStringArray("Mr", "Mrs", "Ms", "Dr", "etc", "eg", "ex")
-metadata/_custom_type_script = ExtResource("4_exrlr")
+metadata/_custom_type_script = "uid://g32um0mltv5d"
 
 [connection signal="gui_input" from="MarginContainer/Balloon" to="." method="OnGuiInput"]
 [connection signal="ResponseSelected" from="MarginContainer/Balloon/VBoxContainer/HBoxContainer/ResponsesMenu" to="." method="OnResponseSelected"]
