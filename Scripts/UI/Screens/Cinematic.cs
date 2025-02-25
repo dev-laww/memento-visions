@@ -12,6 +12,9 @@ public partial class Cinematic : CanvasLayer
     [Node] private ColorRect topBar;
     [Node] private ColorRect bottomBar;
 
+    [Signal] public delegate void CinematicStartedEventHandler();
+    [Signal] public delegate void CinematicEndedEventHandler();
+
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
@@ -22,6 +25,7 @@ public partial class Cinematic : CanvasLayer
     public void Start()
     {
         animationPlayer.Play(ANIM_IN);
+        EmitSignalCinematicStarted();
     }
 
     public async void Stop()
@@ -30,7 +34,7 @@ public partial class Cinematic : CanvasLayer
 
         await ToSignal(animationPlayer, "animation_finished");
 
-        // QueueFree();
+        EmitSignalCinematicEnded();
     }
 }
 
