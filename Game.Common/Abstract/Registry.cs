@@ -4,7 +4,7 @@ using FuzzySharp;
 
 namespace Game.Common.Abstract;
 
-public abstract class Registry<T, TRegistry> : GodotObject
+public abstract class Registry<T, TRegistry> : RefCounted
     where T : GodotObject
     where TRegistry : Registry<T, TRegistry>, new()
 {
