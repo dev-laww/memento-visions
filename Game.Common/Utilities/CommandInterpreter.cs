@@ -1,6 +1,7 @@
 using System.CommandLine;
 using System.CommandLine.NamingConventionBinder;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace Game.Common.Utilities;
 
@@ -49,9 +50,10 @@ public static class CommandInterpreter
         }
     }
 
-    private static RootCommand rootCommand = new("Game Commands");
+    private static Command rootCommand = Command;
     private static readonly List<Command> commands = [];
-
+    // Temporary solution on command interpreter not working on MacOS/Linux
+    private static Command Command => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? new RootCommand("Game Commands") : new Command("game", "Game Commands");
     public static void Register(object obj)
     {
         var type = obj.GetType();
@@ -112,7 +114,7 @@ public static class CommandInterpreter
 
     private static void RebuildRootCommand()
     {
-        rootCommand = new RootCommand("Game Commands");
+        rootCommand = Command;
 
         foreach (var command in commands)
         {
