@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://dlkqy8b0idb1c"]
+[gd_scene load_steps=3 format=3 uid="uid://dlkqy8b0idb1c"]
+
+[ext_resource type="PackedScene" uid="uid://da81eqoly45qo" path="res://Scenes/UI/Screens/Cinematic.tscn" id="1_esiv8"]
+[ext_resource type="Script" uid="uid://2ig2mddkgnu7" path="res://Scripts/Autoload/CinematicManager.cs" id="1_j7r4i"]
 
 [node name="CinematicManager" type="Node"]
+script = ExtResource("1_j7r4i")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("Cinematic"), [ExtResource("1_esiv8")]]

@@ -22,19 +22,16 @@ public partial class CinematicManager : Autoload<CinematicManager>
         WireNodes();
     }
 
-    public static void StartCinematic(Vector2 position)
+    public static void StartCinematic(Vector2 position = default)
     {
-        var cinematic = Instance.cinematic;
+        Instance.cinematic = Instance.resourcePreloader.InstanceSceneOrNull<Cinematic>();
+        Instance.cinematic.CinematicEnded += GameCamera.ClearTargetPositionOverride;
 
-        cinematic = Instance.resourcePreloader.InstanceSceneOrNull<Cinematic>();
-        cinematic.CinematicEnded += GameCamera.ClearTargetPositionOverride;
-
-        var scene = GameManager.CurrentScene ?? Instance.GetTree().CurrentScene;
-        scene.AddChild(cinematic);
+        GameManager.CurrentScene.AddChild(Instance.cinematic);
 
         GameCamera.SetTargetPositionOverride(position);
 
-        Instance.GetTree().CreateTimer(0.1f).Timeout += cinematic.Start;
+        Instance.GetTree().CreateTimer(0.1f).Timeout += Instance.cinematic.Start;
         Instance.EmitSignal(SignalName.CinematicStarted, position);
     }
 
@@ -44,8 +41,9 @@ public partial class CinematicManager : Autoload<CinematicManager>
 
         if (cinematic == null) return;
 
-        Instance.EmitSignal(SignalName.CinematicEnded);
-
         cinematic.Stop();
+
+        Instance.EmitSignal(SignalName.CinematicEnded);
+        GameCamera.ClearTargetPositionOverride();
     }
 }

@@ -36,6 +36,7 @@ InteractionManager="*res://Scripts/Autoload/InteractionManager.cs"
 EnemyManager="*res://Scripts/Autoload/EnemyManager.cs"
 FloatingTextManager="*res://Scenes/Autoload/FloatingTextManager.tscn"
 OverlayManager="*res://Scenes/Autoload/OverlayManager.tscn"
+CinematicManager="*res://Scenes/Autoload/CinematicManager.tscn"
 
 [dialogue_manager]
 
