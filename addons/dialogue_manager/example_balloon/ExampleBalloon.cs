@@ -38,6 +38,7 @@ namespace DialogueManagerRuntime
 
     Timer MutationCooldown = new Timer();
 
+
     public override void _Ready()
     {
       balloon = GetNode<Control>("%Balloon");
