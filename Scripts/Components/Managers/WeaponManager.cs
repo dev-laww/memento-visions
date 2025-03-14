@@ -90,7 +90,14 @@ public partial class WeaponManager : Node
         WeaponComponent?.Animate();
     }
 
-    public void EquipCommand(string weaponId) => Equip(ItemRegistry.Get(weaponId));
+    [Command(Name = "equip", Description = "Equips a weapon")]
+    public void EquipCommand(string id)
+    {
+        var weapon = ItemRegistry.Get(id) ?? throw new System.Exception("Weapon not found");
 
+        Equip(weapon);
+    }
+
+    [Command(Name = "unequip", Description = "Unequips the weapon")]
     public void UnequipCommand() => Unequip();
 }

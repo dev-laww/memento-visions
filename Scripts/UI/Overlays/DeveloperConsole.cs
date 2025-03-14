@@ -18,7 +18,6 @@ public partial class DeveloperConsole : Overlay
 
     public static InterpreterConsole Console { get; private set; }
 
-    // TODO: use up and down arrow keys to cycle through command history
     private static readonly List<string> commandHistory = [];
     private int commandHistoryIndex;
 
