@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Game.Common;
 using Game.Utils.Extensions;
@@ -58,6 +59,12 @@ public partial class VelocityManager : Node
     private bool isDashing;
     private StatsManager statsManager;
 
+    public enum FacingDirectionMode
+    {
+        FourDirections,
+        EightDirections
+    }
+
     /// <summary>
     /// Called when the node is added to the scene. Disables processing until movement is explicitly applied.
     /// </summary>
@@ -79,7 +86,6 @@ public partial class VelocityManager : Node
     /// </remarks>
     public VelocityManager Accelerate(Vector2 direction)
     {
-        LastFacedDirection = direction;
         return AccelerateToVelocity(direction.TryNormalize() * StatsManager.CalculatedMaxSpeed);
     }
 
@@ -120,7 +126,10 @@ public partial class VelocityManager : Node
         accelerationCoefficient = accelerationCoefficient == 0 ? AccelerationCoefficient : accelerationCoefficient;
         var delta = (float)GetProcessDeltaTime();
         var weight = 1f - Mathf.Exp(-accelerationCoefficient * delta);
+
         Velocity = Velocity.Lerp(velocity, weight);
+        LastFacedDirection = Velocity.TryNormalize();
+
         return this;
     }
 
@@ -176,6 +185,7 @@ public partial class VelocityManager : Node
     {
         Log.Debug($"{Body} knocked back to {direction} with force {force}");
         Velocity = direction.TryNormalize() * force;
+        LastFacedDirection = -direction.TryNormalize();
 
         return this;
     }
@@ -256,6 +266,84 @@ public partial class VelocityManager : Node
         var available = TimesCanDash > dashQueue.Count && !direction.IsZeroApprox();
         var whileDashing = CanDashWhileDashing || (!CanDashWhileDashing && !IsDashing);
         return available && whileDashing;
+    }
+
+    /// <summary>
+    /// Determines the last faced direction of the entity as a string.
+    /// </summary>
+    /// <param name="mode">
+    /// The facing direction mode to use. The default is <see cref="FacingDirectionMode.FourDirections"/>.
+    /// </param>
+    /// <returns>
+    /// Returns a string representing the last faced direction of the entity.
+    /// </returns>
+    public string GetLastFacedDirectionString(FacingDirectionMode mode = FacingDirectionMode.FourDirections)
+    {
+        return mode switch
+        {
+            FacingDirectionMode.FourDirections => GetFourDirectionString(),
+            FacingDirectionMode.EightDirections => GetEightDirectionString(),
+            _ => throw new ArgumentOutOfRangeException(nameof(mode), mode, null)
+        };
+    }
+
+
+    /// <summary>
+    /// Gets the last faced direction of the entity as a string using four cardinal directions.
+    /// </summary>
+    /// <returns>
+    /// Returns a string representing the last faced direction of the entity.
+    /// </returns>
+    public string GetFourDirectionString()
+    {
+        var lastMoveDirection = LastFacedDirection;
+
+        if (lastMoveDirection == Vector2.Zero) return "down";
+
+        var x = lastMoveDirection.X;
+        var y = lastMoveDirection.Y;
+
+        if (Math.Abs(x) > Math.Abs(y))
+        {
+            if (x > 0)
+                return "right";
+
+            return "left";
+        }
+
+        if (y < 0)
+            return "up";
+
+        return "down";
+    }
+
+    /// <summary>
+    /// Gets the last faced direction of the entity as a string using eight cardinal directions.
+    /// </summary>
+    /// <returns>
+    /// Returns a string representing the last faced direction of the entity.
+    /// </returns>
+    public string GetEightDirectionString()
+    {
+        var lastMoveDirection = LastFacedDirection;
+
+        if (lastMoveDirection == Vector2.Zero) return "down";
+
+        var x = Mathf.Sign(lastMoveDirection.X);
+        var y = Mathf.Sign(lastMoveDirection.Y);
+
+        if (x == 0 && y == 0) return "down";
+
+        if (x == 0)
+            return y > 0 ? "up" : "down";
+
+        if (y == 0)
+            return x > 0 ? "right" : "left";
+
+        if (x > 0)
+            return y > 0 ? "right-up" : "right-down";
+
+        return y > 0 ? "left-up" : "left-down";
     }
 
 

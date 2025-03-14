@@ -25,20 +25,7 @@ public partial class Player : Entity
 
     private Vector2 inputDirection;
 
-    public string LastFacedDirection
-    {
-        get
-        {
-            var lastMoveDirection = VelocityManager.LastFacedDirection;
-
-            if (lastMoveDirection == Vector2.Zero) return "front";
-
-            if (Math.Abs(lastMoveDirection.X) > Math.Abs(lastMoveDirection.Y))
-                return lastMoveDirection.X > 0 ? "right" : "left";
-
-            return lastMoveDirection.Y < 0 ? "back" : "front";
-        }
-    }
+    public string LastFacedDirection => VelocityManager.GetFourDirectionString();
 
     public override void _EnterTree()
     {
