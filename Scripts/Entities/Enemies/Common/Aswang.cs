@@ -35,38 +35,66 @@ public partial class Aswang : Entity
         StateMachine.AddStates(CommonAttack, EnterCommonAttack);
         StateMachine.AddStates(SpecialAttack, EnterSpecialAttack);
         StateMachine.SetInitialState(Move);
+
+        attackTimer.Timeout += OnAttackTimerTimeout;
     }
 
     public void EnterMove()
     {
+        EnterState(MOVE);
         playback.Travel(MOVE);
     }
 
     private void Move()
     {
-
+        GD.Print(MOVE);
     }
 
 
     public void EnterCommonAttack()
     {
-        playback.Travel(COMMON_ATTACK);
+        EnterState(COMMON_ATTACK);
     }
 
     private void CommonAttack()
     {
-
+        GD.Print(COMMON_ATTACK);
     }
 
 
     public void EnterSpecialAttack()
     {
-        playback.Travel(SPECIAL_ATTACK);
+        EnterState(SPECIAL_ATTACK);
     }
 
     private void SpecialAttack()
     {
+        GD.Print(SPECIAL_ATTACK);
+    }
 
+    private void OnAttackTimerTimeout()
+    {
+        var randomNumber = MathUtil.RNG.RandfRange(0, 1);
+
+        if (randomNumber < 0.7f)
+        {
+            StateMachine.ChangeState(CommonAttack);
+        }
+        else
+        {
+            StateMachine.ChangeState(SpecialAttack);
+        }
+    }
+
+    private void ChangeToMove()
+    {
+        StateMachine.ChangeState(Move);
+    }
+
+    private void EnterState(string animation)
+    {
+        playback.Travel(animation);
+        animationTree.Set($"parameters/{animation}/blend_position", velocityManager.LastFacedDirection);
     }
 }
 
