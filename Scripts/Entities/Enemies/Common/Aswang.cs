@@ -1,11 +1,8 @@
-using System.Security.Cryptography;
 using Game.Components;
-using Game.Entities;
-using Game.UI.Screens;
 using Godot;
 using GodotUtilities;
 
-namespace Game;
+namespace Game.Entities;
 
 [Scene]
 public partial class Aswang : Entity
@@ -37,7 +34,6 @@ public partial class Aswang : Entity
         StateMachine.AddStates(Move, EnterMove);
         StateMachine.AddStates(CommonAttack, EnterCommonAttack);
         StateMachine.AddStates(SpecialAttack, EnterSpecialAttack);
-
         StateMachine.SetInitialState(Move);
     }
 
