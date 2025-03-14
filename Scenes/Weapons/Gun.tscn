@@ -85,7 +85,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_5me0j")
 }],
 "loop": false,
-"name": &"back",
+"name": &"up",
 "speed": 8.0
 }, {
 "frames": [{
@@ -102,7 +102,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_bv7jb")
 }],
 "loop": false,
-"name": &"front",
+"name": &"down",
 "speed": 8.0
 }, {
 "frames": [{
@@ -164,7 +164,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"front"]
+"values": [&"down"]
 }
 
 [sub_resource type="Animation" id="Animation_5yf45"]
@@ -192,7 +192,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": ["back"]
+"values": ["up"]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -232,7 +232,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": ["front"]
+"values": ["down"]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -330,8 +330,8 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f582b"]
 _data = {
 &"RESET": SubResource("Animation_a2k4k"),
-&"back": SubResource("Animation_5yf45"),
-&"front": SubResource("Animation_rllg4"),
+&"up": SubResource("Animation_5yf45"),
+&"down": SubResource("Animation_rllg4"),
 &"left": SubResource("Animation_hs8jx"),
 &"right": SubResource("Animation_qo1oo")
 }
@@ -346,7 +346,7 @@ unique_name_in_owner = true
 texture_filter = 2
 material = ExtResource("2_l6mw3")
 sprite_frames = SubResource("SpriteFrames_3lbdf")
-animation = &"front"
+animation = &"down"
 script = ExtResource("3_ahu3j")
 
 [node name="AttackSfx" type="AudioStreamPlayer2D" parent="Assets"]
