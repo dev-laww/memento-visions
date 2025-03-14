@@ -1227,23 +1227,23 @@ Damage = 100.0
 [node name="HealthNumberManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
 script = ExtResource("3_0iqml")
 StatsManager = NodePath("../StatsManager")
-metadata/_custom_type_script = ExtResource("3_0iqml")
+metadata/_custom_type_script = "uid://cpwyjck8klk35"
 
 [node name="InventoryManager" type="Node" parent="."]
 script = ExtResource("3_5oqto")
-metadata/_custom_type_script = ExtResource("3_5oqto")
+metadata/_custom_type_script = "uid://cwq8sbj55gxb6"
 
 [node name="InputManager" type="Node" parent="."]
 script = ExtResource("4_0iqml")
-metadata/_custom_type_script = ExtResource("4_0iqml")
+metadata/_custom_type_script = "uid://tapd6e6pmvag"
 
 [node name="QuestManager" type="Node" parent="."]
 script = ExtResource("4_1ij2i")
-metadata/_custom_type_script = ExtResource("4_1ij2i")
+metadata/_custom_type_script = "uid://cy0j5540bkg11"
 
 [node name="WeaponManager" type="Node" parent="."]
 script = ExtResource("3_65tgk")
-metadata/_custom_type_script = ExtResource("3_65tgk")
+metadata/_custom_type_script = "uid://dq1u7skg2nopr"
 
 [node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
 script = ExtResource("3_lmufy")
@@ -1252,7 +1252,7 @@ AccelerationCoefficient = 12.0
 TimesCanDash = 2
 CanDashWhileDashing = true
 DashSpeed = 150.0
-metadata/_custom_type_script = ExtResource("3_lmufy")
+metadata/_custom_type_script = "uid://nuxtah4mmhg5"
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
 collision_layer = 2048
