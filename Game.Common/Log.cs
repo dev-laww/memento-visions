@@ -15,8 +15,8 @@ public static class Log
         Error
     }
 
-    public static bool Enabled { get; private set; } = !OS.IsDebugBuild();
-    public static Level LogLevel { get; set; } = OS.IsDebugBuild() ? Level.Debug : Level.Info;
+    public static bool Enabled { get; private set; } = true;
+    public static Level LogLevel { get; set; } = Level.Debug;
 
     [Conditional("DEBUG")]
     public static void Debug(
