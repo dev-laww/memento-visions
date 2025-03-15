@@ -6,6 +6,7 @@ using Game.Autoload;
 using Game.Common;
 using Game.Common.Utilities;
 using Game.Components;
+using Game.Data;
 using Game.UI.Overlays;
 using Godot;
 using GodotUtilities;
@@ -163,13 +164,20 @@ public partial class DeveloperConsole : Overlay
 
         var isUsingGameManager = GetTree().Root.GetNodeOrNull("/root/GameManager") != null;
 
+
+        if (!SceneRegistry.Get(scene, out var res))
+        {
+            Console.Error.WriteLine($"Scene '{scene}' not found.");
+            return;
+        }
+
         if (isUsingGameManager)
         {
-            GameManager.ChangeScene(scene);
+            GameManager.ChangeScene(res);
         }
         else
         {
-            SceneManager.ChangeScene(scene);
+            SceneManager.ChangeScene(res);
         }
     }
 }
