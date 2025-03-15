@@ -35,6 +35,13 @@ public abstract class Registry<T, TRegistry> : RefCounted
         return resource;
     }
 
+    public static bool Get(string id, out T? resource)
+    {
+        resource = Get(id);
+
+        return resource != null;
+    }
+
     protected virtual void LoadResources()
     {
         var files = DirAccessUtils.GetFilesRecursively(Instance.Value.ResourcePath);
