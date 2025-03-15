@@ -38,7 +38,7 @@ public partial class Player : Entity
     {
         if (Engine.IsEditorHint()) return;
 
-        CommandInterpreter.Register(this);
+        CommandInterpreter.Unregister(this);
     }
 
     public override void _Notification(int what)
