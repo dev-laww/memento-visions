@@ -2,8 +2,10 @@ using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.IO;
 using System.Linq;
+using Game.Autoload;
 using Game.Common;
 using Game.Common.Utilities;
+using Game.Components;
 using Game.UI.Overlays;
 using Godot;
 using GodotUtilities;
@@ -69,7 +71,10 @@ public partial class DeveloperConsole : Overlay
         if (string.IsNullOrWhiteSpace(text)) return;
 
         var command = text.Split(" ").First();
-        var args = string.Join(" ", text.Split(" ").Skip(1).Select(x => x.StartsWith('-') ? $"[color=#989898]{x}[/color]" : x));
+        var args = string.Join(
+            " ",
+            text.Split(" ").Skip(1).Select(x => x.StartsWith('-') ? $"[color=#989898]{x}[/color]" : x)
+        );
 
         output.Text += $"> [color=#ffff00]{command}[/color] {args}\n";
 
@@ -97,7 +102,9 @@ public partial class DeveloperConsole : Overlay
         else if (@event.IsActionPressed("ui_down"))
         {
             commandHistoryIndex = Mathf.Clamp(commandHistoryIndex + 1, 0, commandHistory.Count);
-            commandInput.Text = commandHistoryIndex == commandHistory.Count ? string.Empty : commandHistory[commandHistoryIndex];
+            commandInput.Text = commandHistoryIndex == commandHistory.Count
+                ? string.Empty
+                : commandHistory[commandHistoryIndex];
             commandInput.CaretColumn = commandInput.Text.Length;
             commandInput.GrabFocus();
         }
@@ -143,5 +150,26 @@ public partial class DeveloperConsole : Overlay
 
         foreach (var command in commandHistory)
             Console.WriteLine(command);
+    }
+
+    [Command(Name = "transition", Description = "Transitions to a scene.")]
+    private void Transition(string scene)
+    {
+        if (string.IsNullOrWhiteSpace(scene))
+        {
+            Console.Error.WriteLine("Scene name cannot be empty.");
+            return;
+        }
+
+        var isUsingGameManager = GetTree().Root.GetNodeOrNull("/root/GameManager") != null;
+
+        if (isUsingGameManager)
+        {
+            GameManager.ChangeScene(scene);
+        }
+        else
+        {
+            SceneManager.ChangeScene(scene);
+        }
     }
 }
