@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://drgpljgprfgnk"]
+
+[ext_resource type="PackedScene" uid="uid://cyn0d3ajisvlo" path="res://Scenes/UI/Screens/Loading.tscn" id="1_3ewyu"]
+[ext_resource type="Script" uid="uid://dmdl060r1vi8b" path="res://Scripts/Autoload/SceneManager.cs" id="1_xwn8q"]
+
+[node name="SceneManager" type="Node"]
+script = ExtResource("1_xwn8q")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("Loading"), [ExtResource("1_3ewyu")]]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1

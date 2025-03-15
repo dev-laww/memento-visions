@@ -1,4 +1,6 @@
-using Game.Autoload;
+using System.Threading.Tasks;
+using Game.Common;
+using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
@@ -7,13 +9,17 @@ namespace Game.UI.Screens;
 [Scene]
 public partial class Loading : CanvasLayer
 {
+    public enum Transition
+    {
+        Fade
+    }
+
+    [Node] private Panel panel;
     [Node] private ProgressBar progressBar;
-    [Node] public AnimationPlayer animationPlayer;
     [Node] private Timer timer;
+    [Node] public AnimationPlayer animationPlayer;
 
-    [Signal] public delegate void TransitionInCompleteEventHandler();
-
-    private Transition transition;
+    private string currentTransition;
 
     public override void _Notification(int what)
     {
@@ -28,35 +34,37 @@ public partial class Loading : CanvasLayer
         timer.Timeout += () => progressBar.Visible = true;
     }
 
-    public void StartTransition(Transition _transition)
-    {
-        if (!animationPlayer.HasAnimation(_transition.ToValue()))
-        {
-            GD.PushWarning($"{_transition} does not exists");
-            transition = _transition;
-        }
-
-        transition = _transition;
-        animationPlayer.Play(transition.ToValue());
-        timer.Start();
-    }
-
-    public async void FinishTransition()
-    {
-        timer?.Stop();
-
-        var endingTransitionName = transition.ToValue().Replace("to", "from");
-        animationPlayer.Play(endingTransitionName);
-
-        await ToSignal(animationPlayer, "animation_finished");
-        QueueFree();
-    }
-
-    public void UpdateBar(float value)
+    public void SetProgress(float value)
     {
         var tween = CreateTween();
         tween.TweenProperty(progressBar, "value", value, 0.2f);
     }
 
-    public void ReportMidpoint() => EmitSignalTransitionInComplete();
+    public async Task Start(Transition transition)
+    {
+        var transitionName = transition.ToAnimation();
+
+        if (!animationPlayer.HasAnimation(transitionName))
+        {
+            Log.Warn($"Animation '{transitionName}' not found.");
+            return;
+        }
+
+        animationPlayer.Play(transitionName);
+        timer.Start();
+        currentTransition = transitionName;
+
+        await ToSignal(animationPlayer, "animation_finished");
+    }
+
+    public async Task End()
+    {
+        animationPlayer.PlayBackwards(currentTransition);
+        timer.Stop();
+        currentTransition = null;
+
+        await ToSignal(animationPlayer, "animation_finished");
+
+        QueueFree();
+    }
 }

@@ -1,199 +1,162 @@
 using System;
+using System.Linq;
+using Game.Common;
 using Game.UI.Screens;
 using Godot;
-using Array = Godot.Collections.Array;
+using GodotUtilities;
 
 namespace Game.Autoload;
 
-public enum Transition
-{
-    Fade,
-    FadeWhite,
-    Wipe,
-    Zelda,
-    None
-}
-
-public static class TransitionExtensions
-{
-    public static string ToValue(this Transition transition)
-    {
-        return transition switch
-        {
-            Transition.Fade => "fade_to_black",
-            Transition.FadeWhite => "fade_to_white",
-            Transition.Wipe => "wipe_to_right",
-            Transition.Zelda => "zelda",
-            Transition.None => "no_to_transition",
-            _ => "no_to_transition"
-        };
-    }
-}
-
-// TODO: Add wipe direction to Transition.Wipe
+[Scene]
 public partial class SceneManager : Autoload<SceneManager>
 {
-    [Signal] public delegate void LoadStartEventHandler(Loading loadingScreen);
-    [Signal] public delegate void SceneAddedEventHandler(Node node, Loading loadingScreen);
-    [Signal] public delegate void LoadCompleteEventHandler(Node node);
-    [Signal] public delegate void ContentFinishedLoadingEventHandler(Node2D content);
-    [Signal] public delegate void ContentInvalidEventHandler(string path);
-    [Signal] public delegate void ContentFailedToLoadEventHandler(string path);
+    [Node] private ResourcePreloader resourcePreloader;
+    [Node] private Timer timer;
 
-    private PackedScene loadingScreenScene =
-        ResourceLoader.Load("res://Scenes/UI/Screens/Loading.tscn") as PackedScene;
-
-    // TODO: cleanup
-    private int WINDOW_WIDTH => GetViewport().GetWindow().Size.X;
-    private int WINDOW_HEIGHT => GetViewport().GetWindow().Size.Y;
-    private Loading loadingScreen;
-    private Transition transition;
-    private Vector2 direction;
-    private string contentPath;
-    private Timer loadProgressTimer;
-    private Node loadSceneInTo;
-    private Node sceneToUnload;
     private bool loading;
+    private string loadPath;
+    private Node from;
+    private Node to;
+    private Loading loadingScreen;
+    private Loading.Transition transition = Loading.Transition.Fade;
+
+
+    public override void _Notification(int what)
+    {
+        if (what != NotificationSceneInstantiated) return;
+
+        WireNodes();
+    }
 
     public override void _Ready()
     {
-        ContentInvalid += path => GD.PushError($"Content at path {path} is invalid.");
-        ContentFailedToLoad += path => GD.PushError($"Failed to load content at path {path}.");
-        ContentFinishedLoading += OnFinishedLoading;
+        timer.Timeout += UpdateLoadStatus;
+        from = GetTree().CurrentScene;
+        to = GetTree().Root;
     }
 
-    public static async void ChangeScene(
-        string to,
+    public static void ChangeScene(
+        string path,
         Node from = null,
-        Transition transition = Transition.Fade,
-        Node loadInTo = null,
-        Vector2 moveDirection = default
+        Node to = null,
+        Loading.Transition? transition = null
     )
     {
-        if (Instance.loading)
+
+        if (!ResourceLoader.Exists(path))
         {
-            GD.PushWarning("SceneManager is already loading a scene.");
+            Log.Error($"Scene '{path}' not found.");
             return;
         }
 
-        if (moveDirection == default && transition == Transition.Zelda)
+        var instance = Instance;
+
+        if (instance.loading)
         {
-            GD.PushWarning("Move direction is not set");
+            Log.Warn("Scene change already in progress.");
             return;
         }
 
-        if (transition != Transition.Zelda && Instance.loadingScreen != null)
-            await Instance.ToSignal(Instance.loadingScreen.animationPlayer, "animation_finished");
+        instance.Reset();
+        instance.loading = true;
+        instance.from = from ?? instance.GetTree().CurrentScene;
+        instance.to = to ?? instance.GetTree().Root;
+        instance.transition = transition ?? Loading.Transition.Fade;
 
-        Instance.loading = true;
-        Instance.loadSceneInTo = loadInTo ?? Instance.GetTree().Root;
-        Instance.sceneToUnload = from ?? Instance.GetTree().CurrentScene;
-        Instance.transition = transition;
-        Instance.direction = moveDirection;
-
-        if (Instance.transition != Transition.Zelda)
-        {
-            Instance.loadingScreen = Instance.loadingScreenScene.Instantiate<Loading>();
-            Instance.GetTree().Root.AddChild(Instance.loadingScreen);
-            Instance.loadingScreen.StartTransition(Instance.transition);
-        }
-
-        Instance.LoadContent(to);
+        instance.LoadScene(path);
     }
 
-    private async void LoadContent(string path)
+    private async void LoadScene(string path)
     {
-        if (transition != Transition.Zelda)
-            await ToSignal(loadingScreen.animationPlayer, "animation_finished");
+        loadingScreen = resourcePreloader.InstanceSceneOrNull<Loading>();
+        GetTree().Root.AddChild(loadingScreen);
+        await loadingScreen.Start(transition);
 
-        EmitSignal(SignalName.LoadStart, loadingScreen);
-        contentPath = path;
+        var error = ResourceLoader.LoadThreadedRequest(path);
 
-        var loader = ResourceLoader.LoadThreadedRequest(path);
-
-        if (!ResourceLoader.Exists(path) || loader != Error.Ok)
+        if (error != Error.Ok)
         {
-            EmitSignal(SignalName.ContentInvalid, path);
+            Log.Error($"Failed to load scene '{path}'.");
             return;
         }
 
-        loadProgressTimer = new Timer
-            { WaitTime = 0.1f };
-        loadProgressTimer.Timeout += MonitorLoadStatus;
-        GetTree().Root.AddChild(loadProgressTimer);
-        loadProgressTimer.Start();
+        loadPath = path;
+        timer.Start();
     }
 
-    private void MonitorLoadStatus()
+    private void UpdateLoadStatus()
     {
-        Array loadProgress = new();
-        var loadStatus = ResourceLoader.LoadThreadedGetStatus(contentPath, loadProgress);
+        var progress = new Godot.Collections.Array();
+        var status = ResourceLoader.LoadThreadedGetStatus(loadPath, progress);
 
-        switch (loadStatus)
+        switch (status)
         {
             case ResourceLoader.ThreadLoadStatus.InvalidResource:
-                EmitSignal(SignalName.ContentInvalid, contentPath);
-                loadProgressTimer.Stop();
+                Log.Error($"Invalid resource '{loadPath}'.");
                 break;
             case ResourceLoader.ThreadLoadStatus.InProgress:
-                loadingScreen?.UpdateBar((float)loadProgress[0] * 100);
+                var p = progress.FirstOrDefault().As<float>();
+                Log.Debug($"Loading scene '{loadPath}': {p:P0}");
+                loadingScreen?.SetProgress(p);
                 break;
             case ResourceLoader.ThreadLoadStatus.Failed:
-                EmitSignal(SignalName.ContentFailedToLoad, contentPath);
-                loadProgressTimer.Stop();
+                Log.Error($"Failed to load scene '{loadPath}'.");
                 break;
             case ResourceLoader.ThreadLoadStatus.Loaded:
-                loadProgressTimer.Stop();
-                loadProgressTimer.QueueFree();
-                EmitSignal(
-                    SignalName.ContentFinishedLoading,
-                    (ResourceLoader.LoadThreadedGet(contentPath) as PackedScene)?.Instantiate()
-                );
+
+                if (ResourceLoader.LoadThreadedGet(loadPath) is not PackedScene scene)
+                {
+                    Log.Error($"Failed to load scene '{loadPath}'.");
+
+                    break;
+                }
+
+                FinishLoad(scene);
+
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
 
-    private async void OnFinishedLoading(Node2D content)
+    private async void FinishLoad(PackedScene scene)
     {
-        var outGoingScene = sceneToUnload;
-        loadSceneInTo.AddChild(content);
-        EmitSignal(SignalName.SceneAdded, content, loadingScreen);
+        var outgoing = from;
+        var incoming = scene.InstantiateOrNull<Node>();
 
-        if (transition == Transition.Zelda)
+        if (incoming == null)
         {
-            content.Position = content.Position with
-            {
-                X = direction.X * WINDOW_WIDTH,
-                Y = direction.Y * WINDOW_HEIGHT
-            };
-
-            var tweenIn = CreateTween();
-            tweenIn.TweenProperty(content, "position", Vector2.Zero, 1f).SetTrans(Tween.TransitionType.Sine);
-
-            var resetVector = new Vector2
-            {
-                X = direction.X * WINDOW_WIDTH,
-                Y = direction.Y * WINDOW_HEIGHT
-            };
-            var tweenOut = CreateTween();
-            tweenOut.TweenProperty(outGoingScene, "position", resetVector, 1f).SetTrans(Tween.TransitionType.Sine);
-
-            await ToSignal(tweenIn, "finished");
+            Log.Error($"Failed to instantiate scene '{loadPath}'.");
+            Reset();
+            return;
         }
 
-        if (outGoingScene != GetTree().Root)
-            outGoingScene?.QueueFree();
-
-        if (loadingScreen != null && transition != Transition.Zelda)
+        if (outgoing != GetTree().Root)
         {
-            loadingScreen.FinishTransition();
-            await ToSignal(loadingScreen.animationPlayer, "animation_finished");
-            loadingScreen = null;
+            outgoing.QueueFree();
         }
 
-        EmitSignal(SignalName.LoadComplete, content);
+        await loadingScreen?.End();
+
+        loadingScreen = null;
+
+        to.AddChild(incoming);
+        Reset();
+    }
+
+    private void Reset()
+    {
         loading = false;
+        loadPath = null;
+
+        from = GetTree().CurrentScene;
+        to = GetTree().Root;
+
+        timer.Stop();
+
+        loadingScreen?.QueueFree();
+        loadingScreen = null;
+
+        transition = Loading.Transition.Fade;
     }
 }
