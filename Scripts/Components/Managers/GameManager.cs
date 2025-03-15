@@ -1,5 +1,4 @@
 using System.Linq;
-using Game.Autoload;
 using Game.UI.Overlays;
 using Game.Common.Extensions;
 using Godot;
@@ -8,6 +7,8 @@ using Game.Common.Utilities;
 using Game.Data;
 using Game.Utils.Extensions;
 using Game.Entities;
+using Game.UI.Screens;
+using Game.Autoload;
 
 namespace Game.Components;
 
@@ -62,18 +63,13 @@ public partial class GameManager : Node
         CommandInterpreter.Unregister(this);
     }
 
-    public static void ChangeScene(
-        string path,
-        Vector2 direction = default,
-        Transition transition = Transition.Fade
-    )
+    public static void ChangeScene(string path, Loading.Transition? transition = null)
     {
         SceneManager.ChangeScene(
             path,
             transition: transition,
             from: instance.currentScene.GetChildren().FirstOrDefault(),
-            loadInTo: instance.currentScene,
-            moveDirection: direction
+            to: instance.currentScene
         );
     }
 
