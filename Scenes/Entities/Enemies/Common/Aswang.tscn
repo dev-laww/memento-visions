@@ -1013,7 +1013,6 @@ metadata/_custom_type_script = "uid://d4io668qmblcf"
 
 [node name="PathFindManager" parent="." node_paths=PackedStringArray("VelocityManager") instance=ExtResource("5_4f33n")]
 VelocityManager = NodePath("../VelocityManager")
-DebugEnabled = null
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
 position = Vector2(0, -31)
@@ -1036,9 +1035,9 @@ texture_filter = 2
 material = ExtResource("6_k57tq")
 position = Vector2(0, -26)
 sprite_frames = SubResource("SpriteFrames_5bdsy")
-animation = &"move_left"
+animation = &"move_down"
 autoplay = "move_down"
-frame = 3
+frame = 2
 script = ExtResource("8_cvtll")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1053,6 +1052,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_eg51y")
 anim_player = NodePath("../AnimationPlayer")
-"parameters/Common Attack/blend_position" = Vector2(0, 0)
-parameters/Move/blend_position = Vector2(0, 0)
-"parameters/Special Attack/blend_position" = Vector2(0, 0)
+"parameters/Common Attack/blend_position" = Vector2(0, 0.1)
+parameters/Move/blend_position = Vector2(0, 0.1)
+"parameters/Special Attack/blend_position" = Vector2(0, 0.1)
