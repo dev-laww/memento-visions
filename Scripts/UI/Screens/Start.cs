@@ -5,7 +5,7 @@ using GodotUtilities;
 namespace Game.UI.Screens;
 
 [Scene]
-public partial class Start : Control
+public partial class Start : CanvasLayer
 {
     [Node] private Button button;
 
