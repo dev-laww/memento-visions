@@ -10,12 +10,22 @@ namespace Game.Components;
 public partial class HitBox : Area2D
 {
     [Export] public Attack.Type Type { get; set; } = Attack.Type.Physical;
-
     [Export] public float Damage;
+    [Export] public float KnockbackForce;
 
     [Signal] public delegate void HitEventHandler();
 
-    public Attack Attack => Attack.Create(Damage, Type, Owner as Entity);
+    public Attack Attack
+    {
+        get
+        {
+            if (KnockbackForce <= 0) return Attack.Create(Damage, Type, Owner as Entity);
+
+            var knockback = new Attack.KnockbackInfo { Direction = Vector2.Zero, Force = KnockbackForce };
+
+            return Attack.Create(Damage, Type, Owner as Entity, knockback);
+        }
+    }
 
     public override void _Ready()
     {

@@ -73,7 +73,6 @@ public partial class WeaponComponent : Node2D
         {
             box.Owner = player;
             box.Damage = player.StatsManager.Damage;
-
         }
     }
 
