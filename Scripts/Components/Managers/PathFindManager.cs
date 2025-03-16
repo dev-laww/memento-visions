@@ -26,11 +26,12 @@ public partial class PathFindManager : Node2D
     [Export]
     private bool DebugEnabled
     {
-        get => NavigationAgent2D.DebugEnabled;
+        get => GetNode<NavigationAgent2D>("NavigationAgent2D").DebugEnabled;
         set
         {
-            NavigationAgent2D.DebugEnabled = value;
-            NavigationAgent2D.NotifyPropertyListChanged();
+            var agent = GetNode<NavigationAgent2D>("NavigationAgent2D");
+            agent.DebugEnabled = value;
+            agent.NotifyPropertyListChanged();
         }
     }
 
