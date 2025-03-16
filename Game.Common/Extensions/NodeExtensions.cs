@@ -15,4 +15,18 @@ public static class NodeExtensions
         parent.NotifyPropertyListChanged();
         child.NotifyPropertyListChanged();
     }
+
+    public static T? GetFirstChildOrNull<T>(this Node node) where T : Node
+    {
+        if (node is T t) return t;
+
+        foreach (Node child in node.GetChildren())
+        {
+            T? found = GetFirstChildOrNull<T>(child);
+
+            if (found != null) return found;
+        }
+
+        return null;
+    }
 }
