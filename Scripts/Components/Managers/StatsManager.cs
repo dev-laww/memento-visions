@@ -33,6 +33,7 @@ public partial class StatsManager : Node
     [Signal] public delegate void LevelUpEventHandler(float level);
 
     [Export] public float MaxHealth = 100;
+    [Export] private bool Invulnerable;
 
     public float Health
     {
@@ -179,7 +180,7 @@ public partial class StatsManager : Node
 
         while (Experience >= requiredExperience)
         {
-            Experience -= requiredExperience; 
+            Experience -= requiredExperience;
             Level++;
 
             EmitSignalLevelUp(Level);
@@ -197,7 +198,9 @@ public partial class StatsManager : Node
 
     public void ReceiveAttack(Attack attack)
     {
-        Health -= Math.Clamp(attack.Damage - defense, 0, float.MaxValue);
+        if (!Invulnerable)
+            Health -= Math.Clamp(attack.Damage - defense, 0, float.MaxValue);
+
         attack.Fatal = Health <= 0;
 
         EmitSignalAttackReceived(attack);
