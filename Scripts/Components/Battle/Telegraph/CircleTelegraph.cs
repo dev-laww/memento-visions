@@ -7,7 +7,7 @@ namespace Game;
 [Scene]
 public partial class CircleTelegraph : Node2D
 {
-    [Export] private float radius = 50;
+    [Export] public float Radius = 50;
 
     private float currentRadius;
 
@@ -22,7 +22,7 @@ public partial class CircleTelegraph : Node2D
     {
         var tween = CreateTween();
 
-        tween.TweenProperty(this, "currentRadius", radius, 0.3f)
+        tween.TweenProperty(this, "currentRadius", Radius, 0.3f)
             .SetTrans(Tween.TransitionType.Cubic)
             .SetEase(Tween.EaseType.InOut);
     }

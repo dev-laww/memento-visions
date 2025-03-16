@@ -4,11 +4,13 @@ using GodotUtilities;
 
 namespace Game;
 
-[Scene]
 [Tool]
+[Scene]
 public partial class TelegraphCanvas : CanvasGroup
 {
     [Export] private float frequency;
+
+    [Node] private ResourcePreloader resourcePreloader;
 
     private float time;
 
@@ -36,6 +38,16 @@ public partial class TelegraphCanvas : CanvasGroup
         color = new Color(color.R, t, t, color.A);
 
         (Material as ShaderMaterial)?.SetShaderParameter("color", color);
+    }
+
+    public CircleTelegraph CreateCircleTelegraph(float radius)
+    {
+        var telegraph = resourcePreloader.InstanceSceneOrNull<CircleTelegraph>();
+        telegraph.Radius = radius;
+
+        AddChild(telegraph);
+
+        return telegraph;
     }
 }
 
