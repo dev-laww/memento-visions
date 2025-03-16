@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://bbe7f6b722mu0" path="res://Scripts/Components/Battle/Telegraph/Circle.cs" id="1_b1cml"]
 
-[node name="Circle" type="Node2D"]
+[node name="CircleTelegraph" type="Node2D"]
 script = ExtResource("1_b1cml")
