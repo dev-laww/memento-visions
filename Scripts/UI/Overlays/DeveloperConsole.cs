@@ -4,6 +4,7 @@ using System.CommandLine.IO;
 using System.Linq;
 using Game.Autoload;
 using Game.Common;
+using Game.Common.Extensions;
 using Game.Common.Utilities;
 using Game.Components;
 using Game.Data;
@@ -219,5 +220,31 @@ public partial class DeveloperConsole : Overlay
                 GetTree().CurrentScene.AddChild(instance);
             }
         }
+    }
+
+    [Command(Name = "telegraph", Description = "Creates a telegraph at the given position.")]
+    private void Telegraph(
+        [CommandOption(Name = "-x", Description = "X position")]
+        float x = 0,
+        [CommandOption(Name = "-y", Description = "Y position")]
+        float y = 0
+    )
+    {
+        var canvas = GetTree().Root.GetFirstChildOrNull<TelegraphCanvas>();
+
+        if (canvas == null)
+        {
+            Console.Error.WriteLine("TelegraphCanvas not found.");
+            return;
+        }
+
+        DamageBuilder.Circle()
+            .WithRadius(140)
+            .WithDamage(10)
+            .WithDamage(1000)
+            .WithWaitTime(3)
+            .WithPosition(new Vector2(x, y))
+            .WithOwner(this.GetPlayer())
+            .Build();
     }
 }

@@ -477,7 +477,6 @@ navigation_polygon = SubResource("NavigationPolygon_3itxx")
 navigation_polygon = SubResource("NavigationPolygon_hjsuk")
 
 [node name="TelegraphCanvas" parent="." instance=ExtResource("5_7amk1")]
-top_level = true
 
 [node name="Map" type="Node2D" parent="."]
 

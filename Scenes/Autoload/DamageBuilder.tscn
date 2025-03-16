@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ulwer0t40uhg"]
+
+[ext_resource type="Script" uid="uid://dwkxy8gfhoqkm" path="res://Scripts/Autoload/DamageBuilder.cs" id="1_7j4t0"]
+[ext_resource type="PackedScene" uid="uid://bkhuqhhynpfe5" path="res://Scenes/Components/Battle/Damage/CircleDamage.tscn" id="1_pw8du"]
+
+[node name="DamageBuilder" type="Node"]
+script = ExtResource("1_7j4t0")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("CircleDamage"), [ExtResource("1_pw8du")]]

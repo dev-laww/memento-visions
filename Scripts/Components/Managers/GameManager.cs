@@ -43,6 +43,13 @@ public partial class GameManager : Node
         currentScene.AddChild(startScreen);
     }
 
+    public override void _Process(double delta)
+    {
+        var node = GetTree().CurrentScene.GetFirstChildOrNull<TelegraphCanvas>();
+
+        GD.Print(node);
+    }
+
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;

@@ -24,3 +24,5 @@ metadata/_custom_type_script = "uid://dkgndduo4d7p4"
 unique_name_in_owner = true
 shape = SubResource("CircleShape2D_q5qdf")
 disabled = true
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

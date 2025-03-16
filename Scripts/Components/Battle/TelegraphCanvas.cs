@@ -45,8 +45,6 @@ public partial class TelegraphCanvas : CanvasGroup
         var telegraph = resourcePreloader.InstanceSceneOrNull<CircleTelegraph>();
         telegraph.Radius = radius;
 
-        AddChild(telegraph);
-
         return telegraph;
     }
 }

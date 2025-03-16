@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using Godot;
 using GodotUtilities;
 
@@ -39,6 +41,19 @@ public partial class CircleTelegraph : Node2D
         color.A = 0.01f;
 
         DrawCircle(Vector2.Zero, currentRadius, color);
+    }
+
+    public async Task End()
+    {
+        var tween = CreateTween();
+
+        tween.TweenProperty(this, "currentRadius", 0, 0.3f)
+            .SetTrans(Tween.TransitionType.Cubic)
+            .SetEase(Tween.EaseType.InOut);
+
+        await ToSignal(tween, "finished");
+
+        QueueFree();
     }
 }
 

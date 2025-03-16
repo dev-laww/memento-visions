@@ -1,5 +1,6 @@
 using Game.Components;
 using Game.Entities;
+using Game.Utils.Battle;
 using Godot;
 using GodotUtilities;
 
@@ -21,7 +22,9 @@ public partial class CircleDamage : Node2D
         get => (float)GetNode<Timer>("Timer").WaitTime;
         set
         {
-            var timer = GetNode<Timer>("Timer");
+            var timer = GetNodeOrNull<Timer>("Timer");
+
+            if (timer == null) return;
 
             timer.WaitTime = value;
             timer.NotifyPropertyListChanged();
@@ -34,7 +37,9 @@ public partial class CircleDamage : Node2D
         get => ((CircleShape2D)GetNode<CollisionShape2D>("%CollisionShape2D").Shape).Radius;
         set
         {
-            var shape = (CircleShape2D)GetNode<CollisionShape2D>("%CollisionShape2D").Shape;
+            var shape = (CircleShape2D)GetNodeOrNull<CollisionShape2D>("%CollisionShape2D")?.Shape;
+
+            if (shape == null) return;
 
             shape.Radius = value;
             shape.NotifyPropertyListChanged();
@@ -68,20 +73,33 @@ public partial class CircleDamage : Node2D
         timer.WaitTime = duration;
     }
 
-    public void Start(TelegraphCanvas canvas)
+    public void SetType(Attack.Type type)
     {
-        timer.Start();
-
-        telegraph = canvas.CreateCircleTelegraph(Radius);
+        hitBox.Type = type;
     }
 
-    private void OnTimerTimeout()
+    public void SetRadius(float radius)
     {
-        telegraph.QueueFree(); // TODO: Implement a fade out animation
+        Radius = radius;
+    }
+
+    public void Start(TelegraphCanvas canvas)
+    {
+        telegraph = canvas.CreateCircleTelegraph(Radius);
+
+        AddChild(telegraph);
+        canvas.AddChild(this);
+        
+        timer.Start();
+    }
+
+    private async void OnTimerTimeout()
+    {
+        await telegraph.End();
 
         collisionShape2D.Disabled = false;
 
-        QueueFree(); // TODO: Make queue free after fade out animation
+        QueueFree();
     }
 }
 
