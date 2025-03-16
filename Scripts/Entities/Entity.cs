@@ -7,6 +7,7 @@ using Game.Utils.Battle;
 using Godot;
 using GodotUtilities;
 using GodotUtilities.Logic;
+using Game.Utils.Extensions;
 
 namespace Game.Entities;
 
@@ -124,6 +125,8 @@ public abstract partial class Entity : CharacterBody2D
 
         if (attack.Knockback is not null && velocityManager is not null)
         {
+            attack.Knockback.Direction = -velocityManager.LastFacedDirection.TryNormalize();
+
             var (direction, force) = attack.Knockback;
             velocityManager.Knockback(direction, force);
         }

@@ -57,6 +57,7 @@ public partial class VelocityManager : Node
     private CharacterBody2D Body => GetParent() as CharacterBody2D;
     private Array<Vector2> dashQueue = [];
     private bool isDashing;
+    private bool knockbacked;
     private StatsManager statsManager;
 
     public enum FacingDirectionMode
@@ -128,7 +129,9 @@ public partial class VelocityManager : Node
         var weight = 1f - Mathf.Exp(-accelerationCoefficient * delta);
 
         Velocity = Velocity.Lerp(velocity, weight);
-        LastFacedDirection = Velocity.TryNormalize();
+
+        if (!Velocity.IsZeroApprox() && !knockbacked)
+            LastFacedDirection = Velocity.TryNormalize();
 
         return this;
     }
@@ -185,7 +188,14 @@ public partial class VelocityManager : Node
     {
         Log.Debug($"{Body} knocked back to {direction} with force {force}");
         Velocity = direction.TryNormalize() * force;
-        LastFacedDirection = -direction.TryNormalize();
+
+        knockbacked = true;
+
+        GetTree().CreateTimer(0.5f).Timeout += () =>
+        {
+            Decelerate(true);
+            knockbacked = false;
+        };
 
         return this;
     }
