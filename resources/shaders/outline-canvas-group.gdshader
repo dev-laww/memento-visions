@@ -11,7 +11,7 @@ bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D screen_tex
     for (float i = -ceil(width); i <= ceil(width); i++) {
         float x = abs(i) > width ? sign(i) : i;
         float offset;
-        
+
         if (pattern == 0) {
             offset = width - abs(x);
         } else if (pattern == 1) {
@@ -19,28 +19,28 @@ bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D screen_tex
         } else if (pattern == 2) {
             offset = width;
         }
-        
+
         for (float j = -ceil(offset); j <= ceil(offset); j++) {
             float y = abs(j) > offset ? offset * sign(j) : j;
             vec2 xy = uv + texture_pixel_size * vec2(x, y);
-            
+
             if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || texture(screen_texture, xy).a == 0.0) == inside) {
                 return true;
             }
         }
     }
-    
+
     return false;
 }
 
 void fragment() {
     COLOR = textureLod(screenTexture, SCREEN_UV, 0.0);
-    
+
     vec2 screen_size = vec2(textureSize(screenTexture, 0));
     vec2 base_resolution_size = vec2(640.0, 360.0);
     vec2 scale_multiplier = screen_size / base_resolution_size;
     vec2 adjusted_screen_pixel_size = SCREEN_PIXEL_SIZE * scale_multiplier;
-    
+
     if ((COLOR.a > 0.0) == inside && hasContraryNeighbour(SCREEN_UV, adjusted_screen_pixel_size, screenTexture)) {
         COLOR.rgb = inside ? mix(COLOR.rgb, COLOR.rgb, color.a) : color.rgb;
         COLOR.a += (1.0 - COLOR.a) * color.a;

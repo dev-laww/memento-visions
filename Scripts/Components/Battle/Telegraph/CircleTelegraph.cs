@@ -7,7 +7,7 @@ namespace Game;
 [Scene]
 public partial class CircleTelegraph : Node2D
 {
-    [Export] private float radius = 100;
+    [Export] private float radius = 50;
 
     private float currentRadius;
 
