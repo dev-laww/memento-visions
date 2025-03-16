@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Game.Entities;
 using Game.Utils.Battle;
 using Godot;
@@ -15,15 +16,17 @@ public partial class HitBox : Area2D
 
     [Signal] public delegate void HitEventHandler();
 
+    public Entity HitboxOwner;
+
     public Attack Attack
     {
         get
         {
-            if (KnockbackForce <= 0) return Attack.Create(Damage, Type, Owner as Entity);
+            if (KnockbackForce <= 0) return Attack.Create(Damage, Type, HitboxOwner ?? Owner as Entity);
 
             var knockback = new Attack.KnockbackInfo { Direction = Vector2.Zero, Force = KnockbackForce };
 
-            return Attack.Create(Damage, Type, Owner as Entity, knockback);
+            return Attack.Create(Damage, Type, HitboxOwner ?? Owner as Entity, knockback);
         }
     }
 
