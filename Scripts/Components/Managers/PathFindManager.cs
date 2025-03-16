@@ -50,6 +50,7 @@ public partial class PathFindManager : Node2D
     public override void _Ready()
     {
         NavigationAgent2D.DebugEnabled = DebugEnabled;
+        NavigationAgent2D.VelocityComputed += OnVelocityComputed;
     }
 
     public void SetTargetPosition(Vector2 position)
@@ -98,5 +99,12 @@ public partial class PathFindManager : Node2D
             warnings.Add("VelocityManager is not set.");
 
         return [.. warnings];
+    }
+
+    private void OnVelocityComputed(Vector2 velocity)
+    {
+        if (Engine.IsEditorHint()) return;
+
+        VelocityManager.AccelerateToVelocity(velocity);
     }
 }

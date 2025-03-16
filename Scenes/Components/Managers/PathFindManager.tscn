@@ -7,13 +7,14 @@
 script = ExtResource("1_tv2j5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
+avoidance_enabled = true
+radius = 16.0
 
 [node name="IntervalTimer" type="Timer" parent="."]
 one_shot = true
 script = ExtResource("2_sywbf")
 min_wait_time = 0.3
 max_wait_time = 0.8
-metadata/_custom_type_script = ExtResource("2_sywbf")
+metadata/_custom_type_script = "uid://clh46y8w17vem"
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="OnVelocityComputed"]
