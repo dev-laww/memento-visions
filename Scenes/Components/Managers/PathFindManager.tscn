@@ -8,7 +8,8 @@ script = ExtResource("1_tv2j5")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
-radius = 16.0
+radius = 32.0
+neighbor_distance = 64.0
 
 [node name="IntervalTimer" type="Timer" parent="."]
 one_shot = true
