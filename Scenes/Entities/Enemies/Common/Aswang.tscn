@@ -1,8 +1,9 @@
-[gd_scene load_steps=99 format=3 uid="uid://bgwiqgrwaypag"]
+[gd_scene load_steps=100 format=3 uid="uid://bgwiqgrwaypag"]
 
 [ext_resource type="Script" uid="uid://d0ski8uwhyyvs" path="res://Scripts/Entities/Enemies/Common/Aswang.cs" id="1_qdfm2"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_mp7jp"]
 [ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Managers/VelocityManager.cs" id="3_4f33n"]
+[ext_resource type="Script" uid="uid://cpwyjck8klk35" path="res://Scripts/Components/Managers/HealthNumberManager.cs" id="3_jt21t"]
 [ext_resource type="Script" uid="uid://d4io668qmblcf" path="res://Scripts/Components/Managers/DropManager.cs" id="4_44276"]
 [ext_resource type="PackedScene" uid="uid://cup5c3p5fcfyu" path="res://Scenes/Components/Managers/PathFindManager.tscn" id="5_4f33n"]
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="6_46yqc"]
@@ -990,6 +991,10 @@ collision_mask = 15
 script = ExtResource("1_qdfm2")
 Id = "enemy:aswang"
 
+[node name="UpdateBlendPositionTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
 [node name="AttackTimer" type="Timer" parent="."]
 autostart = true
 script = ExtResource("10_cvtll")
@@ -997,8 +1002,14 @@ min_wait_time = 3.0
 max_wait_time = 6.0
 metadata/_custom_type_script = "uid://clh46y8w17vem"
 
+[node name="HealthNumberManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
+script = ExtResource("3_jt21t")
+StatsManager = NodePath("../StatsManager")
+metadata/_custom_type_script = "uid://cpwyjck8klk35"
+
 [node name="StatsManager" type="Node" parent="."]
 script = ExtResource("2_mp7jp")
+MaxHealth = 500.0
 metadata/_custom_type_script = "uid://dnpva4sn53c1r"
 
 [node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
@@ -1037,7 +1048,7 @@ position = Vector2(0, -26)
 sprite_frames = SubResource("SpriteFrames_5bdsy")
 animation = &"move_down"
 autoplay = "move_down"
-frame = 2
+frame = 1
 script = ExtResource("8_cvtll")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1055,3 +1066,5 @@ anim_player = NodePath("../AnimationPlayer")
 "parameters/Common Attack/blend_position" = Vector2(0, 0.1)
 parameters/Move/blend_position = Vector2(0, 0.1)
 "parameters/Special Attack/blend_position" = Vector2(0, 0.1)
+
+[connection signal="timeout" from="UpdateBlendPositionTimer" to="." method="UpdateBlendPosition"]

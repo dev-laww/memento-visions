@@ -1,4 +1,5 @@
 using Game.Components;
+using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
@@ -39,15 +40,22 @@ public partial class Aswang : Entity
         attackTimer.Timeout += OnAttackTimerTimeout;
     }
 
+    public override void OnPhysicsProcess(double delta)
+    {
+        velocityManager.ApplyMovement();
+    }
+
     public void EnterMove()
     {
         EnterState(MOVE);
-        playback.Travel(MOVE);
     }
 
     private void Move()
     {
-        GD.Print(MOVE);
+        // var velocity 
+
+        pathFindManager.SetTargetPosition(this.GetPlayer()?.GlobalPosition ?? Vector2.Zero);
+        pathFindManager.Follow();
     }
 
 
@@ -58,7 +66,7 @@ public partial class Aswang : Entity
 
     private void CommonAttack()
     {
-        GD.Print(COMMON_ATTACK);
+        // GD.Print(COMMON_ATTACK);
     }
 
 
@@ -69,7 +77,7 @@ public partial class Aswang : Entity
 
     private void SpecialAttack()
     {
-        GD.Print(SPECIAL_ATTACK);
+        // GD.Print(SPECIAL_ATTACK);
     }
 
     private void OnAttackTimerTimeout()
@@ -91,10 +99,17 @@ public partial class Aswang : Entity
         StateMachine.ChangeState(Move);
     }
 
-    private void EnterState(string animation)
+    private void EnterState(string state)
     {
-        playback.Travel(animation);
-        animationTree.Set($"parameters/{animation}/blend_position", velocityManager.LastFacedDirection);
+        playback.Travel(state);
+        UpdateBlendPosition();
+    }
+
+    private void UpdateBlendPosition()
+    {
+        animationTree.Set("parameters/Move/blend_position", velocityManager.LastFacedDirection);
+        animationTree.Set("parameters/Common Attack/blend_position", velocityManager.LastFacedDirection);
+        animationTree.Set("parameters/Special Attack/blend_position", velocityManager.LastFacedDirection);
     }
 }
 
