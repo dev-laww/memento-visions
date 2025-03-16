@@ -19,6 +19,11 @@ public partial class TelegraphCanvas : CanvasGroup
         WireNodes();
     }
 
+    public override void _Ready()
+    {
+        TopLevel = true;
+    }
+
     public override void _Process(double delta)
     {
 

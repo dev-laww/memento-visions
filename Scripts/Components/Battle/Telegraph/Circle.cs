@@ -9,11 +9,22 @@ public partial class Circle : Node2D
 {
     [Export] private float radius = 100;
 
+    private float currentRadius;
+
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
 
         WireNodes();
+    }
+
+    public override void _Ready()
+    {
+        var tween = CreateTween();
+
+        tween.TweenProperty(this, "currentRadius", radius, 0.3f)
+            .SetTrans(Tween.TransitionType.Cubic)
+            .SetEase(Tween.EaseType.InOut);
     }
 
     public override void _Process(double delta)
@@ -27,7 +38,7 @@ public partial class Circle : Node2D
 
         color.A = 0.01f;
 
-        DrawCircle(Vector2.Zero, radius, color);
+        DrawCircle(Vector2.Zero, currentRadius, color);
     }
 }
 
