@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkhuqhhynpfe5"]
+
+[ext_resource type="Script" uid="uid://7puxryxjdh7j" path="res://Scripts/Components/Battle/Damage/CircleDamage.cs" id="1_284tt"]
+[ext_resource type="Script" uid="uid://dkgndduo4d7p4" path="res://Scripts/Components/Area/HitBox.cs" id="1_q5qdf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q5qdf"]
+radius = 50.0
+
+[node name="CircleDamage" type="Node2D"]
+script = ExtResource("1_284tt")
+WaitTime = 1.0
+Radius = 50.0
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 1024
+collision_mask = 2048
+script = ExtResource("1_q5qdf")
+metadata/_custom_type_script = "uid://dkgndduo4d7p4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_q5qdf")
+disabled = true
