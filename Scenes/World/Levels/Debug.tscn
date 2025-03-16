@@ -1,9 +1,10 @@
-[gd_scene load_steps=60 format=4 uid="uid://8f5bf8r14y55"]
+[gd_scene load_steps=61 format=4 uid="uid://8f5bf8r14y55"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_ngidu"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="2_24oem"]
 [ext_resource type="TileSet" uid="uid://dxocwf56b40k3" path="res://resources/tilesets/forest-actual.tres" id="2_h6twk"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="4_h6twk"]
+[ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="5_7amk1"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_7amk1"]
 
@@ -304,6 +305,7 @@ border_size = 256.0
 [node name="Debug" type="Node2D"]
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
+visible = false
 z_index = 1000
 color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(-384, -336, -288, -336, -288, -288, -192, -288, -192, -192, -48, -192, -48, -96, 48, -96, 48, -144, 96, -144, 96, -192, 192, -192, 192, -144, 288, -144, 288, 96, 336, 96, 336, -96, 384, -96, 384, -192, 432, -192, 432, -240, 1056, -240, 1056, -192, 1104, -192, 1104, -144, 1248, -144, 1248, -192, 1344, -192, 1344, 0, 1296, 0, 1296, 96, 1248, 96, 1248, 192, 1344, 192, 1344, 240, 1392, 240, 1392, 288, 1440, 288, 1440, 384, 1392, 384, 1392, 432, 1344, 432, 1344, 480, 1296, 480, 1296, 528, 1152, 528, 1152, 576, 1056, 576, 1056, 624, 960, 624, 960, 864, 912, 864, 912, 912, 864, 912, 864, 960, 720, 960, 720, 1008, 480, 1008, 480, 960, 384, 960, 384, 912, 336, 912, 336, 768, 384, 768, 384, 672, 336, 672, 336, 624, 288, 624, 288, 672, 240, 672, 240, 720, 144, 720, 144, 672, -144, 672, -144, 720, -192, 720, -192, 672, -288, 672, -288, 624, -240, 624, -240, 576, -192, 576, -192, 528, -240, 528, -240, 480, -288, 480, -288, 432, -384, 432, -384, 96, -432, 96, -432, 48, -528, 48, -528, -48, -480, -48, -480, -192, -432, -192, -432, -288, -384, -288)
@@ -473,6 +475,9 @@ navigation_polygon = SubResource("NavigationPolygon_3itxx")
 
 [node name="@NavigationRegion2D@70582" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_hjsuk")
+
+[node name="TelegraphCanvas" parent="." instance=ExtResource("5_7amk1")]
+top_level = true
 
 [node name="Map" type="Node2D" parent="."]
 
