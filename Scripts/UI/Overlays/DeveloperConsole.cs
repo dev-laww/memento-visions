@@ -7,7 +7,9 @@ using Game.Common;
 using Game.Common.Utilities;
 using Game.Components;
 using Game.Data;
+using Game.Entities;
 using Game.UI.Overlays;
+using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
@@ -178,6 +180,44 @@ public partial class DeveloperConsole : Overlay
         else
         {
             SceneManager.ChangeScene(res);
+        }
+    }
+
+    [Command(Name = "spawn", Description = "Spawns an entity at the given position.")]
+    private void Spawn(
+        string id,
+        int amount = 1,
+        [CommandOption(Name = "-x", Description = "X position")]
+        float x = 0,
+        [CommandOption(Name = "-y", Description = "Y position")]
+        float y = 0
+    )
+    {
+        if (id.Contains("player", System.StringComparison.CurrentCultureIgnoreCase) && this.GetPlayer() != null)
+        {
+            throw new System.Exception("Cannot spawn player entity when player already exists.");
+        }
+
+        var entity = EntityRegistry.Get(id) ?? throw new System.Exception($"Entity with id {id} not found.");
+
+        var position = new Vector2(x, y);
+        position = position == Vector2.Zero ? this.GetPlayer()?.GlobalPosition ?? Vector2.Zero : position;
+
+        var isUsingGameManager = GetTree().Root.GetNodeOrNull("/root/GameManager") != null;
+
+        for (var i = 0; i < amount; i++)
+        {
+            var instance = entity.Instantiate<Entity>();
+            instance.GlobalPosition = position + (Vector2.One * MathUtil.RNG.RandfRange(-10, 10));
+
+            if (isUsingGameManager)
+            {
+                GameManager.CurrentScene.AddChild(instance);
+            }
+            else
+            {
+                GetTree().CurrentScene.AddChild(instance);
+            }
         }
     }
 }
