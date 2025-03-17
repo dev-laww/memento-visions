@@ -95,7 +95,7 @@ public partial class StatsManager : Node
         health = MaxHealth;
         Entity = GetParent() as Entity;
 
-        var effects = GetParent().GetChildren().OfType<StatusEffect>();
+        var effects = GetParent().GetChildren().OfType<StatusEffect>().Where(e => e.EditorAdded);
 
         foreach (var effect in effects)
             AddStatusEffect(effect);
@@ -218,6 +218,7 @@ public partial class StatsManager : Node
         {
             Entity.AddChild(effect);
             effect.Apply();
+            statusEffects.Add(effect.Id, effect);
         }
         else if (!effect.EditorAdded)
             existing.Stack(effect.StackCount);

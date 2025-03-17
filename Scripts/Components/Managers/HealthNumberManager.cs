@@ -37,11 +37,11 @@ public partial class HealthNumberManager : Node
     {
         if (type != StatsType.Health)
             return;
-
+        value = Mathf.Max(0, Mathf.RoundToInt(value));
         var args = new FloatingTextManager.FloatingTextSpawnArgs
         {
             Text = $"+{value}",
-            Position = (Owner as Node2D).GlobalPosition,
+            Position = (Owner as Node2D)?.GlobalPosition ?? Vector2.Zero,
             Parent = GetParent(),
             Color = new Color(0.5f, 1f, 0.5f),
             SpawnRadius = 16
@@ -53,10 +53,11 @@ public partial class HealthNumberManager : Node
 
     private void OnDamageTaken(float value)
     {
+        value = Mathf.Max(0, Mathf.RoundToInt(value));
         var args = new FloatingTextManager.FloatingTextSpawnArgs
         {
             Text = $"-{value}",
-            Position = (Owner as Node2D).GlobalPosition,
+            Position = (Owner as Node2D)?.GlobalPosition ?? Vector2.Zero,
             Color = new Color(1f, 0.5f, 0.5f),
             Parent = GetParent(),
             SpawnRadius = 16
@@ -68,7 +69,12 @@ public partial class HealthNumberManager : Node
 
     private void OnAttackReceived(Attack attack)
     {
-        var floatingText = FloatingTextManager.SpawnDamageText(Owner, (Owner as Node2D).GlobalPosition, attack.Damage);
+        var damage = Mathf.Max(1, Mathf.RoundToInt(attack.Damage));
+        var floatingText = FloatingTextManager.SpawnDamageText(
+            Owner,
+            (Owner as Node2D)?.GlobalPosition ?? Vector2.Zero,
+            damage
+        );
 
         floatingText.SetColor(attack.AttackType switch
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Game.Entities;
 using Game.Utils.Battle;
 using Godot;
+using GodotUtilities.Logic;
 
 namespace Game.Components;
 
@@ -17,16 +18,25 @@ public partial class HitBox : Area2D
     [Signal] public delegate void HitEventHandler();
 
     public Entity HitboxOwner;
+    private readonly LootTable<string> lootTable = new();
 
     public Attack Attack
     {
         get
         {
-            if (KnockbackForce <= 0) return Attack.Create(Damage, Type, HitboxOwner ?? Owner as Entity);
+            var attack = Attack.Create(Damage, Type, HitboxOwner ?? Owner as Entity);
+            var statusEffect = lootTable.PickItem();
 
-            var knockback = new Attack.KnockbackInfo { Direction = Vector2.Zero, Force = KnockbackForce };
+            if (!string.IsNullOrEmpty(statusEffect))
+            {
+                attack.AddStatusEffect(statusEffect);
+            }
 
-            return Attack.Create(Damage, Type, HitboxOwner ?? Owner as Entity, knockback);
+            if (KnockbackForce <= 0) return attack;
+
+            attack.AddKnockback(Vector2.Zero, KnockbackForce);
+
+            return attack;
         }
     }
 
@@ -35,6 +45,13 @@ public partial class HitBox : Area2D
         CollisionLayer = 1 << 10;
         CollisionMask = 1 << 11;
         NotifyPropertyListChanged();
+
+        lootTable.AddItem("", 10);
+    }
+
+    public void AddStatusEffect(string statusEffectId, int weight = 10)
+    {
+        lootTable.AddItem(statusEffectId, weight);
     }
 
     public void EmitHit() => EmitSignalHit();
