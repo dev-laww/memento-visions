@@ -39,25 +39,5 @@ public partial class TelegraphCanvas : CanvasGroup
 
         (Material as ShaderMaterial)?.SetShaderParameter("color", color);
     }
-
-    public CircleTelegraph CreateCircleTelegraph(float radius)
-    {
-        var telegraph = resourcePreloader.InstanceSceneOrNull<CircleTelegraph>();
-        telegraph.Radius = radius;
-
-        AddChild(telegraph);
-
-        return telegraph;
-    }
-
-    public LineTelegraph CreateLineTelegraph(Vector2 targetPosition)
-    {
-        var telegraph = resourcePreloader.InstanceSceneOrNull<LineTelegraph>();
-        telegraph.TargetPosition = targetPosition;
-
-        AddChild(telegraph);
-
-        return telegraph;
-    }
 }
 
