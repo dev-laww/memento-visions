@@ -21,9 +21,11 @@ public partial class Aswang : Entity
     [Node] private Timer specialAttackTimer;
     [Node] private Timer specialAttackWindUpTimer;
     [Node] private Timer patrolTimer;
+    [Node] private StatsManager statsManager;
 
     private AnimationNodeStateMachinePlayback playback;
     private Vector2 initialPosition;
+    private Vector2 chargeOrigin;
     private Vector2 chargeDestination;
     private Vector2 chargeDirection;
     private Damage damageComponent;
@@ -42,8 +44,8 @@ public partial class Aswang : Entity
 
         StateMachine.AddStates(Normal, EnterNormal, LeaveNormal);
         StateMachine.AddStates(Patrol, EnterPatrol);
-        StateMachine.AddStates(SpecialAttackWindUp, EnterSpecialAttackWindUp);
-        StateMachine.AddStates(SpecialAttack, EnterSpecialAttack, LeaveSpecialAttack);
+        StateMachine.AddStates(AttackWindUp, EnterAttackWindUp);
+        StateMachine.AddStates(Attack, EnterAttack, LeaveAttack);
 
         StateMachine.SetInitialState(Patrol);
     }
@@ -67,7 +69,7 @@ public partial class Aswang : Entity
     {
         if (specialAttackTimer.IsStopped())
         {
-            StateMachine.ChangeState(SpecialAttackWindUp);
+            StateMachine.ChangeState(AttackWindUp);
         }
 
         if (patrolTimer.IsStopped())
@@ -86,8 +88,6 @@ public partial class Aswang : Entity
 
     private void EnterPatrol()
     {
-        EnterState(MOVE);
-
         var randomDirection = MathUtil.RNG.RandDirection();
         var randomLength = MathUtil.RNG.RandfRange(50, 100);
         var randomAngle = MathUtil.RNG.RandfRange(0f, 360f);
@@ -108,12 +108,13 @@ public partial class Aswang : Entity
         }
     }
 
-    private void EnterSpecialAttackWindUp()
+    private void EnterAttackWindUp()
     {
         isShowingAttackIndicator = false;
+        chargeOrigin = GlobalPosition;
     }
 
-    private void SpecialAttackWindUp()
+    private void AttackWindUp()
     {
         velocityManager.Decelerate();
 
@@ -122,28 +123,37 @@ public partial class Aswang : Entity
             isShowingAttackIndicator = true;
             specialAttackWindUpTimer.Start();
 
-            chargeDestination = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
-            chargeDirection = (chargeDestination - GlobalPosition).TryNormalize();
+            var playerPostion = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
+            var direction = (playerPostion - chargeOrigin).TryNormalize();
+
+            chargeDestination = chargeOrigin + direction * (playerPostion.DistanceTo(chargeOrigin) - 32);
+            chargeDirection = (chargeDestination - chargeOrigin).TryNormalize();
 
             var canvas = GetTree().Root.GetFirstChildOrNull<TelegraphCanvas>();
 
-            new TelegraphFactory.LineTelegraphBuilder(canvas, GlobalPosition)
+            new TelegraphFactory.LineTelegraphBuilder(canvas, chargeOrigin)
                 .SetDestitnation(chargeDestination)
                 .Build();
         }
         else if (specialAttackWindUpTimer.IsStopped() && isShowingAttackIndicator)
         {
-            StateMachine.ChangeState(SpecialAttack);
+            StateMachine.ChangeState(Attack);
         }
     }
 
-    private void EnterSpecialAttack()
+    private void EnterAttack()
     {
         StatsManager.ApplySpeedModifier("special_attack", 2f);
         pathFindManager.NavigationAgent2D.AvoidanceEnabled = false;
+
+        new DamageFactory.LineDamageBuilder(chargeOrigin, chargeDestination)
+            .SetOwner(this)
+            .SetDamage(statsManager.Damage * .4f)
+            .SetDuration(0.1f)
+            .Build();
     }
 
-    private void SpecialAttack()
+    private void Attack()
     {
         velocityManager.Accelerate(chargeDirection);
 
@@ -152,9 +162,9 @@ public partial class Aswang : Entity
         StateMachine.ChangeState(Normal);
     }
 
-    private void LeaveSpecialAttack()
+    private void LeaveAttack()
     {
-        EnterState(SPECIAL_ATTACK);
+        EnterState(SPECIAL_ATTACK); // TODO: Make this a random attack e.g. Common Attack, Special Attack
 
         pathFindManager.NavigationAgent2D.AvoidanceEnabled = true;
         StatsManager.RemoveSpeedModifier("special_attack");
