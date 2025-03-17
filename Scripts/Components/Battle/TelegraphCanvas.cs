@@ -49,5 +49,15 @@ public partial class TelegraphCanvas : CanvasGroup
 
         return telegraph;
     }
+
+    public LineTelegraph CreateLineTelegraph(Vector2 targetPosition)
+    {
+        var telegraph = resourcePreloader.InstanceSceneOrNull<LineTelegraph>();
+        telegraph.TargetPosition = targetPosition;
+
+        AddChild(telegraph);
+
+        return telegraph;
+    }
 }
 

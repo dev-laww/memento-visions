@@ -7,7 +7,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a67uh"]
 shader = ExtResource("1_blmlj")
-shader_parameter/color = Color(2656.31, 0.0710361, 0.0710361, 1)
+shader_parameter/color = Color(2656.31, 0.922494, 0.922494, 1)
 shader_parameter/width = 0.5
 shader_parameter/pattern = 1
 shader_parameter/inside = false

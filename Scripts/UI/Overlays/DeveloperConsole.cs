@@ -221,30 +221,4 @@ public partial class DeveloperConsole : Overlay
             }
         }
     }
-
-    [Command(Name = "telegraph", Description = "Creates a telegraph at the given position.")]
-    private void Telegraph(
-        [CommandOption(Name = "-x", Description = "X position")]
-        float x = 0,
-        [CommandOption(Name = "-y", Description = "Y position")]
-        float y = 0
-    )
-    {
-        var canvas = GetTree().Root.GetFirstChildOrNull<TelegraphCanvas>();
-
-        if (canvas == null)
-        {
-            Console.Error.WriteLine("TelegraphCanvas not found.");
-            return;
-        }
-
-        DamageBuilder.Circle()
-            .WithRadius(140)
-            .WithDamage(10)
-            .WithDamage(1000)
-            .WithWaitTime(3)
-            .WithPosition(new Vector2(x, y))
-            .WithOwner(this.GetPlayer())
-            .Build();
-    }
 }

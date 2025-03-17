@@ -5,30 +5,17 @@ using GodotUtilities;
 
 namespace Game.Components;
 
-[Tool]
 [Scene]
-public partial class CircleDamage : Damage
+public partial class LineDamage : Damage
 {
-    [Node] private HitBox hitBox;
-    [Node] private CollisionShape2D collisionShape2D;
     [Node] private Timer timer;
 
-    private CircleTelegraph telegraph;
+    [Node] private HitBox hitBox;
+    [Node] private CollisionShape2D collisionShape2D;
 
-    [Export]
-    private float Radius
-    {
-        get => ((CircleShape2D)GetNode<CollisionShape2D>("%CollisionShape2D").Shape).Radius;
-        set
-        {
-            if (!IsNodeReady()) return;
+    [Export] private Vector2 endPosition;
 
-            var shape = (CircleShape2D)GetNode<CollisionShape2D>("%CollisionShape2D")?.Shape;
-
-            shape.Radius = value;
-            shape.NotifyPropertyListChanged();
-        }
-    }
+    private LineTelegraph telegraph;
 
     public override void _Notification(int what)
     {
@@ -42,11 +29,6 @@ public partial class CircleDamage : Damage
         collisionShape2D.Disabled = true;
     }
 
-    public override void SetOwner(Entity owner)
-    {
-        hitBox.HitboxOwner = owner;
-    }
-
     public override void SetDamage(float damage)
     {
         hitBox.Damage = damage;
@@ -57,22 +39,34 @@ public partial class CircleDamage : Damage
         timer.WaitTime = duration;
     }
 
+    public override void SetOwner(Entity owner)
+    {
+        hitBox.HitboxOwner = owner;
+    }
+
     public override void SetType(Attack.Type type)
     {
         hitBox.Type = type;
     }
 
-    public void SetRadius(float radius)
+    public void SetTargetPosition(Vector2 position)
     {
-        Radius = radius;
+        endPosition = position;
+
+        var length = (position - GlobalPosition).Length();
+        var angle = GlobalPosition.AngleToPoint(position);
+
+        GlobalRotation = angle;
+
+        collisionShape2D.Shape = new RectangleShape2D { Size = new Vector2(length, 16 * Scale.Y) };
+        collisionShape2D.Position = new Vector2(length / 2, 0);
     }
 
     public override void Start(TelegraphCanvas canvas)
     {
-        telegraph = canvas.CreateCircleTelegraph(Radius);
+        telegraph = canvas.CreateLineTelegraph(endPosition);
         telegraph.Finished += OnTelegraphFinished;
 
-        // AddChild(telegraph);
         GameManager.CurrentScene.AddChild(this);
 
         timer.Start();
@@ -80,8 +74,8 @@ public partial class CircleDamage : Damage
 
     private void OnTimerTimeout()
     {
-        telegraph.End();
         collisionShape2D.Disabled = false;
+        telegraph.End();
     }
 
     private void OnTelegraphFinished()

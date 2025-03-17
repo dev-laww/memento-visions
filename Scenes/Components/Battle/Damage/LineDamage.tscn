@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cw0jhng0y2553"]
+
+[ext_resource type="Script" uid="uid://cd4k3u31uecl7" path="res://Scripts/Components/Battle/Damage/LineDamage.cs" id="1_ioy30"]
+[ext_resource type="Script" uid="uid://dkgndduo4d7p4" path="res://Scripts/Components/Area/HitBox.cs" id="1_sh6tp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ioy30"]
+size = Vector2(16, 16)
+
+[node name="LineDamage" type="Node2D"]
+script = ExtResource("1_ioy30")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 1024
+collision_mask = 2048
+script = ExtResource("1_sh6tp")
+metadata/_custom_type_script = "uid://dkgndduo4d7p4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_ioy30")
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://47o6g554nf78"]
+[gd_scene load_steps=3 format=3 uid="uid://47o6g554nf78"]
+
+[ext_resource type="Script" uid="uid://delr6patucln" path="res://Scripts/Components/Battle/Telegraph/LineTelegraph.cs" id="1_fxqhc"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oexqo"]
 load_path = "res://.godot/imported/line.png-0d244e781ba52d6d4cd1435821524a08.ctex"
@@ -6,6 +8,8 @@ load_path = "res://.godot/imported/line.png-0d244e781ba52d6d4cd1435821524a08.cte
 [node name="LineTelegraph" type="Line2D"]
 self_modulate = Color(1, 1, 1, 0.00392157)
 texture_repeat = 2
+points = PackedVector2Array(0, 0, 0, 0)
 width = 16.0
 texture = SubResource("CompressedTexture2D_oexqo")
 texture_mode = 1
+script = ExtResource("1_fxqhc")

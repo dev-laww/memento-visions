@@ -37,7 +37,14 @@ public partial class DamageBuilder : Autoload<DamageBuilder>
 
     public DamageBuilder WithRadius(float radius)
     {
-        damageComponent?.SetRadius(radius);
+        ((CircleDamage)damageComponent)?.SetRadius(radius);
+
+        return this;
+    }
+
+    public DamageBuilder WithEndPosition(Vector2 position)
+    {
+        ((LineDamage)damageComponent)?.SetTargetPosition(position);
 
         return this;
     }
@@ -82,7 +89,7 @@ public partial class DamageBuilder : Autoload<DamageBuilder>
 
         if (damageComponent == null)
         {
-            GD.PrintErr("Create a circle damage before building.");
+            GD.PrintErr("Create a damage before building.");
             return null;
         }
 
