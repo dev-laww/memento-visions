@@ -13,7 +13,7 @@ public partial class Aswang : Entity
     const string START_RANDOM = "start_random";
     const string SPECIAL_ATTACK = "Special Attack";
     const string COMMON_ATTACK = "Common Attack";
-    const string MOVE = "Move";
+    const float DISTANCE_TO_PLAYER = 150;
 
     [Node] private AnimationTree animationTree;
     [Node] private VelocityManager velocityManager;
@@ -22,6 +22,7 @@ public partial class Aswang : Entity
     [Node] private Timer specialAttackWindUpTimer;
     [Node] private Timer patrolTimer;
     [Node] private StatsManager statsManager;
+    [Node] private HitBox hitBox;
 
     private AnimationNodeStateMachinePlayback playback;
     private Vector2 initialPosition;
@@ -67,7 +68,10 @@ public partial class Aswang : Entity
 
     private void Normal()
     {
-        if (specialAttackTimer.IsStopped())
+        var player = this.GetPlayer();
+        var isPlayerInRange = player != null && player.GlobalPosition.DistanceSquaredTo(GlobalPosition) < DISTANCE_TO_PLAYER * DISTANCE_TO_PLAYER;
+
+        if (specialAttackTimer.IsStopped() && isPlayerInRange)
         {
             StateMachine.ChangeState(AttackWindUp);
         }
@@ -164,7 +168,12 @@ public partial class Aswang : Entity
 
     private void LeaveAttack()
     {
-        EnterState(SPECIAL_ATTACK); // TODO: Make this a random attack e.g. Common Attack, Special Attack
+        var randomNumber = MathUtil.RNG.RandfRange(0, 1);
+        var state = randomNumber < 0.3f ? SPECIAL_ATTACK : COMMON_ATTACK;
+        var damage = statsManager.Damage * (state == SPECIAL_ATTACK ? 1.5f : 1f);
+
+        hitBox.Damage = damage;
+        EnterState(state);
 
         pathFindManager.NavigationAgent2D.AvoidanceEnabled = true;
         StatsManager.RemoveSpeedModifier("special_attack");
