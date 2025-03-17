@@ -1,4 +1,5 @@
 using Game.Common.Extensions;
+using Game.Components;
 using Game.Entities;
 using Godot;
 using GodotUtilities;
@@ -11,7 +12,7 @@ public partial class DamageBuilder : Autoload<DamageBuilder>
 {
     [Node] private ResourcePreloader resourcePreloader;
 
-    private static CircleDamage circleDamage; // TODO: make base class for all damage types
+    private static Damage damageComponent; // TODO: make base class for all damage types
 
     public override void _Notification(int what)
     {
@@ -22,51 +23,54 @@ public partial class DamageBuilder : Autoload<DamageBuilder>
 
     public static DamageBuilder Circle()
     {
-        circleDamage = Instance.resourcePreloader.InstanceSceneOrNull<CircleDamage>();
+        damageComponent = Instance.resourcePreloader.InstanceSceneOrNull<CircleDamage>();
+
+        return Instance;
+    }
+
+    public static DamageBuilder Line()
+    {
+        damageComponent = Instance.resourcePreloader.InstanceSceneOrNull<LineDamage>();
 
         return Instance;
     }
 
     public DamageBuilder WithRadius(float radius)
     {
-        circleDamage?.SetRadius(radius);
+        damageComponent?.SetRadius(radius);
 
         return this;
     }
 
     public DamageBuilder WithPosition(Vector2 position)
     {
-        circleDamage?.SetPosition(position);
-        // lineDamage?.SetPosition(position);
+        damageComponent?.SetGlobalPosition(position);
 
         return this;
     }
 
     public DamageBuilder WithDamage(float damage)
     {
-        circleDamage?.SetDamage(damage);
-        // lineDamage?.SetDamage(damage);
+        damageComponent?.SetDamage(damage);
 
         return this;
     }
 
     public DamageBuilder WithWaitTime(float waitTime)
     {
-        circleDamage?.SetDuration(waitTime);
-        // lineDamage?.SetDuration(waitTime);
+        damageComponent?.SetDuration(waitTime);
 
         return this;
     }
 
     public DamageBuilder WithOwner(Entity owner)
     {
-        circleDamage?.SetOwner(owner);
-        // lineDamage?.SetOwner(owner);
+        damageComponent?.SetOwner(owner);
 
         return this;
     }
 
-    public CircleDamage Build()
+    public Damage Build()
     {
         var canvas = GetTree().Root.GetFirstChildOrNull<TelegraphCanvas>();
 
@@ -76,18 +80,17 @@ public partial class DamageBuilder : Autoload<DamageBuilder>
             return null;
         }
 
-        if (circleDamage == null)
+        if (damageComponent == null)
         {
             GD.PrintErr("Create a circle damage before building.");
             return null;
         }
 
-        var damage = circleDamage;
+        var damage = damageComponent;
 
         damage.Start(canvas);
 
-        circleDamage = null;
-        // lineDamage = null;
+        damageComponent = null;
 
         return damage;
     }

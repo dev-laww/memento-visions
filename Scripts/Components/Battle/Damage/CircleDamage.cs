@@ -1,14 +1,13 @@
-using Game.Components;
 using Game.Entities;
 using Game.Utils.Battle;
 using Godot;
 using GodotUtilities;
 
-namespace Game;
+namespace Game.Components;
 
 [Tool]
 [Scene]
-public partial class CircleDamage : Node2D
+public partial class CircleDamage : Damage
 {
     [Node] private HitBox hitBox;
     [Node] private CollisionShape2D collisionShape2D;
@@ -17,29 +16,14 @@ public partial class CircleDamage : Node2D
     private CircleTelegraph telegraph;
 
     [Export]
-    private float WaitTime
-    {
-        get => (float)GetNode<Timer>("Timer").WaitTime;
-        set
-        {
-            var timer = GetNodeOrNull<Timer>("Timer");
-
-            if (timer == null) return;
-
-            timer.WaitTime = value;
-            timer.NotifyPropertyListChanged();
-        }
-    }
-
-    [Export]
     private float Radius
     {
         get => ((CircleShape2D)GetNode<CollisionShape2D>("%CollisionShape2D").Shape).Radius;
         set
         {
-            var shape = (CircleShape2D)GetNodeOrNull<CollisionShape2D>("%CollisionShape2D")?.Shape;
+            if (!IsNodeReady()) return;
 
-            if (shape == null) return;
+            var shape = (CircleShape2D)GetNode<CollisionShape2D>("%CollisionShape2D")?.Shape;
 
             shape.Radius = value;
             shape.NotifyPropertyListChanged();
@@ -58,32 +42,32 @@ public partial class CircleDamage : Node2D
         collisionShape2D.Disabled = true;
     }
 
-    public void SetOwner(Entity owner)
+    public override void SetOwner(Entity owner)
     {
         hitBox.HitboxOwner = owner;
     }
 
-    public void SetDamage(float damage)
+    public override void SetDamage(float damage)
     {
         hitBox.Damage = damage;
     }
 
-    public void SetDuration(float duration)
+    public override void SetDuration(float duration)
     {
         timer.WaitTime = duration;
     }
 
-    public void SetType(Attack.Type type)
+    public override void SetType(Attack.Type type)
     {
         hitBox.Type = type;
     }
 
-    public void SetRadius(float radius)
+    public override void SetRadius(float radius)
     {
         Radius = radius;
     }
 
-    public void Start(TelegraphCanvas canvas)
+    public override void Start(TelegraphCanvas canvas)
     {
         telegraph = canvas.CreateCircleTelegraph(Radius);
         telegraph.Finished += OnTelegraphFinished;
