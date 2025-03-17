@@ -170,7 +170,7 @@ public partial class Aswang : Entity
     {
         var randomNumber = MathUtil.RNG.RandfRange(0, 1);
         var state = randomNumber < 0.3f ? SPECIAL_ATTACK : COMMON_ATTACK;
-        var damage = statsManager.Damage * (state == SPECIAL_ATTACK ? 1.5f : 1f);
+        var damage = statsManager.Damage * (state == SPECIAL_ATTACK ? 1.2f : 1f);
 
         hitBox.Damage = damage;
         EnterState(state);
