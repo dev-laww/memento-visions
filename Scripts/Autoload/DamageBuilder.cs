@@ -1,3 +1,4 @@
+using System.CommandLine.IO;
 using Game.Common.Extensions;
 using Game.Components;
 using Game.Entities;
@@ -83,13 +84,13 @@ public partial class DamageBuilder : Autoload<DamageBuilder>
 
         if (canvas == null)
         {
-            GD.PrintErr("TelegraphCanvas not found.");
+            DeveloperConsole.Console.Error.WriteLine("TelegraphCanvas not found.");
             return null;
         }
 
         if (damageComponent == null)
         {
-            GD.PrintErr("Create a damage before building.");
+            DeveloperConsole.Console.Error.WriteLine("Create a damage before building.");
             return null;
         }
 

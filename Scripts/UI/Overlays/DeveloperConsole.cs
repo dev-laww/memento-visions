@@ -196,10 +196,16 @@ public partial class DeveloperConsole : Overlay
     {
         if (id.Contains("player", System.StringComparison.CurrentCultureIgnoreCase) && this.GetPlayer() != null)
         {
-            throw new System.Exception("Cannot spawn player entity when player already exists.");
+            Console.Error.WriteLine("Cannot spawn player entity when player already exists.");
         }
 
-        var entity = EntityRegistry.Get(id) ?? throw new System.Exception($"Entity with id {id} not found.");
+        var entity = EntityRegistry.Get(id);
+
+        if (entity == null)
+        {
+            Console.Error.WriteLine($"Entity '{id}' not found.");
+            return;
+        }
 
         var position = new Vector2(x, y);
         position = position == Vector2.Zero ? this.GetPlayer()?.GlobalPosition ?? Vector2.Zero : position;

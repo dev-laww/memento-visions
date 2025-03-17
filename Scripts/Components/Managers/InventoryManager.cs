@@ -8,6 +8,7 @@ using Game.Autoload;
 using Game.Data;
 using Godot;
 using Item = Game.Data.Item;
+using System.CommandLine.IO;
 
 namespace Game.Components;
 
@@ -111,7 +112,13 @@ public partial class InventoryManager : Node
     [Command(Name = "give", Description = "Adds an item to the inventory.")]
     private void AddItemCommand(string id, int quantity = 1)
     {
-        var item = ItemRegistry.Get(id) ?? throw new CommandException($"Item '{id}' not found.");
+        var item = ItemRegistry.Get(id);
+
+        if (item is null)
+        {
+            DeveloperConsole.Console.Error.WriteLine($"Item '{id}' not found.");
+            return;
+        }
 
         AddItem(new ItemGroup
         {
@@ -123,7 +130,13 @@ public partial class InventoryManager : Node
     [Command(Name = "take", Description = "Removes an item from the inventory.")]
     private void RemoveItemCommand(string id, int quantity = 1)
     {
-        var item = ItemRegistry.Get(id) ?? throw new CommandException($"Item '{id}' not found.");
+        var item = ItemRegistry.Get(id);
+
+        if (item is null)
+        {
+            DeveloperConsole.Console.Error.WriteLine($"Item '{id}' not found.");
+            return;
+        }
 
         RemoveItem(new ItemGroup
         {

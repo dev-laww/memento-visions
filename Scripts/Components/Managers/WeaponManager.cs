@@ -5,6 +5,7 @@ using Game.Entities;
 using Game.Autoload;
 using Game.Data;
 using Godot;
+using System.CommandLine.IO;
 
 namespace Game.Components;
 
@@ -93,7 +94,13 @@ public partial class WeaponManager : Node
     [Command(Name = "equip", Description = "Equips a weapon")]
     public void EquipCommand(string id)
     {
-        var weapon = ItemRegistry.Get(id) ?? throw new System.Exception("Weapon not found");
+        var weapon = ItemRegistry.Get(id);
+
+        if (weapon == null)
+        {
+            DeveloperConsole.Console.Error.WriteLine($"Item {id} not found.");
+            return;
+        }
 
         Equip(weapon);
     }
