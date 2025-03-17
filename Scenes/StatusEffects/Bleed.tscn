@@ -7,3 +7,4 @@ script = ExtResource("1_y0wky")
 Id = "status:bleed"
 StatusEffectName = "Bleed"
 Duration = 4.0
+MaxStacks = 3
