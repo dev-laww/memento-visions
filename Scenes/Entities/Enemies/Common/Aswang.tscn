@@ -995,12 +995,23 @@ Id = "enemy:aswang"
 wait_time = 0.5
 autostart = true
 
+[node name="SpecialAttackWindUpTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="SpecialAttackTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
 script = ExtResource("10_cvtll")
 min_wait_time = 4.0
 max_wait_time = 6.0
+metadata/_custom_type_script = "uid://clh46y8w17vem"
+
+[node name="PatrolTimer" type="Timer" parent="."]
+one_shot = true
+script = ExtResource("10_cvtll")
+min_wait_time = 3.0
+max_wait_time = 4.0
 metadata/_custom_type_script = "uid://clh46y8w17vem"
 
 [node name="HealthNumberManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
@@ -1050,7 +1061,7 @@ position = Vector2(0, -26)
 sprite_frames = SubResource("SpriteFrames_5bdsy")
 animation = &"move_down"
 autoplay = "move_down"
-frame = 1
+frame = 2
 script = ExtResource("8_cvtll")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

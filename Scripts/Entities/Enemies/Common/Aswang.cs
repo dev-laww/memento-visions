@@ -1,6 +1,6 @@
-using System.Runtime.CompilerServices;
-using Game.Autoload;
+using Game.Common.Extensions;
 using Game.Components;
+using Game.Utils;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
@@ -14,19 +14,20 @@ public partial class Aswang : Entity
     const string SPECIAL_ATTACK = "Special Attack";
     const string COMMON_ATTACK = "Common Attack";
     const string MOVE = "Move";
-    const float PATROL_WAIT_TIME = 3f;
-
 
     [Node] private AnimationTree animationTree;
-    [Node] private Timer specialAttackTimer;
     [Node] private VelocityManager velocityManager;
     [Node] private PathFindManager pathFindManager;
+    [Node] private Timer specialAttackTimer;
+    [Node] private Timer specialAttackWindUpTimer;
+    [Node] private Timer patrolTimer;
 
     private AnimationNodeStateMachinePlayback playback;
     private Vector2 initialPosition;
     private Vector2 chargeDestination;
     private Vector2 chargeDirection;
     private Damage damageComponent;
+    private bool isShowingAttackIndicator;
 
     public override void _Notification(int what)
     {
@@ -39,12 +40,12 @@ public partial class Aswang : Entity
     {
         playback = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
 
-        StateMachine.AddStates(Patrol, EnterPatrol, LeavePatrol);
+        StateMachine.AddStates(Normal, EnterNormal, LeaveNormal);
+        StateMachine.AddStates(Patrol, EnterPatrol);
+        StateMachine.AddStates(SpecialAttackWindUp, EnterSpecialAttackWindUp);
         StateMachine.AddStates(SpecialAttack, EnterSpecialAttack, LeaveSpecialAttack);
 
         StateMachine.SetInitialState(Patrol);
-
-        pathFindManager.NavigationAgent2D.NavigationFinished += OnPathFindNavigationFinished;
     }
 
     public override void OnProcess(double delta)
@@ -52,7 +53,38 @@ public partial class Aswang : Entity
         velocityManager.ApplyMovement();
     }
 
-    private async void EnterPatrol()
+    private void EnterNormal()
+    {
+        if (specialAttackTimer.Paused)
+        {
+            specialAttackTimer.Paused = false;
+        }
+
+        patrolTimer.Start();
+    }
+
+    private void Normal()
+    {
+        if (specialAttackTimer.IsStopped())
+        {
+            StateMachine.ChangeState(SpecialAttackWindUp);
+        }
+
+        if (patrolTimer.IsStopped())
+        {
+            StateMachine.ChangeState(Patrol);
+        }
+    }
+
+    private void LeaveNormal()
+    {
+        if (!specialAttackTimer.IsStopped())
+        {
+            specialAttackTimer.Paused = true;
+        }
+    }
+
+    private void EnterPatrol()
     {
         EnterState(MOVE);
 
@@ -64,40 +96,51 @@ public partial class Aswang : Entity
         targetPosition.RotatedDegrees(randomAngle);
 
         pathFindManager.SetTargetPosition(targetPosition);
-
-        if (specialAttackTimer.Paused)
-        {
-            specialAttackTimer.Paused = false;
-        }
-
-        await ToSignal(GetTree().CreateTimer(PATROL_WAIT_TIME), "timeout");
     }
 
     private void Patrol()
     {
         pathFindManager.Follow();
 
-        if (specialAttackTimer.IsStopped())
+        if (pathFindManager.NavigationAgent2D.IsNavigationFinished())
+        {
+            StateMachine.ChangeState(Normal);
+        }
+    }
+
+    private void EnterSpecialAttackWindUp()
+    {
+        isShowingAttackIndicator = false;
+    }
+
+    private void SpecialAttackWindUp()
+    {
+        velocityManager.Decelerate();
+
+        if (specialAttackWindUpTimer.IsStopped() && !isShowingAttackIndicator && velocityManager.Velocity.LengthSquared() < 20 * 20)
+        {
+            isShowingAttackIndicator = true;
+            specialAttackWindUpTimer.Start();
+
+            chargeDestination = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
+            chargeDirection = (chargeDestination - GlobalPosition).TryNormalize();
+
+            var canvas = GetTree().Root.GetFirstChildOrNull<TelegraphCanvas>();
+
+            new TelegraphFactory.LineTelegraphBuilder(canvas, GlobalPosition)
+                .SetDestitnation(chargeDestination)
+                .Build();
+        }
+        else if (specialAttackWindUpTimer.IsStopped() && isShowingAttackIndicator)
         {
             StateMachine.ChangeState(SpecialAttack);
         }
     }
 
-    private void LeavePatrol()
-    {
-        if (!specialAttackTimer.IsStopped())
-        {
-            specialAttackTimer.Paused = true;
-        }
-    }
-
     private void EnterSpecialAttack()
     {
-        chargeDestination = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
-
-        pathFindManager.NavigationAgent2D.AvoidanceEnabled = false;
-        chargeDirection = (chargeDestination - GlobalPosition).TryNormalize();
         StatsManager.ApplySpeedModifier("special_attack", 2f);
+        pathFindManager.NavigationAgent2D.AvoidanceEnabled = false;
     }
 
     private void SpecialAttack()
@@ -106,11 +149,13 @@ public partial class Aswang : Entity
 
         if (GlobalPosition.DistanceSquaredTo(chargeDestination) > 32 * 32) return;
 
-        StateMachine.ChangeState(Patrol);
+        StateMachine.ChangeState(Normal);
     }
 
     private void LeaveSpecialAttack()
     {
+        EnterState(SPECIAL_ATTACK);
+
         pathFindManager.NavigationAgent2D.AvoidanceEnabled = true;
         StatsManager.RemoveSpeedModifier("special_attack");
         specialAttackTimer.Call(START_RANDOM);
@@ -128,17 +173,6 @@ public partial class Aswang : Entity
         animationTree.Set("parameters/Move/blend_position", velocityManager.LastFacedDirection);
         animationTree.Set("parameters/Common Attack/blend_position", velocityManager.LastFacedDirection);
         animationTree.Set("parameters/Special Attack/blend_position", velocityManager.LastFacedDirection);
-    }
-
-    private async void OnPathFindNavigationFinished()
-    {
-        var state = StateMachine.GetCurrentState();
-
-        if (state != Patrol) return;
-
-        await ToSignal(GetTree().CreateTimer(PATROL_WAIT_TIME), "timeout");
-
-        StateMachine.ChangeState(Patrol);
     }
 }
 
