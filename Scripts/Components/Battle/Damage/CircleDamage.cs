@@ -86,19 +86,22 @@ public partial class CircleDamage : Node2D
     public void Start(TelegraphCanvas canvas)
     {
         telegraph = canvas.CreateCircleTelegraph(Radius);
+        telegraph.Finished += OnTelegraphFinished;
 
-        AddChild(telegraph);
-        canvas.AddChild(this);
-        
+        // AddChild(telegraph);
+        GameManager.CurrentScene.AddChild(this);
+
         timer.Start();
     }
 
-    private async void OnTimerTimeout()
+    private void OnTimerTimeout()
     {
-        await telegraph.End();
-
+        telegraph.End();
         collisionShape2D.Disabled = false;
+    }
 
+    private void OnTelegraphFinished()
+    {
         QueueFree();
     }
 }

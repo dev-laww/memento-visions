@@ -29,7 +29,7 @@ public partial class DamageBuilder : Autoload<DamageBuilder>
 
     public DamageBuilder WithRadius(float radius)
     {
-        // circleDamage?.SetRadius(radius);
+        circleDamage?.SetRadius(radius);
 
         return this;
     }
