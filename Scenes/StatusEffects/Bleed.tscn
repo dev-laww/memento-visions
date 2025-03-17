@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpx321bensjgy"]
+
+[ext_resource type="Script" uid="uid://dspgxtju4i1uo" path="res://Scripts/StatusEffects/Bleed.cs" id="1_y0wky"]
+
+[node name="Bleed" type="Node"]
+script = ExtResource("1_y0wky")
+Id = "status:bleed"
+StatusEffectName = "Bleed"
+Duration = 4.0
