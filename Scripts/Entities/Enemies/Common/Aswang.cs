@@ -10,10 +10,10 @@ namespace Game.Entities;
 [Scene]
 public partial class Aswang : Entity
 {
-    const string START_RANDOM = "start_random";
-    const string SPECIAL_ATTACK = "Special Attack";
-    const string COMMON_ATTACK = "Common Attack";
-    const float DISTANCE_TO_PLAYER = 150;
+    private const string START_RANDOM = "start_random";
+    private const string SPECIAL_ATTACK = "Special Attack";
+    private const string COMMON_ATTACK = "Common Attack";
+    private const float DISTANCE_TO_PLAYER = 150;
 
     [Node] private AnimationTree animationTree;
     [Node] private VelocityManager velocityManager;
@@ -48,7 +48,9 @@ public partial class Aswang : Entity
         StateMachine.AddStates(AttackWindUp, EnterAttackWindUp);
         StateMachine.AddStates(Attack, EnterAttack, LeaveAttack);
 
-        StateMachine.SetInitialState(Patrol);
+        StateMachine.SetInitialState(Normal);
+
+        hitBox.AddStatusEffect("bleed", 3);
     }
 
     public override void OnProcess(double delta)
@@ -122,15 +124,19 @@ public partial class Aswang : Entity
     {
         velocityManager.Decelerate();
 
-        if (specialAttackWindUpTimer.IsStopped() && !isShowingAttackIndicator && velocityManager.Velocity.LengthSquared() < 20 * 20)
+        if (
+            specialAttackWindUpTimer.IsStopped() &&
+            !isShowingAttackIndicator &&
+            velocityManager.Velocity.LengthSquared() < 20 * 20
+        )
         {
             isShowingAttackIndicator = true;
             specialAttackWindUpTimer.Start();
 
-            var playerPostion = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
-            var direction = (playerPostion - chargeOrigin).TryNormalize();
+            var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
+            var direction = (playerPosition - chargeOrigin).TryNormalize();
 
-            chargeDestination = chargeOrigin + direction * (playerPostion.DistanceTo(chargeOrigin) - 32);
+            chargeDestination = chargeOrigin + direction * (playerPosition.DistanceTo(chargeOrigin) - 32);
             chargeDirection = (chargeDestination - chargeOrigin).TryNormalize();
 
             var canvas = GetTree().Root.GetFirstChildOrNull<TelegraphCanvas>();
@@ -194,4 +200,3 @@ public partial class Aswang : Entity
         animationTree.Set("parameters/Special Attack/blend_position", velocityManager.LastFacedDirection);
     }
 }
-
