@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+using Game.Autoload;
 using Game.Components;
 using Game.Utils.Extensions;
 using Godot;
@@ -12,14 +14,19 @@ public partial class Aswang : Entity
     const string SPECIAL_ATTACK = "Special Attack";
     const string COMMON_ATTACK = "Common Attack";
     const string MOVE = "Move";
+    const float PATROL_WAIT_TIME = 3f;
 
 
     [Node] private AnimationTree animationTree;
-    [Node] private Timer attackTimer;
+    [Node] private Timer specialAttackTimer;
     [Node] private VelocityManager velocityManager;
     [Node] private PathFindManager pathFindManager;
 
     private AnimationNodeStateMachinePlayback playback;
+    private Vector2 initialPosition;
+    private Vector2 chargeDestination;
+    private Vector2 chargeDirection;
+    private Damage damageComponent;
 
     public override void _Notification(int what)
     {
@@ -32,71 +39,82 @@ public partial class Aswang : Entity
     {
         playback = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
 
-        StateMachine.AddStates(Move, EnterMove);
-        StateMachine.AddStates(CommonAttack, EnterCommonAttack);
-        StateMachine.AddStates(SpecialAttack, EnterSpecialAttack);
-        StateMachine.SetInitialState(Move);
+        StateMachine.AddStates(Patrol, EnterPatrol, LeavePatrol);
+        StateMachine.AddStates(SpecialAttack, EnterSpecialAttack, LeaveSpecialAttack);
 
-        attackTimer.Timeout += OnAttackTimerTimeout;
+        StateMachine.SetInitialState(Patrol);
+
+        pathFindManager.NavigationAgent2D.NavigationFinished += OnPathFindNavigationFinished;
     }
 
-    public override void OnPhysicsProcess(double delta)
+    public override void OnProcess(double delta)
     {
         velocityManager.ApplyMovement();
     }
 
-    public void EnterMove()
+    private async void EnterPatrol()
     {
         EnterState(MOVE);
-    }
 
-    private void Move()
-    {
-        // var velocity 
+        var randomDirection = MathUtil.RNG.RandDirection();
+        var randomLength = MathUtil.RNG.RandfRange(50, 100);
+        var randomAngle = MathUtil.RNG.RandfRange(0f, 360f);
 
-        pathFindManager.SetTargetPosition(this.GetPlayer()?.GlobalPosition ?? Vector2.Zero);
-        pathFindManager.Follow();
-    }
+        var targetPosition = initialPosition + (randomDirection * randomLength);
+        targetPosition.RotatedDegrees(randomAngle);
 
+        pathFindManager.SetTargetPosition(targetPosition);
 
-    public void EnterCommonAttack()
-    {
-        EnterState(COMMON_ATTACK);
-    }
-
-    private void CommonAttack()
-    {
-        // GD.Print(COMMON_ATTACK);
-    }
-
-
-    public void EnterSpecialAttack()
-    {
-        EnterState(SPECIAL_ATTACK);
-    }
-
-    private void SpecialAttack()
-    {
-        // GD.Print(SPECIAL_ATTACK);
-    }
-
-    private void OnAttackTimerTimeout()
-    {
-        var randomNumber = MathUtil.RNG.RandfRange(0, 1);
-
-        if (randomNumber < 0.7f)
+        if (specialAttackTimer.Paused)
         {
-            StateMachine.ChangeState(CommonAttack);
+            specialAttackTimer.Paused = false;
         }
-        else
+
+        await ToSignal(GetTree().CreateTimer(PATROL_WAIT_TIME), "timeout");
+    }
+
+    private void Patrol()
+    {
+        pathFindManager.Follow();
+
+        if (specialAttackTimer.IsStopped())
         {
             StateMachine.ChangeState(SpecialAttack);
         }
     }
 
-    private void ChangeToMove()
+    private void LeavePatrol()
     {
-        StateMachine.ChangeState(Move);
+        if (!specialAttackTimer.IsStopped())
+        {
+            specialAttackTimer.Paused = true;
+        }
+    }
+
+    private void EnterSpecialAttack()
+    {
+        chargeDestination = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
+
+        pathFindManager.NavigationAgent2D.AvoidanceEnabled = false;
+        chargeDirection = (chargeDestination - GlobalPosition).TryNormalize();
+        StatsManager.ApplySpeedModifier("special_attack", 2f);
+    }
+
+    private void SpecialAttack()
+    {
+        velocityManager.Accelerate(chargeDirection);
+
+        if (GlobalPosition.DistanceSquaredTo(chargeDestination) > 32 * 32) return;
+
+        StateMachine.ChangeState(Patrol);
+    }
+
+    private void LeaveSpecialAttack()
+    {
+        pathFindManager.NavigationAgent2D.AvoidanceEnabled = true;
+        StatsManager.RemoveSpeedModifier("special_attack");
+        specialAttackTimer.Call(START_RANDOM);
+        initialPosition = GlobalPosition;
     }
 
     private void EnterState(string state)
@@ -110,6 +128,17 @@ public partial class Aswang : Entity
         animationTree.Set("parameters/Move/blend_position", velocityManager.LastFacedDirection);
         animationTree.Set("parameters/Common Attack/blend_position", velocityManager.LastFacedDirection);
         animationTree.Set("parameters/Special Attack/blend_position", velocityManager.LastFacedDirection);
+    }
+
+    private async void OnPathFindNavigationFinished()
+    {
+        var state = StateMachine.GetCurrentState();
+
+        if (state != Patrol) return;
+
+        await ToSignal(GetTree().CreateTimer(PATROL_WAIT_TIME), "timeout");
+
+        StateMachine.ChangeState(Patrol);
     }
 }
 
