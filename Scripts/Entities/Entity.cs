@@ -125,7 +125,9 @@ public abstract partial class Entity : CharacterBody2D
 
         if (attack.Knockback is not null && velocityManager is not null)
         {
-            attack.Knockback.Direction = -velocityManager.LastFacedDirection.TryNormalize();
+            var sourceVelocityManager = attack.Source.GetChildren().OfType<VelocityManager>().FirstOrDefault();
+
+            attack.Knockback.Direction = sourceVelocityManager.LastFacedDirection.DirectionTo(GlobalPosition).TryNormalize();
 
             var (direction, force) = attack.Knockback;
             velocityManager.Knockback(direction, force);
