@@ -4,6 +4,4 @@
 
 [node name="CircleTelegraph" type="Node2D"]
 script = ExtResource("1_b1cml")
-Duration = 1.0
-
-[node name="Timer" type="Timer" parent="."]
+Duration = null
