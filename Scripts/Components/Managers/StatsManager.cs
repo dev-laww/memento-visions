@@ -211,7 +211,6 @@ public partial class StatsManager : Node
             AddStatusEffect(effect);
     }
 
-    // TODO: Revalidate this method
     public void AddStatusEffect(StatusEffect effect)
     {
         if (!statusEffects.TryGetValue(effect.Id, out var existing))
@@ -220,7 +219,7 @@ public partial class StatsManager : Node
             effect.Apply();
             statusEffects.Add(effect.Id, effect);
         }
-        else if (!effect.EditorAdded)
+        else if (!effect.EditorAdded && existing.StackCount < existing.MaxStacks)
             existing.Stack(effect.StackCount);
 
         EmitSignalStatusEffectAdded(effect);

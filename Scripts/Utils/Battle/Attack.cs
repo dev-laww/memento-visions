@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Game.Components;
+using Game.Data;
 using Game.Entities;
 using Godot;
 using GodotUtilities;
@@ -35,7 +36,7 @@ public partial class Attack : RefCounted
 
     public bool Fatal { get; set; }
 
-    public KnockbackInfo Knockback { get; }
+    public KnockbackInfo Knockback { get; private set; }
 
     public readonly bool Critical;
 
@@ -47,20 +48,33 @@ public partial class Attack : RefCounted
 
     private Attack() { }
 
-    private Attack(float damage, Type type, Entity source, KnockbackInfo knockback = null)
+    private Attack(float damage, Type type, Entity source)
     {
         AttackType = type;
         Critical = MathUtil.RNG.RandfRange(0, 1) < 0.2f;
         Source = source;
-        Knockback = knockback;
 
-        // Apply damage modifiers
         Damage = damage * (Critical ? MathUtil.RNG.RandfRange(1.5f, 2f) : 1);
         Damage *= AttackType == Type.Physical ? 1 : 1.2f;
         Damage = (float)Math.Round(Damage);
     }
 
-    public void AddStatusEffect(StatusEffect effect) => statusEffects.Add(effect);
+    public void AddKnockback(Vector2 direction, float force)
+    {
+        Knockback = new KnockbackInfo { Direction = direction, Force = force };
+    }
 
-    public static Attack Create(float damage, Type type, Entity source, KnockbackInfo knockback = null) => new(damage, type, source, knockback);
+    public void AddKnockback(float force)
+    {
+        Knockback = new KnockbackInfo { Direction = Vector2.Zero, Force = force };
+    }
+
+    public void AddStatusEffect(string effect)
+    {
+        var statusEffect = StatusEffectRegistry.GetAsStatusEffect(effect) ?? throw new NullReferenceException();
+
+        statusEffects.Add(statusEffect);
+    }
+
+    public static Attack Create(float damage, Type type, Entity source) => new(damage, type, source);
 }

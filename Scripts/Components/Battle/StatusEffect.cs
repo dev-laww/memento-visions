@@ -12,7 +12,7 @@ public partial class StatusEffect : Node
     [Export] public float Duration { get; private set; }
     [Export(PropertyHint.MultilineText)] public string Description;
     [Export] public bool EditorAdded { get; private set; }
-    [Export] private int maxStacks = 1;
+    [Export] public int MaxStacks = 1;
 
     public int StackCount { get; protected set; } = 1;
     public float RemainingDuration;
