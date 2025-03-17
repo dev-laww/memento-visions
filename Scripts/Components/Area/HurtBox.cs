@@ -43,7 +43,9 @@ public partial class HurtBox : Area2D
     {
         if (area is not HitBox hitBox) return;
 
-        if (hitBox.Owner == StatsManager.Owner) return;
+        var owner = hitBox.HitboxOwner ?? hitBox.Owner;
+
+        if (owner == StatsManager.Owner) return;
 
         statsManager.ReceiveAttack(hitBox.Attack);
         hitBox.EmitHit();
