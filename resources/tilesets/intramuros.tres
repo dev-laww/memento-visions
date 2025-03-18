@@ -1,6 +1,6 @@
-[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://lit0htfvc1su"]
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://wuwsi02f3fft"]
 
-[ext_resource type="Texture2D" uid="uid://dabcjbakwl7w0" path="res://assets/tilesets/intramuros-autotileset.png" id="1_p4w5w"]
+[ext_resource type="Texture2D" uid="uid://dabcjbakwl7w0" path="res://assets/tilesets/intramuros.png" id="1_p4w5w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ocxsr"]
 texture = ExtResource("1_p4w5w")
@@ -153,6 +153,7 @@ texture_region_size = Vector2i(48, 48)
 1:10/0 = 0
 2:10/animation_columns = 2
 2:10/animation_separation = Vector2i(0, 2)
+2:10/animation_speed = 2.0
 2:10/animation_mode = 1
 2:10/animation_frame_0/duration = 1.0
 2:10/animation_frame_1/duration = 1.0
@@ -226,33 +227,41 @@ texture_region_size = Vector2i(48, 48)
 24:13/0 = 0
 25:13/0 = 0
 0:6/size_in_atlas = Vector2i(1, 2)
+0:6/animation_speed = 2.0
+0:6/animation_mode = 1
 0:6/animation_frame_0/duration = 1.0
 0:6/animation_frame_1/duration = 1.0
 0:6/animation_frame_2/duration = 1.0
 0:6/0 = 0
 0:4/size_in_atlas = Vector2i(1, 2)
 0:4/animation_columns = 3
+0:4/animation_speed = 2.0
+0:4/animation_mode = 1
 0:4/animation_frame_0/duration = 1.0
 0:4/animation_frame_1/duration = 1.0
 0:4/animation_frame_2/duration = 1.0
 0:4/0 = 0
 2:12/animation_columns = 1
 2:12/animation_separation = Vector2i(0, 1)
+2:12/animation_speed = 2.0
 2:12/animation_frame_0/duration = 1.0
 2:12/animation_frame_1/duration = 1.0
 2:12/0 = 0
 3:12/animation_columns = 1
 3:12/animation_separation = Vector2i(0, 1)
+3:12/animation_speed = 2.0
 3:12/animation_frame_0/duration = 1.0
 3:12/animation_frame_1/duration = 1.0
 3:12/0 = 0
 3:11/animation_columns = 1
 3:11/animation_separation = Vector2i(0, 1)
+3:11/animation_speed = 2.0
 3:11/animation_frame_0/duration = 1.0
 3:11/animation_frame_1/duration = 1.0
 3:11/0 = 0
 2:11/animation_columns = 1
 2:11/animation_separation = Vector2i(0, 1)
+2:11/animation_speed = 2.0
 2:11/animation_frame_0/duration = 1.0
 2:11/animation_frame_1/duration = 1.0
 2:11/0 = 0

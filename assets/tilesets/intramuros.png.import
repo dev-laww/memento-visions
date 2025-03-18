@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2giocwwcmiir"
-path="res://.godot/imported/manila-city-tileset.png-e86cf8756b6c99fb23328573607a59ef.ctex"
+uid="uid://dabcjbakwl7w0"
+path="res://.godot/imported/intramuros.png-58e47368c2882c59046742b8920ffa59.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/manila-city-tileset.png"
-dest_files=["res://.godot/imported/manila-city-tileset.png-e86cf8756b6c99fb23328573607a59ef.ctex"]
+source_file="res://assets/tilesets/intramuros.png"
+dest_files=["res://.godot/imported/intramuros.png-58e47368c2882c59046742b8920ffa59.ctex"]
 
 [params]
 

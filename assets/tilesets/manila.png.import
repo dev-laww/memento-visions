@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dabcjbakwl7w0"
-path="res://.godot/imported/intramuros-autotileset.png-13a0de7422cebf60fdbaa5d0d305f9d6.ctex"
+uid="uid://d2giocwwcmiir"
+path="res://.godot/imported/manila.png-7992570d408864c662dbc656e6b590ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/intramuros-autotileset.png"
-dest_files=["res://.godot/imported/intramuros-autotileset.png-13a0de7422cebf60fdbaa5d0d305f9d6.ctex"]
+source_file="res://assets/tilesets/manila.png"
+dest_files=["res://.godot/imported/manila.png-7992570d408864c662dbc656e6b590ad.ctex"]
 
 [params]
 
