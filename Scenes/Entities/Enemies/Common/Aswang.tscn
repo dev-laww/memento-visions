@@ -445,7 +445,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -7)]
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_guea1"]
@@ -502,7 +502,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -7)]
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_aw44c"]
@@ -839,7 +839,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -7)]
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_5tyvj"]
@@ -1172,7 +1172,6 @@ shape = SubResource("RectangleShape2D_cvtll")
 debug_color = Color(1, 0.3, 0.4, 0.4)
 
 [node name="HitBox" type="Area2D" parent="."]
-position = Vector2(0, -7)
 collision_layer = 1024
 collision_mask = 2048
 script = ExtResource("9_gtpg4")
@@ -1184,6 +1183,7 @@ disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_46yqc")
+disabled = true
 
 [node name="SmoothAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 2
