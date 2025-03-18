@@ -17,14 +17,14 @@ public partial class HitBox : Area2D
 
     [Signal] public delegate void HitEventHandler();
 
-    public Entity HitboxOwner;
-    private readonly LootTable<string> lootTable = new();
+    public Entity HitBoxOwner;
+    private readonly LootTable<string> lootTable = new(); // TODO: make the loot table be able to remove items
 
     public Attack Attack
     {
         get
         {
-            var attack = Attack.Create(Damage, Type, HitboxOwner ?? Owner as Entity);
+            var attack = Attack.Create(Damage, Type, HitBoxOwner ?? Owner as Entity);
             var statusEffect = lootTable.PickItem();
 
             if (!string.IsNullOrEmpty(statusEffect))

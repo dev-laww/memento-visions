@@ -43,7 +43,7 @@ public partial class HurtBox : Area2D
     {
         if (area is not HitBox hitBox) return;
 
-        var owner = hitBox.HitboxOwner ?? hitBox.Owner;
+        var owner = hitBox.HitBoxOwner ?? hitBox.Owner;
 
         if (owner == StatsManager.Owner) return;
 

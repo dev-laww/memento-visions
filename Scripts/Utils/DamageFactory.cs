@@ -50,7 +50,7 @@ public static class DamageFactory
 
             instance.HitBox.Type = type;
             instance.HitBox.Damage = damage;
-            instance.HitBox.HitboxOwner = owner;
+            instance.HitBox.HitBoxOwner = owner;
 
             GameManager.CurrentScene.AddChild(instance);
 
