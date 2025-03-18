@@ -64,8 +64,6 @@ public partial class Aswang : Entity
         {
             specialAttackTimer.Paused = false;
         }
-
-        patrolTimer.Start();
     }
 
     private void Normal()
@@ -90,6 +88,11 @@ public partial class Aswang : Entity
         {
             specialAttackTimer.Paused = true;
         }
+
+        if (!patrolTimer.IsStopped())
+        {
+            patrolTimer.Paused = true;
+        }
     }
 
     private void EnterPatrol()
@@ -102,6 +105,7 @@ public partial class Aswang : Entity
         targetPosition.RotatedDegrees(randomAngle);
 
         pathFindManager.SetTargetPosition(targetPosition);
+
     }
 
     private void Patrol()
@@ -110,6 +114,7 @@ public partial class Aswang : Entity
 
         if (pathFindManager.NavigationAgent2D.IsNavigationFinished())
         {
+            patrolTimer.Call(START_RANDOM);
             StateMachine.ChangeState(Normal);
         }
     }
