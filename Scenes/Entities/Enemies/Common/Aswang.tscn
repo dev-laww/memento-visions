@@ -1157,7 +1157,6 @@ metadata/_custom_type_script = "uid://d4io668qmblcf"
 
 [node name="PathFindManager" parent="." node_paths=PackedStringArray("VelocityManager") instance=ExtResource("5_4f33n")]
 VelocityManager = NodePath("../VelocityManager")
-DebugEnabled = true
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
 position = Vector2(0, -31)
@@ -1193,7 +1192,7 @@ position = Vector2(0, -26)
 sprite_frames = SubResource("SpriteFrames_5bdsy")
 animation = &"move_down"
 autoplay = "move_down"
-frame = 2
+frame = 3
 script = ExtResource("8_cvtll")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
