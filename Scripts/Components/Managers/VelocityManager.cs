@@ -23,7 +23,7 @@ public partial class VelocityManager : Node
         }
     }
 
-    [Export] private float AccelerationCoefficient = 10f;
+    [Export] public float AccelerationCoefficient = 10f;
 
     [ExportCategory("Dash")]
     [Export(PropertyHint.Range, "0,5,1")]
