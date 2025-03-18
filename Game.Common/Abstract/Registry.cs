@@ -28,7 +28,7 @@ public abstract class Registry<T, TRegistry> : RefCounted
 
         var matches = Process.ExtractOne(id, [.. Resources.Keys]);
 
-        if (matches.Score < 80) return null;
+        if (matches == null || matches.Score < 80) return null;
 
         Resources.TryGetValue(matches.Value, out resource);
 

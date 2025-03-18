@@ -1191,7 +1191,7 @@ position = Vector2(0, -26)
 sprite_frames = SubResource("SpriteFrames_5bdsy")
 animation = &"move_down"
 autoplay = "move_down"
-frame = 3
+frame = 2
 script = ExtResource("8_cvtll")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
