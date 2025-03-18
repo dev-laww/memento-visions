@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.Common;
 using Game.Common.Utilities;
 using Game.Entities;
 using Godot;
+using GodotUtilities;
 
 namespace Game.Autoload;
 
@@ -22,6 +22,8 @@ public partial class EnemyManager : Autoload<EnemyManager>
             return;
         }
 
+        info.Entity.AddToGroup();
+        info.Entity.AddToGroup("Enemy");
         Instance.enemies.Add(enemy);
 
         Log.Debug($"{enemy} added to the registry. {info}");

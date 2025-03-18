@@ -44,8 +44,9 @@ public partial class HurtBox : Area2D
         if (area is not HitBox hitBox) return;
 
         var owner = hitBox.HitBoxOwner ?? hitBox.Owner;
+        var isBothEnemy = owner.IsInGroup("Enemy") && StatsManager.Owner.IsInGroup("Enemy");
 
-        if (owner == StatsManager.Owner) return;
+        if (owner == StatsManager.Owner || isBothEnemy) return;
 
         statsManager.ReceiveAttack(hitBox.Attack);
         hitBox.EmitHit();

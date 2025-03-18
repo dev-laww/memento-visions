@@ -8,12 +8,13 @@ using GodotUtilities;
 namespace Game.Entities;
 
 [Scene]
-public partial class Aswang : Entity
+public partial class Aswang : Enemy
 {
     private const string START_RANDOM = "start_random";
     private const string SPECIAL_ATTACK = "Special Attack";
     private const string COMMON_ATTACK = "Common Attack";
-    private const float DISTANCE_TO_PLAYER = 150;
+    private const float DISTANCE_TO_PLAYER = 200;
+    private const float ATTACK_RANGE = 16;
 
     [Node] private AnimationTree animationTree;
     [Node] private VelocityManager velocityManager;
@@ -31,6 +32,7 @@ public partial class Aswang : Entity
     private Vector2 chargeDirection;
     private Damage damageComponent;
     private bool isShowingAttackIndicator;
+    private string attackState;
 
     public override void _Notification(int what)
     {
@@ -68,6 +70,7 @@ public partial class Aswang : Entity
 
     private void Normal()
     {
+        velocityManager.Decelerate();
         var player = this.GetPlayer();
         var isPlayerInRange = player != null && player.GlobalPosition.DistanceSquaredTo(GlobalPosition) < DISTANCE_TO_PLAYER * DISTANCE_TO_PLAYER;
 
@@ -105,7 +108,6 @@ public partial class Aswang : Entity
         targetPosition.RotatedDegrees(randomAngle);
 
         pathFindManager.SetTargetPosition(targetPosition);
-
     }
 
     private void Patrol()
@@ -141,7 +143,7 @@ public partial class Aswang : Entity
             var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
             var direction = (playerPosition - chargeOrigin).TryNormalize();
 
-            chargeDestination = chargeOrigin + direction * (playerPosition.DistanceTo(chargeOrigin) - 32);
+            chargeDestination = chargeOrigin + direction * (playerPosition.DistanceTo(chargeOrigin) - ATTACK_RANGE); // TODO: fix not right on upwards
             chargeDirection = (chargeDestination - chargeOrigin).TryNormalize();
 
             var canvas = GetTree().Root.GetFirstChildOrNull<TelegraphCanvas>();
@@ -158,8 +160,14 @@ public partial class Aswang : Entity
 
     private void EnterAttack()
     {
-        StatsManager.ApplySpeedModifier("special_attack", 2f);
+        StatsManager.ApplySpeedModifier("attack", 2f);
         pathFindManager.NavigationAgent2D.AvoidanceEnabled = false;
+
+        var randomNumber = MathUtil.RNG.RandfRange(0, 1);
+        attackState = randomNumber < 0.3f ? SPECIAL_ATTACK : COMMON_ATTACK;
+        var damage = statsManager.Damage * (attackState == SPECIAL_ATTACK ? 1.2f : 1f);
+
+        hitBox.Damage = damage;
 
         new DamageFactory.LineDamageBuilder(chargeOrigin, chargeDestination)
             .SetOwner(this)
@@ -179,12 +187,7 @@ public partial class Aswang : Entity
 
     private void LeaveAttack()
     {
-        var randomNumber = MathUtil.RNG.RandfRange(0, 1);
-        var state = randomNumber < 0.3f ? SPECIAL_ATTACK : COMMON_ATTACK;
-        var damage = statsManager.Damage * (state == SPECIAL_ATTACK ? 1.2f : 1f);
-
-        hitBox.Damage = damage;
-        EnterState(state);
+        EnterState(attackState);
 
         pathFindManager.NavigationAgent2D.AvoidanceEnabled = true;
         StatsManager.RemoveSpeedModifier("special_attack");

@@ -6,7 +6,7 @@ using GodotUtilities;
 namespace Game.Entities;
 
 [Scene]
-public partial class Tikbalang : Entity
+public partial class Tikbalang : Enemy
 {
     private const string START_RANDOM = "start_random";
     private const string SPECIAL_ATTACK = "Special Attack";
