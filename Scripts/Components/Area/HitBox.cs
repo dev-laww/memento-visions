@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.Entities;
+using Game.Utils;
 using Game.Utils.Battle;
 using Godot;
-using GodotUtilities.Logic;
 
 namespace Game.Components;
 
@@ -18,40 +18,68 @@ public partial class HitBox : Area2D
     [Signal] public delegate void HitEventHandler();
 
     public Entity HitBoxOwner;
-    private readonly LootTable<string> lootTable = new(); // TODO: make the loot table be able to remove items
+    private readonly List<StatusEffect.Info> statusEffects = [];
+    private Attack attackOverride;
 
-    public Attack Attack
-    {
-        get
-        {
-            var attack = Attack.Create(Damage, Type, HitBoxOwner ?? Owner as Entity);
-            var statusEffect = lootTable.PickItem();
-
-            if (!string.IsNullOrEmpty(statusEffect))
-            {
-                attack.AddStatusEffect(statusEffect);
-            }
-
-            if (KnockbackForce <= 0) return attack;
-
-            attack.AddKnockback(Vector2.Zero, KnockbackForce);
-
-            return attack;
-        }
-    }
+    public Attack Attack => GetAttack();
 
     public override void _Ready()
     {
         CollisionLayer = 1 << 10;
         CollisionMask = 1 << 11;
         NotifyPropertyListChanged();
-
-        lootTable.AddItem("", 10);
     }
 
-    public void AddStatusEffect(string statusEffectId, int weight = 10)
+    public void SetAttackOverride(Attack attack) => attackOverride = attack;
+    public void ClearAttackOverride() => attackOverride = null;
+
+    public void AddStatusEffectToPool(string statusEffectId, int turns = 1)
     {
-        lootTable.AddItem(statusEffectId, weight);
+        var statusEffect = new StatusEffect.Info
+        {
+            Id = statusEffectId,
+            IsGuaranteed = true,
+            Chance = 1,
+            Turns = turns,
+        };
+
+        statusEffects.Add(statusEffect);
+    }
+
+    public void AddStatusEffectToPool(string statusEffectId, float chance, int turns = 1)
+    {
+        var statusEffect = new StatusEffect.Info
+        {
+            Id = statusEffectId,
+            IsGuaranteed = false,
+            Chance = chance,
+            Turns = turns,
+        };
+
+        statusEffects.Add(statusEffect);
+    }
+
+    private Attack GetAttack()
+    {
+        if (attackOverride != null) return attackOverride;
+
+        var attack = new DamageFactory.AttackBuilder(HitBoxOwner ?? Owner as Entity)
+            .SetDamage(Damage)
+            .SetType(Type)
+            .SetKnockback(KnockbackForce)
+            .SetStatusEffectPool(statusEffects)
+            .Build();
+
+        var effects = statusEffects.ToArray();
+
+        foreach (var effect in effects)
+        {
+            if (--effect.Turns > 0) continue;
+
+            statusEffects.Remove(effect);
+        }
+
+        return attack;
     }
 
     public void EmitHit() => EmitSignalHit();

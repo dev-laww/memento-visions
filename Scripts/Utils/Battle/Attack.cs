@@ -28,53 +28,19 @@ public partial class Attack : RefCounted
         Magical
     }
 
-    public float Damage { get; }
+    public float Damage;
 
-    public Type AttackType { get; }
+    public Type AttackType;
 
-    public Entity Source { get; }
+    public Entity Source;
 
-    public bool Fatal { get; set; }
+    public bool Fatal;
 
-    public KnockbackInfo Knockback { get; private set; }
+    public KnockbackInfo Knockback;
 
     public readonly bool Critical;
 
-    public IReadOnlyList<StatusEffect> StatusEffects => statusEffects;
+    public List<StatusEffect> StatusEffects;
 
-    public bool HasStatusEffects => statusEffects.Count > 0;
-
-    private readonly List<StatusEffect> statusEffects = [];
-
-    private Attack() { }
-
-    private Attack(float damage, Type type, Entity source)
-    {
-        AttackType = type;
-        Critical = MathUtil.RNG.RandfRange(0, 1) < 0.2f;
-        Source = source;
-
-        Damage = damage * (Critical ? MathUtil.RNG.RandfRange(1.5f, 2f) : 1);
-        Damage *= AttackType == Type.Physical ? 1 : 1.2f;
-        Damage = (float)Math.Round(Damage);
-    }
-
-    public void AddKnockback(Vector2 direction, float force)
-    {
-        Knockback = new KnockbackInfo { Direction = direction, Force = force };
-    }
-
-    public void AddKnockback(float force)
-    {
-        Knockback = new KnockbackInfo { Direction = Vector2.Zero, Force = force };
-    }
-
-    public void AddStatusEffect(string effect)
-    {
-        var statusEffect = StatusEffectRegistry.GetAsStatusEffect(effect) ?? throw new NullReferenceException();
-
-        statusEffects.Add(statusEffect);
-    }
-
-    public static Attack Create(float damage, Type type, Entity source) => new(damage, type, source);
+    public bool HasStatusEffects => StatusEffects.Count > 0;
 }

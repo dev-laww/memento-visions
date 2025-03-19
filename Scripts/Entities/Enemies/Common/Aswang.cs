@@ -52,8 +52,6 @@ public partial class Aswang : Enemy
         StateMachine.AddStates(Attack, EnterAttack, LeaveAttack);
 
         StateMachine.SetInitialState(Normal);
-
-        hitBox.AddStatusEffect("bleed", 3);
     }
 
     public override void OnProcess(double delta)
@@ -78,7 +76,8 @@ public partial class Aswang : Enemy
     {
         velocityManager.Decelerate();
         var player = this.GetPlayer();
-        var isPlayerInRange = player != null && player.GlobalPosition.DistanceSquaredTo(GlobalPosition) < DISTANCE_TO_PLAYER * DISTANCE_TO_PLAYER;
+        var isPlayerInRange = player != null && player.GlobalPosition.DistanceSquaredTo(GlobalPosition) <
+            DISTANCE_TO_PLAYER * DISTANCE_TO_PLAYER;
 
         if (specialAttackTimer.IsStopped() && isPlayerInRange)
         {
@@ -152,7 +151,9 @@ public partial class Aswang : Enemy
             var isGoingSideWay = Mathf.Abs(direction.X) > 0.5f;
             var range = ATTACK_RANGE * (isGoingUp ? 2f : 1f);
 
-            chargeDestination = isGoingUp || isGoingSideWay ? chargeOrigin + direction * (playerPosition.DistanceTo(chargeOrigin) - range) : playerPosition;
+            chargeDestination = isGoingUp || isGoingSideWay
+                ? chargeOrigin + direction * (playerPosition.DistanceTo(chargeOrigin) - range)
+                : playerPosition;
             chargeDirection = (chargeDestination - chargeOrigin).TryNormalize();
 
             var canvas = GetTree().Root.GetFirstChildOrNull<TelegraphCanvas>();
@@ -178,6 +179,16 @@ public partial class Aswang : Enemy
 
         hitBox.Damage = damage;
 
+
+        if (attackState == COMMON_ATTACK)
+        {
+            hitBox.AddStatusEffectToPool("bleed", 0.3f);
+        }
+        else
+        {
+            hitBox.AddStatusEffectToPool("bleed");
+        }
+
         new DamageFactory.LineDamageBuilder(chargeOrigin, chargeDestination)
             .SetOwner(this)
             .SetDamage(statsManager.Damage * .4f)
@@ -198,7 +209,6 @@ public partial class Aswang : Enemy
     {
         EnterState(attackState);
 
-        pathFindManager.NavigationAgent2D.AvoidanceEnabled = true;
         StatsManager.RemoveSpeedModifier("attack");
         specialAttackTimer.Call(START_RANDOM);
         initialPosition = GlobalPosition;
@@ -215,5 +225,10 @@ public partial class Aswang : Enemy
         animationTree.Set("parameters/Move/blend_position", velocityManager.LastFacedDirection);
         animationTree.Set("parameters/Common Attack/blend_position", velocityManager.LastFacedDirection);
         animationTree.Set("parameters/Special Attack/blend_position", velocityManager.LastFacedDirection);
+    }
+
+    private void EnableAvoidance()
+    {
+        pathFindManager.NavigationAgent2D.AvoidanceEnabled = true;
     }
 }

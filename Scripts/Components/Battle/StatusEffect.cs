@@ -7,6 +7,14 @@ namespace Game.Components;
 [GlobalClass]
 public partial class StatusEffect : Node
 {
+    public class Info
+    {
+        public string Id;
+        public bool IsGuaranteed;
+        public float Chance;
+        public int Turns;
+    }
+
     [Export] public string Id;
     [Export] public string StatusEffectName;
     [Export] public float Duration { get; private set; }
@@ -44,7 +52,6 @@ public partial class StatusEffect : Node
     public virtual void Remove() { }
 
     public virtual void Stack(int amount = 1) { }
-
 
     public override string ToString() => $"<StatusEffect ({Id})>";
 }

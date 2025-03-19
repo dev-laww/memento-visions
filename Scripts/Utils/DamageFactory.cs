@@ -1,20 +1,26 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Game.Components;
+using Game.Data;
 using Game.Entities;
 using Game.Utils.Battle;
 using Godot;
+using GodotUtilities;
 
 
 namespace Game.Utils;
 
 public static class DamageFactory
 {
-    private static readonly PackedScene LineDamageScene = ResourceLoader.Load<PackedScene>("res://Scenes/Components/Battle/Damage/LineDamage.tscn");
-    private static readonly PackedScene CircleDamageScene = ResourceLoader.Load<PackedScene>("res://Scenes/Components/Battle/Damage/CircleDamage.tscn");
+    private static readonly PackedScene LineDamageScene =
+        ResourceLoader.Load<PackedScene>("res://Scenes/Components/Battle/Damage/LineDamage.tscn");
+
+    private static readonly PackedScene CircleDamageScene =
+        ResourceLoader.Load<PackedScene>("res://Scenes/Components/Battle/Damage/CircleDamage.tscn");
 
     public class LineDamageBuilder(Vector2 start, Vector2 end)
     {
-        private readonly Vector2 start = start;
-        private readonly Vector2 end = end;
         private float duration = -1;
         private Entity owner;
         private Attack.Type type;
@@ -56,6 +62,84 @@ public static class DamageFactory
 
             instance.Start(start, end, duration);
             return instance;
+        }
+    }
+
+    public class AttackBuilder(Entity source)
+    {
+        private const float CRITICAL_CHANCE = 0.2f;
+
+        private float damage;
+        private Attack.Type type;
+        private Attack.KnockbackInfo knockback;
+        private readonly List<StatusEffect.Info> statusEffectPool = [];
+
+        public AttackBuilder SetDamage(float damage)
+        {
+            this.damage = damage;
+            return this;
+        }
+
+        public AttackBuilder SetType(Attack.Type type)
+        {
+            this.type = type;
+            return this;
+        }
+
+        public AttackBuilder SetKnockback(Vector2 direction, float force)
+        {
+            if (force <= 0) return this;
+
+            knockback = new Attack.KnockbackInfo { Direction = direction, Force = force };
+            return this;
+        }
+
+        public AttackBuilder SetKnockback(float force)
+        {
+            if (force <= 0) return this;
+
+            knockback = new Attack.KnockbackInfo { Direction = Vector2.Zero, Force = force };
+            return this;
+        }
+
+        public AttackBuilder SetStatusEffectPool(IEnumerable<StatusEffect.Info> pool)
+        {
+            statusEffectPool.AddRange(pool);
+            return this;
+        }
+
+        public Attack Build()
+        {
+            var effects = new List<StatusEffect>();
+
+            foreach (var effect in statusEffectPool)
+            {
+                var randomNumber = MathUtil.RNG.RandfRange(0, 1);
+
+                if (randomNumber > effect.Chance && !effect.IsGuaranteed) continue;
+
+                var instance = StatusEffectRegistry.GetAsStatusEffect(effect.Id);
+
+                if (instance == null) continue;
+
+                effects.Add(instance);
+            }
+
+            var isCritical = MathUtil.RNG.RandfRange(0, 1) < CRITICAL_CHANCE;
+            var calculatedDamage = damage * (isCritical ? MathUtil.RNG.RandfRange(1.5f, 2f) : 1);
+            calculatedDamage *= type == Attack.Type.Physical ? 1 : 1.2f;
+            calculatedDamage = (float)Math.Round(calculatedDamage);
+
+            var attack = new Attack
+            {
+                Damage = calculatedDamage,
+                Source = source,
+                AttackType = type,
+                StatusEffects = effects,
+                Knockback = knockback
+            };
+
+            return attack;
         }
     }
 }
