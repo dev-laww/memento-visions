@@ -33,6 +33,7 @@ public partial class Aswang : Enemy
     private Damage damageComponent;
     private bool isShowingAttackIndicator;
     private string attackState;
+    private float previousDistance = float.MaxValue;
 
     public override void _Notification(int what)
     {
@@ -47,7 +48,7 @@ public partial class Aswang : Enemy
         initialPosition = GlobalPosition;
 
         StateMachine.AddStates(Normal, EnterNormal, LeaveNormal);
-        StateMachine.AddStates(Patrol, EnterPatrol);
+        StateMachine.AddStates(Patrol, EnterPatrol, ExitPatrol);
         StateMachine.AddStates(AttackWindUp, EnterAttackWindUp);
         StateMachine.AddStates(Attack, EnterAttack, LeaveAttack);
 
@@ -86,6 +87,7 @@ public partial class Aswang : Enemy
             StateMachine.ChangeState(AttackWindUp);
         }
 
+        // TODO: sometimes the enemy is stuck in normal state, need to investigate
         if (patrolTimer.IsStopped())
         {
             StateMachine.ChangeState(Patrol);
@@ -121,11 +123,14 @@ public partial class Aswang : Enemy
     {
         pathFindManager.Follow();
 
-        if (pathFindManager.NavigationAgent2D.IsNavigationFinished())
-        {
-            patrolTimer.Call(START_RANDOM);
-            StateMachine.ChangeState(Normal);
-        }
+        if (!pathFindManager.NavigationAgent2D.IsNavigationFinished()) return;
+
+        StateMachine.ChangeState(Normal);
+    }
+
+    private void ExitPatrol()
+    {
+        patrolTimer.Call(START_RANDOM);
     }
 
     private void EnterAttackWindUp()
@@ -181,7 +186,6 @@ public partial class Aswang : Enemy
 
         hitBox.Damage = damage;
 
-
         if (attackState == COMMON_ATTACK)
         {
             hitBox.AddStatusEffectToPool("bleed", 0.3f);
@@ -202,9 +206,16 @@ public partial class Aswang : Enemy
     {
         velocityManager.Accelerate(chargeDirection);
 
-        if (GlobalPosition.DistanceSquaredTo(chargeDestination) > 4 * 4) return;
+        var currentDistance = GlobalPosition.DistanceSquaredTo(chargeDestination);
+        var isCloseToDestination = currentDistance < 4 * 4;
 
-        StateMachine.ChangeState(Normal);
+        if (isCloseToDestination || currentDistance > previousDistance)
+        {
+            StateMachine.ChangeState(Normal);
+            return;
+        }
+
+        previousDistance = currentDistance;
     }
 
     private void LeaveAttack()
@@ -214,6 +225,7 @@ public partial class Aswang : Enemy
         StatsManager.RemoveSpeedModifier("attack");
         specialAttackTimer.Call(START_RANDOM);
         initialPosition = GlobalPosition;
+        previousDistance = float.MaxValue;
     }
 
     private void EnterState(string state)
