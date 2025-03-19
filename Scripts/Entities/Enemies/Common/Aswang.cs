@@ -52,6 +52,8 @@ public partial class Aswang : Enemy
         StateMachine.AddStates(Attack, EnterAttack, LeaveAttack);
 
         StateMachine.SetInitialState(Normal);
+
+        animationTree.AnimationFinished += EnableAvoidance;
     }
 
     public override void OnProcess(double delta)
@@ -227,7 +229,7 @@ public partial class Aswang : Enemy
         animationTree.Set("parameters/Special Attack/blend_position", velocityManager.LastFacedDirection);
     }
 
-    private void EnableAvoidance()
+    private void EnableAvoidance(StringName _)
     {
         pathFindManager.NavigationAgent2D.AvoidanceEnabled = true;
     }
