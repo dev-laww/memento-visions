@@ -1,7 +1,8 @@
 using Game.Common;
+using Game.Components;
 using Godot;
 
-namespace Game.Components;
+namespace Game.StatusEffects;
 
 public partial class Bleed : StatusEffect
 {
@@ -15,7 +16,7 @@ public partial class Bleed : StatusEffect
 
         if (accumulatedDamage < 1) return;
 
-        Target?.StatsManager.TakeDamage(accumulatedDamage);
+        TargetStatsManager?.TakeDamage(accumulatedDamage);
 
         accumulatedDamage = 0;
     }

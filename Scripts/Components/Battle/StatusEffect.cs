@@ -1,6 +1,8 @@
+using System.Linq;
 using Game.Common;
 using Game.Entities;
 using Godot;
+using GodotUtilities;
 
 namespace Game.Components;
 
@@ -27,6 +29,8 @@ public partial class StatusEffect : Node
 
 #nullable enable
     protected Entity? Target => GetParent() as Entity;
+    protected VelocityManager? TargetVelocityManager => Target?.GetChildrenOfType<VelocityManager>().FirstOrDefault();
+    protected StatsManager? TargetStatsManager => Target?.GetChildrenOfType<StatsManager>().FirstOrDefault();
 #nullable disable
 
     public override void _Ready()
@@ -52,6 +56,7 @@ public partial class StatusEffect : Node
     public virtual void Remove() { }
 
     public virtual void Stack(int amount = 1) { }
+
 
     public override string ToString() => $"<StatusEffect ({Id})>";
 }

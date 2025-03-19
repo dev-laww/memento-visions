@@ -2,7 +2,7 @@ using Game.Common;
 using Game.Components;
 using Godot;
 
-namespace Game;
+namespace Game.StatusEffects;
 
 public partial class Slow : StatusEffect
 {
@@ -10,12 +10,12 @@ public partial class Slow : StatusEffect
 
     public override void Apply()
     {
-        Target?.StatsManager?.ApplySpeedModifier(Id, -SlowAmount);
+        TargetStatsManager?.ApplySpeedModifier(Id, -SlowAmount);
     }
 
     public override void Remove()
     {
-        Target?.StatsManager?.RemoveSpeedModifier(Id, -SlowAmount);
+        TargetStatsManager?.RemoveSpeedModifier(Id, -SlowAmount);
     }
 
     public override void Stack(int amount = 1)
