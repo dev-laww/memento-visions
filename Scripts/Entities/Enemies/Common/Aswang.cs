@@ -14,7 +14,7 @@ public partial class Aswang : Enemy
     private const string SPECIAL_ATTACK = "Special Attack";
     private const string COMMON_ATTACK = "Common Attack";
     private const float DISTANCE_TO_PLAYER = 200;
-    private const float ATTACK_RANGE = 16;
+    private const float ATTACK_RANGE = 32;
 
     [Node] private AnimationTree animationTree;
     [Node] private VelocityManager velocityManager;
@@ -142,9 +142,11 @@ public partial class Aswang : Enemy
 
             var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
             var direction = (playerPosition - chargeOrigin).TryNormalize();
+            var isGoingUp = direction.Y < 0 && Mathf.Abs(direction.Y) > Mathf.Abs(direction.X);
+            var isGoingSideWay = Mathf.Abs(direction.X) > 0.5f;
+            var range = ATTACK_RANGE * (isGoingUp ? 2f : 1f);
 
-            // chargeDestination = chargeOrigin + direction * (playerPosition.DistanceTo(chargeOrigin) - ATTACK_RANGE); // TODO: fix not right on upwards
-            chargeDestination = playerPosition;
+            chargeDestination = isGoingUp || isGoingSideWay ? chargeOrigin + direction * (playerPosition.DistanceTo(chargeOrigin) - range) : playerPosition;
             chargeDirection = (chargeDestination - chargeOrigin).TryNormalize();
 
             var canvas = GetTree().Root.GetFirstChildOrNull<TelegraphCanvas>();
@@ -181,7 +183,7 @@ public partial class Aswang : Enemy
     {
         velocityManager.Accelerate(chargeDirection);
 
-        if (GlobalPosition.DistanceSquaredTo(chargeDestination) > ATTACK_RANGE * ATTACK_RANGE) return;
+        if (GlobalPosition.DistanceSquaredTo(chargeDestination) > 4 * 4) return;
 
         StateMachine.ChangeState(Normal);
     }
