@@ -3,6 +3,7 @@ using System.Linq;
 using Game.Common.Extensions;
 using Game.Entities;
 using Godot;
+using GodotUtilities;
 
 namespace Game.Components;
 
@@ -20,6 +21,8 @@ public partial class HurtBox : Area2D
             UpdateConfigurationWarnings();
         }
     }
+
+    [Node] private CollisionShape2D collisionShape2D;
 
     private StatsManager statsManager;
 
@@ -51,6 +54,16 @@ public partial class HurtBox : Area2D
         statsManager.ReceiveAttack(hitBox.Attack);
         hitBox.EmitHit();
     }
+
+    public void Disable(float duration = -1)
+    {
+        collisionShape2D.Disabled = true;
+
+        if (duration > 0)
+            GetTree().CreateTimer(duration).Timeout += () => collisionShape2D.Disabled = false;
+    }
+
+    public void Enable() => collisionShape2D.Disabled = false;
 
     public override string[] _GetConfigurationWarnings()
     {

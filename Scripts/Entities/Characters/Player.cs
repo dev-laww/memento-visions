@@ -1,4 +1,3 @@
-using System;
 using Game.Common;
 using Game.Common.Utilities;
 using Game.Components;
@@ -104,6 +103,7 @@ public partial class Player : Entity
 
         trail.ShowBehindParent = VelocityManager.LastFacedDirection.Y > 0;
         trail.Emitting = true;
+        hurtBox.Disable();
     }
 
     private void Dash()
@@ -116,6 +116,7 @@ public partial class Player : Entity
     private void ExitDash()
     {
         trail.Emitting = false;
+        hurtBox.Enable();
     }
 
     private void EnterAttack()
