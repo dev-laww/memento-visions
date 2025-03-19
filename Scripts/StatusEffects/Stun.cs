@@ -1,6 +1,3 @@
-using Game.Common;
-using Game.Components;
-
 namespace Game.StatusEffects;
 
 public partial class Stun : StatusEffect

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
 using Game.Entities;
+using Game.StatusEffects;
 using Game.Utils.Battle;
 using Godot;
 

@@ -3,6 +3,7 @@ using Game.Common.Abstract;
 using Game.Common.Utilities;
 using Game.Components;
 using Game.Entities;
+using Game.StatusEffects;
 using Godot;
 
 namespace Game.Data;

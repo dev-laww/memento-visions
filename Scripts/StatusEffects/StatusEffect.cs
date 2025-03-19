@@ -1,10 +1,11 @@
 using System.Linq;
 using Game.Common;
+using Game.Components;
 using Game.Entities;
 using Godot;
 using GodotUtilities;
 
-namespace Game.Components;
+namespace Game.StatusEffects;
 
 [GlobalClass]
 public partial class StatusEffect : Node
