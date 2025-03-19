@@ -116,7 +116,7 @@ public partial class Aswang : Enemy
         var targetPosition = initialPosition + (randomDirection * randomLength);
         targetPosition.RotatedDegrees(randomAngle);
 
-        pathFindManager.SetTargetPosition(targetPosition);
+        pathFindManager.ForceSetTargetPosition(targetPosition);
     }
 
     private void Patrol()
