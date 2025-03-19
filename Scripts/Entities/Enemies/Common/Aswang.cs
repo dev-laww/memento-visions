@@ -143,7 +143,8 @@ public partial class Aswang : Enemy
             var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
             var direction = (playerPosition - chargeOrigin).TryNormalize();
 
-            chargeDestination = chargeOrigin + direction * (playerPosition.DistanceTo(chargeOrigin) - ATTACK_RANGE); // TODO: fix not right on upwards
+            // chargeDestination = chargeOrigin + direction * (playerPosition.DistanceTo(chargeOrigin) - ATTACK_RANGE); // TODO: fix not right on upwards
+            chargeDestination = playerPosition;
             chargeDirection = (chargeDestination - chargeOrigin).TryNormalize();
 
             var canvas = GetTree().Root.GetFirstChildOrNull<TelegraphCanvas>();
@@ -180,7 +181,7 @@ public partial class Aswang : Enemy
     {
         velocityManager.Accelerate(chargeDirection);
 
-        if (GlobalPosition.DistanceSquaredTo(chargeDestination) > 32 * 32) return;
+        if (GlobalPosition.DistanceSquaredTo(chargeDestination) > ATTACK_RANGE * ATTACK_RANGE) return;
 
         StateMachine.ChangeState(Normal);
     }
@@ -190,7 +191,7 @@ public partial class Aswang : Enemy
         EnterState(attackState);
 
         pathFindManager.NavigationAgent2D.AvoidanceEnabled = true;
-        StatsManager.RemoveSpeedModifier("special_attack");
+        StatsManager.RemoveSpeedModifier("attack");
         specialAttackTimer.Call(START_RANDOM);
         initialPosition = GlobalPosition;
     }
