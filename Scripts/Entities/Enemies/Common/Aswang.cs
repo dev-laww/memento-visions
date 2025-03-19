@@ -44,6 +44,7 @@ public partial class Aswang : Enemy
     public override void OnReady()
     {
         playback = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
+        initialPosition = GlobalPosition;
 
         StateMachine.AddStates(Normal, EnterNormal, LeaveNormal);
         StateMachine.AddStates(Patrol, EnterPatrol);
@@ -65,6 +66,11 @@ public partial class Aswang : Enemy
         if (specialAttackTimer.Paused)
         {
             specialAttackTimer.Paused = false;
+        }
+
+        if (patrolTimer.Paused)
+        {
+            patrolTimer.Paused = false;
         }
     }
 
