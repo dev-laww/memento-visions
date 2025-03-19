@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpuiy5awfvyk4"]
+
+[ext_resource type="Script" uid="uid://clu5oggovs0qe" path="res://Scripts/Components/Battle/StatusEffect.cs" id="1_ke1j8"]
+
+[node name="Stun" type="Node"]
+script = ExtResource("1_ke1j8")
+metadata/_custom_type_script = "uid://clu5oggovs0qe"
