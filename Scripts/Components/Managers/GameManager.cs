@@ -24,7 +24,8 @@ public partial class GameManager : Node
 
     private bool isDevConsoleOpen;
 
-    public static Node CurrentScene => instance?.currentScene.GetChildren().FirstOrDefault() ?? GameCamera.Instance.GetTree().CurrentScene;
+    public static Node CurrentScene => instance?.currentScene.GetChildren().FirstOrDefault() ??
+                                       GameCamera.Instance.GetTree().CurrentScene;
 
     public static Overlay CurrentOverlay
     {
@@ -41,13 +42,6 @@ public partial class GameManager : Node
         currentScene.GetChildren().ToList().ForEach(c => c.QueueFree());
         var startScreen = resourcePreloader.GetResource<PackedScene>("StartScreen").Instantiate();
         currentScene.AddChild(startScreen);
-    }
-
-    public override void _Process(double delta)
-    {
-        var node = GetTree().CurrentScene.GetFirstChildOrNull<TelegraphCanvas>();
-
-        GD.Print(node);
     }
 
     public override void _Notification(int what)
