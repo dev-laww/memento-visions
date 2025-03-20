@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://dp6ardmi6lci5"]
+
+[ext_resource type="Script" uid="uid://y5deekl7r83u" path="res://Scripts/UI/Common/HealthBar.cs" id="1_dj1yy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6hco4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dj1yy"]
+bg_color = Color(0.890196, 0.196078, 0.156863, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6hco4"]
+bg_color = Color(0.101961, 0.0117647, 0.00392157, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5vo2"]
+bg_color = Color(0.913725, 0.321569, 0.156863, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="HealthBar" type="ProgressBar"]
+z_index = 1
+offset_right = 225.0
+offset_bottom = 10.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_6hco4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dj1yy")
+value = 50.0
+show_percentage = false
+script = ExtResource("1_dj1yy")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_6hco4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_e5vo2")
+value = 80.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
