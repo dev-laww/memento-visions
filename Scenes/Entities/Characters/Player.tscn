@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=116 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" uid="uid://bbhesrdqhrnnb" path="res://Scripts/Entities/Characters/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_cqdhe"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://crm174xl683eq" path="res://assets/entities/player.png" id="9_2exdb"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="9_401x2"]
 [ext_resource type="Texture2D" uid="uid://bbaj1lmrgykxu" path="res://assets/effects/dash-trail.png" id="13_c8fx8"]
+[ext_resource type="PackedScene" uid="uid://c6kt3qbs62e4i" path="res://Scenes/UI/Overlays/HeadsUpDisplay.tscn" id="14_c8fx8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7xh7"]
 radius = 9.0
@@ -1298,5 +1299,7 @@ libraries = {
 &"walk": SubResource("AnimationLibrary_70mij")
 }
 autoplay = "idle/down"
+
+[node name="HeadsUpDisplay" parent="." instance=ExtResource("14_c8fx8")]
 
 [connection signal="LevelUp" from="StatsManager" to="." method="OnLevelUp"]
