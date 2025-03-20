@@ -1,9 +1,10 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://b0bp4y4xuaxog"]
 
-[ext_resource type="Texture2D" uid="uid://ce8kps6x3fps8" path="res://assets/tilesets/bar.png" id="1_bp5tn"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2yfu6"]
+load_path = "res://.godot/imported/bar.png-5ba422731a6390ffd1d96bdca8649cd5.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hh1bi"]
-texture = ExtResource("1_bp5tn")
+texture = SubResource("CompressedTexture2D_2yfu6")
 texture_region_size = Vector2i(24, 24)
 6:8/size_in_atlas = Vector2i(2, 1)
 6:8/0 = 0

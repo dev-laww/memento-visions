@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=4 format=3 uid="uid://byj7jjirquwwi"]
 
-[ext_resource type="Texture2D" uid="uid://sfubyao3my3l" path="res://assets/tilesets/bar-hub-autotileset.png" id="1_wnbcs"]
+[ext_resource type="Texture2D" uid="uid://sfubyao3my3l" path="res://assets/tilesets/bar.png" id="1_wnbcs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0bnyh"]
 resource_name = "Floor"

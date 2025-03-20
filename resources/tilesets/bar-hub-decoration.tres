@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bjf37iuqg5jxj"]
 
-[ext_resource type="Texture2D" uid="uid://sfubyao3my3l" path="res://assets/tilesets/bar-hub-autotileset.png" id="1_omyp4"]
+[ext_resource type="Texture2D" uid="uid://sfubyao3my3l" path="res://assets/tilesets/bar.png" id="1_omyp4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vmyjv"]
 resource_name = "decoration"
