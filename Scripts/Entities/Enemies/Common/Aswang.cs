@@ -156,10 +156,9 @@ public partial class Aswang : Enemy
             var direction = (playerPosition - chargeOrigin).TryNormalize();
             var isGoingUp = direction.Y < 0 && Mathf.Abs(direction.Y) > Mathf.Abs(direction.X);
             var isGoingSideWay = Mathf.Abs(direction.X) > 0.5f;
-            var range = ATTACK_RANGE * (isGoingUp ? 2f : 1f);
 
             chargeDestination = isGoingUp || isGoingSideWay
-                ? chargeOrigin + direction * (playerPosition.DistanceTo(chargeOrigin) - range)
+                ? chargeOrigin + direction * (playerPosition.DistanceTo(chargeOrigin) - ATTACK_RANGE)
                 : playerPosition;
             chargeDirection = (chargeDestination - chargeOrigin).TryNormalize();
 
@@ -207,7 +206,7 @@ public partial class Aswang : Enemy
         velocityManager.Accelerate(chargeDirection);
 
         var currentDistance = GlobalPosition.DistanceSquaredTo(chargeDestination);
-        var isCloseToDestination = currentDistance < 4 * 4;
+        var isCloseToDestination = currentDistance < 32 * 32;
 
         if (isCloseToDestination || currentDistance > previousDistance)
         {
