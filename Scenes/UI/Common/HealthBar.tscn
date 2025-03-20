@@ -39,7 +39,7 @@ value = 50.0
 show_percentage = false
 script = ExtResource("1_dj1yy")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="DamageBar" type="ProgressBar" parent="."]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -53,5 +53,5 @@ value = 80.0
 show_percentage = false
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.5
 one_shot = true

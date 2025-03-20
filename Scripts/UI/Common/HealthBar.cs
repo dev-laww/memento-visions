@@ -2,7 +2,7 @@ using Game.Components;
 using Godot;
 using GodotUtilities;
 
-namespace Game;
+namespace Game.UI.Common;
 
 [Scene]
 public partial class HealthBar : ProgressBar
@@ -24,7 +24,7 @@ public partial class HealthBar : ProgressBar
         timer.Timeout += OnTimerTimeout;
     }
 
-    private void Initialize(StatsManager statsManager)
+    public void Initialize(StatsManager statsManager)
     {
         Value = statsManager.Health;
         MaxValue = statsManager.MaxHealth;
@@ -36,25 +36,25 @@ public partial class HealthBar : ProgressBar
         statsManager.StatIncreased += OnStatIncreased;
     }
 
-    private void OnStatIncreased(float value, StatsType type)
+    private void OnStatIncreased(float increase, StatsType type)
     {
         if (type != StatsType.Health) return;
 
         var tween = CreateTween();
 
-        damageBar.Value = Value;
-        tween.TweenProperty(this, "value", value, 0.3f)
+        tween.TweenProperty(this, "value", Value + increase, 0.3f)
             .SetTrans(Tween.TransitionType.Cubic)
             .SetEase(Tween.EaseType.InOut);
+        tween.TweenCallback(Callable.From(() => damageBar.Value = Value));
     }
 
-    private void OnStatDecreased(float value, StatsType type)
+    private void OnStatDecreased(float decrease, StatsType type)
     {
         if (type != StatsType.Health) return;
 
         var tween = CreateTween();
 
-        tween.TweenProperty(this, "value", value, 0.3f)
+        tween.TweenProperty(this, "value", Value - decrease, 0.3f)
             .SetTrans(Tween.TransitionType.Cubic)
             .SetEase(Tween.EaseType.InOut);
 
