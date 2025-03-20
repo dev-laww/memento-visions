@@ -79,6 +79,7 @@ public partial class StatsManager : Node
 
     public float SpeedModifier => speedModifiers.Values.Sum();
     public float CalculatedMaxSpeed => speed * (1f + SpeedModifier);
+    public Attack LastReceivedAttack { get; private set; }
     public IReadOnlyDictionary<string, StatusEffect> StatusEffects => statusEffects;
 
     private float speed = 100;
@@ -202,8 +203,7 @@ public partial class StatsManager : Node
         if (!Invulnerable)
             Health -= Math.Clamp(attack.Damage - defense, 0, float.MaxValue);
 
-        attack.Fatal = Health <= 0;
-
+        LastReceivedAttack = attack;
         EmitSignalAttackReceived(attack);
 
         if (!attack.HasStatusEffects) return;

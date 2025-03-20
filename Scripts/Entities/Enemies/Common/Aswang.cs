@@ -22,7 +22,6 @@ public partial class Aswang : Enemy
     [Node] private Timer specialAttackTimer;
     [Node] private Timer specialAttackWindUpTimer;
     [Node] private Timer patrolTimer;
-    [Node] private StatsManager statsManager;
     [Node] private HitBox hitBox;
 
     private AnimationNodeStateMachinePlayback playback;
@@ -156,10 +155,9 @@ public partial class Aswang : Enemy
             var direction = (playerPosition - chargeOrigin).TryNormalize();
             var isGoingUp = direction.Y < 0 && Mathf.Abs(direction.Y) > Mathf.Abs(direction.X);
             var isGoingSideWay = Mathf.Abs(direction.X) > 0.5f;
-            var range = ATTACK_RANGE * (isGoingUp ? 2f : 1f);
 
             chargeDestination = isGoingUp || isGoingSideWay
-                ? chargeOrigin + direction * (playerPosition.DistanceTo(chargeOrigin) - range)
+                ? chargeOrigin + direction * (playerPosition.DistanceTo(chargeOrigin) - ATTACK_RANGE)
                 : playerPosition;
             chargeDirection = (chargeDestination - chargeOrigin).TryNormalize();
 
@@ -182,7 +180,7 @@ public partial class Aswang : Enemy
 
         var randomNumber = MathUtil.RNG.RandfRange(0, 1);
         attackState = randomNumber < 0.3f ? SPECIAL_ATTACK : COMMON_ATTACK;
-        var damage = statsManager.Damage * (attackState == SPECIAL_ATTACK ? 1.2f : 1f);
+        var damage = StatsManager.Damage * (attackState == SPECIAL_ATTACK ? 1.2f : 1f);
 
         hitBox.Damage = damage;
 
@@ -197,7 +195,7 @@ public partial class Aswang : Enemy
 
         new DamageFactory.LineDamageBuilder(chargeOrigin, chargeDestination)
             .SetOwner(this)
-            .SetDamage(statsManager.Damage * .4f)
+            .SetDamage(StatsManager.Damage * .4f)
             .SetDuration(0.1f)
             .Build();
     }
@@ -207,7 +205,7 @@ public partial class Aswang : Enemy
         velocityManager.Accelerate(chargeDirection);
 
         var currentDistance = GlobalPosition.DistanceSquaredTo(chargeDestination);
-        var isCloseToDestination = currentDistance < 4 * 4;
+        var isCloseToDestination = currentDistance < 32 * 32;
 
         if (isCloseToDestination || currentDistance > previousDistance)
         {

@@ -86,8 +86,6 @@ public abstract partial class Entity : CharacterBody2D
     /// <param name="info">The killer entity.</param>
     protected virtual void Die(DeathInfo info)
     {
-        Log.Debug($"{info.Victim} killed by {info.Killer}.");
-
         QueueFree();
     }
 
@@ -119,7 +117,7 @@ public abstract partial class Entity : CharacterBody2D
 
     private void AttackReceived(Attack attack)
     {
-        Log.Debug($"{this} received {(attack.Fatal ? "a fatal" : "an")} attack from {attack.Source}.");
+        Log.Debug($"{this} received an attack from {attack.Source}.");
 
         var velocityManager = GetChildren().OfType<VelocityManager>().FirstOrDefault();
 
@@ -132,10 +130,20 @@ public abstract partial class Entity : CharacterBody2D
             var (direction, force) = attack.Knockback;
             velocityManager.Knockback(direction, force);
         }
+    }
 
-        if (!attack.Fatal) return;
+    private void StatDepleted(StatsType type)
+    {
+        if (type != StatsType.Health) return;
 
-        deathInfo = new DeathInfo { Victim = this, Killer = attack.Source, Position = GlobalPosition };
+        deathInfo = deathInfo = new DeathInfo
+        {
+            Victim = this,
+            Killer = StatsManager.LastReceivedAttack?.Source,
+            Position = GlobalPosition
+        };
+
+        Log.Debug($"{this} died{(deathInfo.Killer != null ? $" from an attack by {deathInfo.Killer}" : "")}.");
 
         Die(deathInfo);
     }
@@ -153,6 +161,7 @@ public abstract partial class Entity : CharacterBody2D
         TreeExiting += EmitDeath;
         StateMachine = new DelegateStateMachine();
         StatsManager.AttackReceived += AttackReceived;
+        StatsManager.StatDepleted += StatDepleted;
         spawnInfo = new SpawnInfo(this);
 
         GameEvents.EmitEntitySpawned(spawnInfo);
@@ -160,10 +169,8 @@ public abstract partial class Entity : CharacterBody2D
         if (this is Enemy)
             EnemyManager.Register(spawnInfo);
 
-
         OnReady();
     }
-
 
     public sealed override void _Input(InputEvent @event)
     {

@@ -13,20 +13,21 @@ public partial class Tikbalang : Enemy
     private const string COMMON_ATTACK = "Common Attack";
     private const string IDLE = "Idle";
     private const string MOVE = "Move";
-    private const float PLAYER_DISTANCE = 250;
+    private const float PLAYER_DISTANCE = 100;
     private const float MOVE_RANGE = 300;
 
     [Node] private VelocityManager velocityManager;
     [Node] private PathFindManager pathFindManager;
+    [Node] private HitBox hitBox;
     [Node] private AnimationTree animationTree;
     [Node] private Timer moveTimer;
-    [Node] private Timer specialAttackTimer;
-    [Node] private Timer commonAttackTimer;
-    [Node] private HitBox hitBox;
+    [Node] private Timer attackTimer;
+    [Node] private Timer attackCooldownTimer;
 
     private AnimationNodeStateMachinePlayback playback;
-    private Vector2[] directions = { Vector2.Up, Vector2.Down, Vector2.Left, Vector2.Right };
+    private Vector2[] directions = [Vector2.Up, Vector2.Down, Vector2.Left, Vector2.Right];
     private Vector2 initialPosition;
+    private bool IsPlayerInRange => GlobalPosition.DistanceTo(this.GetPlayer()?.GlobalPosition ?? GlobalPosition) < PLAYER_DISTANCE;
 
     public override void _Notification(int what)
     {
@@ -41,12 +42,14 @@ public partial class Tikbalang : Enemy
 
         StateMachine.AddStates(Normal, EnterNormal, LeaveNormal);
         StateMachine.AddStates(Move, EnterMove, LeaveMove);
+        StateMachine.AddStates(TravelToPlayer, EnterTravelToPlayer);
+        StateMachine.AddStates(SpecialAttack, EnterSpecialAttack, LeaveSpecialAttack);
         StateMachine.AddStates(CommonAttack, EnterCommonAttack, LeaveCommonAttack);
-        StateMachine.AddStates(SpecialAttack, EnterSpecialAttack);
 
         StateMachine.SetInitialState(Normal);
         animationTree.AnimationFinished += OnAnimationFinished;
         initialPosition = GlobalPosition;
+        hitBox.Damage = StatsManager.Damage;
     }
 
     public override void OnProcess(double delta)
@@ -62,6 +65,11 @@ public partial class Tikbalang : Enemy
         {
             moveTimer.Paused = false;
         }
+
+        if (attackTimer.Paused)
+        {
+            attackTimer.Paused = false;
+        }
     }
 
     private void Normal()
@@ -74,15 +82,10 @@ public partial class Tikbalang : Enemy
             StateMachine.ChangeState(Move);
         }
 
-        // if (specialAttackTimer.IsStopped())
-        // {
-        //     StateMachine.ChangeState(SpecialAttack);
-        // }
-
-        // if (commonAttackTimer.IsStopped())
-        // {
-        //     StateMachine.ChangeState(CommonAttack);
-        // }
+        if (attackTimer.IsStopped() && attackCooldownTimer.IsStopped() && IsPlayerInRange)
+        {
+            StateMachine.ChangeState(TravelToPlayer);
+        }
     }
 
     private void LeaveNormal()
@@ -90,6 +93,11 @@ public partial class Tikbalang : Enemy
         if (!moveTimer.IsStopped())
         {
             moveTimer.Paused = true;
+        }
+
+        if (!attackTimer.IsStopped())
+        {
+            attackTimer.Paused = true;
         }
     }
 
@@ -136,37 +144,64 @@ public partial class Tikbalang : Enemy
         moveTimer.Call(START_RANDOM);
     }
 
+    private void EnterTravelToPlayer()
+    {
+        EnterState(MOVE);
+
+        var player = this.GetPlayer();
+        var playerPosition = player.GlobalPosition;
+
+        pathFindManager.ForceSetTargetPosition(playerPosition);
+    }
+
+    private void TravelToPlayer()
+    {
+        UpdateBlendPosition();
+
+        var targetPosition = pathFindManager.GetTargetPosition();
+        var distance = targetPosition.DistanceSquaredTo(GlobalPosition);
+        var navigationFinished = pathFindManager.NavigationAgent2D.IsNavigationFinished();
+
+        if ((distance < 32 * 32 || navigationFinished) && attackCooldownTimer.IsStopped())
+        {
+            var randomNumber = MathUtil.RNG.RandfRange(0, 1);
+            StateMachine.ChangeState(randomNumber < 0.8 ? CommonAttack : SpecialAttack);
+            return;
+        }
+        else if (distance < 32 * 32 || navigationFinished)
+        {
+            EnterState(IDLE);
+            return;
+        }
+
+        pathFindManager.Follow();
+    }
+
     private void EnterCommonAttack()
     {
         EnterState(COMMON_ATTACK);
-        var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
-        pathFindManager.SetTargetPosition(playerPosition);
     }
 
-    private void CommonAttack()
-    {
-        pathFindManager.Follow();
-
-        if (!pathFindManager.NavigationAgent2D.IsNavigationFinished()) return;
-
-        StateMachine.ChangeState(Normal);
-    }
+    private void CommonAttack() { }
 
     private void LeaveCommonAttack()
     {
-        commonAttackTimer.Call(START_RANDOM);
+        attackTimer.Call(START_RANDOM);
     }
 
     private void EnterSpecialAttack()
     {
         EnterState(SPECIAL_ATTACK);
-        velocityManager.Decelerate(force: true);
-
-        // apply stun to player
+        hitBox.AddStatusEffectToPool("stun");
     }
 
     private void SpecialAttack() { }
 
+    private void LeaveSpecialAttack()
+    {
+        hitBox.ClearStatusEffectPool();
+        attackTimer.Call(START_RANDOM);
+    }
 
     private void EnterState(string state)
     {
@@ -178,7 +213,16 @@ public partial class Tikbalang : Enemy
     {
         if (!anim.ToString().Contains("attack")) return;
 
-        StateMachine.ChangeState(Normal);
+        if (IsPlayerInRange)
+        {
+            StateMachine.ChangeState(TravelToPlayer);
+        }
+        else
+        {
+            StateMachine.ChangeState(Normal);
+        }
+
+        attackCooldownTimer.Start();
     }
 
     private void UpdateBlendPosition()

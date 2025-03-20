@@ -1222,7 +1222,7 @@ Id = "player"
 unique_name_in_owner = true
 Speed = 80.0
 Defense = 10.0
-Damage = 100.0
+Damage = 30.0
 
 [node name="HealthNumberManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
 script = ExtResource("3_0iqml")
@@ -1255,6 +1255,7 @@ DashSpeed = 150.0
 metadata/_custom_type_script = "uid://nuxtah4mmhg5"
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
+position = Vector2(0, -17)
 collision_layer = 2048
 collision_mask = 1024
 script = ExtResource("5_5x453")
@@ -1266,12 +1267,13 @@ shape = SubResource("CapsuleShape2D_n7xh7")
 debug_color = Color(1, 0.3, 0.4, 0.4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 13)
+position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_c8fx8")
 
 [node name="Sprites" type="AnimatedSprite2D" parent="."]
 texture_filter = 2
 material = ExtResource("7_s1dwx")
+position = Vector2(0, -17)
 sprite_frames = SubResource("SpriteFrames_ycwij")
 animation = &"idle_down"
 autoplay = "idle_down"
@@ -1279,7 +1281,7 @@ frame = 1
 script = ExtResource("9_401x2")
 
 [node name="Trail" type="GPUParticles2D" parent="."]
-position = Vector2(0, 13)
+position = Vector2(0, -4)
 emitting = false
 amount = 60
 texture = ExtResource("13_c8fx8")

@@ -35,8 +35,6 @@ public partial class Attack : RefCounted
 
     public Entity Source;
 
-    public bool Fatal;
-
     public KnockbackInfo Knockback;
 
     public readonly bool Critical;

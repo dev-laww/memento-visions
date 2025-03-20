@@ -8,6 +8,7 @@ using GodotUtilities;
 namespace Game.Components;
 
 [Tool]
+[Scene]
 [GlobalClass, Icon("res://assets/icons/hurtbox.svg")]
 public partial class HurtBox : Area2D
 {
@@ -22,24 +23,26 @@ public partial class HurtBox : Area2D
         }
     }
 
-    [Node] private CollisionShape2D collisionShape2D;
-
+    private CollisionShape2D shape;
     private StatsManager statsManager;
 
     public override void _EnterTree()
     {
-        if (GetChildren().OfType<CollisionShape2D>().Any()) return;
+        if (this.GetChildrenOfType<CollisionShape2D>().Any() && Engine.IsEditorHint()) return;
 
         this.EditorAddChild(new CollisionShape2D { Name = "CollisionShape2D", DebugColor = new Color(1f, 0.3f, 0.4f, 0.4f) });
     }
 
     public override void _Ready()
     {
-        AddToGroup("HurtBox");
         AreaEntered += OnHurtBoxAreaEntered;
         CollisionLayer = 1 << 11;
         CollisionMask = 1 << 10;
         NotifyPropertyListChanged();
+
+        if (Engine.IsEditorHint()) return;
+
+        shape = this.GetChildrenOfType<CollisionShape2D>().First();
     }
 
     private void OnHurtBoxAreaEntered(Area2D area)
@@ -57,13 +60,13 @@ public partial class HurtBox : Area2D
 
     public void Disable(float duration = -1)
     {
-        collisionShape2D.Disabled = true;
+        shape.Disabled = true;
 
         if (duration > 0)
-            GetTree().CreateTimer(duration).Timeout += () => collisionShape2D.Disabled = false;
+            GetTree().CreateTimer(duration).Timeout += () => shape.Disabled = false;
     }
 
-    public void Enable() => collisionShape2D.Disabled = false;
+    public void Enable() => shape.Disabled = false;
 
     public override string[] _GetConfigurationWarnings()
     {

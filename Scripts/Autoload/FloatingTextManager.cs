@@ -67,6 +67,8 @@ public partial class FloatingTextManager : Autoload<FloatingTextManager>
         return floatingText;
     }
 
+    public static FloatingText SpawnFloatingText(string text, Vector2 position) => SpawnFloatingText(new FloatingTextSpawnArgs { Text = text, Position = position });
+
     private static void OnFloatingTextFinished(Node owner, FloatingText floatingText)
     {
         floatingTexts.Remove(owner);
