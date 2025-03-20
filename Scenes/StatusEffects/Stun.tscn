@@ -6,5 +6,5 @@
 script = ExtResource("1_ke1j8")
 Id = "status:stun"
 StatusEffectName = "Stun"
-Duration = 0.4
+Duration = 1.0
 metadata/_custom_type_script = "uid://clu5oggovs0qe"
