@@ -5,6 +5,7 @@ using Game.Autoload;
 using Game.Data;
 using Godot;
 using GodotUtilities;
+using System.CommandLine.IO;
 
 
 namespace Game.Entities;
@@ -203,4 +204,18 @@ public partial class Player : Entity
 
     [Command(Name = "levelup", Description = "Increases the player's level")]
     private void LevelUp(float level = 1) => StatsManager.IncreaseLevel(level);
+
+    [Command(Name = "apply", Description = "Applies a status effect to the player")]
+    private void ApplyStatusEffect(string statusEffectId)
+    {
+        var statusEffect = StatusEffectRegistry.GetAsStatusEffect(statusEffectId);
+
+        if (statusEffect is null)
+        {
+            DeveloperConsole.Console.Error.WriteLine("Status effect not found");
+            return;
+        }
+
+        StatsManager.AddStatusEffect(statusEffect);
+    }
 }
