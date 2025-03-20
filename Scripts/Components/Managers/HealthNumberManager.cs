@@ -3,6 +3,7 @@ using Game.Utils.Battle;
 using Godot;
 using Game.Autoload;
 using Game.Entities;
+using Game.Common.Models;
 
 namespace Game.Components;
 
@@ -69,11 +70,29 @@ public partial class HealthNumberManager : Node
 
     private void OnAttackReceived(Attack attack)
     {
+        var willNegate = StatsManager.Defense >= attack.Damage;
+
+        if (willNegate)
+        {
+            var args = new FloatingTextManager.FloatingTextSpawnArgs
+            {
+                Text = "Defended", // TODO: think of a better text
+                Position = (Owner as Node2D)?.GlobalPosition ?? Vector2.Zero,
+                Color = Colors.Gray,
+                Parent = Owner,
+                SpawnRadius = 16
+            };
+
+            var text = FloatingTextManager.SpawnFloatingText(args);
+            text.Finished += text.QueueFree;
+            return;
+        }
+
         var damage = Mathf.Max(1, Mathf.RoundToInt(attack.Damage));
         var floatingText = FloatingTextManager.SpawnDamageText(
             Owner,
             (Owner as Node2D)?.GlobalPosition ?? Vector2.Zero,
-            damage
+            damage - StatsManager.Defense
         );
 
         floatingText.SetColor(attack.AttackType switch
