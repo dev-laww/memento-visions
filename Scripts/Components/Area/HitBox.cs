@@ -59,6 +59,8 @@ public partial class HitBox : Area2D
         statusEffects.Add(statusEffect);
     }
 
+    public void ClearStatusEffectPool() => statusEffects.Clear();
+
     private Attack GetAttack()
     {
         if (attackOverride != null) return attackOverride;

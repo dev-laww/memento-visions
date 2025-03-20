@@ -83,7 +83,8 @@ public partial class PathFindManager : Node2D
         VelocityManager.Accelerate(direction);
     }
 
-    public Vector2 GetTargetPosition() => NavigationAgent2D.GetNextPathPosition();
+    public Vector2 GetNextPathPosition() => NavigationAgent2D.GetNextPathPosition();
+    public Vector2 GetTargetPosition() => NavigationAgent2D.TargetPosition;
 
     public void ForceSetTargetPosition(Vector2 position)
     {
