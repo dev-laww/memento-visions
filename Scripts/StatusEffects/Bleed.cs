@@ -1,5 +1,4 @@
 using Godot;
-using Game.Common;
 
 namespace Game.StatusEffects;
 
@@ -13,7 +12,7 @@ public partial class Bleed : StatusEffect
     {
         accumulatedDamage += damagePerSecond * (float)GetPhysicsProcessDeltaTime();
 
-        if (accumulatedDamage < 1) return;
+        if (accumulatedDamage < StackCount) return;
 
         TargetStatsManager?.TakeDamage(accumulatedDamage);
 
@@ -26,7 +25,6 @@ public partial class Bleed : StatusEffect
         damagePerSecond = baseDamage * (StackCount + amount);
 
         StackCount += amount;
-
-        Log.Debug($"{this} stacked to {StackCount} {RemainingDuration}");
+        RemainingDuration = Duration;
     }
 }

@@ -19,4 +19,9 @@ public partial class Stun : StatusEffect
         Target?.SetPhysicsProcess(true);
         Target?.SetProcess(true);
     }
+
+    public override void Stack(int amount = 1)
+    {
+        RemainingDuration = Duration;
+    }
 }

@@ -1222,7 +1222,7 @@ Id = "player"
 unique_name_in_owner = true
 Speed = 80.0
 Defense = 10.0
-Damage = 100.0
+Damage = 30.0
 
 [node name="HealthNumberManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
 script = ExtResource("3_0iqml")
