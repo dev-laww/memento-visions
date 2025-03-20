@@ -1190,8 +1190,9 @@ texture_filter = 2
 material = ExtResource("6_k57tq")
 position = Vector2(0, -26)
 sprite_frames = SubResource("SpriteFrames_5bdsy")
-animation = &"spec_attack_up"
+animation = &"move_down"
 autoplay = "move_down"
+frame = 1
 script = ExtResource("8_cvtll")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
