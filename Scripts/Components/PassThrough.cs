@@ -10,9 +10,9 @@ public partial class PassThrough : Container
 {
     public override void _Ready()
     {
-        Size = Vector2.Zero;
-        CustomMinimumSize = Vector2.Zero;
-        NotifyPropertyListChanged();
+        SetAnchorsPreset(LayoutPreset.TopLeft);
+        SetDeferred("size", Vector2.Zero);
+        SetDeferred("custom_minimum_size", Vector2.Zero);
 
         if (GetParent() is not Control parent)
         {
