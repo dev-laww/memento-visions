@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://d0qr3o1nxmcpe"]
+[gd_scene load_steps=14 format=4 uid="uid://d0qr3o1nxmcpe"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="1_28rab"]
 [ext_resource type="PackedScene" uid="uid://2586jb7lbuyn" path="res://Scenes/UI/Common/Fog.tscn" id="1_71mkv"]
@@ -8,6 +8,14 @@
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_tm1gt"]
 [ext_resource type="TileSet" uid="uid://dvd6ajqdt1f52" path="res://resources/tilesets/bar/small-props.tres" id="5_efdby"]
 [ext_resource type="TileSet" uid="uid://grwoctw4gvjl" path="res://resources/tilesets/bar/wall.tres" id="7_unifd"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_71mkv"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6ugc5"]
+width = 640
+height = 360
+seamless = true
+noise = SubResource("FastNoiseLite_71mkv")
 
 [sub_resource type="Environment" id="Environment_71mkv"]
 background_mode = 3
@@ -26,13 +34,16 @@ agent_radius = 8.0
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
 
+[node name="Fog" parent="." instance=ExtResource("1_71mkv")]
+Color = Color(1, 0.795349, 0.72216, 1)
+Speed = Vector2(0.02, 0.01)
+Noise = SubResource("NoiseTexture2D_6ugc5")
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(1, 0.771003, 0.687845, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_71mkv")
-
-[node name="Fog" parent="." instance=ExtResource("1_71mkv")]
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 z_index = 1000
