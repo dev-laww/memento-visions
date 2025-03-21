@@ -27,12 +27,12 @@ public partial class VelocityManager : Node
 
     [ExportCategory("Dash")]
     [Export(PropertyHint.Range, "0,5,1")]
-    private int TimesCanDash = 1;
+    public int TimesCanDash = 1;
 
-    [Export] private bool CanDashWhileDashing;
-    [Export] private float DashSpeed = 200;
-    [Export] private float DashDuration = 0.3f;
-    [Export] private float DashCoolDown = 4f;
+    [Export] public bool CanDashWhileDashing;
+    [Export] public float DashSpeed = 200;
+    [Export] public float DashDuration = 0.3f;
+    [Export] public float DashCoolDown = 4f;
 
     [Signal] public delegate void DashedEventHandler(Vector2 position);
     [Signal] public delegate void DashFreedEventHandler(Vector2 position);

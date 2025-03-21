@@ -6,10 +6,10 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dj1yy"]
 bg_color = Color(0.890196, 0.196078, 0.156863, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6hco4"]
 bg_color = Color(0.101961, 0.0117647, 0.00392157, 1)
@@ -24,10 +24,10 @@ expand_margin_bottom = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e5vo2"]
 bg_color = Color(0.913725, 0.321569, 0.156863, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 
 [node name="HealthBar" type="ProgressBar"]
 z_index = 1

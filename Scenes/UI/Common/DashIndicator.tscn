@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://83s52vks6mbt"]
+
+[ext_resource type="Texture2D" uid="uid://b325capwlkm17" path="res://assets/ui/dash-indicator.png" id="1_hr6lt"]
+[ext_resource type="Script" uid="uid://d0nyqqqb3hbtf" path="res://Scripts/UI/Common/DashIndicator.cs" id="2_7k448"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4wbm"]
+atlas = ExtResource("1_hr6lt")
+region = Rect2(2, 1, 6, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fe11v"]
+atlas = ExtResource("1_hr6lt")
+region = Rect2(2, 11, 6, 8)
+
+[node name="Indicator" type="TextureProgressBar"]
+pivot_offset = Vector2(3, 4)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+value = 40.0
+texture_under = SubResource("AtlasTexture_m4wbm")
+texture_progress = SubResource("AtlasTexture_fe11v")
+script = ExtResource("2_7k448")

@@ -1,9 +1,82 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6kt3qbs62e4i"]
+[gd_scene load_steps=15 format=3 uid="uid://c6kt3qbs62e4i"]
 
 [ext_resource type="PackedScene" uid="uid://dp6ardmi6lci5" path="res://Scenes/UI/Common/HealthBar.tscn" id="1_4jtnt"]
 [ext_resource type="Script" uid="uid://xxp0gu26j6fh" path="res://Scripts/UI/Overlays/HeadsUpDisplay.cs" id="1_6jntk"]
+[ext_resource type="PackedScene" uid="uid://83s52vks6mbt" path="res://Scenes/UI/Common/DashIndicator.tscn" id="3_k4xdi"]
+[ext_resource type="Texture2D" uid="uid://md5ydpqy2onr" path="res://assets/effects/heal.png" id="4_m4wbm"]
+[ext_resource type="Shader" uid="uid://bxmmk6qfkcuks" path="res://resources/shaders/vignette.gdshader" id="5_fe11v"]
+
+[sub_resource type="Curve" id="Curve_m4wbm"]
+_data = [Vector2(0.516279, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fe11v"]
+curve = SubResource("Curve_m4wbm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fe11v"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(520, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+gravity = Vector3(0, -300, 0)
+scale_max = 2.0
+alpha_curve = SubResource("CurveTexture_fe11v")
+
+[sub_resource type="Gradient" id="Gradient_m4wbm"]
+colors = PackedColorArray(0.121569, 0.737255, 0.45098, 0.392157, 0.121569, 0.737255, 0.45098, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fe11v"]
+gradient = SubResource("Gradient_m4wbm")
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ay0d6"]
+shader = ExtResource("5_fe11v")
+shader_parameter/innerRadius = 0.372
+shader_parameter/outerRadius = 1.0
+shader_parameter/mainAlpha = 0.0
+shader_parameter/vignetteColor = Color(0.25098, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_fe11v"]
+resource_name = "hit"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Damage:material:shader_parameter/mainAlpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ay0d6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Damage:material:shader_parameter/mainAlpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c0e4u"]
+_data = {
+&"RESET": SubResource("Animation_ay0d6"),
+&"hit": SubResource("Animation_fe11v")
+}
 
 [node name="HeadsUpDisplay" type="CanvasLayer"]
+layer = 0
 script = ExtResource("1_6jntk")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -12,6 +85,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 0
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
@@ -26,3 +100,76 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(225, 10)
 layout_mode = 2
 size_flags_horizontal = 0
+
+[node name="DashContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 2
+
+[node name="DashIndicator" parent="MarginContainer/VBoxContainer/DashContainer" instance=ExtResource("3_k4xdi")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HealthEffect" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthParticlesForeground" type="GPUParticles2D" parent="HealthEffect"]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(325, 360)
+emitting = false
+amount = 20
+texture = ExtResource("4_m4wbm")
+lifetime = 0.7
+process_material = SubResource("ParticleProcessMaterial_fe11v")
+
+[node name="HealthParticlesBackground" type="GPUParticles2D" parent="HealthEffect"]
+unique_name_in_owner = true
+position = Vector2(325, 360)
+emitting = false
+amount = 20
+texture = ExtResource("4_m4wbm")
+lifetime = 0.7
+process_material = SubResource("ParticleProcessMaterial_fe11v")
+
+[node name="HealthGlow" type="TextureRect" parent="HealthEffect"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_fe11v")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Damage" type="ColorRect" parent="Control"]
+z_index = -1
+material = SubResource("ShaderMaterial_ay0d6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_c0e4u")
+}
