@@ -29,4 +29,18 @@ public static class NodeExtensions
 
         return null;
     }
+
+    public static IEnumerable<T> GetAllChildrenOfType<T>(this Node node) where T : Node
+    {
+        foreach (Node child in node.GetChildren())
+        {
+            if (child is T t)
+                yield return t;
+
+            foreach (T descendant in child.GetAllChildrenOfType<T>())
+            {
+                yield return descendant;
+            }
+        }
+    }
 }
