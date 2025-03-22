@@ -114,14 +114,14 @@ Id = "npc:blacksmith"
 
 [node name="StatsManager" type="Node" parent="."]
 script = ExtResource("2_fbx4l")
-metadata/_custom_type_script = ExtResource("2_fbx4l")
+metadata/_custom_type_script = "uid://dnpva4sn53c1r"
 
 [node name="Interaction" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("1_hw0pw")
 InteractionLabel = "Craft"
-metadata/_custom_type_script = ExtResource("1_hw0pw")
+metadata/_custom_type_script = "uid://cll1v71th1oms"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
 shape = SubResource("CircleShape2D_fbx4l")
