@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=4 uid="uid://b8fwe8jelapyc"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_bxepo"]
-[ext_resource type="TileSet" uid="uid://3vp6jmixtfvm" path="res://resources/tilesets/forest.tres" id="2_ctmsp"]
+[ext_resource type="TileSet" uid="uid://3vp6jmixtfvm" path="res://resources/tilesets/forest-temp.tres" id="2_ctmsp"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_nrwh7"]
 
 [node name="Cross" type="Node2D"]

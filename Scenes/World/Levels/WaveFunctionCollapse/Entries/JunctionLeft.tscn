@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=4 uid="uid://i4hvpfta6arm"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_5jyja"]
-[ext_resource type="TileSet" uid="uid://3vp6jmixtfvm" path="res://resources/tilesets/forest.tres" id="2_vkcem"]
+[ext_resource type="TileSet" uid="uid://3vp6jmixtfvm" path="res://resources/tilesets/forest-temp.tres" id="2_vkcem"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_e7n8a"]
 
 [node name="JunctionLeft" type="Node2D"]
