@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://32sdfvnmihf2" path="res://Scripts/Components/PassThrough.cs" id="2_ay0d6"]
 [ext_resource type="PackedScene" uid="uid://83s52vks6mbt" path="res://Scenes/UI/Common/DashIndicator.tscn" id="3_k4xdi"]
 [ext_resource type="Texture2D" uid="uid://md5ydpqy2onr" path="res://assets/effects/heal.png" id="4_m4wbm"]
-[ext_resource type="Shader" uid="uid://bxmmk6qfkcuks" path="res://resources/shaders/vignette.gdshader" id="5_fe11v"]
+[ext_resource type="Shader" path="res://resources/shaders/vignette.gdshader" id="5_fe11v"]
 
 [sub_resource type="Curve" id="Curve_m4wbm"]
 _data = [Vector2(0.516279, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
