@@ -78,7 +78,7 @@ public abstract partial class Entity : CharacterBody2D
     /// <summary>
     /// State machine for managing entity states.
     /// </summary>
-    protected DelegateStateMachine StateMachine;
+    protected DelegateStateMachine StateMachine { get; } = new();
 
     /// <summary>
     /// Handles the entity's death.
@@ -160,7 +160,6 @@ public abstract partial class Entity : CharacterBody2D
         if (Engine.IsEditorHint() || isNpc) return;
 
         TreeExiting += EmitDeath;
-        StateMachine = new DelegateStateMachine();
         StatsManager.AttackReceived += AttackReceived;
         StatsManager.StatDepleted += StatDepleted;
         spawnInfo = new SpawnInfo(this);
