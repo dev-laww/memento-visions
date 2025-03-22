@@ -1,7 +1,6 @@
-[gd_scene load_steps=58 format=3 uid="uid://d2hrj4ebc2ra6"]
+[gd_scene load_steps=57 format=3 uid="uid://d2hrj4ebc2ra6"]
 
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="1_inirs"]
-[ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_5rnxu"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_37443"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_u6lhy"]
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/npc/storyteller.png" id="3_u6lhy"]
@@ -464,10 +463,7 @@ graph_offset = Vector2(-23, -24)
 collision_mask = 15
 script = ExtResource("1_inirs")
 Id = "npc:storyteller"
-
-[node name="StatsManager" type="Node" parent="."]
-script = ExtResource("2_5rnxu")
-metadata/_custom_type_script = "uid://dnpva4sn53c1r"
+isNpc = true
 
 [node name="ActionTimer" type="Timer" parent="."]
 autostart = true
@@ -485,7 +481,6 @@ material = ExtResource("2_37443")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 1
 script = ExtResource("4_5rnxu")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

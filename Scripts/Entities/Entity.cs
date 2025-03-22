@@ -52,27 +52,28 @@ public abstract partial class Entity : CharacterBody2D
     /// <summary>
     /// Unique name of the entity.
     /// </summary>
-    [Export]
-    public string Id;
+    [Export] public string Id;
+
+    /// <summary>
+    /// Determines if the entity is an NPC.
+    /// </summary>
+    [Export] private bool isNpc;
 
     /// <summary>
     /// Reference to the StatsManager node.
     /// </summary>
-    [Node]
-    public StatsManager StatsManager;
+    [Node] public StatsManager StatsManager;
 
     /// <summary>
     /// Reference to the HurtBox node.
     /// </summary>
-    [Node]
-    private HurtBox HurtBox;
+    [Node] private HurtBox HurtBox;
 
     /// <summary>
     /// Signal emitted when the entity dies.
     /// </summary>
     /// <param name="info">The death info.Contains the victim and the killer.</param>
-    [Signal]
-    public delegate void DeathEventHandler(DeathInfo info);
+    [Signal] public delegate void DeathEventHandler(DeathInfo info);
 
     /// <summary>
     /// State machine for managing entity states.
@@ -156,7 +157,7 @@ public abstract partial class Entity : CharacterBody2D
             NotifyPropertyListChanged();
         }
 
-        if (Engine.IsEditorHint()) return;
+        if (Engine.IsEditorHint() || isNpc) return;
 
         TreeExiting += EmitDeath;
         StateMachine = new DelegateStateMachine();
@@ -227,12 +228,12 @@ public abstract partial class Entity : CharacterBody2D
 
         var statsManagers = GetChildren().OfType<StatsManager>().Count();
 
-        if (statsManagers != 1)
+        if (statsManagers != 1 && !isNpc)
             warnings.Add($"Entity should have {(statsManagers == 0 ? "a" : "only one")} StatsManager node.");
 
         var hurtBoxes = GetChildren().OfType<HurtBox>().Count();
 
-        if (hurtBoxes != 1)
+        if (hurtBoxes != 1 && !isNpc)
             warnings.Add($"Entity should have {(hurtBoxes == 0 ? "a" : "only one")} HurtBox node.");
 
         if (Id is null or "")
