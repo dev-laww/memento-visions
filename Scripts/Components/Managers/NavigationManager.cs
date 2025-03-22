@@ -16,7 +16,7 @@ public partial class NavigationManager : Polygon2D
     private const int CHUNK_SIZE = 256;
     private const float AGENT_RADIUS = 10f;
 
-    [ExportToolButton("Place Navigation", Icon = "RotateLeft")] private Callable Place => Callable.From(PlaceNavigationRegions);
+    [ExportToolButton("Bake Navigation", Icon = "Bake")] private Callable Place => Callable.From(PlaceNavigationRegions);
 
     [Export]
     private Node2D ParseRootNode
