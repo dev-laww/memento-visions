@@ -1,12 +1,10 @@
-[gd_scene load_steps=16 format=4 uid="uid://8f5bf8r14y55"]
+[gd_scene load_steps=14 format=4 uid="uid://8f5bf8r14y55"]
 
 [ext_resource type="PackedScene" uid="uid://2586jb7lbuyn" path="res://Scenes/UI/Common/Fog.tscn" id="1_o3pym"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_h6twk"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="3_7amk1"]
-[ext_resource type="PackedScene" uid="uid://47o6g554nf78" path="res://Scenes/Components/Battle/Telegraph/LineTelegraph.tscn" id="3_217ep"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="4_h6twk"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="4_o3pym"]
-[ext_resource type="PackedScene" uid="uid://d03vu328ak281" path="res://Scenes/Components/Battle/Telegraph/CircleTelegraph.tscn" id="4_x30ws"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="5_7amk1"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_7amk1"]
@@ -50,13 +48,6 @@ y_sort_enabled = true
 
 [node name="TelegraphCanvas" parent="." instance=ExtResource("5_7amk1")]
 z_index = -1
-
-[node name="LineTelegraph" parent="TelegraphCanvas" instance=ExtResource("3_217ep")]
-position = Vector2(-12, 47)
-
-[node name="CircleTelegraph" parent="TelegraphCanvas" instance=ExtResource("4_x30ws")]
-position = Vector2(70, 7)
-radius = 30.0
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 z_index = 1000
