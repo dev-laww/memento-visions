@@ -29,6 +29,7 @@ y_sort_enabled = true
 environment = SubResource("Environment_71mkv")
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
+visible = false
 z_index = 1000
 color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(768, 528, 480, 528, 480, 480, 192, 480, 192, 384, 48, 384, 48, 240, 0, 240, 0, 0, 288, 0, 288, 192, 336, 192, 336, 144, 480, 144, 480, 48, 720, 48, 720, 288, 672, 288, 672, 384, 768, 384)
@@ -94,4 +95,3 @@ position = Vector2(132, 55)
 
 [node name="StoryTeller" parent="." instance=ExtResource("8_71mkv")]
 position = Vector2(242, 95)
-collision_mask = 15
