@@ -27,7 +27,6 @@ public partial class Chief : Entity
         playback = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
 
         actionTimer.Timeout += OnTimerTimeout;
-        actionTimer.Call("start_random");
     }
 
     private void OnTimerTimeout()
@@ -46,7 +45,6 @@ public partial class Chief : Entity
                 playback.Travel(IDLE);
                 break;
         }
-        actionTimer.Call("start_random");
     }
 }
 

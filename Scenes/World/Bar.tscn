@@ -99,4 +99,3 @@ position = Vector2(242, 95)
 
 [node name="Chief" parent="." instance=ExtResource("9_6ugc5")]
 position = Vector2(36, 171)
-collision_mask = 15

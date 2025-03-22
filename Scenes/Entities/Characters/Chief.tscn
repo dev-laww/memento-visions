@@ -311,14 +311,14 @@ _data = {
 &"work": SubResource("Animation_e6tbd")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e6tbd"]
+animation = &"work"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tbqyk"]
 animation = &"idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uwdmb"]
 animation = &"scratching"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e6tbd"]
-animation = &"work"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h6wn6"]
 switch_mode = 2
@@ -336,16 +336,17 @@ advance_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bmtwh"]
+states/eat/node = SubResource("AnimationNodeAnimation_e6tbd")
+states/eat/position = Vector2(509, 100)
 states/idle/node = SubResource("AnimationNodeAnimation_tbqyk")
 states/idle/position = Vector2(324, 42)
-states/scratching/node = SubResource("AnimationNodeAnimation_uwdmb")
-states/scratching/position = Vector2(324, 166)
-states/work/node = SubResource("AnimationNodeAnimation_e6tbd")
-states/work/position = Vector2(509, 100)
-transitions = ["work", "idle", SubResource("AnimationNodeStateMachineTransition_h6wn6"), "scratching", "idle", SubResource("AnimationNodeStateMachineTransition_wufp6"), "idle", "work", SubResource("AnimationNodeStateMachineTransition_6sirx"), "idle", "scratching", SubResource("AnimationNodeStateMachineTransition_v5csj"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_tbqyk")]
+states/scratch/node = SubResource("AnimationNodeAnimation_uwdmb")
+states/scratch/position = Vector2(324, 166)
+transitions = ["eat", "idle", SubResource("AnimationNodeStateMachineTransition_h6wn6"), "scratch", "idle", SubResource("AnimationNodeStateMachineTransition_wufp6"), "idle", "eat", SubResource("AnimationNodeStateMachineTransition_6sirx"), "idle", "scratch", SubResource("AnimationNodeStateMachineTransition_v5csj"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_tbqyk")]
 graph_offset = Vector2(-16, -28)
 
 [node name="Chief" type="CharacterBody2D"]
+collision_mask = 15
 script = ExtResource("1_e6tbd")
 Id = "npc:chief"
 isNpc = true
@@ -368,7 +369,6 @@ position = Vector2(0, -17)
 sprite_frames = SubResource("SpriteFrames_ghsbm")
 animation = &"idle"
 autoplay = "idle"
-frame = 2
 script = ExtResource("3_e6tbd")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
