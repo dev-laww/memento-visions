@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://d0qr3o1nxmcpe"]
+[gd_scene load_steps=12 format=4 uid="uid://d0qr3o1nxmcpe"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="1_28rab"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="1_sthvm"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_tm1gt"]
 [ext_resource type="TileSet" uid="uid://dvd6ajqdt1f52" path="res://resources/tilesets/bar/small-props.tres" id="5_efdby"]
 [ext_resource type="TileSet" uid="uid://grwoctw4gvjl" path="res://resources/tilesets/bar/wall.tres" id="7_unifd"]
+[ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="8_71mkv"]
 
 [sub_resource type="Environment" id="Environment_71mkv"]
 background_mode = 3
@@ -90,3 +91,7 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="Player" parent="." instance=ExtResource("1_28rab")]
 position = Vector2(132, 55)
+
+[node name="StoryTeller" parent="." instance=ExtResource("8_71mkv")]
+position = Vector2(242, 95)
+collision_mask = 15
