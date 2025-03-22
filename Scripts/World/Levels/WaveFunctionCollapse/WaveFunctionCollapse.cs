@@ -13,13 +13,13 @@ namespace Game.Levels;
 [Scene]
 public partial class WaveFunctionCollapse : Node2D
 {
-    [Export] private WaveFuncitonCollapseSettings settings;
+    private const int MAX_ITERATIONS = 10000;
+
+    [Export] private WaveFunctionCollapseSettings settings;
 
     [Node] private Node2D map;
-
     [Node] private NavigationManager navigationManager;
 
-    private const int MAX_ITERATIONS = 10000;
     private readonly Dictionary<Vector2I, string> directions = new()
     {
         { Vector2I.Right, "Right" },
@@ -29,7 +29,6 @@ public partial class WaveFunctionCollapse : Node2D
     };
 
     private readonly Dictionary<Vector2I, List<WaveFunctionCollapseEntry>> waveFunction = [];
-
     private Grid<PackedScene> grid;
 
     public override void _Notification(int what)
@@ -48,13 +47,13 @@ public partial class WaveFunctionCollapse : Node2D
     {
         Clear();
 
-        grid = new Grid<PackedScene>(settings.gridSize, Vector2I.Zero);
+        grid = new Grid<PackedScene>(settings.GridSize, Vector2I.Zero);
 
         waveFunction.Clear();
 
-        for (int x = 0; x < settings.gridSize.X; x++)
+        for (var x = 0; x < settings.GridSize.X; x++)
         {
-            for (int y = 0; y < settings.gridSize.Y; y++)
+            for (var y = 0; y < settings.GridSize.Y; y++)
             {
                 waveFunction[new Vector2I(x, y)] = [.. settings.Entries];
             }
@@ -68,7 +67,7 @@ public partial class WaveFunctionCollapse : Node2D
 
         InitializeWaveFunction();
 
-        int iterations = 0;
+        var iterations = 0;
         while (!IsCollapsed() && iterations < MAX_ITERATIONS)
         {
             iterations++;
@@ -91,9 +90,9 @@ public partial class WaveFunctionCollapse : Node2D
         }
 
         // place the packed scenes in the world
-        for (int x = 0; x < settings.gridSize.X; x++)
+        for (var x = 0; x < settings.GridSize.X; x++)
         {
-            for (int y = 0; y < settings.gridSize.Y; y++)
+            for (var y = 0; y < settings.GridSize.Y; y++)
             {
                 var scene = grid[new Vector2I(x, y)];
                 if (scene is null) continue;
@@ -191,7 +190,8 @@ public partial class WaveFunctionCollapse : Node2D
         var directionKey = directions[direction];
         var neighborCoords = coords + direction;
 
-        if (!waveFunction.TryGetValue(neighborCoords, out List<WaveFunctionCollapseEntry> value)) return possibleNeighbors;
+        if (!waveFunction.TryGetValue(neighborCoords, out List<WaveFunctionCollapseEntry> value))
+            return possibleNeighbors;
 
         foreach (var entry in waveFunction[coords])
         {

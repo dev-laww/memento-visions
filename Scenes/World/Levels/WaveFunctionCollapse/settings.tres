@@ -1,19 +1,19 @@
-[gd_resource type="Resource" script_class="WaveFuncitonCollapseSettings" load_steps=27 format=3 uid="uid://cptrdb0xglwg5"]
+[gd_resource type="Resource" script_class="WaveFunctionCollapseSettings" load_steps=27 format=3 uid="uid://cptrdb0xglwg5"]
 
-[ext_resource type="PackedScene" uid="uid://bk513scvcpla3" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/Empty.tscn" id="1_7lylm"]
+[ext_resource type="PackedScene" uid="uid://bk513scvcpla3" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/Empty/Empty.tscn" id="1_7lylm"]
 [ext_resource type="Script" uid="uid://ky5xget0fajt" path="res://Scripts/World/Levels/WaveFunctionCollapse/WaveFunctionCollapseEntry.cs" id="2_danux"]
-[ext_resource type="PackedScene" uid="uid://cl11bc8lux4tl" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/Vertical.tscn" id="3_a75oa"]
-[ext_resource type="PackedScene" uid="uid://b8fwe8jelapyc" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/Cross.tscn" id="4_6q581"]
-[ext_resource type="PackedScene" uid="uid://sw1n3scmb4ad" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/JunctionUp.tscn" id="5_sjod5"]
-[ext_resource type="PackedScene" uid="uid://36bw13543e44" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/JunctionDown.tscn" id="6_avn0a"]
-[ext_resource type="PackedScene" uid="uid://bg4wdcl6d484t" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/Horizontal.tscn" id="7_kdxwf"]
-[ext_resource type="PackedScene" uid="uid://bkqvffqu4jfdl" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/JunctionRight.tscn" id="8_1o4gp"]
-[ext_resource type="PackedScene" uid="uid://i4hvpfta6arm" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/JunctionLeft.tscn" id="9_yfyh6"]
-[ext_resource type="PackedScene" uid="uid://bv540ks582u0h" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/CornerTopLeft.tscn" id="10_owrly"]
-[ext_resource type="PackedScene" uid="uid://c4p7kn072p3fy" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/CornerTopRight.tscn" id="11_xu1a2"]
-[ext_resource type="PackedScene" uid="uid://dfdmp8jpxja1u" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/CornerBottomLeft.tscn" id="12_y7gul"]
-[ext_resource type="PackedScene" uid="uid://ekenskrdc0m8" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/CornerBottomRight.tscn" id="13_f4p1w"]
-[ext_resource type="Script" uid="uid://gu1jo2ump6dj" path="res://Scripts/World/Levels/WaveFunctionCollapse/WaveFuncitonCollapseSettings.cs" id="14_eey4g"]
+[ext_resource type="PackedScene" uid="uid://cl11bc8lux4tl" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/Vertical/Vertical.tscn" id="3_a75oa"]
+[ext_resource type="PackedScene" uid="uid://b8fwe8jelapyc" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/Cross/Cross.tscn" id="4_6q581"]
+[ext_resource type="PackedScene" uid="uid://sw1n3scmb4ad" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/JunctionUp/JunctionUp.tscn" id="5_sjod5"]
+[ext_resource type="PackedScene" uid="uid://36bw13543e44" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/JunctionDown/JunctionDown.tscn" id="6_avn0a"]
+[ext_resource type="PackedScene" uid="uid://bg4wdcl6d484t" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/Horizontal/Horizontal.tscn" id="7_kdxwf"]
+[ext_resource type="PackedScene" uid="uid://bkqvffqu4jfdl" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/JunctionRight/JunctionRight.tscn" id="8_1o4gp"]
+[ext_resource type="PackedScene" uid="uid://i4hvpfta6arm" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/JunctionLeft/JunctionLeft.tscn" id="9_yfyh6"]
+[ext_resource type="PackedScene" uid="uid://bv540ks582u0h" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/CornerTopLeft/CornerTopLeft.tscn" id="10_owrly"]
+[ext_resource type="PackedScene" uid="uid://c4p7kn072p3fy" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/CornerTopRight/CornerTopRight.tscn" id="11_xu1a2"]
+[ext_resource type="PackedScene" uid="uid://dfdmp8jpxja1u" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/CornerBottomLeft/CornerBottomLeft.tscn" id="12_y7gul"]
+[ext_resource type="PackedScene" uid="uid://ekenskrdc0m8" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/CornerBottomRight/CornerBottomRight.tscn" id="13_f4p1w"]
+[ext_resource type="Script" uid="uid://gu1jo2ump6dj" path="res://Scripts/World/Levels/WaveFunctionCollapse/WaveFunctionCollapseSettings.cs" id="14_7lylm"]
 
 [sub_resource type="Resource" id="Resource_k8riw"]
 resource_name = "Empty"
@@ -148,7 +148,8 @@ Right = [ExtResource("9_yfyh6"), ExtResource("7_kdxwf"), ExtResource("4_6q581"),
 metadata/_custom_type_script = ExtResource("2_danux")
 
 [resource]
-script = ExtResource("14_eey4g")
-gridSize = Vector2i(12, 12)
+script = ExtResource("14_7lylm")
+CellSize = 256
+GridSize = Vector2i(12, 12)
 Entries = [SubResource("Resource_k8riw"), SubResource("Resource_hej7c"), SubResource("Resource_c377g"), SubResource("Resource_d4jhf"), SubResource("Resource_oj6ub"), SubResource("Resource_0bpo3"), SubResource("Resource_etea5"), SubResource("Resource_8j88n"), SubResource("Resource_v5byw"), SubResource("Resource_b3u7i"), SubResource("Resource_frlk2"), SubResource("Resource_ghvp3")]
-metadata/_custom_type_script = ExtResource("14_eey4g")
+metadata/_custom_type_script = "uid://gu1jo2ump6dj"
