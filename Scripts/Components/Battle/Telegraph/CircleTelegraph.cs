@@ -14,6 +14,9 @@ public partial class CircleTelegraph : Node2D
     {
         color = Colors.White;
         color.A = GetParent() is TelegraphCanvas ? 0.01f : 1;
+
+        if (Engine.IsEditorHint())
+            currentRadius = radius;
     }
 
     public void Start(Vector2 position)
