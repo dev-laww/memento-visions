@@ -168,8 +168,6 @@ public abstract partial class Entity : CharacterBody2D
 
             if (this is Enemy)
                 EnemyManager.Register(spawnInfo);
-
-            return;
         }
 
         OnReady();
