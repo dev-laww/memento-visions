@@ -9,6 +9,7 @@ using Game.Data;
 using Godot;
 using Item = Game.Data.Item;
 using System.CommandLine.IO;
+using Game.Entities;
 
 namespace Game.Components;
 
@@ -103,11 +104,31 @@ public partial class InventoryManager : Node
         Log.Debug($"Removed {group} from the inventory.");
     }
 
+    public void UseItem(ItemGroup group)
+    {
+        if (!HasItem(group))
+        {
+            Log.Warn($"Item '{group}' not found or not enough quantity.");
+            return;
+        }
+
+        var item = group.Item;
+
+        for (var i = 0; i < group.Quantity; i++)
+            item.Use(Owner as Entity);
+
+        RemoveItem(group);
+        Log.Info($"Used {group}.");
+    }
+
     public IReadOnlyList<ItemGroup> GetItemsFromCategory(Item.Category category) =>
         Inventory[category].AsReadOnly();
 
     public bool HasItem(ItemGroup group) => Inventory[group.Item.ItemCategory]
         .Any(g => g.Item.Id == group.Item.Id && g.Quantity >= group.Quantity);
+
+    public bool HasItem(Item item) => Inventory[item.ItemCategory]
+        .Any(g => g.Item.Id == item.Id);
 
     [Command(Name = "give", Description = "Adds an item to the inventory.")]
     private void AddItemCommand(string id, int quantity = 1)

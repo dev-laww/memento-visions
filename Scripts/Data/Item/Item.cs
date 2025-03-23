@@ -1,4 +1,5 @@
 using System;
+using Game.Entities;
 using Godot;
 using Godot.Collections;
 
@@ -52,6 +53,7 @@ public partial class Item : Resource
     }
 
     private Category category;
+    public virtual void Use(Entity entity) { }
 
     public override string ToString() => $"<Item ({Id})>";
 

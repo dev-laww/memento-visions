@@ -39,6 +39,7 @@ public partial class Inventory : Overlay
         WireNodes();
     }
 
+    // TODO: Refactor this to rewire when player dies and respawns
     public override void _Ready()
     {
         var player = this.GetPlayer();
@@ -49,6 +50,7 @@ public partial class Inventory : Overlay
         slots.ForEach(slot => slot.Pressed += SelectSlot);
         closeButton.Pressed += Close;
         selectedItemActionButton.Toggled += OnButtonToggle;
+        selectedItemActionButton.Pressed += OnButtonPress;
         materialButton.ButtonGroup.Pressed += OnItemCategoryPress;
         player.InventoryManager.Updated += OnInventoryUpdate;
 
@@ -168,5 +170,18 @@ public partial class Inventory : Overlay
             player.WeaponManager.Unequip();
             selectedItemActionButton.Text = "Equip";
         }
+    }
+
+    private void OnButtonPress()
+    {
+        var player = this.GetPlayer();
+
+        if (SelectedItem is null || SelectedItem.ItemCategory != Item.Category.Consumable || player is null) return;
+
+        player.InventoryManager.UseItem(new ItemGroup
+        {
+            Item = SelectedItem,
+            Quantity = 1
+        });
     }
 }
