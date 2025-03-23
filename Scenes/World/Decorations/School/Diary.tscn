@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://liua02dq0v6c"]
+
+[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_ksxae"]
+[ext_resource type="Texture2D" uid="uid://ckj3v8yrowvxb" path="res://assets/tilesets/school-tileset.png" id="2_ublhu"]
+[ext_resource type="Script" uid="uid://58jqrupdcss0" path="res://Scripts/Components/SmoothSprite2D.cs" id="3_4ijek"]
+[ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="4_ksxae"]
+[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="5_qxk81"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="6_44s3i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ublhu"]
+radius = 13.0384
+
+[node name="Diary" type="Node2D"]
+
+[node name="SmoothSprite2D" type="Sprite2D" parent="."]
+texture_filter = 2
+material = ExtResource("1_ksxae")
+position = Vector2(3.5, 3.5)
+scale = Vector2(1.875, 1.875)
+texture = ExtResource("2_ublhu")
+region_enabled = true
+region_rect = Rect2(448, 360, 8, 8)
+script = ExtResource("3_4ijek")
+metadata/_custom_type_script = "uid://58jqrupdcss0"
+
+[node name="DialogueTrigger" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("4_ksxae")
+ShouldInteract = true
+InteractionLabel = "Investigate"
+metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueTrigger"]
+position = Vector2(3, 2)
+shape = SubResource("CircleShape2D_ublhu")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="DialogueTrigger"]
+
+[node name="InteractionUI" type="Control" parent="DialogueTrigger/Node2D" instance=ExtResource("5_qxk81")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("6_44s3i")
