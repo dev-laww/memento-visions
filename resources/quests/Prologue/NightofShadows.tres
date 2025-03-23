@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=7 format=3 uid="uid://bb0a0gl7qcddj"]
+
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="1_u1lt3"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="2_6c0y8"]
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="3_r2ecs"]
+
+[sub_resource type="Resource" id="Resource_fqfcu"]
+script = ExtResource("1_u1lt3")
+Id = "enemy:aswang"
+Amount = 3
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_5vn2r"]
+script = ExtResource("2_6c0y8")
+Type = 3
+Description = ""
+Enemies = [SubResource("Resource_fqfcu")]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="Resource" id="Resource_u1lt3"]
+script = ExtResource("2_6c0y8")
+Type = 2
+Description = ""
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[resource]
+script = ExtResource("3_r2ecs")
+Id = "d7d4c9c4-4813-47f7-8da0-f4a2b98068c0"
+Title = "Night of Shadow"
+Ordered = false
+Description = "You spotted three aswang around the school surroundings. Track and eliminate them"
+objectives = [SubResource("Resource_5vn2r"), SubResource("Resource_u1lt3")]
+Experience = 0
+Items = []
+metadata/_custom_type_script = "uid://dssta8xepjmkg"
