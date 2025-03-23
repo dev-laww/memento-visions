@@ -53,6 +53,7 @@ public partial class InventoryManager : Node
             .ToList();
 
         SaveManager.Data.SetItemsData(items);
+        SaveManager.Save();
     }
 
     public override void _Ready()
