@@ -1,14 +1,13 @@
 using System.Linq;
-using Game.Common;
 using Game.Components;
 using Game.Entities;
 using Godot;
 using GodotUtilities;
 
-namespace Game.StatusEffects;
+namespace Game.Data;
 
 [GlobalClass, Icon("res://assets/icons/status-effect.svg")]
-public partial class StatusEffect : Node
+public partial class StatusEffect : Resource
 {
     public class Info
     {
@@ -22,32 +21,26 @@ public partial class StatusEffect : Node
     [Export] public string StatusEffectName;
     [Export] public float Duration { get; private set; }
     [Export(PropertyHint.MultilineText)] public string Description;
-    [Export] public bool EditorAdded { get; private set; }
     [Export] public int MaxStacks = 1;
 
     public int StackCount { get; protected set; } = 1;
     public float RemainingDuration;
 
-#nullable enable
-    protected Entity? Target => GetParent() as Entity;
-    protected VelocityManager? TargetVelocityManager => Target?.GetChildrenOfType<VelocityManager>().FirstOrDefault();
-    protected StatsManager? TargetStatsManager => Target?.GetChildrenOfType<StatsManager>().FirstOrDefault();
-#nullable disable
-
-    public override void _Ready()
-    {
-        RemainingDuration += Duration;
-
-        if (Target != null) return;
-
-        Log.Error($"{this} must be a child of an Entity. Disabling...");
-        QueueFree();
-    }
+    protected Entity Target;
+    protected VelocityManager TargetVelocityManager => Target.GetChildrenOfType<VelocityManager>().FirstOrDefault();
+    protected StatsManager TargetStatsManager => Target.StatsManager;
 
     public void Update()
     {
-        RemainingDuration -= (float)GetPhysicsProcessDeltaTime();
+        RemainingDuration -= (float)Target.GetPhysicsProcessDeltaTime();
         Tick();
+    }
+
+    public void ApplyStatusEffect(Entity target)
+    {
+        Target = target;
+        RemainingDuration += Duration;
+        Apply();
     }
 
     protected virtual void Tick() { }

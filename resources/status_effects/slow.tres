@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ii6xw8h8nicn"]
+
+[ext_resource type="Script" uid="uid://dwvf3kbwuuxkv" path="res://Scripts/Data/StatusEffect/Slow.cs" id="1_nry7c"]
+
+[resource]
+script = ExtResource("1_nry7c")
+SlowAmount = 0.5
+Id = "status:slow"
+StatusEffectName = "Slow"
+Duration = 2.0
+Description = ""
+MaxStacks = 1
+metadata/_custom_type_script = "uid://clu5oggovs0qe"

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Game.Components;
 using Game.Data;
 using Game.Entities;
-using Game.StatusEffects;
 using Game.Utils.Battle;
 using Godot;
 using GodotUtilities;
@@ -118,7 +117,7 @@ public static class DamageFactory
 
                 if (randomNumber > effect.Chance && !effect.IsGuaranteed) continue;
 
-                var instance = StatusEffectRegistry.GetAsStatusEffect(effect.Id);
+                var instance = StatusEffectRegistry.Get(effect.Id);
 
                 if (instance == null) continue;
 

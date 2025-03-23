@@ -15,4 +15,4 @@ WeaponType = 1
 Component = ExtResource("1_3sg1w")
 DamagePercentBuff = 20
 Description = ""
-metadata/_custom_type_script = ExtResource("1_gsd8o")
+metadata/_custom_type_script = "uid://b772648mucsjw"

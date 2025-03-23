@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bne5e1vtmm1j6"]
+
+[ext_resource type="Script" uid="uid://dspgxtju4i1uo" path="res://Scripts/Data/StatusEffect/Bleed.cs" id="1_26d3s"]
+
+[resource]
+script = ExtResource("1_26d3s")
+damagePerSecond = 2.0
+Id = "status:bleed"
+StatusEffectName = "Bleed"
+Duration = 4.0
+Description = ""
+MaxStacks = 1
+metadata/_custom_type_script = "uid://clu5oggovs0qe"

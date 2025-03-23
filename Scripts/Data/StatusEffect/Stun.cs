@@ -1,6 +1,6 @@
 using Game.Autoload;
 
-namespace Game.StatusEffects;
+namespace Game.Data;
 
 public partial class Stun : StatusEffect
 {

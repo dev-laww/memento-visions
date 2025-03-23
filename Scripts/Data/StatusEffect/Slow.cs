@@ -1,7 +1,7 @@
 using Godot;
 using Game.Common;
 
-namespace Game.StatusEffects;
+namespace Game.Data;
 
 public partial class Slow : StatusEffect
 {

@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Game.StatusEffects;
+namespace Game.Data;
 
 public partial class Bleed : StatusEffect
 {
@@ -10,7 +10,7 @@ public partial class Bleed : StatusEffect
 
     protected override void Tick()
     {
-        accumulatedDamage += damagePerSecond * (float)GetPhysicsProcessDeltaTime();
+        accumulatedDamage += damagePerSecond * (float)Target.GetPhysicsProcessDeltaTime();
 
         if (accumulatedDamage < StackCount) return;
 
@@ -22,9 +22,8 @@ public partial class Bleed : StatusEffect
     public override void Stack(int amount = 1)
     {
         var baseDamage = damagePerSecond / StackCount;
-        damagePerSecond = baseDamage * (StackCount + amount);
-
         StackCount += amount;
+        damagePerSecond = baseDamage * StackCount;
         RemainingDuration = Duration;
     }
 }

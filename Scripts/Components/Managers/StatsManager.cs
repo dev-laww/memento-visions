@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
 using Game.Entities;
-using Game.StatusEffects;
+using Game.Data;
 using Game.Utils.Battle;
 using Godot;
 
@@ -96,11 +96,6 @@ public partial class StatsManager : Node
     {
         health = MaxHealth;
         Entity = GetParent() as Entity;
-
-        var effects = GetParent().GetChildren().OfType<StatusEffect>().Where(e => e.EditorAdded);
-
-        foreach (var effect in effects)
-            AddStatusEffect(effect);
     }
 
     // Health
@@ -216,16 +211,16 @@ public partial class StatsManager : Node
     {
         if (!statusEffects.TryGetValue(effect.Id, out var existing))
         {
-            Entity.AddChild(effect);
-            effect.Apply();
+            effect.ApplyStatusEffect(Entity);
             statusEffects.Add(effect.Id, effect);
+            Log.Debug($"{effect} added to {Entity}");
+            EmitSignalStatusEffectAdded(effect);
         }
-        else if (!effect.EditorAdded && existing.StackCount < existing.MaxStacks)
+        else if (existing.StackCount < existing.MaxStacks)
+        {
             existing.Stack(effect.StackCount);
-
-        EmitSignalStatusEffectAdded(effect);
-
-        Log.Debug($"{effect} added to {Entity}");
+            Log.Debug($"Added {effect.StackCount} stacks to {existing}");
+        }
     }
 
     public void RemoveStatusEffect(string id)
@@ -233,7 +228,6 @@ public partial class StatsManager : Node
         if (!statusEffects.TryGetValue(id, out var effect)) return;
 
         effect.Remove();
-        effect.QueueFree();
 
         statusEffects.Remove(id);
 

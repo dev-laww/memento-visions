@@ -208,7 +208,7 @@ public partial class Player : Entity
     [Command(Name = "apply", Description = "Applies a status effect to the player")]
     private void ApplyStatusEffect(string statusEffectId)
     {
-        var statusEffect = StatusEffectRegistry.GetAsStatusEffect(statusEffectId);
+        var statusEffect = StatusEffectRegistry.Get(statusEffectId);
 
         if (statusEffect is null)
         {
