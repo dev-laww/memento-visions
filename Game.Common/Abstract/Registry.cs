@@ -5,7 +5,7 @@ using FuzzySharp;
 namespace Game.Common.Abstract;
 
 public abstract class Registry<T, TRegistry> : RefCounted
-    where T : GodotObject
+    where T : Resource
     where TRegistry : Registry<T, TRegistry>, new()
 {
     protected static readonly Lazy<TRegistry> Instance = new(() => new TRegistry());
@@ -21,10 +21,9 @@ public abstract class Registry<T, TRegistry> : RefCounted
 
     public static T? Get(string id)
     {
-        // Fuzzy matching
         Resources.TryGetValue(id, out var resource);
 
-        if (resource != null) return resource;
+        if (resource != null) return (T)resource.Duplicate();
 
         var matches = Process.ExtractOne(id, [.. Resources.Keys]);
 
@@ -32,7 +31,7 @@ public abstract class Registry<T, TRegistry> : RefCounted
 
         Resources.TryGetValue(matches.Value, out resource);
 
-        return resource;
+        return resource?.Duplicate() as T;
     }
 
     public static bool Get(string id, out T? resource)
