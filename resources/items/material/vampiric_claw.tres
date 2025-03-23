@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dmt06nxku6q1f"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_2fbrj"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_lggrn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eaty5"]
+atlas = ExtResource("1_2fbrj")
+region = Rect2(16, 48, 16, 16)
+
+[resource]
+resource_name = "Vampiric's Claw"
+script = ExtResource("2_lggrn")
+Id = "item:vampiricclaw"
+Icon = SubResource("AtlasTexture_eaty5")
+Name = "Vampiric's Claw"
+ItemCategory = 1
+Description = "A sharp, crimson-stained claw pulsing with dark energy. It carries a lingering thirst, radiating an eerie, lifedraining aura."
+metadata/_custom_type_script = "uid://b772648mucsjw"

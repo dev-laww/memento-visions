@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dmbnoq0p8nta0"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_pwy30"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_0ofru"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h58jb"]
+atlas = ExtResource("1_pwy30")
+region = Rect2(0, 48, 16, 16)
+
+[resource]
+resource_name = "Thunder Essence"
+script = ExtResource("2_0ofru")
+Id = "item:thunderessence"
+Icon = SubResource("AtlasTexture_h58jb")
+Name = "Thunder Essence"
+ItemCategory = 1
+Description = "A concentrated spark of Aghon’s power, swirling with raw thunder energy. It crackles with untamed electricity, surging with the echoes of a storm."
+metadata/_custom_type_script = "uid://b772648mucsjw"

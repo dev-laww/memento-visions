@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://d0u4wc8nhju7v"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_ui70j"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_43ilf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lp6iv"]
+atlas = ExtResource("1_ui70j")
+region = Rect2(32, 48, 16, 16)
+
+[resource]
+resource_name = "Sacred Tear"
+script = ExtResource("2_43ilf")
+Id = "item:sacredtear"
+Icon = SubResource("AtlasTexture_lp6iv")
+Name = "Sacred Tear"
+ItemCategory = 1
+Description = "A pure, glistening droplet said to hold divine blessings. It shimmers with a gentle glow, radiating a serene and holy presence."
+metadata/_custom_type_script = "uid://b772648mucsjw"

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://oduwv2m4xfc5"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_owkui"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_lxs8o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oloqr"]
+atlas = ExtResource("1_owkui")
+region = Rect2(48, 48, 16, 16)
+
+[resource]
+resource_name = "Inferno Core"
+script = ExtResource("2_lxs8o")
+Id = "item:infernocore"
+Icon = SubResource("AtlasTexture_oloqr")
+Name = "Inferno Core"
+ItemCategory = 1
+Description = "A searing core of ghostly fire, imbued with the wrathful essence of a Santelmo. It flickers with an eerie, otherworldly glow, burning with unquenchable spectral flames."
+metadata/_custom_type_script = "uid://b772648mucsjw"

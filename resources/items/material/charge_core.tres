@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://bnyee87b6kqhj"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_0iwg2"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_k1ewf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0mg1"]
+atlas = ExtResource("1_0iwg2")
+region = Rect2(32, 32, 16, 16)
+
+[resource]
+resource_name = "Charge Core"
+script = ExtResource("2_k1ewf")
+Id = "item:chargecore"
+Icon = SubResource("AtlasTexture_q0mg1")
+Name = "Charge Core"
+ItemCategory = 1
+Description = "A dense, smoldering core pulsating with the raw energy of a Kapre. It radiates a steady heat, crackling with embers and ancient power."
+metadata/_custom_type_script = "uid://b772648mucsjw"

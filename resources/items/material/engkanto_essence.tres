@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dhr2jtmgl0gse"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_sm88w"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_7cop7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4qui"]
+atlas = ExtResource("1_sm88w")
+region = Rect2(48, 32, 16, 16)
+
+[resource]
+resource_name = "Engkanto Essence"
+script = ExtResource("2_7cop7")
+Id = "item:engkantoessence"
+Icon = SubResource("AtlasTexture_f4qui")
+Name = "Engkanto Essence"
+ItemCategory = 1
+Description = "A shimmering, ethereal substance infused with the mystical energy of an Engkanto. It hums with an enchanting aura, shifting colors like a fleeting illusion."
+metadata/_custom_type_script = "uid://b772648mucsjw"

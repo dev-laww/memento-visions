@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://buy0xwqx0ocwe"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_4fn1v"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_dtcx2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofiyp"]
+atlas = ExtResource("1_4fn1v")
+region = Rect2(128, 16, 16, 16)
+
+[resource]
+resource_name = "Soul Ember"
+script = ExtResource("2_dtcx2")
+Id = "item:soulember"
+Icon = SubResource("AtlasTexture_ofiyp")
+Name = "Soul Ember"
+ItemCategory = 1
+Description = "A flickering ember infused with the restless spirit of a Santelmo. It burns with an eerie, ghostly glow, pulsing with trapped energy."
+metadata/_custom_type_script = "uid://b772648mucsjw"

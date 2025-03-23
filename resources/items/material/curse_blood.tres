@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://c6j15ogomrwqo"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_lgwnk"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_qu0la"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkl5q"]
+atlas = ExtResource("1_lgwnk")
+region = Rect2(32, 0, 16, 16)
+
+[resource]
+resource_name = "Curse Blood"
+script = ExtResource("2_qu0la")
+Id = "item:curseblood"
+Icon = SubResource("AtlasTexture_fkl5q")
+Name = "Curse Blood"
+ItemCategory = 1
+Description = "A thick, sinister liquid infused with the Aswang’s dark curse. It radiates an eerie aura, whispering of ancient malice and forbidden power."
+metadata/_custom_type_script = "uid://b772648mucsjw"

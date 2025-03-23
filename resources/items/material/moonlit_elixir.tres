@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://hrhry5q5e5ri"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_0i7wc"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_8c7fb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_me1jm"]
+atlas = ExtResource("1_0i7wc")
+region = Rect2(0, 16, 16, 16)
+
+[resource]
+resource_name = "Moonlit Elixir"
+script = ExtResource("2_8c7fb")
+Id = "item:moonlitelixir"
+Icon = SubResource("AtlasTexture_me1jm")
+Name = "Moonlit Elixir"
+ItemCategory = 0
+Description = "A mystical potion infused with the essence of moonlight. It glows softly in the dark, radiating a calm yet potent energy."
+metadata/_custom_type_script = "uid://b772648mucsjw"

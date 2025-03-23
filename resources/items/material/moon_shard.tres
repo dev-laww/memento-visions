@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dxrl1uamwfs14"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_3p8i7"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_4jnuj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7g74"]
+atlas = ExtResource("1_3p8i7")
+region = Rect2(112, 0, 16, 16)
+
+[resource]
+resource_name = "Moon Shard"
+script = ExtResource("2_4jnuj")
+Id = "item:moonshard"
+Icon = SubResource("AtlasTexture_t7g74")
+Name = "Moon Shard"
+ItemCategory = 1
+Description = "A luminous fragment of the moon, shimmering with mythical energy. It holds a mysterious power that flows with the night sky."
+metadata/_custom_type_script = "uid://b772648mucsjw"

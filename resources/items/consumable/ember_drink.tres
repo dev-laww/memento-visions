@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dc3iyb8ld4cuh"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_8uhf3"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_q07dv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5svl"]
+atlas = ExtResource("1_8uhf3")
+region = Rect2(16, 32, 16, 16)
+
+[resource]
+resource_name = "Ember Drink"
+script = ExtResource("2_q07dv")
+Id = "item:emberdrink"
+Icon = SubResource("AtlasTexture_d5svl")
+Name = "Ember Drink"
+ItemCategory = 0
+Description = "A glowing, molten drink infused with the essence of a Santelmo. It crackles with ghostly energy, carrying the lingering heat of a wandering spirit."
+metadata/_custom_type_script = "uid://b772648mucsjw"

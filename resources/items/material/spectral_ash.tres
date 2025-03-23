@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://iw7urxt8gbm0"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_va5uo"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_ta805"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xbju"]
+atlas = ExtResource("1_va5uo")
+region = Rect2(112, 16, 16, 16)
+
+[resource]
+resource_name = "Spectral Ash"
+script = ExtResource("2_ta805")
+Id = "item:spectralash"
+Icon = SubResource("AtlasTexture_1xbju")
+Name = "Spectral Ash"
+ItemCategory = 1
+Description = "A smoldering ash that falls from the ever-burning cigarette of a Kapre. It carries a faint, smoky glow and the lingering scent of enchanted tobacco."
+metadata/_custom_type_script = "uid://b772648mucsjw"

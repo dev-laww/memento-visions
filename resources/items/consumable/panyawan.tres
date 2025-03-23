@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dhpmfptxf7g2s"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_el7qd"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_n8nc0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ofvl"]
+atlas = ExtResource("1_el7qd")
+region = Rect2(96, 16, 16, 16)
+
+[resource]
+resource_name = "Panyawan"
+script = ExtResource("2_n8nc0")
+Id = "item:panyawan"
+Icon = SubResource("AtlasTexture_8ofvl")
+Name = "Panyawan"
+ItemCategory = 0
+Description = "A resilient, bitter vine known for its powerful medicinal properties. Used in traditional healing, it is said to cleanse the body and restore vitality."
+metadata/_custom_type_script = "uid://b772648mucsjw"

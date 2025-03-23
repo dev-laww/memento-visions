@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dx25tu288c73x"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_ky0a6"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_8oq0r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdxd0"]
+atlas = ExtResource("1_ky0a6")
+region = Rect2(128, 0, 16, 16)
+
+[resource]
+resource_name = "Lunar Petal"
+script = ExtResource("2_8oq0r")
+Id = "item:lunarpetal"
+Icon = SubResource("AtlasTexture_sdxd0")
+Name = "Lunar Petal"
+ItemCategory = 1
+Description = "A delicate, glowing petal said to bloom only under the full moon. It shimmers with a faint, otherworldly energy, carrying the essence of the night."
+metadata/_custom_type_script = "uid://b772648mucsjw"

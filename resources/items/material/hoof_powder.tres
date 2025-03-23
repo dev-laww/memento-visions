@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://doqpta8ruoou0"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_ogeqk"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_sjns5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytsul"]
+atlas = ExtResource("1_ogeqk")
+region = Rect2(64, 16, 16, 16)
+
+[resource]
+resource_name = "Hoof Powder"
+script = ExtResource("2_sjns5")
+Id = "item:hoofpowder"
+Icon = SubResource("AtlasTexture_ytsul")
+Name = "Hoof Powder"
+ItemCategory = 1
+Description = "A fine, dark powder ground from enchanted hooves. It carries a faint, earthy aroma and is said to enhance speed and agility when used properly."
+metadata/_custom_type_script = "uid://b772648mucsjw"

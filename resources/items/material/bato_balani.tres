@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://drj5puv2462td"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_ubhox"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_8js31"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv3o8"]
+atlas = ExtResource("1_ubhox")
+region = Rect2(80, 48, 16, 16)
+
+[resource]
+resource_name = "Bato Balani"
+script = ExtResource("2_8js31")
+Id = "item:batobalani"
+Icon = SubResource("AtlasTexture_wv3o8")
+Name = "Bato Balani"
+ItemCategory = 1
+Description = "A powerful magnetic stone formed from compressed Hoof Powder, infused with traces of mystical energy. Its dark, polished surface hums softly, pulling in small metal objects with an unseen force."
+metadata/_custom_type_script = "uid://b772648mucsjw"

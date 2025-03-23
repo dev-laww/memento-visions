@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://1e7qp47hdgi7"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_ylkyr"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_br4xx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0h6ui"]
+atlas = ExtResource("1_ylkyr")
+region = Rect2(112, 32, 16, 16)
+
+[resource]
+resource_name = "Hoof Iron"
+script = ExtResource("2_br4xx")
+Id = "item:hoofiron"
+Icon = SubResource("AtlasTexture_0h6ui")
+Name = "Hoof Iron"
+ItemCategory = 1
+Description = "A solid, dark metal piece forged from enchanted hooves. It carries a faint, unyielding aura and a slight metallic sheen."
+metadata/_custom_type_script = "uid://b772648mucsjw"

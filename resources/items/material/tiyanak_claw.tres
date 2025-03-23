@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://bs5b83hxstpro"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_nqsq5"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_qmr1g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_an2vu"]
+atlas = ExtResource("1_nqsq5")
+region = Rect2(32, 16, 16, 16)
+
+[resource]
+resource_name = "Tiyanak's Claw"
+script = ExtResource("2_qmr1g")
+Id = "item:tiyanakclaw"
+Icon = SubResource("AtlasTexture_an2vu")
+Name = "Tiyanak's Claw"
+ItemCategory = 1
+Description = "A twisted, jagged claw ripped from a Tiyanak, still pulsing with dark energy. It carries the wailing echoes of the creature’s cursed existence."
+metadata/_custom_type_script = "uid://b772648mucsjw"

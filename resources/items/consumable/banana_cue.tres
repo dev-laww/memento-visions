@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://beouuo27sayj2"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_w0ouh"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_air7k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1ul0"]
+atlas = ExtResource("1_w0ouh")
+region = Rect2(80, 16, 16, 16)
+
+[resource]
+resource_name = "Banana Cue"
+script = ExtResource("2_air7k")
+Id = "item:bananacue"
+Icon = SubResource("AtlasTexture_b1ul0")
+Name = "Banana Cue"
+ItemCategory = 0
+Description = "Caramelized bananas skewered on a stick, coated in golden-brown sugar. A sweet, crispy, and satisfying street food favorite."
+metadata/_custom_type_script = "uid://b772648mucsjw"
