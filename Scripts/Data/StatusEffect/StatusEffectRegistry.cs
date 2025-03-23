@@ -1,6 +1,5 @@
 using Game.Common;
 using Game.Common.Abstract;
-using Game.StatusEffects;
 
 namespace Game.Data;
 

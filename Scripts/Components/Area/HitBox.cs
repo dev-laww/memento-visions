@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Game.Entities;
-using Game.StatusEffects;
+using Game.Data;
 using Game.Utils;
 using Game.Utils.Battle;
 using Godot;
