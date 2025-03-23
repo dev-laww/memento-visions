@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://duruvlye3dyyc"
+path="res://.godot/imported/PhotographDetails.dialogue-457f5f36e63e0356e53c0adbff5e9b0d.tres"
+
+[deps]
+
+source_file="res://resources/dialogues/PhotographDetails.dialogue"
+dest_files=["res://.godot/imported/PhotographDetails.dialogue-457f5f36e63e0356e53c0adbff5e9b0d.tres"]
+
+[params]
+
+defaults=true
