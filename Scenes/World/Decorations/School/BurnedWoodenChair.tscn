@@ -1,12 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1gihhoaku3hk"]
+[gd_scene load_steps=8 format=3 uid="uid://b1gihhoaku3hk"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_kykbt"]
 [ext_resource type="Texture2D" uid="uid://ckj3v8yrowvxb" path="res://assets/tilesets/school-tileset.png" id="2_hk2xv"]
 [ext_resource type="Script" uid="uid://58jqrupdcss0" path="res://Scripts/Components/SmoothSprite2D.cs" id="3_odju6"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="4_kykbt"]
-[ext_resource type="Resource" uid="uid://oueqodom268k" path="res://resources/dialogues/Chapter1.dialogue" id="5_hk2xv"]
+[ext_resource type="Resource" uid="uid://bb54w5sxnh122" path="res://resources/dialogues/BurnedChairDesc.dialogue" id="5_kykbt"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="5_vkrxr"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="6_yosd6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hk2xv"]
 radius = 18.0
@@ -26,7 +25,7 @@ metadata/_custom_type_script = "uid://58jqrupdcss0"
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("4_kykbt")
-DialogueResource = ExtResource("5_hk2xv")
+DialogueResource = ExtResource("5_kykbt")
 ShouldInteract = true
 InteractionLabel = "Investigate"
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
@@ -37,8 +36,4 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="DialogueTrigger"]
 
-[node name="InteractionUI" type="Control" parent="DialogueTrigger/Node2D" instance=ExtResource("5_vkrxr")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("6_yosd6")
+[node name="InteractionUI" parent="DialogueTrigger/Node2D" instance=ExtResource("5_vkrxr")]

@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://58jqrupdcss0" path="res://Scripts/Components/SmoothSprite2D.cs" id="3_tkva0"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="4_qbwjs"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="5_1flri"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="6_afc1n"]
+[ext_resource type="Resource" uid="uid://duruvlye3dyyc" path="res://resources/dialogues/PhotographDetails.dialogue" id="5_qbwjs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jvymt"]
 radius = 19.105
@@ -25,6 +25,7 @@ metadata/_custom_type_script = "uid://58jqrupdcss0"
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("4_qbwjs")
+DialogueResource = ExtResource("5_qbwjs")
 ShouldInteract = true
 InteractionLabel = "Investigate"
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
@@ -35,8 +36,4 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="DialogueTrigger"]
 
-[node name="InteractionUI" type="Control" parent="DialogueTrigger/Node2D" instance=ExtResource("5_1flri")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("6_afc1n")
+[node name="InteractionUI" parent="DialogueTrigger/Node2D" instance=ExtResource("5_1flri")]
