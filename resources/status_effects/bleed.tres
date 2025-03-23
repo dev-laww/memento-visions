@@ -9,5 +9,5 @@ Id = "status:bleed"
 StatusEffectName = "Bleed"
 Duration = 4.0
 Description = ""
-MaxStacks = 1
+MaxStacks = 3
 metadata/_custom_type_script = "uid://clu5oggovs0qe"
