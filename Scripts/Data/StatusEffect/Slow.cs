@@ -1,5 +1,6 @@
 using Godot;
 using Game.Common;
+using Game.Autoload;
 
 namespace Game.Data;
 
@@ -10,6 +11,7 @@ public partial class Slow : StatusEffect
     public override void Apply()
     {
         TargetStatsManager?.ApplySpeedModifier(Id, -SlowAmount);
+        FloatingTextManager.SpawnFloatingText("Slowed", Target.GlobalPosition);
     }
 
     public override void Remove()
