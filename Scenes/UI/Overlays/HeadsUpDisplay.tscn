@@ -1,11 +1,19 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6kt3qbs62e4i"]
+[gd_scene load_steps=21 format=3 uid="uid://c6kt3qbs62e4i"]
 
 [ext_resource type="PackedScene" uid="uid://dp6ardmi6lci5" path="res://Scenes/UI/Common/HealthBar.tscn" id="1_4jtnt"]
 [ext_resource type="Script" uid="uid://xxp0gu26j6fh" path="res://Scripts/UI/Overlays/HeadsUpDisplay.cs" id="1_6jntk"]
 [ext_resource type="Script" uid="uid://32sdfvnmihf2" path="res://Scripts/Components/PassThrough.cs" id="2_ay0d6"]
 [ext_resource type="PackedScene" uid="uid://83s52vks6mbt" path="res://Scenes/UI/Common/DashIndicator.tscn" id="3_k4xdi"]
 [ext_resource type="Texture2D" uid="uid://md5ydpqy2onr" path="res://assets/effects/heal.png" id="4_m4wbm"]
+[ext_resource type="Texture2D" uid="uid://bhg24ad0ut6dq" path="res://assets/ui/slot.png" id="5_44j1a"]
 [ext_resource type="Shader" path="res://resources/shaders/vignette.gdshader" id="5_fe11v"]
+[ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/items/temp/Item5.png" id="6_rnii0"]
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="7_1gu0f"]
+[ext_resource type="LabelSettings" uid="uid://cktp08gmb038p" path="res://resources/misc/normal-text.tres" id="8_nhdt0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b5sbs"]
+texture = ExtResource("5_44j1a")
+region_rect = Rect2(0, 0, 32, 32)
 
 [sub_resource type="Curve" id="Curve_m4wbm"]
 _data = [Vector2(0.516279, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -102,27 +110,71 @@ theme_override_constants/margin_bottom = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 0
 mouse_filter = 2
 
-[node name="HealthBar" parent="MarginContainer/VBoxContainer" instance=ExtResource("1_4jtnt")]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HealthBar" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("1_4jtnt")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(225, 10)
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 2
 
-[node name="DashContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="DashContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 2
 theme_override_constants/separation = 2
 
-[node name="DashIndicator" parent="MarginContainer/VBoxContainer/DashContainer" instance=ExtResource("3_k4xdi")]
+[node name="DashIndicator" parent="MarginContainer/VBoxContainer/VBoxContainer/DashContainer" instance=ExtResource("3_k4xdi")]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
+
+[node name="QuickUseSlot" type="Panel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxTexture_b5sbs")
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/QuickUseSlot"]
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuickUseIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/QuickUseSlot/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("6_rnii0")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/QuickUseSlot"]
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="QuickUseLabel" type="Label" parent="MarginContainer/VBoxContainer/QuickUseSlot/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme = ExtResource("7_1gu0f")
+theme_override_font_sizes/font_size = 8
+text = "999+"
+label_settings = ExtResource("8_nhdt0")
+horizontal_alignment = 2
 
 [node name="HealthEffect" type="Control" parent="."]
 layout_mode = 3

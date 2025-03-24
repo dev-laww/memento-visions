@@ -14,6 +14,7 @@ public partial class InputManager : Node
     private readonly StringName moveDown = "move_down";
     private readonly StringName attack = "attack";
     private readonly StringName dash = "dash";
+    private readonly StringName quickUse = "quick_use";
 
 
     private readonly HashSet<string> justPressed = [];
@@ -44,6 +45,7 @@ public partial class InputManager : Node
         Track(moveDown, @event);
         Track(attack, @event);
         Track(dash, @event);
+        Track(quickUse, @event);
     }
 
     private void Track(StringName name, InputEvent @event)

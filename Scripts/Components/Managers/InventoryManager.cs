@@ -60,22 +60,8 @@ public partial class InventoryManager : Node
         Log.Debug($"Removed {group} from the inventory.");
     }
 
-    public void UseItem(ItemGroup group)
-    {
-        if (!HasItem(group))
-        {
-            Log.Warn($"Item '{group}' not found or not enough quantity.");
-            return;
-        }
-
-        var item = group.Item;
-
-        for (var i = 0; i < group.Quantity; i++)
-            item.Use(Owner as Entity);
-
-        RemoveItem(group);
-        Log.Info($"Used {group}.");
-    }
+    public ItemGroup GetItem(Item item) => Inventory[item.ItemCategory]
+        .Find(g => g.Item.Id == item.Id);
 
     public IReadOnlyList<ItemGroup> GetItemsFromCategory(Item.Category category) =>
         Inventory[category].AsReadOnly();

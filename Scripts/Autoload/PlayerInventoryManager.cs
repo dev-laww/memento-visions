@@ -4,6 +4,7 @@ using Game.Common;
 using Game.Common.Utilities;
 using Game.Components;
 using Game.Data;
+using Game.Utils.Extensions;
 using GodotUtilities;
 
 namespace Game.Autoload;
@@ -56,6 +57,8 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
     public override void _Ready()
     {
         var items = SaveManager.Data.Items;
+        
+        inventoryManager.Updated += OnInventoryUpdate;
 
         Log.Info("Loading inventory...");
         items.ForEach(item =>
@@ -70,12 +73,43 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
         });
     }
 
-    public static void SetQuickSlotItem(Item item) => QuickSlotItem = item;
     public static void AddItem(ItemGroup item) => Instance.inventoryManager.AddItem(item);
     public static void RemoveItem(ItemGroup item) => Instance.inventoryManager.RemoveItem(item);
-    public static void UseItem(ItemGroup item) => Instance.inventoryManager.UseItem(item);
+    public static ItemGroup GetItem(Item item) => item is null ? null : Instance.inventoryManager.GetItem(item);
 
-    public static void UseItem(Item item, int quantity = 1) => Instance.inventoryManager.UseItem(new ItemGroup
+    public static void UseItem(ItemGroup group)
+    {
+        if (!HasItem(group))
+        {
+            Log.Warn($"Item '{group}' not found or not enough quantity.");
+            return;
+        }
+
+        var item = group.Item;
+        var player = Instance.GetPlayer();
+
+        if (player is null)
+        {
+            Log.Warn("Player not found in scene.");
+            return;
+        }
+
+        for (var i = 0; i < group.Quantity; i++)
+            item.Use(player);
+
+        RemoveItem(group);
+        Log.Info($"Used {group}.");
+    }
+
+    public static void SetQuickSlotItem(Item item)
+    {
+        QuickSlotItem = item;
+        var group = Instance.inventoryManager.GetItem(item);
+
+        GameEvents.EmitQuickUseSlotUpdated(group);
+    }
+
+    public static void UseItem(Item item, int quantity = 1) => UseItem(new ItemGroup
     {
         Item = item,
         Quantity = quantity
@@ -87,6 +121,13 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
     public static bool HasItem(ItemGroup group) => Instance.inventoryManager.HasItem(group);
 
     public static bool HasItem(Item item) => Instance.inventoryManager.HasItem(item);
+
+    private void OnInventoryUpdate(ItemGroup group)
+    {
+        if (group.Item.Id != QuickSlotItem?.Id && group.Quantity > 0) return;
+
+        SetQuickSlotItem(null);
+    }
 
     [Command(Name = "give", Description = "Adds an item to the inventory.")]
     private void AddItemCommand(string id, int quantity = 1)
