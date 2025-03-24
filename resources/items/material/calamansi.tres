@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dti7vm5w4d0e"]
+
+[ext_resource type="Texture2D" uid="uid://bee7g8pee3fd0" path="res://assets/inventory/general_goods.png" id="1_x2fyg"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_22a2t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spfxm"]
+atlas = ExtResource("1_x2fyg")
+region = Rect2(48, 0, 16, 16)
+
+[resource]
+resource_name = "Calamansi"
+script = ExtResource("2_22a2t")
+Id = "item:calamansi"
+Icon = SubResource("AtlasTexture_spfxm")
+Name = "Calamansi"
+ItemCategory = 1
+Description = "A small, round citrus fruit with thin, glossy green skin. Its juicy, vibrant orange flesh exudes a sharp, refreshing aroma with a bright, tangy essence."
+metadata/_custom_type_script = "uid://b772648mucsjw"

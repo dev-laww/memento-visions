@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://ckm0dxjgvcxtj"]
+
+[ext_resource type="Texture2D" uid="uid://bee7g8pee3fd0" path="res://assets/inventory/general_goods.png" id="1_c4npj"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_hp1jk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypmow"]
+atlas = ExtResource("1_c4npj")
+region = Rect2(32, 0, 16, 16)
+
+[resource]
+resource_name = "Tofu"
+script = ExtResource("2_hp1jk")
+Id = "item:tofu"
+Icon = SubResource("AtlasTexture_ypmow")
+Name = "Tofu"
+ItemCategory = 1
+Description = "A soft, white block made from coagulated soy milk. It has a smooth, tender texture with a mild, neutral taste, often packed in water to maintain freshness."
+metadata/_custom_type_script = "uid://b772648mucsjw"
