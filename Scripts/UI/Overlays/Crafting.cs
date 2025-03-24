@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Game.Common;
 using Game.Data;
 using Game.UI.Common;
@@ -90,13 +92,22 @@ public partial class Crafting : Overlay
 
     private void UpdateSelectedItem(ItemGroup item)
     {
+        selectedRecipe = item is not null ? RecipeRegistry.Get(item.Item.Id) : null;
         selectedItemIcon.Texture = item?.Item.Icon;
         selectedItemName.Text = item?.Item.Name;
         selectedItemCategory.Text = item?.Item.ItemCategory.ToString();
 
-        selectedItemDescription.Text = item?.Item.Description;
+        selectedItemDescription.Text = new StringBuilder().AppendLine(item?.Item.Description)
+            .AppendLine()
+            .AppendLine("Ingredients:")
+            .AppendLine()
+            .AppendJoin(
+                "\n",
+                selectedRecipe?.GetIngredients().Select(ingredient =>
+                    $"{ingredient.Quantity}x {ingredient.Item.Name}") ?? Array.Empty<string>()
+            )
+            .ToString();
 
-        selectedRecipe = item is not null ? RecipeRegistry.Get(item.Item.Id) : null;
         quantity = 1;
         quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
         UpdateButtonState();
