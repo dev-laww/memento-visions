@@ -16,6 +16,7 @@ namespace Game.Entities;
 /// Inherits from CharacterBody2D.
 /// </summary>
 [Scene]
+[GlobalClass]
 public abstract partial class Entity : CharacterBody2D
 {
     /// <summary>
