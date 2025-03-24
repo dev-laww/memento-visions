@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=3 uid="uid://cmpubd6rbsqiu"]
+[gd_scene load_steps=148 format=3 uid="uid://cmpubd6rbsqiu"]
 
 [ext_resource type="Script" uid="uid://bqv2ubu81g3e7" path="res://Scripts/Entities/Enemies/Common/Tikbalang.cs" id="1_4ml10"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_hkjad"]
@@ -7,11 +7,66 @@
 [ext_resource type="Script" uid="uid://cpwyjck8klk35" path="res://Scripts/Components/Managers/HealthNumberManager.cs" id="3_hkjad"]
 [ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Managers/VelocityManager.cs" id="4_pokvf"]
 [ext_resource type="PackedScene" uid="uid://cup5c3p5fcfyu" path="res://Scenes/Components/Managers/PathFindManager.tscn" id="5_6pqlh"]
+[ext_resource type="Resource" uid="uid://doqpta8ruoou0" path="res://resources/items/material/hoof_powder.tres" id="6_8cri1"]
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="6_mh5vc"]
+[ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="7_472wo"]
+[ext_resource type="Resource" uid="uid://1e7qp47hdgi7" path="res://resources/items/material/hoof_iron.tres" id="8_fyoqx"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="8_pokvf"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="9_6pqlh"]
 [ext_resource type="Script" uid="uid://dkgndduo4d7p4" path="res://Scripts/Components/Area/HitBox.cs" id="9_fg8r8"]
 [ext_resource type="Texture2D" uid="uid://d2rgjab2cym6d" path="res://assets/entities/enemy/common/tikbalang/spritesheet.png" id="9_mh5vc"]
+[ext_resource type="Resource" uid="uid://cd1uqih0xu1yc" path="res://resources/items/material/ginger.tres" id="9_w5geh"]
+[ext_resource type="Resource" uid="uid://5wcb5ppatwya" path="res://resources/items/material/garlic.tres" id="10_o1s6x"]
+[ext_resource type="Resource" uid="uid://dhr2jtmgl0gse" path="res://resources/items/material/engkanto_essence.tres" id="11_msr8t"]
+[ext_resource type="Resource" uid="uid://drj5puv2462td" path="res://resources/items/material/bato_balani.tres" id="12_u32vl"]
+
+[sub_resource type="Resource" id="Resource_18kv7"]
+script = ExtResource("7_472wo")
+Item = ExtResource("6_8cri1")
+Min = 3
+Max = 5
+Weight = 8
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_v47yl"]
+script = ExtResource("7_472wo")
+Item = ExtResource("8_fyoqx")
+Min = 3
+Max = 5
+Weight = 8
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_l6ao8"]
+script = ExtResource("7_472wo")
+Item = ExtResource("9_w5geh")
+Min = 2
+Max = 4
+Weight = 5
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_h1nv2"]
+script = ExtResource("7_472wo")
+Item = ExtResource("10_o1s6x")
+Min = 2
+Max = 4
+Weight = 5
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_y1e4h"]
+script = ExtResource("7_472wo")
+Item = ExtResource("11_msr8t")
+Min = 1
+Max = 2
+Weight = 3
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_uogyr"]
+script = ExtResource("7_472wo")
+Item = ExtResource("12_u32vl")
+Min = 1
+Max = 2
+Weight = 3
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6pqlh"]
 size = Vector2(24, 38)
@@ -1452,7 +1507,7 @@ metadata/_custom_type_script = "uid://cpwyjck8klk35"
 
 [node name="DropManager" type="Node" parent="."]
 script = ExtResource("3_duuwi")
-Drops = []
+Drops = [SubResource("Resource_18kv7"), SubResource("Resource_v47yl"), SubResource("Resource_l6ao8"), SubResource("Resource_h1nv2"), SubResource("Resource_y1e4h"), SubResource("Resource_uogyr")]
 metadata/_custom_type_script = "uid://d4io668qmblcf"
 
 [node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
@@ -1485,6 +1540,7 @@ debug_color = Color(1, 0.3, 0.4, 0.4)
 collision_layer = 1024
 collision_mask = 2048
 script = ExtResource("9_fg8r8")
+Damage = 25.0
 KnockbackForce = 300.0
 metadata/_custom_type_script = "uid://dkgndduo4d7p4"
 
@@ -1500,8 +1556,9 @@ texture_filter = 2
 material = ExtResource("8_pokvf")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_472wo")
-animation = &"special_attack_up"
+animation = &"idle_down"
 autoplay = "idle_down"
+frame = 2
 script = ExtResource("9_6pqlh")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1518,9 +1575,9 @@ autoplay = "idle/down"
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_wabo6")
 anim_player = NodePath("../AnimationPlayer")
-"parameters/Common Attack/blend_position" = Vector2(0, 0.1)
-parameters/Idle/blend_position = Vector2(0, 0.1)
-parameters/Move/blend_position = Vector2(0, 0.1)
-"parameters/Special Attack/blend_position" = Vector2(0, 0.1)
+"parameters/Common Attack/blend_position" = Vector2(0, 1)
+parameters/Idle/blend_position = Vector2(0, 1)
+parameters/Move/blend_position = Vector2(0, 1)
+"parameters/Special Attack/blend_position" = Vector2(0, 1)
 
 [editable path="PathFindManager"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://bgwiqgrwaypag"]
+[gd_scene load_steps=114 format=3 uid="uid://bgwiqgrwaypag"]
 
 [ext_resource type="Script" uid="uid://d0ski8uwhyyvs" path="res://Scripts/Entities/Enemies/Common/Aswang.cs" id="1_qdfm2"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_mp7jp"]
@@ -8,10 +8,56 @@
 [ext_resource type="PackedScene" uid="uid://cup5c3p5fcfyu" path="res://Scenes/Components/Managers/PathFindManager.tscn" id="5_4f33n"]
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="6_46yqc"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="6_k57tq"]
+[ext_resource type="Resource" uid="uid://b7kfqu8k8dykm" path="res://resources/items/material/aswang_elixir.tres" id="7_5tyvj"]
 [ext_resource type="Texture2D" uid="uid://daric1l1mtljq" path="res://assets/entities/enemy/common/aswang/spritesheet.png" id="7_46yqc"]
+[ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="8_cvnaw"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="8_cvtll"]
 [ext_resource type="Script" uid="uid://dkgndduo4d7p4" path="res://Scripts/Components/Area/HitBox.cs" id="9_gtpg4"]
+[ext_resource type="Resource" uid="uid://cocs17ig06umk" path="res://resources/items/material/vampiric_claw.tres" id="9_ixksh"]
+[ext_resource type="Resource" uid="uid://ckm0dxjgvcxtj" path="res://resources/items/material/tofu.tres" id="9_m4t5y"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="10_cvtll"]
+[ext_resource type="Resource" uid="uid://lgbdgcr5l0og" path="res://resources/items/material/sago_pearls.tres" id="11_guea1"]
+[ext_resource type="Resource" uid="uid://bsddfgq1qtd3r" path="res://resources/items/material/water.tres" id="12_aw44c"]
+
+[sub_resource type="Resource" id="Resource_0pshh"]
+script = ExtResource("8_cvnaw")
+Item = ExtResource("9_ixksh")
+Min = 2
+Max = 5
+Weight = 8
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_tmhjr"]
+script = ExtResource("8_cvnaw")
+Item = ExtResource("9_m4t5y")
+Min = 1
+Max = 3
+Weight = 5
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_6fh3g"]
+script = ExtResource("8_cvnaw")
+Item = ExtResource("7_5tyvj")
+Min = 2
+Max = 5
+Weight = 8
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_dqby6"]
+script = ExtResource("8_cvnaw")
+Item = ExtResource("11_guea1")
+Min = 1
+Max = 3
+Weight = 5
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_d0xdj"]
+script = ExtResource("8_cvnaw")
+Item = ExtResource("12_aw44c")
+Min = 1
+Max = 3
+Weight = 5
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvtll"]
 size = Vector2(24, 29)
@@ -1152,7 +1198,7 @@ metadata/_custom_type_script = "uid://nuxtah4mmhg5"
 
 [node name="DropManager" type="Node" parent="."]
 script = ExtResource("4_44276")
-Drops = []
+Drops = [SubResource("Resource_0pshh"), SubResource("Resource_tmhjr"), SubResource("Resource_6fh3g"), SubResource("Resource_dqby6"), SubResource("Resource_d0xdj")]
 metadata/_custom_type_script = "uid://d4io668qmblcf"
 
 [node name="PathFindManager" parent="." node_paths=PackedStringArray("VelocityManager") instance=ExtResource("5_4f33n")]

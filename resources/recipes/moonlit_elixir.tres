@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=13 format=3 uid="uid://brltimgptbjtj"]
+
+[ext_resource type="Resource" uid="uid://dxrl1uamwfs14" path="res://resources/items/material/moon_shard.tres" id="1_ggu1u"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_c7p5t"]
+[ext_resource type="Resource" uid="uid://dx25tu288c73x" path="res://resources/items/material/lunar_petal.tres" id="3_ip47y"]
+[ext_resource type="Resource" uid="uid://dhr2jtmgl0gse" path="res://resources/items/material/engkanto_essence.tres" id="4_0h3fq"]
+[ext_resource type="Resource" uid="uid://bsddfgq1qtd3r" path="res://resources/items/material/water.tres" id="5_c7p5t"]
+[ext_resource type="Resource" uid="uid://hrhry5q5e5ri" path="res://resources/items/material/moonlit_elixir.tres" id="5_qp0ej"]
+[ext_resource type="Script" uid="uid://djs3qll7uwkya" path="res://Scripts/Data/Recipe/Recipe.cs" id="6_07bxi"]
+
+[sub_resource type="Resource" id="Resource_iufmh"]
+script = ExtResource("2_c7p5t")
+Item = ExtResource("1_ggu1u")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_obv4l"]
+script = ExtResource("2_c7p5t")
+Item = ExtResource("3_ip47y")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_m8rw4"]
+script = ExtResource("2_c7p5t")
+Item = ExtResource("4_0h3fq")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_ip47y"]
+script = ExtResource("2_c7p5t")
+Item = ExtResource("5_c7p5t")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_ljwnp"]
+script = ExtResource("2_c7p5t")
+Item = ExtResource("5_qp0ej")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[resource]
+script = ExtResource("6_07bxi")
+Result = SubResource("Resource_ljwnp")
+RecipeType = 0
+Ingredients = [SubResource("Resource_iufmh"), SubResource("Resource_obv4l"), SubResource("Resource_m8rw4"), SubResource("Resource_ip47y")]
+metadata/_custom_type_script = "uid://djs3qll7uwkya"
