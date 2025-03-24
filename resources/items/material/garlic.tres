@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://5wcb5ppatwya"]
+
+[ext_resource type="Texture2D" uid="uid://b3eabq367npx8" path="res://assets/inventory/goods.png" id="1_ptrhn"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_xcisv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_getbk"]
+atlas = ExtResource("1_ptrhn")
+region = Rect2(16, 0, 16, 16)
+
+[resource]
+resource_name = "Garlic"
+script = ExtResource("2_xcisv")
+Id = "0e4ab388-40a4-4790-879e-1323f65c3b16"
+Icon = SubResource("AtlasTexture_getbk")
+Name = "Garlic"
+ItemCategory = 1
+Description = "Garlic is a small, bulb-shaped vegetable with a strong smell and taste. It has a papery white skin and is made up of several cloves. "
+metadata/_custom_type_script = "uid://b772648mucsjw"

@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=11 format=3 uid="uid://b8343xt85fy6s"]
+
+[ext_resource type="Resource" uid="uid://dmbnoq0p8nta0" path="res://resources/items/material/thunder_essence.tres" id="1_8ep2v"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_75gld"]
+[ext_resource type="Resource" uid="uid://bmn7ssfnkxruq" path="res://resources/items/material/buko_juice.tres" id="3_8ep2v"]
+[ext_resource type="Resource" uid="uid://d0u4wc8nhju7v" path="res://resources/items/material/sacred_tear.tres" id="4_ullfm"]
+[ext_resource type="Resource" uid="uid://cynqml7na5ksi" path="res://resources/items/consumable/breeze_potion.tres" id="5_f3e17"]
+[ext_resource type="Script" uid="uid://djs3qll7uwkya" path="res://Scripts/Data/Recipe/Recipe.cs" id="6_c74lx"]
+
+[sub_resource type="Resource" id="Resource_yrtdc"]
+script = ExtResource("2_75gld")
+Item = ExtResource("1_8ep2v")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_kneew"]
+script = ExtResource("2_75gld")
+Item = ExtResource("3_8ep2v")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_8dkku"]
+script = ExtResource("2_75gld")
+Item = ExtResource("4_ullfm")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_703rl"]
+script = ExtResource("2_75gld")
+Item = ExtResource("5_f3e17")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[resource]
+script = ExtResource("6_c74lx")
+Result = SubResource("Resource_703rl")
+RecipeType = 0
+Ingredients = [SubResource("Resource_yrtdc"), SubResource("Resource_kneew"), SubResource("Resource_8dkku")]
+metadata/_custom_type_script = "uid://djs3qll7uwkya"
