@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://2586jb7lbuyn"]
 
 [ext_resource type="Script" uid="uid://bytk2n3d1tb0v" path="res://Scripts/UI/Common/Fog.cs" id="1_hhyia"]
-[ext_resource type="Shader" uid="uid://bddjl6f0kab64" path="res://resources/shaders/fog.gdshader" id="1_r2lgl"]
+[ext_resource type="Shader" path="res://resources/shaders/fog.gdshader" id="1_r2lgl"]
 [ext_resource type="Script" uid="uid://32sdfvnmihf2" path="res://Scripts/Components/PassThrough.cs" id="2_1r0jk"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_71mkv"]
@@ -19,7 +19,7 @@ shader_parameter/density = 0.2
 shader_parameter/speed = Vector2(0.02, 0.01)
 
 [node name="Fog" type="ParallaxBackground"]
-layer = 2
+layer = 1
 scroll_ignore_camera_zoom = true
 script = ExtResource("1_hhyia")
 Density = 0.2
