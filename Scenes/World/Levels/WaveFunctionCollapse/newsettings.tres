@@ -150,7 +150,7 @@ metadata/_custom_type_script = ExtResource("12_60r6p")
 
 [resource]
 script = ExtResource("14_v1m0s")
-CellSize = 798
+CellSize = 768
 GridSize = Vector2i(3, 3)
 Entries = [SubResource("Resource_k8riw"), SubResource("Resource_hej7c"), SubResource("Resource_c377g"), SubResource("Resource_d4jhf"), SubResource("Resource_oj6ub"), SubResource("Resource_0bpo3"), SubResource("Resource_etea5"), SubResource("Resource_8j88n"), SubResource("Resource_v5byw"), SubResource("Resource_b3u7i"), SubResource("Resource_frlk2"), SubResource("Resource_ghvp3")]
 metadata/_custom_type_script = "uid://gu1jo2ump6dj"
