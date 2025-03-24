@@ -99,7 +99,7 @@ public static class Log
     private static string FileName(string? x) => $"[{Path.GetFileNameWithoutExtension(x)}";
     private static string? MemberName(string? x) => x is not null ? $"{x}]" : null;
 
-    private static string Format(this TimeSpan value, string noTimeStr = "0ms")
+    private static string Format(this TimeSpan value, string noTimeStr = "")
     {
         var timeStr = value.ToString("d'.'hh':'mm':'ss'.'fff'ms'").TrimStart('0', ':', '.');
         return timeStr == "ms" ? noTimeStr
@@ -136,7 +136,7 @@ public static class Log
         {
             try
             {
-                GD.Print(msg.Replace("\n", ""));
+                GD.Print(msg.TrimEnd(Environment.NewLine.ToCharArray()));
                 File.AppendAllText(LogFile, $"{msg}");
             }
             catch (Exception e)
