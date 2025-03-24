@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://e5dmknfrsqko"]
 
-[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_uvlj0"]
-[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_mk0tq"]
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_ggcua"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_hsjmi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6osf0"]
-atlas = ExtResource("1_uvlj0")
+atlas = ExtResource("1_ggcua")
 region = Rect2(80, 0, 16, 16)
 
 [resource]
 resource_name = "Bibingka"
-script = ExtResource("2_mk0tq")
+script = ExtResource("2_hsjmi")
 Id = "item:bibingka"
 Icon = SubResource("AtlasTexture_6osf0")
 Name = "Bibingka"

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://cd1uqih0xu1yc"]
+
+[ext_resource type="Texture2D" uid="uid://b3eabq367npx8" path="res://assets/inventory/goods.png" id="1_1h7qp"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_1ru8m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7s3t"]
+atlas = ExtResource("1_1h7qp")
+region = Rect2(32, 0, 16, 16)
+
+[resource]
+resource_name = "Ginger"
+script = ExtResource("2_1ru8m")
+Id = "item:ginger"
+Icon = SubResource("AtlasTexture_p7s3t")
+Name = "Ginger"
+ItemCategory = 1
+Description = "Ginger is a knobby, light brown root with a firm texture and a fibrous interior. It has a strong, spicy aroma and a slightly warm, pungent taste."
+metadata/_custom_type_script = "uid://b772648mucsjw"

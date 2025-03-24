@@ -3,16 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_q401a"]
 [ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_2swa1"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_glnnw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_q401a"]
 atlas = ExtResource("1_q401a")
 region = Rect2(80, 32, 16, 16)
 
 [resource]
 resource_name = "Taho"
 script = ExtResource("2_2swa1")
-Id = "item:taho"
-Icon = SubResource("AtlasTexture_glnnw")
+Id = "id:taho"
+Icon = SubResource("AtlasTexture_q401a")
 Name = "Taho"
 ItemCategory = 0
-Description = "A warm, silky tofu snack served with sweet arnibal syrup and chewy sago pearls. Its rich aroma and smooth texture make it a comforting delight."
+Description = "A warm, velvety mass draped in golden syrup, with soft, translucent orbs nestled within. Its surface glistens, rich with sweetness, yielding effortlessly to touch."
 metadata/_custom_type_script = "uid://b772648mucsjw"
