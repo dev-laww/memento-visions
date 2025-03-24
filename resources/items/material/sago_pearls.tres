@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://lgbdgcr5l0og"]
+
+[ext_resource type="Texture2D" uid="uid://bee7g8pee3fd0" path="res://assets/inventory/general_goods.png" id="1_sa12w"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_esfg5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ij2jn"]
+atlas = ExtResource("1_sa12w")
+region = Rect2(96, 0, 16, 18)
+
+[resource]
+resource_name = "Sago Pearls"
+script = ExtResource("2_esfg5")
+Id = "item:sagopearls"
+Icon = SubResource("AtlasTexture_ij2jn")
+Name = "Sago Pearls"
+ItemCategory = 1
+Description = "Soft, chewy translucent pearls submerged in creamy, sweet milk tea. Their smooth texture contrasts with the rich, velvety drink."
+metadata/_custom_type_script = "uid://b772648mucsjw"
