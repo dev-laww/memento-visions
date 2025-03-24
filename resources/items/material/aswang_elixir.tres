@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://efbp6aphwl23"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_md6vm"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_lua2o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twnk2"]
+atlas = ExtResource("1_md6vm")
+region = Rect2(96, 0, 16, 16)
+
+[resource]
+resource_name = "Aswang Elixir"
+script = ExtResource("2_lua2o")
+Id = "item:aswangelixir"
+Icon = SubResource("AtlasTexture_twnk2")
+Name = "Aswang Elixir"
+ItemCategory = 1
+Description = "A dark and potent concoction said to have been crafted by ancient alchemists who studied forbidden rituals. This elixir is infused with the essence of the Aswang, a creature known for its shape-shifting abilities and insatiable hunger for human flesh."
+metadata/_custom_type_script = "uid://b772648mucsjw"
