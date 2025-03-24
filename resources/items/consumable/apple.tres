@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bxgw165vramlx"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bxgw165vramlx"]
 
 [ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/items/temp/Item5.png" id="1_m6vti"]
-[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Resources/Item.cs" id="1_q1p51"]
+[ext_resource type="Script" uid="uid://crq535kia1ar" path="res://Scripts/Data/Item/Consumable/Apple.cs" id="1_tuiof"]
 
 [resource]
 resource_local_to_scene = true
 resource_name = "Apple"
-script = ExtResource("1_q1p51")
+script = ExtResource("1_tuiof")
 Id = "item:apple"
 Icon = ExtResource("1_m6vti")
 Name = "Apple"
