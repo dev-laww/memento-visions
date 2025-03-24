@@ -62,8 +62,8 @@ public partial class QuestManager : Node
 
         if (player is null || player.QuestManager.IsActive(quest)) return;
 
-        player.InventoryManager.Pickup += quest.OnItemPickup;
-        player.InventoryManager.Remove += quest.OnItemRemoved;
+        PlayerInventoryManager.Pickup += quest.OnItemPickup;
+        PlayerInventoryManager.Remove += quest.OnItemRemoved;
 
         GameEvents.ConnectToSignal(
             GameEvents.SignalName.EntityDied,
@@ -84,8 +84,8 @@ public partial class QuestManager : Node
         if (player is null || quest is null) return;
 
 
-        player.InventoryManager.Pickup -= quest.OnItemPickup;
-        player.InventoryManager.Remove -= quest.OnItemRemoved;
+        PlayerInventoryManager.Pickup -= quest.OnItemPickup;
+        PlayerInventoryManager.Remove -= quest.OnItemRemoved;
 
         GameEvents.DisconnectFromSignal(
             GameEvents.SignalName.EntityDied,

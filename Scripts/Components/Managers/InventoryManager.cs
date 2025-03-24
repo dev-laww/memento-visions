@@ -3,12 +3,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Game.Common;
 using Game.Common.Utilities;
-using Game.Exceptions;
 using Game.Autoload;
 using Game.Data;
 using Godot;
 using Item = Game.Data.Item;
-using System.CommandLine.IO;
 using Game.Entities;
 
 namespace Game.Components;
@@ -29,49 +27,6 @@ public partial class InventoryManager : Node
             { Item.Category.Material, [] }
         }
     );
-
-    public override void _EnterTree()
-    {
-        base._EnterTree();
-
-        CommandInterpreter.Register(this);
-    }
-
-    public override void _ExitTree()
-    {
-        base._ExitTree();
-
-        CommandInterpreter.Unregister(this);
-
-        var items = Inventory.Values
-            .SelectMany(i => i)
-            .Select(i => new Game.Common.Models.Item
-            {
-                Id = i.Item.Id,
-                Amount = i.Quantity
-            })
-            .ToList();
-
-        SaveManager.Data.SetItemsData(items);
-        SaveManager.Save();
-    }
-
-    public override void _Ready()
-    {
-        var items = SaveManager.Data.Items;
-
-        Log.Info("Loading inventory...");
-        items.ForEach(item =>
-        {
-            if (item.Amount <= 0) return;
-
-            AddItem(new ItemGroup
-            {
-                Item = ItemRegistry.Get(item.Id),
-                Quantity = item.Amount
-            });
-        });
-    }
 
     public void AddItem(ItemGroup group)
     {
@@ -131,50 +86,22 @@ public partial class InventoryManager : Node
     public bool HasItem(Item item) => Inventory[item.ItemCategory]
         .Any(g => g.Item.Id == item.Id);
 
-    [Command(Name = "give", Description = "Adds an item to the inventory.")]
-    private void AddItemCommand(string id, int quantity = 1)
+    public void Clear()
     {
-        var item = ItemRegistry.Get(id);
-
-        if (item is null)
+        foreach (var key in Inventory.Keys)
         {
-            DeveloperConsole.Console.Error.WriteLine($"Item '{id}' not found.");
-            return;
-        }
-
-        AddItem(new ItemGroup
-        {
-            Item = item,
-            Quantity = quantity
-        });
-    }
-
-    [Command(Name = "take", Description = "Removes an item from the inventory.")]
-    private void RemoveItemCommand(string id, int quantity = 1)
-    {
-        var item = ItemRegistry.Get(id);
-
-        if (item is null)
-        {
-            DeveloperConsole.Console.Error.WriteLine($"Item '{id}' not found.");
-            return;
-        }
-
-        RemoveItem(new ItemGroup
-        {
-            Item = item,
-            Quantity = quantity
-        });
-    }
-
-    [Command(Name = "clear-inventory", Description = "Clears the inventory.")]
-    private void ClearInventory()
-    {
-        foreach (var category in Inventory.Keys)
-        {
-            var items = Inventory[category].ToList();
+            var items = Inventory[key].ToList();
 
             items.ForEach(RemoveItem);
         }
     }
+
+    public List<Game.Common.Models.Item> GetItemsAsModel() => Inventory.Values
+        .SelectMany(i => i)
+        .Select(i => new Game.Common.Models.Item
+        {
+            Id = i.Item.Id,
+            Amount = i.Quantity
+        })
+        .ToList();
 }

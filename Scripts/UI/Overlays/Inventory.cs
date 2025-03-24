@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Autoload;
 using Game.Data;
 using Game.UI.Common;
 using Game.Utils.Extensions;
@@ -52,7 +53,7 @@ public partial class Inventory : Overlay
         selectedItemActionButton.Toggled += OnButtonToggle;
         selectedItemActionButton.Pressed += OnButtonPress;
         materialButton.ButtonGroup.Pressed += OnItemCategoryPress;
-        player.InventoryManager.Updated += OnInventoryUpdate;
+        PlayerInventoryManager.Updated += OnInventoryUpdate;
 
         PopulateSlots(currentCategory);
     }
@@ -66,7 +67,7 @@ public partial class Inventory : Overlay
         closeButton.Pressed -= Close;
         selectedItemActionButton.Toggled -= OnButtonToggle;
         materialButton.ButtonGroup.Pressed -= OnItemCategoryPress;
-        player.InventoryManager.Updated -= OnInventoryUpdate;
+        PlayerInventoryManager.Updated -= OnInventoryUpdate;
     }
 
     private void SelectSlot(Slot slot)
@@ -123,7 +124,7 @@ public partial class Inventory : Overlay
 
         if (player is null) return;
 
-        var items = player.InventoryManager.GetItemsFromCategory(category);
+        var items = PlayerInventoryManager.GetItemsFromCategory(category);
 
         slots.Where(slot => slot.Item != null).ToList().ForEach(slot => slot.Item = null);
 
@@ -178,7 +179,7 @@ public partial class Inventory : Overlay
 
         if (SelectedItem is null || SelectedItem.ItemCategory != Item.Category.Consumable || player is null) return;
 
-        player.InventoryManager.UseItem(new ItemGroup
+        PlayerInventoryManager.UseItem(new ItemGroup
         {
             Item = SelectedItem,
             Quantity = 1

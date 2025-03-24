@@ -16,7 +16,6 @@ public partial class Player : Entity
     [Node] private HurtBox hurtBox;
     [Node] private AnimationPlayer animations;
 
-    [Node] public InventoryManager InventoryManager;
     [Node] public VelocityManager VelocityManager;
     [Node] public WeaponManager WeaponManager;
     [Node] public QuestManager QuestManager;

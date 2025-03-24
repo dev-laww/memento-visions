@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.Autoload;
 using Game.Data;
 using Game.Utils.Extensions;
 using Godot;
@@ -72,7 +73,7 @@ public partial class InteractableItem : Node2D
         var player = this.GetPlayer();
         if (player is null || Engine.IsEditorHint() || ItemGroup is null) return;
 
-        player.InventoryManager.AddItem(ItemGroup);
+        PlayerInventoryManager.AddItem(ItemGroup);
         QueueFree();
     }
 }

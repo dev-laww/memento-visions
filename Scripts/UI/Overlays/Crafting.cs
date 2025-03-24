@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Game.Autoload;
 using Game.Common;
 using Game.Data;
 using Game.UI.Common;
@@ -52,7 +53,7 @@ public partial class Crafting : Overlay
         increaseButton.Pressed += OnIncreaseButtonPress;
         decreaseButton.Pressed += OnDecreaseButtonPress;
         craftButton.Pressed += OnCraftButtonPress;
-        player.InventoryManager.Updated += _ => Reset();
+        PlayerInventoryManager.Updated += _ => Reset();
 
         PopulateSlots();
     }
@@ -180,7 +181,7 @@ public partial class Crafting : Overlay
 
         var ingredients = selectedRecipe?.GetIngredients(qty);
 
-        return ingredients != null && ingredients.All(player.InventoryManager.HasItem);
+        return ingredients != null && ingredients.All(PlayerInventoryManager.HasItem);
     }
 
     private void Create(int qty = 1)
@@ -192,7 +193,7 @@ public partial class Crafting : Overlay
         var ingredients = selectedRecipe.GetIngredients(qty);
 
         foreach (var ingredient in ingredients)
-            player.InventoryManager.RemoveItem(ingredient);
+            PlayerInventoryManager.RemoveItem(ingredient);
 
         var item = new ItemGroup
         {
@@ -200,7 +201,7 @@ public partial class Crafting : Overlay
             Quantity = selectedRecipe.Result.Quantity * qty
         };
 
-        player.InventoryManager.AddItem(item);
+        PlayerInventoryManager.AddItem(item);
         Log.Debug($"Created {item}.");
     }
 }

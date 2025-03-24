@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.Autoload;
 using Game.Components;
 using Game.Data;
 using Game.Utils.Extensions;
@@ -112,7 +113,7 @@ public partial class ItemQuestTrigger : QuestTrigger
         var player = this.GetPlayer();
         if (player is null || Engine.IsEditorHint() || ItemGroup is null) return;
 
-        player.InventoryManager.AddItem(ItemGroup);
+        PlayerInventoryManager.AddItem(ItemGroup);
         QueueFree();
     }
 }
