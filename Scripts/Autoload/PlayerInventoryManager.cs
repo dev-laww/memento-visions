@@ -11,8 +11,6 @@ namespace Game.Autoload;
 [Scene]
 public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
 {
-    [Node] private InventoryManager inventoryManager;
-
     public static event InventoryManager.UpdatedEventHandler Updated
     {
         add => Instance.inventoryManager.Updated += value;
@@ -37,6 +35,10 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
 
         WireNodes();
     }
+
+    [Node] private InventoryManager inventoryManager;
+
+    public static Item QuickSlotItem { get; private set; }
 
     public override void _EnterTree()
     {
@@ -68,9 +70,16 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
         });
     }
 
+    public static void SetQuickSlotItem(Item item) => QuickSlotItem = item;
     public static void AddItem(ItemGroup item) => Instance.inventoryManager.AddItem(item);
     public static void RemoveItem(ItemGroup item) => Instance.inventoryManager.RemoveItem(item);
     public static void UseItem(ItemGroup item) => Instance.inventoryManager.UseItem(item);
+
+    public static void UseItem(Item item, int quantity = 1) => Instance.inventoryManager.UseItem(new ItemGroup
+    {
+        Item = item,
+        Quantity = quantity
+    });
 
     public static IReadOnlyList<ItemGroup> GetItemsFromCategory(Item.Category category) =>
         Instance.inventoryManager.GetItemsFromCategory(category);

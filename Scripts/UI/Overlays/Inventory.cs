@@ -28,10 +28,11 @@ public partial class Inventory : Overlay
     [Node] private Label selectedItemQuantity;
     [Node] private RichTextLabel selectedItemDescription;
     [Node] private Button selectedItemActionButton;
+    [Node] private Button selectedItemQuickUseButton;
 
     private List<Slot> slots;
     private Item.Category currentCategory = Item.Category.Material;
-    private Item SelectedItem => slots.FirstOrDefault(s => s.Selected)?.Item?.Item;
+    private Item selectedItem => slots.FirstOrDefault(s => s.Selected)?.Item?.Item;
 
     public override void _Notification(int what)
     {
@@ -50,8 +51,9 @@ public partial class Inventory : Overlay
 
         slots.ForEach(slot => slot.Pressed += SelectSlot);
         closeButton.Pressed += Close;
-        selectedItemActionButton.Toggled += OnButtonToggle;
-        selectedItemActionButton.Pressed += OnButtonPress;
+        selectedItemActionButton.Toggled += OnActionButtonToggle;
+        selectedItemActionButton.Pressed += OnActionButtonPress;
+        selectedItemQuickUseButton.Toggled += OnSelectedItemQuickUseToggle;
         materialButton.ButtonGroup.Pressed += OnItemCategoryPress;
         PlayerInventoryManager.Updated += OnInventoryUpdate;
 
@@ -65,7 +67,7 @@ public partial class Inventory : Overlay
 
         slots.ForEach(slot => slot.Pressed -= SelectSlot);
         closeButton.Pressed -= Close;
-        selectedItemActionButton.Toggled -= OnButtonToggle;
+        selectedItemActionButton.Toggled -= OnActionButtonToggle;
         materialButton.ButtonGroup.Pressed -= OnItemCategoryPress;
         PlayerInventoryManager.Updated -= OnInventoryUpdate;
     }
@@ -104,6 +106,10 @@ public partial class Inventory : Overlay
             Item.Category.Consumable => "Use",
             _ => string.Empty
         };
+        
+        selectedItemQuickUseButton.Visible = item?.Item.ItemCategory == Item.Category.Consumable;
+        selectedItemQuickUseButton.ButtonPressed = item?.Item.Id == PlayerInventoryManager.QuickSlotItem?.Id;
+        selectedItemQuickUseButton.Text = selectedItemQuickUseButton.ButtonPressed ? "Unequip" : "Quick Use";
     }
 
     private void OnItemCategoryPress(BaseButton button)
@@ -155,34 +161,48 @@ public partial class Inventory : Overlay
         }
     }
 
-    private void OnButtonToggle(bool pressed)
+    private void OnActionButtonToggle(bool pressed)
     {
         var player = this.GetPlayer();
 
-        if (SelectedItem is null || SelectedItem.ItemCategory != Item.Category.Weapon || player is null) return;
+        if (selectedItem is null || selectedItem.ItemCategory != Item.Category.Weapon || player is null) return;
 
         if (pressed)
         {
-            player.WeaponManager.Equip(SelectedItem);
+            player.WeaponManager.Equip(selectedItem);
             selectedItemActionButton.Text = "Unequip";
         }
-        else if (SelectedItem.Id == player.WeaponManager.Weapon?.Id)
+        else if (selectedItem.Id == player.WeaponManager.Weapon?.Id)
         {
             player.WeaponManager.Unequip();
             selectedItemActionButton.Text = "Equip";
         }
     }
 
-    private void OnButtonPress()
+    private void OnActionButtonPress()
     {
         var player = this.GetPlayer();
 
-        if (SelectedItem is null || SelectedItem.ItemCategory != Item.Category.Consumable || player is null) return;
+        if (selectedItem is null || selectedItem.ItemCategory != Item.Category.Consumable || player is null) return;
 
-        PlayerInventoryManager.UseItem(new ItemGroup
+        PlayerInventoryManager.UseItem(selectedItem);
+    }
+
+    private void OnSelectedItemQuickUseToggle(bool pressed)
+    {
+        var player = this.GetPlayer();
+
+        if (selectedItem is null || selectedItem.ItemCategory != Item.Category.Consumable || player is null) return;
+
+        if (pressed)
         {
-            Item = SelectedItem,
-            Quantity = 1
-        });
+            selectedItemQuickUseButton.Text = "Unequip";
+            PlayerInventoryManager.SetQuickSlotItem(selectedItem);
+        }
+        else if (selectedItem.Id == player.WeaponManager.Weapon?.Id)
+        {
+            selectedItemQuickUseButton.Text = "Quick Use";
+            PlayerInventoryManager.SetQuickSlotItem(null);
+        }
     }
 }
