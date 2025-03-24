@@ -24,7 +24,7 @@ script = ExtResource("8_cvnaw")
 Item = ExtResource("9_ixksh")
 Min = 2
 Max = 5
-Weight = 8
+Weight = 3
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="Resource" id="Resource_tmhjr"]
@@ -32,7 +32,7 @@ script = ExtResource("8_cvnaw")
 Item = ExtResource("9_m4t5y")
 Min = 1
 Max = 3
-Weight = 5
+Weight = 1
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="Resource" id="Resource_6fh3g"]
@@ -40,7 +40,7 @@ script = ExtResource("8_cvnaw")
 Item = ExtResource("7_5tyvj")
 Min = 2
 Max = 5
-Weight = 8
+Weight = 3
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="Resource" id="Resource_dqby6"]
@@ -48,7 +48,7 @@ script = ExtResource("8_cvnaw")
 Item = ExtResource("11_guea1")
 Min = 1
 Max = 3
-Weight = 5
+Weight = 1
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="Resource" id="Resource_d0xdj"]
@@ -56,7 +56,7 @@ script = ExtResource("8_cvnaw")
 Item = ExtResource("12_aw44c")
 Min = 1
 Max = 3
-Weight = 5
+Weight = 2
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvtll"]
