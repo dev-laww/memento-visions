@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Game.Common.Extensions;
 using Game.Components;
 using Game.Generation;
 using Godot;
@@ -97,11 +97,10 @@ public partial class WaveFunctionCollapse : Node2D
                 var scene = grid[new Vector2I(x, y)];
                 if (scene is null) continue;
 
-                var instance = scene.Instantiate() as Node2D;
-                instance.Position = new Vector2(x * 256, y * 256);
+                var instance = scene.Instantiate<Node2D>();
+                instance.Position = new Vector2(x * settings.CellSize, y * settings.CellSize);
 
-                map.AddChild(instance);
-                instance.SetOwner(GetTree().GetEditedSceneRoot());
+                map.EditorAddChild(instance);
             }
         }
 
