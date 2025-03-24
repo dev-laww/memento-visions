@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://d0qr3o1nxmcpe"]
+[gd_scene load_steps=14 format=4 uid="uid://d0qr3o1nxmcpe"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="1_28rab"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="1_sthvm"]
@@ -9,6 +9,7 @@
 [ext_resource type="TileSet" uid="uid://grwoctw4gvjl" path="res://resources/tilesets/bar/wall.tres" id="7_unifd"]
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="8_71mkv"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="9_6ugc5"]
+[ext_resource type="PackedScene" uid="uid://dgqrvixy2ocww" path="res://Scenes/Entities/Characters/BlackSmith.tscn" id="9_yvalt"]
 
 [sub_resource type="Environment" id="Environment_71mkv"]
 background_mode = 3
@@ -99,3 +100,6 @@ position = Vector2(242, 95)
 
 [node name="Chief" parent="." instance=ExtResource("9_6ugc5")]
 position = Vector2(36, 171)
+
+[node name="BlackSmith" parent="." instance=ExtResource("9_yvalt")]
+position = Vector2(271, 258)
