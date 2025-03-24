@@ -16,6 +16,7 @@ public partial class WaveFunctionCollapse : Node2D
     private const int MAX_ITERATIONS = 10000;
 
     [Export] private WaveFunctionCollapseSettings settings;
+    [Export] private bool generateOnReady = true;
 
     [Node] private Node2D map;
     [Node] private NavigationManager navigationManager;
@@ -40,7 +41,8 @@ public partial class WaveFunctionCollapse : Node2D
 
     public override void _Ready()
     {
-        Generate();
+        if (generateOnReady)
+            Generate();
     }
 
     private void InitializeWaveFunction()

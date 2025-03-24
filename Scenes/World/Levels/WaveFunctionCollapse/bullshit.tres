@@ -1,0 +1,111 @@
+[gd_resource type="Resource" script_class="WaveFunctionCollapseSettings" load_steps=21 format=3 uid="uid://camheuk12kcrd"]
+
+[ext_resource type="PackedScene" uid="uid://clej7wbxyjkq1" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/1.tscn" id="1_cvlxp"]
+[ext_resource type="Script" uid="uid://ky5xget0fajt" path="res://Scripts/World/Levels/WaveFunctionCollapse/WaveFunctionCollapseEntry.cs" id="2_s5e4s"]
+[ext_resource type="PackedScene" uid="uid://oqrdh5fl72an" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/2.tscn" id="3_afd5d"]
+[ext_resource type="PackedScene" uid="uid://c6sausljuxo1y" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/3.tscn" id="4_hl30q"]
+[ext_resource type="PackedScene" uid="uid://25j6vsidrovm" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/4.tscn" id="5_px12h"]
+[ext_resource type="PackedScene" uid="uid://bsahjnwy2ye15" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/5.tscn" id="6_qw3iw"]
+[ext_resource type="PackedScene" uid="uid://cewwr6sj0i6gy" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/6.tscn" id="7_rfdig"]
+[ext_resource type="PackedScene" uid="uid://brnlo6qd0mitw" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/7.tscn" id="8_72o5a"]
+[ext_resource type="PackedScene" uid="uid://by4navfcxsat5" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/8.tscn" id="9_lyk2g"]
+[ext_resource type="PackedScene" uid="uid://d0aw5wlvedbl5" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/9.tscn" id="10_02f3p"]
+[ext_resource type="Script" uid="uid://gu1jo2ump6dj" path="res://Scripts/World/Levels/WaveFunctionCollapse/WaveFunctionCollapseSettings.cs" id="11_5oeda"]
+
+[sub_resource type="Resource" id="Resource_o653j"]
+script = ExtResource("2_s5e4s")
+Scene = ExtResource("1_cvlxp")
+Weight = 4
+Up = [ExtResource("4_hl30q"), ExtResource("9_lyk2g")]
+Down = [ExtResource("9_lyk2g"), ExtResource("4_hl30q")]
+Left = [ExtResource("7_rfdig"), ExtResource("3_afd5d")]
+Right = [ExtResource("3_afd5d"), ExtResource("7_rfdig")]
+metadata/_custom_type_script = "uid://ky5xget0fajt"
+
+[sub_resource type="Resource" id="Resource_hhtg0"]
+script = ExtResource("2_s5e4s")
+Scene = ExtResource("3_afd5d")
+Weight = 2
+Up = [ExtResource("5_px12h")]
+Down = [ExtResource("10_02f3p")]
+Left = []
+Right = []
+metadata/_custom_type_script = "uid://ky5xget0fajt"
+
+[sub_resource type="Resource" id="Resource_j80su"]
+script = ExtResource("2_s5e4s")
+Scene = ExtResource("4_hl30q")
+Weight = 3
+Up = [ExtResource("1_cvlxp")]
+Down = [ExtResource("1_cvlxp")]
+Left = [ExtResource("6_qw3iw")]
+Right = [ExtResource("5_px12h")]
+metadata/_custom_type_script = "uid://ky5xget0fajt"
+
+[sub_resource type="Resource" id="Resource_5wl3d"]
+script = ExtResource("2_s5e4s")
+Scene = ExtResource("5_px12h")
+Weight = 1
+Up = [ExtResource("1_cvlxp")]
+Down = [ExtResource("3_afd5d")]
+Left = [ExtResource("4_hl30q")]
+Right = [ExtResource("1_cvlxp")]
+metadata/_custom_type_script = "uid://ky5xget0fajt"
+
+[sub_resource type="Resource" id="Resource_td385"]
+script = ExtResource("2_s5e4s")
+Scene = ExtResource("6_qw3iw")
+Weight = 2
+Up = [ExtResource("1_cvlxp")]
+Down = [ExtResource("7_rfdig")]
+Left = [ExtResource("1_cvlxp"), null]
+Right = [ExtResource("4_hl30q")]
+metadata/_custom_type_script = "uid://ky5xget0fajt"
+
+[sub_resource type="Resource" id="Resource_xayni"]
+script = ExtResource("2_s5e4s")
+Scene = ExtResource("7_rfdig")
+Weight = 0
+Up = [ExtResource("6_qw3iw")]
+Down = [ExtResource("8_72o5a")]
+Left = [ExtResource("1_cvlxp")]
+Right = [ExtResource("1_cvlxp")]
+metadata/_custom_type_script = "uid://ky5xget0fajt"
+
+[sub_resource type="Resource" id="Resource_a7rh4"]
+script = ExtResource("2_s5e4s")
+Scene = ExtResource("8_72o5a")
+Weight = 1
+Up = [ExtResource("7_rfdig")]
+Down = [ExtResource("1_cvlxp")]
+Left = [ExtResource("1_cvlxp")]
+Right = [ExtResource("9_lyk2g")]
+metadata/_custom_type_script = "uid://ky5xget0fajt"
+
+[sub_resource type="Resource" id="Resource_1b3ti"]
+script = ExtResource("2_s5e4s")
+Scene = ExtResource("9_lyk2g")
+Weight = 1
+Up = [ExtResource("1_cvlxp")]
+Down = [ExtResource("1_cvlxp")]
+Left = [ExtResource("8_72o5a")]
+Right = [ExtResource("10_02f3p")]
+metadata/_custom_type_script = "uid://ky5xget0fajt"
+
+[sub_resource type="Resource" id="Resource_11hqr"]
+script = ExtResource("2_s5e4s")
+Scene = ExtResource("10_02f3p")
+Weight = 1
+Up = [ExtResource("3_afd5d")]
+Down = [ExtResource("1_cvlxp")]
+Left = [ExtResource("9_lyk2g")]
+Right = [ExtResource("1_cvlxp")]
+metadata/_custom_type_script = "uid://ky5xget0fajt"
+
+[resource]
+resource_name = "bullshit"
+script = ExtResource("11_5oeda")
+CellSize = 288
+GridSize = Vector2i(7, 7)
+Entries = [SubResource("Resource_o653j"), SubResource("Resource_hhtg0"), SubResource("Resource_j80su"), SubResource("Resource_5wl3d"), SubResource("Resource_td385"), SubResource("Resource_xayni"), SubResource("Resource_a7rh4"), SubResource("Resource_1b3ti"), SubResource("Resource_11hqr")]
+metadata/_custom_type_script = "uid://gu1jo2ump6dj"
