@@ -11,11 +11,9 @@ public partial class OverlayManager : Autoload<OverlayManager>
 {
     public const string CRAFTING = "Crafting";
     public const string DEVELOPER_CONSOLE = "DeveloperConsole";
-    public const string HUD = "HeadsUpDisplay"; // make autoload
     public const string INVENTORY = "Inventory";
     public const string MENU = "Menu";
     public const string QUEST = "Quest";
-
 
     [Node] private ResourcePreloader resourcePreloader;
 
