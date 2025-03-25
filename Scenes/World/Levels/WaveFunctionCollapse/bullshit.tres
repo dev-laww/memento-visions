@@ -293,6 +293,6 @@ metadata/_custom_type_script = "uid://ky5xget0fajt"
 resource_name = "bullshit"
 script = ExtResource("11_5oeda")
 CellSize = 288
-GridSize = Vector2i(9, 7)
+GridSize = Vector2i(7, 7)
 Entries = [SubResource("Resource_o653j"), SubResource("Resource_hhtg0"), SubResource("Resource_j80su"), SubResource("Resource_5wl3d"), SubResource("Resource_td385"), SubResource("Resource_xayni"), SubResource("Resource_a7rh4"), SubResource("Resource_1b3ti"), SubResource("Resource_ninhl"), SubResource("Resource_kfkm7"), SubResource("Resource_48y8t"), SubResource("Resource_d6kea"), SubResource("Resource_u8crw"), SubResource("Resource_djodb"), SubResource("Resource_f1mgk"), SubResource("Resource_jx8t6"), SubResource("Resource_5oeda"), SubResource("Resource_xki54"), SubResource("Resource_4fymg"), SubResource("Resource_u0p4c"), SubResource("Resource_x1471"), SubResource("Resource_c1nhg"), SubResource("Resource_xtese"), SubResource("Resource_2up1a"), SubResource("Resource_q42gy"), SubResource("Resource_u3o11")]
 metadata/_custom_type_script = "uid://gu1jo2ump6dj"

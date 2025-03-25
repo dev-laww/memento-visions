@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_4pq0f"]
 
 [node name="9" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Floor" type="TileMapLayer" parent="."]
 z_index = -2
@@ -36,6 +37,7 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 y_sort_enabled = true
 texture_filter = 2
 material = ExtResource("1_qnhfb")
+tile_map_data = PackedByteArray("AAAEAAAAAQAcABAAAAABAAMAAQAdABAAAAABAAQAAQAgAAQAAAAEAAMAAQAdAA8AAAAAAAUAAQAcAA8AAAAFAAUAAQAfABAAAAA=")
 tile_set = ExtResource("2_va57p")
 script = ExtResource("3_4pq0f")
 metadata/_custom_type_script = "uid://bc2jlb4w58y24"
