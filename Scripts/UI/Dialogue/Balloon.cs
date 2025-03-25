@@ -4,7 +4,7 @@ using DialogueManagerRuntime;
 using GodotUtilities;
 using System.Threading.Tasks;
 using Game.Utils.Extensions;
-using Game.Autoload;
+using Game.Components;
 
 namespace Game.UI.Common;
 
@@ -20,12 +20,15 @@ public partial class Balloon : CanvasLayer
     [Node] private ResponseMenu responsesMenu;
     [Node] private Timer mutationCooldown = new();
 
+    private Node CurrentScene => GameManager.CurrentScene;
+
     private Resource resource;
     private Array<Variant> temporaryGameStates = [];
     private bool isWaitingForInput;
     private bool willHideBalloon;
 
     private DialogueLine dialogueLine;
+
     private DialogueLine DialogueLine
     {
         get => dialogueLine;
@@ -132,6 +135,7 @@ public partial class Balloon : CanvasLayer
             {
                 time = dialogueLine.Text.Length * 0.02f;
             }
+
             await ToSignal(GetTree().CreateTimer(time), "timeout");
             await Next(dialogueLine.NextId);
         }
