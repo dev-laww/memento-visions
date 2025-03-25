@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_2hku4"]
 
 [node name="WaterTopLeft" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Floor" type="TileMapLayer" parent="."]
 z_index = -2
