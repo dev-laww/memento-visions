@@ -51,13 +51,14 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
     {
         base._ExitTree();
         SaveManager.Data.SetItemsData(inventoryManager.GetItemsAsModel());
+        SaveManager.Data.Player.QuickUse = QuickSlotItem?.Id ?? string.Empty;
         SaveManager.Save();
     }
 
     public override void _Ready()
     {
         var items = SaveManager.Data.Items;
-        
+
         inventoryManager.Updated += OnInventoryUpdate;
 
         Log.Info("Loading inventory...");
@@ -71,6 +72,9 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
                 Quantity = item.Amount
             });
         });
+
+        var quickSlotItem = ItemRegistry.Get(SaveManager.Data.Player.QuickUse);
+        SetQuickSlotItem(quickSlotItem);
     }
 
     public static void AddItem(ItemGroup item) => Instance.inventoryManager.AddItem(item);
@@ -104,6 +108,13 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
     public static void SetQuickSlotItem(Item item)
     {
         QuickSlotItem = item;
+
+        if (item is null)
+        {
+            GameEvents.EmitQuickUseSlotUpdated(null);
+            return;
+        }
+
         var group = Instance.inventoryManager.GetItem(item);
 
         GameEvents.EmitQuickUseSlotUpdated(group);
@@ -115,6 +126,13 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
         Quantity = quantity
     });
 
+    public static void UseQuickSlotItem()
+    {
+        if (QuickSlotItem is null) return;
+
+        UseItem(QuickSlotItem);
+    }
+
     public static IReadOnlyList<ItemGroup> GetItemsFromCategory(Item.Category category) =>
         Instance.inventoryManager.GetItemsFromCategory(category);
 
@@ -122,9 +140,9 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
 
     public static bool HasItem(Item item) => Instance.inventoryManager.HasItem(item);
 
-    private void OnInventoryUpdate(ItemGroup group)
+    private static void OnInventoryUpdate(ItemGroup group)
     {
-        if (group.Item.Id != QuickSlotItem?.Id && group.Quantity > 0) return;
+        if (group.Item.Id != QuickSlotItem?.Id || group.Quantity > 0) return;
 
         SetQuickSlotItem(null);
     }

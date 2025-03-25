@@ -199,7 +199,7 @@ public partial class Inventory : Overlay
             selectedItemQuickUseButton.Text = "Unequip";
             PlayerInventoryManager.SetQuickSlotItem(selectedItem);
         }
-        else if (selectedItem.Id == player.WeaponManager.Weapon?.Id)
+        else if (selectedItem.Id == PlayerInventoryManager.QuickSlotItem?.Id)
         {
             selectedItemQuickUseButton.Text = "Quick Use";
             PlayerInventoryManager.SetQuickSlotItem(null);

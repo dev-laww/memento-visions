@@ -164,9 +164,11 @@ public partial class Player : Entity
 
         var dash = InputManager.IsActionJustPressed("dash");
         var attack = InputManager.IsActionJustPressed("attack");
+        var quickUse = InputManager.IsActionJustPressed("quick_use");
 
         if (dash) StateMachine.ChangeState(Dash);
         if (attack) StateMachine.ChangeState(Attack);
+        if (quickUse) PlayerInventoryManager.UseQuickSlotItem();
     }
 
 

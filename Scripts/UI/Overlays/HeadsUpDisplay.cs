@@ -63,7 +63,6 @@ public partial class HeadsUpDisplay : Overlay
         PlayerInventoryManager.Updated += OnInventoryUpdated;
         GameEvents.Instance.QuickUseSlotUpdated += UpdateQuickUseSlot;
 
-
         dashIndicator.Value = 100;
 
         for (var i = 1; i < player.VelocityManager.TimesCanDash; i++)
@@ -75,14 +74,6 @@ public partial class HeadsUpDisplay : Overlay
         var quickUseGroup = PlayerInventoryManager.GetItem(quickUseItem);
 
         UpdateQuickUseSlot(quickUseGroup);
-    }
-
-    public override void _Process(double delta)
-    {
-        if (player is null || !player.InputManager.IsActionPressed("quick_use")) return;
-
-        var item = PlayerInventoryManager.QuickSlotItem;
-        PlayerInventoryManager.UseItem(item);
     }
 
     private void OnDash(Vector2 _)
@@ -129,7 +120,6 @@ public partial class HeadsUpDisplay : Overlay
         healthBar.Initialize(player.StatsManager);
     }
 
-    // TODO: Fix errors on quick use slot
     private void OnInventoryUpdated(ItemGroup group)
     {
         if (group.Item.Id != PlayerInventoryManager.QuickSlotItem?.Id) return;

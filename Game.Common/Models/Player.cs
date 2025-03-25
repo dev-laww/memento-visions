@@ -9,4 +9,5 @@ public class Player
     [JsonProperty("direction")] public Vector2 Direction = Vector2.Down;
     [JsonProperty("stats")] public Stats Stats = new();
     [JsonProperty("equipped")] public string Equipped = "";
+    [JsonProperty("quick_use")] public string QuickUse = "";
 }
