@@ -62,4 +62,12 @@ public static class Vector2Extensions
     }
 
     public static Vector2 TryNormalize(this Vector2 vector) => vector.IsNormalized() ? vector : vector.Normalized();
+
+    public static IEnumerable<Vector2I> GetNeighbors(this Vector2I cell)
+    {
+        yield return new Vector2I(cell.X - 1, cell.Y);
+        yield return new Vector2I(cell.X + 1, cell.Y);
+        yield return new Vector2I(cell.X, cell.Y - 1);
+        yield return new Vector2I(cell.X, cell.Y + 1);
+    }
 }
