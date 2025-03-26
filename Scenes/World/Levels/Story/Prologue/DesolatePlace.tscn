@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://c64wsg4p1yvco"]
+[gd_scene load_steps=23 format=4 uid="uid://c64wsg4p1yvco"]
 
 [ext_resource type="Script" uid="uid://dudaew5h4f4vy" path="res://Scripts/World/Levels/Story/DesolatePlace.cs" id="1_6oxsh"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_aatxx"]
@@ -9,37 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://b1gihhoaku3hk" path="res://Scenes/World/Decorations/School/BurnedWoodenChair.tscn" id="6_l1us4"]
 [ext_resource type="PackedScene" uid="uid://cdaa4ueq5j1i6" path="res://Scenes/World/Decorations/School/Photographs.tscn" id="7_tvh6o"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="8_alqbt"]
-[ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="8_j7p5r"]
-[ext_resource type="Resource" uid="uid://bcsrr6l46xq2" path="res://resources/quests/Prologue/prologue1.tres" id="9_b4cw0"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="9_d7mfr"]
 [ext_resource type="Resource" uid="uid://hauoimw2ybjp" path="res://resources/dialogues/prologue1.1.dialogue" id="10_4aocj"]
-[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="10_8oxtl"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="11_6oxsh"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="13_al03n"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="13_alqbt"]
 [ext_resource type="Resource" uid="uid://bwf2gshn73y8l" path="res://resources/dialogues/tutorial.dialogue" id="14_d7mfr"]
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="15_4aocj"]
-
-[sub_resource type="Resource" id="Resource_tnbyp"]
-script = ExtResource("10_8oxtl")
-Type = 2
-Description = "Investigate the Notebook"
-metadata/_custom_type_script = "uid://dpkqc20rlrftv"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_cnuhk"]
-radius = 18.0278
-
-[sub_resource type="Resource" id="Resource_6f01l"]
-script = ExtResource("10_8oxtl")
-Type = 2
-Description = "Find Chair"
-metadata/_custom_type_script = "uid://dpkqc20rlrftv"
-
-[sub_resource type="Resource" id="Resource_rxg1s"]
-script = ExtResource("10_8oxtl")
-Type = 2
-Description = "Investigate the Photographs"
-metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+[ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="17_al03n"]
+[ext_resource type="Resource" uid="uid://bcsrr6l46xq2" path="res://resources/quests/Prologue/prologue1.tres" id="18_52t3j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_52t3j"]
 radius = 16.0312
@@ -49,6 +27,9 @@ size = Vector2(145, 45)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4aocj"]
 size = Vector2(16.125, 146)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7p5r"]
+size = Vector2(20, 90)
 
 [node name="Desolate Place" type="Node2D"]
 script = ExtResource("1_6oxsh")
@@ -88,64 +69,15 @@ script = ExtResource("3_3ewk0")
 metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="Diary" parent="Art" instance=ExtResource("5_tvh6o")]
-unique_name_in_owner = true
 position = Vector2(1408, 300)
-
-[node name="QuestTrigger" type="Area2D" parent="Art/Diary"]
-collision_layer = 16
-collision_mask = 4
-script = ExtResource("8_j7p5r")
-Quest = ExtResource("9_b4cw0")
-Mode = 1
-ShouldInteract = false
-Objective = SubResource("Resource_tnbyp")
-ObjectiveIndex = 1
-metadata/_custom_type_script = "uid://cd87fvbcydnp5"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Art/Diary/QuestTrigger"]
-position = Vector2(0, 1)
-shape = SubResource("CircleShape2D_cnuhk")
-debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Burned Wooden Chair" parent="Art" instance=ExtResource("6_l1us4")]
 unique_name_in_owner = true
 position = Vector2(1174, -70)
 
-[node name="QuestTrigger" type="Area2D" parent="Art/Burned Wooden Chair"]
-collision_layer = 16
-collision_mask = 4
-script = ExtResource("8_j7p5r")
-Quest = ExtResource("9_b4cw0")
-Mode = 1
-ShouldInteract = false
-Objective = SubResource("Resource_6f01l")
-ObjectiveIndex = 0
-metadata/_custom_type_script = "uid://cd87fvbcydnp5"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Art/Burned Wooden Chair/QuestTrigger"]
-position = Vector2(0, 1)
-shape = SubResource("CircleShape2D_cnuhk")
-debug_color = Color(0.88, 0.525, 0.898, 0.42)
-
 [node name="Photographs" parent="Art" instance=ExtResource("7_tvh6o")]
 unique_name_in_owner = true
 position = Vector2(1603, 519)
-
-[node name="QuestTrigger" type="Area2D" parent="Art/Photographs"]
-collision_layer = 16
-collision_mask = 4
-script = ExtResource("8_j7p5r")
-Quest = ExtResource("9_b4cw0")
-Mode = 1
-ShouldInteract = false
-Objective = SubResource("Resource_rxg1s")
-ObjectiveIndex = 2
-metadata/_custom_type_script = "uid://cd87fvbcydnp5"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Art/Photographs/QuestTrigger"]
-position = Vector2(0, 1)
-shape = SubResource("CircleShape2D_cnuhk")
-debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Chief" parent="." instance=ExtResource("8_alqbt")]
 unique_name_in_owner = true
@@ -199,3 +131,17 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 unique_name_in_owner = true
 visible = false
 position = Vector2(1648, 485)
+
+[node name="QuestTrigger" type="Area2D" parent="."]
+position = Vector2(209, 186)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("17_al03n")
+Quest = ExtResource("18_52t3j")
+Mode = 0
+ShouldInteract = false
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
+shape = SubResource("RectangleShape2D_j7p5r")
+debug_color = Color(0.427269, 0.718892, 0.882021, 0.42)
