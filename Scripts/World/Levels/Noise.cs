@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Game.Common.Extensions;
+using Game.Components;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
@@ -18,6 +19,7 @@ public partial class Noise : Node2D
     [Node] private TileMapLayer props;
     [Node] private Node noiseGenerator;
     [Node] private Node2D spawnPoints;
+    [Node] private NavigationManager navigationManager;
 
     private GodotObject grid;
     private Stopwatch stopwatch;
@@ -57,9 +59,17 @@ public partial class Noise : Node2D
 
         GD.Print("Spawning enemies...");
         stopwatch.Restart();
-
         SpawnEnemies();
         stopwatch.Stop();
+        GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
+
+        GD.Print("Placing navigation regions...");
+        GetTree().CreateTimer(0.2f).Timeout += () =>
+        {
+            stopwatch.Restart();
+            navigationManager.PlaceNavigationRegions();
+            stopwatch.Stop();
+        };
         GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
     }
 
