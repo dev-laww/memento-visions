@@ -30,9 +30,9 @@ buses/default_bus_layout="res://resources/misc/default_bus_layout.tres"
 SceneManager="*res://Scenes/Autoload/SceneManager.tscn"
 GameEvents="*res://Scripts/Autoload/GameEvents.cs"
 SaveManager="*res://Scripts/Autoload/SaveManager.cs"
+GameCamera="*res://Scenes/Autoload/GameCamera.tscn"
 PlayerInventoryManager="*res://Scenes/Autoload/PlayerInventoryManager.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-GameCamera="*res://Scenes/Autoload/GameCamera.tscn"
 InteractionManager="*res://Scripts/Autoload/InteractionManager.cs"
 EnemyManager="*res://Scripts/Autoload/EnemyManager.cs"
 FloatingTextManager="*res://Scenes/Autoload/FloatingTextManager.tscn"
@@ -156,7 +156,7 @@ quick_use={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://resources/dialogues/Chapter1.dialogue", "res://resources/dialogues/Test.dialogue", "res://resources/dialogues/BurnedChairDesc.dialogue", "res://resources/dialogues/DiaryDetails.dialogue", "res://resources/dialogues/PhotographDetails.dialogue", "res://resources/dialogues/prologue1.1.dialogue", "res://resources/dialogues/prologue1.2.dialogue")
+locale/translations_pot_files=PackedStringArray("res://resources/dialogues/Chapter1.dialogue", "res://resources/dialogues/Test.dialogue", "res://resources/dialogues/BurnedChairDesc.dialogue", "res://resources/dialogues/DiaryDetails.dialogue", "res://resources/dialogues/PhotographDetails.dialogue", "res://resources/dialogues/prologue1.1.dialogue", "res://resources/dialogues/prologue1.2.dialogue", "res://resources/dialogues/prologue1.3.dialogue", "res://resources/dialogues/tutorial.dialogue")
 
 [layer_names]
 
