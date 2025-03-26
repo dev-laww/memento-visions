@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Game.Common.Extensions;
 using Game.Utils.Extensions;
@@ -16,8 +17,11 @@ public partial class Noise : Node2D
     [Node] private TileMapLayer foreGround;
     [Node] private TileMapLayer props;
     [Node] private Node noiseGenerator;
+    [Node] private Node2D spawnPoints;
 
     private GodotObject grid;
+    private Stopwatch stopwatch;
+    private bool placedFirstProp;
 
     public override void _Notification(int what)
     {
@@ -30,54 +34,39 @@ public partial class Noise : Node2D
     {
         grid = noiseGenerator.Get("grid").AsGodotObject();
         noiseGenerator.Connect("generation_finished", Callable.From(OnGenerationFinished));
-
+        noiseGenerator.Connect("generation_started", Callable.From(PlacedTerrain));
     }
+
+    private void PlacedTerrain()
+    {
+
+        GD.Print("Generating terrain...");
+        GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
+    }
+
 
     private void OnGenerationFinished()
     {
-        this.GetAllChildrenOfType<Marker2D>().ToList().ForEach(marker => marker.QueueFree());
+        stopwatch = Stopwatch.StartNew();
+        GD.Print("Terrain generated!");
 
-        var tileSize = floor.TileSet.TileSize;
-        var occupiedCells = GetOccupiedCells(layer: 1);
-        var clusters = GetClusters([.. occupiedCells]);
-        var innerCells = clusters.SelectMany(GetInnerCells);
+        GD.Print("Cleaning up...");
+        PurgeElevationTopEdges();
+        stopwatch.Stop();
+        GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
 
-        var topEdges = clusters.SelectMany(cluster => GetEdges(cluster, Vector2I.Up));
-        var innerTopEdges = new HashSet<Vector2I>();
+        GD.Print("Spawning enemies...");
+        stopwatch.Restart();
 
-        foreach (var cell in topEdges)
-        {
-            var left = new Vector2I(cell.X - 1, cell.Y);
-            var right = new Vector2I(cell.X + 1, cell.Y);
-
-            if (occupiedCells.Contains(left) && occupiedCells.Contains(right))
-            {
-                var topLeft = new Vector2I(cell.X - 1, cell.Y - 1);
-                var topRight = new Vector2I(cell.X + 1, cell.Y - 1);
-
-                if (!occupiedCells.Contains(topLeft) && !occupiedCells.Contains(topRight))
-                {
-                    innerTopEdges.Add(cell);
-                }
-            }
-        }
-
-        foreach (var cell in innerTopEdges)
-        {
-            var marker = new Marker2D
-            {
-                Position = (cell * tileSize) + tileSize / 2,
-            };
-
-            this.EditorAddChild(marker);
-            foreGround.SetCell(cell);
-        }
+        SpawnEnemies();
+        stopwatch.Stop();
+        GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
     }
 
     private void SpawnEnemies()
     {
         // TODO: use noise to select spawn points and spawn enemies instead of markers
-        this.GetAllChildrenOfType<Marker2D>().ToList().ForEach(marker => marker.QueueFree());
+        spawnPoints.QueueFreeChildren();
 
         var layerCount = grid.Call("get_layer_count").AsInt32();
         var emptyCells = GetEmptyCells();
@@ -91,21 +80,67 @@ public partial class Noise : Node2D
 
         } while (layerCount > 0);
 
-        var occupiedCells = GetOccupiedCells(layer: 1);
-        var clusters = GetClusters([.. occupiedCells]);
-        var innerCells = clusters.SelectMany(GetInnerCells);
-
-        var spawnableCells = innerCells.Union(emptyCells).ToList();
         var tileSize = floor.TileSet.TileSize;
 
-        foreach (var cell in spawnableCells)
+        foreach (var cell in emptyCells)
         {
             var marker = new Marker2D
             {
                 Position = (cell * tileSize) + tileSize / 2,
             };
 
-            this.EditorAddChild(marker);
+            spawnPoints.EditorAddChild(marker);
+        }
+    }
+
+    private void PurgeElevationTopEdges()
+    {
+        var tileSize = floor.TileSet.TileSize;
+        var occupiedCells = GetOccupiedCells(layer: 1);
+        var clusters = GetClusters([.. occupiedCells]);
+        var innerCells = clusters.SelectMany(GetInnerCells);
+
+        var topEdges = clusters.SelectMany(cluster => GetEdges(cluster, Vector2I.Up));
+        var topEdgesSet = new HashSet<Vector2I>(topEdges);
+        var innerTopEdges = new HashSet<Vector2I>();
+
+        foreach (var cell in topEdgesSet)
+        {
+            var left = new Vector2I(cell.X - 1, cell.Y);
+            var right = new Vector2I(cell.X + 1, cell.Y);
+            var topLeft = new Vector2I(cell.X - 1, cell.Y - 1);
+            var topRight = new Vector2I(cell.X + 1, cell.Y - 1);
+
+            var cornerCondition = occupiedCells.Contains(left) && occupiedCells.Contains(right) &&
+                                   !occupiedCells.Contains(topLeft) && !occupiedCells.Contains(topRight);
+
+            var contiguousCondition = topEdgesSet.Contains(left) || topEdgesSet.Contains(right);
+
+            if (cornerCondition || contiguousCondition)
+            {
+                innerTopEdges.Add(cell);
+            }
+        }
+
+        foreach (var cell in innerTopEdges)
+        {
+            var marker = new Marker2D
+            {
+                Position = (cell * tileSize) + tileSize / 2,
+            };
+
+            for (var i = 0; i < MathUtil.RNG.RandiRange(0, 3); i++)
+            {
+                var cellToErase = new Vector2I(cell.X + MathUtil.RNG.RandSign(), cell.Y);
+                var markerToErase = new Marker2D
+                {
+                    Position = (cellToErase * tileSize) + tileSize / 2,
+                };
+
+                GetTree().CreateTimer(0.1f).Timeout += () => foreGround.EraseCell(cellToErase);
+            }
+
+            GetTree().CreateTimer(0.1f).Timeout += () => foreGround.EraseCell(cell);
         }
     }
 
