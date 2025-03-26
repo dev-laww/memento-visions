@@ -1,6 +1,11 @@
 using Godot;
 using System;
+using Game.Data;
+using GodotUtilities;
 
+namespace Game.Levels.Story;
+
+[Scene]
 public partial class Bar : Node2D
 {
     private Quest quest = ResourceLoader.Load<Quest>("res://resources/quests/Prologue/NightofShadows.tres");
