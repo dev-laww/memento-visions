@@ -1,4 +1,5 @@
 ~ start
-Chief : press W,A,S D and try to move towards me
+Chief : Try moving toward me by pressing W, A, S, and D.
+do CurrentScene.toggleDialogue()
 
 => END

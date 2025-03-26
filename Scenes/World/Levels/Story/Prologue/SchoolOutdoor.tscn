@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="8_dpuhn"]
 [ext_resource type="Resource" uid="uid://bb0a0gl7qcddj" path="res://resources/quests/Prologue/NightofShadows.tres" id="9_1g7q4"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="10_eil1u"]
-[ext_resource type="Resource" uid="uid://bwf2gshn73y8l" path="res://resources/dialogues/tutorial.dialogue" id="11_b2y2l"]
+[ext_resource type="Resource" uid="uid://yh060giw306t" path="res://resources/dialogues/AttackTutorial.dialogue" id="11_b2y2l"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="12_b2y2l"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_vvo3j"]
@@ -469,8 +469,10 @@ collision_layer = 16
 collision_mask = 4
 script = ExtResource("8_dpuhn")
 Quest = ExtResource("9_1g7q4")
-Mode = 0
+Mode = 1
 ShouldInteract = false
+Objective = null
+ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
@@ -533,7 +535,7 @@ position = Vector2(637, 359)
 position = Vector2(475, 948)
 
 [node name="Player" parent="." instance=ExtResource("5_kybra")]
-position = Vector2(-7, 60)
+position = Vector2(200, 96)
 
 [node name="DialogueTrigger" type="Area2D" parent="."]
 position = Vector2(293, 100)
