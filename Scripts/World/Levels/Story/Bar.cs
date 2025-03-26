@@ -1,6 +1,10 @@
 using Game.Data;
 using Godot;
+using System;
+using Game.Data;
 using GodotUtilities;
+
+namespace Game.Levels.Story;
 
 [Scene]
 public partial class Bar : Node2D

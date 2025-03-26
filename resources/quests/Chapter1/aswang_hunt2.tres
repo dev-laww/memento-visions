@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=6 format=3 uid="uid://cpgaa23upm6hk"]
+[gd_resource type="Resource" script_class="Quest" load_steps=7 format=3 uid="uid://cpgaa23upm6hk"]
 
 [ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="1_kcivv"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="2_symma"]
@@ -17,13 +17,19 @@ Description = "Defeat 5 Aswang and question survivors for clues."
 Enemies = [SubResource("Resource_3mkcf")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
+[sub_resource type="Resource" id="Resource_kcivv"]
+script = ExtResource("2_symma")
+Type = 2
+Description = " Approach the Aswang and question it for answers."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
 [resource]
 script = ExtResource("3_kv4sf")
 Id = "quest: aswanghunt"
-Title = "Shadows in the Streets"
+Title = "The Mayor’s Dark Pact"
 Ordered = false
 Description = "The Aswang grow bolder. Eliminate them and uncover who’s pulling the strings."
-objectives = [SubResource("Resource_riumb")]
+objectives = [SubResource("Resource_riumb"), SubResource("Resource_kcivv")]
 Experience = 0
 Items = []
 metadata/_custom_type_script = "uid://dssta8xepjmkg"
