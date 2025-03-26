@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DialogueManagerRuntime;
 using Game.Common.Extensions;
 using Game.Common.Interfaces;
 using Game.Autoload;
@@ -80,6 +81,17 @@ public partial class QuestTrigger : Area2D, IInteractable
             InteractionUI.Text = value;
         }
     }
+    private Resource DialogueResource
+    {
+        get => dialogueResource;
+        set
+        {
+            dialogueResource = value;
+            UpdateConfigurationWarnings();
+        }
+    }
+
+    private Resource dialogueResource;
 
     private bool shouldInteract;
     private string interactionLabel = "Interact";
@@ -131,7 +143,12 @@ public partial class QuestTrigger : Area2D, IInteractable
 
     public Vector2 InteractionPosition => GlobalPosition;
 
-    public virtual void Interact() => TriggerQuest();
+    public virtual void Interact()
+    {
+        DialogueManager.ShowDialogueBalloon(DialogueResource);
+        TriggerQuest();
+        
+    }
 
     private void TriggerQuest()
     {
@@ -196,12 +213,21 @@ public partial class QuestTrigger : Area2D, IInteractable
         };
 
         if (ShouldInteract)
+        {
             properties.Add(new Dictionary
             {
                 { "name", PropertyName.InteractionLabel },
                 { "type", (int)Variant.Type.String },
                 { "usage", (int)PropertyUsageFlags.Default }
             });
+            properties.Add(new Dictionary
+            {
+                { "name", "DialogueResource" },
+                { "type", (int)Variant.Type.Object },
+                { "usage", (int)PropertyUsageFlags.Default },
+                { "hint_string", "DialogueResource" }
+            });
+        }
 
         if (Mode == TriggerMode.Start) return properties;
 
@@ -235,7 +261,8 @@ public partial class QuestTrigger : Area2D, IInteractable
     public override void _EnterTree()
     {
         if (GetNodeOrNull("CollisionShape2D") == null)
-            this.EditorAddChild(new CollisionShape2D { Name = "CollisionShape2D", DebugColor = new Color(0.88f, 0.525f, 0.898f, 0.42f) });
+            this.EditorAddChild(new CollisionShape2D
+                { Name = "CollisionShape2D", DebugColor = new Color(0.88f, 0.525f, 0.898f, 0.42f) });
 
         if (!ShouldInteract)
         {
