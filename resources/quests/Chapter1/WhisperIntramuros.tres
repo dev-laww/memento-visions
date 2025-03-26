@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=4 format=3 uid="uid://dpkjhbld0pfm4"]
+
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_ka0b6"]
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="2_ssna1"]
+
+[sub_resource type="Resource" id="Resource_1jmwf"]
+script = ExtResource("1_ka0b6")
+Type = 2
+Description = "Speak with locals, gather testimonies, and investigate strange signs linked to the mayor’s campaign."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[resource]
+script = ExtResource("2_ssna1")
+Id = "quest:WhispersIntramuros"
+Title = "Whispers in Intramuros"
+Ordered = false
+Description = "Mysterious disappearances haunt Everfield City. The Aswang are suspected, but something doesn’t add up. Alejandro must uncover the truth before more lives are lost."
+objectives = [SubResource("Resource_1jmwf")]
+Experience = 0
+Items = []
+metadata/_custom_type_script = "uid://dssta8xepjmkg"

@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://ckj3v8yrowvxb" path="res://assets/tilesets/school-tileset.png" id="2_hk2xv"]
 [ext_resource type="Script" uid="uid://58jqrupdcss0" path="res://Scripts/Components/SmoothSprite2D.cs" id="3_odju6"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="4_kykbt"]
-[ext_resource type="Resource" uid="uid://bb54w5sxnh122" path="res://resources/dialogues/BurnedChairDesc.dialogue" id="5_kykbt"]
-[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="5_vkrxr"]
+[ext_resource type="Resource" uid="uid://bb54w5sxnh122" path="res://resources/dialogues/prologue/BurnedChairDesc.dialogue" id="5_kykbt"]
+[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="6_hk2xv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hk2xv"]
 radius = 18.0
@@ -36,4 +36,4 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="DialogueTrigger"]
 
-[node name="InteractionUI" parent="DialogueTrigger/Node2D" instance=ExtResource("5_vkrxr")]
+[node name="InteractionUI" parent="DialogueTrigger/Node2D" instance=ExtResource("6_hk2xv")]

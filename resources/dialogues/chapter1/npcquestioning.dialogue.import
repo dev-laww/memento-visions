@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://bvch8blxsmpmn"
+path="res://.godot/imported/npcquestioning.dialogue-7b709fd095e132b7406d2d53d22d3335.tres"
+
+[deps]
+
+source_file="res://resources/dialogues/chapter1/npcquestioning.dialogue"
+dest_files=["res://.godot/imported/npcquestioning.dialogue-7b709fd095e132b7406d2d53d22d3335.tres"]
+
+[params]
+
+defaults=true

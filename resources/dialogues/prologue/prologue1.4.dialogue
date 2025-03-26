@@ -1,0 +1,15 @@
+~ start
+#conditional dialogue
+
+#complete quest
+do CurrentScene.CompleteQuest()
+Chief: Alex, we’ve got another one. Strange occurrences, eerie sightings – the whole village is on edge.
+Chief: The locals are certain it’s an aswang. They’re terrified.
+Alex: Chief, are you sure? Are they running rampant?
+Chief: No, not yet. But the sooner we move, the sooner we can prevent such a tragedy from happening.
+Alex: Fine. I’ll look around.
+#start chapter1 quest
+do CurrentScene.StartQuest()
+
+
+=> END

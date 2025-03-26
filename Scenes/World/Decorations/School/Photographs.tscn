@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://58jqrupdcss0" path="res://Scripts/Components/SmoothSprite2D.cs" id="3_tkva0"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="4_qbwjs"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="5_1flri"]
-[ext_resource type="Resource" uid="uid://duruvlye3dyyc" path="res://resources/dialogues/PhotographDetails.dialogue" id="5_qbwjs"]
+[ext_resource type="Resource" uid="uid://duruvlye3dyyc" path="res://resources/dialogues/prologue/PhotographDetails.dialogue" id="5_qbwjs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jvymt"]
 radius = 19.105

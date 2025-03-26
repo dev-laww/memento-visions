@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=6 format=3 uid="uid://bcsrr6l46xq2"]
+
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_ummsd"]
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="2_y1ik8"]
+
+[sub_resource type="Resource" id="Resource_6f01l"]
+script = ExtResource("1_ummsd")
+Type = 2
+Description = "Find Chair"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="Resource" id="Resource_tnbyp"]
+script = ExtResource("1_ummsd")
+Type = 2
+Description = "Investigate the Notebook"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="Resource" id="Resource_rxg1s"]
+script = ExtResource("1_ummsd")
+Type = 2
+Description = "Investigate the Photographs"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[resource]
+script = ExtResource("2_y1ik8")
+Id = "quest:prologue1"
+Title = "Find Clues"
+Ordered = false
+Description = "Find Clues Around the area"
+objectives = [SubResource("Resource_6f01l"), SubResource("Resource_tnbyp"), SubResource("Resource_rxg1s")]
+Experience = 0
+Items = []
+metadata/_custom_type_script = "uid://dssta8xepjmkg"

@@ -1,5 +1,6 @@
-[gd_scene load_steps=19 format=4 uid="uid://c64wsg4p1yvco"]
+[gd_scene load_steps=21 format=4 uid="uid://c64wsg4p1yvco"]
 
+[ext_resource type="Script" uid="uid://dudaew5h4f4vy" path="res://Scripts/World/Levels/Story/DesolatePlace.cs" id="1_6oxsh"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_aatxx"]
 [ext_resource type="TileSet" uid="uid://c1mmutvocnp5g" path="res://resources/tilesets/bar/props.tres" id="2_2f277"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_3ewk0"]
@@ -9,12 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://cdaa4ueq5j1i6" path="res://Scenes/World/Decorations/School/Photographs.tscn" id="7_tvh6o"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="8_alqbt"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="9_d7mfr"]
-[ext_resource type="Resource" uid="uid://hauoimw2ybjp" path="res://resources/dialogues/prologue1.1.dialogue" id="10_4aocj"]
+[ext_resource type="Resource" uid="uid://hauoimw2ybjp" path="res://resources/dialogues/prologue/prologue1.1.dialogue" id="10_4aocj"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="11_6oxsh"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="13_al03n"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="13_alqbt"]
-[ext_resource type="Resource" uid="uid://bwf2gshn73y8l" path="res://resources/dialogues/tutorial.dialogue" id="14_d7mfr"]
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="15_4aocj"]
+[ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="17_al03n"]
+[ext_resource type="Resource" uid="uid://bcsrr6l46xq2" path="res://resources/quests/Prologue/prologue1.tres" id="18_52t3j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_52t3j"]
 radius = 16.0312
@@ -22,10 +24,12 @@ radius = 16.0312
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7mfr"]
 size = Vector2(145, 45)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4aocj"]
-size = Vector2(22.25, 11)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7p5r"]
+size = Vector2(20, 90)
 
 [node name="Desolate Place" type="Node2D"]
+position = Vector2(1056, 288)
+script = ExtResource("1_6oxsh")
 
 [node name="Art" type="Node2D" parent="."]
 
@@ -65,12 +69,15 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 position = Vector2(1408, 300)
 
 [node name="Burned Wooden Chair" parent="Art" instance=ExtResource("6_l1us4")]
+unique_name_in_owner = true
 position = Vector2(1174, -70)
 
 [node name="Photographs" parent="Art" instance=ExtResource("7_tvh6o")]
+unique_name_in_owner = true
 position = Vector2(1603, 519)
 
 [node name="Chief" parent="." instance=ExtResource("8_alqbt")]
+unique_name_in_owner = true
 position = Vector2(139, 140)
 
 [node name="DialogueTrigger" type="Area2D" parent="Chief"]
@@ -90,31 +97,34 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="InteractionUI" parent="Chief/DialogueTrigger/Node2D" instance=ExtResource("11_6oxsh")]
 
 [node name="Player" parent="." instance=ExtResource("13_al03n")]
-position = Vector2(1662, 622)
+position = Vector2(34, 176)
 
 [node name="TransitionArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("13_alqbt")
+TargetScene = "uid://v06x46jch2vm"
 metadata/_custom_type_script = "uid://davlg2u8drdh4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
 position = Vector2(1606.5, 695.5)
 shape = SubResource("RectangleShape2D_d7mfr")
 
-[node name="DialogueTrigger" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("9_d7mfr")
-DialogueResource = ExtResource("14_d7mfr")
-InteractionLabel = ""
-metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueTrigger"]
-position = Vector2(82, 180.5)
-shape = SubResource("RectangleShape2D_4aocj")
-debug_color = Color(0.88, 0.525, 0.898, 0.42)
-
 [node name="StoryTeller" parent="." instance=ExtResource("15_4aocj")]
+unique_name_in_owner = true
 visible = false
 position = Vector2(1648, 485)
+
+[node name="QuestTrigger" type="Area2D" parent="."]
+position = Vector2(209, 186)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("17_al03n")
+Quest = ExtResource("18_52t3j")
+Mode = 0
+ShouldInteract = false
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
+shape = SubResource("RectangleShape2D_j7p5r")
+debug_color = Color(0.427269, 0.718892, 0.882021, 0.42)

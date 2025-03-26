@@ -1,0 +1,13 @@
+~ start
+Alex: A photograph of a group of students—suggesting they may have taken pleasure in targeting this young girl with their pranks or harassment.
+do CurrentScene.CompleteObjectiveAtIndex(2)
+Alex: From the clues I’ve gathered, it seems like the students weren’t harmed. They simply disappeared after encountering a vengeful spirit.
+do CurrentScene.setStoryTellerVisible()
+StoryTeller: Good observation, Mr. Alejandro Gutierrez. The said spirit didn’t harm or show violence to those wandering children; It merely offered them my kindness.
+-I see… So, those missing people—are they dead?
+StoryTeller: That is for you to find out.
+- If they’re not dead, then they must be somewhere.
+StoryTeller: Narration “As our protagonist goes on its conquest, what could possibly happen as he delves into it?
+- From the clues gathered, they seem to camp here and went out
+
+=> END

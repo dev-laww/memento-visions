@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="8_dpuhn"]
 [ext_resource type="Resource" uid="uid://bb0a0gl7qcddj" path="res://resources/quests/Prologue/NightofShadows.tres" id="9_1g7q4"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="10_eil1u"]
-[ext_resource type="Resource" uid="uid://bwf2gshn73y8l" path="res://resources/dialogues/tutorial.dialogue" id="11_b2y2l"]
+[ext_resource type="Resource" uid="uid://yh060giw306t" path="res://resources/dialogues/prologue/AttackTutorial.dialogue" id="11_b2y2l"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="12_b2y2l"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_vvo3j"]
@@ -307,7 +307,6 @@ y_sort_enabled = true
 z_index = -1
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
-visible = false
 z_index = 1000
 position = Vector2(-16, -10)
 scale = Vector2(1.02314, 1.00853)
@@ -464,7 +463,7 @@ navigation_polygon = SubResource("NavigationPolygon_75jj6")
 navigation_polygon = SubResource("NavigationPolygon_xpd1u")
 
 [node name="QuestTrigger" type="Area2D" parent="."]
-position = Vector2(234, 25)
+position = Vector2(254, 95)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("8_dpuhn")
@@ -474,7 +473,7 @@ ShouldInteract = false
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
-position = Vector2(75, 79.5)
+position = Vector2(56, 21)
 shape = SubResource("RectangleShape2D_dpuhn")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
@@ -533,7 +532,7 @@ position = Vector2(637, 359)
 position = Vector2(475, 948)
 
 [node name="Player" parent="." instance=ExtResource("5_kybra")]
-position = Vector2(-7, 60)
+position = Vector2(154, 84)
 
 [node name="DialogueTrigger" type="Area2D" parent="."]
 position = Vector2(293, 100)
