@@ -17,6 +17,7 @@ public partial class NavigationManager : Polygon2D
     private const float AGENT_RADIUS = 10f;
 
     [ExportToolButton("Bake Navigation", Icon = "Bake")] private Callable Place => Callable.From(PlaceNavigationRegions);
+    [ExportToolButton("Clear", Icon = "Clear")] private Callable ClearButton => Callable.From(Clear);
 
     [Export]
     private Node2D ParseRootNode
