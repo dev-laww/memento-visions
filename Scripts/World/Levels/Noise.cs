@@ -4,7 +4,6 @@ using Game.Common.Extensions;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
-using Priority_Queue;
 
 namespace Game;
 
@@ -16,7 +15,6 @@ public partial class Noise : Node2D
     [Node] private TileMapLayer middleGround;
     [Node] private TileMapLayer foreGround;
     [Node] private TileMapLayer props;
-    [Node] private TileMapLayer test;
     [Node] private Node noiseGenerator;
 
     private GodotObject grid;
@@ -37,10 +35,50 @@ public partial class Noise : Node2D
 
     private void OnGenerationFinished()
     {
-        test.Clear();
         this.GetAllChildrenOfType<Marker2D>().ToList().ForEach(marker => marker.QueueFree());
 
-        // fill empty cells with a tile
+        var tileSize = floor.TileSet.TileSize;
+        var occupiedCells = GetOccupiedCells(layer: 1);
+        var clusters = GetClusters([.. occupiedCells]);
+        var innerCells = clusters.SelectMany(GetInnerCells);
+
+        var topEdges = clusters.SelectMany(cluster => GetEdges(cluster, Vector2I.Up));
+        var innerTopEdges = new HashSet<Vector2I>();
+
+        foreach (var cell in topEdges)
+        {
+            var left = new Vector2I(cell.X - 1, cell.Y);
+            var right = new Vector2I(cell.X + 1, cell.Y);
+
+            if (occupiedCells.Contains(left) && occupiedCells.Contains(right))
+            {
+                var topLeft = new Vector2I(cell.X - 1, cell.Y - 1);
+                var topRight = new Vector2I(cell.X + 1, cell.Y - 1);
+
+                if (!occupiedCells.Contains(topLeft) && !occupiedCells.Contains(topRight))
+                {
+                    innerTopEdges.Add(cell);
+                }
+            }
+        }
+
+        foreach (var cell in innerTopEdges)
+        {
+            var marker = new Marker2D
+            {
+                Position = (cell * tileSize) + tileSize / 2,
+            };
+
+            this.EditorAddChild(marker);
+            foreGround.SetCell(cell);
+        }
+    }
+
+    private void SpawnEnemies()
+    {
+        // TODO: use noise to select spawn points and spawn enemies instead of markers
+        this.GetAllChildrenOfType<Marker2D>().ToList().ForEach(marker => marker.QueueFree());
+
         var layerCount = grid.Call("get_layer_count").AsInt32();
         var emptyCells = GetEmptyCells();
 
@@ -53,18 +91,18 @@ public partial class Noise : Node2D
 
         } while (layerCount > 0);
 
-
         var occupiedCells = GetOccupiedCells(layer: 1);
         var clusters = GetClusters([.. occupiedCells]);
         var innerCells = clusters.SelectMany(GetInnerCells);
 
         var spawnableCells = innerCells.Union(emptyCells).ToList();
+        var tileSize = floor.TileSet.TileSize;
 
         foreach (var cell in spawnableCells)
         {
             var marker = new Marker2D
             {
-                Position = (cell * 48) + new Vector2(24, 24)
+                Position = (cell * tileSize) + tileSize / 2,
             };
 
             this.EditorAddChild(marker);
@@ -114,6 +152,18 @@ public partial class Noise : Node2D
         foreach (var cell in cluster)
         {
             if (!cell.GetNeighbors().All(cluster.Contains)) continue;
+
+            yield return cell;
+        }
+    }
+
+    private static IEnumerable<Vector2I> GetEdges(HashSet<Vector2I> cluster, Vector2I direction)
+    {
+        foreach (var cell in cluster)
+        {
+            var neighborToCheck = cell + direction;
+
+            if (cluster.Contains(neighborToCheck)) continue;
 
             yield return cell;
         }
