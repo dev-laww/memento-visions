@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=6 format=3 uid="uid://cpgaa23upm6hk"]
+
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="1_kcivv"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="2_symma"]
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="3_kv4sf"]
+
+[sub_resource type="Resource" id="Resource_3mkcf"]
+script = ExtResource("1_kcivv")
+Id = "enemy:aswang"
+Amount = 5
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_riumb"]
+script = ExtResource("2_symma")
+Type = 3
+Description = "Defeat 5 Aswang and question survivors for clues."
+Enemies = [SubResource("Resource_3mkcf")]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[resource]
+script = ExtResource("3_kv4sf")
+Id = "quest: aswanghunt"
+Title = "Shadows in the Streets"
+Ordered = false
+Description = "The Aswang grow bolder. Eliminate them and uncover who’s pulling the strings."
+objectives = [SubResource("Resource_riumb")]
+Experience = 0
+Items = []
+metadata/_custom_type_script = "uid://dssta8xepjmkg"

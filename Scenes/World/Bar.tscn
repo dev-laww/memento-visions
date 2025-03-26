@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=4 uid="uid://d0qr3o1nxmcpe"]
+[gd_scene load_steps=20 format=4 uid="uid://d0qr3o1nxmcpe"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="1_28rab"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="1_sthvm"]
+[ext_resource type="Script" uid="uid://bmr5usqox5f0h" path="res://Scenes/World/Bar.cs" id="1_u221d"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_7gq68"]
 [ext_resource type="TileSet" uid="uid://c1mmutvocnp5g" path="res://resources/tilesets/bar/props.tres" id="2_uavhr"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_tm1gt"]
@@ -10,6 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="8_71mkv"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="9_6ugc5"]
 [ext_resource type="PackedScene" uid="uid://dgqrvixy2ocww" path="res://Scenes/Entities/Characters/BlackSmith.tscn" id="9_yvalt"]
+[ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="11_j24d5"]
+[ext_resource type="Resource" uid="uid://dpkjhbld0pfm4" path="res://resources/quests/Chapter1/WhisperIntramuros.tres" id="12_4di4u"]
+[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="12_fjgj2"]
+[ext_resource type="Resource" uid="uid://dfhk5ud22nohe" path="res://resources/dialogues/prologue/prologue1.4.dialogue" id="12_j24d5"]
 
 [sub_resource type="Environment" id="Environment_71mkv"]
 background_mode = 3
@@ -24,8 +29,12 @@ parsed_geometry_type = 1
 border_size = 1000.0
 agent_radius = 8.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_j24d5"]
+radius = 33.7343
+
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_u221d")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_71mkv")
@@ -93,13 +102,33 @@ script = ExtResource("3_tm1gt")
 metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="Player" parent="." instance=ExtResource("1_28rab")]
-position = Vector2(132, 55)
+position = Vector2(133, 79)
 
 [node name="StoryTeller" parent="." instance=ExtResource("8_71mkv")]
 position = Vector2(242, 95)
 
 [node name="Chief" parent="." instance=ExtResource("9_6ugc5")]
 position = Vector2(36, 171)
+
+[node name="QuestTrigger" type="Area2D" parent="Chief"]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("11_j24d5")
+Quest = ExtResource("12_4di4u")
+Mode = 0
+ShouldInteract = true
+InteractionLabel = "Talk"
+DialogueResource = ExtResource("12_j24d5")
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/QuestTrigger"]
+shape = SubResource("CircleShape2D_j24d5")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
+position = Vector2(1, 12)
+
+[node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("12_fjgj2")]
 
 [node name="BlackSmith" parent="." instance=ExtResource("9_yvalt")]
 position = Vector2(271, 258)
