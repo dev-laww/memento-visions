@@ -1,10 +1,12 @@
+using Game.Data;
 using Godot;
-using System;
+using GodotUtilities;
 
+[Scene]
 public partial class Bar : Node2D
 {
     private Quest quest = ResourceLoader.Load<Quest>("res://resources/quests/Prologue/NightofShadows.tres");
-    
+
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
@@ -16,8 +18,8 @@ public partial class Bar : Node2D
     {
         base._Ready();
     }
-    
-    
+
+
     public void CompleteObjectiveAtIndex(int index)
     {
         if (quest == null)
@@ -25,7 +27,7 @@ public partial class Bar : Node2D
             GD.PrintErr("Quest not loaded");
             return;
         }
-        
+
         quest.CompleteObjective(1);
     }
 
