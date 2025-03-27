@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Game.Common.Extensions;
 using Game.Components;
 using Game.Entities;
 using Game.Utils.Extensions;
@@ -21,8 +20,16 @@ public partial class Noise : Node2D
     [Node] private Node noiseGenerator;
     [Node] private Spawner spawner;
     [Node] private NavigationManager navigationManager;
+    [Node] private Node2D enemies;
 
-    [ExportToolButton("Generate", Icon = "RotateLeft")] private Callable generate => Callable.From(() => noiseGenerator.Call("generate"));
+    [ExportToolButton("Generate", Icon = "RotateLeft")] private Callable Generate => Callable.From(() => noiseGenerator.Call("generate"));
+    [ExportToolButton("Clear", Icon = "Clear")]
+    private Callable Clear => Callable.From(() =>
+    {
+        noiseGenerator.Call("erase");
+        enemies.QueueFreeChildren();
+        navigationManager.Clear();
+    });
 
     private GodotObject grid;
     private readonly Stopwatch stopwatch = new();
@@ -61,7 +68,7 @@ public partial class Noise : Node2D
 
         GD.Print("Spawning enemies...");
         stopwatch.Restart();
-        spawner.StartSpawning();
+        SpawnEnemies();
         stopwatch.Stop();
         GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
 
@@ -107,6 +114,21 @@ public partial class Noise : Node2D
             var position = (cell * tileSize) + tileSize / 2;
 
             spawner.SpawnPoints.Add(position);
+        }
+    }
+
+    private void SpawnEnemies()
+    {
+        enemies.QueueFreeChildren();
+        var spawnedEnemies = spawner.Spawn();
+
+        foreach (var enemy in spawnedEnemies)
+        {
+            enemies.AddChild(enemy);
+
+            if (!Engine.IsEditorHint()) continue;
+
+            enemy.SetOwner(GetTree().GetEditedSceneRoot());
         }
     }
 

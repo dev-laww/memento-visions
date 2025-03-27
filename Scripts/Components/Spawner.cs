@@ -1,6 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Game.Common.Extensions;
 using Game.Data;
+using Game.Entities;
 using Godot;
 using Godot.Collections;
 using GodotUtilities;
@@ -66,17 +69,16 @@ public partial class Spawner : Node
     private LootTable<EnemySpawnEntry> lootTable = new();
 
 
-    public void StartSpawning()
+    public IEnumerable<Enemy> Spawn()
     {
-        SpawnPoints.ToList().ForEach(point =>
+        foreach (var point in SpawnPoints)
         {
-            var spawnEntry = lootTable.PickItem();
-            var enemy = spawnEntry.Create(point);
+            var entry = lootTable.PickItem();
+            var enemy = entry.Create(point);
 
-            if (enemy is null) return;
+            if (enemy is null) continue;
 
-            GetParent().AddChild(enemy);
-            enemy.SetOwner(GetTree().GetEditedSceneRoot());
-        });
+            yield return enemy;
+        }
     }
 }
