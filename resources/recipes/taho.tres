@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=11 format=3 uid="uid://bttkovwyh4n4u"]
+
+[ext_resource type="Resource" uid="uid://ckm0dxjgvcxtj" path="res://resources/items/material/tofu.tres" id="1_ydqf3"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_tsiie"]
+[ext_resource type="Resource" uid="uid://bsddfgq1qtd3r" path="res://resources/items/material/water.tres" id="3_486qj"]
+[ext_resource type="Resource" uid="uid://lgbdgcr5l0og" path="res://resources/items/material/sago_pearls.tres" id="4_f7kyl"]
+[ext_resource type="Resource" uid="uid://7cbhpfgtsp6y" path="res://resources/items/consumable/taho.tres" id="5_hlt4i"]
+[ext_resource type="Script" uid="uid://djs3qll7uwkya" path="res://Scripts/Data/Recipe/Recipe.cs" id="6_pcu8v"]
+
+[sub_resource type="Resource" id="Resource_nwb7f"]
+script = ExtResource("2_tsiie")
+Item = ExtResource("1_ydqf3")
+Quantity = 2
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_5hnpk"]
+script = ExtResource("2_tsiie")
+Item = ExtResource("3_486qj")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_h0ugg"]
+script = ExtResource("2_tsiie")
+Item = ExtResource("4_f7kyl")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_304qj"]
+script = ExtResource("2_tsiie")
+Item = ExtResource("5_hlt4i")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[resource]
+script = ExtResource("6_pcu8v")
+Result = SubResource("Resource_304qj")
+RecipeType = 0
+Ingredients = [SubResource("Resource_nwb7f"), SubResource("Resource_5hnpk"), SubResource("Resource_h0ugg")]
+metadata/_custom_type_script = "uid://djs3qll7uwkya"

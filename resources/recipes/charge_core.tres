@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=9 format=3 uid="uid://davhx81hb0oh0"]
+
+[ext_resource type="Resource" uid="uid://1e7qp47hdgi7" path="res://resources/items/material/hoof_iron.tres" id="1_expwu"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_wofi1"]
+[ext_resource type="Resource" uid="uid://drj5puv2462td" path="res://resources/items/material/bato_balani.tres" id="3_4l80d"]
+[ext_resource type="Resource" uid="uid://bnyee87b6kqhj" path="res://resources/items/material/charge_core.tres" id="4_5t2hq"]
+[ext_resource type="Script" uid="uid://djs3qll7uwkya" path="res://Scripts/Data/Recipe/Recipe.cs" id="5_kg6h3"]
+
+[sub_resource type="Resource" id="Resource_1071q"]
+script = ExtResource("2_wofi1")
+Item = ExtResource("1_expwu")
+Quantity = 6
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_havke"]
+script = ExtResource("2_wofi1")
+Item = ExtResource("3_4l80d")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_7fikv"]
+script = ExtResource("2_wofi1")
+Item = ExtResource("4_5t2hq")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[resource]
+script = ExtResource("5_kg6h3")
+Result = SubResource("Resource_7fikv")
+RecipeType = 0
+Ingredients = [SubResource("Resource_1071q"), SubResource("Resource_havke")]
+metadata/_custom_type_script = "uid://djs3qll7uwkya"

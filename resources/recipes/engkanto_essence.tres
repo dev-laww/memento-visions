@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=11 format=3 uid="uid://ffb0lus8tfkg"]
+
+[ext_resource type="Resource" uid="uid://hrhry5q5e5ri" path="res://resources/items/material/moonlit_elixir.tres" id="1_id744"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_8rupw"]
+[ext_resource type="Resource" uid="uid://dx25tu288c73x" path="res://resources/items/material/lunar_petal.tres" id="3_txigc"]
+[ext_resource type="Resource" uid="uid://dti7vm5w4d0e" path="res://resources/items/material/calamansi.tres" id="4_l15ns"]
+[ext_resource type="Resource" uid="uid://dhr2jtmgl0gse" path="res://resources/items/material/engkanto_essence.tres" id="5_3rshn"]
+[ext_resource type="Script" uid="uid://djs3qll7uwkya" path="res://Scripts/Data/Recipe/Recipe.cs" id="6_xx5r1"]
+
+[sub_resource type="Resource" id="Resource_uy2y2"]
+script = ExtResource("2_8rupw")
+Item = ExtResource("1_id744")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_ekaax"]
+script = ExtResource("2_8rupw")
+Item = ExtResource("3_txigc")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_7m0f0"]
+script = ExtResource("2_8rupw")
+Item = ExtResource("4_l15ns")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_njwbc"]
+script = ExtResource("2_8rupw")
+Item = ExtResource("5_3rshn")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[resource]
+script = ExtResource("6_xx5r1")
+Result = SubResource("Resource_njwbc")
+RecipeType = 0
+Ingredients = [SubResource("Resource_uy2y2"), SubResource("Resource_ekaax"), SubResource("Resource_7m0f0")]
+metadata/_custom_type_script = "uid://djs3qll7uwkya"

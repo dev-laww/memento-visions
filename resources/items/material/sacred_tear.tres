@@ -10,7 +10,7 @@ region = Rect2(32, 48, 16, 16)
 [resource]
 resource_name = "Sacred Tear"
 script = ExtResource("2_43ilf")
-Id = "item:sacredtear"
+Id = "item:sacred_tear"
 Icon = SubResource("AtlasTexture_lp6iv")
 Name = "Sacred Tear"
 ItemCategory = 1

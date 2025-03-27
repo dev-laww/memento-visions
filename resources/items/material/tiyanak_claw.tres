@@ -10,7 +10,7 @@ region = Rect2(32, 16, 16, 16)
 [resource]
 resource_name = "Tiyanak's Claw"
 script = ExtResource("2_qmr1g")
-Id = "item:tiyanakclaw"
+Id = "item:tiyanak_claw"
 Icon = SubResource("AtlasTexture_an2vu")
 Name = "Tiyanak's Claw"
 ItemCategory = 1

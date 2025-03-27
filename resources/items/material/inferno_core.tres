@@ -10,7 +10,7 @@ region = Rect2(48, 48, 16, 16)
 [resource]
 resource_name = "Inferno Core"
 script = ExtResource("2_lxs8o")
-Id = "item:infernocore"
+Id = "item:inferno_core"
 Icon = SubResource("AtlasTexture_oloqr")
 Name = "Inferno Core"
 ItemCategory = 1

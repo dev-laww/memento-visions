@@ -10,9 +10,9 @@ region = Rect2(96, 32, 16, 16)
 [resource]
 resource_name = "Tsaang Gubat"
 script = ExtResource("2_twy13")
-Id = "item:tsaanggubat"
+Id = "item:tsaang_gubat"
 Icon = SubResource("AtlasTexture_yc3e6")
 Name = "Tsaang Gubat"
 ItemCategory = 0
-Description = "A wild herbal tea with an earthy, slightly bitter taste. Known for its distinct aroma and deep, soothing flavor."
+Description = "A wild herbal tea with an earthy, slightly bitter taste. Known for its distinct aroma and deep, soothing flavor, it restores 15% of HP when consumed."
 metadata/_custom_type_script = "uid://b772648mucsjw"

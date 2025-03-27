@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=11 format=3 uid="uid://b7fi5wq6oudb1"]
+
+[ext_resource type="Resource" uid="uid://buy0xwqx0ocwe" path="res://resources/items/material/soul_ember.tres" id="1_a1xu4"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_857pd"]
+[ext_resource type="Resource" uid="uid://iw7urxt8gbm0" path="res://resources/items/material/spectral_ash.tres" id="3_na1ln"]
+[ext_resource type="Resource" uid="uid://drj5puv2462td" path="res://resources/items/material/bato_balani.tres" id="4_mqfxv"]
+[ext_resource type="Resource" uid="uid://oduwv2m4xfc5" path="res://resources/items/material/inferno_core.tres" id="5_wfmos"]
+[ext_resource type="Script" uid="uid://djs3qll7uwkya" path="res://Scripts/Data/Recipe/Recipe.cs" id="6_hcgo7"]
+
+[sub_resource type="Resource" id="Resource_xbpmh"]
+script = ExtResource("2_857pd")
+Item = ExtResource("1_a1xu4")
+Quantity = 6
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_oeqqi"]
+script = ExtResource("2_857pd")
+Item = ExtResource("3_na1ln")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_58mvv"]
+script = ExtResource("2_857pd")
+Item = ExtResource("4_mqfxv")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_hh7wj"]
+script = ExtResource("2_857pd")
+Item = ExtResource("5_wfmos")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[resource]
+script = ExtResource("6_hcgo7")
+Result = SubResource("Resource_hh7wj")
+RecipeType = 0
+Ingredients = [SubResource("Resource_xbpmh"), SubResource("Resource_oeqqi"), SubResource("Resource_58mvv")]
+metadata/_custom_type_script = "uid://djs3qll7uwkya"
