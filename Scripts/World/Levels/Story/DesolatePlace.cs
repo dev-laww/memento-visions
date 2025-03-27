@@ -10,8 +10,9 @@ namespace Game.Levels.Story;
 public partial class DesolatePlace : Node2D
 {
     [Node] private Entity StoryTeller;
-    private Quest quest = ResourceLoader.Load<Quest>("res://resources/quests/Prologue/prologue1.tres");
     public bool isInteracted = false;
+    public int ObjectiveInteracted = 0;
+    public bool isStoryTellerVisible = false;
     
 
     public override void _Notification(int what)
@@ -30,16 +31,7 @@ public partial class DesolatePlace : Node2D
     public void setStoryTellerVisible()
     {
         StoryTeller.Visible = true;
+        isStoryTellerVisible = true;
     }
-
-    public void CompleteObjectiveAtIndex(int index)
-    {
-        if (quest == null)
-        {
-            GD.PrintErr("Quest not loaded");
-            return;
-        }
-        
-        quest.CompleteObjective(index);
-    }
+    
 }

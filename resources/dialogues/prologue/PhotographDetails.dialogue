@@ -1,4 +1,10 @@
 ~ start
+if CurrentScene.ObjectiveInteracted != 2
+	Alex: I need more clues before this.
+	=> END! 
+if CurrentScene.isStoryTellerVisible == true 
+	Alex: A photograph of a group of students—suggesting they may have taken pleasure in targeting this young girl with their pranks or harassment.
+	=> END!
 Alex: A photograph of a group of students—suggesting they may have taken pleasure in targeting this young girl with their pranks or harassment.
 Alex: From the clues I’ve gathered, it seems like the students weren’t harmed. They simply disappeared after encountering a vengeful spirit.
 do CurrentScene.setStoryTellerVisible()

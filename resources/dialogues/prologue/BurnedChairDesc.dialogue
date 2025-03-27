@@ -1,3 +1,4 @@
 ~ start
+set CurrentScene.ObjectiveInteracted +=1
 A scorched chair and dismantled components—likely repurposed for a campfire.
 => END
