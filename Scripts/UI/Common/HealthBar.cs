@@ -42,7 +42,7 @@ public partial class HealthBar : ProgressBar
 
         var tween = CreateTween();
 
-        tween.TweenProperty(this, "value", Value + increase, 0.3f)
+        tween.TweenProperty(this, "value", Value + increase, timer.WaitTime)
             .SetTrans(Tween.TransitionType.Cubic)
             .SetEase(Tween.EaseType.InOut);
         tween.TweenCallback(Callable.From(() => damageBar.Value = Value));
@@ -54,7 +54,7 @@ public partial class HealthBar : ProgressBar
 
         var tween = CreateTween();
 
-        tween.TweenProperty(this, "value", Value - decrease, 0.3f)
+        tween.TweenProperty(this, "value", Value - decrease, timer.WaitTime)
             .SetTrans(Tween.TransitionType.Cubic)
             .SetEase(Tween.EaseType.InOut);
 
@@ -65,7 +65,7 @@ public partial class HealthBar : ProgressBar
     {
         var tween = CreateTween();
 
-        tween.TweenProperty(damageBar, "value", Value, 0.3f)
+        tween.TweenProperty(damageBar, "value", Value, timer.WaitTime)
             .SetTrans(Tween.TransitionType.Cubic)
             .SetEase(Tween.EaseType.InOut);
     }
