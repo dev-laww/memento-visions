@@ -134,7 +134,7 @@ public partial class QuestTrigger : Area2D, IInteractable
 
         if (player is null) return;
 
-        var isActive = player.QuestManager.IsActive(Quest);
+        var isActive = QuestManager.IsActive(Quest);
 
         if (!ShouldInteract || (!isActive && Mode == TriggerMode.Complete)) return;
 
@@ -152,16 +152,12 @@ public partial class QuestTrigger : Area2D, IInteractable
 
     private void TriggerQuest()
     {
-        var player = this.GetPlayer();
-
-        if (player is null) return;
-
-        var isActive = player.QuestManager.IsActive(Quest);
+        var isActive = QuestManager.IsActive(Quest);
 
         switch (Mode)
         {
             case TriggerMode.Start:
-                player.QuestManager.Add(Quest);
+                QuestManager.Add(Quest);
                 break;
             case TriggerMode.Complete:
                 if (!isActive || (Quest.Ordered && Quest.CurrentObjective != Objective)) return;

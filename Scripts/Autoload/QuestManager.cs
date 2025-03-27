@@ -1,27 +1,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
-using Game.Autoload;
 using Game.Common.Utilities;
 using Game.Data;
-using Game.Utils.Extensions;
 using Godot;
 
-namespace Game.Components;
+namespace Game.Autoload;
 
-[GlobalClass, Icon("res://assets/icons/quest-manager.svg")]
-public partial class QuestManager : Node
+[Icon("res://assets/icons/quest-manager.svg")]
+public partial class QuestManager : Autoload<QuestManager>
 {
     [Signal] public delegate void AddedEventHandler(Quest quest);
     [Signal] public delegate void UpdatedEventHandler(Quest quest);
     [Signal] public delegate void CompletedEventHandler(Quest quest);
     [Signal] public delegate void RemovedEventHandler(Quest quest);
 
+    // TODO: move signals to source generator
+    public static event AddedEventHandler QuestAdded
+    {
+        add => Instance.Added += value;
+        remove => Instance.Added -= value;
+    }
+
+    public static event UpdatedEventHandler QuestUpdated
+    {
+        add => Instance.Updated += value;
+        remove => Instance.Updated -= value;
+    }
+
+    public static event CompletedEventHandler QuestCompleted
+    {
+        add => Instance.Completed += value;
+        remove => Instance.Completed -= value;
+    }
+
     private readonly List<Quest> quests = [];
 
-    public IReadOnlyList<Quest> Quests => quests;
+    public static IReadOnlyList<Quest> Quests => Instance.quests;
 
-    public override void _Ready()
+    public override void _EnterTree()
     {
         // TODO: load quests from save file
     }
@@ -54,13 +71,11 @@ public partial class QuestManager : Node
         }
     }
 
-    public bool IsActive(Quest quest) => quests.Contains(quest);
+    public static bool IsActive(Quest quest) => Instance.quests.Contains(quest);
 
-    public void Add(Quest quest)
+    public static void Add(Quest quest)
     {
-        var player = this.GetPlayer();
-
-        if (player is null || player.QuestManager.IsActive(quest)) return;
+        if (IsActive(quest)) return;
 
         PlayerInventoryManager.Pickup += quest.OnItemPickup;
         PlayerInventoryManager.Remove += quest.OnItemRemoved;
@@ -70,18 +85,16 @@ public partial class QuestManager : Node
             CallableUtils.FromMethod(quest.OnEnemyDied)
         );
 
-        quests.Add(quest);
-        EmitSignalAdded(quest);
+        Instance.quests.Add(quest);
+        Instance.EmitSignalAdded(quest);
 
         Log.Info($"{quest} added.");
     }
 
-    public void Remove(string id)
+    public static void Remove(string id)
     {
-        var quest = quests.FirstOrDefault(q => q.Id == id);
-        var player = this.GetPlayer();
-
-        if (player is null || quest is null) return;
+        var quest = Instance.quests.FirstOrDefault(q => q.Id == id);
+        if (quest is null) return;
 
 
         PlayerInventoryManager.Pickup -= quest.OnItemPickup;
@@ -92,8 +105,8 @@ public partial class QuestManager : Node
             CallableUtils.FromMethod(quest.OnEnemyDied)
         );
 
-        quests.Remove(quest);
-        EmitSignalRemoved(quest);
+        Instance.quests.Remove(quest);
+        Instance.EmitSignalRemoved(quest);
 
         Log.Info($"{quest} removed.");
     }

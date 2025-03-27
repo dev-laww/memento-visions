@@ -18,7 +18,6 @@ public partial class Player : Entity
 
     [Node] public VelocityManager VelocityManager;
     [Node] public WeaponManager WeaponManager;
-    [Node] public QuestManager QuestManager;
     [Node] public InputManager InputManager;
     [Node] private GpuParticles2D trail;
 

@@ -1,12 +1,12 @@
 using Godot;
 using System.Linq;
+using Game.Autoload;
 using GodotUtilities;
 using Game.Components;
 using Game.Utils.Extensions;
 using QuestResource = Game.Data.Quest;
 
 namespace Game.UI.Overlays;
-
 
 [Scene]
 public partial class Quest : Overlay
@@ -16,7 +16,6 @@ public partial class Quest : Overlay
     [Node] public Label Title;
     [Node] public RichTextLabel Objectives;
     [Node] public Label Reward;
-    public QuestManager questManager;
 
     private TreeItem TreeRoot;
 
@@ -28,11 +27,9 @@ public partial class Quest : Overlay
 
     public override void _Ready()
     {
-        var player = this.GetPlayer();
-        questManager = player.QuestManager;
-        questManager.Added += OnQuestAdded;
-        questManager.Updated += OnQuestUpdated;
-        questManager.Removed += OnQuestRemoved;
+        QuestManager.QuestAdded += OnQuestAdded;
+        QuestManager.QuestUpdated += OnQuestUpdated;
+        QuestManager.QuestCompleted += OnQuestCompleted;
         QuestTree.ItemSelected += OnItemSelected;
 
         InitializeTree();
@@ -49,12 +46,12 @@ public partial class Quest : Overlay
     {
         var questItem = QuestTree.CreateItem(TreeRoot);
         questItem.SetText(0, quest.Title);
-        questItem.SetMetadata(0, quest); 
+        questItem.SetMetadata(0, quest);
     }
 
     private void OnQuestUpdated(QuestResource quest)
     {
-        foreach (TreeItem item in TreeRoot.GetChildren())
+        foreach (var item in TreeRoot.GetChildren())
         {
             if ((QuestResource)item.GetMetadata(0) != quest) continue;
             item.SetText(0, quest.Title);
@@ -76,9 +73,9 @@ public partial class Quest : Overlay
         }));
     }
 
-    private void OnQuestRemoved(QuestResource quest)
+    private void OnQuestCompleted(QuestResource quest)
     {
-        foreach (TreeItem item in TreeRoot.GetChildren())
+        foreach (var item in TreeRoot.GetChildren())
         {
             if ((QuestResource)item.GetMetadata(0) != quest) continue;
             item.Free();
@@ -92,9 +89,7 @@ public partial class Quest : Overlay
         if (selectedItem == null) return;
 
         var quest = (QuestResource)selectedItem.GetMetadata(0);
-        if (quest == null) return;
 
         UpdateQuestDetails(quest);
     }
-    
 }
