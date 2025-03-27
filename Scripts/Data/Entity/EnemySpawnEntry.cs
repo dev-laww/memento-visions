@@ -9,7 +9,7 @@ namespace Game.Data;
 public partial class EnemySpawnEntry : Resource
 {
     [Export] private PackedScene enemyScene;
-    [Export] private int weight = 1;
+    [Export] public int Weight = 1;
 
     [ExportGroup("Thresholds")]
     [Export(PropertyHint.Range, "-1,1")]
@@ -62,7 +62,7 @@ public partial class EnemySpawnEntry : Resource
 
         var enemy = enemyScene.InstantiateOrNull<Enemy>();
 
-        enemy.GlobalPosition = position;
+        enemy.Position = position;
 
         return enemy;
     }

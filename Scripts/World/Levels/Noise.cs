@@ -18,11 +18,11 @@ public partial class Noise : Node2D
     [Node] private TileMapLayer foreGround;
     [Node] private TileMapLayer props;
     [Node] private Node noiseGenerator;
-    [Node] private Node2D spawnPoints;
+    [Node] private Spawner spawner;
     [Node] private NavigationManager navigationManager;
 
     private GodotObject grid;
-    private Stopwatch stopwatch;
+    private Stopwatch stopwatch = new();
     private bool placedFirstProp;
 
     public override void _Notification(int what)
@@ -36,20 +36,12 @@ public partial class Noise : Node2D
     {
         grid = noiseGenerator.Get("grid").AsGodotObject();
         noiseGenerator.Connect("generation_finished", Callable.From(OnGenerationFinished));
-        noiseGenerator.Connect("generation_started", Callable.From(PlacedTerrain));
-    }
-
-    private void PlacedTerrain()
-    {
-
-        GD.Print("Generating terrain...");
-        GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
     }
 
 
     private void OnGenerationFinished()
     {
-        stopwatch = Stopwatch.StartNew();
+        stopwatch.Restart();
         GD.Print("Terrain generated!");
 
         GD.Print("Cleaning up...");
@@ -57,9 +49,15 @@ public partial class Noise : Node2D
         stopwatch.Stop();
         GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
 
+        GD.Print("Generating spawn points...");
+        stopwatch.Restart();
+        GenerateSpawnPosition();
+        stopwatch.Stop();
+        GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
+
         GD.Print("Spawning enemies...");
         stopwatch.Restart();
-        SpawnEnemies();
+        spawner.StartSpawning();
         stopwatch.Stop();
         GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
 
@@ -73,11 +71,8 @@ public partial class Noise : Node2D
         GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
     }
 
-    private void SpawnEnemies()
+    private void GenerateSpawnPosition()
     {
-        // TODO: use noise to select spawn points and spawn enemies instead of markers
-        spawnPoints.QueueFreeChildren();
-
         var layerCount = grid.Call("get_layer_count").AsInt32();
         var emptyCells = GetEmptyCells();
 
@@ -94,12 +89,9 @@ public partial class Noise : Node2D
 
         foreach (var cell in emptyCells)
         {
-            var marker = new Marker2D
-            {
-                Position = (cell * tileSize) + tileSize / 2,
-            };
+            var position = (cell * tileSize) + tileSize / 2;
 
-            spawnPoints.EditorAddChild(marker);
+            spawner.SpawnPoints.Add(position);
         }
     }
 

@@ -1,4 +1,5 @@
 using System.Linq;
+using Game.Common.Extensions;
 using Game.Data;
 using Godot;
 using Godot.Collections;
@@ -48,11 +49,31 @@ public partial class Spawner : Node
             {
                 entry.Noise = noise;
             }
+
+            lootTable = new();
+
+            foreach (var entry in spawnEntries)
+            {
+                lootTable.AddItem(entry, entry.Weight);
+            }
         }
     }
 
-    public Array<Vector2> SpawnPoints = [];
+    public Array<Vector2> SpawnPoints { get; } = [];
     private FastNoiseLite noise = new();
     private Array<EnemySpawnEntry> spawnEntries = [];
     private LootTable<EnemySpawnEntry> lootTable = new();
+
+
+    public void StartSpawning()
+    {
+        SpawnPoints.ToList().ForEach(point =>
+        {
+            var spawnEntry = SpawnEntries[0];
+
+            var enemy = spawnEntry.Create(point);
+
+            this.EditorAddChild(enemy);
+        });
+    }
 }
