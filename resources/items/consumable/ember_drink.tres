@@ -14,5 +14,5 @@ Id = "item:ember_drink"
 Icon = SubResource("AtlasTexture_d5svl")
 Name = "Ember Drink"
 ItemCategory = 0
-Description = "A glowing, molten drink infused with the essence of a Santelmo. It crackles with ghostly energy, carrying the lingering heat of a wandering spirit."
+Description = "A glowing, molten drink infused with the essence of a Santelmo. It crackles with ghostly energy, carrying the lingering heat of a wandering spirit, restoring 10% HP and gaining 15% strength for 3 minutes when consumed."
 metadata/_custom_type_script = "uid://b772648mucsjw"
