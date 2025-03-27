@@ -1,14 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1gihhoaku3hk"]
+[gd_scene load_steps=12 format=3 uid="uid://b1gihhoaku3hk"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_kykbt"]
 [ext_resource type="Texture2D" uid="uid://ckj3v8yrowvxb" path="res://assets/tilesets/school-tileset.png" id="2_hk2xv"]
 [ext_resource type="Script" uid="uid://58jqrupdcss0" path="res://Scripts/Components/SmoothSprite2D.cs" id="3_odju6"]
-[ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="4_kykbt"]
+[ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="4_vkrxr"]
 [ext_resource type="Resource" uid="uid://bb54w5sxnh122" path="res://resources/dialogues/prologue/BurnedChairDesc.dialogue" id="5_kykbt"]
+[ext_resource type="Resource" uid="uid://bcsrr6l46xq2" path="res://resources/quests/Prologue/prologue1.tres" id="5_yosd6"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="6_hk2xv"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="6_i3y0y"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_hk2xv"]
-radius = 18.0
+[sub_resource type="Resource" id="Resource_6f01l"]
+script = ExtResource("6_i3y0y")
+Type = 2
+Description = "Find Chair"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hwwpg"]
+radius = 17.8045
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_odju6"]
+size = Vector2(21, 23.5)
 
 [node name="Burned Wooden Chair" type="Node2D"]
 
@@ -21,19 +32,29 @@ region_rect = Rect2(536, 264, 32, 24)
 script = ExtResource("3_odju6")
 metadata/_custom_type_script = "uid://58jqrupdcss0"
 
-[node name="DialogueTrigger" type="Area2D" parent="."]
-collision_layer = 0
+[node name="QuestTrigger" type="Area2D" parent="SmoothSprite2D"]
+collision_layer = 16
 collision_mask = 4
-script = ExtResource("4_kykbt")
-DialogueResource = ExtResource("5_kykbt")
+script = ExtResource("4_vkrxr")
+Quest = ExtResource("5_yosd6")
+Mode = 1
 ShouldInteract = true
-InteractionLabel = "Investigate"
-metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("5_kykbt")
+Objective = SubResource("Resource_6f01l")
+ObjectiveIndex = 0
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueTrigger"]
-shape = SubResource("CircleShape2D_hk2xv")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmoothSprite2D/QuestTrigger"]
+shape = SubResource("CircleShape2D_hwwpg")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
-[node name="Node2D" type="Node2D" parent="DialogueTrigger"]
+[node name="Node2D" type="Node2D" parent="SmoothSprite2D/QuestTrigger"]
 
-[node name="InteractionUI" parent="DialogueTrigger/Node2D" instance=ExtResource("6_hk2xv")]
+[node name="InteractionUI" parent="SmoothSprite2D/QuestTrigger/Node2D" instance=ExtResource("6_hk2xv")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SmoothSprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmoothSprite2D/StaticBody2D"]
+position = Vector2(-0.5, -0.25)
+shape = SubResource("RectangleShape2D_odju6")

@@ -1,4 +1,3 @@
 ~ start
 A scorched chair and dismantled components—likely repurposed for a campfire.
-do CurrentScene.CompleteObjectiveAtIndex(0)
 => END

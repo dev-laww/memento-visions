@@ -1,6 +1,5 @@
 ~ start
 Alex: A photograph of a group of students—suggesting they may have taken pleasure in targeting this young girl with their pranks or harassment.
-do CurrentScene.CompleteObjectiveAtIndex(2)
 Alex: From the clues I’ve gathered, it seems like the students weren’t harmed. They simply disappeared after encountering a vengeful spirit.
 do CurrentScene.setStoryTellerVisible()
 StoryTeller: Good observation, Mr. Alejandro Gutierrez. The said spirit didn’t harm or show violence to those wandering children; It merely offered them my kindness.
