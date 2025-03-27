@@ -10,7 +10,7 @@ region = Rect2(80, 48, 16, 16)
 [resource]
 resource_name = "Bato Balani"
 script = ExtResource("2_8js31")
-Id = "item:batobalani"
+Id = "item:bato_balani"
 Icon = SubResource("AtlasTexture_wv3o8")
 Name = "Bato Balani"
 ItemCategory = 1

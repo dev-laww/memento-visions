@@ -10,7 +10,7 @@ region = Rect2(32, 32, 16, 16)
 [resource]
 resource_name = "Charge Core"
 script = ExtResource("2_k1ewf")
-Id = "item:chargecore"
+Id = "item:charge_core"
 Icon = SubResource("AtlasTexture_q0mg1")
 Name = "Charge Core"
 ItemCategory = 1

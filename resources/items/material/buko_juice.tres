@@ -10,7 +10,7 @@ region = Rect2(64, 0, 16, 16)
 [resource]
 resource_name = "Buko Juice"
 script = ExtResource("2_i50aq")
-Id = "item:bukojuice"
+Id = "item:buko_juice"
 Icon = SubResource("AtlasTexture_e6xn2")
 Name = "Buko Juice"
 ItemCategory = 0

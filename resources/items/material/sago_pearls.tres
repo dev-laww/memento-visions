@@ -10,7 +10,7 @@ region = Rect2(96, 0, 16, 18)
 [resource]
 resource_name = "Sago Pearls"
 script = ExtResource("2_esfg5")
-Id = "item:sagopearls"
+Id = "item:sago_pearls"
 Icon = SubResource("AtlasTexture_ij2jn")
 Name = "Sago Pearls"
 ItemCategory = 1

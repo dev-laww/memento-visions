@@ -10,7 +10,7 @@ region = Rect2(0, 16, 16, 16)
 [resource]
 resource_name = "Moonlit Elixir"
 script = ExtResource("2_8c7fb")
-Id = "item:moonlitelixir"
+Id = "item:moonlit_elixir"
 Icon = SubResource("AtlasTexture_me1jm")
 Name = "Moonlit Elixir"
 ItemCategory = 0

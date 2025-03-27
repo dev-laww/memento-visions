@@ -10,7 +10,7 @@ region = Rect2(0, 0, 16, 16)
 [resource]
 resource_name = "Rice Flour"
 script = ExtResource("2_rrppy")
-Id = "item:riceflour"
+Id = "item:rice_flour"
 Icon = SubResource("AtlasTexture_1j8gq")
 Name = "Rice Flour"
 ItemCategory = 1

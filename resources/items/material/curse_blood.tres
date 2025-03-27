@@ -10,7 +10,7 @@ region = Rect2(32, 0, 16, 16)
 [resource]
 resource_name = "Curse Blood"
 script = ExtResource("2_qu0la")
-Id = "item:curseblood"
+Id = "item:curse_blood"
 Icon = SubResource("AtlasTexture_fkl5q")
 Name = "Curse Blood"
 ItemCategory = 1

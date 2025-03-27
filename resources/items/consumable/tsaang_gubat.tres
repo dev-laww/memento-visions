@@ -10,7 +10,7 @@ region = Rect2(96, 32, 16, 16)
 [resource]
 resource_name = "Tsaang Gubat"
 script = ExtResource("2_twy13")
-Id = "item:tsaanggubat"
+Id = "item:tsaang_gubat"
 Icon = SubResource("AtlasTexture_yc3e6")
 Name = "Tsaang Gubat"
 ItemCategory = 0

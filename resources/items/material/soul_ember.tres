@@ -10,7 +10,7 @@ region = Rect2(128, 16, 16, 16)
 [resource]
 resource_name = "Soul Ember"
 script = ExtResource("2_dtcx2")
-Id = "item:soulember"
+Id = "item:soul_ember"
 Icon = SubResource("AtlasTexture_ofiyp")
 Name = "Soul Ember"
 ItemCategory = 1

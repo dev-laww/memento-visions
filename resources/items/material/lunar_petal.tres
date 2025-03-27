@@ -10,7 +10,7 @@ region = Rect2(128, 0, 16, 16)
 [resource]
 resource_name = "Lunar Petal"
 script = ExtResource("2_8oq0r")
-Id = "item:lunarpetal"
+Id = "item:lunar_petal"
 Icon = SubResource("AtlasTexture_sdxd0")
 Name = "Lunar Petal"
 ItemCategory = 1

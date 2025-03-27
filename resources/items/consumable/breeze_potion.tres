@@ -10,7 +10,7 @@ region = Rect2(48, 16, 16, 16)
 [resource]
 resource_name = "Breeze Potion"
 script = ExtResource("2_wn5ri")
-Id = "item:breezepotion"
+Id = "item:breeze_potion"
 Icon = SubResource("AtlasTexture_058v3")
 Name = "Breeze Potion"
 ItemCategory = 0

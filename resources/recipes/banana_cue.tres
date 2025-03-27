@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="Recipe" load_steps=9 format=3 uid="uid://bg26w8ojop6yg"]
 
-[ext_resource type="Resource" uid="uid://bkj8alwvgl152" path="res://resources/items/material/banana.tres" id="1_2patj"]
+[ext_resource type="Resource" uid="uid://bwwk3vtqo5h7w" path="res://resources/items/material/banana.tres" id="1_2patj"]
 [ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_fih1o"]
 [ext_resource type="Resource" uid="uid://doqpta8ruoou0" path="res://resources/items/material/hoof_powder.tres" id="3_n6n3g"]
-[ext_resource type="Resource" uid="uid://ycm2jvw8a4st" path="res://resources/items/consumable/banana_cue.tres" id="4_fpxi0"]
+[ext_resource type="Resource" uid="uid://benoaphq2f8wm" path="res://resources/items/consumable/banana_cue.tres" id="4_fpxi0"]
 [ext_resource type="Script" uid="uid://djs3qll7uwkya" path="res://Scripts/Data/Recipe/Recipe.cs" id="5_4q66f"]
 
 [sub_resource type="Resource" id="Resource_2wwsr"]

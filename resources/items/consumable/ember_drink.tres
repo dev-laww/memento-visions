@@ -10,7 +10,7 @@ region = Rect2(16, 32, 16, 16)
 [resource]
 resource_name = "Ember Drink"
 script = ExtResource("2_q07dv")
-Id = "item:emberdrink"
+Id = "item:ember_drink"
 Icon = SubResource("AtlasTexture_d5svl")
 Name = "Ember Drink"
 ItemCategory = 0

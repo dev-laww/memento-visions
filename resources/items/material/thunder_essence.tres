@@ -10,7 +10,7 @@ region = Rect2(0, 48, 16, 16)
 [resource]
 resource_name = "Thunder Essence"
 script = ExtResource("2_0ofru")
-Id = "item:thunderessence"
+Id = "item:thunder_essence"
 Icon = SubResource("AtlasTexture_h58jb")
 Name = "Thunder Essence"
 ItemCategory = 1

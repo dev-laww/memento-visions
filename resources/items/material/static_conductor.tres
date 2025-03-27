@@ -10,7 +10,7 @@ region = Rect2(128, 32, 16, 16)
 [resource]
 resource_name = "Static Conductor"
 script = ExtResource("2_nmow8")
-Id = "item:staticconductor"
+Id = "item:static_conductor"
 Icon = SubResource("AtlasTexture_wy2qc")
 Name = "Static Conductor"
 ItemCategory = 1

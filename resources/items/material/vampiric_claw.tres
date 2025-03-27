@@ -10,7 +10,7 @@ region = Rect2(16, 48, 16, 16)
 [resource]
 resource_name = "Vampiric's Claw"
 script = ExtResource("2_lggrn")
-Id = "item:vampiricclaw"
+Id = "item:vampiric_claw"
 Icon = SubResource("AtlasTexture_eaty5")
 Name = "Vampiric's Claw"
 ItemCategory = 1

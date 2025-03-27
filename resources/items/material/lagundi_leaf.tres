@@ -10,7 +10,7 @@ region = Rect2(64, 48, 16, 16)
 [resource]
 resource_name = "Lagundi Leaf"
 script = ExtResource("2_mcbjh")
-Id = "item:lagundileaf"
+Id = "item:lagundi_leaf"
 Icon = SubResource("AtlasTexture_7oj38")
 Name = "Lagundi Leaf"
 ItemCategory = 1

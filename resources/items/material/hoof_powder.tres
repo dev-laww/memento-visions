@@ -10,7 +10,7 @@ region = Rect2(64, 16, 16, 16)
 [resource]
 resource_name = "Hoof Powder"
 script = ExtResource("2_sjns5")
-Id = "item:hoofpowder"
+Id = "item:hoof_powder"
 Icon = SubResource("AtlasTexture_ytsul")
 Name = "Hoof Powder"
 ItemCategory = 1

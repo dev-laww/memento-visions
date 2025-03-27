@@ -10,7 +10,7 @@ region = Rect2(48, 32, 16, 16)
 [resource]
 resource_name = "Engkanto Essence"
 script = ExtResource("2_7cop7")
-Id = "item:engkantoessence"
+Id = "item:engkanto_essence"
 Icon = SubResource("AtlasTexture_f4qui")
 Name = "Engkanto Essence"
 ItemCategory = 1
