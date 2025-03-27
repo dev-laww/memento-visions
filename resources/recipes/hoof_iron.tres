@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=7 format=3 uid="uid://crw0x1x00d107"]
+
+[ext_resource type="Resource" uid="uid://doqpta8ruoou0" path="res://resources/items/material/hoof_powder.tres" id="1_xv72f"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_n87bu"]
+[ext_resource type="Resource" uid="uid://1e7qp47hdgi7" path="res://resources/items/material/hoof_iron.tres" id="3_pjgfq"]
+[ext_resource type="Script" uid="uid://djs3qll7uwkya" path="res://Scripts/Data/Recipe/Recipe.cs" id="4_n77e0"]
+
+[sub_resource type="Resource" id="Resource_sj6du"]
+script = ExtResource("2_n87bu")
+Item = ExtResource("1_xv72f")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_ofpkn"]
+script = ExtResource("2_n87bu")
+Item = ExtResource("3_pjgfq")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[resource]
+script = ExtResource("4_n77e0")
+Result = SubResource("Resource_ofpkn")
+RecipeType = 0
+Ingredients = [SubResource("Resource_sj6du")]
+metadata/_custom_type_script = "uid://djs3qll7uwkya"

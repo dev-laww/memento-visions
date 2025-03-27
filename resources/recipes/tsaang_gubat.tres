@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=11 format=3 uid="uid://lr4nirglt6jf"]
+
+[ext_resource type="Resource" uid="uid://d0u4wc8nhju7v" path="res://resources/items/material/sacred_tear.tres" id="1_3ntcr"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_xgmi5"]
+[ext_resource type="Resource" uid="uid://bkgu01oom7qam" path="res://resources/items/material/panyawan.tres" id="3_drmfh"]
+[ext_resource type="Resource" uid="uid://bsddfgq1qtd3r" path="res://resources/items/material/water.tres" id="4_1hv07"]
+[ext_resource type="Resource" uid="uid://du6n3qtjkmo27" path="res://resources/items/consumable/tsaang_gubat.tres" id="5_kutj7"]
+[ext_resource type="Script" uid="uid://djs3qll7uwkya" path="res://Scripts/Data/Recipe/Recipe.cs" id="6_cnsf7"]
+
+[sub_resource type="Resource" id="Resource_ws5vp"]
+script = ExtResource("2_xgmi5")
+Item = ExtResource("1_3ntcr")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_wyq6y"]
+script = ExtResource("2_xgmi5")
+Item = ExtResource("3_drmfh")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_lrtv4"]
+script = ExtResource("2_xgmi5")
+Item = ExtResource("4_1hv07")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_fo2w1"]
+script = ExtResource("2_xgmi5")
+Item = ExtResource("5_kutj7")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[resource]
+script = ExtResource("6_cnsf7")
+Result = SubResource("Resource_fo2w1")
+RecipeType = 0
+Ingredients = [SubResource("Resource_ws5vp"), SubResource("Resource_wyq6y"), SubResource("Resource_lrtv4")]
+metadata/_custom_type_script = "uid://djs3qll7uwkya"

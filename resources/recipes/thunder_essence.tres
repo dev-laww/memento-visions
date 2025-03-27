@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=11 format=3 uid="uid://riusgw64xgye"]
+
+[ext_resource type="Resource" uid="uid://4xxavg0do20k" path="res://resources/items/material/static_conductor.tres" id="1_dsj8c"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_h0lwg"]
+[ext_resource type="Resource" uid="uid://c6j15ogomrwqo" path="res://resources/items/material/curse_blood.tres" id="3_6s2qo"]
+[ext_resource type="Resource" uid="uid://b7kfqu8k8dykm" path="res://resources/items/material/aswang_elixir.tres" id="4_6a6aw"]
+[ext_resource type="Resource" uid="uid://dmbnoq0p8nta0" path="res://resources/items/material/thunder_essence.tres" id="5_d6yb7"]
+[ext_resource type="Script" uid="uid://djs3qll7uwkya" path="res://Scripts/Data/Recipe/Recipe.cs" id="6_pjqdq"]
+
+[sub_resource type="Resource" id="Resource_g7tia"]
+script = ExtResource("2_h0lwg")
+Item = ExtResource("1_dsj8c")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_bvn8j"]
+script = ExtResource("2_h0lwg")
+Item = ExtResource("3_6s2qo")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_ek6t8"]
+script = ExtResource("2_h0lwg")
+Item = ExtResource("4_6a6aw")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_dpeu6"]
+script = ExtResource("2_h0lwg")
+Item = ExtResource("5_d6yb7")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[resource]
+script = ExtResource("6_pjqdq")
+Result = SubResource("Resource_dpeu6")
+RecipeType = 0
+Ingredients = [SubResource("Resource_g7tia"), SubResource("Resource_bvn8j"), SubResource("Resource_ek6t8")]
+metadata/_custom_type_script = "uid://djs3qll7uwkya"

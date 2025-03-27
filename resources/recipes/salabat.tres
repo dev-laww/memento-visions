@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=11 format=3 uid="uid://dyqr2ga1idvut"]
+
+[ext_resource type="Resource" uid="uid://cd1uqih0xu1yc" path="res://resources/items/material/ginger.tres" id="1_yqfie"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_pmi8u"]
+[ext_resource type="Resource" uid="uid://dti7vm5w4d0e" path="res://resources/items/material/calamansi.tres" id="3_5mjtx"]
+[ext_resource type="Resource" uid="uid://bsddfgq1qtd3r" path="res://resources/items/material/water.tres" id="4_h1w4x"]
+[ext_resource type="Resource" uid="uid://ct2y0f318jxyf" path="res://resources/items/consumable/salabat.tres" id="5_7rbir"]
+[ext_resource type="Script" uid="uid://djs3qll7uwkya" path="res://Scripts/Data/Recipe/Recipe.cs" id="6_3tvav"]
+
+[sub_resource type="Resource" id="Resource_gxijj"]
+script = ExtResource("2_pmi8u")
+Item = ExtResource("1_yqfie")
+Quantity = 2
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_sduln"]
+script = ExtResource("2_pmi8u")
+Item = ExtResource("3_5mjtx")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_cqjho"]
+script = ExtResource("2_pmi8u")
+Item = ExtResource("4_h1w4x")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_3cghb"]
+script = ExtResource("2_pmi8u")
+Item = ExtResource("5_7rbir")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[resource]
+script = ExtResource("6_3tvav")
+Result = SubResource("Resource_3cghb")
+RecipeType = 0
+Ingredients = [SubResource("Resource_gxijj"), SubResource("Resource_sduln"), SubResource("Resource_cqjho")]
+metadata/_custom_type_script = "uid://djs3qll7uwkya"
