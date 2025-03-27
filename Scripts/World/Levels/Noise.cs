@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using Game.Common.Extensions;
 using Game.Components;
+using Game.Entities;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
@@ -21,8 +22,10 @@ public partial class Noise : Node2D
     [Node] private Spawner spawner;
     [Node] private NavigationManager navigationManager;
 
+    [ExportToolButton("Generate", Icon = "RotateLeft")] private Callable generate => Callable.From(() => noiseGenerator.Call("generate"));
+
     private GodotObject grid;
-    private Stopwatch stopwatch = new();
+    private readonly Stopwatch stopwatch = new();
     private bool placedFirstProp;
 
     public override void _Notification(int what)
@@ -36,6 +39,7 @@ public partial class Noise : Node2D
     {
         grid = noiseGenerator.Get("grid").AsGodotObject();
         noiseGenerator.Connect("generation_finished", Callable.From(OnGenerationFinished));
+        noiseGenerator.Connect("generation_started", Callable.From(OnGenerationStarted));
     }
 
 
@@ -71,10 +75,21 @@ public partial class Noise : Node2D
         GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
     }
 
+    private void OnGenerationStarted()
+    {
+        var enemies = GetChildren().OfType<Enemy>();
+
+        foreach (var enemy in enemies)
+        {
+            enemy.QueueFree();
+        }
+    }
+
     private void GenerateSpawnPosition()
     {
         var layerCount = grid.Call("get_layer_count").AsInt32();
         var emptyCells = GetEmptyCells();
+        spawner.SpawnPoints.Clear();
 
         do
         {

@@ -3,6 +3,7 @@ using Game.Common.Extensions;
 using Game.Data;
 using Godot;
 using Godot.Collections;
+using GodotUtilities;
 using GodotUtilities.Logic;
 
 namespace Game.Components;
@@ -69,11 +70,13 @@ public partial class Spawner : Node
     {
         SpawnPoints.ToList().ForEach(point =>
         {
-            var spawnEntry = SpawnEntries[0];
-
+            var spawnEntry = lootTable.PickItem();
             var enemy = spawnEntry.Create(point);
 
-            this.EditorAddChild(enemy);
+            if (enemy is null) return;
+
+            GetParent().AddChild(enemy);
+            enemy.SetOwner(GetTree().GetEditedSceneRoot());
         });
     }
 }

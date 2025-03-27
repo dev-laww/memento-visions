@@ -1,6 +1,7 @@
 using Game.Common;
 using Game.Entities;
 using Godot;
+using GodotUtilities;
 
 namespace Game.Data;
 
@@ -9,11 +10,12 @@ namespace Game.Data;
 public partial class EnemySpawnEntry : Resource
 {
     [Export] private PackedScene enemyScene;
+    [Export] private float spawnChance = 0.5f;
     [Export] public int Weight = 1;
 
     [ExportGroup("Thresholds")]
     [Export(PropertyHint.Range, "-1,1")]
-    private float Min
+    public float Min
     {
         get => min;
         set
@@ -24,7 +26,7 @@ public partial class EnemySpawnEntry : Resource
     }
 
     [Export(PropertyHint.Range, "-1,1")]
-    private float Max
+    public float Max
     {
         get => max;
         set
@@ -54,6 +56,14 @@ public partial class EnemySpawnEntry : Resource
 
     public Enemy Create(Vector2 position)
     {
+        var randomValue = MathUtil.RNG.RandfRange(0, 1);
+        var noiseValue = noise.GetNoise2D(position.X, position.Y);
+
+        if (randomValue > spawnChance || noiseValue < min || noiseValue > max)
+        {
+            return null;
+        }
+
         if (enemyScene == null)
         {
             Log.Error("Enemy scene is null.");
