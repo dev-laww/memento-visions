@@ -2,7 +2,7 @@
 #conditional dialogue
 
 #complete quest
-do CurrentScene.CompleteQuest()
+#do CurrentScene.CompleteQuest()
 Chief: Alex, we’ve got another one. Strange occurrences, eerie sightings – the whole village is on edge.
 Chief: The locals are certain it’s an aswang. They’re terrified.
 Alex: Chief, are you sure? Are they running rampant?

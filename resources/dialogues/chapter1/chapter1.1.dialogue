@@ -1,4 +1,5 @@
 ~ start
+do CurrentScene.CompleteObjectiveAtIndex(0)
 Alex: Can I talk to you? I need to know what’s the situation here. I know that you’re in dire need of help.
 Tisoy: ITS THEM!!! With their ravaging and sharp claws!!! WE! HUMANS! CAN’T! STAND! AGAINST! THEM!
 Alex: Something sinister happened here, I’m sure of it. But what could’ve caused them to act aggressively like this? Hmmm… 
