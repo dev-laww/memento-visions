@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df0a4eavi6x3r"
-path="res://.godot/imported/chief.png-9fcba47c78d99119d4a0fe3a651ba8ab.ctex"
+uid="uid://bhhku8reprfju"
+path="res://.godot/imported/spritesheet.png-89471881b4a09e07f6fd51be18dec03d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entities/npc/chief.png"
-dest_files=["res://.godot/imported/chief.png-9fcba47c78d99119d4a0fe3a651ba8ab.ctex"]
+source_file="res://assets/entities/characters/player/spritesheet.png"
+dest_files=["res://.godot/imported/spritesheet.png-89471881b4a09e07f6fd51be18dec03d.ctex"]
 
 [params]
 

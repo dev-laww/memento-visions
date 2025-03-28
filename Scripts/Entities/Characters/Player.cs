@@ -6,6 +6,7 @@ using Game.Data;
 using Godot;
 using GodotUtilities;
 using System.CommandLine.IO;
+using System.Data;
 
 
 namespace Game.Entities;
@@ -13,15 +14,19 @@ namespace Game.Entities;
 [Scene]
 public partial class Player : Entity
 {
+    private readonly StringName[] ANIMATION_STATES = ["idle", "move"];
+    private const string IDLE = "idle";
+    private const string MOVE = "move";
+
     [Node] private HurtBox hurtBox;
-    [Node] private AnimationPlayer animations;
+    [Node] private AnimationTree animationTree;
 
     [Node] public VelocityManager VelocityManager;
     [Node] public WeaponManager WeaponManager;
     [Node] public InputManager InputManager;
-    [Node] private GpuParticles2D trail;
 
     private Vector2 inputDirection;
+    private AnimationNodeStateMachinePlayback playback;
 
     public string LastFacedDirection => VelocityManager.GetFourDirectionString();
 
@@ -46,6 +51,60 @@ public partial class Player : Entity
         WireNodes();
     }
 
+    public override void OnReady()
+    {
+        playback = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
+
+        StateMachine.AddStates(Idle);
+        StateMachine.AddStates(Move);
+
+        StateMachine.SetInitialState(Idle);
+    }
+
+    public override void OnProcess(double delta)
+    {
+        VelocityManager.ApplyMovement();
+        UpdateBlendPositions();
+    }
+
+    public void Idle()
+    {
+        playback.Travel(IDLE);
+
+        if (!inputDirection.IsZeroApprox())
+        {
+            StateMachine.ChangeState(Move);
+            return;
+        }
+
+        VelocityManager.Decelerate();
+    }
+
+    public void Move()
+    {
+        playback.Travel(MOVE);
+
+        if (InputManager.GetVector().IsZeroApprox())
+        {
+            StateMachine.ChangeState(Idle);
+            return;
+        }
+
+        VelocityManager.Accelerate(InputManager.GetVector8());
+    }
+
+    private void UpdateBlendPositions()
+    {
+        foreach (var animation in ANIMATION_STATES)
+        {
+            animationTree.Set($"parameters/{animation}/blend_position", VelocityManager.LastFacedDirection.Normalized());
+        }
+    }
+
+    private void ProcessInput()
+    {
+        inputDirection = InputManager.GetVector8();
+    }
 
     [Command(Name = "heal", Description = "Adds health to the player")]
     private void AddHealth(float value = 100)
