@@ -1060,6 +1060,8 @@ blend_point_6/node = SubResource("AnimationNodeAnimation_c8fx8")
 blend_point_6/pos = Vector2(-0.7, 0.7)
 blend_point_7/node = SubResource("AnimationNodeAnimation_srhpj")
 blend_point_7/pos = Vector2(-0.7, -0.7)
+min_space = Vector2(-1.1, -1.1)
+max_space = Vector2(1.1, 1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fqtcb"]

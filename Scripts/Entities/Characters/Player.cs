@@ -6,7 +6,6 @@ using Game.Data;
 using Godot;
 using GodotUtilities;
 using System.CommandLine.IO;
-using System.Data;
 
 
 namespace Game.Entities;
@@ -27,8 +26,6 @@ public partial class Player : Entity
 
     private Vector2 inputDirection;
     private AnimationNodeStateMachinePlayback playback;
-
-    public string LastFacedDirection => VelocityManager.GetFourDirectionString();
 
     public override void _EnterTree()
     {
@@ -64,6 +61,7 @@ public partial class Player : Entity
     public override void OnProcess(double delta)
     {
         VelocityManager.ApplyMovement();
+        ProcessInput();
         UpdateBlendPositions();
     }
 
