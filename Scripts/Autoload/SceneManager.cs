@@ -42,7 +42,6 @@ public partial class SceneManager : Autoload<SceneManager>
         Loading.Transition? transition = null
     )
     {
-
         if (!ResourceLoader.Exists(path))
         {
             Log.Error($"Scene '{path}' not found.");
@@ -95,12 +94,21 @@ public partial class SceneManager : Autoload<SceneManager>
                 Log.Error($"Invalid resource '{loadPath}'.");
                 break;
             case ResourceLoader.ThreadLoadStatus.InProgress:
-                var p = progress.FirstOrDefault().As<float>();
-                Log.Debug($"Loading scene '{loadPath}': {p:P0}");
-                loadingScreen?.SetProgress(p);
+                if (progress.Count > 0)
+                {
+                    var p = progress[0].As<float>();
+                    loadingScreen?.SetProgress(p);
+                    Log.Debug($"Loading scene '{loadPath}': {p:P0}");
+                }
                 break;
             case ResourceLoader.ThreadLoadStatus.Failed:
                 Log.Error($"Failed to load scene '{loadPath}'.");
+                timer.Stop();
+                loadingScreen?.SetProgress(1.0f);
+                loadingScreen?.QueueFree();
+                loadingScreen = null;
+                loading = false;
+                loadPath = null;
                 break;
             case ResourceLoader.ThreadLoadStatus.Loaded:
 
