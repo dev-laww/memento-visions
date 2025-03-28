@@ -1180,7 +1180,7 @@ material = ExtResource("9_5oqto")
 sprite_frames = SubResource("SpriteFrames_1ij2i")
 animation = &"idle_down"
 autoplay = "idle_down"
-frame = 1
+frame = 3
 script = ExtResource("10_5oqto")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

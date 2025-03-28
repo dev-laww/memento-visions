@@ -24,6 +24,8 @@ public partial class Player : Entity
     [Node] public WeaponManager WeaponManager;
     [Node] public InputManager InputManager;
 
+    public string LastFacedDirection => VelocityManager.GetEightDirectionString();
+
     private Vector2 inputDirection;
     private AnimationNodeStateMachinePlayback playback;
 
