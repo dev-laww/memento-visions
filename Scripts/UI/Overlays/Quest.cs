@@ -27,9 +27,9 @@ public partial class Quest : Overlay
 
     public override void _Ready()
     {
-        QuestManager.QuestAdded += OnQuestAdded;
-        QuestManager.QuestUpdated += OnQuestUpdated;
-        QuestManager.QuestCompleted += OnQuestCompleted;
+        QuestManager.Instance.QuestAdded += OnQuestAdded;
+        QuestManager.Instance.QuestUpdated += OnQuestUpdated;
+        QuestManager.Instance.QuestCompleted += OnQuestCompleted;
         QuestTree.ItemSelected += OnItemSelected;
 
         InitializeTree();
