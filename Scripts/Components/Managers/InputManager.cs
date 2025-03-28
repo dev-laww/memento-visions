@@ -69,6 +69,7 @@ public partial class InputManager : Node
     public Vector2 GetVector() => lockCount > 0 ? Vector2.Zero : Input.GetVector(moveLeft, moveRight, moveUp, moveDown);
     public Vector2 GetVector8() => lockCount > 0 ? Vector2.Zero : Input.GetVector(moveLeft, moveRight, moveUp, moveDown).Normalized();
     public Vector2 GetMousePosition() => lockCount > 0 ? Vector2.Zero : GetViewport().GetMousePosition();
+    public Vector2 GetGlobalMousePosition() => lockCount > 0 ? Vector2.Zero : (GetParent() as Node2D)?.GetGlobalMousePosition() ?? Vector2.Zero;
 
     public bool IsActionPressed(StringName name) => pressed.Contains(name);
 
