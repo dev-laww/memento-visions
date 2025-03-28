@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dukv28wob344v"
-path="res://.godot/imported/Char_001.png-5839ad4ffbd6cd6fd228384a4c18cae7.ctex"
+uid="uid://cedupdnagtvrd"
+path="res://.godot/imported/black-smith.png-b1fb1eb05c1e7c449080645314aee18c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entities/escort/Char_001.png"
-dest_files=["res://.godot/imported/Char_001.png-5839ad4ffbd6cd6fd228384a4c18cae7.ctex"]
+source_file="res://assets/entities/characters/npc/black-smith.png"
+dest_files=["res://.godot/imported/black-smith.png-b1fb1eb05c1e7c449080645314aee18c.ctex"]
 
 [params]
 

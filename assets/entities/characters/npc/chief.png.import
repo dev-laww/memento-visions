@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db5rchhjpbc5g"
-path="res://.godot/imported/Char_001_Idle.png-0c20c26f234e5a61ec5287676521b6db.ctex"
+uid="uid://df0a4eavi6x3r"
+path="res://.godot/imported/chief.png-648dc7e7e4eb37a95928043414f2c8cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entities/escort/Char_001_Idle.png"
-dest_files=["res://.godot/imported/Char_001_Idle.png-0c20c26f234e5a61ec5287676521b6db.ctex"]
+source_file="res://assets/entities/characters/npc/chief.png"
+dest_files=["res://.godot/imported/chief.png-648dc7e7e4eb37a95928043414f2c8cf.ctex"]
 
 [params]
 

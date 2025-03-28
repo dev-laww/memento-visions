@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://df0a4eavi6x3r"
-path="res://.godot/imported/chief.png-9fcba47c78d99119d4a0fe3a651ba8ab.ctex"
+uid="uid://dm8absnc0tcfu"
+path="res://.godot/imported/storyteller.png-de79d10f3a7bdfaabd3382d28d63aaf3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entities/npc/chief.png"
-dest_files=["res://.godot/imported/chief.png-9fcba47c78d99119d4a0fe3a651ba8ab.ctex"]
+source_file="res://assets/entities/characters/npc/storyteller.png"
+dest_files=["res://.godot/imported/storyteller.png-de79d10f3a7bdfaabd3382d28d63aaf3.ctex"]
 
 [params]
 

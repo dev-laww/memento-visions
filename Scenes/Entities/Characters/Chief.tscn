@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c00y25k3divsu" path="res://Scripts/Entities/Characters/Chief.cs" id="1_e6tbd"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_tbqyk"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_e6tbd"]
-[ext_resource type="Texture2D" uid="uid://df0a4eavi6x3r" path="res://assets/entities/npc/chief.png" id="2_uwdmb"]
+[ext_resource type="Texture2D" uid="uid://df0a4eavi6x3r" path="res://assets/entities/characters/npc/chief.png" id="2_uwdmb"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="3_e6tbd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbqyk"]

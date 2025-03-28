@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="1_hw0pw"]
 [ext_resource type="Script" uid="uid://dlhoi4y35jo82" path="res://Scripts/Entities/Characters/BlackSmith.cs" id="1_m0lkp"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="4_iumo3"]
-[ext_resource type="Texture2D" uid="uid://cedupdnagtvrd" path="res://assets/entities/npc/black-smith.png" id="5_eh65q"]
+[ext_resource type="Texture2D" uid="uid://cedupdnagtvrd" path="res://assets/entities/characters/npc/black-smith.png" id="5_eh65q"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="6_j0jn0"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="7_fbx4l"]
 
