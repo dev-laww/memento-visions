@@ -6,6 +6,7 @@ using Game.Autoload;
 using Game.Data;
 using Godot;
 using System.CommandLine.IO;
+using Game.Utils.Extensions;
 
 namespace Game.Components;
 
@@ -15,16 +16,17 @@ public partial class WeaponManager : Node
     public WeaponComponent WeaponComponent { get; private set; }
     public Item Weapon { get; private set; }
     public bool CanAttack => Weapon != null && WeaponComponent != null;
-    private Entity parent;
+    private Player player;
 
-    public SignalAwaiter AnimationFinished => WeaponComponent.AnimationFinished;
     public bool IsUsingDagger => Weapon?.WeaponType == Item.Type.Dagger;
     public bool IsUsingSword => Weapon?.WeaponType == Item.Type.Sword;
     public bool IsUsingWhip => Weapon?.WeaponType == Item.Type.Whip;
 
+    private Vector2 blendPosition;
+
     public override void _Ready()
     {
-        parent = GetParent<Entity>();
+        player = GetParent<Player>();
 
         if (SaveManager.Data.Player.Equipped == string.Empty) return;
 
@@ -58,23 +60,29 @@ public partial class WeaponManager : Node
         WeaponComponent?.QueueFree();
 
         if (Weapon != null)
-            parent.StatsManager.DecreaseDamage(Weapon.DamagePercentBuff, StatsManager.ModifyMode.Percentage);
+            player.StatsManager.DecreaseDamage(Weapon.DamagePercentBuff, StatsManager.ModifyMode.Percentage);
 
         Weapon = weapon;
-        WeaponComponent = weapon.Component.Instantiate<WeaponComponent>();
-        WeaponComponent.Visible = false;
+        WeaponComponent = Weapon.Component.InstantiateOrNull<WeaponComponent>();
+
+        if (WeaponComponent == null)
+        {
+            Log.Error($"Failed to instantiate weapon component for {weapon}");
+            return;
+        }
+
 
         SaveManager.Data.Player.Equipped = Weapon.Id;
 
-        parent.StatsManager.IncreaseDamage(weapon.DamagePercentBuff, StatsManager.ModifyMode.Percentage);
-        parent.CallDeferred("add_child", WeaponComponent);
+        player.StatsManager.IncreaseDamage(weapon.DamagePercentBuff, StatsManager.ModifyMode.Percentage);
+        this.GetPlayer()?.Center.CallDeferred("add_child", WeaponComponent);
 
         Log.Debug($"Equipped {weapon}");
     }
 
     public void Unequip()
     {
-        parent.StatsManager.DecreaseDamage(Weapon.DamagePercentBuff, StatsManager.ModifyMode.Percentage);
+        player.StatsManager.DecreaseDamage(Weapon.DamagePercentBuff, StatsManager.ModifyMode.Percentage);
 
         WeaponComponent?.QueueFree();
         Weapon = null;
@@ -85,15 +93,15 @@ public partial class WeaponManager : Node
         Log.Debug($"Unequipped {Weapon}");
     }
 
-    public void Animate()
+    public void Animate(int combo)
     {
-        if (!Owner.GetChildren().OfType<WeaponComponent>().Any())
-        {
-            WeaponComponent = Weapon.Component.Instantiate<WeaponComponent>();
-            Owner.AddChild(WeaponComponent);
-        }
+        WeaponComponent?.Animate(combo);
+    }
 
-        WeaponComponent?.Animate();
+    public void SetBlendPosition(Vector2 position)
+    {
+        blendPosition = position;
+        WeaponComponent?.SetBlendPosition(position);
     }
 
     [Command(Name = "equip", Description = "Equips a weapon")]

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Game.Common.Extensions;
-using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
@@ -52,28 +52,38 @@ public partial class WeaponComponent : Node2D
         }
     }
 
+    public event Action AnimationFinished;
+
     [Node] private SmoothAnimatedSprite2D animatedSprite2d;
-    [Node] private AnimationPlayer animationPlayer;
+    [Node] private AnimationTree animationTree;
     [Node] private AudioStreamPlayer2D attackSfx;
     [Node] private AudioStreamPlayer2D hitSfx;
 
-    public SignalAwaiter AnimationFinished => ToSignal(animationPlayer, "animation_finished");
+    private AnimationNodeStateMachinePlayback playback;
+    private int combo = 1;
+    private Vector2 blendPosition;
 
-    public void Animate() => animationPlayer.Play(this.GetPlayer()?.LastFacedDirection ?? "front");
+    public void Animate(int combo)
+    {
+        this.combo = combo;
+
+        playback.Start("animate");
+    }
+
+    public void SetBlendPosition(Vector2 position)
+    {
+        blendPosition = position;
+        animationTree.Set("parameters/animate/blend_position", blendPosition);
+    }
 
     public override void _Ready()
     {
         var hitBoxes = GetChildren().OfType<HitBox>();
 
-        if (Engine.IsEditorHint() || !hitBoxes.Any()) return;
+        if (Engine.IsEditorHint()) return;
 
-        var player = this.GetPlayer();
-
-        foreach (var box in hitBoxes)
-        {
-            box.Owner = player;
-            box.Damage = player.StatsManager.Damage;
-        }
+        playback = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
+        animationTree.AnimationFinished += _ => AnimationFinished?.Invoke();
     }
 
     public override void _Notification(int what)

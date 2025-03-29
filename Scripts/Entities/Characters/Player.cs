@@ -18,11 +18,12 @@ public partial class Player : Entity
 
     [Node] private HurtBox hurtBox;
     [Node] private AnimationTree animationTree;
+    [Node] private Timer comboResetTimer;
 
     [Node] public VelocityManager VelocityManager;
     [Node] public WeaponManager WeaponManager;
     [Node] public InputManager InputManager;
-    [Node] private Timer comboResetTimer;
+    [Node] public Marker2D Center;
 
     public string LastFacedDirection => VelocityManager.GetEightDirectionString();
 
@@ -99,6 +100,8 @@ public partial class Player : Entity
     {
         isAttacking = true;
         UpdateAttackBlendPositions();
+
+        WeaponManager.Animate(combo);
     }
 
     public void ExitAttack()
@@ -128,6 +131,7 @@ public partial class Player : Entity
 
         animationTree.Set("parameters/sword_and_dagger/blend_position", directionToMouse);
         animationTree.Set("parameters/whip/blend_position", directionToMouse);
+        WeaponManager.SetBlendPosition(directionToMouse);
     }
     #endregion
 
