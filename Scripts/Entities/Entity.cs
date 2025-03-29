@@ -158,7 +158,9 @@ public abstract partial class Entity : CharacterBody2D
             NotifyPropertyListChanged();
         }
 
-        if (!Engine.IsEditorHint() && !isNpc)
+        if (Engine.IsEditorHint()) return;
+
+        if (!isNpc)
         {
             TreeExiting += EmitDeath;
             StatsManager.AttackReceived += AttackReceived;
