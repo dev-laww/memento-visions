@@ -118,6 +118,11 @@ public partial class WeaponComponent : Node2D
         var player = new AnimationPlayer { Name = "AnimationPlayer" };
         var atkSfx = new AudioStreamPlayer2D { Name = "AttackSfx" };
         var htSfx = new AudioStreamPlayer2D { Name = "HitSfx" };
+        var animationTree = new AnimationTree
+        {
+            Name = "AnimationTree",
+            TreeRoot = new AnimationNodeStateMachine(),
+        };
 
         var library = new AnimationLibrary();
 
@@ -139,5 +144,6 @@ public partial class WeaponComponent : Node2D
 
         this.EditorAddChild(assets);
         this.EditorAddChild(player);
+        this.EditorAddChild(animationTree);
     }
 }
