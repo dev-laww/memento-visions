@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://s6xynv7btqjd"]
+
+[ext_resource type="PackedScene" uid="uid://bs801y15b1a7e" path="res://Scenes/Weapons/Whip.tscn" id="1_kome1"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="1_wnled"]
+
+[resource]
+resource_name = "Whip"
+script = ExtResource("1_wnled")
+Id = "weapon:whip"
+Name = "Whip"
+ItemCategory = 3
+WeaponType = 3
+Component = ExtResource("1_kome1")
+DamagePercentBuff = 25
+Description = ""
+metadata/_custom_type_script = "uid://b772648mucsjw"

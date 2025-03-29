@@ -28,7 +28,7 @@ public partial class Player : Entity
 
     private AnimationNodeStateMachinePlayback playback;
     private int combo = 1;
-    private bool attacking;
+    private bool isAttacking;
 
     public override void _EnterTree()
     {
@@ -55,6 +55,7 @@ public partial class Player : Entity
     {
         playback = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
         comboResetTimer.Timeout += OnComboReset;
+        StatsManager.LevelUp += OnLevelUp;
 
         StateMachine.AddStates(Normal);
         StateMachine.AddStates(Attack, EnterAttack, ExitAttack);
@@ -66,11 +67,7 @@ public partial class Player : Entity
     {
         VelocityManager.ApplyMovement();
         UpdateNormalBlendPositions();
-    }
 
-    #region States
-    public void Normal()
-    {
         var inputDirection = InputManager.GetVector8();
 
         if (inputDirection.IsZeroApprox())
@@ -81,10 +78,14 @@ public partial class Player : Entity
         {
             VelocityManager.Accelerate(inputDirection);
         }
+    }
 
+    #region States
+    public void Normal()
+    {
         var attacking = InputManager.IsActionJustPressed("attack");
 
-        if (attacking) StateMachine.ChangeState(Attack);
+        if (attacking && WeaponManager.CanAttack) StateMachine.ChangeState(Attack);
     }
 
     public async void Attack()
@@ -96,7 +97,7 @@ public partial class Player : Entity
 
     public void EnterAttack()
     {
-        attacking = true;
+        isAttacking = true;
         UpdateAttackBlendPositions();
     }
 
@@ -104,10 +105,11 @@ public partial class Player : Entity
     {
         combo = combo >= MAX_COMBO ? 1 : combo + 1;
         comboResetTimer.Start();
-        attacking = false;
+        isAttacking = false;
     }
     #endregion
 
+    #region Utilities
     private void UpdateNormalBlendPositions()
     {
         var mousePosition = InputManager.GetGlobalMousePosition();
@@ -124,10 +126,12 @@ public partial class Player : Entity
         var mousePosition = InputManager.GetGlobalMousePosition();
         var directionToMouse = (mousePosition - GlobalPosition).Normalized();
 
-        animationTree.Set("parameters/melee/blend_position", directionToMouse);
-        // animationTree.Set("parameters/whip/blend_position", directionToMouse);
+        animationTree.Set("parameters/sword_and_dagger/blend_position", directionToMouse);
+        animationTree.Set("parameters/whip/blend_position", directionToMouse);
     }
+    #endregion
 
+    #region SignalListeners
     private void OnLevelUp(float level)
     {
         Log.Debug($"Player leveled up to {level}");
@@ -146,6 +150,7 @@ public partial class Player : Entity
         combo = 1;
         Log.Debug("Combo reset");
     }
+    #endregion
 
     #region Commands
     [Command(Name = "heal", Description = "Adds health to the player")]
