@@ -16,7 +16,11 @@ public partial class WeaponManager : Node
     public Item Weapon { get; private set; }
     public bool CanAttack => Weapon != null && WeaponComponent != null;
     private Entity parent;
+
     public SignalAwaiter AnimationFinished => WeaponComponent.AnimationFinished;
+    public bool IsUsingDagger => Weapon?.WeaponType == Item.Type.Dagger;
+    public bool IsUsingSword => Weapon?.WeaponType == Item.Type.Sword;
+    public bool IsUsingWhip => Weapon?.WeaponType == Item.Type.Whip;
 
     public override void _Ready()
     {
@@ -64,6 +68,7 @@ public partial class WeaponManager : Node
 
         parent.StatsManager.IncreaseDamage(weapon.DamagePercentBuff, StatsManager.ModifyMode.Percentage);
         parent.CallDeferred("add_child", WeaponComponent);
+
         Log.Debug($"Equipped {weapon}");
     }
 
