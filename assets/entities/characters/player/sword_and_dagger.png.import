@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://qelvcb3gkmb3"
-path="res://.godot/imported/melee.png-0d49195c20854fa9c8dd293fbc430201.ctex"
+path="res://.godot/imported/sword_and_dagger.png-82d8fd30a0fdfb1cf857bd031b419c46.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entities/characters/player/melee.png"
-dest_files=["res://.godot/imported/melee.png-0d49195c20854fa9c8dd293fbc430201.ctex"]
+source_file="res://assets/entities/characters/player/sword_and_dagger.png"
+dest_files=["res://.godot/imported/sword_and_dagger.png-82d8fd30a0fdfb1cf857bd031b419c46.ctex"]
 
 [params]
 
