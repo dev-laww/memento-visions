@@ -7,15 +7,14 @@ using Godot;
 using GodotUtilities;
 using System.CommandLine.IO;
 
-
 namespace Game.Entities;
 
 [Scene]
 public partial class Player : Entity
 {
     private readonly StringName[] ANIMATION_STATES = ["idle", "move"];
-    private const string IDLE = "idle";
-    private const string MOVE = "move";
+
+    private const int MAX_COMBO = 3;
 
     [Node] private HurtBox hurtBox;
     [Node] private AnimationTree animationTree;
@@ -23,11 +22,13 @@ public partial class Player : Entity
     [Node] public VelocityManager VelocityManager;
     [Node] public WeaponManager WeaponManager;
     [Node] public InputManager InputManager;
+    [Node] private Timer comboResetTimer;
 
     public string LastFacedDirection => VelocityManager.GetEightDirectionString();
 
-    private Vector2 inputDirection;
     private AnimationNodeStateMachinePlayback playback;
+    private int combo = 1;
+    private bool attacking;
 
     public override void _EnterTree()
     {
@@ -53,59 +54,100 @@ public partial class Player : Entity
     public override void OnReady()
     {
         playback = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
+        comboResetTimer.Timeout += OnComboReset;
 
-        StateMachine.AddStates(Idle);
-        StateMachine.AddStates(Move);
+        StateMachine.AddStates(Normal);
+        StateMachine.AddStates(Attack, EnterAttack, ExitAttack);
 
-        StateMachine.SetInitialState(Idle);
+        StateMachine.SetInitialState(Normal);
     }
 
     public override void OnProcess(double delta)
     {
         VelocityManager.ApplyMovement();
-        ProcessInput();
-        UpdateBlendPositions();
+        UpdateNormalBlendPositions();
     }
 
-    public void Idle()
+    #region States
+    public void Normal()
     {
-        playback.Travel(IDLE);
+        var inputDirection = InputManager.GetVector8();
 
-        if (!inputDirection.IsZeroApprox())
+        if (inputDirection.IsZeroApprox())
         {
-            StateMachine.ChangeState(Move);
-            return;
+            VelocityManager.Decelerate();
+        }
+        else
+        {
+            VelocityManager.Accelerate(inputDirection);
         }
 
-        VelocityManager.Decelerate();
+        var attacking = InputManager.IsActionJustPressed("attack");
+
+        if (attacking) StateMachine.ChangeState(Attack);
     }
 
-    public void Move()
+    public async void Attack()
     {
-        playback.Travel(MOVE);
+        await ToSignal(animationTree, "animation_finished");
 
-        if (InputManager.GetVector().IsZeroApprox())
-        {
-            StateMachine.ChangeState(Idle);
-            return;
-        }
-
-        VelocityManager.Accelerate(InputManager.GetVector8());
+        StateMachine.ChangeState(Normal);
     }
 
-    private void UpdateBlendPositions()
+    public void EnterAttack()
     {
+        attacking = true;
+        UpdateAttackBlendPositions();
+    }
+
+    public void ExitAttack()
+    {
+        combo = combo >= MAX_COMBO ? 1 : combo + 1;
+        comboResetTimer.Start();
+        attacking = false;
+    }
+    #endregion
+
+    private void UpdateNormalBlendPositions()
+    {
+        var mousePosition = InputManager.GetGlobalMousePosition();
+        var directionToMouse = (mousePosition - GlobalPosition).Normalized();
+
         foreach (var animation in ANIMATION_STATES)
         {
-            animationTree.Set($"parameters/{animation}/blend_position", VelocityManager.LastFacedDirection.Normalized());
+            animationTree.Set($"parameters/{animation}/blend_position", directionToMouse);
         }
     }
 
-    private void ProcessInput()
+    private void UpdateAttackBlendPositions()
     {
-        inputDirection = InputManager.GetVector8();
+        var mousePosition = InputManager.GetGlobalMousePosition();
+        var directionToMouse = (mousePosition - GlobalPosition).Normalized();
+
+        animationTree.Set("parameters/melee/blend_position", directionToMouse);
+        // animationTree.Set("parameters/whip/blend_position", directionToMouse);
     }
 
+    private void OnLevelUp(float level)
+    {
+        Log.Debug($"Player leveled up to {level}");
+        var text = FloatingTextManager.SpawnFloatingText(new FloatingTextManager.FloatingTextSpawnArgs
+        {
+            Text = $"Level up to {level}!",
+            Position = GlobalPosition,
+            Parent = GetParent(),
+            Color = new Color(1f, 1f, 0.5f),
+        });
+        text.Finished += text.QueueFree;
+    }
+
+    private void OnComboReset()
+    {
+        combo = 1;
+        Log.Debug("Combo reset");
+    }
+
+    #region Commands
     [Command(Name = "heal", Description = "Adds health to the player")]
     private void AddHealth(float value = 100)
     {
@@ -124,19 +166,6 @@ public partial class Player : Entity
         Log.Debug($"Current health: {StatsManager.Health}");
     }
 
-    private void OnLevelUp(float level)
-    {
-        Log.Debug($"Player leveled up to {level}");
-        var text = FloatingTextManager.SpawnFloatingText(new FloatingTextManager.FloatingTextSpawnArgs
-        {
-            Text = $"Level up to {level}!",
-            Position = GlobalPosition,
-            Parent = GetParent(),
-            Color = new Color(1f, 1f, 0.5f),
-        });
-        text.Finished += text.QueueFree;
-    }
-
     [Command(Name = "levelup", Description = "Increases the player's level")]
     private void LevelUp(float level = 1) => StatsManager.IncreaseLevel(level);
 
@@ -153,4 +182,5 @@ public partial class Player : Entity
 
         StatsManager.AddStatusEffect(statusEffect);
     }
+    #endregion
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=308 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" uid="uid://bbhesrdqhrnnb" path="res://Scripts/Entities/Characters/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_cqdhe"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c4x1susg0bgdd" path="res://assets/entities/characters/player/idle.png" id="11_1ij2i"]
 [ext_resource type="Texture2D" uid="uid://csfswm0vdx8rf" path="res://assets/entities/characters/player/move.png" id="13_0iqml"]
 [ext_resource type="PackedScene" uid="uid://c6kt3qbs62e4i" path="res://Scenes/UI/Overlays/HeadsUpDisplay.tscn" id="14_c8fx8"]
+[ext_resource type="Texture2D" uid="uid://qelvcb3gkmb3" path="res://assets/entities/characters/player/melee.png" id="14_srhpj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7xh7"]
 radius = 9.0
@@ -555,6 +556,633 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_doe1m"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(0, 288, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5if8u"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(144, 288, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_88es7"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(288, 288, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6bbu"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(432, 288, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avtcc"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(576, 288, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0sw06"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(720, 288, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srksk"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(864, 288, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nomjs"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1008, 288, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svjn3"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1152, 288, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbphp"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(0, 576, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hltpv"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(144, 576, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ji65"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(288, 576, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj11v"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(432, 576, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dw67"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(576, 576, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33veu"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(720, 576, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdeb1"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(864, 576, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fq7q3"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1008, 576, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlbbd"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1152, 576, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fi8nh"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(0, 432, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sohn"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(144, 432, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ejul"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(288, 432, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opj1r"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(432, 432, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d35ih"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(576, 432, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcj1v"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(720, 432, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvua6"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(864, 432, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_co5au"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1008, 432, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frgtw"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1152, 432, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gp1c7"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(0, 720, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6yat"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(144, 720, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uibpd"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(288, 720, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta72v"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(432, 720, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rrkd6"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(576, 720, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkjro"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(720, 720, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjpct"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(864, 720, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tscli"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1008, 720, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7o8rq"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1152, 720, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2y0m0"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(0, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_da1nu"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(144, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7m8j"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(288, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ha0jx"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(432, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oiqps"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(576, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igwv4"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(720, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejnne"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(864, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tvf0"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1008, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spdgk"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1152, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4bj6"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(0, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyd8g"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(144, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gui0s"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(288, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iagwv"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(432, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmjk0"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(576, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4c24"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(720, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mv860"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(864, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjamq"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1008, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0unvs"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1152, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fol21"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(0, 1008, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2dg4"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(144, 1008, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4j6d7"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(288, 1008, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ns1a"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(432, 1008, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wlf4"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(576, 1008, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m64xl"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(720, 1008, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y20fw"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(864, 1008, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8rp8"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1008, 1008, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjeqj"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1152, 1008, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sie5j"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(0, 864, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rx3rt"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(144, 864, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37fop"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(288, 864, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8hum"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(432, 864, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kegiu"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(576, 864, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wea0"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(720, 864, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87irw"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(864, 864, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23uyc"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1008, 864, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bml8"]
+atlas = ExtResource("14_srhpj")
+region = Rect2(1152, 864, 144, 144)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fqtcb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_doe1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5if8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88es7")
+}],
+"loop": false,
+"name": &"east_1",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6bbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avtcc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0sw06")
+}],
+"loop": false,
+"name": &"east_2",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srksk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nomjs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svjn3")
+}],
+"loop": false,
+"name": &"east_3",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbphp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hltpv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ji65")
+}],
+"loop": false,
+"name": &"north_1",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj11v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dw67")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33veu")
+}],
+"loop": false,
+"name": &"north_2",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdeb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fq7q3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlbbd")
+}],
+"loop": false,
+"name": &"north_3",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fi8nh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2sohn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ejul")
+}],
+"loop": false,
+"name": &"north_east_1",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opj1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d35ih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcj1v")
+}],
+"loop": false,
+"name": &"north_east_2",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvua6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_co5au")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frgtw")
+}],
+"loop": false,
+"name": &"north_east_3",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gp1c7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6yat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uibpd")
+}],
+"loop": false,
+"name": &"north_west_1",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ta72v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rrkd6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pkjro")
+}],
+"loop": false,
+"name": &"north_west_2",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjpct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tscli")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7o8rq")
+}],
+"loop": false,
+"name": &"north_west_3",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2y0m0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_da1nu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7m8j")
+}],
+"loop": false,
+"name": &"south_1",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ha0jx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oiqps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igwv4")
+}],
+"loop": false,
+"name": &"south_2",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejnne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tvf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spdgk")
+}],
+"loop": false,
+"name": &"south_3",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4bj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyd8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gui0s")
+}],
+"loop": false,
+"name": &"south_east_1",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iagwv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmjk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4c24")
+}],
+"loop": false,
+"name": &"south_east_2",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mv860")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjamq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0unvs")
+}],
+"loop": false,
+"name": &"south_east_3",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fol21")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2dg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4j6d7")
+}],
+"loop": false,
+"name": &"south_west_1",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ns1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wlf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m64xl")
+}],
+"loop": false,
+"name": &"south_west_2",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y20fw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8rp8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjeqj")
+}],
+"loop": false,
+"name": &"south_west_3",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sie5j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rx3rt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37fop")
+}],
+"loop": false,
+"name": &"west_1",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8hum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kegiu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wea0")
+}],
+"loop": false,
+"name": &"west_2",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_87irw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23uyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bml8")
+}],
+"loop": false,
+"name": &"west_3",
+"speed": 8.0
+}]
+
 [sub_resource type="Animation" id="Animation_0k36x"]
 length = 0.001
 tracks/0/type = "value"
@@ -604,6 +1232,30 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [&"south"]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Animations/Melee:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"south_1"]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2uqso"]
@@ -662,6 +1314,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_c8fx8"]
 length = 0.5
@@ -709,6 +1373,18 @@ tracks/3/path = NodePath("Animations/Move:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -766,6 +1442,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_fqtcb"]
 length = 0.5
@@ -813,6 +1501,18 @@ tracks/3/path = NodePath("Animations/Move:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -870,6 +1570,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_h0qod"]
 length = 0.5
@@ -917,6 +1629,18 @@ tracks/3/path = NodePath("Animations/Move:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -974,6 +1698,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_2uqso"]
 length = 0.5
@@ -1026,6 +1762,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0iqml"]
 _data = {
@@ -1037,6 +1785,1546 @@ _data = {
 &"south_east": SubResource("Animation_h0qod"),
 &"south_west": SubResource("Animation_27dh2"),
 &"west": SubResource("Animation_2uqso")
+}
+
+[sub_resource type="Animation" id="Animation_00fp1"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["east_1"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_fs1v2"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["east_2"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_hkqvp"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["east_3"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_dw12t"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["north_1"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ylcw4"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["north_2"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_h0wcw"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["north_3"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_aywd4"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["north_east_1"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_pa3uv"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["north_east_2"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_27rv3"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["north_east_3"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qpvym"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["north_west_1"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_aybh0"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["north_west_2"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_diglt"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["north_west_3"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_e176i"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["south_1"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_nfrp8"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["south_2"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_nfwqq"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["south_3"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_eauk8"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["south_east_1"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_xhst7"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["south_east_2"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_2ak7b"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["south_east_3"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_gllvg"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["south_west_1"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_nig40"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["south_west_2"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_0cnu0"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["south_west_3"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_5won7"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["west_1"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_fiyie"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["west_2"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_m24ox"]
+length = 0.375
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Melee:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Melee:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["west_3"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Melee:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Idle:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Move:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_elndc"]
+_data = {
+&"east_1": SubResource("Animation_00fp1"),
+&"east_2": SubResource("Animation_fs1v2"),
+&"east_3": SubResource("Animation_hkqvp"),
+&"north_1": SubResource("Animation_dw12t"),
+&"north_2": SubResource("Animation_ylcw4"),
+&"north_3": SubResource("Animation_h0wcw"),
+&"north_east_1": SubResource("Animation_aywd4"),
+&"north_east_2": SubResource("Animation_pa3uv"),
+&"north_east_3": SubResource("Animation_27rv3"),
+&"north_west_1": SubResource("Animation_qpvym"),
+&"north_west_2": SubResource("Animation_aybh0"),
+&"north_west_3": SubResource("Animation_diglt"),
+&"south_1": SubResource("Animation_e176i"),
+&"south_2": SubResource("Animation_nfrp8"),
+&"south_3": SubResource("Animation_nfwqq"),
+&"south_east_1": SubResource("Animation_eauk8"),
+&"south_east_2": SubResource("Animation_xhst7"),
+&"south_east_3": SubResource("Animation_2ak7b"),
+&"south_west_1": SubResource("Animation_gllvg"),
+&"south_west_2": SubResource("Animation_nig40"),
+&"south_west_3": SubResource("Animation_0cnu0"),
+&"west_1": SubResource("Animation_5won7"),
+&"west_2": SubResource("Animation_fiyie"),
+&"west_3": SubResource("Animation_m24ox")
 }
 
 [sub_resource type="Animation" id="Animation_70mij"]
@@ -1085,6 +3373,18 @@ tracks/3/path = NodePath("Animations/Idle:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1142,6 +3442,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_lpq1k"]
 length = 0.5
@@ -1189,6 +3501,18 @@ tracks/3/path = NodePath("Animations/Idle:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1246,6 +3570,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_wl46y"]
 length = 0.5
@@ -1293,6 +3629,18 @@ tracks/3/path = NodePath("Animations/Idle:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1350,6 +3698,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_13gvp"]
 length = 0.5
@@ -1397,6 +3757,18 @@ tracks/3/path = NodePath("Animations/Idle:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1454,6 +3826,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Animations/Melee:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_00fp1"]
 _data = {
@@ -1486,10 +3870,10 @@ animation = &"idle/south_west"
 animation = &"idle/south_east"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_27dh2"]
-animation = &"idle/north_west"
+animation = &"idle/north_east"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2uqso"]
-animation = &"move/north_west"
+animation = &"idle/north_west"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_0iqml"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_0iqml")
@@ -1508,6 +3892,369 @@ blend_point_6/node = SubResource("AnimationNodeAnimation_27dh2")
 blend_point_6/pos = Vector2(0.5, -1)
 blend_point_7/node = SubResource("AnimationNodeAnimation_2uqso")
 blend_point_7/pos = Vector2(-0.5, -1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wwkb6"]
+animation = &"melee/south_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_00fp1"]
+animation = &"melee/south_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fs1v2"]
+animation = &"melee/south_3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hkqvp"]
+advance_mode = 2
+advance_expression = "combo == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dw12t"]
+advance_mode = 2
+advance_expression = "combo == 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ylcw4"]
+advance_mode = 2
+advance_expression = "combo == 3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xqgt3"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h0qod"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_27dh2"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_h0wcw"]
+states/melee_south_1/node = SubResource("AnimationNodeAnimation_wwkb6")
+states/melee_south_1/position = Vector2(532, 23)
+states/melee_south_2/node = SubResource("AnimationNodeAnimation_00fp1")
+states/melee_south_2/position = Vector2(532, 100)
+states/melee_south_3/node = SubResource("AnimationNodeAnimation_fs1v2")
+states/melee_south_3/position = Vector2(532, 182)
+transitions = ["Start", "melee_south_1", SubResource("AnimationNodeStateMachineTransition_hkqvp"), "Start", "melee_south_2", SubResource("AnimationNodeStateMachineTransition_dw12t"), "Start", "melee_south_3", SubResource("AnimationNodeStateMachineTransition_ylcw4"), "melee_south_1", "End", SubResource("AnimationNodeStateMachineTransition_xqgt3"), "melee_south_2", "End", SubResource("AnimationNodeStateMachineTransition_h0qod"), "melee_south_3", "End", SubResource("AnimationNodeStateMachineTransition_27dh2")]
+graph_offset = Vector2(-43, -13)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hkqvp"]
+animation = &"melee/north_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dw12t"]
+animation = &"melee/north_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ylcw4"]
+animation = &"melee/north_3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h0wcw"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aywd4"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pa3uv"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_27rv3"]
+advance_mode = 2
+advance_expression = "combo == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qpvym"]
+advance_mode = 2
+advance_expression = "combo == 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aybh0"]
+advance_mode = 2
+advance_expression = "combo == 3"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_aywd4"]
+states/melee_north_1/node = SubResource("AnimationNodeAnimation_hkqvp")
+states/melee_north_1/position = Vector2(524, 18)
+states/melee_north_2/node = SubResource("AnimationNodeAnimation_dw12t")
+states/melee_north_2/position = Vector2(524, 100)
+states/melee_north_3/node = SubResource("AnimationNodeAnimation_ylcw4")
+states/melee_north_3/position = Vector2(524, 177)
+transitions = ["melee_north_1", "End", SubResource("AnimationNodeStateMachineTransition_h0wcw"), "melee_north_2", "End", SubResource("AnimationNodeStateMachineTransition_aywd4"), "melee_north_3", "End", SubResource("AnimationNodeStateMachineTransition_pa3uv"), "Start", "melee_north_1", SubResource("AnimationNodeStateMachineTransition_27rv3"), "Start", "melee_north_2", SubResource("AnimationNodeStateMachineTransition_qpvym"), "Start", "melee_north_3", SubResource("AnimationNodeStateMachineTransition_aybh0")]
+graph_offset = Vector2(-55, -22)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h0wcw"]
+animation = &"melee/east_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aywd4"]
+animation = &"melee/east_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pa3uv"]
+animation = &"melee/east_3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_diglt"]
+advance_mode = 2
+advance_expression = "combo == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e176i"]
+advance_mode = 2
+advance_expression = "combo == 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nfrp8"]
+advance_mode = 2
+advance_expression = "combo == 3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nfwqq"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eauk8"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xhst7"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2ak7b"]
+states/melee_east_1/node = SubResource("AnimationNodeAnimation_h0wcw")
+states/melee_east_1/position = Vector2(515, 28)
+states/melee_east_2/node = SubResource("AnimationNodeAnimation_aywd4")
+states/melee_east_2/position = Vector2(515, 100)
+states/melee_east_3/node = SubResource("AnimationNodeAnimation_pa3uv")
+states/melee_east_3/position = Vector2(515, 178)
+transitions = ["Start", "melee_east_1", SubResource("AnimationNodeStateMachineTransition_diglt"), "Start", "melee_east_2", SubResource("AnimationNodeStateMachineTransition_e176i"), "Start", "melee_east_3", SubResource("AnimationNodeStateMachineTransition_nfrp8"), "melee_east_1", "End", SubResource("AnimationNodeStateMachineTransition_nfwqq"), "melee_east_2", "End", SubResource("AnimationNodeStateMachineTransition_eauk8"), "melee_east_3", "End", SubResource("AnimationNodeStateMachineTransition_xhst7")]
+graph_offset = Vector2(-86, -30)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_27rv3"]
+animation = &"melee/west_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qpvym"]
+animation = &"melee/west_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aybh0"]
+animation = &"melee/west_3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2ak7b"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gllvg"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nig40"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0cnu0"]
+advance_mode = 2
+advance_expression = "combo == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5won7"]
+advance_mode = 2
+advance_expression = "combo == 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fiyie"]
+advance_mode = 2
+advance_expression = "combo == 3"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_m24ox"]
+states/melee_west_1/node = SubResource("AnimationNodeAnimation_27rv3")
+states/melee_west_1/position = Vector2(502, 30)
+states/melee_west_2/node = SubResource("AnimationNodeAnimation_qpvym")
+states/melee_west_2/position = Vector2(502, 100)
+states/melee_west_3/node = SubResource("AnimationNodeAnimation_aybh0")
+states/melee_west_3/position = Vector2(502, 172)
+transitions = ["melee_west_1", "End", SubResource("AnimationNodeStateMachineTransition_2ak7b"), "melee_west_2", "End", SubResource("AnimationNodeStateMachineTransition_gllvg"), "melee_west_3", "End", SubResource("AnimationNodeStateMachineTransition_nig40"), "Start", "melee_west_1", SubResource("AnimationNodeStateMachineTransition_0cnu0"), "Start", "melee_west_2", SubResource("AnimationNodeStateMachineTransition_5won7"), "Start", "melee_west_3", SubResource("AnimationNodeStateMachineTransition_fiyie")]
+graph_offset = Vector2(-48, -61)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_diglt"]
+animation = &"melee/south_east_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e176i"]
+animation = &"melee/south_east_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nfrp8"]
+animation = &"melee/south_east_3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m24ox"]
+advance_mode = 2
+advance_expression = "combo == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_elndc"]
+advance_mode = 2
+advance_expression = "combo == 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_my8w1"]
+advance_mode = 2
+advance_expression = "combo == 3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n88h3"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fbryd"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vkckb"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6mm00"]
+states/melee_south_east_1/node = SubResource("AnimationNodeAnimation_diglt")
+states/melee_south_east_1/position = Vector2(563, 33)
+states/melee_south_east_2/node = SubResource("AnimationNodeAnimation_e176i")
+states/melee_south_east_2/position = Vector2(563, 100)
+states/melee_south_east_3/node = SubResource("AnimationNodeAnimation_nfrp8")
+states/melee_south_east_3/position = Vector2(563, 169)
+transitions = ["Start", "melee_south_east_1", SubResource("AnimationNodeStateMachineTransition_m24ox"), "Start", "melee_south_east_2", SubResource("AnimationNodeStateMachineTransition_elndc"), "Start", "melee_south_east_3", SubResource("AnimationNodeStateMachineTransition_my8w1"), "melee_south_east_1", "End", SubResource("AnimationNodeStateMachineTransition_n88h3"), "melee_south_east_2", "End", SubResource("AnimationNodeStateMachineTransition_fbryd"), "melee_south_east_3", "End", SubResource("AnimationNodeStateMachineTransition_vkckb")]
+graph_offset = Vector2(-52, -3)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nfwqq"]
+animation = &"melee/north_east_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eauk8"]
+animation = &"melee/north_east_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xhst7"]
+animation = &"melee/north_east_3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6mm00"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uuu27"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ovyr"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ojuw8"]
+advance_mode = 2
+advance_expression = "combo == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ejayu"]
+advance_mode = 2
+advance_expression = "combo == 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oi8uf"]
+advance_mode = 2
+advance_expression = "combo == 3"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1t1u6"]
+states/melee_north_east_1/node = SubResource("AnimationNodeAnimation_nfwqq")
+states/melee_north_east_1/position = Vector2(529, 25)
+states/melee_north_east_2/node = SubResource("AnimationNodeAnimation_eauk8")
+states/melee_north_east_2/position = Vector2(529, 100)
+states/melee_north_east_3/node = SubResource("AnimationNodeAnimation_xhst7")
+states/melee_north_east_3/position = Vector2(529, 188)
+transitions = ["melee_north_east_1", "End", SubResource("AnimationNodeStateMachineTransition_6mm00"), "melee_north_east_2", "End", SubResource("AnimationNodeStateMachineTransition_uuu27"), "melee_north_east_3", "End", SubResource("AnimationNodeStateMachineTransition_8ovyr"), "Start", "melee_north_east_1", SubResource("AnimationNodeStateMachineTransition_ojuw8"), "Start", "melee_north_east_2", SubResource("AnimationNodeStateMachineTransition_ejayu"), "Start", "melee_north_east_3", SubResource("AnimationNodeStateMachineTransition_oi8uf")]
+graph_offset = Vector2(-67, -15)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2ak7b"]
+animation = &"melee/north_west_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gllvg"]
+animation = &"melee/north_west_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nig40"]
+animation = &"melee/north_west_3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1t1u6"]
+advance_mode = 2
+advance_expression = "combo == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_njqam"]
+advance_mode = 2
+advance_expression = "combo == 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5yib1"]
+advance_mode = 2
+advance_expression = "combo == 3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xdb5y"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8n0xm"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1uu2k"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_c8fx8"]
+states/melee_north_west_1/node = SubResource("AnimationNodeAnimation_2ak7b")
+states/melee_north_west_1/position = Vector2(544, 19)
+states/melee_north_west_2/node = SubResource("AnimationNodeAnimation_gllvg")
+states/melee_north_west_2/position = Vector2(544, 100)
+states/melee_north_west_3/node = SubResource("AnimationNodeAnimation_nig40")
+states/melee_north_west_3/position = Vector2(544, 192)
+transitions = ["Start", "melee_north_west_1", SubResource("AnimationNodeStateMachineTransition_1t1u6"), "Start", "melee_north_west_2", SubResource("AnimationNodeStateMachineTransition_njqam"), "Start", "melee_north_west_3", SubResource("AnimationNodeStateMachineTransition_5yib1"), "melee_north_west_1", "End", SubResource("AnimationNodeStateMachineTransition_xdb5y"), "melee_north_west_2", "End", SubResource("AnimationNodeStateMachineTransition_8n0xm"), "melee_north_west_3", "End", SubResource("AnimationNodeStateMachineTransition_1uu2k")]
+graph_offset = Vector2(19, -39)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0cnu0"]
+animation = &"melee/south_west_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5won7"]
+animation = &"melee/south_west_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fiyie"]
+animation = &"melee/south_west_3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6bfyd"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5jqhu"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5u78d"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6onom"]
+advance_mode = 2
+advance_expression = "combo == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_57ifn"]
+advance_mode = 2
+advance_expression = "combo == 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_doe1m"]
+advance_mode = 2
+advance_expression = "combo == 3"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_5if8u"]
+states/melee_south_west_1/node = SubResource("AnimationNodeAnimation_0cnu0")
+states/melee_south_west_1/position = Vector2(537, 20)
+states/melee_south_west_2/node = SubResource("AnimationNodeAnimation_5won7")
+states/melee_south_west_2/position = Vector2(537, 100)
+states/melee_south_west_3/node = SubResource("AnimationNodeAnimation_fiyie")
+states/melee_south_west_3/position = Vector2(537, 185)
+transitions = ["melee_south_west_1", "End", SubResource("AnimationNodeStateMachineTransition_6bfyd"), "melee_south_west_2", "End", SubResource("AnimationNodeStateMachineTransition_5jqhu"), "melee_south_west_3", "End", SubResource("AnimationNodeStateMachineTransition_5u78d"), "Start", "melee_south_west_1", SubResource("AnimationNodeStateMachineTransition_6onom"), "Start", "melee_south_west_2", SubResource("AnimationNodeStateMachineTransition_57ifn"), "Start", "melee_south_west_3", SubResource("AnimationNodeStateMachineTransition_doe1m")]
+graph_offset = Vector2(-48, -50)
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_pa3uv"]
+blend_point_0/node = SubResource("AnimationNodeStateMachine_h0wcw")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeStateMachine_aywd4")
+blend_point_1/pos = Vector2(0, -1)
+blend_point_2/node = SubResource("AnimationNodeStateMachine_2ak7b")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeStateMachine_m24ox")
+blend_point_3/pos = Vector2(-1, 0)
+blend_point_4/node = SubResource("AnimationNodeStateMachine_6mm00")
+blend_point_4/pos = Vector2(0.5, 1)
+blend_point_5/node = SubResource("AnimationNodeStateMachine_1t1u6")
+blend_point_5/pos = Vector2(0.5, -1)
+blend_point_6/node = SubResource("AnimationNodeStateMachine_c8fx8")
+blend_point_6/pos = Vector2(-0.6, -1)
+blend_point_7/node = SubResource("AnimationNodeStateMachine_5if8u")
+blend_point_7/pos = Vector2(-0.6, 1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0k36x"]
@@ -1554,18 +4301,43 @@ blend_point_7/pos = Vector2(-0.5, -1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_srhpj"]
+advance_mode = 2
+advance_expression = "!InputManager.GetVector8().is_zero_approx()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fqtcb"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wwkb6"]
 advance_mode = 2
+advance_expression = "InputManager.GetVector8().is_zero_approx()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c8fx8"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2uqso"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "!InputManager.GetVector8().is_zero_approx()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0k36x"]
+switch_mode = 2
+advance_mode = 2
+advance_expression = "InputManager.GetVector8().is_zero_approx()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_70mij"]
+advance_mode = 2
+advance_expression = "attacking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b6xmj"]
+advance_mode = 2
+advance_expression = "attacking"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0iqml"]
 states/idle/node = SubResource("AnimationNodeBlendSpace2D_0iqml")
-states/idle/position = Vector2(352, 100)
+states/idle/position = Vector2(361, 100)
+states/melee/node = SubResource("AnimationNodeBlendSpace2D_pa3uv")
+states/melee/position = Vector2(509, 213)
 states/move/node = SubResource("AnimationNodeBlendSpace2D_c8fx8")
-states/move/position = Vector2(553, 100)
-transitions = ["idle", "move", SubResource("AnimationNodeStateMachineTransition_srhpj"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_fqtcb"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_wwkb6")]
+states/move/position = Vector2(660, 100)
+transitions = ["idle", "move", SubResource("AnimationNodeStateMachineTransition_srhpj"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_fqtcb"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_c8fx8"), "melee", "move", SubResource("AnimationNodeStateMachineTransition_2uqso"), "melee", "idle", SubResource("AnimationNodeStateMachineTransition_0k36x"), "move", "melee", SubResource("AnimationNodeStateMachineTransition_70mij"), "idle", "melee", SubResource("AnimationNodeStateMachineTransition_b6xmj")]
+graph_offset = Vector2(51, 53)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 4
@@ -1575,6 +4347,10 @@ Id = "player"
 
 [node name="HeadsUpDisplay" parent="." instance=ExtResource("14_c8fx8")]
 visible = false
+
+[node name="ComboResetTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 
 [node name="StatsManager" parent="." instance=ExtResource("2_cqdhe")]
 unique_name_in_owner = true
@@ -1632,6 +4408,7 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_5oqto")
 animation = &"south"
 autoplay = "south"
+frame = 3
 script = ExtResource("10_5oqto")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1645,18 +4422,31 @@ animation = &"south"
 script = ExtResource("10_5oqto")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
+[node name="Melee" type="AnimatedSprite2D" parent="Animations"]
+visible = false
+texture_filter = 2
+material = ExtResource("9_5oqto")
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_fqtcb")
+animation = &"south_1"
+script = ExtResource("10_5oqto")
+metadata/_custom_type_script = "uid://onowuhrhhpuc"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_2uqso"),
 &"idle": SubResource("AnimationLibrary_0iqml"),
+&"melee": SubResource("AnimationLibrary_elndc"),
 &"move": SubResource("AnimationLibrary_00fp1")
 }
 autoplay = "idle/south"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_0iqml")
+advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(0, 0)
+parameters/melee/blend_position = Vector2(0, 0)
 parameters/move/blend_position = Vector2(0, 0)
 
 [connection signal="LevelUp" from="StatsManager" to="." method="OnLevelUp"]
