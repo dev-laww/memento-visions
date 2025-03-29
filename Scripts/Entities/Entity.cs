@@ -160,18 +160,15 @@ public abstract partial class Entity : CharacterBody2D
 
         if (Engine.IsEditorHint()) return;
 
-        if (!isNpc)
-        {
-            TreeExiting += EmitDeath;
-            StatsManager.AttackReceived += AttackReceived;
-            StatsManager.StatDepleted += StatDepleted;
-            spawnInfo = new SpawnInfo(this);
+        TreeExiting += EmitDeath;
+        StatsManager.AttackReceived += AttackReceived;
+        StatsManager.StatDepleted += StatDepleted;
+        spawnInfo = new SpawnInfo(this);
 
-            GameEvents.EmitEntitySpawned(spawnInfo);
+        GameEvents.EmitEntitySpawned(spawnInfo);
 
-            if (this is Enemy)
-                EnemyManager.Register(spawnInfo);
-        }
+        if (this is Enemy)
+            EnemyManager.Register(spawnInfo);
 
         OnReady();
     }

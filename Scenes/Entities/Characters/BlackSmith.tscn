@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://dgqrvixy2ocww"]
+[gd_scene load_steps=23 format=3 uid="uid://dgqrvixy2ocww"]
 
 [ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="1_hw0pw"]
 [ext_resource type="Script" uid="uid://dlhoi4y35jo82" path="res://Scripts/Entities/Characters/BlackSmith.cs" id="1_m0lkp"]
+[ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_byyuo"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="4_iumo3"]
 [ext_resource type="Texture2D" uid="uid://cedupdnagtvrd" path="res://assets/entities/characters/npc/black-smith.png" id="5_eh65q"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="6_j0jn0"]
@@ -111,6 +112,10 @@ collision_mask = 15
 script = ExtResource("1_m0lkp")
 Id = "npc:blacksmith"
 isNpc = true
+
+[node name="StatsManager" type="Node" parent="."]
+script = ExtResource("2_byyuo")
+metadata/_custom_type_script = "uid://dnpva4sn53c1r"
 
 [node name="Interaction" type="Area2D" parent="."]
 position = Vector2(0, -15)
