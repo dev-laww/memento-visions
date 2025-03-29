@@ -1,0 +1,44 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dxghb8vs6lhwg"]
+
+[resource]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"east",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"north",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"north_east",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"north_west",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"south",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"south_east",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"south_west",
+"speed": 8.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"west",
+"speed": 8.0
+}]
