@@ -9,7 +9,7 @@ namespace Game.Levels.Story;
 [Scene]
 public partial class Bar : Node2D
 {
-    private Quest quest = ResourceLoader.Load<Quest>("res://resources/quests/Prologue/NightofShadows.tres");
+    private Quest quest = ResourceLoader.Load<Quest>("res://resources/quests/Prologue/night-of-shadows.tres");
 
     public override void _Notification(int what)
     {
@@ -32,7 +32,7 @@ public partial class Bar : Node2D
             return;
         }
 
-        quest.CompleteObjective(1);
+        quest.CompleteObjective(index);
     }
 
 }

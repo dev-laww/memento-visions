@@ -33,29 +33,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
+theme = ExtResource("2_y52qg")
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme = ExtResource("2_y52qg")
 
 [node name="Header" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 2
-
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/Header"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-theme = ExtResource("2_y52qg")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0.61339, 0.61339, 0.61339, 1)
-theme_override_font_sizes/font_size = 16
-text = "Quest "
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="CloseButton" type="TextureButton" parent="MarginContainer/VBoxContainer/Header"]
 unique_name_in_owner = true
@@ -137,7 +124,7 @@ clip_contents = true
 layout_mode = 2
 size_flags_stretch_ratio = 20.0
 theme = ExtResource("2_y52qg")
-theme_override_constants/separation = 10
+theme_override_constants/separation = 20
 
 [node name="Title" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -148,32 +135,103 @@ theme_override_font_sizes/font_size = 26
 horizontal_alignment = 1
 uppercase = true
 
-[node name="Subtitle" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-horizontal_alignment = 1
+size_flags_vertical = 3
+alignment = 1
 
-[node name="Objectives" type="RichTextLabel" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_gsxto")
+region_rect = Rect2(-0.336523, -0.0132232, 32.3036, 31.6703)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Objectives" type="RichTextLabel" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/NinePatchRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 7.0
+offset_right = -9.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(183, 54.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "ajkhsvjhvxsj,HVas"
+fit_content = true
+scroll_following = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("4_gsxto")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Description" type="RichTextLabel" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/VBoxContainer2/NinePatchRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = 7.0
+offset_right = -12.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(172.5, 35)
+theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 fit_content = true
+scroll_following = true
+justification_flags = 171
 
-[node name="Description" type="RichTextLabel" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 70)
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-fit_content = true
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.65
 
-[node name="Status" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_horizontal = 3
+texture = ExtResource("4_gsxto")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Reward" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer2/NinePatchRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -14.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(173.5, 17)
+size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("5_488ye")
-vertical_alignment = 2
-
-[node name="Reward" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_fonts/font = ExtResource("5_488ye")
+theme_override_font_sizes/font_size = 10
 vertical_alignment = 2

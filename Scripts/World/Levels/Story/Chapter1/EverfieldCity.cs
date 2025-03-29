@@ -22,10 +22,8 @@ public partial class EverfieldCity : Node2D
 
     public override void _Ready()
     {
-        
-        QuestManager.Instance.QuestUpdated += OnQuestUpdated;
-        GD.Print($"instance {QuestManager.Instance.Name}" );
-
+        base._Ready();
+        QuestManager.QuestUpdated += OnQuestUpdated;
     }
 
     private void OnQuestUpdated(Quest updatedQuest)
@@ -43,13 +41,13 @@ public partial class EverfieldCity : Node2D
             GD.PrintErr("Objectives are null or not enough objectives!");
             return;
         }
-      
+
         if (updatedQuest.Objectives[0].Completed && !Chief2.Visible)
         {
             Chief2.Visible = true;
         }
     }
-    
+
     public void CompleteObjectiveAtIndex(int index)
     {
         if (quest1 == null)

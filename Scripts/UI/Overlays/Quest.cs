@@ -5,6 +5,7 @@ using GodotUtilities;
 using Game.Components;
 using Game.Utils.Extensions;
 using QuestResource = Game.Data.Quest;
+using System;
 
 namespace Game.UI.Overlays;
 
@@ -16,6 +17,7 @@ public partial class Quest : Overlay
     [Node] public Label Title;
     [Node] public RichTextLabel Objectives;
     [Node] public Label Reward;
+    [Node] public TextureButton CloseButton;
 
     private TreeItem TreeRoot;
 
@@ -27,69 +29,110 @@ public partial class Quest : Overlay
 
     public override void _Ready()
     {
-        QuestManager.Instance.QuestAdded += OnQuestAdded;
-        QuestManager.Instance.QuestUpdated += OnQuestUpdated;
-        QuestManager.Instance.QuestCompleted += OnQuestCompleted;
+        base._Ready();
+        CloseButton.Pressed += Close;
+        QuestManager.QuestAdded += OnQuestAdded;
+        QuestManager.QuestUpdated += OnQuestUpdated;
+        QuestManager.QuestCompleted += OnQuestCompleted;
         QuestTree.ItemSelected += OnItemSelected;
 
         InitializeTree();
+        if (TreeRoot != null && TreeRoot.GetChildCount() > 0)
+        {
+            var firstItem = TreeRoot.GetChild(0);
+            QuestTree.SetSelected(firstItem, 0);
+            OnItemSelected(); // Manually trigger details update
+        }
     }
+
+    private void OnItemSelected()
+    {
+        var item = QuestTree.GetSelected();
+        if (item == null || !IsInstanceValid(item)) return;
+
+        var metadata = item.GetMetadata(0);
+        var quest = metadata.As<QuestResource>();
+        if (quest == null) return;
+
+        UpdateQuestDetails(quest);
+    }
+
 
     public void InitializeTree()
     {
         QuestTree.Clear();
         QuestTree.SetColumnTitle(0, "Quests");
         TreeRoot = QuestTree.CreateItem();
+        foreach (var item in QuestManager.Quests)
+        {
+            var treeItem = QuestTree.CreateItem(TreeRoot);
+            treeItem.SetText(0, item.Title);
+            treeItem.SetMetadata(0, item);
+        }
     }
 
-    private void OnQuestAdded(QuestResource quest)
-    {
-        var questItem = QuestTree.CreateItem(TreeRoot);
-        questItem.SetText(0, quest.Title);
-        questItem.SetMetadata(0, quest);
-    }
 
     private void OnQuestUpdated(QuestResource quest)
     {
         foreach (var item in TreeRoot.GetChildren())
         {
+            if (item == null || !IsInstanceValid(item)) continue;
             if ((QuestResource)item.GetMetadata(0) != quest) continue;
+
             item.SetText(0, quest.Title);
-            UpdateQuestDetails(quest);
+
+            if (QuestTree.GetSelected() == item)
+            {
+                UpdateQuestDetails(quest);
+            }
+
             break;
         }
     }
 
-    private void UpdateQuestDetails(QuestResource quest)
+    private void OnQuestAdded(QuestResource quest)
     {
-        Title.Text = quest.Title;
-        Description.Text = quest.Description;
+        if (TreeRoot == null) return;
 
-        // Convert all objectives to a single string with BBCode formatting
-        Objectives.Text = string.Join("\n", quest.Objectives.Select(objective =>
-        {
-            var color = objective.Completed ? "green" : "white";
-            return $"[color={color}]{objective.Description}[/color]";
-        }));
+        var item = QuestTree.CreateItem(TreeRoot);
+        item.SetText(0, quest.Title);
+        item.SetMetadata(0, quest);
     }
+
 
     private void OnQuestCompleted(QuestResource quest)
     {
         foreach (var item in TreeRoot.GetChildren())
         {
+            if (item == null || !IsInstanceValid(item)) continue;
             if ((QuestResource)item.GetMetadata(0) != quest) continue;
-            item.Free();
+
+            TreeRoot.RemoveChild(item);
             break;
         }
     }
 
-    private void OnItemSelected()
+
+    private void UpdateQuestDetails(QuestResource quest)
     {
-        var selectedItem = QuestTree.GetSelected();
-        if (selectedItem == null) return;
+        Title.Text = quest.Title;
+        Description.Text = quest.Description;
+        Objectives.Text = "OBJECTIVE:\n" + string.Join("\n", quest.Objectives.Select(objective =>
+        {
+            var color = objective.Completed ? "green" : "white";
+            return $"[color={color}]{objective.Description}[/color]";
+        }));
+        Reward.Text =
+            $"Experience: {quest.Experience}\nItems: {string.Join(", ", quest.Items.Select(item => item.ResourceName))}";
+    }
 
-        var quest = (QuestResource)selectedItem.GetMetadata(0);
 
-        UpdateQuestDetails(quest);
+    public override void _ExitTree()
+    {
+        QuestManager.QuestAdded -= OnQuestAdded;
+        QuestManager.QuestUpdated -= OnQuestUpdated;
+        QuestManager.QuestCompleted -= OnQuestCompleted;
+        QuestTree.ItemSelected -= OnItemSelected;
+        CloseButton.Pressed -= Close;
     }
 }

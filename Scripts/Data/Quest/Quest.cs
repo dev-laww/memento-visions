@@ -16,8 +16,8 @@ public partial class Quest : Resource
     [Export(PropertyHint.MultilineText)] public string Description;
     [Export] private QuestObjective[] objectives;
 
-    [ExportCategory("Rewards")][Export] private int Experience;
-    [Export] private ItemGroup[] Items = [];
+    [ExportCategory("Rewards")][Export] public int Experience;
+    [Export] public ItemGroup[] Items = [];
 
     public bool Completed { get; private set; }
     public List<QuestObjective> Objectives => [.. objectives];

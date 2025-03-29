@@ -10,34 +10,32 @@ namespace Game.Autoload;
 [Icon("res://assets/icons/quest-manager.svg")]
 public partial class QuestManager : Autoload<QuestManager>
 {
-    
-    [Signal] public delegate void AddedEventHandler(Quest quest);
-    [Signal] public delegate void UpdatedEventHandler(Quest quest);
-    [Signal] public delegate void CompletedEventHandler(Quest quest);
-    [Signal] public delegate void RemovedEventHandler(Quest quest);
-    public static QuestManager Instance { get; private set; }
+    [Signal]
+    public delegate void AddedEventHandler(Quest quest);
+
+    [Signal]
+    public delegate void UpdatedEventHandler(Quest quest);
+
+    [Signal]
+    public delegate void CompletedEventHandler(Quest quest);
+
+    [Signal]
+    public delegate void RemovedEventHandler(Quest quest);
 
     // TODO: move signals to source generator
-
-    public override void _Ready()
-    {
-        base._Ready();
-        Instance = this;
-    }
-
-    public event AddedEventHandler QuestAdded
+    public static event AddedEventHandler QuestAdded
     {
         add => Instance.Added += value;
         remove => Instance.Added -= value;
     }
 
-    public event UpdatedEventHandler QuestUpdated
+    public static event UpdatedEventHandler QuestUpdated
     {
         add => Instance.Updated += value;
         remove => Instance.Updated -= value;
     }
 
-    public event CompletedEventHandler QuestCompleted
+    public static event CompletedEventHandler QuestCompleted
     {
         add => Instance.Completed += value;
         remove => Instance.Completed -= value;
@@ -50,6 +48,7 @@ public partial class QuestManager : Autoload<QuestManager>
     public override void _EnterTree()
     {
         // TODO: load quests from save file
+        base._EnterTree();
     }
 
     public override void _Process(double delta)
