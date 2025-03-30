@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Game.Common;
 using Game.Components;
 using Game.Data;
 using Game.Entities;
@@ -12,11 +13,9 @@ namespace Game.Utils;
 
 public static class DamageFactory
 {
-    private static readonly PackedScene LineDamageScene =
-        ResourceLoader.Load<PackedScene>("res://Scenes/Components/Battle/Damage/LineDamage.tscn");
+    private static readonly PackedScene LineDamageScene = ResourceLoader.Load<PackedScene>("res://Scenes/Components/Battle/Damage/LineDamage.tscn");
 
-    private static readonly PackedScene CircleDamageScene =
-        ResourceLoader.Load<PackedScene>("res://Scenes/Components/Battle/Damage/CircleDamage.tscn");
+    private static readonly PackedScene CircleDamageScene = ResourceLoader.Load<PackedScene>("res://Scenes/Components/Battle/Damage/CircleDamage.tscn");
 
     public class LineDamageBuilder(Vector2 start, Vector2 end)
     {
@@ -61,6 +60,97 @@ public static class DamageFactory
 
             instance.Start(start, end, duration);
             return instance;
+        }
+    }
+
+    public class HitBoxBuilder(Vector2 position)
+    {
+        private float duration = -1;
+        private Entity owner;
+        private Attack.Type type = Attack.Type.Physical;
+        private float damage = 1;
+        private float rotation;
+        private Vector2 shapeOffset;
+        private Shape2D shape;
+
+        public HitBoxBuilder SetOwner(Entity owner)
+        {
+            this.owner = owner;
+            return this;
+        }
+
+        public HitBoxBuilder SetDuration(float duration)
+        {
+            this.duration = duration;
+            return this;
+        }
+
+        public HitBoxBuilder SetRotation(float rotation)
+        {
+            this.rotation = rotation;
+            return this;
+        }
+
+        public HitBoxBuilder SetDamage(float damage)
+        {
+            this.damage = damage;
+            return this;
+        }
+
+        public HitBoxBuilder SetDamageType(Attack.Type type)
+        {
+            this.type = type;
+            return this;
+        }
+
+        public HitBoxBuilder SetShapeOffset(Vector2 offset)
+        {
+            shapeOffset = offset;
+            return this;
+        }
+
+        public HitBoxBuilder SetShape(Shape2D shape)
+        {
+            this.shape = shape;
+            return this;
+        }
+
+        public HitBox Build()
+        {
+            if (shape is null || owner is null)
+            {
+                Log.Error("Shape or owner is null");
+                return null;
+            }
+
+            var collision = new CollisionShape2D
+            {
+                Shape = shape,
+                Position = shapeOffset,
+            };
+
+            var hitBox = new HitBox
+            {
+                GlobalPosition = position,
+                Rotation = rotation,
+                Type = type,
+                Damage = damage,
+                HitBoxOwner = owner,
+            };
+
+            duration = Mathf.Max(duration, 0.1f);
+
+            hitBox.AddChild(collision);
+
+            GameManager.CurrentScene.AddChild(hitBox);
+            GameManager.CurrentScene.GetTree().CreateTimer(duration).Timeout += () =>
+            {
+                if (!hitBox.IsInsideTree()) return;
+
+                hitBox.QueueFree();
+            };
+
+            return hitBox;
         }
     }
 
