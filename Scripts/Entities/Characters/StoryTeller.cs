@@ -1,3 +1,5 @@
+using Game.Autoload;
+using Game.Components;
 using Godot;
 using GodotUtilities;
 
@@ -16,6 +18,7 @@ public partial class StoryTeller : Entity
 
     [Node] private Timer actionTimer;
     [Node] private AnimationTree animationTree;
+    [Node] private Interaction interaction;
 
     private AnimationNodeStateMachinePlayback playback;
 
@@ -31,6 +34,7 @@ public partial class StoryTeller : Entity
         playback = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
 
         actionTimer.Timeout += OnTimeout;
+        interaction.Interacted += OnInteract;
     }
 
     private void OnTimeout()
@@ -50,6 +54,11 @@ public partial class StoryTeller : Entity
                 playback.Travel(FIX_HAT);
                 break;
         }
+    }
+
+    private void OnInteract()
+    {
+        OverlayManager.ShowOverlay(OverlayManager.MODE_SELECT);
     }
 
     private void Work()
