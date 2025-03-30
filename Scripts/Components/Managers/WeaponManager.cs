@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Game.Common;
+﻿using Game.Common;
 using Game.Common.Utilities;
 using Game.Entities;
 using Game.Autoload;
@@ -7,6 +6,7 @@ using Game.Data;
 using Godot;
 using System.CommandLine.IO;
 using Game.Utils.Extensions;
+using Game.Utils;
 
 namespace Game.Components;
 
@@ -96,6 +96,28 @@ public partial class WeaponManager : Node
     public void Animate(int combo)
     {
         WeaponComponent?.Animate(combo);
+
+        if (WeaponComponent == null) return;
+
+        var shape = Weapon.WeaponType switch
+        {
+            Item.Type.Dagger => new RectangleShape2D { Size = new Vector2(25, 40) },
+            Item.Type.Sword => new RectangleShape2D { Size = new Vector2(40, 40) },
+            Item.Type.Whip => new RectangleShape2D { Size = new Vector2(80, 25) },
+            _ => null
+        }; // TODO: balance the hitboxes
+
+        var difference = player.InputManager.GetGlobalMousePosition() - player.Center.GlobalPosition;
+        var angle = difference.Angle();
+
+        new DamageFactory.HitBoxBuilder(player.Center.GlobalPosition)
+            .SetShape(shape)
+            .SetRotation(angle)
+            .SetShapeOffset(new Vector2(((RectangleShape2D)shape).Size.X / 2, 0))
+            .SetOwner(player)
+            .SetDamage(player.StatsManager.Damage)
+            .SetDuration(0.1f)
+            .Build();
     }
 
     public void SetBlendPosition(Vector2 position)
