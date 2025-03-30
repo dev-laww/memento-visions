@@ -20,14 +20,22 @@ public partial class Noise : Node2D
     [Node] private Node noiseGenerator;
     [Node] private Spawner spawner;
     [Node] private NavigationManager navigationManager;
-    [Node] private Node2D enemies;
+    [Node] private Node2D entities;
+    [Node] private ResourcePreloader resourcePreloader;
 
-    [ExportToolButton("Generate", Icon = "RotateLeft")] private Callable Generate => Callable.From(() => noiseGenerator.Call("generate"));
+    [ExportToolButton("Generate", Icon = "RotateLeft")]
+    private Callable Generate => Callable.From(() =>
+    {
+        GD.Print("Generating noise...");
+        noiseGenerator.Call("generate");
+    });
+
     [ExportToolButton("Clear", Icon = "Clear")]
     private Callable Clear => Callable.From(() =>
     {
+        GD.Print("Clearing noise...");
         noiseGenerator.Call("erase");
-        enemies.QueueFreeChildren();
+        entities.QueueFreeChildren();
         navigationManager.Clear();
     });
 
@@ -42,11 +50,19 @@ public partial class Noise : Node2D
         WireNodes();
     }
 
-    public override void _Ready()
+    public override async void _Ready()
     {
         grid = noiseGenerator.Get("grid").AsGodotObject();
         noiseGenerator.Connect("generation_finished", Callable.From(OnGenerationFinished));
         noiseGenerator.Connect("generation_started", Callable.From(OnGenerationStarted));
+
+        if (Engine.IsEditorHint()) return;
+
+        Clear.Call();
+
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+
+        Generate.Call();
     }
 
 
@@ -63,6 +79,12 @@ public partial class Noise : Node2D
         GD.Print("Generating spawn points...");
         stopwatch.Restart();
         GenerateSpawnPosition();
+        stopwatch.Stop();
+        GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
+
+        GD.Print("Spawing player...");
+        stopwatch.Restart();
+        SpawnPlayer();
         stopwatch.Stop();
         GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
 
@@ -84,12 +106,7 @@ public partial class Noise : Node2D
 
     private void OnGenerationStarted()
     {
-        var enemies = GetChildren().OfType<Enemy>();
-
-        foreach (var enemy in enemies)
-        {
-            enemy.QueueFree();
-        }
+        entities.QueueFreeChildren();
     }
 
     private void GenerateSpawnPosition()
@@ -104,7 +121,6 @@ public partial class Noise : Node2D
 
             var cells = GetEmptyCells(layerCount);
             emptyCells = emptyCells.Intersect(cells);
-
         } while (layerCount > 0);
 
         var tileSize = floor.TileSet.TileSize;
@@ -117,14 +133,28 @@ public partial class Noise : Node2D
         }
     }
 
+    private void SpawnPlayer()
+    {
+        var player = resourcePreloader.InstanceSceneOrNull<Player>();
+        var spawnPoint = spawner.SpawnPoints.PickRandom();
+        spawner.SpawnPoints.Remove(spawnPoint);
+
+        player.Position = spawnPoint;
+
+        entities.AddChild(player);
+
+        if (!Engine.IsEditorHint()) return;
+
+        player.SetOwner(GetTree().GetEditedSceneRoot());
+    }
+
     private void SpawnEnemies()
     {
-        enemies.QueueFreeChildren();
         var spawnedEnemies = spawner.Spawn();
 
         foreach (var enemy in spawnedEnemies)
         {
-            enemies.AddChild(enemy);
+            entities.AddChild(enemy);
 
             if (!Engine.IsEditorHint()) continue;
 
@@ -151,7 +181,7 @@ public partial class Noise : Node2D
             var topRight = new Vector2I(cell.X + 1, cell.Y - 1);
 
             var cornerCondition = occupiedCells.Contains(left) && occupiedCells.Contains(right) &&
-                                   !occupiedCells.Contains(topLeft) && !occupiedCells.Contains(topRight);
+                                  !occupiedCells.Contains(topLeft) && !occupiedCells.Contains(topRight);
 
             var contiguousCondition = topEdgesSet.Contains(left) || topEdgesSet.Contains(right);
 
