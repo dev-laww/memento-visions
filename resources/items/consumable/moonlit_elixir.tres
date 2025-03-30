@@ -14,5 +14,8 @@ Id = "item:moonlit_elixir"
 Icon = SubResource("AtlasTexture_me1jm")
 Name = "Moonlit Elixir"
 ItemCategory = 0
-Description = "A mystical potion infused with the essence of moonlight. It glows softly in the dark, radiating a calm yet potent energy."
+Description = "A mystical potion infused with the essence of moonlight. It glows softly in the dark, radiating a calm yet potent energy.
+
+Usage:
+Removes all status effects and grants 300 seconds of immunity to status effects."
 metadata/_custom_type_script = "uid://b772648mucsjw"

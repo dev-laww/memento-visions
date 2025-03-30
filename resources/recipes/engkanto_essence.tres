@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Recipe" load_steps=11 format=3 uid="uid://ffb0lus8tfkg"]
 
-[ext_resource type="Resource" uid="uid://hrhry5q5e5ri" path="res://resources/items/material/moonlit_elixir.tres" id="1_id744"]
+[ext_resource type="Resource" uid="uid://hrhry5q5e5ri" path="res://resources/items/consumable/moonlit_elixir.tres" id="1_id744"]
 [ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_8rupw"]
 [ext_resource type="Resource" uid="uid://dx25tu288c73x" path="res://resources/items/material/lunar_petal.tres" id="3_txigc"]
 [ext_resource type="Resource" uid="uid://dti7vm5w4d0e" path="res://resources/items/material/calamansi.tres" id="4_l15ns"]

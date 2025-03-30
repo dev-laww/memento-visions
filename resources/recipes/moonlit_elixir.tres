@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_c7p5t"]
 [ext_resource type="Resource" uid="uid://dxrl1uamwfs14" path="res://resources/items/material/moon_shard.tres" id="3_ip47y"]
 [ext_resource type="Resource" uid="uid://d0u4wc8nhju7v" path="res://resources/items/material/sacred_tear.tres" id="4_0h3fq"]
-[ext_resource type="Resource" uid="uid://hrhry5q5e5ri" path="res://resources/items/material/moonlit_elixir.tres" id="5_qp0ej"]
+[ext_resource type="Resource" uid="uid://hrhry5q5e5ri" path="res://resources/items/consumable/moonlit_elixir.tres" id="5_qp0ej"]
 [ext_resource type="Script" uid="uid://djs3qll7uwkya" path="res://Scripts/Data/Recipe/Recipe.cs" id="6_07bxi"]
 
 [sub_resource type="Resource" id="Resource_iufmh"]
