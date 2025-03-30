@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_mp7jp"]
 [ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Managers/VelocityManager.cs" id="3_4f33n"]
 [ext_resource type="Script" uid="uid://cpwyjck8klk35" path="res://Scripts/Components/Managers/HealthNumberManager.cs" id="3_jt21t"]
-[ext_resource type="Script" uid="uid://d4io668qmblcf" path="res://Scripts/Components/Managers/DropManager.cs" id="4_44276"]
 [ext_resource type="PackedScene" uid="uid://cup5c3p5fcfyu" path="res://Scenes/Components/Managers/PathFindManager.tscn" id="5_4f33n"]
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="6_46yqc"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="6_k57tq"]
-[ext_resource type="Resource" uid="uid://b7kfqu8k8dykm" path="res://resources/items/material/aswang_elixir.tres" id="7_5tyvj"]
+[ext_resource type="PackedScene" uid="uid://t7im5teuo2bt" path="res://Scenes/Components/Managers/DropManager.tscn" id="6_m4t5y"]
+[ext_resource type="Resource" uid="uid://efbp6aphwl23" path="res://resources/items/material/aswang_elixir.tres" id="7_5tyvj"]
 [ext_resource type="Texture2D" uid="uid://daric1l1mtljq" path="res://assets/entities/enemy/common/aswang/spritesheet.png" id="7_46yqc"]
 [ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="8_cvnaw"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="8_cvtll"]
@@ -1196,10 +1196,8 @@ script = ExtResource("3_4f33n")
 StatsManager = NodePath("../StatsManager")
 metadata/_custom_type_script = "uid://nuxtah4mmhg5"
 
-[node name="DropManager" type="Node" parent="."]
-script = ExtResource("4_44276")
+[node name="DropManager" parent="." instance=ExtResource("6_m4t5y")]
 Drops = [SubResource("Resource_0pshh"), SubResource("Resource_tmhjr"), SubResource("Resource_6fh3g"), SubResource("Resource_dqby6"), SubResource("Resource_d0xdj")]
-metadata/_custom_type_script = "uid://d4io668qmblcf"
 
 [node name="PathFindManager" parent="." node_paths=PackedStringArray("VelocityManager") instance=ExtResource("5_4f33n")]
 VelocityManager = NodePath("../VelocityManager")
@@ -1238,7 +1236,6 @@ position = Vector2(0, -26)
 sprite_frames = SubResource("SpriteFrames_5bdsy")
 animation = &"move_down"
 autoplay = "move_down"
-frame = 1
 script = ExtResource("8_cvtll")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

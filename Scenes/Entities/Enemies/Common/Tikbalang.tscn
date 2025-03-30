@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://bqv2ubu81g3e7" path="res://Scripts/Entities/Enemies/Common/Tikbalang.cs" id="1_4ml10"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_hkjad"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_mh5vc"]
-[ext_resource type="Script" uid="uid://d4io668qmblcf" path="res://Scripts/Components/Managers/DropManager.cs" id="3_duuwi"]
 [ext_resource type="Script" uid="uid://cpwyjck8klk35" path="res://Scripts/Components/Managers/HealthNumberManager.cs" id="3_hkjad"]
 [ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Managers/VelocityManager.cs" id="4_pokvf"]
 [ext_resource type="PackedScene" uid="uid://cup5c3p5fcfyu" path="res://Scenes/Components/Managers/PathFindManager.tscn" id="5_6pqlh"]
+[ext_resource type="PackedScene" uid="uid://t7im5teuo2bt" path="res://Scenes/Components/Managers/DropManager.tscn" id="5_472wo"]
 [ext_resource type="Resource" uid="uid://doqpta8ruoou0" path="res://resources/items/material/hoof_powder.tres" id="6_8cri1"]
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="6_mh5vc"]
 [ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="7_472wo"]
@@ -1506,10 +1506,8 @@ script = ExtResource("3_hkjad")
 StatsManager = NodePath("../StatsManager")
 metadata/_custom_type_script = "uid://cpwyjck8klk35"
 
-[node name="DropManager" type="Node" parent="."]
-script = ExtResource("3_duuwi")
+[node name="DropManager" parent="." instance=ExtResource("5_472wo")]
 Drops = [SubResource("Resource_18kv7"), SubResource("Resource_v47yl"), SubResource("Resource_l6ao8"), SubResource("Resource_h1nv2"), SubResource("Resource_y1e4h"), SubResource("Resource_uogyr")]
-metadata/_custom_type_script = "uid://d4io668qmblcf"
 
 [node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
 script = ExtResource("4_pokvf")
