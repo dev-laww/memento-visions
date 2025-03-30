@@ -7,6 +7,7 @@ using Godot;
 
 namespace Game.Components;
 
+// TODO: fix hitbox not creating the same attack when hitting multiple hurtboxes at once, (this includes refactoring on tikbalang and aswang enemies)
 [Tool]
 [GlobalClass, Icon("res://assets/icons/hitbox.svg")]
 public partial class HitBox : Area2D
