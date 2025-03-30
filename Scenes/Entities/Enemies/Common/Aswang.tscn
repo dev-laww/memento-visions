@@ -22,7 +22,7 @@
 [sub_resource type="Resource" id="Resource_0pshh"]
 script = ExtResource("8_cvnaw")
 Item = ExtResource("9_ixksh")
-Min = 2
+Min = 3
 Max = 5
 Weight = 3
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
@@ -38,7 +38,7 @@ metadata/_custom_type_script = "uid://4ubxomqok4pv"
 [sub_resource type="Resource" id="Resource_6fh3g"]
 script = ExtResource("8_cvnaw")
 Item = ExtResource("7_5tyvj")
-Min = 2
+Min = 3
 Max = 5
 Weight = 3
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
@@ -1236,6 +1236,7 @@ position = Vector2(0, -26)
 sprite_frames = SubResource("SpriteFrames_5bdsy")
 animation = &"move_down"
 autoplay = "move_down"
+frame = 1
 script = ExtResource("8_cvtll")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

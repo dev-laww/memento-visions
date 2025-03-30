@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://4xxavg0do20k" path="res://resources/items/material/static_conductor.tres" id="1_dsj8c"]
 [ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_h0lwg"]
 [ext_resource type="Resource" uid="uid://c6j15ogomrwqo" path="res://resources/items/material/curse_blood.tres" id="3_6s2qo"]
-[ext_resource type="Resource" uid="uid://b7kfqu8k8dykm" path="res://resources/items/material/aswang_elixir.tres" id="4_6a6aw"]
+[ext_resource type="Resource" uid="uid://efbp6aphwl23" path="res://resources/items/material/aswang_elixir.tres" id="4_6a6aw"]
 [ext_resource type="Resource" uid="uid://dmbnoq0p8nta0" path="res://resources/items/material/thunder_essence.tres" id="5_d6yb7"]
 [ext_resource type="Script" uid="uid://djs3qll7uwkya" path="res://Scripts/Data/Recipe/Recipe.cs" id="6_pjqdq"]
 

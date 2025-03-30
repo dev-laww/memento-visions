@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Recipe" load_steps=11 format=3 uid="uid://dyqr2ga1idvut"]
 
-[ext_resource type="Resource" uid="uid://cd1uqih0xu1yc" path="res://resources/items/material/ginger.tres" id="1_yqfie"]
+[ext_resource type="Resource" uid="uid://8ff83npfhiru" path="res://resources/items/material/ginger.tres" id="1_yqfie"]
 [ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_pmi8u"]
 [ext_resource type="Resource" uid="uid://dti7vm5w4d0e" path="res://resources/items/material/calamansi.tres" id="3_5mjtx"]
 [ext_resource type="Resource" uid="uid://bsddfgq1qtd3r" path="res://resources/items/material/water.tres" id="4_h1w4x"]

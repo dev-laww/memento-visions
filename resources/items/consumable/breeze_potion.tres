@@ -14,5 +14,8 @@ Id = "item:breeze_potion"
 Icon = SubResource("AtlasTexture_058v3")
 Name = "Breeze Potion"
 ItemCategory = 0
-Description = "A light, ethereal potion infused with the blessing of Aghon. It carries the essence of a gentle breeze, refreshing the body by restoring 25% HP and calming the soul."
+Description = "A light, ethereal potion infused with the blessing of Aghon. It carries the essence of a gentle breeze, refreshing the body and calming the soul.
+
+Usage: 
+Restores 25% of HP and gain 10% movement speed for 300 seconds."
 metadata/_custom_type_script = "uid://b772648mucsjw"

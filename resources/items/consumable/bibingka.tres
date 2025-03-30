@@ -14,6 +14,9 @@ Id = "item:bibingka"
 Icon = SubResource("AtlasTexture_6osf0")
 Name = "Bibingka"
 ItemCategory = 0
-Description = "A soft, warm rice cake with a slightly charred crust, traditionally baked in banana leaves. Its rich, buttery flavor is restores 10% HP when consumed.
+Description = "A soft, warm rice cake with a slightly charred crust, traditionally baked in banana leaves. 
+
+Usage: 
+Restores 10% of HP when consumed.
 "
 metadata/_custom_type_script = "uid://b772648mucsjw"

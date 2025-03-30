@@ -14,5 +14,8 @@ Id = "id:taho"
 Icon = SubResource("AtlasTexture_q401a")
 Name = "Taho"
 ItemCategory = 0
-Description = "A warm, velvety mass draped in golden syrup, with soft, translucent orbs nestled within. Its surface glistens, rich with sweetness, yielding effortlessly to touch, restoring 10% of HP when consumed."
+Description = "A warm, velvety mass draped in golden syrup, with soft, translucent orbs nestled within. Its surface glistens, rich with sweetness, yielding effortlessly to touch.
+
+Usage:
+Restores 10% of HP when consumed."
 metadata/_custom_type_script = "uid://b772648mucsjw"

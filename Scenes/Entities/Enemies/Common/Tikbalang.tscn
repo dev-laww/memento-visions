@@ -39,16 +39,16 @@ metadata/_custom_type_script = "uid://4ubxomqok4pv"
 [sub_resource type="Resource" id="Resource_l6ao8"]
 script = ExtResource("7_472wo")
 Item = ExtResource("9_w5geh")
-Min = 2
-Max = 4
-Weight = 1
+Min = 1
+Max = 3
+Weight = 2
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="Resource" id="Resource_h1nv2"]
 script = ExtResource("7_472wo")
 Item = ExtResource("10_o1s6x")
-Min = 2
-Max = 4
+Min = 1
+Max = 3
 Weight = 2
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
@@ -56,16 +56,16 @@ metadata/_custom_type_script = "uid://4ubxomqok4pv"
 script = ExtResource("7_472wo")
 Item = ExtResource("11_msr8t")
 Min = 1
-Max = 2
-Weight = 1
+Max = 3
+Weight = 2
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="Resource" id="Resource_uogyr"]
 script = ExtResource("7_472wo")
 Item = ExtResource("12_u32vl")
 Min = 1
-Max = 2
-Weight = 1
+Max = 3
+Weight = 2
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6pqlh"]
@@ -1557,7 +1557,7 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_472wo")
 animation = &"idle_down"
 autoplay = "idle_down"
-frame = 1
+frame = 2
 script = ExtResource("9_6pqlh")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

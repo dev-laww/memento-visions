@@ -14,5 +14,8 @@ Id = "item:salabat"
 Icon = SubResource("AtlasTexture_6osf0")
 Name = "Salabat"
 ItemCategory = 0
-Description = "Warm herbal drink known for its restorative properties that restores 15% of HP when consumed."
+Description = "Warm herbal drink known for its restorative properties.
+
+Usage: 
+Restores 15% of HP when consumed."
 metadata/_custom_type_script = "uid://b772648mucsjw"

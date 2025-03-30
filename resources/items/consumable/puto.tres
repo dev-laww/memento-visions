@@ -14,5 +14,8 @@ Id = "item:puto"
 Icon = SubResource("AtlasTexture_fauw7")
 Name = "Puto"
 ItemCategory = 0
-Description = "A soft, fluffy rice cake with a mildly sweet taste, often enjoyed as a light and delicate treat that restores 5% of HP when consumed."
+Description = "A soft, fluffy rice cake with a mildly sweet taste, often enjoyed as a light and delicate treat.
+
+Usage: 
+Restores 5% of HP when consumed."
 metadata/_custom_type_script = "uid://b772648mucsjw"

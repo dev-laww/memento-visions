@@ -14,5 +14,8 @@ Id = "item:banana_cue"
 Icon = SubResource("AtlasTexture_w0ouh")
 Name = "Banana Cue"
 ItemCategory = 0
-Description = "Caramelized bananas skewered on a stick, coated in golden-brown sugar. A sweet, crispy, and satisfying street food favorite that restores 10% HP when consumed."
+Description = "Caramelized bananas skewered on a stick, coated in golden-brown sugar. A sweet, crispy, and satisfying street food favorite!
+
+Usage: 
+Restores 10% of HP when consumed."
 metadata/_custom_type_script = "uid://b772648mucsjw"
