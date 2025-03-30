@@ -15,8 +15,8 @@
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="9_6pqlh"]
 [ext_resource type="Script" uid="uid://dkgndduo4d7p4" path="res://Scripts/Components/Area/HitBox.cs" id="9_fg8r8"]
 [ext_resource type="Texture2D" uid="uid://d2rgjab2cym6d" path="res://assets/entities/enemy/common/tikbalang/spritesheet.png" id="9_mh5vc"]
-[ext_resource type="Resource" uid="uid://cd1uqih0xu1yc" path="res://resources/items/material/ginger.tres" id="9_w5geh"]
-[ext_resource type="Resource" uid="uid://5wcb5ppatwya" path="res://resources/items/material/garlic.tres" id="10_o1s6x"]
+[ext_resource type="Resource" uid="uid://8ff83npfhiru" path="res://resources/items/material/ginger.tres" id="9_w5geh"]
+[ext_resource type="Resource" uid="uid://gydfyrvpu6vm" path="res://resources/items/material/garlic.tres" id="10_o1s6x"]
 [ext_resource type="Resource" uid="uid://dhr2jtmgl0gse" path="res://resources/items/material/engkanto_essence.tres" id="11_msr8t"]
 [ext_resource type="Resource" uid="uid://drj5puv2462td" path="res://resources/items/material/bato_balani.tres" id="12_u32vl"]
 
@@ -1474,6 +1474,7 @@ script = ExtResource("1_4ml10")
 Id = "enemy:tikbalang"
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [node name="AttackTimer" type="Timer" parent="."]
@@ -1558,7 +1559,7 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_472wo")
 animation = &"idle_down"
 autoplay = "idle_down"
-frame = 2
+frame = 1
 script = ExtResource("9_6pqlh")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
