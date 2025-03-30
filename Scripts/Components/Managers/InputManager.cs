@@ -21,6 +21,8 @@ public partial class InputManager : Node
     private readonly HashSet<string> justReleased = [];
     private readonly HashSet<string> pressed = [];
 
+    public bool IsLocked => lockCount > 0;
+
     private Callable clearJustPressed;
     private int lockCount;
 
