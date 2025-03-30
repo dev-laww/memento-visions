@@ -139,7 +139,7 @@ public partial class SceneManager : Autoload<SceneManager>
             return;
         }
 
-        if (outgoing != GetTree().Root)
+        if (outgoing != GetTree().Root && IsInstanceValid(outgoing))
         {
             outgoing.QueueFree();
         }
