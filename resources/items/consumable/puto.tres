@@ -17,5 +17,5 @@ ItemCategory = 0
 Description = "A soft, fluffy rice cake with a mildly sweet taste, often enjoyed as a light and delicate treat.
 
 Usage: 
-Restores 5% of HP when consumed."
+Reduces incoming damage by 15% and restores 5% of HP when consumed."
 metadata/_custom_type_script = "uid://b772648mucsjw"
