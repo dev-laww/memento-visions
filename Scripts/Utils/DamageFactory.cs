@@ -66,6 +66,7 @@ public static class DamageFactory
     public class HitBoxBuilder(Vector2 position)
     {
         private float duration = -1;
+        private float delay = -1;
         private Entity owner;
         private Attack.Type type = Attack.Type.Physical;
         private float damage = 1;
@@ -115,6 +116,12 @@ public static class DamageFactory
             return this;
         }
 
+        public HitBoxBuilder SetDelay(float delay)
+        {
+            this.delay = delay;
+            return this;
+        }
+
         public HitBox Build()
         {
             if (shape is null || owner is null)
@@ -139,15 +146,20 @@ public static class DamageFactory
             };
 
             duration = Mathf.Max(duration, 0.1f);
+            delay = Mathf.Clamp(delay, 0, duration);
 
             hitBox.AddChild(collision);
 
-            GameManager.CurrentScene.AddChild(hitBox);
-            GameManager.CurrentScene.GetTree().CreateTimer(duration).Timeout += () =>
+            GameManager.CurrentScene.GetTree().CreateTimer(delay).Timeout += () =>
             {
-                if (!hitBox.IsInsideTree()) return;
+                GameManager.CurrentScene.AddChild(hitBox);
 
-                hitBox.QueueFree();
+                GameManager.CurrentScene.GetTree().CreateTimer(duration).Timeout += () =>
+                {
+                    if (!hitBox.IsInsideTree()) return;
+
+                    hitBox.QueueFree();
+                };
             };
 
             return hitBox;
@@ -221,6 +233,7 @@ public static class DamageFactory
 
             var attack = new Attack
             {
+                Critical = isCritical,
                 Damage = calculatedDamage,
                 Source = source,
                 AttackType = type,
