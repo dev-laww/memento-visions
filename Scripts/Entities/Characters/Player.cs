@@ -115,6 +115,8 @@ public partial class Player : Entity
     #region Utilities
     private void UpdateNormalBlendPositions()
     {
+        if (InputManager.IsLocked) return;
+
         var mousePosition = InputManager.GetGlobalMousePosition();
         var directionToMouse = (mousePosition - GlobalPosition).Normalized();
 
