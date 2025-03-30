@@ -60,6 +60,7 @@ public partial class Player : Entity
 
         StateMachine.AddStates(Normal);
         StateMachine.AddStates(Attack, EnterAttack, ExitAttack);
+        StateMachine.AddStates(Dash, EnterDash, ExitDash);
 
         StateMachine.SetInitialState(Normal);
     }
@@ -68,29 +69,24 @@ public partial class Player : Entity
     {
         VelocityManager.ApplyMovement();
         UpdateNormalBlendPositions();
-
-        var inputDirection = InputManager.GetVector8();
-
-        if (inputDirection.IsZeroApprox())
-        {
-            VelocityManager.Decelerate();
-        }
-        else
-        {
-            VelocityManager.Accelerate(inputDirection);
-        }
     }
 
     #region States
     public void Normal()
     {
+        ProcessMovement();
+
         var attacking = InputManager.IsActionJustPressed("attack");
+        var dashing = InputManager.IsActionJustPressed("dash");
 
         if (attacking && WeaponManager.CanAttack) StateMachine.ChangeState(Attack);
+        if (dashing && VelocityManager.CanDash(VelocityManager.LastFacedDirection)) StateMachine.ChangeState(Dash);
     }
 
     public async void Attack()
     {
+        ProcessMovement();
+
         await ToSignal(animationTree, "animation_finished");
 
         StateMachine.ChangeState(Normal);
@@ -109,6 +105,25 @@ public partial class Player : Entity
         combo = combo >= MAX_COMBO ? 1 : combo + 1;
         comboResetTimer.Start();
         isAttacking = false;
+    }
+
+    private void EnterDash()
+    {
+        VelocityManager.Dash(VelocityManager.LastFacedDirection);
+
+        hurtBox.Disable();
+    }
+
+    private void Dash()
+    {
+        if (VelocityManager.IsDashing) return;
+
+        StateMachine.ChangeState(Normal);
+    }
+
+    private void ExitDash()
+    {
+        hurtBox.Enable();
     }
     #endregion
 
@@ -134,6 +149,20 @@ public partial class Player : Entity
         animationTree.Set("parameters/sword_and_dagger/blend_position", directionToMouse);
         animationTree.Set("parameters/whip/blend_position", directionToMouse);
         WeaponManager.SetBlendPosition(directionToMouse);
+    }
+
+    private void ProcessMovement()
+    {
+        var inputDirection = InputManager.GetVector8();
+
+        if (inputDirection.IsZeroApprox())
+        {
+            VelocityManager.Decelerate();
+        }
+        else
+        {
+            VelocityManager.Accelerate(inputDirection);
+        }
     }
     #endregion
 
