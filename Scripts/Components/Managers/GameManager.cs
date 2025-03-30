@@ -66,8 +66,8 @@ public partial class GameManager : Node
         SceneManager.ChangeScene(
             path,
             transition: transition,
-            from: instance.currentScene.GetChildren().FirstOrDefault(),
-            to: instance.currentScene
+            from: instance?.currentScene.GetChildren().FirstOrDefault(),
+            to: instance?.currentScene
         );
     }
 }
