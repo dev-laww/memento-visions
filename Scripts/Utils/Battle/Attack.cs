@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Game.Data;
 using Game.Entities;
-using Game.Data;
 using Godot;
 
 namespace Game.Utils.Battle;
@@ -34,7 +33,7 @@ public partial class Attack : RefCounted
 
     public KnockbackInfo Knockback;
 
-    public readonly bool Critical;
+    public bool Critical;
 
     public List<StatusEffect> StatusEffects;
 
