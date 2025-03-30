@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using Game.Common;
 using Game.UI.Screens;
@@ -10,6 +11,8 @@ namespace Game.Autoload;
 [Scene]
 public partial class SceneManager : Autoload<SceneManager>
 {
+    private const float MAX_LOAD_TIME = 5.0f;
+
     [Node] private ResourcePreloader resourcePreloader;
     [Node] private Timer timer;
 
@@ -19,6 +22,7 @@ public partial class SceneManager : Autoload<SceneManager>
     private Node to;
     private Loading loadingScreen;
     private Loading.Transition transition = Loading.Transition.Fade;
+    private readonly Stopwatch stopwatch = new();
 
 
     public override void _Notification(int what)
@@ -67,11 +71,13 @@ public partial class SceneManager : Autoload<SceneManager>
 
     private async void LoadScene(string path)
     {
+        stopwatch.Restart();
+
         loadingScreen = resourcePreloader.InstanceSceneOrNull<Loading>();
         GetTree().Root.AddChild(loadingScreen);
         await loadingScreen.Start(transition);
 
-        var error = ResourceLoader.LoadThreadedRequest(path);
+        var error = ResourceLoader.LoadThreadedRequest(path, useSubThreads: true);
 
         if (error != Error.Ok)
         {
@@ -85,6 +91,14 @@ public partial class SceneManager : Autoload<SceneManager>
 
     private void UpdateLoadStatus()
     {
+        if (stopwatch.Elapsed.TotalSeconds > MAX_LOAD_TIME)
+        {
+            Log.Warn($"Loading scene '{loadPath}' took too long. Resetting.");
+            var path = loadPath;
+            ChangeScene(path, from, to, transition);
+            return;
+        }
+
         var progress = new Godot.Collections.Array();
         var status = ResourceLoader.LoadThreadedGetStatus(loadPath, progress);
 
@@ -100,6 +114,7 @@ public partial class SceneManager : Autoload<SceneManager>
                     loadingScreen?.SetProgress(p);
                     Log.Debug($"Loading scene '{loadPath}': {p:P0}");
                 }
+
                 break;
             case ResourceLoader.ThreadLoadStatus.Failed:
                 Log.Error($"Failed to load scene '{loadPath}'.");
@@ -111,11 +126,9 @@ public partial class SceneManager : Autoload<SceneManager>
                 loadPath = null;
                 break;
             case ResourceLoader.ThreadLoadStatus.Loaded:
-
                 if (ResourceLoader.LoadThreadedGet(loadPath) is not PackedScene scene)
                 {
                     Log.Error($"Failed to load scene '{loadPath}'.");
-
                     break;
                 }
 
@@ -144,7 +157,7 @@ public partial class SceneManager : Autoload<SceneManager>
             outgoing.QueueFree();
         }
 
-        await loadingScreen?.End();
+        await loadingScreen.End();
 
         loadingScreen = null;
 
