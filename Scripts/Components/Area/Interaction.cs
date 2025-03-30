@@ -3,6 +3,8 @@ using Game.Common.Interfaces;
 using Game.Autoload;
 using Game.UI.Common;
 using Godot;
+using GodotUtilities;
+using System.Linq;
 
 namespace Game.Components;
 
@@ -27,12 +29,18 @@ public partial class Interaction : Area2D, IInteractable
     [Signal] public delegate void InteractedEventHandler();
 
     private InteractionUI InteractionUI => GetNodeOrNull<InteractionUI>("Node2D/InteractionUI");
-    private string interactionLabel;
+    private string interactionLabel = "Interact";
     private bool isInteractable = true;
 
     public override void _EnterTree()
     {
         this.AddInteractionUI();
+
+        if (this.GetChildrenOfType<CollisionShape2D>().Any()) return;
+
+        var collisionShape = new CollisionShape2D { Name = "CollisionShape2D", DebugColor = new Color(0.88f, 0.525f, 0.898f, 0.42f) };
+
+        this.EditorAddChild(collisionShape);
     }
 
     public override void _Ready()
@@ -60,7 +68,6 @@ public partial class Interaction : Area2D, IInteractable
         if (!isInteractable) return;
 
         EmitSignalInteracted();
-        HideUI();
     }
 
     public void Toggle(bool value) => isInteractable = value;
