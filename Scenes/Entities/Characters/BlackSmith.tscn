@@ -130,7 +130,7 @@ shape = SubResource("CircleShape2D_fbx4l")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Interaction"]
-position = Vector2(0, 29)
+position = Vector2(0, -15)
 
 [node name="InteractionUI" parent="Interaction/Node2D" instance=ExtResource("7_fbx4l")]
 unique_name_in_owner = true
