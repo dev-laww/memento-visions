@@ -149,6 +149,13 @@ public partial class Tikbalang : Enemy
         EnterState(MOVE);
 
         var player = this.GetPlayer();
+
+        if (player is null)
+        {
+            StateMachine.ChangeState(Normal);
+            return;
+        }
+
         var playerPosition = player.GlobalPosition;
 
         pathFindManager.ForceSetTargetPosition(playerPosition);
