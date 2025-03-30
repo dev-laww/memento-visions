@@ -1,0 +1,216 @@
+[gd_scene load_steps=11 format=3 uid="uid://bg32n0pmt15qc"]
+
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="1_6t02b"]
+[ext_resource type="Script" uid="uid://dmv8sparxyw4k" path="res://Scripts/UI/Overlays/ModeSelect.cs" id="1_bao6r"]
+[ext_resource type="PackedScene" uid="uid://cb8psn10ig05k" path="res://Scenes/UI/Common/CloseButton.tscn" id="1_v4p0c"]
+[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="2_2wb6e"]
+[ext_resource type="Material" uid="uid://bkm4tri52hhdr" path="res://resources/shaders/blur.tres" id="2_rq77x"]
+[ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="4_fray8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fray8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bao6r"]
+texture = ExtResource("2_2wb6e")
+texture_margin_left = 3.0
+texture_margin_top = 5.0
+texture_margin_right = 3.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(0, 0, 32, 32)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6t02b"]
+size = Vector2(150, 150)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bao6r"]
+font = ExtResource("4_fray8")
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="ModeSelect" type="CanvasLayer"]
+script = ExtResource("1_bao6r")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource("2_rq77x")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00141, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_6t02b")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="CloseButton" parent="MarginContainer/VBoxContainer/Header" instance=ExtResource("1_v4p0c")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="StoryModeButton" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 300)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -259.0
+offset_top = -135.0
+offset_right = -59.0
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 150)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fray8")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/normal = SubResource("StyleBoxTexture_bao6r")
+
+[node name="MarginContainer" type="MarginContainer" parent="StoryModeButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 150)
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_6t02b")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StoryModeButton/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StoryModeButton/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="StoryModeButton/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_6t02b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StoryModeButton/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="StoryModeButton/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Story Mode"
+label_settings = SubResource("LabelSettings_bao6r")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StoryModeButton/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_font_sizes/bold_italics_font_size = 8
+theme_override_font_sizes/italics_font_size = 8
+theme_override_font_sizes/mono_font_size = 8
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 8
+bbcode_enabled = true
+text = "Experience our epic narrative at your own pace balanced combat and seamless cinematic cutscenes let you dive into the story without intense challenges."
+
+[node name="FrenzyModeButton" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 300)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 66.0
+offset_top = -135.0
+offset_right = 266.0
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 150)
+size_flags_vertical = 4
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fray8")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_bao6r")
+theme_override_styles/normal = SubResource("StyleBoxTexture_bao6r")
+
+[node name="MarginContainer" type="MarginContainer" parent="FrenzyModeButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 150)
+theme = ExtResource("1_6t02b")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FrenzyModeButton/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FrenzyModeButton/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="FrenzyModeButton/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_6t02b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FrenzyModeButton/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="FrenzyModeButton/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Frenzy Mode"
+label_settings = SubResource("LabelSettings_bao6r")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="FrenzyModeButton/MarginContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_font_sizes/bold_italics_font_size = 8
+theme_override_font_sizes/italics_font_size = 8
+theme_override_font_sizes/mono_font_size = 8
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 8
+bbcode_enabled = true
+text = "Brace yourself for relentless, high-octane combat. In Frenzy Mode, every encounter is a pulse-pounding challenge that pushes your skills to the limit. Perfect for adrenaline junkies who crave non-stop action."

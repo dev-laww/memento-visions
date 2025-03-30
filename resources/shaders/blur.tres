@@ -151,5 +151,5 @@ void fragment(){
 shader = SubResource("Shader_q5ndh")
 shader_parameter/blur_type = 0
 shader_parameter/blur_amount = 2
-shader_parameter/blur_radius = 10.0
+shader_parameter/blur_radius = 8.0
 shader_parameter/blur_direction = Vector2(1, 1)

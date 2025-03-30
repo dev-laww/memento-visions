@@ -14,6 +14,7 @@ public partial class OverlayManager : Autoload<OverlayManager>
     public const string INVENTORY = "Inventory";
     public const string MENU = "Menu";
     public const string QUEST = "Quest";
+    public const string MODE_SELECT = "ModeSelect";
 
     [Node] private ResourcePreloader resourcePreloader;
 
