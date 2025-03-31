@@ -146,7 +146,7 @@ public static class DamageFactory
             };
 
             duration = Mathf.Max(duration, 0.1f);
-            delay = Mathf.Clamp(delay, 0, duration);
+            delay = Mathf.Max(delay, 0f);
 
             hitBox.AddChild(collision);
 
