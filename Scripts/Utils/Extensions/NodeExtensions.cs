@@ -1,4 +1,6 @@
 using System.Linq;
+using Game.Common.Extensions;
+using Game.Components;
 using Game.Entities;
 using Godot;
 
@@ -13,4 +15,6 @@ public static class NodeExtensions
 
         return player as Player;
     }
+
+    public static TelegraphCanvas? GetTelegraphCanvas(this Node node) => node.GetTree().Root.GetFirstChildOrNull<TelegraphCanvas>();
 }

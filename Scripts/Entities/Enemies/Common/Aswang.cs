@@ -147,7 +147,7 @@ public partial class Aswang : Enemy
                 : playerPosition;
             chargeDirection = (chargeDestination - chargeOrigin).TryNormalize();
 
-            var canvas = GetTree().Root.GetFirstChildOrNull<TelegraphCanvas>();
+            var canvas = this.GetTelegraphCanvas();
 
             new TelegraphFactory.LineTelegraphBuilder(canvas, chargeOrigin)
                 .SetDestitnation(chargeDestination)
