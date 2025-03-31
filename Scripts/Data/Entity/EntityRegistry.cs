@@ -23,7 +23,8 @@ public partial class EntityRegistry : Registry<PackedScene, EntityRegistry>
 
             if (scene == null) continue;
 
-            var instance = scene.Instantiate<Entity>();
+            if (scene.Instantiate() is not Entity instance) continue;
+
             var id = instance.Id;
 
             if (id == string.Empty) continue;
