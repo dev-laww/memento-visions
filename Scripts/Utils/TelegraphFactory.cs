@@ -14,7 +14,9 @@ public static class TelegraphFactory
     {
         private readonly TelegraphCanvas canvas = canvas;
         private readonly Vector2 position = spawnPosition;
+        private float delay;
         private Vector2 destination;
+        private float width = 16f;
 
         public LineTelegraphBuilder SetDestitnation(Vector2 destination)
         {
@@ -22,11 +24,24 @@ public static class TelegraphFactory
             return this;
         }
 
+        public LineTelegraphBuilder SetDelay(float delay)
+        {
+            this.delay = delay;
+            return this;
+        }
+
+        public LineTelegraphBuilder SetWidth(float width)
+        {
+            this.width = width;
+            return this;
+        }
+
         public LineTelegraph Build()
         {
             var instance = LineTelegraphScene.Instantiate<LineTelegraph>();
+
             canvas.AddChild(instance);
-            instance.Start(position, destination);
+            canvas.GetTree().CreateTimer(delay).Timeout += () => instance.Start(position, destination, width);
             return instance;
         }
     }

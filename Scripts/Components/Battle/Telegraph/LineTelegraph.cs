@@ -25,7 +25,7 @@ public partial class LineTelegraph : Node2D
         line2d.NotifyPropertyListChanged();
     }
 
-    public void Start(Vector2 start, Vector2 end)
+    public void Start(Vector2 start, Vector2 end, float width = 16f)
     {
         line2d.Points = [];
         GlobalPosition = start;
@@ -33,6 +33,7 @@ public partial class LineTelegraph : Node2D
         var trajectory = end - start;
         var length = trajectory.Length();
         line2d.Rotation = trajectory.Angle();
+        line2d.Width = width;
 
         var tween = CreateTween();
         tween.TweenMethod(Callable.From((float t) => SetupPoints(t, length)), 0f, 1f, .5f).SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Sine);
