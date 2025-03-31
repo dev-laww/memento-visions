@@ -76,8 +76,17 @@ public partial class Aghon : Enemy
     #region States
     private void Normal()
     {
-        pathFindManager.SetTargetPosition(this.GetPlayer()?.GlobalPosition ?? GlobalPosition);
-        pathFindManager.Follow();
+        var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
+        pathFindManager.SetTargetPosition(playerPosition);
+
+        if (GlobalPosition.DistanceSquaredTo(playerPosition) > 64 * 64)
+        {
+            pathFindManager.Follow();
+        }
+        else
+        {
+            velocityManager.Decelerate();
+        }
 
         if (commonAttackTimer.IsStopped())
         {
@@ -240,7 +249,7 @@ public partial class Aghon : Enemy
             .Build();
 
         // spawn a spear
-        
+
     }
 
     private void ExitFirstPhaseSpecialAttack2()
