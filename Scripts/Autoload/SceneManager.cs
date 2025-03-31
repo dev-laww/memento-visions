@@ -77,11 +77,24 @@ public partial class SceneManager : Autoload<SceneManager>
         GetTree().Root.AddChild(loadingScreen);
         await loadingScreen.Start(transition);
 
-        var error = ResourceLoader.LoadThreadedRequest(path, useSubThreads: true);
-
-        if (error != Error.Ok)
+        if (!ResourceLoader.Exists(path))
         {
-            Log.Error($"Failed to load scene '{path}'.");
+            Log.Error($"[LoadScene] Resource not found: {path}");
+            Reset();
+            return;
+        }
+        
+        if (ResourceLoader.Load<PackedScene>(path) == null)
+        {
+            Log.Error($"[LoadScene] Failed to load scene: {path}");
+            Reset();
+            return;
+        }
+        
+        if (ResourceLoader.LoadThreadedRequest(path, useSubThreads: true) != Error.Ok)
+        {
+            Log.Error($"[LoadScene] Threaded loading failed: {path}");
+            Reset();
             return;
         }
 
