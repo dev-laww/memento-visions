@@ -1,5 +1,6 @@
 using Godot;
 using Game.Autoload;
+using Game.Components;
 using Game.Data;
 using Game.Entities;
 using GodotUtilities;
@@ -10,6 +11,7 @@ namespace Game.Levels.Story;
 public partial class EverfieldCity : Node2D
 {
     [Node] private Entity Chief2;
+    [Node] private TransitionArea TransitionArea;
     private Quest quest = ResourceLoader.Load<Quest>("res://resources/quests/Chapter1/aswang-hunt2.tres");
     private Quest quest1 = ResourceLoader.Load<Quest>("res://resources/quests/Chapter1/whisper-intramuros1.tres");
 
@@ -24,13 +26,18 @@ public partial class EverfieldCity : Node2D
     {
         base._Ready();
         QuestManager.QuestUpdated += OnQuestUpdated;
+        TransitionArea.Monitoring = false;
+    }
+    
+    public void EnableTransitionArea()
+    {
+        TransitionArea.Monitoring = true;
     }
 
     private void OnQuestUpdated(Quest updatedQuest)
     {
         if (updatedQuest != quest )
         {
-            GD.PrintErr("different quest");
             return;
         }
     
@@ -50,6 +57,17 @@ public partial class EverfieldCity : Node2D
         {
             Chief2.Visible = true;
         }
+    }
+
+    public void CompleteQuest(int index)
+    {
+        if (quest == null)
+        {
+            GD.PrintErr("Quest not loaded");
+            return;
+        }
+        
+        quest.CompleteObjective(index);
     }
 
     public void CompleteObjectiveAtIndex(int index)

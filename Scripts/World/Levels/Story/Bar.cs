@@ -1,6 +1,7 @@
 using Game.Data;
 using Godot;
 using System;
+using Game.Components;
 using Game.Data;
 using GodotUtilities;
 
@@ -10,7 +11,7 @@ namespace Game.Levels.Story;
 public partial class Bar : Node2D
 {
     private Quest quest = ResourceLoader.Load<Quest>("res://resources/quests/Prologue/night-of-shadows.tres");
-
+    [Node] private TransitionArea TransitionArea;
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
@@ -21,6 +22,11 @@ public partial class Bar : Node2D
     public override void _Ready()
     {
         base._Ready();
+        TransitionArea.Monitoring = false;
+    }
+    public void EnableTransitionArea()
+    {
+        TransitionArea.Monitoring = true;
     }
 
 

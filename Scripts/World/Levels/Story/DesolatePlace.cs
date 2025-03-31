@@ -13,6 +13,7 @@ public partial class DesolatePlace : Node2D
     public bool isInteracted = false;
     public int ObjectiveInteracted = 0;
     public bool isStoryTellerVisible = false;
+    [Node] TransitionArea TransitionArea;
     
 
     public override void _Notification(int what)
@@ -25,6 +26,7 @@ public partial class DesolatePlace : Node2D
     public override void _Ready()
     {
         base._Ready();
+        TransitionArea.Monitoring = false;
     }
 
 
@@ -33,6 +35,8 @@ public partial class DesolatePlace : Node2D
         ((StoryTeller)StoryTeller).Work();
         StoryTeller.Visible = true;
         isStoryTellerVisible = true;
+        TransitionArea.Monitoring = true;
     }
+    
     
 }

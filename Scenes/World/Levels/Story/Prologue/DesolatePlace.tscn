@@ -97,6 +97,7 @@ debug_color = Color(0.427269, 0.718892, 0.882021, 0.42)
 position = Vector2(34, 176)
 
 [node name="TransitionArea" type="Area2D" parent="."]
+unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("13_alqbt")

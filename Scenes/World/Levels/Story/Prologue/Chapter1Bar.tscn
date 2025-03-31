@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://ciqiplx11424"]
+[gd_scene load_steps=23 format=4 uid="uid://ciqiplx11424"]
 
 [ext_resource type="Script" uid="uid://bmr5usqox5f0h" path="res://Scripts/World/Levels/Story/Bar.cs" id="1_kjwk4"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="2_bccpv"]
@@ -13,9 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="10_ft4fi"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="11_eae30"]
 [ext_resource type="Resource" uid="uid://dpkjhbld0pfm4" path="res://resources/quests/Chapter1/whisper-intramuros1.tres" id="13_bccpv"]
-[ext_resource type="Resource" uid="uid://dfhk5ud22nohe" path="res://resources/dialogues/prologue/prologue1.4.dialogue" id="14_bccpv"]
-[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="14_dag5c"]
+[ext_resource type="Resource" uid="uid://dfhk5ud22nohe" path="res://resources/dialogues/prologue/prologue1.4.dialogue" id="14_0eolv"]
 [ext_resource type="PackedScene" uid="uid://dgqrvixy2ocww" path="res://Scenes/Entities/Characters/BlackSmith.tscn" id="15_23oy7"]
+[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_l668m"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="16_rdkqj"]
 
 [sub_resource type="Environment" id="Environment_71mkv"]
 background_mode = 3
@@ -105,6 +106,7 @@ script = ExtResource("5_ibwns")
 metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="TransitionArea" type="Area2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(130, 44)
 collision_layer = 0
 collision_mask = 4
@@ -132,7 +134,7 @@ Quest = ExtResource("13_bccpv")
 Mode = 0
 ShouldInteract = true
 InteractionLabel = "Interact"
-DialogueResource = ExtResource("14_bccpv")
+DialogueResource = ExtResource("14_0eolv")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/QuestTrigger"]
@@ -141,7 +143,11 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
 
-[node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("14_dag5c")]
+[node name="InteractionUI" type="Control" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("15_l668m")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("16_rdkqj")
 
 [node name="BlackSmith" parent="." instance=ExtResource("15_23oy7")]
 position = Vector2(271, 258)

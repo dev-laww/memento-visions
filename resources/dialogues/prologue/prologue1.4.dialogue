@@ -8,6 +8,7 @@ Chief: The locals are certain it’s an aswang. They’re terrified.
 Alex: Chief, are you sure? Are they running rampant?
 Chief: No, not yet. But the sooner we move, the sooner we can prevent such a tragedy from happening.
 Alex: Fine. I’ll look around.
+do CurrentScene.EnableTransitionArea()
 #start new quest
 
 

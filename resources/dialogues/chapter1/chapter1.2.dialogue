@@ -1,5 +1,6 @@
 ~ start
 do CurrentScene.CompleteQuest(1)
+do CurrentScene.EnableTransitionArea()
 Alex: Who’s bossing you around?!
 Aswang: It’s the Mayor! He wants us to terrify and show people fear to let them know that the Mayor is in charge of power!
 Alex: Tell me where he is or you’ll be dead before you blink your eyes!
