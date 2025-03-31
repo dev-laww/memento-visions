@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://83s52vks6mbt" path="res://Scenes/UI/Common/DashIndicator.tscn" id="3_k4xdi"]
 [ext_resource type="Texture2D" uid="uid://md5ydpqy2onr" path="res://assets/effects/heal.png" id="4_m4wbm"]
 [ext_resource type="Texture2D" uid="uid://bhg24ad0ut6dq" path="res://assets/ui/slot.png" id="5_44j1a"]
-[ext_resource type="Shader" path="res://resources/shaders/vignette.gdshader" id="5_fe11v"]
+[ext_resource type="Shader" uid="uid://bxmmk6qfkcuks" path="res://resources/shaders/vignette.gdshader" id="5_fe11v"]
 [ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/items/temp/Item5.png" id="6_rnii0"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="7_1gu0f"]
 [ext_resource type="LabelSettings" uid="uid://cktp08gmb038p" path="res://resources/misc/normal-text.tres" id="8_nhdt0"]
@@ -115,6 +115,7 @@ mouse_filter = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="HealthBar" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("1_4jtnt")]
 unique_name_in_owner = true
@@ -142,6 +143,7 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_b5sbs")
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/QuickUseSlot"]
@@ -150,16 +152,19 @@ offset_right = 32.0
 offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="QuickUseIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/QuickUseSlot/CenterContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("6_rnii0")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/QuickUseSlot"]
 layout_mode = 2
 offset_right = 32.0
 offset_bottom = 32.0
+mouse_filter = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 5
