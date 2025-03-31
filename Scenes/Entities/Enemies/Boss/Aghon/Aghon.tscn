@@ -1,6 +1,6 @@
 [gd_scene load_steps=192 format=3 uid="uid://c6ddutu3xqvkn"]
 
-[ext_resource type="Script" uid="uid://chjvcyjmc1jdu" path="res://Scripts/Entities/Enemies/Boss/Aghon/Aghon.cs" id="1_bsq0j"]
+[ext_resource type="Script" uid="uid://0pdu2f5btf1o" path="res://Scripts/Entities/Enemies/Boss/Aghon/Aghon.cs" id="1_bsq0j"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_hbkja"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_swhix"]
 [ext_resource type="Script" uid="uid://cpwyjck8klk35" path="res://Scripts/Components/Managers/HealthNumberManager.cs" id="3_53yii"]
@@ -1777,8 +1777,8 @@ metadata/_custom_type_script = "uid://clh46y8w17vem"
 one_shot = true
 autostart = true
 script = ExtResource("2_swhix")
-min_wait_time = 4.0
-max_wait_time = 5.0
+min_wait_time = 5.0
+max_wait_time = 7.0
 metadata/_custom_type_script = "uid://clh46y8w17vem"
 
 [node name="StatsManager" type="Node" parent="."]

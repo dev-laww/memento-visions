@@ -49,6 +49,7 @@ public partial class Aghon : Enemy
         StateMachine.AddStates(CommonAttack, EnterCommonAttack, ExitCommonAttack);
         StateMachine.AddStates(TransformToSecondPhase, EnterTransformToSecondPhase);
         StateMachine.AddStates(FirstPhaseSpecialAttack1, EnterFirstPhaseSpecialAttack1, ExitFirstPhaseSpecialAttack1);
+        StateMachine.AddStates(FirstPhaseSpecialAttack2, EnterFirstPhaseSpecialAttack2, ExitFirstPhaseSpecialAttack2);
 
         StateMachine.SetInitialState(Normal);
     }
@@ -87,6 +88,12 @@ public partial class Aghon : Enemy
         {
             // StateMachine.ChangeState(phase == 1 ? FirstPhaseSpecialAttack1 : SecondPhaseSpecialAttack1);
             StateMachine.ChangeState(FirstPhaseSpecialAttack1);
+        }
+
+        if (specialAttackTimer2.IsStopped())
+        {
+            // StateMachine.ChangeState(phase == 1 ? FirstPhaseSpecialAttack2 : SecondPhaseSpecialAttack2);
+            StateMachine.ChangeState(FirstPhaseSpecialAttack2);
         }
     }
 
@@ -212,6 +219,33 @@ public partial class Aghon : Enemy
     {
         specialAttackTimer1.Call(START_RANDOM);
         damageCreated = false;
+    }
+
+    private async void FirstPhaseSpecialAttack2()
+    {
+        await ToSignal(animationTree, "animation_finished");
+        StateMachine.ChangeState(Normal);
+    }
+
+    private void EnterFirstPhaseSpecialAttack2()
+    {
+        playback.Travel(SPECIAL_ATTACK_2);
+
+        var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
+        var canvas = this.GetTelegraphCanvas();
+
+        new TelegraphFactory.CircleTelegraphBuilder(canvas, playerPosition)
+            .SetRadius(100f)
+            .SetDelay(.5f)
+            .Build();
+
+        // spawn a spear
+        
+    }
+
+    private void ExitFirstPhaseSpecialAttack2()
+    {
+        specialAttackTimer2.Call(START_RANDOM);
     }
     #endregion
 

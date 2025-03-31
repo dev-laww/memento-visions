@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://cqnxlvlmyqede"]
+[gd_scene load_steps=5 format=3 uid="uid://cqnxlvlmyqede"]
+
+[ext_resource type="Script" uid="uid://xuhp4et655x7" path="res://Scripts/Entities/Enemies/Boss/Aghon/Spear.cs" id="1_mdl3n"]
+[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_v40og"]
+[ext_resource type="Script" uid="uid://58jqrupdcss0" path="res://Scripts/Components/SmoothSprite2D.cs" id="3_cqyj8"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dh32q"]
+size = Vector2(150, 20)
 
 [node name="Spear" type="Node2D"]
+script = ExtResource("1_mdl3n")
+
+[node name="SmoothSprite2D" type="Sprite2D" parent="."]
+texture_filter = 2
+material = ExtResource("2_v40og")
+position = Vector2(-75, 0)
+texture = SubResource("PlaceholderTexture2D_dh32q")
+script = ExtResource("3_cqyj8")
+metadata/_custom_type_script = "uid://58jqrupdcss0"
