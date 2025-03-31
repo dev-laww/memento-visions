@@ -1,5 +1,6 @@
 using Game.Common.Extensions;
 using Game.Components;
+using Game.Data;
 using Game.Utils;
 using Game.Utils.Extensions;
 using Godot;
@@ -15,15 +16,22 @@ public partial class Aghon : Enemy
     private const string COMMON_ATTACK = "common_attack";
     private const string SPECIAL_ATTACK_1 = "special_attack_1";
     private const string SPECIAL_ATTACK_2 = "special_attack_2";
+    private const float ATTACK_WIDTH = 64f;
+    private const float ATTACK_LENGTH = 250f;
 
     [Node] private AnimationTree animationTree;
     [Node] private VelocityManager velocityManager;
     [Node] private PathFindManager pathFindManager;
     [Node] private Timer commonAttackTimer;
+    [Node] private Timer specialAttackTimer1;
+    [Node] private Timer specialAttackTimer2;
 
 
     private AnimationNodeStateMachinePlayback playback;
     private int phase = 1;
+    private Vector2 attackOrigin;
+    private Vector2 attackDestination;
+    private bool damageCreated;
 
     public override void _Notification(int what)
     {
@@ -40,6 +48,7 @@ public partial class Aghon : Enemy
         StateMachine.AddStates(TravelToPlayer, EnterTravelToPlayer);
         StateMachine.AddStates(CommonAttack, EnterCommonAttack, ExitCommonAttack);
         StateMachine.AddStates(TransformToSecondPhase, EnterTransformToSecondPhase);
+        StateMachine.AddStates(FirstPhaseSpecialAttack1, EnterFirstPhaseSpecialAttack1, ExitFirstPhaseSpecialAttack1);
 
         StateMachine.SetInitialState(Normal);
     }
@@ -73,16 +82,26 @@ public partial class Aghon : Enemy
         {
             StateMachine.ChangeState(TravelToPlayer);
         }
+
+        if (specialAttackTimer1.IsStopped())
+        {
+            // StateMachine.ChangeState(phase == 1 ? FirstPhaseSpecialAttack1 : SecondPhaseSpecialAttack1);
+            StateMachine.ChangeState(FirstPhaseSpecialAttack1);
+        }
     }
 
     private void EnterNormal()
     {
         commonAttackTimer.Resume();
+        specialAttackTimer1.Resume();
+        specialAttackTimer2.Resume();
     }
 
     private void ExitNormal()
     {
         commonAttackTimer.Pause();
+        specialAttackTimer1.Pause();
+        specialAttackTimer2.Pause();
     }
 
     private void TravelToPlayer()
@@ -112,6 +131,7 @@ public partial class Aghon : Enemy
         playback.Travel(COMMON_ATTACK);
 
         new DamageFactory.HitBoxBuilder(GlobalPosition)
+            .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
             .SetDamage(StatsManager.Damage)
             .SetDelay(.3f)
             .SetShape(new CircleShape2D { Radius = 40 })
@@ -119,6 +139,7 @@ public partial class Aghon : Enemy
             .Build();
 
         new DamageFactory.HitBoxBuilder(GlobalPosition)
+            .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
             .SetDamage(StatsManager.Damage)
             .SetDelay(.7f)
             .SetShape(new CircleShape2D { Radius = 40 })
@@ -149,6 +170,48 @@ public partial class Aghon : Enemy
         StatsManager.IncreaseDamage(40, StatsManager.ModifyMode.Percentage);
         StatsManager.DecreaseDefense(100, StatsManager.ModifyMode.Percentage);
         StatsManager.ApplySpeedModifier("second_phase", .15f);
+    }
+
+    private async void FirstPhaseSpecialAttack1()
+    {
+        await ToSignal(animationTree, "animation_finished");
+
+        if (!damageCreated)
+        {
+            damageCreated = true;
+            new DamageFactory.HitBoxBuilder(attackOrigin) // create a continuous damage
+                .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
+                .SetDamage(StatsManager.Damage * 1.5f)
+                .SetRotation((attackDestination - attackOrigin).Angle())
+                .SetShapeOffset(new Vector2(ATTACK_LENGTH / 2, 0))
+                .SetShape(new RectangleShape2D { Size = new Vector2(ATTACK_LENGTH, ATTACK_WIDTH) })
+                .SetOwner(this)
+                .Build();
+        }
+
+        StateMachine.ChangeState(Normal);
+    }
+
+    private void EnterFirstPhaseSpecialAttack1()
+    {
+        playback.Travel(SPECIAL_ATTACK_1);
+
+        var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
+        var direction = (playerPosition - GlobalPosition).Normalized();
+        attackOrigin = GlobalPosition;
+        attackDestination = attackOrigin + (direction * ATTACK_LENGTH);
+        var canvas = this.GetTelegraphCanvas();
+
+        new TelegraphFactory.LineTelegraphBuilder(canvas, attackOrigin)
+            .SetDestitnation(attackDestination)
+            .SetWidth(ATTACK_WIDTH)
+            .Build();
+    }
+
+    private void ExitFirstPhaseSpecialAttack1()
+    {
+        specialAttackTimer1.Call(START_RANDOM);
+        damageCreated = false;
     }
     #endregion
 

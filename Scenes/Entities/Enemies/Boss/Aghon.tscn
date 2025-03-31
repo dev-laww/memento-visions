@@ -1761,6 +1761,24 @@ Id = "enemy:aghon"
 one_shot = true
 autostart = true
 script = ExtResource("2_swhix")
+min_wait_time = 2.0
+max_wait_time = 3.0
+metadata/_custom_type_script = "uid://clh46y8w17vem"
+
+[node name="SpecialAttackTimer1" type="Timer" parent="."]
+one_shot = true
+autostart = true
+script = ExtResource("2_swhix")
+min_wait_time = 4.0
+max_wait_time = 5.0
+metadata/_custom_type_script = "uid://clh46y8w17vem"
+
+[node name="SpecialAttackTimer2" type="Timer" parent="."]
+one_shot = true
+autostart = true
+script = ExtResource("2_swhix")
+min_wait_time = 4.0
+max_wait_time = 5.0
 metadata/_custom_type_script = "uid://clh46y8w17vem"
 
 [node name="StatsManager" type="Node" parent="."]
@@ -1811,7 +1829,6 @@ position = Vector2(0, -23)
 sprite_frames = SubResource("SpriteFrames_lpr6g")
 animation = &"south"
 autoplay = "south"
-frame = 2
 script = ExtResource("8_bxdfj")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
