@@ -61,7 +61,7 @@ public partial class StoryTeller : Entity
         OverlayManager.ShowOverlay(OverlayManager.MODE_SELECT);
     }
 
-    private void Work()
+    public void Work()
     {
         playback.Travel(ENTER_WORK);
     }
