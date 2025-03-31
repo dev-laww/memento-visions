@@ -197,7 +197,7 @@ public partial class Aghon : Enemy
             damageCreated = true;
             new DamageFactory.HitBoxBuilder(attackOrigin) // create a continuous damage and move to separate entity
                 .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
-                .SetDamage(StatsManager.Damage * 1.5f)
+                .SetDamage(StatsManager.Damage * .5f)
                 .SetRotation((attackDestination - attackOrigin).Angle())
                 .SetShapeOffset(new Vector2(ATTACK_LENGTH / 2, 0))
                 .SetShape(new RectangleShape2D { Size = new Vector2(ATTACK_LENGTH, ATTACK_WIDTH) })
