@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://8f5bf8r14y55"]
+[gd_scene load_steps=15 format=4 uid="uid://8f5bf8r14y55"]
 
 [ext_resource type="PackedScene" uid="uid://2586jb7lbuyn" path="res://Scenes/UI/Common/Fog.tscn" id="1_o3pym"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_h6twk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="4_h6twk"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="4_o3pym"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="5_7amk1"]
+[ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="7_m2ydh"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_7amk1"]
 
@@ -126,3 +127,6 @@ tile_map_data = PackedByteArray("AAAVAAgAAQAcAA4AAAAYAAsAAQAcAA8AAAAOAAwAAQAcAA4
 tile_set = ExtResource("3_7amk1")
 script = ExtResource("4_o3pym")
 metadata/_custom_type_script = "uid://bc2jlb4w58y24"
+
+[node name="Player" parent="." instance=ExtResource("7_m2ydh")]
+position = Vector2(240, 429)
