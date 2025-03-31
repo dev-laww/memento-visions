@@ -34,6 +34,7 @@ public partial class HitBox : Area2D
     public void SetAttackOverride(Attack attack) => attackOverride = attack;
     public void ClearAttackOverride() => attackOverride = null;
 
+    // TODO: refactor to be applied on damage factory
     public void AddStatusEffectToPool(string statusEffectId, int turns = 1)
     {
         var statusEffect = new StatusEffect.Info
@@ -56,6 +57,16 @@ public partial class HitBox : Area2D
             Chance = chance,
             Turns = turns,
         };
+
+        statusEffects.Add(statusEffect);
+    }
+
+    public void AddStatusEffectToPool(StatusEffect.Info statusEffect)
+    {
+        if (statusEffect.IsGuaranteed)
+        {
+            statusEffect.Chance = 1;
+        }
 
         statusEffects.Add(statusEffect);
     }

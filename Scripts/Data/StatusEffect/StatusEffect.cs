@@ -14,7 +14,7 @@ public partial class StatusEffect : Resource
         public string Id;
         public bool IsGuaranteed;
         public float Chance;
-        public int Turns;
+        public int Turns = 1;
     }
 
     [Export] public string Id;

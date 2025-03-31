@@ -73,6 +73,7 @@ public static class DamageFactory
         private float rotation;
         private Vector2 shapeOffset;
         private Shape2D shape;
+        private readonly List<StatusEffect.Info> statusEffectPool = [];
 
         public HitBoxBuilder SetOwner(Entity owner)
         {
@@ -122,6 +123,18 @@ public static class DamageFactory
             return this;
         }
 
+        public HitBoxBuilder AddStatusEffectToPoolRange(IEnumerable<StatusEffect.Info> pool)
+        {
+            statusEffectPool.AddRange(pool);
+            return this;
+        }
+
+        public HitBoxBuilder AddStatusEffectToPool(StatusEffect.Info statusEffect)
+        {
+            statusEffectPool.Add(statusEffect);
+            return this;
+        }
+
         public HitBox Build()
         {
             if (shape is null || owner is null)
@@ -147,6 +160,8 @@ public static class DamageFactory
 
             duration = Mathf.Max(duration, 0.1f);
             delay = Mathf.Max(delay, 0f);
+
+            statusEffectPool.ForEach(hitBox.AddStatusEffectToPool);
 
             hitBox.AddChild(collision);
 
