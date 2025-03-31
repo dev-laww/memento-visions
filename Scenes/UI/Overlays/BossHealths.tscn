@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://c83jdh0qud72h"]
+
+[ext_resource type="Script" uid="uid://bfb4okksd6cn3" path="res://Scripts/UI/Overlays/BossHealths.cs" id="1_knil2"]
+[ext_resource type="Script" uid="uid://32sdfvnmihf2" path="res://Scripts/Components/PassThrough.cs" id="1_o1cvr"]
+[ext_resource type="PackedScene" uid="uid://f4xjestlhvif" path="res://Scenes/UI/Common/BossHealthBar.tscn" id="2_knil2"]
+
+[node name="BossHealths" type="CanvasLayer"]
+script = ExtResource("1_knil2")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("BossHealthBar"), [ExtResource("2_knil2")]]
+
+[node name="PassThrough" type="Container" parent="."]
+mouse_filter = 2
+script = ExtResource("1_o1cvr")
+metadata/_custom_type_script = "uid://32sdfvnmihf2"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 10
+
+[node name="HealthBarsContainer" type="VBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="HealthBar" parent="MarginContainer/HealthBarsContainer" instance=ExtResource("2_knil2")]
+layout_mode = 2
+mouse_filter = 2
+BossName = null
+
+[node name="AnotherHealthBar" parent="MarginContainer/HealthBarsContainer" instance=ExtResource("2_knil2")]
+layout_mode = 2
+BossName = null
