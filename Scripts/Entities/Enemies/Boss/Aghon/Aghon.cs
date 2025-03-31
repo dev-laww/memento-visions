@@ -179,7 +179,7 @@ public partial class Aghon : Enemy
         if (!damageCreated)
         {
             damageCreated = true;
-            new DamageFactory.HitBoxBuilder(attackOrigin) // create a continuous damage
+            new DamageFactory.HitBoxBuilder(attackOrigin) // create a continuous damage and move to separate entity
                 .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
                 .SetDamage(StatsManager.Damage * 1.5f)
                 .SetRotation((attackDestination - attackOrigin).Angle())
