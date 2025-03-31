@@ -1,3 +1,4 @@
+using Game.Common.Extensions;
 using Game.Components;
 using Game.Utils.Extensions;
 using Godot;
@@ -42,7 +43,7 @@ public partial class Tikbalang : Enemy
 
         StateMachine.AddStates(Normal, EnterNormal, LeaveNormal);
         StateMachine.AddStates(Move, EnterMove, LeaveMove);
-        StateMachine.AddStates(TravelToPlayer, EnterTravelToPlayer);
+        StateMachine.AddStates(TravelToPlayer, EnterTravelToPlayer, ExitTravelToPlayer);
         StateMachine.AddStates(SpecialAttack, EnterSpecialAttack, LeaveSpecialAttack);
         StateMachine.AddStates(CommonAttack, EnterCommonAttack, LeaveCommonAttack);
 
@@ -61,15 +62,8 @@ public partial class Tikbalang : Enemy
     {
         EnterState(IDLE);
 
-        if (moveTimer.Paused)
-        {
-            moveTimer.Paused = false;
-        }
-
-        if (attackTimer.Paused)
-        {
-            attackTimer.Paused = false;
-        }
+        moveTimer.Resume();
+        attackTimer.Resume();
     }
 
     private void Normal()
@@ -90,15 +84,8 @@ public partial class Tikbalang : Enemy
 
     private void LeaveNormal()
     {
-        if (!moveTimer.IsStopped())
-        {
-            moveTimer.Paused = true;
-        }
-
-        if (!attackTimer.IsStopped())
-        {
-            attackTimer.Paused = true;
-        }
+        moveTimer.Pause();
+        attackTimer.Pause();
     }
 
     private void EnterMove()
@@ -159,6 +146,12 @@ public partial class Tikbalang : Enemy
         var playerPosition = player.GlobalPosition;
 
         pathFindManager.ForceSetTargetPosition(playerPosition);
+        StatsManager.ApplySpeedModifier("travel_to_player", 0.2f);
+    }
+
+    private void ExitTravelToPlayer()
+    {
+        StatsManager.RemoveSpeedModifier("travel_to_player");
     }
 
     private void TravelToPlayer()

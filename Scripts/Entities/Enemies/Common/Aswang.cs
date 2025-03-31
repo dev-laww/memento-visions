@@ -63,15 +63,8 @@ public partial class Aswang : Enemy
 
     private void EnterNormal()
     {
-        if (specialAttackTimer.Paused)
-        {
-            specialAttackTimer.Paused = false;
-        }
-
-        if (patrolTimer.Paused)
-        {
-            patrolTimer.Paused = false;
-        }
+        specialAttackTimer.Resume();
+        patrolTimer.Resume();
     }
 
     private void Normal()
@@ -95,15 +88,8 @@ public partial class Aswang : Enemy
 
     private void LeaveNormal()
     {
-        if (!specialAttackTimer.IsStopped())
-        {
-            specialAttackTimer.Paused = true;
-        }
-
-        if (!patrolTimer.IsStopped())
-        {
-            patrolTimer.Paused = true;
-        }
+        specialAttackTimer.Pause();
+        patrolTimer.Pause();
     }
 
     private void EnterPatrol()
