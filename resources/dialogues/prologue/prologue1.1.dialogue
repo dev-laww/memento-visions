@@ -1,12 +1,4 @@
 ~ start
-if CurrentScene.isInteracted == true
-	Chief : Investigate and find some clues
-	=> END
-Chief: Nice of you to finally arrive, Alejandro Gutierrez… or should I call you Alex?
-- Alex is fine, Chief. Now, what do we have here?
-Chief: Rumors are circulating about a vengeful spirit in this place, said to kill anyone who seeks it.
 Chief: Recently, several people have gone missing around here. Speculation suggests these disappearances are connected to encounters with the spirit, but we have no concrete evidence yet.
-- I see. Then let’s start digging for clues.
-set CurrentScene.isInteracted = true
-# queue free chief and appear in other place.
+Alex: I see. Then let’s start digging for clues.
 => END

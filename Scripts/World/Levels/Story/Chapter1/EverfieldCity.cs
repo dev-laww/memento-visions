@@ -28,20 +28,24 @@ public partial class EverfieldCity : Node2D
 
     private void OnQuestUpdated(Quest updatedQuest)
     {
-        if (updatedQuest == null)
+        if (updatedQuest != quest )
         {
-            GD.PrintErr("Updated quest is null!");
+            GD.PrintErr("different quest");
             return;
         }
-
-        if (updatedQuest.ResourcePath != quest.ResourcePath) return;
-
-        if (updatedQuest.Objectives == null || updatedQuest.Objectives.Count <= 1)
+    
+        if (updatedQuest.Objectives == null || updatedQuest.Objectives.Count == 0)
         {
-            GD.PrintErr("Objectives are null or not enough objectives!");
+            GD.PrintErr("Objectives are null or empty!");
             return;
         }
-
+    
+        if (updatedQuest.Objectives[0] == null)
+        {
+            GD.PrintErr("First objective is null!");
+            return;
+        }
+    
         if (updatedQuest.Objectives[0].Completed && !Chief2.Visible)
         {
             Chief2.Visible = true;

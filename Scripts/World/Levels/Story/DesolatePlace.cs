@@ -30,6 +30,7 @@ public partial class DesolatePlace : Node2D
 
     public void setStoryTellerVisible()
     {
+        ((StoryTeller)StoryTeller).Work();
         StoryTeller.Visible = true;
         isStoryTellerVisible = true;
     }
