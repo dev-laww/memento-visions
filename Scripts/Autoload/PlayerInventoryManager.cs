@@ -50,8 +50,6 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
     public override void _ExitTree()
     {
         base._ExitTree();
-        SaveManager.Data.SetItemsData(inventoryManager.GetItemsAsModel());
-        SaveManager.Data.Player.QuickUse = QuickSlotItem?.Id ?? string.Empty;
         SaveManager.Save();
     }
 
@@ -142,6 +140,10 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
 
     private static void OnInventoryUpdate(ItemGroup group)
     {
+        // TODO: add custom listeners on save manager
+        SaveManager.Data.SetItemsData(Instance.inventoryManager.GetItemsAsModel());
+        SaveManager.Data.Player.QuickUse = QuickSlotItem?.Id ?? string.Empty;
+
         if (group.Item.Id != QuickSlotItem?.Id || group.Quantity > 0) return;
 
         SetQuickSlotItem(null);

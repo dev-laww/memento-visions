@@ -78,9 +78,11 @@ public partial class Player : Entity
 
         var attacking = InputManager.IsActionJustPressed("attack");
         var dashing = InputManager.IsActionJustPressed("dash");
+        var quickUse = InputManager.IsActionJustPressed("quick_use");
 
         if (attacking && WeaponManager.CanAttack) StateMachine.ChangeState(Attack);
         if (dashing && VelocityManager.CanDash(VelocityManager.LastFacedDirection)) StateMachine.ChangeState(Dash);
+        if (quickUse) PlayerInventoryManager.UseQuickSlotItem();
     }
 
     public async void Attack()
