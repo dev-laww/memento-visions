@@ -2,12 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Game.Common;
-using Game.Common.Utilities;
-using Game.Autoload;
 using Game.Data;
 using Godot;
 using Item = Game.Data.Item;
-using Game.Entities;
 
 namespace Game.Components;
 
@@ -82,9 +79,9 @@ public partial class InventoryManager : Node
         }
     }
 
-    public List<Game.Common.Models.Item> GetItemsAsModel() => Inventory.Values
+    public List<Common.Models.Item> GetItemsAsModel() => Inventory.Values
         .SelectMany(i => i)
-        .Select(i => new Game.Common.Models.Item
+        .Select(i => new Common.Models.Item
         {
             Id = i.Item.Id,
             Amount = i.Quantity
