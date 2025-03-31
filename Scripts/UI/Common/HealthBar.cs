@@ -4,6 +4,7 @@ using GodotUtilities;
 
 namespace Game.UI.Common;
 
+[Tool]
 [Scene]
 public partial class HealthBar : ProgressBar
 {
@@ -26,8 +27,8 @@ public partial class HealthBar : ProgressBar
 
     public void Initialize(StatsManager statsManager)
     {
-        Value = statsManager.Health;
         MaxValue = statsManager.MaxHealth;
+        Value = statsManager.Health;
 
         damageBar.MaxValue = statsManager.MaxHealth;
         damageBar.Value = statsManager.Health;
