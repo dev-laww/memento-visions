@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://l3s0gn3supdj"]
+
+[ext_resource type="Script" uid="uid://dondsojtcsd5d" path="res://Scripts/Data/StatusEffect/Electrocute.cs" id="1_oarvu"]
+
+[resource]
+script = ExtResource("1_oarvu")
+damagePerSecond = 2.0
+Id = "status_effect:electrocute"
+StatusEffectName = "Electrocute"
+Duration = 3.0
+Description = ""
+MaxStacks = 1
+metadata/_custom_type_script = "uid://clu5oggovs0qe"
