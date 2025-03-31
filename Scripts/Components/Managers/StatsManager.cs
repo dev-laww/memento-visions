@@ -242,6 +242,11 @@ public partial class StatsManager : Node
             RemoveStatusEffect(effect.Id);
     }
 
+    public void SetInvulnerable(bool value)
+    {
+        Invulnerable = value;
+    }
+
     public void ApplySpeedModifier(string id, float modifier)
     {
         if (speedModifiers.TryGetValue(id, out var value))
