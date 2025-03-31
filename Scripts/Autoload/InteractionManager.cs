@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Game.Common.Interfaces;
 using Game.Utils.Extensions;
@@ -35,31 +36,48 @@ public partial class InteractionManager : Autoload<InteractionManager>
         closest.Interact();
     }
 
-    public static void Register(IInteractable area) => Instance.areas.Add(area);
-    
+    public static void Register(IInteractable area)
+    {
+        if (area?.InteractionPosition == null)
+        {
+            GD.PrintErr("Tried to register null interactable or one with null position");
+            return;
+        }
+
+        Instance.areas.Add(area);
+    }
+
 
     public static void Unregister(IInteractable area)
     {
+        if (area == null) return;
+
         if (area == Instance.lastClosest)
             Instance.lastClosest = null;
 
         Instance.areas.Remove(area);
-        area.HideUI();
+
+        if (GodotObject.IsInstanceValid(area as GodotObject))
+            area.HideUI();
     }
 
     private IInteractable GetClosest()
     {
         if (areas.Count == 0) return null;
+        
+        areas.RemoveAll(area =>
+            area is GodotObject godotObj && !GodotObject.IsInstanceValid(godotObj)
+        );
 
-        areas.Sort((a, b) =>
-        {
-            var player = this.GetPlayer();
-            var aDistance = a.InteractionPosition.DistanceTo(player?.GlobalPosition ?? Vector2.Zero);
-            var bDistance = b.InteractionPosition.DistanceTo(player?.GlobalPosition ?? Vector2.Zero);
+        var player = this.GetPlayer();
+        if (player == null) return null;
 
-            return aDistance.CompareTo(bDistance);
-        });
-
-        return areas.First();
+        return areas
+            .Where(area =>
+                area != null &&
+                GodotObject.IsInstanceValid(area as GodotObject)
+            )
+            .OrderBy(area => area.InteractionPosition.DistanceTo(player.GlobalPosition))
+            .FirstOrDefault();
     }
 }
