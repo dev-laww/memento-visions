@@ -1,7 +1,8 @@
-[gd_scene load_steps=191 format=3 uid="uid://c6ddutu3xqvkn"]
+[gd_scene load_steps=192 format=3 uid="uid://c6ddutu3xqvkn"]
 
 [ext_resource type="Script" uid="uid://chjvcyjmc1jdu" path="res://Scripts/Entities/Enemies/Boss/Aghon.cs" id="1_bsq0j"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_hbkja"]
+[ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_swhix"]
 [ext_resource type="Script" uid="uid://cpwyjck8klk35" path="res://Scripts/Components/Managers/HealthNumberManager.cs" id="3_53yii"]
 [ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Managers/VelocityManager.cs" id="4_bxdfj"]
 [ext_resource type="PackedScene" uid="uid://t7im5teuo2bt" path="res://Scenes/Components/Managers/DropManager.tscn" id="5_lpr6g"]
@@ -1756,10 +1757,18 @@ BossName = "Aghon"
 Type = 1
 Id = "enemy:aghon"
 
+[node name="CommonAttackTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+script = ExtResource("2_swhix")
+metadata/_custom_type_script = "uid://clh46y8w17vem"
+
 [node name="StatsManager" type="Node" parent="."]
 script = ExtResource("2_hbkja")
 MaxHealth = 750.0
-Speed = 150.0
+Speed = 120.0
+Defense = 20.0
+Damage = 30.0
 metadata/_custom_type_script = "uid://dnpva4sn53c1r"
 
 [node name="HealthNumberManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
@@ -1777,7 +1786,6 @@ Drops = []
 
 [node name="PathFindManager" parent="." node_paths=PackedStringArray("VelocityManager") instance=ExtResource("6_a1nrq")]
 VelocityManager = NodePath("../VelocityManager")
-DebugEnabled = true
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
 position = Vector2(0, -20)
@@ -1803,7 +1811,7 @@ position = Vector2(0, -23)
 sprite_frames = SubResource("SpriteFrames_lpr6g")
 animation = &"south"
 autoplay = "south"
-frame = 3
+frame = 2
 script = ExtResource("8_bxdfj")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
