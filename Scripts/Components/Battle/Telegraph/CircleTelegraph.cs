@@ -19,9 +19,10 @@ public partial class CircleTelegraph : Node2D
             currentRadius = radius;
     }
 
-    public void Start(Vector2 position)
+    public void Start(Vector2 position, float radius)
     {
         GlobalPosition = position;
+        this.radius = radius;
         currentRadius = 0;
 
         var tween = CreateTween();

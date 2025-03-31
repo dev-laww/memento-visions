@@ -45,5 +45,34 @@ public static class TelegraphFactory
             return instance;
         }
     }
+
+    public class CircleTelegraphBuilder(TelegraphCanvas canvas, Vector2 spawnPosition)
+    {
+        private readonly TelegraphCanvas canvas = canvas;
+        private readonly Vector2 position = spawnPosition;
+        private float delay;
+        private float radius = 16f;
+
+        public CircleTelegraphBuilder SetDelay(float delay)
+        {
+            this.delay = delay;
+            return this;
+        }
+
+        public CircleTelegraphBuilder SetRadius(float radius)
+        {
+            this.radius = radius;
+            return this;
+        }
+
+        public CircleTelegraph Build()
+        {
+            var instance = CircleTelegraphScene.Instantiate<CircleTelegraph>();
+
+            canvas.AddChild(instance);
+            canvas.GetTree().CreateTimer(delay).Timeout += () => instance.Start(position, radius);
+            return instance;
+        }
+    }
 }
 
