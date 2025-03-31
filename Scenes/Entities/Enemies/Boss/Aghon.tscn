@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://c6ddutu3xqvkn"]
+[gd_scene load_steps=191 format=3 uid="uid://c6ddutu3xqvkn"]
 
 [ext_resource type="Script" uid="uid://chjvcyjmc1jdu" path="res://Scripts/Entities/Enemies/Boss/Aghon.cs" id="1_bsq0j"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_hbkja"]
@@ -589,7 +589,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"common_attack",
-"speed": 8.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -787,6 +787,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_11d0v"]
 length = 1.25
+step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -844,7 +845,6 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_a1nrq"]
 length = 0.875
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1482,6 +1482,273 @@ _data = {
 &"west": SubResource("Animation_0bpde")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i03pf"]
+animation = &"first_phase/common_attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hu3eg"]
+animation = &"second_phase/common_attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aw0en"]
+advance_mode = 2
+advance_expression = "phase == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r01ht"]
+advance_mode = 2
+advance_expression = "phase == 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ga8xx"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8u1ki"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wmpl3"]
+states/first_phase_common_attack/node = SubResource("AnimationNodeAnimation_i03pf")
+states/first_phase_common_attack/position = Vector2(528, 64)
+states/second_phase_common_attack/node = SubResource("AnimationNodeAnimation_hu3eg")
+states/second_phase_common_attack/position = Vector2(528, 151)
+transitions = ["Start", "first_phase_common_attack", SubResource("AnimationNodeStateMachineTransition_aw0en"), "Start", "second_phase_common_attack", SubResource("AnimationNodeStateMachineTransition_r01ht"), "first_phase_common_attack", "End", SubResource("AnimationNodeStateMachineTransition_ga8xx"), "second_phase_common_attack", "End", SubResource("AnimationNodeStateMachineTransition_8u1ki")]
+graph_offset = Vector2(-25, -95)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lt36k"]
+animation = &"first_phase/south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_swhix"]
+animation = &"second_phase/south"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ra6m"]
+advance_mode = 2
+advance_expression = "phase == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ng0ux"]
+advance_mode = 2
+advance_expression = "phase == 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_swhix"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3lbmj"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3lbmj"]
+states/first_phase_south/node = SubResource("AnimationNodeAnimation_lt36k")
+states/first_phase_south/position = Vector2(501, 53)
+states/second_phase_south/node = SubResource("AnimationNodeAnimation_swhix")
+states/second_phase_south/position = Vector2(501, 169)
+transitions = ["Start", "first_phase_south", SubResource("AnimationNodeStateMachineTransition_8ra6m"), "Start", "second_phase_south", SubResource("AnimationNodeStateMachineTransition_ng0ux"), "first_phase_south", "End", SubResource("AnimationNodeStateMachineTransition_swhix"), "second_phase_south", "End", SubResource("AnimationNodeStateMachineTransition_3lbmj")]
+graph_offset = Vector2(7, -117)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8ra6m"]
+animation = &"first_phase/south"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ng0ux"]
+animation = &"second_phase/south"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_11d0v"]
+advance_mode = 2
+advance_expression = "phase == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jtat8"]
+advance_mode = 2
+advance_expression = "phase == 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e5bey"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3cmre"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_uv7jg"]
+states/first_phase_south/node = SubResource("AnimationNodeAnimation_8ra6m")
+states/first_phase_south/position = Vector2(488, 59)
+states/second_phase_south/node = SubResource("AnimationNodeAnimation_ng0ux")
+states/second_phase_south/position = Vector2(488, 157)
+transitions = ["Start", "first_phase_south", SubResource("AnimationNodeStateMachineTransition_11d0v"), "Start", "second_phase_south", SubResource("AnimationNodeStateMachineTransition_jtat8"), "first_phase_south", "End", SubResource("AnimationNodeStateMachineTransition_e5bey"), "second_phase_south", "End", SubResource("AnimationNodeStateMachineTransition_3cmre")]
+graph_offset = Vector2(-3, -158)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xufrs"]
+animation = &"first_phase/east"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_meybd"]
+animation = &"second_phase/east"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ow82j"]
+advance_mode = 2
+advance_expression = "phase == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0bpde"]
+advance_mode = 2
+advance_expression = "phase == 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_meybd"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mo8gb"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i03pf"]
+states/first_phase_east/node = SubResource("AnimationNodeAnimation_xufrs")
+states/first_phase_east/position = Vector2(511, 53)
+states/second_phase_east/node = SubResource("AnimationNodeAnimation_meybd")
+states/second_phase_east/position = Vector2(511, 147)
+transitions = ["Start", "first_phase_east", SubResource("AnimationNodeStateMachineTransition_ow82j"), "Start", "second_phase_east", SubResource("AnimationNodeStateMachineTransition_0bpde"), "first_phase_east", "End", SubResource("AnimationNodeStateMachineTransition_meybd"), "second_phase_east", "End", SubResource("AnimationNodeStateMachineTransition_mo8gb")]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ow82j"]
+animation = &"first_phase/west"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0bpde"]
+animation = &"second_phase/west"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i03pf"]
+advance_mode = 2
+advance_expression = "phase == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hu3eg"]
+advance_mode = 2
+advance_expression = "phase == 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uv7jg"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xufrs"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mo8gb"]
+states/first_phase_west/node = SubResource("AnimationNodeAnimation_ow82j")
+states/first_phase_west/position = Vector2(538, 32)
+states/second_phase_west/node = SubResource("AnimationNodeAnimation_0bpde")
+states/second_phase_west/position = Vector2(538, 145)
+transitions = ["Start", "first_phase_west", SubResource("AnimationNodeStateMachineTransition_i03pf"), "Start", "second_phase_west", SubResource("AnimationNodeStateMachineTransition_hu3eg"), "first_phase_west", "End", SubResource("AnimationNodeStateMachineTransition_uv7jg"), "second_phase_west", "End", SubResource("AnimationNodeStateMachineTransition_xufrs")]
+graph_offset = Vector2(13, -111)
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_swhix"]
+blend_point_0/node = SubResource("AnimationNodeStateMachine_3lbmj")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeStateMachine_uv7jg")
+blend_point_1/pos = Vector2(0, -1)
+blend_point_2/node = SubResource("AnimationNodeStateMachine_i03pf")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeStateMachine_mo8gb")
+blend_point_3/pos = Vector2(-1, 0)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mo8gb"]
+animation = &"first_phase/special_attack_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e5bey"]
+animation = &"second_phase/special_attack_1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wmpl3"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_40f7o"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pqlme"]
+advance_mode = 2
+advance_expression = "phase == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_008nk"]
+advance_mode = 2
+advance_expression = "phase == 2"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_40f7o"]
+states/first_phase_special_attack_1/node = SubResource("AnimationNodeAnimation_mo8gb")
+states/first_phase_special_attack_1/position = Vector2(505, 49)
+states/second_phase_special_attack_1/node = SubResource("AnimationNodeAnimation_e5bey")
+states/second_phase_special_attack_1/position = Vector2(505, 150)
+transitions = ["first_phase_special_attack_1", "End", SubResource("AnimationNodeStateMachineTransition_wmpl3"), "second_phase_special_attack_1", "End", SubResource("AnimationNodeStateMachineTransition_40f7o"), "Start", "first_phase_special_attack_1", SubResource("AnimationNodeStateMachineTransition_pqlme"), "Start", "second_phase_special_attack_1", SubResource("AnimationNodeStateMachineTransition_008nk")]
+graph_offset = Vector2(-35, -144)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3cmre"]
+animation = &"first_phase/special_attack_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aw0en"]
+animation = &"second_phase/special_attack_2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uxt8i"]
+advance_mode = 2
+advance_expression = "phase == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hqilg"]
+advance_mode = 2
+advance_expression = "phase == 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l8iio"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gt6ns"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pqlme"]
+states/first_phase_special_attack_2/node = SubResource("AnimationNodeAnimation_3cmre")
+states/first_phase_special_attack_2/position = Vector2(543, 38)
+states/second_phase_special_attack_2/node = SubResource("AnimationNodeAnimation_aw0en")
+states/second_phase_special_attack_2/position = Vector2(543, 143)
+transitions = ["Start", "first_phase_special_attack_2", SubResource("AnimationNodeStateMachineTransition_uxt8i"), "Start", "second_phase_special_attack_2", SubResource("AnimationNodeStateMachineTransition_hqilg"), "first_phase_special_attack_2", "End", SubResource("AnimationNodeStateMachineTransition_l8iio"), "second_phase_special_attack_2", "End", SubResource("AnimationNodeStateMachineTransition_gt6ns")]
+graph_offset = Vector2(37, -107)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_11d0v"]
+animation = &"transformation"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jtat8"]
+animation = &"transformation"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3lbmj"]
+animation = &"transformation"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uv7jg"]
+animation = &"transformation"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_xufrs"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_11d0v")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_jtat8")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_3lbmj")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_uv7jg")
+blend_point_3/pos = Vector2(-1, 0)
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lt36k"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_14n3e"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dkskx"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6gtjl"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4nxo6"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hplak"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aybq0"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vhx0g"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ytqqc"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_lt36k"]
+states/common_attack/node = SubResource("AnimationNodeStateMachine_wmpl3")
+states/common_attack/position = Vector2(616, 1)
+states/move/node = SubResource("AnimationNodeBlendSpace2D_swhix")
+states/move/position = Vector2(395, 100)
+states/special_attack_1/node = SubResource("AnimationNodeStateMachine_40f7o")
+states/special_attack_1/position = Vector2(616, 100)
+states/special_attack_2/node = SubResource("AnimationNodeStateMachine_pqlme")
+states/special_attack_2/position = Vector2(616, 194)
+states/transform/node = SubResource("AnimationNodeBlendSpace2D_xufrs")
+states/transform/position = Vector2(395, 1)
+transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_lt36k"), "move", "transform", SubResource("AnimationNodeStateMachineTransition_14n3e"), "transform", "move", SubResource("AnimationNodeStateMachineTransition_dkskx"), "move", "common_attack", SubResource("AnimationNodeStateMachineTransition_6gtjl"), "move", "special_attack_1", SubResource("AnimationNodeStateMachineTransition_4nxo6"), "move", "special_attack_2", SubResource("AnimationNodeStateMachineTransition_hplak"), "special_attack_2", "move", SubResource("AnimationNodeStateMachineTransition_aybq0"), "special_attack_1", "move", SubResource("AnimationNodeStateMachineTransition_vhx0g"), "common_attack", "move", SubResource("AnimationNodeStateMachineTransition_ytqqc")]
+graph_offset = Vector2(1, -99)
+
 [node name="Aghon" type="CharacterBody2D"]
 collision_mask = 15
 script = ExtResource("1_bsq0j")
@@ -1531,6 +1798,7 @@ position = Vector2(0, -23)
 sprite_frames = SubResource("SpriteFrames_lpr6g")
 animation = &"south"
 autoplay = "south"
+frame = 2
 script = ExtResource("8_bxdfj")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1552,3 +1820,10 @@ libraries = {
 &"second_phase": SubResource("AnimationLibrary_lt36k")
 }
 autoplay = "first_phase/south"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_lt36k")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/move/blend_position = Vector2(0, 0)
+parameters/transform/blend_position = Vector2(0, 0)
