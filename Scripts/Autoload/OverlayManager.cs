@@ -21,6 +21,8 @@ public partial class OverlayManager : Autoload<OverlayManager>
     private static string currentOverlayName;
     private static Overlay currentOverlay;
 
+    public static bool HasOpenOverlay => currentOverlay != null;
+
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;

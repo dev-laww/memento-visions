@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Game.Autoload;
+using Game.Entities;
 using Godot;
 
 namespace Game.Components;
@@ -29,6 +31,10 @@ public partial class InputManager : Node
     public override void _Ready()
     {
         clearJustPressed = Callable.From(ClearJustPressed);
+
+        if (!OverlayManager.HasOpenOverlay) return;
+
+        AddLock();
     }
 
     public override void _Process(double delta)
