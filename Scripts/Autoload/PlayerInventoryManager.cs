@@ -59,6 +59,9 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
 
         inventoryManager.Updated += OnInventoryUpdate;
 
+        var quickSlotItem = ItemRegistry.Get(SaveManager.Data.Player.QuickUse);
+        SetQuickSlotItem(quickSlotItem);
+
         Log.Info("Loading inventory...");
         items.ForEach(item =>
         {
@@ -70,9 +73,6 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
                 Quantity = item.Amount
             });
         });
-
-        var quickSlotItem = ItemRegistry.Get(SaveManager.Data.Player.QuickUse);
-        SetQuickSlotItem(quickSlotItem);
     }
 
     public static void AddItem(ItemGroup item) => Instance.inventoryManager.AddItem(item);
