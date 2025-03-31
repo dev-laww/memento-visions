@@ -1526,17 +1526,17 @@ advance_expression = "phase == 1"
 advance_mode = 2
 advance_expression = "phase == 2"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_swhix"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3lbmj"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_swhix"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3lbmj"]
 states/first_phase_south/node = SubResource("AnimationNodeAnimation_lt36k")
 states/first_phase_south/position = Vector2(501, 53)
 states/second_phase_south/node = SubResource("AnimationNodeAnimation_swhix")
 states/second_phase_south/position = Vector2(501, 169)
-transitions = ["Start", "first_phase_south", SubResource("AnimationNodeStateMachineTransition_8ra6m"), "Start", "second_phase_south", SubResource("AnimationNodeStateMachineTransition_ng0ux"), "first_phase_south", "End", SubResource("AnimationNodeStateMachineTransition_swhix"), "second_phase_south", "End", SubResource("AnimationNodeStateMachineTransition_3lbmj")]
-graph_offset = Vector2(7, -117)
+transitions = ["Start", "first_phase_south", SubResource("AnimationNodeStateMachineTransition_8ra6m"), "Start", "second_phase_south", SubResource("AnimationNodeStateMachineTransition_ng0ux"), "second_phase_south", "End", SubResource("AnimationNodeStateMachineTransition_3lbmj"), "first_phase_south", "End", SubResource("AnimationNodeStateMachineTransition_swhix")]
+graph_offset = Vector2(32, -19)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8ra6m"]
 animation = &"first_phase/south"
@@ -1624,7 +1624,7 @@ blend_point_2/node = SubResource("AnimationNodeStateMachine_i03pf")
 blend_point_2/pos = Vector2(1, 0)
 blend_point_3/node = SubResource("AnimationNodeStateMachine_mo8gb")
 blend_point_3/pos = Vector2(-1, 0)
-blend_mode = 1
+blend_mode = 2
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mo8gb"]
 animation = &"first_phase/special_attack_1"
@@ -1752,10 +1752,14 @@ graph_offset = Vector2(1, -99)
 [node name="Aghon" type="CharacterBody2D"]
 collision_mask = 15
 script = ExtResource("1_bsq0j")
+BossName = "Aghon"
+Type = 1
 Id = "enemy:aghon"
 
 [node name="StatsManager" type="Node" parent="."]
 script = ExtResource("2_hbkja")
+MaxHealth = 750.0
+Speed = 150.0
 metadata/_custom_type_script = "uid://dnpva4sn53c1r"
 
 [node name="HealthNumberManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
@@ -1773,6 +1777,7 @@ Drops = []
 
 [node name="PathFindManager" parent="." node_paths=PackedStringArray("VelocityManager") instance=ExtResource("6_a1nrq")]
 VelocityManager = NodePath("../VelocityManager")
+DebugEnabled = true
 
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
 position = Vector2(0, -20)
@@ -1798,7 +1803,7 @@ position = Vector2(0, -23)
 sprite_frames = SubResource("SpriteFrames_lpr6g")
 animation = &"south"
 autoplay = "south"
-frame = 2
+frame = 3
 script = ExtResource("8_bxdfj")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
