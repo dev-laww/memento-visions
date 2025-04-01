@@ -28,9 +28,6 @@ public partial class Aghon : Enemy
 
     private AnimationNodeStateMachinePlayback playback;
     private int phase = 1;
-    private Vector2 attackOrigin;
-    private Vector2 attackDestination;
-    private bool damageCreated;
 
     public override void _Notification(int what)
     {
@@ -147,7 +144,7 @@ public partial class Aghon : Enemy
 
         new DamageFactory.HitBoxBuilder(GlobalPosition)
             .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
-            .SetDamage(StatsManager.Damage)
+            .SetDamage(StatsManager.Damage * .8f)
             .SetDelay(.3f)
             .SetShape(new CircleShape2D { Radius = 40 })
             .SetOwner(this)
@@ -155,7 +152,7 @@ public partial class Aghon : Enemy
 
         new DamageFactory.HitBoxBuilder(GlobalPosition)
             .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
-            .SetDamage(StatsManager.Damage)
+            .SetDamage(StatsManager.Damage * .8f)
             .SetDelay(.7f)
             .SetShape(new CircleShape2D { Radius = 40 })
             .SetOwner(this)
@@ -200,8 +197,8 @@ public partial class Aghon : Enemy
 
         var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
         var direction = (playerPosition - GlobalPosition).Normalized();
-        attackOrigin = GlobalPosition;
-        attackDestination = attackOrigin + (direction * ShockWave.ATTACK_LENGTH);
+        var attackOrigin = GlobalPosition;
+        var attackDestination = attackOrigin + (direction * ShockWave.ATTACK_LENGTH);
 
         var shockWave = resourcePreloader.InstanceSceneOrNull<ShockWave>();
 
@@ -213,7 +210,6 @@ public partial class Aghon : Enemy
     private void ExitShockWavePunch()
     {
         specialAttackTimer1.Call(START_RANDOM);
-        damageCreated = false;
     }
 
     private async void SpearThrow()
@@ -226,16 +222,9 @@ public partial class Aghon : Enemy
     {
         playback.Travel(SPECIAL_ATTACK_2);
 
-        var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
-        var canvas = this.GetTelegraphCanvas();
+        var spear = resourcePreloader.InstanceSceneOrNull<Spear>();
 
-        new TelegraphFactory.CircleTelegraphBuilder(canvas, playerPosition)
-            .SetRadius(100f)
-            .SetDelay(.5f)
-            .Build();
-
-        // spawn a spear
-
+        GetTree().Root.AddChild(spear);
     }
 
     private void ExitSpearThrow()
