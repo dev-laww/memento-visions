@@ -1323,6 +1323,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_meybd"]
 length = 1.875
+step = 8.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1762,6 +1763,10 @@ Id = "enemy:aghon"
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
 resources = [PackedStringArray("ShockWave", "Spear"), [ExtResource("2_msu6k"), ExtResource("3_luen7")]]
 
+[node name="BlinkTimer" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+
 [node name="CommonAttackTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
@@ -1834,6 +1839,7 @@ position = Vector2(0, -23)
 sprite_frames = SubResource("SpriteFrames_lpr6g")
 animation = &"south"
 autoplay = "south"
+frame = 2
 script = ExtResource("8_bxdfj")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

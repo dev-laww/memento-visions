@@ -23,11 +23,13 @@ public partial class Aghon : Enemy
     [Node] private Timer commonAttackTimer;
     [Node] private Timer specialAttackTimer1;
     [Node] private Timer specialAttackTimer2;
+    [Node] private Timer blinkTimer;
     [Node] private ResourcePreloader resourcePreloader;
 
 
     private AnimationNodeStateMachinePlayback playback;
-    private int phase = 1;
+    private int phase = 2;
+    private bool blinked;
 
     public override void _Notification(int what)
     {
@@ -44,8 +46,9 @@ public partial class Aghon : Enemy
         StateMachine.AddStates(TravelToPlayer, EnterTravelToPlayer);
         StateMachine.AddStates(CommonAttack, EnterCommonAttack, ExitCommonAttack);
         StateMachine.AddStates(TransformToSecondPhase, EnterTransformToSecondPhase);
-        StateMachine.AddStates(ShockWavePunch, EnterShockWavePunch, ExitShockWavePunch);
-        StateMachine.AddStates(SpearThrow, EnterSpearThrow, ExitSpearThrow);
+        StateMachine.AddStates(ShockWavePunch, EnterShockWavePunch);
+        StateMachine.AddStates(SpearThrow, EnterSpearThrow);
+        StateMachine.AddStates(Blink, EnterBlink);
 
         StateMachine.SetInitialState(Normal);
     }
@@ -91,8 +94,7 @@ public partial class Aghon : Enemy
 
         if (specialAttackTimer1.IsStopped())
         {
-            // StateMachine.ChangeState(phase == 1 ? ShockWavePunch : SecondPhaseSpecialAttack1);
-            StateMachine.ChangeState(ShockWavePunch);
+            StateMachine.ChangeState(phase == 1 ? ShockWavePunch : Blink);
         }
 
         if (specialAttackTimer2.IsStopped())
@@ -181,13 +183,14 @@ public partial class Aghon : Enemy
         StatsManager.Heal(100, StatsManager.ModifyMode.Percentage);
         StatsManager.IncreaseDamage(40, StatsManager.ModifyMode.Percentage);
         StatsManager.DecreaseDefense(100, StatsManager.ModifyMode.Percentage);
-        StatsManager.ApplySpeedModifier("second_phase", .15f);
+        StatsManager.ApplySpeedModifier("second_phase", .3f);
     }
 
     private async void ShockWavePunch()
     {
         await ToSignal(animationTree, "animation_finished");
 
+        specialAttackTimer1.Call(START_RANDOM);
         StateMachine.ChangeState(Normal);
     }
 
@@ -207,14 +210,10 @@ public partial class Aghon : Enemy
         shockWave.Start(attackOrigin, attackDestination, this);
     }
 
-    private void ExitShockWavePunch()
-    {
-        specialAttackTimer1.Call(START_RANDOM);
-    }
-
     private async void SpearThrow()
     {
         await ToSignal(animationTree, "animation_finished");
+        specialAttackTimer2.Call(START_RANDOM);
         StateMachine.ChangeState(Normal);
     }
 
@@ -227,9 +226,37 @@ public partial class Aghon : Enemy
         GetTree().Root.AddChild(spear);
     }
 
-    private void ExitSpearThrow()
+    private async void Blink()
     {
-        specialAttackTimer2.Call(START_RANDOM);
+        if (blinkTimer.IsStopped() && !blinked)
+        {
+            var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
+            var targetPosition = MathUtil.RNG.RandDirection() * 16 + playerPosition;
+
+            velocityManager.Teleport(targetPosition);
+
+            new DamageFactory.HitBoxBuilder(GlobalPosition)
+                .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
+                .SetDamage(StatsManager.Damage)
+                .SetDelay(.4f)
+                .SetShape(new CircleShape2D { Radius = 60 })
+                .SetOwner(this)
+                .Build(); // spawn circular shockwave
+
+            blinked = true;
+        }
+
+        await ToSignal(animationTree, "animation_finished");
+
+        blinked = false;
+        specialAttackTimer1.Call(START_RANDOM);
+        StateMachine.ChangeState(Normal);
+    }
+
+    private void EnterBlink()
+    {
+        playback.Travel(SPECIAL_ATTACK_1);
+        blinkTimer.Start();
     }
     #endregion
 
