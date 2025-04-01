@@ -1,7 +1,8 @@
-[gd_scene load_steps=192 format=3 uid="uid://c6ddutu3xqvkn"]
+[gd_scene load_steps=193 format=3 uid="uid://c6ddutu3xqvkn"]
 
 [ext_resource type="Script" uid="uid://0pdu2f5btf1o" path="res://Scripts/Entities/Enemies/Boss/Aghon/Aghon.cs" id="1_bsq0j"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_hbkja"]
+[ext_resource type="PackedScene" uid="uid://bmrebc2f4wgm0" path="res://Scenes/Entities/Enemies/Boss/Aghon/ShockWave.tscn" id="2_msu6k"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_swhix"]
 [ext_resource type="Script" uid="uid://cpwyjck8klk35" path="res://Scripts/Components/Managers/HealthNumberManager.cs" id="3_53yii"]
 [ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Managers/VelocityManager.cs" id="4_bxdfj"]
@@ -1757,6 +1758,9 @@ BossName = "Aghon"
 Type = 1
 Id = "enemy:aghon"
 
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("ShockWave"), [ExtResource("2_msu6k")]]
+
 [node name="CommonAttackTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
@@ -1829,7 +1833,7 @@ position = Vector2(0, -23)
 sprite_frames = SubResource("SpriteFrames_lpr6g")
 animation = &"south"
 autoplay = "south"
-frame = 2
+frame = 3
 script = ExtResource("8_bxdfj")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

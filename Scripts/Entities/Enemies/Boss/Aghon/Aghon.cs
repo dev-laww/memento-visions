@@ -16,8 +16,6 @@ public partial class Aghon : Enemy
     private const string COMMON_ATTACK = "common_attack";
     private const string SPECIAL_ATTACK_1 = "special_attack_1";
     private const string SPECIAL_ATTACK_2 = "special_attack_2";
-    private const float ATTACK_WIDTH = 64f;
-    private const float ATTACK_LENGTH = 250f;
 
     [Node] private AnimationTree animationTree;
     [Node] private VelocityManager velocityManager;
@@ -25,6 +23,7 @@ public partial class Aghon : Enemy
     [Node] private Timer commonAttackTimer;
     [Node] private Timer specialAttackTimer1;
     [Node] private Timer specialAttackTimer2;
+    [Node] private ResourcePreloader resourcePreloader;
 
 
     private AnimationNodeStateMachinePlayback playback;
@@ -48,8 +47,8 @@ public partial class Aghon : Enemy
         StateMachine.AddStates(TravelToPlayer, EnterTravelToPlayer);
         StateMachine.AddStates(CommonAttack, EnterCommonAttack, ExitCommonAttack);
         StateMachine.AddStates(TransformToSecondPhase, EnterTransformToSecondPhase);
-        StateMachine.AddStates(FirstPhaseSpecialAttack1, EnterFirstPhaseSpecialAttack1, ExitFirstPhaseSpecialAttack1);
-        StateMachine.AddStates(FirstPhaseSpecialAttack2, EnterFirstPhaseSpecialAttack2, ExitFirstPhaseSpecialAttack2);
+        StateMachine.AddStates(ShockWavePunch, EnterShockWavePunch, ExitShockWavePunch);
+        StateMachine.AddStates(SpearThrow, EnterSpearThrow, ExitSpearThrow);
 
         StateMachine.SetInitialState(Normal);
     }
@@ -95,14 +94,14 @@ public partial class Aghon : Enemy
 
         if (specialAttackTimer1.IsStopped())
         {
-            // StateMachine.ChangeState(phase == 1 ? FirstPhaseSpecialAttack1 : SecondPhaseSpecialAttack1);
-            StateMachine.ChangeState(FirstPhaseSpecialAttack1);
+            // StateMachine.ChangeState(phase == 1 ? ShockWavePunch : SecondPhaseSpecialAttack1);
+            StateMachine.ChangeState(ShockWavePunch);
         }
 
         if (specialAttackTimer2.IsStopped())
         {
-            // StateMachine.ChangeState(phase == 1 ? FirstPhaseSpecialAttack2 : SecondPhaseSpecialAttack2);
-            StateMachine.ChangeState(FirstPhaseSpecialAttack2);
+            // StateMachine.ChangeState(phase == 1 ? SpearThrow : SecondPhaseSpecialAttack2);
+            StateMachine.ChangeState(SpearThrow);
         }
     }
 
@@ -188,55 +187,42 @@ public partial class Aghon : Enemy
         StatsManager.ApplySpeedModifier("second_phase", .15f);
     }
 
-    private async void FirstPhaseSpecialAttack1()
+    private async void ShockWavePunch()
     {
         await ToSignal(animationTree, "animation_finished");
-
-        if (!damageCreated)
-        {
-            damageCreated = true;
-            new DamageFactory.HitBoxBuilder(attackOrigin) // create a continuous damage and move to separate entity
-                .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
-                .SetDamage(StatsManager.Damage * .5f)
-                .SetRotation((attackDestination - attackOrigin).Angle())
-                .SetShapeOffset(new Vector2(ATTACK_LENGTH / 2, 0))
-                .SetShape(new RectangleShape2D { Size = new Vector2(ATTACK_LENGTH, ATTACK_WIDTH) })
-                .SetOwner(this)
-                .Build();
-        }
 
         StateMachine.ChangeState(Normal);
     }
 
-    private void EnterFirstPhaseSpecialAttack1()
+    private void EnterShockWavePunch()
     {
         playback.Travel(SPECIAL_ATTACK_1);
 
         var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
         var direction = (playerPosition - GlobalPosition).Normalized();
         attackOrigin = GlobalPosition;
-        attackDestination = attackOrigin + (direction * ATTACK_LENGTH);
-        var canvas = this.GetTelegraphCanvas();
+        attackDestination = attackOrigin + (direction * ShockWave.ATTACK_LENGTH);
 
-        new TelegraphFactory.LineTelegraphBuilder(canvas, attackOrigin)
-            .SetDestitnation(attackDestination)
-            .SetWidth(ATTACK_WIDTH)
-            .Build();
+        var shockWave = resourcePreloader.InstanceSceneOrNull<ShockWave>();
+
+        GetTree().Root.AddChild(shockWave);
+
+        shockWave.Start(attackOrigin, attackDestination, this);
     }
 
-    private void ExitFirstPhaseSpecialAttack1()
+    private void ExitShockWavePunch()
     {
         specialAttackTimer1.Call(START_RANDOM);
         damageCreated = false;
     }
 
-    private async void FirstPhaseSpecialAttack2()
+    private async void SpearThrow()
     {
         await ToSignal(animationTree, "animation_finished");
         StateMachine.ChangeState(Normal);
     }
 
-    private void EnterFirstPhaseSpecialAttack2()
+    private void EnterSpearThrow()
     {
         playback.Travel(SPECIAL_ATTACK_2);
 
@@ -252,7 +238,7 @@ public partial class Aghon : Enemy
 
     }
 
-    private void ExitFirstPhaseSpecialAttack2()
+    private void ExitSpearThrow()
     {
         specialAttackTimer2.Call(START_RANDOM);
     }
