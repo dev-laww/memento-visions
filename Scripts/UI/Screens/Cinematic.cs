@@ -1,3 +1,4 @@
+using Game.Components;
 using Godot;
 using GodotUtilities;
 
@@ -25,6 +26,7 @@ public partial class Cinematic : CanvasLayer
     public void Start()
     {
         animationPlayer.Play(ANIM_IN);
+        Input.MouseMode = Input.MouseModeEnum.Hidden;
         EmitSignalCinematicStarted();
     }
 
@@ -35,6 +37,7 @@ public partial class Cinematic : CanvasLayer
         await ToSignal(animationPlayer, "animation_finished");
 
         EmitSignalCinematicEnded();
+        Input.MouseMode = Input.MouseModeEnum.Visible;
     }
 }
 
