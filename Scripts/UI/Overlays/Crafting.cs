@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using Game.Autoload;
 using Game.Common;
+using Game.Common.Extensions;
 using Game.Data;
+using Game.Entities;
 using Game.UI.Common;
 using Game.Utils.Extensions;
 using Godot;
@@ -147,11 +149,18 @@ public partial class Crafting : Overlay
     {
         if (selectedRecipe is null) return;
 
+        var blackSmith = GetTree().Root.GetFirstChildOrNull<BlackSmith>();
+
+        blackSmith?.Work();
+
         Create(quantity);
+        Close();
     }
 
     private void Reset()
     {
+        if (!IsInstanceValid(this)) return;
+
         quantity = 1;
         quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
 

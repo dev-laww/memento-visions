@@ -19,9 +19,8 @@ public partial class OverlayManager : Autoload<OverlayManager>
     [Node] private ResourcePreloader resourcePreloader;
 
     private static string currentOverlayName;
-    private static Overlay currentOverlay;
-
-    public static bool HasOpenOverlay => currentOverlay != null;
+    public static Overlay CurrentOverlay { get; private set; }
+    public static bool HasOpenOverlay => CurrentOverlay != null;
 
     public override void _Notification(int what)
     {
@@ -36,7 +35,7 @@ public partial class OverlayManager : Autoload<OverlayManager>
 
         if (targetOverlay == null) return;
 
-        var shouldClose = currentOverlayName == name || (name == MENU && currentOverlay != null);
+        var shouldClose = currentOverlayName == name || (name == MENU && CurrentOverlay != null);
 
         if (shouldClose)
         {
@@ -44,13 +43,13 @@ public partial class OverlayManager : Autoload<OverlayManager>
             return;
         }
 
-        if (currentOverlay != null) return;
+        if (CurrentOverlay != null) return;
 
-        currentOverlay = targetOverlay;
+        CurrentOverlay = targetOverlay;
         targetOverlay.TreeExiting += OnOverlayClosed;
         currentOverlayName = name;
 
-        Instance.AddChild(currentOverlay);
+        Instance.AddChild(CurrentOverlay);
         Instance.GetPlayer()?.InputManager.AddLock();
         Instance.GetViewport().SetInputAsHandled();
         Log.Debug($"Overlay {name} opended.");
@@ -58,13 +57,13 @@ public partial class OverlayManager : Autoload<OverlayManager>
 
     public static void HideOverlay()
     {
-        currentOverlay?.Close();
+        CurrentOverlay?.Close();
         OnOverlayClosed();
     }
 
     private static void OnOverlayClosed()
     {
-        currentOverlay = null;
+        CurrentOverlay = null;
         currentOverlayName = null;
 
         Instance.GetPlayer()?.InputManager.RemoveLock();
