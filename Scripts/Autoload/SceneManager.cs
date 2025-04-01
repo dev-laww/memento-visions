@@ -83,14 +83,14 @@ public partial class SceneManager : Autoload<SceneManager>
             Reset();
             return;
         }
-        
+
         if (ResourceLoader.Load<PackedScene>(path) == null)
         {
             Log.Error($"[LoadScene] Failed to load scene: {path}");
             Reset();
             return;
         }
-        
+
         if (ResourceLoader.LoadThreadedRequest(path, useSubThreads: true) != Error.Ok)
         {
             Log.Error($"[LoadScene] Threaded loading failed: {path}");
@@ -170,11 +170,11 @@ public partial class SceneManager : Autoload<SceneManager>
             outgoing.QueueFree();
         }
 
+        to.AddChild(incoming);
+
         await loadingScreen.End();
 
         loadingScreen = null;
-
-        to.AddChild(incoming);
         Reset();
     }
 
