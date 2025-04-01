@@ -16,6 +16,7 @@ public partial class Aghon : Enemy
     private const string COMMON_ATTACK = "common_attack";
     private const string SPECIAL_ATTACK_1 = "special_attack_1";
     private const string SPECIAL_ATTACK_2 = "special_attack_2";
+    private const int MAX_SPAWNED_CLOUDS = 3;
 
     [Node] private AnimationTree animationTree;
     [Node] private VelocityManager velocityManager;
@@ -28,8 +29,9 @@ public partial class Aghon : Enemy
 
 
     private AnimationNodeStateMachinePlayback playback;
-    private int phase = 2;
+    private int phase = 1;
     private bool blinked;
+    private int spawnedClouds;
 
     public override void _Notification(int what)
     {
@@ -49,6 +51,7 @@ public partial class Aghon : Enemy
         StateMachine.AddStates(ShockWavePunch, EnterShockWavePunch);
         StateMachine.AddStates(SpearThrow, EnterSpearThrow);
         StateMachine.AddStates(Blink, EnterBlink);
+        StateMachine.AddStates(SpawnCloud, EnterSpawnCloud);
 
         StateMachine.SetInitialState(Normal);
     }
@@ -99,8 +102,7 @@ public partial class Aghon : Enemy
 
         if (specialAttackTimer2.IsStopped())
         {
-            // StateMachine.ChangeState(phase == 1 ? SpearThrow : SecondPhaseSpecialAttack2);
-            StateMachine.ChangeState(SpearThrow);
+            StateMachine.ChangeState(phase == 1 ? SpearThrow : SpawnCloud);
         }
     }
 
@@ -231,14 +233,14 @@ public partial class Aghon : Enemy
         if (blinkTimer.IsStopped() && !blinked)
         {
             var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
-            var targetPosition = MathUtil.RNG.RandDirection() * 16 + playerPosition;
+            var targetPosition = MathUtil.RNG.RandDirection() * 32 + playerPosition;
 
             velocityManager.Teleport(targetPosition);
 
             new DamageFactory.HitBoxBuilder(GlobalPosition)
                 .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
                 .SetDamage(StatsManager.Damage)
-                .SetDelay(.4f)
+                .SetDelay(.6f)
                 .SetShape(new CircleShape2D { Radius = 60 })
                 .SetOwner(this)
                 .Build(); // spawn circular shockwave
@@ -257,6 +259,36 @@ public partial class Aghon : Enemy
     {
         playback.Travel(SPECIAL_ATTACK_1);
         blinkTimer.Start();
+    }
+
+    private async void SpawnCloud()
+    {
+        await ToSignal(animationTree, "animation_finished");
+
+        StateMachine.ChangeState(Normal);
+        specialAttackTimer2.Call(START_RANDOM);
+    }
+
+    private void EnterSpawnCloud()
+    {
+        playback.Travel(SPECIAL_ATTACK_2);
+
+        if (spawnedClouds >= MAX_SPAWNED_CLOUDS)
+        {
+            StateMachine.ChangeState(Normal);
+            return;
+        }
+
+        var cloud = resourcePreloader.InstanceSceneOrNull<Cloud>();
+
+        if (cloud == null) return;
+
+        cloud.GlobalPosition = GlobalPosition;
+        cloud.TreeExiting += () => spawnedClouds = Mathf.Clamp(spawnedClouds - 1, 0, MAX_SPAWNED_CLOUDS);
+
+        GetTree().Root.AddChild(cloud);
+
+        spawnedClouds++;
     }
     #endregion
 
