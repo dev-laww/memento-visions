@@ -56,7 +56,16 @@ public partial class Crafting : Overlay
         PlayerInventoryManager.Updated += _ => Reset();
 
         PopulateSlots();
+        Reset();
     }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+
+        PlayerInventoryManager.Updated -= _ => Reset();
+    }
+
 
     private void PopulateSlots()
     {
@@ -139,8 +148,6 @@ public partial class Crafting : Overlay
         if (selectedRecipe is null) return;
 
         Create(quantity);
-
-        Reset();
     }
 
     private void Reset()
@@ -186,22 +193,23 @@ public partial class Crafting : Overlay
 
     private void Create(int qty = 1)
     {
-        var player = this.GetPlayer();
+        if (!CanCreate(qty) || selectedRecipe is null) return;
 
-        if (player is null || !CanCreate(qty) || selectedRecipe is null) return;
+        var recipe = selectedRecipe.Duplicate() as Recipe;
 
-        var ingredients = selectedRecipe.GetIngredients(qty);
+        var ingredients = recipe.GetIngredients(qty);
 
         foreach (var ingredient in ingredients)
             PlayerInventoryManager.RemoveItem(ingredient);
 
         var item = new ItemGroup
         {
-            Item = selectedRecipe.Result.Item,
-            Quantity = selectedRecipe.Result.Quantity * qty
+            Item = recipe.Result.Item,
+            Quantity = recipe.Result.Quantity * qty
         };
 
         PlayerInventoryManager.AddItem(item);
+        Reset();
         Log.Debug($"Created {item}.");
     }
 }
