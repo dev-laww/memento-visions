@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://bh0btp6qmu1oc"]
+[gd_scene load_steps=24 format=4 uid="uid://3td8x8h36elv"]
 
 [ext_resource type="Script" uid="uid://bw7smwgpceo61" path="res://Scripts/World/Levels/Story/PrologueBar.cs" id="1_lx1uq"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="1_o2334"]
@@ -10,13 +10,12 @@
 [ext_resource type="TileSet" uid="uid://grwoctw4gvjl" path="res://resources/tilesets/bar/wall.tres" id="5_snxl8"]
 [ext_resource type="TileSet" uid="uid://dvd6ajqdt1f52" path="res://resources/tilesets/bar/small-props.tres" id="6_0qhrs"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="6_h8tdj"]
-[ext_resource type="Resource" uid="uid://d0yblc4voyv7o" path="res://resources/quests/Prologue/BarInteraction.tres" id="6_stbqo"]
+[ext_resource type="Resource" uid="uid://0suhta3uejmr" path="res://resources/quests/Prologue/BarInteraction.tres" id="6_stbqo"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="7_stbqo"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="8_lx1uq"]
 [ext_resource type="Resource" uid="uid://dk2nxvecyh5h3" path="res://resources/dialogues/prologue/prologue1.0.dialogue" id="9_ete42"]
 [ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemies/Common/Dummy.tscn" id="9_h8tdj"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="10_n1lv5"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="11_18ej6"]
 
 [sub_resource type="Environment" id="Environment_71mkv"]
 background_mode = 3
@@ -117,14 +116,11 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
 
-[node name="InteractionUI" type="Control" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("10_n1lv5")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("11_18ej6")
+[node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("10_n1lv5")]
 
 [node name="Dummy4" parent="." instance=ExtResource("9_h8tdj")]
 position = Vector2(739, 447)
+Type = 0
 
 [node name="Art" type="Node2D" parent="."]
 y_sort_enabled = true

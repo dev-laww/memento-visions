@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_aatxx"]
 [ext_resource type="TileSet" uid="uid://c1mmutvocnp5g" path="res://resources/tilesets/bar/props.tres" id="2_2f277"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_3ewk0"]
-[ext_resource type="TileSet" uid="uid://ho86oxqsjkkf" path="res://resources/tilesets/school.tres" id="4_l1us4"]
+[ext_resource type="TileSet" uid="uid://i2hb45su1nbs" path="res://resources/tilesets/school.tres" id="4_l1us4"]
 [ext_resource type="PackedScene" uid="uid://liua02dq0v6c" path="res://Scenes/World/Decorations/School/Diary.tscn" id="5_tvh6o"]
 [ext_resource type="PackedScene" uid="uid://b1gihhoaku3hk" path="res://Scenes/World/Decorations/School/BurnedWoodenChair.tscn" id="6_l1us4"]
 [ext_resource type="PackedScene" uid="uid://cdaa4ueq5j1i6" path="res://Scenes/World/Decorations/School/Photographs.tscn" id="7_tvh6o"]

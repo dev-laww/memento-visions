@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="1_3hpnm"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_bo7c4"]
-[ext_resource type="TileSet" uid="uid://ho86oxqsjkkf" path="res://resources/tilesets/school.tres" id="2_7rt8h"]
+[ext_resource type="TileSet" uid="uid://i2hb45su1nbs" path="res://resources/tilesets/school.tres" id="2_7rt8h"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_kybra"]
 [ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="4_7rt8h"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="5_kybra"]
@@ -355,18 +355,23 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="Aswang3" parent="Enemies" instance=ExtResource("4_7rt8h")]
 position = Vector2(770, 1648)
+Type = 0
 
 [node name="Aswang4" parent="Enemies" instance=ExtResource("4_7rt8h")]
 position = Vector2(185, 1619)
+Type = 0
 
 [node name="Aswang5" parent="Enemies" instance=ExtResource("4_7rt8h")]
 position = Vector2(387, 316)
+Type = 0
 
 [node name="Aswang6" parent="Enemies" instance=ExtResource("4_7rt8h")]
 position = Vector2(637, 359)
+Type = 0
 
 [node name="Aswang8" parent="Enemies" instance=ExtResource("4_7rt8h")]
 position = Vector2(475, 948)
+Type = 0
 
 [node name="Player" parent="." instance=ExtResource("5_kybra")]
 position = Vector2(299, 82)
