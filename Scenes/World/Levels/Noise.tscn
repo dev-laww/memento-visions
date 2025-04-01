@@ -1120,106 +1120,141 @@ script = ExtResource("7_ftoxi")
 metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="Entities" type="Node2D" parent="."]
+z_index = -1
 y_sort_enabled = true
+position = Vector2(-2, -22)
 
 [node name="@CharacterBody2D@26571" parent="Entities" instance=ExtResource("2_k6nme")]
-position = Vector2(72, 792)
+position = Vector2(615, 437)
 
 [node name="@CharacterBody2D@26572" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(24, 1224)
+Type = 0
 
 [node name="@CharacterBody2D@26573" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(72, 1320)
+Type = 0
 
 [node name="@CharacterBody2D@26574" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(72, 1752)
+Type = 0
 
 [node name="@CharacterBody2D@26575" parent="Entities" instance=ExtResource("5_fp327")]
 position = Vector2(120, 648)
+Type = 0
 
 [node name="@CharacterBody2D@26576" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(168, 408)
+Type = 0
 
 [node name="@CharacterBody2D@26577" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(216, 1032)
+Type = 0
 
 [node name="@CharacterBody2D@26578" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(408, 1992)
+Type = 0
 
 [node name="@CharacterBody2D@26579" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(456, 792)
+Type = 0
 
 [node name="@CharacterBody2D@26580" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(456, 1896)
+Type = 0
 
 [node name="@CharacterBody2D@26581" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(648, 1752)
+Type = 0
 
 [node name="@CharacterBody2D@26582" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(696, 312)
+Type = 0
 
 [node name="@CharacterBody2D@26583" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(792, 24)
+Type = 0
 
 [node name="@CharacterBody2D@26584" parent="Entities" instance=ExtResource("5_fp327")]
 position = Vector2(840, 552)
+Type = 0
 
 [node name="@CharacterBody2D@26585" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(888, 1512)
+Type = 0
 
 [node name="@CharacterBody2D@26586" parent="Entities" instance=ExtResource("5_fp327")]
 position = Vector2(936, 1944)
+Type = 0
 
 [node name="@CharacterBody2D@26587" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(1080, 984)
+Type = 0
 
 [node name="@CharacterBody2D@26588" parent="Entities" instance=ExtResource("5_fp327")]
 position = Vector2(1080, 1224)
+Type = 0
 
 [node name="@CharacterBody2D@26589" parent="Entities" instance=ExtResource("5_fp327")]
 position = Vector2(1080, 1320)
+Type = 0
 
 [node name="@CharacterBody2D@26590" parent="Entities" instance=ExtResource("5_fp327")]
 position = Vector2(1080, 1896)
+Type = 0
 
 [node name="@CharacterBody2D@26591" parent="Entities" instance=ExtResource("5_fp327")]
 position = Vector2(1176, 216)
+Type = 0
 
 [node name="@CharacterBody2D@26592" parent="Entities" instance=ExtResource("5_fp327")]
 position = Vector2(1272, 504)
+Type = 0
 
 [node name="@CharacterBody2D@26593" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(1320, 1272)
+Type = 0
 
 [node name="@CharacterBody2D@26594" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(1368, 1368)
+Type = 0
 
 [node name="@CharacterBody2D@26595" parent="Entities" instance=ExtResource("5_fp327")]
 position = Vector2(1416, 1176)
+Type = 0
 
 [node name="@CharacterBody2D@26596" parent="Entities" instance=ExtResource("5_fp327")]
 position = Vector2(1416, 1896)
+Type = 0
 
 [node name="@CharacterBody2D@26597" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(1416, 1944)
+Type = 0
 
 [node name="@CharacterBody2D@26598" parent="Entities" instance=ExtResource("5_fp327")]
 position = Vector2(1464, 1176)
+Type = 0
 
 [node name="@CharacterBody2D@26599" parent="Entities" instance=ExtResource("5_fp327")]
 position = Vector2(1512, 504)
+Type = 0
 
 [node name="@CharacterBody2D@26600" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(1512, 984)
+Type = 0
 
 [node name="@CharacterBody2D@26601" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(1560, 696)
+Type = 0
 
 [node name="@CharacterBody2D@26602" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(1608, 456)
+Type = 0
 
 [node name="@CharacterBody2D@26603" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(1944, 408)
+Type = 0
 
 [node name="@CharacterBody2D@26604" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(1992, 504)
+Type = 0
