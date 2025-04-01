@@ -47,7 +47,7 @@ public partial class ShockWave : Node2D
     {
         new DamageFactory.HitBoxBuilder(origin)
            .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
-           .SetDamage(aghon.StatsManager.Damage * .3f)
+           .SetDamage(aghon.StatsManager.Damage * .8f)
            .SetRotation((destination - origin).Angle())
            .SetShapeOffset(new Vector2(ATTACK_LENGTH / 2, 0))
            .SetShape(new RectangleShape2D { Size = new Vector2(ATTACK_LENGTH, ATTACK_WIDTH) })
@@ -60,7 +60,7 @@ public partial class ShockWave : Node2D
         {
             var hitbox = new DamageFactory.HitBoxBuilder(origin)
                 .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", Chance = 0.5f })
-                .SetDamage(aghon.StatsManager.Damage * .1f)
+                .SetDamage(aghon.StatsManager.Damage * .5f)
                 .SetDelay(i * 0.5f)
                 .SetRotation((destination - origin).Angle())
                 .SetShapeOffset(new Vector2(ATTACK_LENGTH / 2, 0))
