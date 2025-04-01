@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Game.Components;
 using Game.Entities;
+using Game.UI.Screens;
+using Game.Utils;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
@@ -40,8 +41,8 @@ public partial class Noise : Node2D
     });
 
     private GodotObject grid;
-    private readonly Stopwatch stopwatch = new();
     private bool placedFirstProp;
+    private TextLoading loadingScreen;
 
     public override void _Notification(int what)
     {
@@ -58,6 +59,10 @@ public partial class Noise : Node2D
 
         if (Engine.IsEditorHint()) return;
 
+        loadingScreen = new LoadingScreenFactory.TextLoadingBuilder(GetTree())
+            .SetText("Generating world...")
+            .Build();
+
         Clear.Call();
 
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
@@ -66,42 +71,32 @@ public partial class Noise : Node2D
     }
 
 
-    private void OnGenerationFinished()
+    private async void OnGenerationFinished()
     {
-        stopwatch.Restart();
-        GD.Print("Terrain generated!");
+        if (loadingScreen is null) return;
 
-        GD.Print("Cleaning up...");
+        loadingScreen.Text = "Terrain generated!";
+        loadingScreen.Text = "Cleaning up...";
         PurgeElevationTopEdges();
-        stopwatch.Stop();
-        GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
 
-        GD.Print("Generating spawn points...");
-        stopwatch.Restart();
+        loadingScreen.Text = "Generating spawn points...";
         GenerateSpawnPosition();
-        stopwatch.Stop();
-        GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
 
-        GD.Print("Spawing player...");
-        stopwatch.Restart();
+        loadingScreen.Text = "Spawing player...";
         SpawnPlayer();
-        stopwatch.Stop();
-        GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
 
-        GD.Print("Spawning enemies...");
-        stopwatch.Restart();
+        loadingScreen.Text = "Spawning enemies...";
         SpawnEnemies();
-        stopwatch.Stop();
-        GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
 
-        GD.Print("Placing navigation regions...");
-        GetTree().CreateTimer(0.2f).Timeout += () =>
-        {
-            stopwatch.Restart();
-            navigationManager.PlaceNavigationRegions();
-            stopwatch.Stop();
-        };
-        GD.Print($"Elapsed time: {stopwatch.ElapsedMilliseconds}ms");
+        await ToSignal(GetTree().CreateTimer(0.2f), "timeout");
+
+        loadingScreen.Text = "Placing navigation regions...";
+        navigationManager.PlaceNavigationRegions();
+
+        await ToSignal(GetTree().CreateTimer(0.2f), "timeout");
+
+        loadingScreen.QueueFree();
+        loadingScreen = null;
     }
 
     private void OnGenerationStarted()
