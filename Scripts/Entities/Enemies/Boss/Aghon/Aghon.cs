@@ -183,7 +183,7 @@ public partial class Aghon : Enemy
         StatsManager.SetInvulnerable(true);
 
         StatsManager.Heal(100, StatsManager.ModifyMode.Percentage);
-        StatsManager.IncreaseDamage(40, StatsManager.ModifyMode.Percentage);
+        StatsManager.IncreaseDamage(20, StatsManager.ModifyMode.Percentage);
         StatsManager.DecreaseDefense(100, StatsManager.ModifyMode.Percentage);
         StatsManager.ApplySpeedModifier("second_phase", .3f);
     }

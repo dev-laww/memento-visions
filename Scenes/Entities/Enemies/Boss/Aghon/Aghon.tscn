@@ -1795,9 +1795,9 @@ metadata/_custom_type_script = "uid://clh46y8w17vem"
 [node name="StatsManager" type="Node" parent="."]
 script = ExtResource("2_hbkja")
 MaxHealth = 750.0
-Speed = 120.0
+Speed = 110.0
 Defense = 20.0
-Damage = 25.0
+Damage = 20.0
 metadata/_custom_type_script = "uid://dnpva4sn53c1r"
 
 [node name="HealthNumberManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
