@@ -1,4 +1,4 @@
-[gd_scene load_steps=139 format=4 uid="uid://cccs11d7xwh47"]
+[gd_scene load_steps=138 format=4 uid="uid://cccs11d7xwh47"]
 
 [ext_resource type="Script" uid="uid://c22irbkohg4bs" path="res://addons/gaea/generators/2D/noise_generator/noise_generator.gd" id="1_0m5yt"]
 [ext_resource type="PackedScene" uid="uid://2586jb7lbuyn" path="res://Scenes/UI/Common/Fog.tscn" id="1_lbxhc"]
@@ -26,7 +26,6 @@
 [ext_resource type="Script" uid="uid://ddmilpn583e8x" path="res://addons/gaea/tile_info/random_tile_info.gd" id="11_kbier"]
 [ext_resource type="Script" uid="uid://cpkq322vsvt44" path="res://addons/gaea/tile_info/tile_info.gd" id="12_m40hy"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="14_ygxkk"]
-[ext_resource type="PackedScene" uid="uid://47o6g554nf78" path="res://Scenes/Components/Battle/Telegraph/LineTelegraph.tscn" id="24_oyrft"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_a8soy"]
 
@@ -1068,10 +1067,8 @@ navigation_polygon = SubResource("NavigationPolygon_0pdra")
 z_index = -1
 position = Vector2(-90, 120)
 
-[node name="LineTelegraph" parent="TelegraphCanvas" instance=ExtResource("24_oyrft")]
-position = Vector2(544, 392)
-
 [node name="Map" type="Node2D" parent="."]
+z_index = -1
 y_sort_enabled = true
 
 [node name="Floor" type="TileMapLayer" parent="Map"]
@@ -1095,6 +1092,7 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="ForeGround" type="TileMapLayer" parent="Map"]
 unique_name_in_owner = true
+z_index = 1
 y_sort_enabled = true
 texture_filter = 2
 material = ExtResource("5_afium")
@@ -1129,7 +1127,7 @@ y_sort_enabled = true
 position = Vector2(-2, -22)
 
 [node name="@CharacterBody2D@26571" parent="Entities" instance=ExtResource("2_k6nme")]
-position = Vector2(523, 483)
+position = Vector2(454, 425)
 
 [node name="@CharacterBody2D@26572" parent="Entities" instance=ExtResource("6_k6nme")]
 position = Vector2(24, 1224)
