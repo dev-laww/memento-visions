@@ -23,6 +23,8 @@ public partial class PathFindManager : Node2D
 
     [Export] private int maxChangeDirectionDegrees = 0;
 
+    [Export] private float decelerateDistanceStart = 0f;
+
     [Export]
     private bool DebugEnabled
     {

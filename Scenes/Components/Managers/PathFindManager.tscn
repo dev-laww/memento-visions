@@ -17,5 +17,3 @@ script = ExtResource("2_sywbf")
 min_wait_time = 0.3
 max_wait_time = 0.8
 metadata/_custom_type_script = "uid://clh46y8w17vem"
-
-[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="OnVelocityComputed"]
