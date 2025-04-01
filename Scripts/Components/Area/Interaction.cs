@@ -72,9 +72,9 @@ public partial class Interaction : Area2D, IInteractable
 
     public void Toggle(bool value) => isInteractable = value;
 
-    public void HideUI() => InteractionUI.Hide();
+    public void HideUI() => InteractionUI.AnimateHide();
 
-    public void ShowUI() => InteractionUI.Show();
+    public void ShowUI() => InteractionUI.AnimateShow();
 
     private void OnBodyEntered(Node _)
     {

@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cf2yu213pnwwr"]
+[gd_scene load_steps=6 format=3 uid="uid://cf2yu213pnwwr"]
 
 [ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="1_mvh6h"]
 [ext_resource type="Texture2D" uid="uid://dyxsacj8kktd1" path="res://assets/icons/f.png" id="1_qix0e"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_mvh6h"]
+[ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="4_7t6ul"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qbopi"]
+font = ExtResource("4_7t6ul")
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="InteractionUI" type="Control"]
 layout_mode = 3
@@ -37,3 +43,4 @@ unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_mvh6h")
 text = "Interact"
+label_settings = SubResource("LabelSettings_qbopi")

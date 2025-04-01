@@ -20,7 +20,7 @@ public partial class InteractionManager : Autoload<InteractionManager>
 
         if (closest == lastClosest || closest == null) return;
 
-        areas.ForEach(area => area.HideUI());
+        areas.Where(area => area != closest).ToList().ForEach(area => area.HideUI());
 
         lastClosest = closest;
 
@@ -64,7 +64,7 @@ public partial class InteractionManager : Autoload<InteractionManager>
     private IInteractable GetClosest()
     {
         if (areas.Count == 0) return null;
-        
+
         areas.RemoveAll(area =>
             area is GodotObject godotObj && !GodotObject.IsInstanceValid(godotObj)
         );
