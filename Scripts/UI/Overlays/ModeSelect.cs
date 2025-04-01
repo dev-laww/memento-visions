@@ -1,4 +1,6 @@
 using Game.Components;
+using Game.UI.Screens;
+using Game.Utils;
 using Godot;
 using GodotUtilities;
 
@@ -32,6 +34,11 @@ public partial class ModeSelect : Overlay
         {
             Close();
             GameManager.ChangeScene("res://Scenes/World/Levels/Noise.tscn");
+
+            new LoadingScreenFactory.TextLoadingBuilder(GetTree())
+                .SetText("")
+                .SetDuration(2f)
+                .Build();
         };
 
         storyModeButton.Pressed += () =>

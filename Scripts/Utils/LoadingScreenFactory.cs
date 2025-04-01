@@ -12,9 +12,17 @@ public static class LoadingScreenFactory
     {
         private string text = "Loading...";
 
+        private float duration;
+
         public TextLoadingBuilder SetText(string text)
         {
             this.text = text;
+            return this;
+        }
+
+        public TextLoadingBuilder SetDuration(float duration)
+        {
+            this.duration = duration;
             return this;
         }
 
@@ -24,6 +32,10 @@ public static class LoadingScreenFactory
             instance.Text = text;
 
             tree.Root.AddChildDeferred(instance);
+
+            if (duration > 0)
+                tree.CreateTimer(duration).Timeout += instance.QueueFree;
+
 
             return instance;
         }
