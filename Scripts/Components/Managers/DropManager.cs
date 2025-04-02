@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Game.Common;
 using Game.Entities;
 using Game.Data;
@@ -21,7 +22,16 @@ public partial class DropManager : Node
         public int Max;
     }
 
-    [Export] private ItemDrop[] Drops;
+    [Export]
+    public ItemDrop[] Drops
+    {
+        get => drops;
+        set
+        {
+            drops = value;
+            NotifyPropertyListChanged();
+        }
+    }
 
     [Node] private ResourcePreloader resourcePreloader;
 
@@ -32,8 +42,8 @@ public partial class DropManager : Node
         WireNodes();
     }
 
-
     private readonly LootTable<Drop> lootTable = new();
+    private ItemDrop[] drops;
 
     public override void _Ready()
     {
@@ -44,12 +54,7 @@ public partial class DropManager : Node
             parent.Death += SpawnDrops;
         }
 
-        foreach (var (item, min, max, weight) in Drops)
-        {
-            var drop = new Drop { Item = item, Min = min, Max = max };
-
-            lootTable.AddItem(drop, weight);
-        }
+        SetupDrops();
     }
 
     private void SpawnDrops(Entity.DeathInfo info) => SpawnDrops(info.Position);
@@ -84,6 +89,22 @@ public partial class DropManager : Node
             GameManager.CurrentScene?.CallDeferred("add_child", item);
 
             Log.Debug($"Dropped {item.ItemGroup}");
+        }
+    }
+
+    public void SetDrops(IEnumerable<ItemDrop> drops)
+    {
+        Drops = drops.ToArray();
+        SetupDrops();
+    }
+
+    private void SetupDrops()
+    {
+        foreach (var (item, min, max, weight) in Drops)
+        {
+            var drop = new Drop { Item = item, Min = min, Max = max };
+
+            lootTable.AddItem(drop, weight);
         }
     }
 }
