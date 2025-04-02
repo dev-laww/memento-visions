@@ -58,6 +58,11 @@ public partial class GameCamera : Autoload<GameCamera>
         TargetPositionOverride = null;
     }
 
+    public static void SetZoom(Vector2 zoom)
+    {
+        Instance.shakyCamera2d.Zoom = zoom;
+    }
+
     public static void Shake(ShakeArgs args = null)
     {
         args ??= new ShakeArgs();
