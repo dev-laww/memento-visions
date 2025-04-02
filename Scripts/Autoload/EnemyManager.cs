@@ -22,6 +22,7 @@ public partial class EnemyManager : Autoload<EnemyManager>
     public static int EnemyCount => Instance.enemies.Count;
     public static event Action<Enemy> EnemyRegistered;
     public static event Action<Enemy> EnemyUnregistered;
+    public static event Action<int> EnemyCountChanged;
 
     public static IReadOnlyList<Enemy> EnemiesOfType(Enemy.EnemyType type) => [.. Instance.enemies.Where(enemy => enemy.Type == type)];
 
@@ -38,6 +39,7 @@ public partial class EnemyManager : Autoload<EnemyManager>
         Instance.enemies.Add(enemy);
         EnemyRegistered?.Invoke(enemy);
         Instance.OnEnemyRegistered(enemy);
+        EnemyCountChanged?.Invoke(Instance.enemies.Count);
 
         Log.Debug($"{enemy} added to the registry. {info}");
     }
@@ -47,6 +49,7 @@ public partial class EnemyManager : Autoload<EnemyManager>
         Instance.enemies.Remove(info.Victim as Enemy);
         Instance.OnEnemyUnregistered(info.Victim as Enemy);
         EnemyUnregistered?.Invoke(info.Victim as Enemy);
+        EnemyCountChanged?.Invoke(Instance.enemies.Count);
 
         Log.Debug($"{info.Victim} removed from the registry. {info}");
     }
@@ -55,6 +58,7 @@ public partial class EnemyManager : Autoload<EnemyManager>
     {
         Instance.enemies.Remove(enemy);
         Instance.OnEnemyUnregistered(enemy);
+        EnemyUnregistered?.Invoke(enemy);
     }
 
     public override void _Notification(int what)
