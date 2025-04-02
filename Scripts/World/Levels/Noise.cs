@@ -5,6 +5,7 @@ using Game.Entities;
 using Game.UI.Screens;
 using Game.Utils;
 using Game.Utils.Extensions;
+using Game.World;
 using Godot;
 using GodotUtilities;
 
@@ -73,29 +74,24 @@ public partial class Noise : Node2D
 
     private async void OnGenerationFinished()
     {
-        if (loadingScreen is null) return;
-
-        loadingScreen.Text = "Terrain generated!";
-        loadingScreen.Text = "Cleaning up...";
         PurgeElevationTopEdges();
-
-        loadingScreen.Text = "Generating spawn points...";
         GenerateSpawnPosition();
-
-        loadingScreen.Text = "Spawing player...";
+        SpawnChests();
         SpawnPlayer();
-
-        loadingScreen.Text = "Spawning enemies...";
         SpawnEnemies();
 
         await ToSignal(GetTree().CreateTimer(0.2f), "timeout");
 
-        loadingScreen.Text = "Placing navigation regions...";
+        if (loadingScreen is not null && !Engine.IsEditorHint())
+        {
+            loadingScreen.Text = "Placing navigation regions...";
+        }
+
         navigationManager.PlaceNavigationRegions();
 
         await ToSignal(GetTree().CreateTimer(0.2f), "timeout");
 
-        loadingScreen.QueueFree();
+        loadingScreen?.QueueFree();
         loadingScreen = null;
     }
 
@@ -106,6 +102,11 @@ public partial class Noise : Node2D
 
     private void GenerateSpawnPosition()
     {
+        if (loadingScreen is not null && !Engine.IsEditorHint())
+        {
+            loadingScreen.Text = "Generating spawn points...";
+        }
+
         var layerCount = grid.Call("get_layer_count").AsInt32();
         var emptyCells = GetEmptyCells();
         spawner.SpawnPoints.Clear();
@@ -130,6 +131,11 @@ public partial class Noise : Node2D
 
     private void SpawnPlayer()
     {
+        if (loadingScreen is not null && !Engine.IsEditorHint())
+        {
+            loadingScreen.Text = "Spawning player...";
+        }
+
         var player = resourcePreloader.InstanceSceneOrNull<Player>();
         var spawnPoint = spawner.SpawnPoints.PickRandom();
         spawner.SpawnPoints.Remove(spawnPoint);
@@ -143,8 +149,35 @@ public partial class Noise : Node2D
         player.SetOwner(GetTree().GetEditedSceneRoot());
     }
 
+    private void SpawnChests()
+    {
+        var chestsCount = MathUtil.RNG.RandiRange(10, 20);
+
+        for (var i = 0; i < chestsCount; i++)
+        {
+            var chest = resourcePreloader.InstanceSceneOrNull<Chest>();
+            // TODO: get random loot resource
+            var position = spawner.SpawnPoints.PickRandom();
+            spawner.SpawnPoints.Remove(position);
+
+            chest.Position = position;
+
+            entities.AddChild(chest);
+
+            if (!Engine.IsEditorHint()) return;
+
+            chest.SetOwner(GetTree().GetEditedSceneRoot());
+        }
+    }
+
+
     private void SpawnEnemies()
     {
+        if (loadingScreen is not null && !Engine.IsEditorHint())
+        {
+            loadingScreen.Text = "Spawning enemies...";
+        }
+
         var spawnedEnemies = spawner.Spawn();
 
         foreach (var enemy in spawnedEnemies)
@@ -159,6 +192,12 @@ public partial class Noise : Node2D
 
     private void PurgeElevationTopEdges()
     {
+        if (loadingScreen is not null && !Engine.IsEditorHint())
+        {
+            loadingScreen.Text = "Terrain generated!";
+            loadingScreen.Text = "Cleaning up...";
+        }
+
         var tileSize = floor.TileSet.TileSize;
         var occupiedCells = GetOccupiedCells(layer: 1);
         var clusters = GetClusters([.. occupiedCells]);
