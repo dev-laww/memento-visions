@@ -6,6 +6,7 @@ using Game.Data;
 using Godot;
 using GodotUtilities;
 using System.CommandLine.IO;
+using Game.UI.Screens;
 
 namespace Game.Entities;
 
@@ -19,6 +20,7 @@ public partial class Player : Entity
     [Node] private HurtBox hurtBox;
     [Node] private AnimationTree animationTree;
     [Node] private Timer comboResetTimer;
+    [Node] private ResourcePreloader resourcePreloader;
 
     [Node] public VelocityManager VelocityManager;
     [Node] public WeaponManager WeaponManager;
@@ -70,6 +72,22 @@ public partial class Player : Entity
         VelocityManager.ApplyMovement();
         UpdateNormalBlendPositions();
     }
+
+    protected override void Die(DeathInfo info)
+    {
+        var deathScreen = resourcePreloader.InstanceSceneOrNull<Death>();
+
+        if (deathScreen is null)
+        {
+            Log.Error("Failed to load death screen");
+            return;
+        }
+
+        GameManager.CurrentScene.AddChild(deathScreen);
+
+        base.Die(info);
+    }
+
 
     #region States
     public void Normal()

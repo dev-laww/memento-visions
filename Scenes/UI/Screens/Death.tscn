@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://83ky6hww4n5s"]
+
+[ext_resource type="Script" uid="uid://ch7o56rrkxexp" path="res://Scripts/UI/Screens/Death.cs" id="1_pnv1f"]
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_j7u7r"]
+[ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="3_m73c0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m73c0"]
+font = ExtResource("3_m73c0")
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Death" type="CanvasLayer"]
+script = ExtResource("1_pnv1f")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_j7u7r")
+color = Color(0, 0, 0, 0.5)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "You died"
+label_settings = SubResource("LabelSettings_m73c0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RespawnButton" type="Button" parent="ColorRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Respawn"

@@ -1,7 +1,8 @@
-[gd_scene load_steps=501 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=502 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" uid="uid://bbhesrdqhrnnb" path="res://Scripts/Entities/Characters/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_cqdhe"]
+[ext_resource type="PackedScene" uid="uid://83ky6hww4n5s" path="res://Scenes/UI/Screens/Death.tscn" id="2_xqgt3"]
 [ext_resource type="Script" uid="uid://cpwyjck8klk35" path="res://Scripts/Components/Managers/HealthNumberManager.cs" id="3_0iqml"]
 [ext_resource type="Script" uid="uid://cwq8sbj55gxb6" path="res://Scripts/Components/Managers/InventoryManager.cs" id="3_5oqto"]
 [ext_resource type="Script" uid="uid://dq1u7skg2nopr" path="res://Scripts/Components/Managers/WeaponManager.cs" id="3_65tgk"]
@@ -7744,6 +7745,9 @@ collision_mask = 1019
 script = ExtResource("1_3hkqn")
 Id = "player"
 
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("Death"), [ExtResource("2_xqgt3")]]
+
 [node name="StatsManager" parent="." instance=ExtResource("2_cqdhe")]
 unique_name_in_owner = true
 Speed = 80.0
@@ -7808,7 +7812,6 @@ material = ExtResource("9_5oqto")
 sprite_frames = SubResource("SpriteFrames_5oqto")
 animation = &"south"
 autoplay = "south"
-frame = 3
 script = ExtResource("10_5oqto")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
