@@ -15,6 +15,8 @@ namespace Game;
 [Scene]
 public partial class Noise : Node2D
 {
+    private const float MIN_CHEST_DISTANCE = 500f;
+
     [Node] private TileMapLayer floor;
     [Node] private TileMapLayer middleGround;
     [Node] private TileMapLayer foreGround;
@@ -24,6 +26,8 @@ public partial class Noise : Node2D
     [Node] private NavigationManager navigationManager;
     [Node] private Node2D entities;
     [Node] private ResourcePreloader resourcePreloader;
+    [Node] private Node2D chests;
+    [Node] private Timer timer;
 
     [ExportToolButton("Generate", Icon = "RotateLeft")]
     private Callable Generate => Callable.From(() => noiseGenerator.Call("generate"));
@@ -33,6 +37,7 @@ public partial class Noise : Node2D
     {
         noiseGenerator.Call("erase");
         entities.QueueFreeChildren();
+        chests.QueueFreeChildren();
         navigationManager.Clear();
     });
 
@@ -55,6 +60,7 @@ public partial class Noise : Node2D
 
         if (Engine.IsEditorHint()) return;
 
+
         loadingScreen = new LoadingScreenFactory.TextLoadingBuilder(GetTree())
             .SetText("Generating world...")
             .Build();
@@ -64,11 +70,22 @@ public partial class Noise : Node2D
         await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 
         Generate.Call();
-    }
 
+        timer.Timeout += () => entities.GetChildrenOfType<Enemy>().ToList().ForEach(enemy =>
+        {
+            var marker = resourcePreloader.InstanceSceneOrNull<ScreenMarker>();
+            marker.Offset = new Vector2(0, -32);
+            marker.Target = enemy;
+            marker.IsRed = true;
+
+            enemy.AddChild(marker);
+        });
+    }
 
     private async void OnGenerationFinished()
     {
+        MathUtil.RNG.Randomize();
+
         PurgeElevationTopEdges();
         GenerateSpawnPosition();
         SpawnChests();
@@ -92,7 +109,7 @@ public partial class Noise : Node2D
 
     private void OnGenerationStarted()
     {
-        entities.QueueFreeChildren();
+        Clear.Call();
     }
 
     private void GenerateSpawnPosition()
@@ -147,6 +164,7 @@ public partial class Noise : Node2D
     private void SpawnChests()
     {
         var chestsCount = MathUtil.RNG.RandiRange(10, 20);
+        var pickedChestPositions = new HashSet<Vector2>();
 
         for (var i = 0; i < chestsCount; i++)
         {
@@ -158,7 +176,7 @@ public partial class Noise : Node2D
 
             chest.Position = position;
 
-            entities.AddChild(chest);
+            chests.AddChild(chest);
 
             if (!Engine.IsEditorHint()) return;
 
