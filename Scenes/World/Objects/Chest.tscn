@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbs4ush0amfqx"]
+
+[ext_resource type="PackedScene" uid="uid://t7im5teuo2bt" path="res://Scenes/Components/Managers/DropManager.tscn" id="1_epnoo"]
+[ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="1_qa6pp"]
+[ext_resource type="Script" uid="uid://crn7cpxqe34ts" path="res://Scripts/World/Objects/Chest.cs" id="1_sueos"]
+[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="2_epnoo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qa6pp"]
+radius = 22.0907
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lmiix"]
+size = Vector2(24, 24)
+
+[node name="Chest" type="Node2D"]
+script = ExtResource("1_sueos")
+
+[node name="DropManager" parent="." instance=ExtResource("1_epnoo")]
+Drops = []
+
+[node name="Interaction" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("1_qa6pp")
+InteractionLabel = "Open Chest"
+metadata/_custom_type_script = "uid://cll1v71th1oms"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+shape = SubResource("CircleShape2D_qa6pp")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="Interaction"]
+position = Vector2(0, -21)
+
+[node name="InteractionUI" parent="Interaction/Node2D" instance=ExtResource("2_epnoo")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_lmiix")
