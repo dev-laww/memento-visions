@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Game.Autoload;
 using Game.Components;
 using Game.Entities;
 using Game.UI.Screens;
@@ -60,7 +62,6 @@ public partial class Noise : Node2D
 
         if (Engine.IsEditorHint()) return;
 
-
         loadingScreen = new LoadingScreenFactory.TextLoadingBuilder(GetTree())
             .SetText("Generating world...")
             .Build();
@@ -80,6 +81,13 @@ public partial class Noise : Node2D
 
             enemy.AddChild(marker);
         });
+
+        EnemyManager.EnemyCountChanged += count =>
+        {
+            if (count > 0) return;
+
+            SpawnBossWave();
+        };
     }
 
     private async void OnGenerationFinished()
@@ -259,6 +267,13 @@ public partial class Noise : Node2D
 
             GetTree().CreateTimer(0.1f).Timeout += () => foreGround.EraseCell(cell);
         }
+    }
+
+    private void SpawnBossWave()
+    {
+        var playerPosition = this.GetPlayer()?.GlobalPosition ?? Vector2.Zero;
+
+        // TODO: spawn boss wave
     }
 
     private static List<HashSet<Vector2I>> GetClusters(HashSet<Vector2I> occupiedCells)

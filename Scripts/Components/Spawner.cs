@@ -81,4 +81,11 @@ public partial class Spawner : Node
             yield return enemy;
         }
     }
+
+    public IEnumerable<Enemy> SpawnBossWave()
+    {
+        // TODO: Implement boss wave spawning logic
+
+        yield break;
+    }
 }

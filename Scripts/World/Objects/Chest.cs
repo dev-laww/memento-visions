@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Game.Components;
 using Game.Data;
 using Godot;
@@ -43,6 +42,7 @@ public partial class Chest : Node2D
 
     private void OnInteracted()
     {
+        // TODO: add item list when chest is opened
         dropManager.SpawnDrops(GlobalPosition);
         QueueFree();
     }
