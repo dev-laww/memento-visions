@@ -19,7 +19,6 @@ script = ExtResource("1_sueos")
 Drops = []
 
 [node name="Interaction" type="Area2D" parent="."]
-position = Vector2(0, -8)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("1_qa6pp")
@@ -36,9 +35,9 @@ position = Vector2(0, -21)
 [node name="InteractionUI" parent="Interaction/Node2D" instance=ExtResource("2_epnoo")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -5.5)
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_sueos")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -12)
+position = Vector2(0, -6)
 texture = ExtResource("5_sueos")
