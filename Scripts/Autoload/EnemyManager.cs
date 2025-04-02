@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
-using Game.Common.Utilities;
 using Game.Entities;
+using Game.UI.Common;
 using Godot;
 using GodotUtilities;
 
 namespace Game.Autoload;
 
+[Scene]
 public partial class EnemyManager : Autoload<EnemyManager>
 {
+    [Node] private VBoxContainer healthBarsContainer;
+    [Node] private ResourcePreloader resourcePreloader;
+
+    private readonly Dictionary<Enemy, BossHealthBar> healthBars = [];
     private readonly List<Enemy> enemies = [];
 
     public static IReadOnlyList<Enemy> Enemies => Instance.enemies;
@@ -32,6 +37,7 @@ public partial class EnemyManager : Autoload<EnemyManager>
         info.Entity.AddToGroup("Enemy");
         Instance.enemies.Add(enemy);
         EnemyRegistered?.Invoke(enemy);
+        Instance.OnEnemyRegistered(enemy);
 
         Log.Debug($"{enemy} added to the registry. {info}");
     }
@@ -39,8 +45,55 @@ public partial class EnemyManager : Autoload<EnemyManager>
     public static void Unregister(Entity.DeathInfo info)
     {
         Instance.enemies.Remove(info.Victim as Enemy);
+        Instance.OnEnemyUnregistered(info.Victim as Enemy);
         EnemyUnregistered?.Invoke(info.Victim as Enemy);
 
         Log.Debug($"{info.Victim} removed from the registry. {info}");
+    }
+
+    public static void Unregister(Enemy enemy)
+    {
+        Instance.enemies.Remove(enemy);
+        Instance.OnEnemyUnregistered(enemy);
+    }
+
+    public override void _Notification(int what)
+    {
+        if (what != NotificationSceneInstantiated) return;
+
+        WireNodes();
+    }
+
+    public override void _Ready()
+    {
+        healthBarsContainer.QueueFreeChildren();
+
+        foreach (var enemy in EnemiesOfType(Enemy.EnemyType.Boss))
+        {
+            OnEnemyRegistered(enemy);
+        }
+    }
+
+    private void OnEnemyRegistered(Enemy enemy)
+    {
+        if (enemy.Type != Enemy.EnemyType.Boss) return;
+
+        var healthBar = resourcePreloader.InstanceSceneOrNull<BossHealthBar>();
+        if (healthBar == null) return;
+
+        healthBarsContainer.AddChild(healthBar);
+
+        healthBar.BossName = enemy.BossName;
+        healthBar.HealthBar.Initialize(enemy.StatsManager);
+        healthBars[enemy] = healthBar;
+    }
+
+    private void OnEnemyUnregistered(Enemy enemy)
+    {
+        if (healthBars.TryGetValue(enemy, out var healthBar))
+        {
+            healthBar.QueueFree();
+            healthBars.Remove(enemy);
+        }
     }
 }

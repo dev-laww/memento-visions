@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using Game.Autoload;
+using Godot;
 using Godot.Collections;
 
 namespace Game.Entities;
@@ -41,4 +42,10 @@ public abstract partial class Enemy : Entity
         return propertyList;
     }
 
+    public override void _ExitTree()
+    {
+        if (Engine.IsEditorHint()) return;
+
+        EnemyManager.Unregister(this);
+    }
 }

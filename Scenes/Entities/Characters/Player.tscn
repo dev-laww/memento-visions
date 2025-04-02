@@ -1,4 +1,4 @@
-[gd_scene load_steps=502 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=501 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" uid="uid://bbhesrdqhrnnb" path="res://Scripts/Entities/Characters/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_cqdhe"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://dq1u7skg2nopr" path="res://Scripts/Components/Managers/WeaponManager.cs" id="3_65tgk"]
 [ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Managers/VelocityManager.cs" id="3_lmufy"]
 [ext_resource type="Script" uid="uid://tapd6e6pmvag" path="res://Scripts/Components/Managers/InputManager.cs" id="4_0iqml"]
-[ext_resource type="PackedScene" uid="uid://c83jdh0qud72h" path="res://Scenes/UI/Overlays/BossHealths.tscn" id="4_fqtcb"]
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="5_5x453"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="9_5oqto"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="10_5oqto"]
@@ -7756,8 +7755,6 @@ Damage = 30.0
 
 [node name="HeadsUpDisplay" parent="." instance=ExtResource("14_c8fx8")]
 
-[node name="BossHealths" parent="." instance=ExtResource("4_fqtcb")]
-
 [node name="ComboResetTimer" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
@@ -7812,6 +7809,7 @@ material = ExtResource("9_5oqto")
 sprite_frames = SubResource("SpriteFrames_5oqto")
 animation = &"south"
 autoplay = "south"
+frame = 3
 script = ExtResource("10_5oqto")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
