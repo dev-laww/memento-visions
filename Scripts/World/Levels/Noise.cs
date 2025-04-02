@@ -26,16 +26,11 @@ public partial class Noise : Node2D
     [Node] private ResourcePreloader resourcePreloader;
 
     [ExportToolButton("Generate", Icon = "RotateLeft")]
-    private Callable Generate => Callable.From(() =>
-    {
-        GD.Print("Generating noise...");
-        noiseGenerator.Call("generate");
-    });
+    private Callable Generate => Callable.From(() => noiseGenerator.Call("generate"));
 
     [ExportToolButton("Clear", Icon = "Clear")]
     private Callable Clear => Callable.From(() =>
     {
-        GD.Print("Clearing noise...");
         noiseGenerator.Call("erase");
         entities.QueueFreeChildren();
         navigationManager.Clear();
@@ -157,6 +152,7 @@ public partial class Noise : Node2D
         {
             var chest = resourcePreloader.InstanceSceneOrNull<Chest>();
             // TODO: get random loot resource
+            // TODO: prevent spawning chests beside each other
             var position = spawner.SpawnPoints.PickRandom();
             spawner.SpawnPoints.Remove(position);
 
