@@ -24,6 +24,9 @@ public partial class ScreenMarker : Node2D
 
     [Node] private Sprite2D smoothSprite2D;
 
+    public Node2D Target { get; set; } = null;
+    public Vector2 Offset { get; set; } = Vector2.Zero;
+
     private Vector2 originalPosition;
 
     public override void _Notification(int what)
@@ -53,14 +56,14 @@ public partial class ScreenMarker : Node2D
 
     private void SetMarkerPosition(Rect2 bounds)
     {
-        var targetPosition = originalPosition;
+        var targetPosition = (Target?.GlobalPosition ?? originalPosition) + Offset;
         var isOutsideBounds = !bounds.HasPoint(targetPosition);
         var targetMarkerPosition = isOutsideBounds
             ? new Vector2(
                 Mathf.Clamp(targetPosition.X, bounds.Position.X, bounds.End.X),
                 Mathf.Clamp(targetPosition.Y, bounds.Position.Y, bounds.End.Y)
             )
-            : originalPosition;
+            : (Target?.GlobalPosition ?? originalPosition) + Offset;
 
         Visible = !HideWhenInBounds || isOutsideBounds;
         GlobalPosition = GlobalPosition.Lerp(targetMarkerPosition, (float)GetProcessDeltaTime() * 10f);
