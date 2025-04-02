@@ -12,7 +12,7 @@ public partial class ScreenMarker : Node2D
 
     [Export] public bool HideWhenInBounds = true;
     [Export]
-    private bool IsRed
+    public bool IsRed
     {
         get => smoothSprite2D.Texture.ResourcePath == red.ResourcePath;
         set
