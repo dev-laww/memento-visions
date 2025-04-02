@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="1_qa6pp"]
 [ext_resource type="Script" uid="uid://crn7cpxqe34ts" path="res://Scripts/World/Objects/Chest.cs" id="1_sueos"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="2_epnoo"]
-[ext_resource type="Texture2D" uid="uid://dsejkr88dhqoc" path="res://assets/items/chest.png" id="5_sueos"]
+[ext_resource type="Texture2D" uid="uid://dsejkr88dhqoc" path="res://assets/world/chest.png" id="5_sueos"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qa6pp"]
 radius = 22.0907
