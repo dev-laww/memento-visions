@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=7 format=3 uid="uid://cv4y46hd6ftmw"]
+
+[ext_resource type="Resource" uid="uid://dx7hcjqmrqnj1" path="res://resources/items/consumable/puto.tres" id="1_1gyf8"]
+[ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="2_6sito"]
+[ext_resource type="Resource" uid="uid://7cbhpfgtsp6y" path="res://resources/items/consumable/taho.tres" id="3_a3e52"]
+[ext_resource type="Script" uid="uid://2133v7vmi65q" path="res://Scripts/Data/Item/LootTable.cs" id="4_f8xv1"]
+
+[sub_resource type="Resource" id="Resource_wytu7"]
+script = ExtResource("2_6sito")
+Item = ExtResource("1_1gyf8")
+Min = 3
+Max = 5
+Weight = 2
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_o0flm"]
+script = ExtResource("2_6sito")
+Item = ExtResource("3_a3e52")
+Min = 1
+Max = 3
+Weight = 1
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[resource]
+script = ExtResource("4_f8xv1")
+Drops = [SubResource("Resource_wytu7"), SubResource("Resource_o0flm")]
+metadata/_custom_type_script = "uid://2133v7vmi65q"

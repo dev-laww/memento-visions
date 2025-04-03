@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=11 format=3 uid="uid://bx16wb3x71qgf"]
+
+[ext_resource type="Resource" uid="uid://ckm0dxjgvcxtj" path="res://resources/items/material/tofu.tres" id="1_bxu6g"]
+[ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="2_qvw6c"]
+[ext_resource type="Resource" uid="uid://bsddfgq1qtd3r" path="res://resources/items/material/water.tres" id="3_mqwn2"]
+[ext_resource type="Resource" uid="uid://dti7vm5w4d0e" path="res://resources/items/material/calamansi.tres" id="4_72mgk"]
+[ext_resource type="Resource" uid="uid://dx7hcjqmrqnj1" path="res://resources/items/consumable/puto.tres" id="5_ue5u5"]
+[ext_resource type="Script" uid="uid://2133v7vmi65q" path="res://Scripts/Data/Item/LootTable.cs" id="6_d0i6m"]
+
+[sub_resource type="Resource" id="Resource_rd41e"]
+script = ExtResource("2_qvw6c")
+Item = ExtResource("1_bxu6g")
+Min = 3
+Max = 5
+Weight = 1
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_0erf0"]
+script = ExtResource("2_qvw6c")
+Item = ExtResource("3_mqwn2")
+Min = 3
+Max = 5
+Weight = 1
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_behcb"]
+script = ExtResource("2_qvw6c")
+Item = ExtResource("4_72mgk")
+Min = 1
+Max = 3
+Weight = 2
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_ltyta"]
+script = ExtResource("2_qvw6c")
+Item = ExtResource("5_ue5u5")
+Min = 2
+Max = 5
+Weight = 2
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[resource]
+script = ExtResource("6_d0i6m")
+Drops = [SubResource("Resource_rd41e"), SubResource("Resource_0erf0"), SubResource("Resource_behcb"), SubResource("Resource_ltyta")]
+metadata/_custom_type_script = "uid://2133v7vmi65q"

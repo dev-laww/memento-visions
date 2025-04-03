@@ -10,7 +10,7 @@ region = Rect2(16, 0, 16, 16)
 [resource]
 resource_name = "Garlic"
 script = ExtResource("2_xcisv")
-Id = "0e4ab388-40a4-4790-879e-1323f65c3b16"
+Id = "item:garlic"
 Icon = SubResource("AtlasTexture_getbk")
 Name = "Garlic"
 ItemCategory = 1

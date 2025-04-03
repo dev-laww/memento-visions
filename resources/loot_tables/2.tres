@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=5 format=3 uid="uid://dcacmt05pm02q"]
+
+[ext_resource type="Resource" uid="uid://bwwk3vtqo5h7w" path="res://resources/items/material/banana.tres" id="1_5xg7x"]
+[ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="2_q42eg"]
+[ext_resource type="Script" uid="uid://2133v7vmi65q" path="res://Scripts/Data/Item/LootTable.cs" id="3_oppqq"]
+
+[sub_resource type="Resource" id="Resource_lhrik"]
+script = ExtResource("2_q42eg")
+Item = ExtResource("1_5xg7x")
+Min = 1
+Max = 3
+Weight = 1
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[resource]
+script = ExtResource("3_oppqq")
+Drops = [SubResource("Resource_lhrik")]
+metadata/_custom_type_script = "uid://2133v7vmi65q"

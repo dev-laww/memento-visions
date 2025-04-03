@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=13 format=3 uid="uid://4l5sldsg4188"]
+
+[ext_resource type="Resource" uid="uid://bmn7ssfnkxruq" path="res://resources/items/consumable/buko_juice.tres" id="1_rbfaf"]
+[ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="2_jd3wo"]
+[ext_resource type="Resource" uid="uid://lgbdgcr5l0og" path="res://resources/items/material/sago_pearls.tres" id="3_t7qhi"]
+[ext_resource type="Resource" uid="uid://ckm0dxjgvcxtj" path="res://resources/items/material/tofu.tres" id="4_b7p0k"]
+[ext_resource type="Resource" uid="uid://bsddfgq1qtd3r" path="res://resources/items/material/water.tres" id="5_f5urd"]
+[ext_resource type="Resource" uid="uid://dti7vm5w4d0e" path="res://resources/items/material/calamansi.tres" id="6_eopao"]
+[ext_resource type="Script" uid="uid://2133v7vmi65q" path="res://Scripts/Data/Item/LootTable.cs" id="7_apwfy"]
+
+[sub_resource type="Resource" id="Resource_ovj7r"]
+script = ExtResource("2_jd3wo")
+Item = ExtResource("1_rbfaf")
+Min = 2
+Max = 5
+Weight = 2
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_xoal2"]
+script = ExtResource("2_jd3wo")
+Item = ExtResource("3_t7qhi")
+Min = 2
+Max = 4
+Weight = 3
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_j113p"]
+script = ExtResource("2_jd3wo")
+Item = ExtResource("4_b7p0k")
+Min = 1
+Max = 4
+Weight = 2
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_tp5k1"]
+script = ExtResource("2_jd3wo")
+Item = ExtResource("5_f5urd")
+Min = 1
+Max = 5
+Weight = 2
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_v5t30"]
+script = ExtResource("2_jd3wo")
+Item = ExtResource("6_eopao")
+Min = 2
+Max = 4
+Weight = 3
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[resource]
+script = ExtResource("7_apwfy")
+Drops = [SubResource("Resource_ovj7r"), SubResource("Resource_xoal2"), SubResource("Resource_j113p"), SubResource("Resource_tp5k1"), SubResource("Resource_v5t30")]
+metadata/_custom_type_script = "uid://2133v7vmi65q"

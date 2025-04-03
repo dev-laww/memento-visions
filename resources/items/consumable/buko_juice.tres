@@ -13,6 +13,6 @@ script = ExtResource("2_i50aq")
 Id = "item:buko_juice"
 Icon = SubResource("AtlasTexture_e6xn2")
 Name = "Buko Juice"
-ItemCategory = 1
+ItemCategory = 0
 Description = "A refreshing drink made from young coconut, offering a sweet and revitalizing taste. Known for its hydrating properties and tropical aroma."
 metadata/_custom_type_script = "uid://b772648mucsjw"

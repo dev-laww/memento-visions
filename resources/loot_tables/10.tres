@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=5 format=3 uid="uid://clfbur06xipdm"]
+
+[ext_resource type="Resource" uid="uid://e5dmknfrsqko" path="res://resources/items/consumable/bibingka.tres" id="1_jptjo"]
+[ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="2_i560p"]
+[ext_resource type="Script" uid="uid://2133v7vmi65q" path="res://Scripts/Data/Item/LootTable.cs" id="3_320kc"]
+
+[sub_resource type="Resource" id="Resource_ec46s"]
+script = ExtResource("2_i560p")
+Item = ExtResource("1_jptjo")
+Min = 3
+Max = 5
+Weight = 1
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[resource]
+script = ExtResource("3_320kc")
+Drops = [SubResource("Resource_ec46s")]
+metadata/_custom_type_script = "uid://2133v7vmi65q"

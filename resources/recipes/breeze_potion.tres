@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://dmbnoq0p8nta0" path="res://resources/items/material/thunder_essence.tres" id="1_75gld"]
 [ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_uc227"]
-[ext_resource type="Resource" uid="uid://bmn7ssfnkxruq" path="res://resources/items/material/buko_juice.tres" id="3_ullfm"]
+[ext_resource type="Resource" uid="uid://bmn7ssfnkxruq" path="res://resources/items/consumable/buko_juice.tres" id="3_ullfm"]
 [ext_resource type="Resource" uid="uid://bsddfgq1qtd3r" path="res://resources/items/material/water.tres" id="4_f3e17"]
 [ext_resource type="Resource" uid="uid://dti7vm5w4d0e" path="res://resources/items/material/calamansi.tres" id="5_c74lx"]
 [ext_resource type="Resource" uid="uid://cynqml7na5ksi" path="res://resources/items/consumable/breeze_potion.tres" id="6_yrtdc"]
