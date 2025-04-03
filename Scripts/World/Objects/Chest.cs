@@ -19,6 +19,7 @@ public partial class Chest : Node2D
         {
             loot = value;
 
+            if (loot == null) return;
             if (loot.IsConnected("property_list_changed", Callable.From(SetDrops))) return;
 
             loot.Connect("property_list_changed", Callable.From(SetDrops));

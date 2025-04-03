@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Game.Autoload;
 using Game.Components;
@@ -198,10 +197,6 @@ public partial class Noise : Node2D
             chest.Position = position;
 
             chests.AddChild(chest);
-
-            if (!Engine.IsEditorHint()) return;
-
-            chest.SetOwner(GetTree().GetEditedSceneRoot());
         }
     }
 
