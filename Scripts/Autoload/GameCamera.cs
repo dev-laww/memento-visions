@@ -73,4 +73,15 @@ public partial class GameCamera : Autoload<GameCamera>
         camera.Set("shake_decay", 1f / args.Duration);
         camera.Call("shake");
     }
+
+    public static void Shake(float duration)
+    {
+        var args = new ShakeArgs { Duration = duration };
+
+        var camera = Instance.shakyCamera2d;
+
+        camera.Set("max_shake_offset", args.Force);
+        camera.Set("shake_decay", 1f / args.Duration);
+        camera.Call("shake");
+    }
 }
