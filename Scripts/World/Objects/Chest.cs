@@ -1,3 +1,5 @@
+using System.Linq;
+using Game.Autoload;
 using Game.Components;
 using Game.Data;
 using Godot;
@@ -42,8 +44,30 @@ public partial class Chest : Node2D
 
     private void OnInteracted()
     {
-        // TODO: add item list when chest is opened
-        dropManager.SpawnDrops(GlobalPosition);
+        var spawnPosition = GlobalPosition;
+        var drops = dropManager.SpawnDrops(spawnPosition).ToList();
+
+        if (drops.Count != 0)
+        {
+            for (var i = 0; i < drops.Count; i++)
+            {
+                var item = drops[i];
+
+                GetTree().CreateTimer(0.3f * i).Timeout += () =>
+                {
+                    var text = FloatingTextManager.SpawnFloatingText($"x{item.Quantity} {item.Item.Name}", spawnPosition);
+
+                    text.Finished += text.QueueFree;
+                };
+            }
+        }
+        else
+        {
+            var text = FloatingTextManager.SpawnFloatingText("Nothing", spawnPosition, Colors.Gray);
+
+            text.Finished += text.QueueFree;
+        }
+
         QueueFree();
     }
 

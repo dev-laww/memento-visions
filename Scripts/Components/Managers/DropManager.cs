@@ -60,8 +60,14 @@ public partial class DropManager : Node
     private void SpawnDrops(Entity.DeathInfo info) => SpawnDrops(info.Position);
 
     // TODO: Balance this
-    public void SpawnDrops(Vector2 position)
+    public IEnumerable<ItemGroup> SpawnDrops(Vector2 position)
     {
+        if (Drops.Length == 0)
+        {
+            Log.Warn("No drops to spawn");
+            yield break;
+        }
+
         var dropItemCount = MathUtil.RNG.RandiRange(0, Drops.Length);
         var droppedItems = new HashSet<Item>();
 
@@ -69,12 +75,12 @@ public partial class DropManager : Node
 
         for (var i = 0; i < dropItemCount; i++)
         {
+            if (droppedItems.Count == Drops.Length) break;
+
             var drop = lootTable.PickItem();
 
             while (droppedItems.Contains(drop.Item))
             {
-                if (droppedItems.Count == Drops.Length) return;
-
                 drop = lootTable.PickItem();
             }
 
@@ -89,6 +95,8 @@ public partial class DropManager : Node
             GameManager.CurrentScene?.CallDeferred("add_child", item);
 
             Log.Debug($"Dropped {item.ItemGroup}");
+
+            yield return item.ItemGroup;
         }
     }
 
