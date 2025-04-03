@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://bgwiqgrwaypag"]
+[gd_scene load_steps=108 format=3 uid="uid://bgwiqgrwaypag"]
 
 [ext_resource type="Script" uid="uid://d0ski8uwhyyvs" path="res://Scripts/Entities/Enemies/Common/Aswang.cs" id="1_qdfm2"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_mp7jp"]
@@ -14,10 +14,7 @@
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="8_cvtll"]
 [ext_resource type="Script" uid="uid://dkgndduo4d7p4" path="res://Scripts/Components/Area/HitBox.cs" id="9_gtpg4"]
 [ext_resource type="Resource" uid="uid://cocs17ig06umk" path="res://resources/items/material/vampiric_claw.tres" id="9_ixksh"]
-[ext_resource type="Resource" uid="uid://ckm0dxjgvcxtj" path="res://resources/items/material/tofu.tres" id="9_m4t5y"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="10_cvtll"]
-[ext_resource type="Resource" uid="uid://lgbdgcr5l0og" path="res://resources/items/material/sago_pearls.tres" id="11_guea1"]
-[ext_resource type="Resource" uid="uid://bsddfgq1qtd3r" path="res://resources/items/material/water.tres" id="12_aw44c"]
 
 [sub_resource type="Resource" id="Resource_0pshh"]
 script = ExtResource("8_cvnaw")
@@ -27,36 +24,12 @@ Max = 5
 Weight = 3
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
-[sub_resource type="Resource" id="Resource_tmhjr"]
-script = ExtResource("8_cvnaw")
-Item = ExtResource("9_m4t5y")
-Min = 1
-Max = 3
-Weight = 1
-metadata/_custom_type_script = "uid://4ubxomqok4pv"
-
 [sub_resource type="Resource" id="Resource_6fh3g"]
 script = ExtResource("8_cvnaw")
 Item = ExtResource("7_5tyvj")
 Min = 3
 Max = 5
 Weight = 3
-metadata/_custom_type_script = "uid://4ubxomqok4pv"
-
-[sub_resource type="Resource" id="Resource_dqby6"]
-script = ExtResource("8_cvnaw")
-Item = ExtResource("11_guea1")
-Min = 1
-Max = 3
-Weight = 1
-metadata/_custom_type_script = "uid://4ubxomqok4pv"
-
-[sub_resource type="Resource" id="Resource_d0xdj"]
-script = ExtResource("8_cvnaw")
-Item = ExtResource("12_aw44c")
-Min = 1
-Max = 3
-Weight = 2
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvtll"]
@@ -1154,6 +1127,7 @@ transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition
 [node name="Aswang" type="CharacterBody2D"]
 collision_mask = 15
 script = ExtResource("1_qdfm2")
+Type = 0
 Id = "enemy:aswang"
 
 [node name="UpdateBlendPositionTimer" type="Timer" parent="."]
@@ -1197,7 +1171,7 @@ StatsManager = NodePath("../StatsManager")
 metadata/_custom_type_script = "uid://nuxtah4mmhg5"
 
 [node name="DropManager" parent="." instance=ExtResource("6_m4t5y")]
-Drops = [SubResource("Resource_0pshh"), SubResource("Resource_tmhjr"), SubResource("Resource_6fh3g"), SubResource("Resource_dqby6"), SubResource("Resource_d0xdj")]
+Drops = [SubResource("Resource_0pshh"), SubResource("Resource_6fh3g")]
 
 [node name="PathFindManager" parent="." node_paths=PackedStringArray("VelocityManager") instance=ExtResource("5_4f33n")]
 VelocityManager = NodePath("../VelocityManager")

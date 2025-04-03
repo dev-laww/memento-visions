@@ -46,7 +46,7 @@ public partial class Chest : Node2D
     private void OnInteracted()
     {
         var spawnPosition = GlobalPosition;
-        var drops = dropManager.SpawnDrops(spawnPosition).ToList();
+        var drops = dropManager.SpawnDrops(spawnPosition);
 
         if (drops.Count != 0)
         {

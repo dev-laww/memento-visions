@@ -1,4 +1,4 @@
-[gd_scene load_steps=148 format=3 uid="uid://cmpubd6rbsqiu"]
+[gd_scene load_steps=144 format=3 uid="uid://cmpubd6rbsqiu"]
 
 [ext_resource type="Script" uid="uid://bqv2ubu81g3e7" path="res://Scripts/Entities/Enemies/Common/Tikbalang.cs" id="1_4ml10"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_hkjad"]
@@ -15,8 +15,6 @@
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="9_6pqlh"]
 [ext_resource type="Script" uid="uid://dkgndduo4d7p4" path="res://Scripts/Components/Area/HitBox.cs" id="9_fg8r8"]
 [ext_resource type="Texture2D" uid="uid://d2rgjab2cym6d" path="res://assets/entities/enemy/common/tikbalang/spritesheet.png" id="9_mh5vc"]
-[ext_resource type="Resource" uid="uid://8ff83npfhiru" path="res://resources/items/material/ginger.tres" id="9_w5geh"]
-[ext_resource type="Resource" uid="uid://gydfyrvpu6vm" path="res://resources/items/material/garlic.tres" id="10_o1s6x"]
 [ext_resource type="Resource" uid="uid://dhr2jtmgl0gse" path="res://resources/items/material/engkanto_essence.tres" id="11_msr8t"]
 [ext_resource type="Resource" uid="uid://drj5puv2462td" path="res://resources/items/material/bato_balani.tres" id="12_u32vl"]
 
@@ -34,22 +32,6 @@ Item = ExtResource("8_fyoqx")
 Min = 3
 Max = 5
 Weight = 3
-metadata/_custom_type_script = "uid://4ubxomqok4pv"
-
-[sub_resource type="Resource" id="Resource_l6ao8"]
-script = ExtResource("7_472wo")
-Item = ExtResource("9_w5geh")
-Min = 1
-Max = 3
-Weight = 2
-metadata/_custom_type_script = "uid://4ubxomqok4pv"
-
-[sub_resource type="Resource" id="Resource_h1nv2"]
-script = ExtResource("7_472wo")
-Item = ExtResource("10_o1s6x")
-Min = 1
-Max = 3
-Weight = 2
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="Resource" id="Resource_y1e4h"]
@@ -1471,6 +1453,7 @@ graph_offset = Vector2(19, -43)
 [node name="Tikbalang" type="CharacterBody2D"]
 collision_mask = 15
 script = ExtResource("1_4ml10")
+Type = 0
 Id = "enemy:tikbalang"
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
@@ -1507,7 +1490,7 @@ StatsManager = NodePath("../StatsManager")
 metadata/_custom_type_script = "uid://cpwyjck8klk35"
 
 [node name="DropManager" parent="." instance=ExtResource("5_472wo")]
-Drops = [SubResource("Resource_18kv7"), SubResource("Resource_v47yl"), SubResource("Resource_l6ao8"), SubResource("Resource_h1nv2"), SubResource("Resource_y1e4h"), SubResource("Resource_uogyr")]
+Drops = [SubResource("Resource_18kv7"), SubResource("Resource_v47yl"), SubResource("Resource_y1e4h"), SubResource("Resource_uogyr")]
 
 [node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
 script = ExtResource("4_pokvf")
@@ -1557,7 +1540,7 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_472wo")
 animation = &"idle_down"
 autoplay = "idle_down"
-frame = 3
+frame = 2
 script = ExtResource("9_6pqlh")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

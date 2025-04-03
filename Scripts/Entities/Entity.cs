@@ -147,6 +147,7 @@ public abstract partial class Entity : CharacterBody2D
 
         Log.Debug($"{this} died{(deathInfo.Killer != null ? $" from an attack by {deathInfo.Killer}" : "")}.");
 
+        EmitDeath();
         Die(deathInfo);
     }
 
@@ -160,7 +161,6 @@ public abstract partial class Entity : CharacterBody2D
 
         if (Engine.IsEditorHint()) return;
 
-        TreeExiting += EmitDeath;
         StatsManager.AttackReceived += AttackReceived;
         StatsManager.StatDepleted += StatDepleted;
         spawnInfo = new SpawnInfo(this);
