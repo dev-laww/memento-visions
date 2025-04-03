@@ -76,6 +76,13 @@ public partial class HeadsUpDisplay : Overlay
         UpdateQuickUseSlot(quickUseGroup);
     }
 
+    public override void _ExitTree()
+    {
+        PlayerInventoryManager.Updated -= OnInventoryUpdated;
+        GameEvents.Instance.QuickUseSlotUpdated -= UpdateQuickUseSlot;
+    }
+
+
     private void OnDash(Vector2 _)
     {
         var indicators = dashContainer.GetChildrenOfType<DashIndicator>().Where(x => !x.Running).ToArray();
