@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://bwwk3vtqo5h7w" path="res://resources/items/material/banana.tres" id="1_5xg7x"]
 [ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="2_q42eg"]
-[ext_resource type="Script" uid="uid://2133v7vmi65q" path="res://Scripts/Data/Item/LootTable.cs" id="3_oppqq"]
+[ext_resource type="Script" uid="uid://2133v7vmi65q" path="res://Scripts/Data/Loot/LootTable.cs" id="3_oppqq"]
 
 [sub_resource type="Resource" id="Resource_lhrik"]
 script = ExtResource("2_q42eg")

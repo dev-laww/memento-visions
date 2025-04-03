@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://bsddfgq1qtd3r" path="res://resources/items/material/water.tres" id="3_mqwn2"]
 [ext_resource type="Resource" uid="uid://dti7vm5w4d0e" path="res://resources/items/material/calamansi.tres" id="4_72mgk"]
 [ext_resource type="Resource" uid="uid://dx7hcjqmrqnj1" path="res://resources/items/consumable/puto.tres" id="5_ue5u5"]
-[ext_resource type="Script" uid="uid://2133v7vmi65q" path="res://Scripts/Data/Item/LootTable.cs" id="6_d0i6m"]
+[ext_resource type="Script" uid="uid://2133v7vmi65q" path="res://Scripts/Data/Loot/LootTable.cs" id="6_d0i6m"]
 
 [sub_resource type="Resource" id="Resource_rd41e"]
 script = ExtResource("2_qvw6c")

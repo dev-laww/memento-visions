@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="2_av3a4"]
 [ext_resource type="Resource" uid="uid://8ff83npfhiru" path="res://resources/items/material/ginger.tres" id="3_e4fdy"]
 [ext_resource type="Resource" uid="uid://cudpirwu4xqon" path="res://resources/items/material/onion.tres" id="4_uycnb"]
-[ext_resource type="Script" uid="uid://2133v7vmi65q" path="res://Scripts/Data/Item/LootTable.cs" id="5_12en4"]
+[ext_resource type="Script" uid="uid://2133v7vmi65q" path="res://Scripts/Data/Loot/LootTable.cs" id="5_12en4"]
 
 [sub_resource type="Resource" id="Resource_1xc1d"]
 script = ExtResource("2_av3a4")

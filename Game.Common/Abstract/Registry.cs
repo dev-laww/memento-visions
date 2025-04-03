@@ -55,7 +55,10 @@ public abstract class Registry<T, TRegistry> : RefCounted
 
             var id = resource.Get("Id").AsString();
 
-            if (id == string.Empty) continue;
+            if (id == string.Empty)
+            {
+                id = file.GetFile().GetBaseName();
+            }
 
             Resources[id] = resource;
         }

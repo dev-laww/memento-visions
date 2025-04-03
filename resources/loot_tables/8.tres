@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://ct2y0f318jxyf" path="res://resources/items/consumable/salabat.tres" id="1_p24uh"]
 [ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="2_nybfy"]
 [ext_resource type="Resource" uid="uid://du6n3qtjkmo27" path="res://resources/items/consumable/tsaang_gubat.tres" id="3_kqsft"]
-[ext_resource type="Script" uid="uid://2133v7vmi65q" path="res://Scripts/Data/Item/LootTable.cs" id="4_1gl5n"]
+[ext_resource type="Script" uid="uid://2133v7vmi65q" path="res://Scripts/Data/Loot/LootTable.cs" id="4_1gl5n"]
 
 [sub_resource type="Resource" id="Resource_8p3gb"]
 script = ExtResource("2_nybfy")
