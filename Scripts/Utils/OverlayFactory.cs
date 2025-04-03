@@ -5,7 +5,7 @@ using GodotUtilities;
 
 namespace Game.Utils;
 
-public static class LoadingScreenFactory
+public static class OverlayFactory
 {
     private static readonly PackedScene textLoadingScene = ResourceLoader.Load<PackedScene>("res://Scenes/UI/Screens/TextLoading.tscn");
     public class TextLoadingBuilder(SceneTree tree)
