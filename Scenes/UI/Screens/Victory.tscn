@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://ngodgqc4w3i2"]
+
+[ext_resource type="Script" uid="uid://cpbflxtj8b8w3" path="res://Scripts/UI/Overlays/Victory.cs" id="1_bfyxh"]
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="1_uy1ql"]
+[ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="2_bfyxh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_uy1ql"]
+font = ExtResource("2_bfyxh")
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Victory" type="CanvasLayer"]
+script = ExtResource("1_bfyxh")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_uy1ql")
+color = Color(0, 0, 0, 0.5)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "Victory"
+label_settings = SubResource("LabelSettings_uy1ql")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LobbyButton" type="Button" parent="ColorRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Back to lobby"

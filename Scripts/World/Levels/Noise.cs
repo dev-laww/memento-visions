@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Autoload;
+using Game.Common;
 using Game.Components;
 using Game.Entities;
 using Game.UI.Screens;
@@ -45,9 +46,9 @@ public partial class Noise : Node2D
     });
 
     private GodotObject grid;
-    private bool placedFirstProp;
     private TextLoading loadingScreen;
     private Godot.Collections.Array<Vector2> validSpawnPositions;
+    private bool spawnedBoss;
 
     public override void _Notification(int what)
     {
@@ -81,7 +82,7 @@ public partial class Noise : Node2D
                 .SetDuration(5f)
                 .Build();
 
-            text.TreeExiting += SpawnBoss;            
+            text.TreeExiting += SpawnBoss;
         };
         showMarkersTimer.Timeout += () => entities.GetChildrenOfType<Enemy>().ToList().ForEach(enemy =>
         {
@@ -95,9 +96,17 @@ public partial class Noise : Node2D
 
         EnemyManager.EnemyCountChanged += count =>
         {
-            if (count > 0) return;
+            if (count > 0 || !spawnedBoss) return;
 
-            SpawnBoss();
+            var victoryScreen = resourcePreloader.InstanceSceneOrNull<Victory>();
+
+            if (victoryScreen is null)
+            {
+                Log.Error("Failed to load victory screen");
+                return;
+            }
+
+            GameManager.CurrentScene.AddChild(victoryScreen);
         };
     }
 

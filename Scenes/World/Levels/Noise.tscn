@@ -28,7 +28,7 @@
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="14_ygxkk"]
 [ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="18_5hc24"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="19_t5swe"]
-[ext_resource type="Script" uid="uid://bbhesrdqhrnnb" path="res://Scripts/Entities/Characters/Player.cs" id="29_ply2r"]
+[ext_resource type="PackedScene" uid="uid://ngodgqc4w3i2" path="res://Scenes/UI/Screens/Victory.tscn" id="23_ply2r"]
 
 [sub_resource type="Resource" id="Resource_me1kn"]
 resource_name = "Elevation and Water Smoothing"
@@ -1896,7 +1896,7 @@ SpawnEntries = Array[ExtResource("4_fp327")]([SubResource("Resource_1v8c7"), Sub
 metadata/_custom_type_script = "uid://bhqbwv1yagshy"
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
-resources = [PackedStringArray("Chest", "Player", "ScreenMarker"), [ExtResource("2_oyrft"), ExtResource("2_k6nme"), ExtResource("4_xs3a0")]]
+resources = [PackedStringArray("Chest", "Player", "ScreenMarker", "Victory"), [ExtResource("2_oyrft"), ExtResource("2_k6nme"), ExtResource("4_xs3a0"), ExtResource("23_ply2r")]]
 
 [node name="SpawnBossTimer" type="Timer" parent="."]
 wait_time = 90.0
@@ -2963,9 +2963,5 @@ unique_name_in_owner = true
 y_sort_enabled = true
 position = Vector2(-2, -22)
 
-[node name="Player" type="CharacterBody2D" parent="Entities" groups=["Player"] instance=ExtResource("2_k6nme")]
+[node name="Player" parent="Entities" instance=ExtResource("2_k6nme")]
 position = Vector2(1080, 1272)
-collision_layer = 4
-collision_mask = 1019
-script = ExtResource("29_ply2r")
-Id = "player"
