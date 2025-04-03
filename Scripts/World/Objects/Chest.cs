@@ -1,4 +1,3 @@
-using System.Linq;
 using Game.Autoload;
 using Game.Components;
 using Game.Data;
@@ -73,4 +72,11 @@ public partial class Chest : Node2D
     }
 
     private void SetDrops() => dropManager.Drops = loot?.Drops;
+
+    public void SetDrops(LootTable lootTable)
+    {
+        if (lootTable == null) return;
+
+        dropManager.Drops = lootTable.Drops;
+    }
 }

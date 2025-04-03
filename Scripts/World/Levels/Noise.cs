@@ -4,6 +4,7 @@ using System.Linq;
 using Game.Autoload;
 using Game.Common;
 using Game.Components;
+using Game.Data;
 using Game.Entities;
 using Game.UI.Screens;
 using Game.Utils;
@@ -204,6 +205,7 @@ public partial class Noise : Node2D
             validSpawnPositions.Remove(position);
 
             chest.Position = position;
+            chest.SetDrops(LootTableRegistry.GetRandom());
 
             chests.AddChild(chest);
         }
