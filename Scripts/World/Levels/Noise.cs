@@ -49,7 +49,7 @@ public partial class Noise : Node2D
     private GodotObject grid;
     private TextLoading loadingScreen;
     private Godot.Collections.Array<Vector2> validSpawnPositions;
-    private bool spawnedBoss;
+    private bool bossSpawned;
 
     public override void _Notification(int what)
     {
@@ -97,7 +97,7 @@ public partial class Noise : Node2D
 
         EnemyManager.EnemyCountChanged += count =>
         {
-            if (count > 0 || !spawnedBoss) return;
+            if (count > 0 || !bossSpawned) return;
 
             var victoryScreen = resourcePreloader.InstanceSceneOrNull<Victory>();
 
@@ -290,6 +290,7 @@ public partial class Noise : Node2D
         if (Engine.IsEditorHint()) return;
 
         GameCamera.Shake(1f);
+        bossSpawned = true;
     }
 
     private static List<HashSet<Vector2I>> GetClusters(HashSet<Vector2I> occupiedCells)
