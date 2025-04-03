@@ -1,6 +1,5 @@
 using Godot;
 using GodotUtilities;
-using System;
 
 namespace Game.UI.Screens;
 
