@@ -286,7 +286,7 @@ public partial class Aghon : Enemy
         cloud.GlobalPosition = GlobalPosition;
         cloud.TreeExiting += () => spawnedClouds = Mathf.Clamp(spawnedClouds - 1, 0, MAX_SPAWNED_CLOUDS);
 
-        GetTree().Root.AddChild(cloud);
+        GameManager.CurrentScene.AddChild(cloud);
 
         spawnedClouds++;
     }

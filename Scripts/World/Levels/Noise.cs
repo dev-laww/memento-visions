@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -29,7 +30,8 @@ public partial class Noise : Node2D
     [Node] private Node2D entities;
     [Node] private ResourcePreloader resourcePreloader;
     [Node] private Node2D chests;
-    [Node] private Timer timer;
+    [Node] private Timer showMarkersTimer;
+    [Node] private Timer spawnBossTimer;
 
     [ExportToolButton("Generate", Icon = "RotateLeft")]
     private Callable Generate => Callable.From(() => noiseGenerator.Call("generate"));
@@ -46,6 +48,7 @@ public partial class Noise : Node2D
     private GodotObject grid;
     private bool placedFirstProp;
     private TextLoading loadingScreen;
+    private Godot.Collections.Array<Vector2> validSpawnPositions;
 
     public override void _Notification(int what)
     {
@@ -62,7 +65,7 @@ public partial class Noise : Node2D
 
         if (Engine.IsEditorHint()) return;
 
-        loadingScreen = new LoadingScreenFactory.TextLoadingBuilder(GetTree())
+        loadingScreen = new OverlayFactory.TextLoadingBuilder(GetTree())
             .SetText("Generating world...")
             .Build();
 
@@ -72,7 +75,16 @@ public partial class Noise : Node2D
 
         Generate.Call();
 
-        timer.Timeout += () => entities.GetChildrenOfType<Enemy>().ToList().ForEach(enemy =>
+        spawnBossTimer.Timeout += () =>
+        {
+            var text = new OverlayFactory.CenterTextBuilder(GetTree())
+                .SetText("A boss is coming!")
+                .SetDuration(5f)
+                .Build();
+
+            text.TreeExiting += SpawnBoss;            
+        };
+        showMarkersTimer.Timeout += () => entities.GetChildrenOfType<Enemy>().ToList().ForEach(enemy =>
         {
             var marker = resourcePreloader.InstanceSceneOrNull<ScreenMarker>();
             marker.Offset = new Vector2(0, -32);
@@ -86,7 +98,7 @@ public partial class Noise : Node2D
         {
             if (count > 0) return;
 
-            SpawnBossWave();
+            SpawnBoss();
         };
     }
 
@@ -99,6 +111,11 @@ public partial class Noise : Node2D
         SpawnChests();
         SpawnPlayer();
         SpawnEnemies();
+
+        if (Engine.IsEditorHint())
+        {
+            SpawnBoss();
+        }
 
         await ToSignal(GetTree().CreateTimer(0.2f), "timeout");
 
@@ -129,7 +146,6 @@ public partial class Noise : Node2D
 
         var layerCount = grid.Call("get_layer_count").AsInt32();
         var emptyCells = GetEmptyCells();
-        spawner.SpawnPoints.Clear();
 
         do
         {
@@ -141,12 +157,7 @@ public partial class Noise : Node2D
 
         var tileSize = floor.TileSet.TileSize;
 
-        foreach (var cell in emptyCells)
-        {
-            var position = (cell * tileSize) + tileSize / 2;
-
-            spawner.SpawnPoints.Add(position);
-        }
+        validSpawnPositions = [.. emptyCells.Select(cell => cell * tileSize + tileSize / 2)];
     }
 
     private void SpawnPlayer()
@@ -157,8 +168,8 @@ public partial class Noise : Node2D
         }
 
         var player = resourcePreloader.InstanceSceneOrNull<Player>();
-        var spawnPoint = spawner.SpawnPoints.PickRandom();
-        spawner.SpawnPoints.Remove(spawnPoint);
+        var spawnPoint = validSpawnPositions.PickRandom();
+        validSpawnPositions.Remove(spawnPoint);
 
         player.Position = spawnPoint;
 
@@ -179,8 +190,10 @@ public partial class Noise : Node2D
             var chest = resourcePreloader.InstanceSceneOrNull<Chest>();
             // TODO: get random loot resource
             // TODO: prevent spawning chests beside each other
-            var position = spawner.SpawnPoints.PickRandom();
-            spawner.SpawnPoints.Remove(position);
+            var position = validSpawnPositions.PickRandom();
+
+            pickedChestPositions.Add(position);
+            validSpawnPositions.Remove(position);
 
             chest.Position = position;
 
@@ -195,21 +208,14 @@ public partial class Noise : Node2D
 
     private void SpawnEnemies()
     {
+        spawner.SetSpawnPositions(validSpawnPositions);
+
         if (loadingScreen is not null && !Engine.IsEditorHint())
         {
             loadingScreen.Text = "Spawning enemies...";
         }
 
-        var spawnedEnemies = spawner.Spawn();
-
-        foreach (var enemy in spawnedEnemies)
-        {
-            entities.AddChild(enemy);
-
-            if (!Engine.IsEditorHint()) continue;
-
-            enemy.SetOwner(GetTree().GetEditedSceneRoot());
-        }
+        spawner.Spawn();
     }
 
     private void PurgeElevationTopEdges()
@@ -269,11 +275,15 @@ public partial class Noise : Node2D
         }
     }
 
-    private void SpawnBossWave()
+    private void SpawnBoss()
     {
-        var playerPosition = this.GetPlayer()?.GlobalPosition ?? Vector2.Zero;
+        var playerPosition = this.GetPlayer().Position + MathUtil.RNG.RandDirection() * 50;
 
-        // TODO: spawn boss wave
+        spawner.SpawnBoss(playerPosition);
+
+        if (Engine.IsEditorHint()) return;
+
+        GameCamera.Shake(1f);
     }
 
     private static List<HashSet<Vector2I>> GetClusters(HashSet<Vector2I> occupiedCells)

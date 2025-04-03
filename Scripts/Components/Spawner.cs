@@ -1,12 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Game.Common.Extensions;
+using System.Runtime.CompilerServices;
 using Game.Data;
-using Game.Entities;
 using Godot;
 using Godot.Collections;
-using GodotUtilities;
 using GodotUtilities.Logic;
 
 namespace Game.Components;
@@ -16,6 +13,8 @@ namespace Game.Components;
 [GlobalClass]
 public partial class Spawner : Node
 {
+    [Export] private Node spawnRoot;
+
     [Export]
     private FastNoiseLite Noise
     {
@@ -63,29 +62,37 @@ public partial class Spawner : Node
         }
     }
 
-    public Array<Vector2> SpawnPoints { get; } = [];
+    private Array<Vector2> spawnPositions = [];
     private FastNoiseLite noise = new();
     private Array<EnemySpawnEntry> spawnEntries = [];
     private LootTable<EnemySpawnEntry> lootTable = new();
 
+    public void SetSpawnPositions(Array<Vector2> positions) => spawnPositions = positions;
 
-    public IEnumerable<Enemy> Spawn()
+    public void Spawn()
     {
-        foreach (var point in SpawnPoints)
+        foreach (var point in spawnPositions)
         {
             var entry = lootTable.PickItem();
             var enemy = entry.Create(point);
 
             if (enemy is null) continue;
 
-            yield return enemy;
+            spawnRoot.AddChild(enemy);
         }
     }
 
-    public IEnumerable<Enemy> SpawnBossWave()
+    public void SpawnBoss(Vector2? position = null)
     {
-        // TODO: Implement boss wave spawning logic
+        var boss = EnemyRegistry.PickRandomBoss();
 
-        yield break;
+        GD.Print("Spawning boss: ", boss?.Name);
+
+        if (boss is null) return;
+
+        position ??= spawnPositions.PickRandom();
+        boss.Position = (Vector2)position;
+
+        spawnRoot.AddChild(boss);
     }
 }
