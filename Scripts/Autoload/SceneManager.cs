@@ -167,10 +167,13 @@ public partial class SceneManager : Autoload<SceneManager>
 
         if (outgoing != GetTree().Root && IsInstanceValid(outgoing))
         {
+            outgoing.TreeExited += () => to.AddChild(incoming);
             outgoing.QueueFree();
         }
-
-        to.AddChild(incoming);
+        else
+        {
+            to.AddChild(incoming);
+        }
 
         await loadingScreen.End();
 
