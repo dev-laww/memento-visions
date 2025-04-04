@@ -14,8 +14,8 @@
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="12_2eimf"]
 [ext_resource type="Resource" uid="uid://dr732yvh2p2me" path="res://resources/dialogues/chapter1/storyteller.dialogue" id="13_74shb"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="14_2eimf"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="15_r45d3"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="16_r45d3"]
+[ext_resource type="Resource" uid="uid://ba4jrntt5jygn" path="res://resources/dialogues/chapter1/chapter1_pt2_dialogue.dialogue" id="17_r45d3"]
 [ext_resource type="Resource" uid="uid://b8egfkscgqbcp" path="res://resources/dialogues/chapter1/chiefpt2.dialogue" id="17_ynjqs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ppcnt"]
@@ -563,7 +563,7 @@ material = ExtResource("1_1cx0f")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 1
+frame = 2
 script = ExtResource("12_2eimf")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -583,6 +583,7 @@ collision_mask = 4
 script = ExtResource("6_my81a")
 DialogueResource = ExtResource("13_74shb")
 ShouldInteract = true
+InteractionLabel = "StoryTeller"
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StoryTeller/DialogueTrigger"]
@@ -593,11 +594,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="Node2D" type="Node2D" parent="StoryTeller/DialogueTrigger"]
 position = Vector2(0, -33)
 
-[node name="InteractionUI" type="Control" parent="StoryTeller/DialogueTrigger/Node2D" instance=ExtResource("14_2eimf")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("15_r45d3")
+[node name="InteractionUI" parent="StoryTeller/DialogueTrigger/Node2D" instance=ExtResource("14_2eimf")]
 
 [node name="Chief" parent="." instance=ExtResource("16_r45d3")]
 position = Vector2(1229, 516)
@@ -608,6 +605,7 @@ collision_mask = 4
 script = ExtResource("6_my81a")
 DialogueResource = ExtResource("17_ynjqs")
 ShouldInteract = true
+InteractionLabel = "Mayor"
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/DialogueTrigger"]
@@ -618,8 +616,26 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="Node2D" type="Node2D" parent="Chief/DialogueTrigger"]
 position = Vector2(0, -33)
 
-[node name="InteractionUI" type="Control" parent="Chief/DialogueTrigger/Node2D" instance=ExtResource("14_2eimf")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("15_r45d3")
+[node name="InteractionUI" parent="Chief/DialogueTrigger/Node2D" instance=ExtResource("14_2eimf")]
+
+[node name="Chief" parent="Chief" instance=ExtResource("16_r45d3")]
+position = Vector2(83, -253)
+
+[node name="DialogueTrigger" type="Area2D" parent="Chief/Chief"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("6_my81a")
+DialogueResource = ExtResource("17_r45d3")
+ShouldInteract = true
+InteractionLabel = "Mang Rudy"
+metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/Chief/DialogueTrigger"]
+position = Vector2(-1, -8)
+shape = SubResource("CircleShape2D_1dpy7")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="Chief/Chief/DialogueTrigger"]
+position = Vector2(0, -33)
+
+[node name="InteractionUI" parent="Chief/Chief/DialogueTrigger/Node2D" instance=ExtResource("14_2eimf")]

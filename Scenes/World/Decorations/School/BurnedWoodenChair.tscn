@@ -12,7 +12,7 @@
 [sub_resource type="Resource" id="Resource_6f01l"]
 script = ExtResource("6_i3y0y")
 Type = 2
-Description = "Find Chair"
+Description = "Investigate the Burned wooden chair"
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hwwpg"]
