@@ -1,4 +1,4 @@
-[gd_scene load_steps=131 format=4 uid="uid://v06x46jch2vm"]
+[gd_scene load_steps=133 format=4 uid="uid://v06x46jch2vm"]
 
 [ext_resource type="Script" uid="uid://dcmogr8vudmpc" path="res://Scripts/World/Levels/Story/SchoolOutdoor.cs" id="1_2ho0r"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_r2wrx"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="22_5n0qf"]
 [ext_resource type="Resource" uid="uid://bj8l78qd3fsks" path="res://resources/dialogues/prologue/endprologue.dialogue" id="23_5jfbt"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="24_sqsyd"]
+[ext_resource type="Resource" uid="uid://cqqlth0pruv27" path="res://resources/dialogues/prologue/prologue3_player.dialogue" id="26_r2wrx"]
 
 [sub_resource type="Resource" id="Resource_5qybx"]
 script = ExtResource("8_k62lt")
@@ -34,7 +35,7 @@ Max = 1
 Weight = 1
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
-[sub_resource type="Resource" id="Resource_2ho0r"]
+[sub_resource type="Resource" id="Resource_r0s03"]
 resource_local_to_scene = true
 script = ExtResource("9_6ep2w")
 Drops = [SubResource("Resource_5qybx")]
@@ -792,6 +793,9 @@ graph_offset = Vector2(-23, -24)
 [sub_resource type="CircleShape2D" id="CircleShape2D_4k184"]
 radius = 17.0294
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ytljl"]
+size = Vector2(20, 94)
+
 [node name="SchoolOutdoor" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_2ho0r")
@@ -839,7 +843,7 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 [node name="Chest" parent="Art" instance=ExtResource("6_16xaq")]
 position = Vector2(349, 59)
 disable_mode = 2
-Loot = SubResource("Resource_2ho0r")
+Loot = SubResource("Resource_r0s03")
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -862,7 +866,7 @@ position = Vector2(475, 948)
 position = Vector2(117, 60)
 
 [node name="TransitionArea" type="Area2D" parent="."]
-position = Vector2(488, 1680)
+position = Vector2(506, 1759)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("12_3cvxb")
@@ -870,7 +874,6 @@ TargetScene = "uid://ciqiplx11424"
 metadata/_custom_type_script = "uid://davlg2u8drdh4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
-position = Vector2(16.5, 75.5)
 shape = SubResource("RectangleShape2D_cymrg")
 
 [node name="Chief" parent="." instance=ExtResource("13_tmhst")]
@@ -1080,7 +1083,7 @@ material = ExtResource("3_r0s03")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 2
+frame = 3
 script = ExtResource("21_uhybl")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1114,3 +1117,15 @@ offset_left = -1.0
 offset_top = -32.0
 offset_right = -1.0
 offset_bottom = -32.0
+
+[node name="DialogueTrigger" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("22_5n0qf")
+DialogueResource = ExtResource("26_r2wrx")
+metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueTrigger"]
+position = Vector2(144, 96)
+shape = SubResource("RectangleShape2D_ytljl")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)

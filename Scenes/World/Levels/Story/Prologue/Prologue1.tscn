@@ -1,14 +1,14 @@
-[gd_scene load_steps=24 format=4 uid="uid://3td8x8h36elv"]
+[gd_scene load_steps=23 format=4 uid="uid://3td8x8h36elv"]
 
 [ext_resource type="Script" uid="uid://bw7smwgpceo61" path="res://Scripts/World/Levels/Story/PrologueBar.cs" id="1_oncee"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="2_7ak36"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="3_fu5k5"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="4_dqrc3"]
 [ext_resource type="Resource" uid="uid://0suhta3uejmr" path="res://resources/quests/Prologue/BarInteraction.tres" id="5_ucy7c"]
-[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="6_7ak36"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="7_r42qq"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="8_l7bid"]
-[ext_resource type="Resource" uid="uid://dk2nxvecyh5h3" path="res://resources/dialogues/prologue/prologue1.0.dialogue" id="9_fu5k5"]
+[ext_resource type="Resource" uid="uid://dk2nxvecyh5h3" path="res://resources/dialogues/prologue/prologue1.0.dialogue" id="8_oncee"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="9_pxtv0"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="10_hfab7"]
 [ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemies/Common/Dummy.tscn" id="11_f5n2n"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="12_e44kk"]
@@ -31,12 +31,6 @@ border_size = 1000.0
 agent_radius = 8.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hn57r"]
-
-[sub_resource type="Resource" id="Resource_ccy1y"]
-script = ExtResource("6_7ak36")
-Type = 2
-Description = "Head to the Haunted School – The real horror begins."
-metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lx1uq"]
 
@@ -85,7 +79,7 @@ script = ExtResource("4_dqrc3")
 Quest = ExtResource("5_ucy7c")
 Mode = 1
 ShouldInteract = false
-Objective = SubResource("Resource_ccy1y")
+Objective = null
 ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -106,8 +100,8 @@ script = ExtResource("4_dqrc3")
 Quest = ExtResource("5_ucy7c")
 Mode = 0
 ShouldInteract = true
-InteractionLabel = "Chief"
-DialogueResource = ExtResource("9_fu5k5")
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("8_oncee")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/QuestTrigger"]
@@ -115,9 +109,12 @@ shape = SubResource("CircleShape2D_coaxs")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
-position = Vector2(0, -34)
 
-[node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("10_hfab7")]
+[node name="InteractionUI" type="Control" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("10_hfab7")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("9_pxtv0")
 
 [node name="Dummy4" parent="." instance=ExtResource("11_f5n2n")]
 position = Vector2(739, 447)

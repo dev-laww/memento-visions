@@ -13,7 +13,7 @@ public partial class MovableObject : RigidBody2D
         get => pushDirection;
         set => SetPush(value);
     }
-     float pushSpeed = 7f;
+    [Export] float pushSpeed = 7f;
     public bool IsBeingPushed { get; set; } = false;
 
     public override void _PhysicsProcess(double delta)
