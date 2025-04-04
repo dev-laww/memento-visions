@@ -7813,7 +7813,6 @@ material = ExtResource("9_5oqto")
 sprite_frames = SubResource("SpriteFrames_5oqto")
 animation = &"south"
 autoplay = "south"
-frame = 2
 script = ExtResource("10_5oqto")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

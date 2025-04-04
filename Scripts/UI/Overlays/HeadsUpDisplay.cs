@@ -55,7 +55,6 @@ public partial class HeadsUpDisplay : Overlay
         healthParticlesForeground.Emitting = false;
         healthGlow.Modulate = Colors.Transparent;
 
-
         player.StatsManager.StatIncreased += OnStatIncreased;
         player.StatsManager.AttackReceived += OnAttackReceived;
         player.StatsManager.LevelUp += OnLevelUp;

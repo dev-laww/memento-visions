@@ -208,10 +208,9 @@ public partial class StatsManager : Node
         var healthRatio = Health / MaxHealth;
 
         MaxHealth = baseMaxHealth + CalculateStatLevelDelta(StatsType.Health, Level);
-        Damage = baseDamage + CalculateStatLevelDelta(StatsType.Damage, Level);
-        Defense = baseDefense + CalculateStatLevelDelta(StatsType.Defense, Level);
-
-        Health = MaxHealth * healthRatio;
+        damage = baseDamage + CalculateStatLevelDelta(StatsType.Damage, Level);
+        defense = baseDefense + CalculateStatLevelDelta(StatsType.Defense, Level);
+        health = MaxHealth * healthRatio;
     }
 
     private static float CalculateStatLevelDelta(StatsType stat, float level)

@@ -7,6 +7,7 @@ using Godot;
 using GodotUtilities;
 using System.CommandLine.IO;
 using Game.UI.Screens;
+using Game.Common.Models;
 
 namespace Game.Entities;
 
@@ -45,6 +46,11 @@ public partial class Player : Entity
         if (Engine.IsEditorHint()) return;
 
         CommandInterpreter.Unregister(this);
+
+        SaveManager.Data.Player.Stats ??= new Stats();
+        SaveManager.Data.Player.Stats.Level = StatsManager.Level;
+
+        SaveManager.Save();
     }
 
     public override void _Notification(int what)
@@ -65,6 +71,10 @@ public partial class Player : Entity
         StateMachine.AddStates(Dash, EnterDash, ExitDash);
 
         StateMachine.SetInitialState(Normal);
+
+        var playerStats = SaveManager.Data.Player.Stats;
+
+        StatsManager.SetLevel(playerStats?.Level ?? 1);
     }
 
     public override void OnProcess(double delta)
