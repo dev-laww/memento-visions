@@ -48,4 +48,4 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 polygon = PackedVector2Array(16, 12, 8, 1005, 1440, 997, 1419, 29, 19, -6, 1594, -10, 1541, 1052, -18, 1026, -70, -14, 11, -74)
 
 [node name="Player" parent="." instance=ExtResource("4_imb2w")]
-position = Vector2(328, 314)
+position = Vector2(98, 81)
