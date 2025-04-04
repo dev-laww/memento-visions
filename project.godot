@@ -39,7 +39,6 @@ InteractionManager="*res://Scripts/Autoload/InteractionManager.cs"
 FloatingTextManager="*res://Scenes/Autoload/FloatingTextManager.tscn"
 OverlayManager="*res://Scenes/Autoload/OverlayManager.tscn"
 CinematicManager="*res://Scenes/Autoload/CinematicManager.tscn"
-TransitionScreen="*res://Scenes/Autoload/transition_screen.gd"
 
 [dialogue_manager]
 
