@@ -4,6 +4,7 @@ using System.Linq;
 using Game.Common;
 using Game.Entities;
 using Game.UI.Common;
+using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
 
@@ -40,6 +41,7 @@ public partial class EnemyManager : Autoload<EnemyManager>
         EnemyRegistered?.Invoke(enemy);
         Instance.OnEnemyRegistered(enemy);
         EnemyCountChanged?.Invoke(Instance.enemies.Count);
+        enemy.StatsManager.SetLevel(Instance.GetPlayer()?.StatsManager.Level ?? 1);
 
         Log.Debug($"{enemy} added to the registry. {info}");
     }

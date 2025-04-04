@@ -109,6 +109,8 @@ public partial class StatsManager : Node
         baseMaxHealth = MaxHealth;
         baseDamage = Damage;
         baseDefense = Defense;
+
+        ApplyLevelToStats();
     }
 
     // Health
