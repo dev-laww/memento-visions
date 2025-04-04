@@ -1,4 +1,4 @@
-[gd_scene load_steps=180 format=4 uid="uid://d3dl8qe3i4hs5"]
+[gd_scene load_steps=177 format=4 uid="uid://d3dl8qe3i4hs5"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_edvum"]
 [ext_resource type="Script" uid="uid://cy5yn6ijpgu1n" path="res://Scripts/World/Levels/Story/Chapter1/EverfieldCity.cs" id="1_hf60o"]
@@ -10,14 +10,11 @@
 [ext_resource type="Resource" uid="uid://cpgaa23upm6hk" path="res://resources/quests/Chapter1/aswang-hunt2.tres" id="6_hf60o"]
 [ext_resource type="Resource" uid="uid://dubpfapg14rna" path="res://resources/quests/Chapter1/quest-testimony3.tres" id="8_7adkd"]
 [ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="8_516uf"]
-[ext_resource type="Resource" uid="uid://dfhk5ud22nohe" path="res://resources/dialogues/chapter1/chapter1.dialogue" id="9_yynft"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="10_7adkd"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="10_grhu3"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="11_84djs"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="11_dclhn"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="11_hn08j"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="12_hf60o"]
-[ext_resource type="Resource" uid="uid://bvch8blxsmpmn" path="res://resources/dialogues/chapter1/chapter1.1.dialogue" id="12_yynft"]
 [ext_resource type="Resource" uid="uid://d38r8diakp5jt" path="res://resources/dialogues/chapter1/chief3.dialogue" id="13_8kgvc"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="14_5xymq"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="15_2ke1t"]
@@ -1053,9 +1050,7 @@ collision_mask = 4
 script = ExtResource("5_hn08j")
 Quest = ExtResource("8_7adkd")
 Mode = 0
-ShouldInteract = true
-InteractionLabel = "Interact"
-DialogueResource = ExtResource("9_yynft")
+ShouldInteract = false
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief2/QuestTrigger"]
@@ -1064,11 +1059,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="npc/Chief2/QuestTrigger"]
 
-[node name="InteractionUI" type="Control" parent="npc/Chief2/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("11_84djs")
+[node name="InteractionUI" parent="npc/Chief2/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
 [node name="Chief3" parent="npc" instance=ExtResource("4_32qxv")]
 material = SubResource("ShaderMaterial_kycha")
@@ -1100,9 +1091,7 @@ collision_mask = 4
 script = ExtResource("5_hn08j")
 Quest = ExtResource("6_hf60o")
 Mode = 0
-ShouldInteract = true
-InteractionLabel = "Interact"
-DialogueResource = ExtResource("12_yynft")
+ShouldInteract = false
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief5/QuestTrigger"]
@@ -1112,11 +1101,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="npc/Chief5/QuestTrigger"]
 
-[node name="InteractionUI" type="Control" parent="npc/Chief5/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("11_84djs")
+[node name="InteractionUI" parent="npc/Chief5/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
 [node name="Chief4" parent="npc" instance=ExtResource("4_32qxv")]
 position = Vector2(130, 169)
@@ -1495,7 +1480,7 @@ material = ExtResource("1_edvum")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 3
+frame = 1
 script = ExtResource("18_8kgvc")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

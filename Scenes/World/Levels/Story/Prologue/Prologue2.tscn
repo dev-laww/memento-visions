@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=4 uid="uid://c64wsg4p1yvco"]
+[gd_scene load_steps=77 format=4 uid="uid://c64wsg4p1yvco"]
 
 [ext_resource type="Script" uid="uid://dudaew5h4f4vy" path="res://Scripts/World/Levels/Story/DesolatePlace.cs" id="1_ngxr6"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_3e0ka"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="12_lochm"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="13_owp6s"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="13_uxpbx"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="14_uxpbx"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="17_lochm"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="18_owp6s"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="19_pyo5b"]
@@ -551,8 +552,13 @@ shape = SubResource("CircleShape2D_5br0r")
 debug_color = Color(0.427269, 0.718892, 0.882021, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
+position = Vector2(-2, -27)
 
-[node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("13_uxpbx")]
+[node name="InteractionUI" type="Control" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("13_uxpbx")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("14_uxpbx")
 
 [node name="Player" parent="." instance=ExtResource("12_lochm")]
 position = Vector2(58, 107)

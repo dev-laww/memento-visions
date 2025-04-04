@@ -9,4 +9,5 @@ Alex: Chief, are you sure? That the Aswangs are running rampant?
 Chief: I'm not sure but right now we have to go. We have to get there to know what the situation could be.
 Chief: It could be worse than what we could have imagined!
 Alex: Fine. Let's go.
+do CurrentScene.EnableTransitionArea()
 => END!
