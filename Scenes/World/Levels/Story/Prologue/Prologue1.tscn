@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://3td8x8h36elv"]
+[gd_scene load_steps=26 format=4 uid="uid://3td8x8h36elv"]
 
 [ext_resource type="Script" uid="uid://bw7smwgpceo61" path="res://Scripts/World/Levels/Story/PrologueBar.cs" id="1_oncee"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="2_7ak36"]
@@ -9,9 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="8_l7bid"]
 [ext_resource type="Resource" uid="uid://dk2nxvecyh5h3" path="res://resources/dialogues/prologue/prologue1.0.dialogue" id="8_oncee"]
 [ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="9_pxtv0"]
-[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="10_hfab7"]
+[ext_resource type="Texture2D" uid="uid://dyxsacj8kktd1" path="res://assets/icons/f.png" id="10_fu5k5"]
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="11_dqrc3"]
 [ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemies/Common/Dummy.tscn" id="11_f5n2n"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="12_e44kk"]
+[ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="12_ucy7c"]
 [ext_resource type="TileSet" uid="uid://c1mmutvocnp5g" path="res://resources/tilesets/bar/props.tres" id="13_bgadp"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="14_6utg0"]
 [ext_resource type="TileSet" uid="uid://grwoctw4gvjl" path="res://resources/tilesets/bar/wall.tres" id="15_5273t"]
@@ -37,6 +39,11 @@ agent_radius = 8.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_coaxs"]
 radius = 23.0217
 
+[sub_resource type="LabelSettings" id="LabelSettings_qbopi"]
+font = ExtResource("12_ucy7c")
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_oncee")
@@ -50,11 +57,11 @@ z_index = 1000
 color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(768, 528, 480, 528, 480, 480, 192, 480, 192, 384, 48, 384, 48, 240, 0, 240, 0, 0, 288, 0, 288, 192, 336, 192, 336, 144, 480, 144, 480, 48, 720, 48, 720, 288, 672, 288, 672, 384, 768, 384)
 script = ExtResource("2_7ak36")
-ParseRootNode = NodePath("../Art")
 NavigationPolygon = SubResource("NavigationPolygon_71mkv")
 agentRadius = 8.0
 chunkSize = 1000
 cellSize = 1000.0
+ParseRootNode = NodePath("../Art")
 metadata/_custom_type_script = "uid://cfscbenslyojv"
 
 [node name="@NavigationRegion2D@41983" type="NavigationRegion2D" parent="NavigationManager"]
@@ -109,12 +116,47 @@ shape = SubResource("CircleShape2D_coaxs")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
+visible = false
+position = Vector2(0, -33)
 
-[node name="InteractionUI" type="Control" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("10_hfab7")]
+[node name="InteractionUI" type="Control" parent="Chief/QuestTrigger"]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
+offset_top = -33.0
+offset_bottom = -33.0
 scale = Vector2(0.5, 0.5)
 script = ExtResource("9_pxtv0")
+Text = "Interact"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Chief/QuestTrigger/InteractionUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -8.0
+offset_right = 30.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="Chief/QuestTrigger/InteractionUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("10_fu5k5")
+
+[node name="Label" type="Label" parent="Chief/QuestTrigger/InteractionUI/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("11_dqrc3")
+text = "Chief"
+label_settings = SubResource("LabelSettings_qbopi")
 
 [node name="Dummy4" parent="." instance=ExtResource("11_f5n2n")]
 position = Vector2(739, 447)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=184 format=4 uid="uid://d3dl8qe3i4hs5"]
+[gd_scene load_steps=183 format=4 uid="uid://d3dl8qe3i4hs5"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_edvum"]
 [ext_resource type="Script" uid="uid://cy5yn6ijpgu1n" path="res://Scripts/World/Levels/Story/Chapter1/EverfieldCity.cs" id="1_hf60o"]
@@ -14,7 +14,6 @@
 [ext_resource type="Resource" uid="uid://dfhk5ud22nohe" path="res://resources/dialogues/chapter1/chapter1.dialogue" id="9_kycha"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="10_7adkd"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="10_grhu3"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="10_sn7c0"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="11_dclhn"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="11_hn08j"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="12_hf60o"]
@@ -29,19 +28,21 @@
 [ext_resource type="Resource" uid="uid://ctatcaqd2g4ox" path="res://resources/dialogues/chapter1/chapter1.4.dialogue" id="20_2ke1t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kycha"]
+radius = 14.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_84djs"]
-radius = 39.3192
+radius = 14.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kycha"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sn7c0"]
-radius = 13.0
+radius = 14.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3h1fx"]
+radius = 13.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yr40k"]
-size = Vector2(73, 47)
+size = Vector2(69.238, 30.3673)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_hn08j"]
 
@@ -1058,21 +1059,17 @@ InteractionLabel = "Dodong Daldal"
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief/DialogueTrigger"]
+position = Vector2(0, -13)
 shape = SubResource("CircleShape2D_kycha")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="npc/Chief/DialogueTrigger"]
 position = Vector2(0, -32)
 
-[node name="InteractionUI" type="Control" parent="npc/Chief/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("10_sn7c0")
+[node name="InteractionUI" parent="npc/Chief/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
 [node name="Chief2" parent="npc" instance=ExtResource("4_32qxv")]
 unique_name_in_owner = true
-visible = false
 position = Vector2(-112, 977)
 
 [node name="QuestTrigger" type="Area2D" parent="npc/Chief2"]
@@ -1089,6 +1086,7 @@ DialogueResource = ExtResource("9_kycha")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief2/QuestTrigger"]
+position = Vector2(1, -12)
 shape = SubResource("CircleShape2D_84djs")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
@@ -1112,18 +1110,14 @@ InteractionLabel = "Paquito Weyt"
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief3/DialogueTrigger"]
-position = Vector2(0, -5)
+position = Vector2(0, -12)
 shape = SubResource("CircleShape2D_sn7c0")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="npc/Chief3/DialogueTrigger"]
 position = Vector2(0, -33)
 
-[node name="InteractionUI" type="Control" parent="npc/Chief3/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("10_sn7c0")
+[node name="InteractionUI" parent="npc/Chief3/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
 [node name="Chief6" parent="npc" instance=ExtResource("4_32qxv")]
 position = Vector2(516, 282)
@@ -1138,6 +1132,7 @@ InteractionLabel = "Tikyo Tiktilaok"
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief6/DialogueTrigger"]
+position = Vector2(0, -13)
 shape = SubResource("CircleShape2D_3h1fx")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
@@ -1145,11 +1140,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 z_index = 1
 position = Vector2(0, -32)
 
-[node name="InteractionUI" type="Control" parent="npc/Chief6/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("10_sn7c0")
+[node name="InteractionUI" parent="npc/Chief6/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
 [node name="Chief5" parent="npc" instance=ExtResource("4_32qxv")]
 position = Vector2(173, 169)
@@ -1173,6 +1164,7 @@ shape = SubResource("RectangleShape2D_yr40k")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="npc/Chief5/QuestTrigger"]
+position = Vector2(0, 5.89982)
 
 [node name="InteractionUI" parent="npc/Chief5/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
@@ -1553,7 +1545,7 @@ material = ExtResource("1_edvum")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 1
+frame = 3
 script = ExtResource("18_8kgvc")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

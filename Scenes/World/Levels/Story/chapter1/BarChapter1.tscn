@@ -120,6 +120,7 @@ shape = SubResource("RectangleShape2D_hhvhg")
 position = Vector2(136, 126)
 
 [node name="StoryTeller" parent="." instance=ExtResource("10_xl1pr")]
+unique_name_in_owner = true
 position = Vector2(245, 93)
 
 [node name="Chief" parent="." instance=ExtResource("11_72xov")]
@@ -132,7 +133,7 @@ script = ExtResource("12_shkw5")
 Quest = ExtResource("13_53sbg")
 Mode = 0
 ShouldInteract = true
-InteractionLabel = "Interact"
+InteractionLabel = "Chief"
 DialogueResource = ExtResource("14_cgm6k")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 

@@ -33,6 +33,7 @@ script = ExtResource("3_odju6")
 metadata/_custom_type_script = "uid://58jqrupdcss0"
 
 [node name="QuestTrigger" type="Area2D" parent="SmoothSprite2D"]
+unique_name_in_owner = true
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("4_vkrxr")

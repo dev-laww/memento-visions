@@ -109,8 +109,12 @@ shape = SubResource("CircleShape2D_5br0r")
 debug_color = Color(0.427269, 0.718892, 0.882021, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
+position = Vector2(-2, -25)
 
 [node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("13_uxpbx")]
+
+[node name="Label" parent="Chief/QuestTrigger/Node2D/InteractionUI/HBoxContainer" index="1"]
+text = "Chief"
 
 [node name="Player" parent="." instance=ExtResource("12_lochm")]
 position = Vector2(58, 107)
@@ -131,3 +135,5 @@ shape = SubResource("RectangleShape2D_d7mfr")
 unique_name_in_owner = true
 visible = false
 position = Vector2(1677, 460)
+
+[editable path="Chief/QuestTrigger/Node2D/InteractionUI"]

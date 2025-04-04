@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=4 uid="uid://v06x46jch2vm"]
+[gd_scene load_steps=137 format=4 uid="uid://v06x46jch2vm"]
 
 [ext_resource type="Script" uid="uid://dcmogr8vudmpc" path="res://Scripts/World/Levels/Story/SchoolOutdoor.cs" id="1_2ho0r"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_r2wrx"]
@@ -18,6 +18,8 @@
 [ext_resource type="Resource" uid="uid://yh060giw306t" path="res://resources/dialogues/prologue/AttackTutorial.dialogue" id="16_r2wrx"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="16_xfxeh"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="17_5o4do"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="17_ytljl"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="18_2t7qd"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="18_m8iv5"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="19_dy0lu"]
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/characters/npc/storyteller.png" id="20_cp01v"]
@@ -35,14 +37,33 @@ Max = 1
 Weight = 1
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
-[sub_resource type="Resource" id="Resource_r0s03"]
+[sub_resource type="Resource" id="Resource_ytljl"]
 resource_local_to_scene = true
 script = ExtResource("9_6ep2w")
 Drops = [SubResource("Resource_5qybx")]
+drops = [SubResource("Resource_5qybx")]
 metadata/_custom_type_script = "uid://2133v7vmi65q"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cymrg"]
 size = Vector2(47, 29)
+
+[sub_resource type="Resource" id="Resource_rcovv"]
+script = ExtResource("17_ytljl")
+Id = "enemy:aswang"
+Amount = 3
+Quantity = 0
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_5vn2r"]
+script = ExtResource("18_2t7qd")
+Type = 3
+Description = "kill 3 aswang
+"
+Items = null
+Enemies = [SubResource("Resource_rcovv")]
+Completed = false
+type = 3
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kc281"]
 radius = 17.0294
@@ -800,8 +821,10 @@ size = Vector2(20, 94)
 y_sort_enabled = true
 script = ExtResource("1_2ho0r")
 
-[node name="TelegraphCanvas" parent="." instance=ExtResource("2_r2wrx")]
+[node name="TelegraphCanvas" parent="." node_paths=PackedStringArray("resourcePreloader") instance=ExtResource("2_r2wrx")]
 z_index = -1
+time = 392.769
+resourcePreloader = NodePath("ResourcePreloader")
 
 [node name="Art" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -840,30 +863,153 @@ tile_set = ExtResource("4_ytljl")
 script = ExtResource("5_2t7qd")
 metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
-[node name="Chest" parent="Art" instance=ExtResource("6_16xaq")]
+[node name="Chest" parent="Art" node_paths=PackedStringArray("dropManager", "interaction") instance=ExtResource("6_16xaq")]
 position = Vector2(349, 59)
 disable_mode = 2
-Loot = SubResource("Resource_r0s03")
+Loot = SubResource("Resource_ytljl")
+loot = SubResource("Resource_ytljl")
+dropManager = NodePath("DropManager")
+interaction = NodePath("Interaction")
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="Aswang3" parent="Enemies" instance=ExtResource("10_xkjgd")]
+[node name="Aswang3" parent="Enemies" node_paths=PackedStringArray("StatsManager", "animationTree", "velocityManager", "pathFindManager", "specialAttackTimer", "specialAttackWindUpTimer", "patrolTimer", "hitBox") instance=ExtResource("10_xkjgd")]
 position = Vector2(770, 1648)
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+BossName = ""
+playback = null
+initialPosition = Vector2(0, 0)
+chargeOrigin = Vector2(0, 0)
+chargeDestination = Vector2(0, 0)
+chargeDirection = Vector2(0, 0)
+damageComponent = null
+isShowingAttackIndicator = false
+attackState = ""
+previousDistance = 3.40282e+38
+StatsManager = NodePath("StatsManager")
+animationTree = NodePath("AnimationTree")
+velocityManager = NodePath("VelocityManager")
+pathFindManager = NodePath("PathFindManager")
+specialAttackTimer = NodePath("SpecialAttackTimer")
+specialAttackWindUpTimer = NodePath("SpecialAttackWindUpTimer")
+patrolTimer = NodePath("PatrolTimer")
+hitBox = NodePath("HitBox")
 
-[node name="Aswang4" parent="Enemies" instance=ExtResource("10_xkjgd")]
+[node name="Aswang4" parent="Enemies" node_paths=PackedStringArray("StatsManager", "animationTree", "velocityManager", "pathFindManager", "specialAttackTimer", "specialAttackWindUpTimer", "patrolTimer", "hitBox") instance=ExtResource("10_xkjgd")]
 position = Vector2(185, 1619)
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+BossName = ""
+playback = null
+initialPosition = Vector2(0, 0)
+chargeOrigin = Vector2(0, 0)
+chargeDestination = Vector2(0, 0)
+chargeDirection = Vector2(0, 0)
+damageComponent = null
+isShowingAttackIndicator = false
+attackState = ""
+previousDistance = 3.40282e+38
+StatsManager = NodePath("StatsManager")
+animationTree = NodePath("AnimationTree")
+velocityManager = NodePath("VelocityManager")
+pathFindManager = NodePath("PathFindManager")
+specialAttackTimer = NodePath("SpecialAttackTimer")
+specialAttackWindUpTimer = NodePath("SpecialAttackWindUpTimer")
+patrolTimer = NodePath("PatrolTimer")
+hitBox = NodePath("HitBox")
 
-[node name="Aswang5" parent="Enemies" instance=ExtResource("10_xkjgd")]
+[node name="Aswang5" parent="Enemies" node_paths=PackedStringArray("StatsManager", "animationTree", "velocityManager", "pathFindManager", "specialAttackTimer", "specialAttackWindUpTimer", "patrolTimer", "hitBox") instance=ExtResource("10_xkjgd")]
 position = Vector2(387, 316)
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+BossName = ""
+playback = null
+initialPosition = Vector2(0, 0)
+chargeOrigin = Vector2(0, 0)
+chargeDestination = Vector2(0, 0)
+chargeDirection = Vector2(0, 0)
+damageComponent = null
+isShowingAttackIndicator = false
+attackState = ""
+previousDistance = 3.40282e+38
+StatsManager = NodePath("StatsManager")
+animationTree = NodePath("AnimationTree")
+velocityManager = NodePath("VelocityManager")
+pathFindManager = NodePath("PathFindManager")
+specialAttackTimer = NodePath("SpecialAttackTimer")
+specialAttackWindUpTimer = NodePath("SpecialAttackWindUpTimer")
+patrolTimer = NodePath("PatrolTimer")
+hitBox = NodePath("HitBox")
 
-[node name="Aswang6" parent="Enemies" instance=ExtResource("10_xkjgd")]
+[node name="Aswang6" parent="Enemies" node_paths=PackedStringArray("StatsManager", "animationTree", "velocityManager", "pathFindManager", "specialAttackTimer", "specialAttackWindUpTimer", "patrolTimer", "hitBox") instance=ExtResource("10_xkjgd")]
 position = Vector2(637, 359)
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+BossName = ""
+playback = null
+initialPosition = Vector2(0, 0)
+chargeOrigin = Vector2(0, 0)
+chargeDestination = Vector2(0, 0)
+chargeDirection = Vector2(0, 0)
+damageComponent = null
+isShowingAttackIndicator = false
+attackState = ""
+previousDistance = 3.40282e+38
+StatsManager = NodePath("StatsManager")
+animationTree = NodePath("AnimationTree")
+velocityManager = NodePath("VelocityManager")
+pathFindManager = NodePath("PathFindManager")
+specialAttackTimer = NodePath("SpecialAttackTimer")
+specialAttackWindUpTimer = NodePath("SpecialAttackWindUpTimer")
+patrolTimer = NodePath("PatrolTimer")
+hitBox = NodePath("HitBox")
 
-[node name="Aswang8" parent="Enemies" instance=ExtResource("10_xkjgd")]
+[node name="Aswang8" parent="Enemies" node_paths=PackedStringArray("StatsManager", "animationTree", "velocityManager", "pathFindManager", "specialAttackTimer", "specialAttackWindUpTimer", "patrolTimer", "hitBox") instance=ExtResource("10_xkjgd")]
 position = Vector2(475, 948)
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+BossName = ""
+playback = null
+initialPosition = Vector2(0, 0)
+chargeOrigin = Vector2(0, 0)
+chargeDestination = Vector2(0, 0)
+chargeDirection = Vector2(0, 0)
+damageComponent = null
+isShowingAttackIndicator = false
+attackState = ""
+previousDistance = 3.40282e+38
+StatsManager = NodePath("StatsManager")
+animationTree = NodePath("AnimationTree")
+velocityManager = NodePath("VelocityManager")
+pathFindManager = NodePath("PathFindManager")
+specialAttackTimer = NodePath("SpecialAttackTimer")
+specialAttackWindUpTimer = NodePath("SpecialAttackWindUpTimer")
+patrolTimer = NodePath("PatrolTimer")
+hitBox = NodePath("HitBox")
 
 [node name="Player" parent="." instance=ExtResource("11_6kbwn")]
 position = Vector2(117, 60)
+StatsManager = null
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+hurtBox = null
+animationTree = null
+comboResetTimer = null
+resourcePreloader = null
+VelocityManager = null
+WeaponManager = null
+InputManager = null
+Center = null
+playback = null
+combo = 1
+isAttacking = false
 
 [node name="TransitionArea" type="Area2D" parent="."]
 position = Vector2(506, 1759)
@@ -871,24 +1017,42 @@ collision_layer = 0
 collision_mask = 4
 script = ExtResource("12_3cvxb")
 TargetScene = "uid://ciqiplx11424"
+targetScene = "uid://ciqiplx11424"
 metadata/_custom_type_script = "uid://davlg2u8drdh4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
 shape = SubResource("RectangleShape2D_cymrg")
 
-[node name="Chief" parent="." instance=ExtResource("13_tmhst")]
+[node name="Chief" parent="." node_paths=PackedStringArray("StatsManager", "actionTimer", "animationTree") instance=ExtResource("13_tmhst")]
 position = Vector2(327, 64)
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+playback = null
+StatsManager = NodePath("StatsManager")
+actionTimer = NodePath("ActionTimer")
+animationTree = NodePath("AnimationTree")
 
 [node name="QuestTrigger" type="Area2D" parent="Chief"]
 position = Vector2(6, -15)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("14_xsvii")
-Quest = ExtResource("15_uwu2f")
 Mode = 0
+Quest = ExtResource("15_uwu2f")
+ObjectiveIndex = 0
 ShouldInteract = true
 InteractionLabel = "Interact"
 DialogueResource = ExtResource("16_r2wrx")
+IsDialogueActive = false
+Objective = SubResource("Resource_5vn2r")
+dialogueResource = ExtResource("16_r2wrx")
+shouldInteract = true
+interactionLabel = "Interact"
+_quest = ExtResource("15_uwu2f")
+_objectiveIndex = 0
+mode = 0
+isDialogueActive = false
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/QuestTrigger"]
@@ -900,15 +1064,21 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 position = Vector2(-6, -18)
 
 [node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("24_sqsyd")]
+Text = "Interact"
 
-[node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
+[node name="Label" parent="Chief/QuestTrigger/Node2D/InteractionUI/HBoxContainer" index="1"]
+text = "Chief"
+
+[node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode", "_parseRootNode")]
 visible = false
 z_index = 1000
 color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(-55, -68, -87, 1768, 1165, 1776, 1105, -41)
 script = ExtResource("16_xfxeh")
-ParseRootNode = NodePath("../Art")
 NavigationPolygon = SubResource("NavigationPolygon_b2y2l")
+_navigationPolygon = SubResource("NavigationPolygon_b2y2l")
+ParseRootNode = NodePath("../Art")
+_parseRootNode = NodePath("../Art")
 metadata/_custom_type_script = "uid://cfscbenslyojv"
 
 [node name="@NavigationRegion2D@24451" type="NavigationRegion2D" parent="NavigationManager"]
@@ -1062,6 +1232,14 @@ collision_mask = 15
 script = ExtResource("17_5o4do")
 Id = "npc:storyteller"
 isNpc = true
+StatsManager = null
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+actionTimer = null
+animationTree = null
+interaction = null
+playback = null
 
 [node name="ActionTimer" type="Timer" parent="StoryTeller"]
 autostart = true
@@ -1070,8 +1248,20 @@ min_wait_time = 4.0
 max_wait_time = 10.0
 metadata/_custom_type_script = "uid://clh46y8w17vem"
 
-[node name="StatsManager" type="Node" parent="StoryTeller"]
+[node name="StatsManager" type="Node" parent="StoryTeller" node_paths=PackedStringArray("Entity")]
 script = ExtResource("19_dy0lu")
+Health = 100.0
+LastReceivedAttack = null
+speed = 100.0
+damage = 0.0
+health = 100.0
+experience = 0.0
+level = 1.0
+defense = 0.0
+baseMaxHealth = 100.0
+baseDamage = 0.0
+baseDefense = 0.0
+Entity = NodePath("..")
 metadata/_custom_type_script = "uid://dnpva4sn53c1r"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StoryTeller"]
@@ -1083,7 +1273,7 @@ material = ExtResource("3_r0s03")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 3
+frame = 2
 script = ExtResource("21_uhybl")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1103,6 +1293,12 @@ collision_mask = 4
 script = ExtResource("22_5n0qf")
 DialogueResource = ExtResource("23_5jfbt")
 ShouldInteract = true
+IsDialogueActive = false
+shouldInteract = true
+interactionLabel = "Interact"
+dialogueResource = ExtResource("23_5jfbt")
+isInteractable = true
+isDialogueActive = false
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StoryTeller/DialogueTrigger"]
@@ -1117,15 +1313,28 @@ offset_left = -1.0
 offset_top = -32.0
 offset_right = -1.0
 offset_bottom = -32.0
+Text = "Interact"
+
+[node name="Label" parent="StoryTeller/DialogueTrigger/Node2D/InteractionUI/HBoxContainer" index="1"]
+text = "Storyteller"
 
 [node name="DialogueTrigger" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("22_5n0qf")
 DialogueResource = ExtResource("26_r2wrx")
+IsDialogueActive = false
+shouldInteract = false
+interactionLabel = "Interact"
+dialogueResource = ExtResource("26_r2wrx")
+isInteractable = true
+isDialogueActive = false
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueTrigger"]
 position = Vector2(144, 96)
 shape = SubResource("RectangleShape2D_ytljl")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[editable path="Chief/QuestTrigger/Node2D/InteractionUI"]
+[editable path="StoryTeller/DialogueTrigger/Node2D/InteractionUI"]
