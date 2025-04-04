@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=4 uid="uid://v06x46jch2vm"]
+[gd_scene load_steps=131 format=4 uid="uid://v06x46jch2vm"]
 
 [ext_resource type="Script" uid="uid://dcmogr8vudmpc" path="res://Scripts/World/Levels/Story/SchoolOutdoor.cs" id="1_2ho0r"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_r2wrx"]
@@ -19,7 +19,6 @@
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="16_xfxeh"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="17_5o4do"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="18_m8iv5"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="18_r0s03"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="19_dy0lu"]
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/characters/npc/storyteller.png" id="20_cp01v"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="21_uhybl"]
@@ -35,7 +34,7 @@ Max = 1
 Weight = 1
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
-[sub_resource type="Resource" id="Resource_ytljl"]
+[sub_resource type="Resource" id="Resource_2ho0r"]
 resource_local_to_scene = true
 script = ExtResource("9_6ep2w")
 Drops = [SubResource("Resource_5qybx")]
@@ -840,7 +839,7 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 [node name="Chest" parent="Art" instance=ExtResource("6_16xaq")]
 position = Vector2(349, 59)
 disable_mode = 2
-Loot = SubResource("Resource_ytljl")
+Loot = SubResource("Resource_2ho0r")
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -897,11 +896,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
 position = Vector2(-6, -18)
 
-[node name="InteractionUI" type="Control" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("24_sqsyd")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("18_r0s03")
+[node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("24_sqsyd")]
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -1085,7 +1080,7 @@ material = ExtResource("3_r0s03")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 3
+frame = 2
 script = ExtResource("21_uhybl")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
