@@ -1,3 +1,4 @@
+using Game.Autoload;
 using Game.Common.Extensions;
 using Game.Components;
 using Game.Data;
@@ -194,6 +195,7 @@ public partial class Aghon : Enemy
 
         specialAttackTimer1.Call(START_RANDOM);
         StateMachine.ChangeState(Normal);
+        GameCamera.Shake(0.5f);
     }
 
     private void EnterShockWavePunch()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=501 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=503 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" uid="uid://bbhesrdqhrnnb" path="res://Scripts/Entities/Characters/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_cqdhe"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://c6kt3qbs62e4i" path="res://Scenes/UI/Overlays/HeadsUpDisplay.tscn" id="14_c8fx8"]
 [ext_resource type="Texture2D" uid="uid://qelvcb3gkmb3" path="res://assets/entities/characters/player/sword_and_dagger.png" id="14_srhpj"]
 [ext_resource type="Texture2D" uid="uid://tflb423580f8" path="res://assets/entities/characters/player/whip.png" id="15_srhpj"]
+[ext_resource type="Script" uid="uid://dkr546xrmggbl" path="res://Scripts/Components/Area/PushArea.cs" id="17_xqgt3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7xh7"]
 radius = 9.0
@@ -7738,20 +7739,47 @@ states/whip/position = Vector2(509, -7)
 transitions = ["idle", "move", SubResource("AnimationNodeStateMachineTransition_srhpj"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_fqtcb"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_c8fx8"), "sword_and_dagger", "move", SubResource("AnimationNodeStateMachineTransition_2uqso"), "sword_and_dagger", "idle", SubResource("AnimationNodeStateMachineTransition_0k36x"), "move", "sword_and_dagger", SubResource("AnimationNodeStateMachineTransition_70mij"), "idle", "sword_and_dagger", SubResource("AnimationNodeStateMachineTransition_b6xmj"), "whip", "move", SubResource("AnimationNodeStateMachineTransition_75tfg"), "whip", "idle", SubResource("AnimationNodeStateMachineTransition_13gvp"), "idle", "whip", SubResource("AnimationNodeStateMachineTransition_wwkb6"), "move", "whip", SubResource("AnimationNodeStateMachineTransition_00fp1")]
 graph_offset = Vector2(-42, 47)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xqgt3"]
+radius = 8.13941
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 4
 collision_mask = 1019
 script = ExtResource("1_3hkqn")
 Id = "player"
+StatsManager = null
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+hurtBox = null
+animationTree = null
+comboResetTimer = null
+resourcePreloader = null
+VelocityManager = null
+WeaponManager = null
+InputManager = null
+Center = null
+playback = null
+combo = 1
+isAttacking = false
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
 resources = [PackedStringArray("Death"), [ExtResource("2_xqgt3")]]
 
-[node name="StatsManager" parent="." instance=ExtResource("2_cqdhe")]
+[node name="StatsManager" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("2_cqdhe")]
 unique_name_in_owner = true
+Health = 100.0
 Speed = 80.0
 Defense = 10.0
 Damage = 30.0
+LastReceivedAttack = null
+speed = 80.0
+damage = 30.0
+health = 100.0
+experience = 0.0
+level = 1.0
+defense = 10.0
+Entity = NodePath("..")
 
 [node name="HeadsUpDisplay" parent="." instance=ExtResource("14_c8fx8")]
 
@@ -7759,9 +7787,10 @@ Damage = 30.0
 wait_time = 1.5
 one_shot = true
 
-[node name="HealthNumberManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
+[node name="HealthNumberManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager", "manager")]
 script = ExtResource("3_0iqml")
 StatsManager = NodePath("../StatsManager")
+manager = NodePath("../StatsManager")
 metadata/_custom_type_script = "uid://cpwyjck8klk35"
 
 [node name="InventoryManager" type="Node" parent="."]
@@ -7776,21 +7805,30 @@ metadata/_custom_type_script = "uid://tapd6e6pmvag"
 script = ExtResource("3_65tgk")
 metadata/_custom_type_script = "uid://dq1u7skg2nopr"
 
-[node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
+[node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager", "statsManager")]
 script = ExtResource("3_lmufy")
 StatsManager = NodePath("../StatsManager")
+Velocity = Vector2(0, 0)
+LastFacedDirection = Vector2(0, 1)
+IsDashing = false
 AccelerationCoefficient = 12.0
 TimesCanDash = 2
 CanDashWhileDashing = true
 DashSpeed = 150.0
+dashQueue = Array[Vector2]([])
+isDashing = false
+knockbacked = false
+statsManager = NodePath("../StatsManager")
 metadata/_custom_type_script = "uid://nuxtah4mmhg5"
 
-[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
+[node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager", "statsManager")]
 position = Vector2(0, -15)
 collision_layer = 2048
 collision_mask = 1024
 script = ExtResource("5_5x453")
 StatsManager = NodePath("../StatsManager")
+shape = null
+statsManager = NodePath("../StatsManager")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CapsuleShape2D_n7xh7")
@@ -7809,7 +7847,7 @@ material = ExtResource("9_5oqto")
 sprite_frames = SubResource("SpriteFrames_5oqto")
 animation = &"south"
 autoplay = "south"
-frame = 3
+frame = 1
 script = ExtResource("10_5oqto")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -7859,4 +7897,14 @@ parameters/move/blend_position = Vector2(0, 0)
 parameters/sword_and_dagger/blend_position = Vector2(0, 0)
 parameters/whip/blend_position = Vector2(0, 0)
 
-[connection signal="LevelUp" from="StatsManager" to="." method="OnLevelUp"]
+[node name="PushArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 3
+monitorable = false
+script = ExtResource("17_xqgt3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea"]
+position = Vector2(0, -3.5)
+shape = SubResource("CircleShape2D_xqgt3")
+debug_color = Color(0.289207, 0.595865, 0.574471, 0.42)

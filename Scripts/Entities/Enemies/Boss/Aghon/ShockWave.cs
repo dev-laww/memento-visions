@@ -1,3 +1,4 @@
+using Game.Autoload;
 using Game.Components;
 using Game.Data;
 using Game.Utils;
@@ -35,6 +36,7 @@ public partial class ShockWave : Node2D
         var telegraph = new TelegraphFactory.LineTelegraphBuilder(canvas, origin)
             .SetDestitnation(destination)
             .SetWidth(ATTACK_WIDTH)
+            .SetDuration(0.4f)
             .Build();
 
         Rotation = (destination - origin).Angle();
@@ -70,8 +72,6 @@ public partial class ShockWave : Node2D
 
             lastHitBox = hitbox;
         }
-
-        GD.Print("Last hitbox: ", lastHitBox);
 
         if (lastHitBox is null) return;
 

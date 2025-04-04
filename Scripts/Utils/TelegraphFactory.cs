@@ -17,6 +17,7 @@ public static class TelegraphFactory
         private float delay;
         private Vector2 destination;
         private float width = 16f;
+        private float duration = 1.75f;
 
         public LineTelegraphBuilder SetDestitnation(Vector2 destination)
         {
@@ -27,6 +28,12 @@ public static class TelegraphFactory
         public LineTelegraphBuilder SetDelay(float delay)
         {
             this.delay = delay;
+            return this;
+        }
+
+        public LineTelegraphBuilder SetDuration(float duration)
+        {
+            this.duration = duration;
             return this;
         }
 

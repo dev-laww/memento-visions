@@ -69,8 +69,7 @@ public partial class Balloon : CanvasLayer
         {
             var visibleRatio = dialogueLabel.VisibleRatio;
             DialogueLine = await Next(DialogueLine.Id);
-
-            if (visibleRatio < 1.0f) dialogueLabel.Call("skip_typing");
+            
         }
     }
 
@@ -162,7 +161,6 @@ public partial class Balloon : CanvasLayer
             if (!mouseWasClicked && !skipButtonWasPressed) return;
 
             GetViewport().SetInputAsHandled();
-            dialogueLabel.Call("skip_typing");
         }
 
         if (!isWaitingForInput) return;

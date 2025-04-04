@@ -87,6 +87,10 @@ public partial class Player : Entity
 
         base.Die(info);
     }
+    public Vector2 GetPlayerDirection()
+    {
+        return InputManager.GetVector8();
+    }
 
 
     #region States
