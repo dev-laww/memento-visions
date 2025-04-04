@@ -3,6 +3,7 @@ using Game.Common.Extensions;
 using Game.Components;
 using Game.Data;
 using Game.Utils;
+using Game.Utils.Battle;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
@@ -243,6 +244,7 @@ public partial class Aghon : Enemy
                 .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
                 .SetDamage(StatsManager.Damage)
                 .SetDelay(.6f)
+                .SetDamageType(Attack.Type.Magical)
                 .SetShape(new CircleShape2D { Radius = 60 })
                 .SetOwner(this)
                 .Build(); // spawn circular shockwave

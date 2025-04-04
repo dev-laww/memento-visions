@@ -2,6 +2,7 @@ using Game.Common.Extensions;
 using Game.Components;
 using Game.Data;
 using Game.Utils;
+using Game.Utils.Battle;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
@@ -75,6 +76,7 @@ public partial class Cloud : Enemy
                 .SetDamage((aghon?.StatsManager.Damage ?? StatsManager.Damage) * .6f)
                 .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
                 .SetOwner(aghon as Enemy ?? this)
+                .SetDamageType(Attack.Type.Magical)
                 .SetDelay(.2f)
                 .SetShape(new CircleShape2D { Radius = ZAP_RADIUS })
                 .Build();

@@ -2,6 +2,7 @@ using Game.Autoload;
 using Game.Components;
 using Game.Data;
 using Game.Utils;
+using Game.Utils.Battle;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
@@ -51,6 +52,7 @@ public partial class ShockWave : Node2D
            .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
            .SetDamage(aghon.StatsManager.Damage * .8f)
            .SetRotation((destination - origin).Angle())
+           .SetDamageType(Attack.Type.Magical)
            .SetShapeOffset(new Vector2(ATTACK_LENGTH / 2, 0))
            .SetShape(new RectangleShape2D { Size = new Vector2(ATTACK_LENGTH, ATTACK_WIDTH) })
            .SetOwner(aghon)
@@ -64,6 +66,7 @@ public partial class ShockWave : Node2D
                 .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", Chance = 0.5f })
                 .SetDamage(aghon.StatsManager.Damage * .5f)
                 .SetDelay(i * 0.5f)
+                .SetDamageType(Attack.Type.Magical)
                 .SetRotation((destination - origin).Angle())
                 .SetShapeOffset(new Vector2(ATTACK_LENGTH / 2, 0))
                 .SetShape(new RectangleShape2D { Size = new Vector2(ATTACK_LENGTH, ATTACK_WIDTH) })
