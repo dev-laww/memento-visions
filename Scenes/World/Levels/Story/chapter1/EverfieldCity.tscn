@@ -1067,10 +1067,6 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="InteractionUI" type="Control" parent="npc/Chief2/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1.0
-offset_top = -30.0
-offset_right = 1.0
-offset_bottom = -30.0
 scale = Vector2(0.5, 0.5)
 script = ExtResource("11_84djs")
 
@@ -1529,8 +1525,4 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="Node2D" type="Node2D" parent="StoryTeller/DialogueTrigger"]
 position = Vector2(0, -32)
 
-[node name="InteractionUI" type="Control" parent="StoryTeller/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("11_84djs")
+[node name="InteractionUI" parent="StoryTeller/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]

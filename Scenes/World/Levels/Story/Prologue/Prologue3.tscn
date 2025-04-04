@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="13_tmhst"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="14_xsvii"]
 [ext_resource type="Resource" uid="uid://bb0a0gl7qcddj" path="res://resources/quests/Prologue/night-of-shadows.tres" id="15_uwu2f"]
+[ext_resource type="Resource" uid="uid://yh060giw306t" path="res://resources/dialogues/prologue/AttackTutorial.dialogue" id="16_2ho0r"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="16_xfxeh"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="17_5o4do"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="18_m8iv5"]
@@ -24,7 +25,6 @@
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="22_5n0qf"]
 [ext_resource type="Resource" uid="uid://bj8l78qd3fsks" path="res://resources/dialogues/prologue/endprologue.dialogue" id="23_5jfbt"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="24_sqsyd"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="25_cdubm"]
 
 [sub_resource type="Resource" id="Resource_5qybx"]
 script = ExtResource("8_k62lt")
@@ -34,7 +34,7 @@ Max = 1
 Weight = 1
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
-[sub_resource type="Resource" id="Resource_yx1y1"]
+[sub_resource type="Resource" id="Resource_r2wrx"]
 resource_local_to_scene = true
 script = ExtResource("9_6ep2w")
 Drops = [SubResource("Resource_5qybx")]
@@ -839,7 +839,7 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 [node name="Chest" parent="Art" instance=ExtResource("6_16xaq")]
 position = Vector2(349, 59)
 disable_mode = 2
-Loot = SubResource("Resource_yx1y1")
+Loot = SubResource("Resource_r2wrx")
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -877,19 +877,26 @@ shape = SubResource("RectangleShape2D_cymrg")
 position = Vector2(327, 64)
 
 [node name="QuestTrigger" type="Area2D" parent="Chief"]
-position = Vector2(3, -13)
+position = Vector2(6, -15)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("14_xsvii")
 Quest = ExtResource("15_uwu2f")
 Mode = 0
-ShouldInteract = false
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("16_2ho0r")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/QuestTrigger"]
 position = Vector2(-7, 9)
 shape = SubResource("CircleShape2D_kc281")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
+position = Vector2(-6, -18)
+
+[node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("24_sqsyd")]
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -1101,12 +1108,8 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="StoryTeller/DialogueTrigger"]
 
-[node name="InteractionUI" type="Control" parent="StoryTeller/DialogueTrigger/Node2D" instance=ExtResource("24_sqsyd")]
-layout_mode = 3
-anchors_preset = 0
+[node name="InteractionUI" parent="StoryTeller/DialogueTrigger/Node2D" instance=ExtResource("24_sqsyd")]
 offset_left = -1.0
 offset_top = -32.0
 offset_right = -1.0
 offset_bottom = -32.0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("25_cdubm")
