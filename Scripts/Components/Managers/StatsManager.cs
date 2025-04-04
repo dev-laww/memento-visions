@@ -33,8 +33,20 @@ public partial class StatsManager : Node
     [Signal] public delegate void DamageTakenEventHandler(float damage);
     [Signal] public delegate void LevelUpEventHandler(float level);
 
-    [Export] public float MaxHealth = 100;
     [Export] private bool Invulnerable;
+
+    [Export]
+    public float Level
+    {
+        get => level;
+        private set
+        {
+            SetStat(ref level, value, StatsType.Level);
+            ApplyLevelToStats();
+        }
+    }
+
+    [Export] public float MaxHealth = 100;
 
     public float Health
     {
@@ -42,12 +54,6 @@ public partial class StatsManager : Node
         private set => SetStat(ref health, value, StatsType.Health);
     }
 
-    [Export]
-    public float Level
-    {
-        get => level;
-        private set => SetStat(ref level, value, StatsType.Level);
-    }
 
     [Export]
     public float Experience
@@ -91,11 +97,18 @@ public partial class StatsManager : Node
     private readonly Dictionary<string, float> speedModifiers = [];
     private readonly Dictionary<string, StatusEffect> statusEffects = [];
     private Entity Entity;
+    private float baseMaxHealth;
+    private float baseDamage;
+    private float baseDefense;
 
     public override void _Ready()
     {
         health = MaxHealth;
         Entity = GetParent() as Entity;
+
+        baseMaxHealth = MaxHealth;
+        baseDamage = Damage;
+        baseDefense = Defense;
     }
 
     // Health
@@ -166,6 +179,7 @@ public partial class StatsManager : Node
     public void IncreaseLevel(float amount)
     {
         Level += amount;
+        ApplyLevelToStats();
         EmitSignalLevelUp(Level);
     }
 
@@ -177,20 +191,36 @@ public partial class StatsManager : Node
 
         while (Experience >= requiredExperience)
         {
-            Experience -= requiredExperience;
-            Level++;
-
-            EmitSignalLevelUp(Level);
-            // TODO: Implement level up effects
-            SetLevel(Level);
+            IncreaseLevel(1);
         }
     }
 
     public void SetLevel(float value)
     {
         Level = value;
+        ApplyLevelToStats();
+    }
 
-        // TODO: Apply level up stats
+    private void ApplyLevelToStats()
+    {
+        var healthRatio = Health / MaxHealth;
+
+        MaxHealth = baseMaxHealth + CalculateStatLevelDelta(StatsType.Health, Level);
+        Damage = baseDamage + CalculateStatLevelDelta(StatsType.Damage, Level);
+        Defense = baseDefense + CalculateStatLevelDelta(StatsType.Defense, Level);
+
+        Health = MaxHealth * healthRatio;
+    }
+
+    private static float CalculateStatLevelDelta(StatsType stat, float level)
+    {
+        return stat switch
+        {
+            StatsType.Health => 20f * (level - 1) + Mathf.Pow(level, 1.8f) - Mathf.Pow(1, 1.8f),
+            StatsType.Damage => 2f * (level - 1) + Mathf.Pow(level, 1.5f) - Mathf.Pow(1, 1.5f),
+            StatsType.Defense => 1.5f * (level - 1) + Mathf.Pow(level, 1.3f) - Mathf.Pow(1, 1.3f),
+            _ => throw new ArgumentOutOfRangeException(nameof(stat), stat, null)
+        };
     }
 
     public void ReceiveAttack(Attack attack)

@@ -3,7 +3,6 @@ using Game.Utils.Battle;
 using Godot;
 using Game.Autoload;
 using Game.Entities;
-using Game.Common.Models;
 
 namespace Game.Components;
 
@@ -26,12 +25,11 @@ public partial class HealthNumberManager : Node
 
     public override void _Ready()
     {
-        if (StatsManager != null)
-        {
-            StatsManager.AttackReceived += OnAttackReceived;
-            StatsManager.StatIncreased += OnStatIncreased;
-            StatsManager.DamageTaken += OnDamageTaken;
-        }
+        if (StatsManager == null || Engine.IsEditorHint()) return;
+
+        StatsManager.AttackReceived += OnAttackReceived;
+        StatsManager.StatIncreased += OnStatIncreased;
+        StatsManager.DamageTaken += OnDamageTaken;
     }
 
     private void OnStatIncreased(float value, StatsType type)

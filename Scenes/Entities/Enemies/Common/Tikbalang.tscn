@@ -1308,7 +1308,7 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_472wo")
 animation = &"idle_down"
 autoplay = "idle_down"
-frame = 2
+frame = 1
 script = ExtResource("9_6pqlh")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

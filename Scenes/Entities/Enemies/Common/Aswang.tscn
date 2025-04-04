@@ -1162,7 +1162,7 @@ metadata/_custom_type_script = "uid://cpwyjck8klk35"
 [node name="StatsManager" type="Node" parent="."]
 script = ExtResource("2_mp7jp")
 MaxHealth = 150.0
-Damage = 10.0
+Damage = 20.0
 metadata/_custom_type_script = "uid://dnpva4sn53c1r"
 
 [node name="VelocityManager" type="Node" parent="." node_paths=PackedStringArray("StatsManager")]
@@ -1210,6 +1210,7 @@ position = Vector2(0, -26)
 sprite_frames = SubResource("SpriteFrames_5bdsy")
 animation = &"move_down"
 autoplay = "move_down"
+frame = 3
 script = ExtResource("8_cvtll")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

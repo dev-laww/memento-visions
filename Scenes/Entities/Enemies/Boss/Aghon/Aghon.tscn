@@ -1840,6 +1840,7 @@ position = Vector2(0, -23)
 sprite_frames = SubResource("SpriteFrames_lpr6g")
 animation = &"south"
 autoplay = "south"
+frame = 3
 script = ExtResource("8_bxdfj")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
