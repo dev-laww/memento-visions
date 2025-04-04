@@ -55,7 +55,10 @@ public partial class StoryTeller : Entity
                 break;
         }
     }
-
+    public void setMonitoringOff()
+    {
+        interaction.Monitoring = false;
+    }
     private void OnInteract()
     {
         OverlayManager.ShowOverlay(OverlayManager.MODE_SELECT);

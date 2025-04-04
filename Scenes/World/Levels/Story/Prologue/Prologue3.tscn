@@ -1080,7 +1080,11 @@ material = ExtResource("3_r0s03")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
+<<<<<<< HEAD
 frame = 1
+=======
+frame = 2
+>>>>>>> 5bfc170a6e9e2691329c7914d29458efacaf7956
 script = ExtResource("21_uhybl")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

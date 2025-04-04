@@ -8,7 +8,7 @@ namespace Game.Levels.Story;
 
 [Scene]
 public partial class DesolatePlace : Node2D
-{
+{   
     [Node] private Entity StoryTeller;
     public bool isInteracted = false;
     public int ObjectiveInteracted = 0;
@@ -27,11 +27,13 @@ public partial class DesolatePlace : Node2D
     {
         base._Ready();
         TransitionArea.Monitoring = false;
+        ((StoryTeller)StoryTeller).setMonitoringOff();
     }
 
 
     public void setStoryTellerVisible()
     {
+        GD.Print("setStoryTellerVisible");
         ((StoryTeller)StoryTeller).Work();
         StoryTeller.Visible = true;
         isStoryTellerVisible = true;
