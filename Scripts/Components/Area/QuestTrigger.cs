@@ -99,6 +99,13 @@ public partial class QuestTrigger : Area2D, IInteractable
     private Quest _quest;
     private int _objectiveIndex;
     private TriggerMode mode;
+    private bool isDialogueActive;
+
+    public bool IsDialogueActive
+    {
+        get => isDialogueActive;
+        private set => isDialogueActive = value;
+    }
 
     public override void _Ready()
     {
@@ -113,12 +120,15 @@ public partial class QuestTrigger : Area2D, IInteractable
 
         BodyEntered += OnBodyEntered;
         BodyExited += OnBodyExited;
+        DialogueManager.DialogueStarted += _ => IsDialogueActive = true;
+        DialogueManager.DialogueEnded += _ => IsDialogueActive = false;
 
         InteractionUI?.Hide();
     }
 
     protected virtual void OnBodyEntered(Node2D body)
     {
+        if (isDialogueActive) return;
         if (!ShouldInteract)
         {
             TriggerQuest();
@@ -145,9 +155,9 @@ public partial class QuestTrigger : Area2D, IInteractable
 
     public virtual void Interact()
     {
+        if (isDialogueActive) return;
         DialogueManager.ShowDialogueBalloon(DialogueResource);
         TriggerQuest();
-        
     }
 
     private void TriggerQuest()
