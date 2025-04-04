@@ -3,6 +3,7 @@ using System;
 using Game.Components;
 using Game.Entities;
 using Game.Data;
+using Game.World.Objects;
 using GodotUtilities;
 namespace Game.Levels.Story;
 
@@ -10,10 +11,12 @@ namespace Game.Levels.Story;
 public partial class DesolatePlace : Node2D
 {   
     [Node] private Entity StoryTeller;
+    [Node] private TransitionArea TransitionArea;
+    [Node] private SmoothTileMapLayer SecretDoor;
+    [Node]private PressurePlate PressurePlate;
     public bool isInteracted = false;
     public int ObjectiveInteracted = 0;
     public bool isStoryTellerVisible = false;
-    [Node] TransitionArea TransitionArea;
     
 
     public override void _Notification(int what)
@@ -27,9 +30,19 @@ public partial class DesolatePlace : Node2D
     {
         base._Ready();
         TransitionArea.Monitoring = false;
+        PressurePlate.Activated += DisbableDoor;
+        PressurePlate.Deactivated += EnableDoor;
         ((StoryTeller)StoryTeller).setMonitoringOff();
     }
 
+    public void DisbableDoor()
+    {
+        SecretDoor.Enabled = false;
+    }
+    public void EnableDoor()
+    {
+        SecretDoor.Enabled = true;
+    }
 
     public void setStoryTellerVisible()
     {
