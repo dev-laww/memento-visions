@@ -1,5 +1,7 @@
 using Game.Common.Extensions;
 using Game.Components;
+using Game.Data;
+using Game.Utils;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
@@ -14,12 +16,12 @@ public partial class Tikbalang : Enemy
     private const string COMMON_ATTACK = "Common Attack";
     private const string IDLE = "Idle";
     private const string MOVE = "Move";
-    private const float PLAYER_DISTANCE = 100;
+    private const float PLAYER_DISTANCE = 200;
     private const float MOVE_RANGE = 300;
+    private const float HITBOX_SIZE = 40;
 
     [Node] private VelocityManager velocityManager;
     [Node] private PathFindManager pathFindManager;
-    [Node] private HitBox hitBox;
     [Node] private AnimationTree animationTree;
     [Node] private Timer moveTimer;
     [Node] private Timer attackTimer;
@@ -29,6 +31,7 @@ public partial class Tikbalang : Enemy
     private Vector2[] directions = [Vector2.Up, Vector2.Down, Vector2.Left, Vector2.Right];
     private Vector2 initialPosition;
     private bool IsPlayerInRange => GlobalPosition.DistanceTo(this.GetPlayer()?.GlobalPosition ?? GlobalPosition) < PLAYER_DISTANCE;
+    private bool damageCreated;
 
     public override void _Notification(int what)
     {
@@ -50,7 +53,6 @@ public partial class Tikbalang : Enemy
         StateMachine.SetInitialState(Normal);
         animationTree.AnimationFinished += OnAnimationFinished;
         initialPosition = GlobalPosition;
-        hitBox.Damage = StatsManager.Damage;
     }
 
     public override void OnProcess(double delta)
@@ -146,7 +148,7 @@ public partial class Tikbalang : Enemy
         var playerPosition = player.GlobalPosition;
 
         pathFindManager.ForceSetTargetPosition(playerPosition);
-        StatsManager.ApplySpeedModifier("travel_to_player", 0.2f);
+        StatsManager.ApplySpeedModifier("travel_to_player", 0.5f);
     }
 
     private void ExitTravelToPlayer()
@@ -182,25 +184,63 @@ public partial class Tikbalang : Enemy
         EnterState(COMMON_ATTACK);
     }
 
-    private void CommonAttack() { }
+    private async void CommonAttack()
+    {
+        await ToSignal(animationTree, "animation_finished");
+
+        if (damageCreated) return;
+
+        var position = GlobalPosition;
+        var facingDirection = velocityManager.LastFacedDirection;
+
+        new DamageFactory.HitBoxBuilder(position)
+            .AddStatusEffectToPool(new StatusEffect.Info { Id = "stun", Chance = 0.2f })
+            .SetShape(new RectangleShape2D { Size = new Vector2(HITBOX_SIZE, HITBOX_SIZE) })
+            .SetShapeOffset(new Vector2(HITBOX_SIZE / 2, 0))
+            .SetOwner(this)
+            .SetRotation(facingDirection.Angle())
+            .SetDamage(StatsManager.Damage)
+            .Build();
+
+        damageCreated = true;
+    }
 
     private void LeaveCommonAttack()
     {
         attackTimer.Call(START_RANDOM);
+        damageCreated = false;
     }
 
     private void EnterSpecialAttack()
     {
         EnterState(SPECIAL_ATTACK);
-        hitBox.AddStatusEffectToPool("stun");
     }
 
-    private void SpecialAttack() { }
+    private async void SpecialAttack()
+    {
+        await ToSignal(animationTree, "animation_finished");
+
+        if (damageCreated) return;
+
+        var position = GlobalPosition;
+        var facingDirection = velocityManager.LastFacedDirection;
+
+        new DamageFactory.HitBoxBuilder(position)
+            .AddStatusEffectToPool(new StatusEffect.Info { Id = "stun", IsGuaranteed = true })
+            .SetShape(new RectangleShape2D { Size = new Vector2(HITBOX_SIZE, HITBOX_SIZE) })
+            .SetShapeOffset(new Vector2(HITBOX_SIZE / 2, 0))
+            .SetOwner(this)
+            .SetRotation(facingDirection.Angle())
+            .SetDamage(StatsManager.Damage)
+            .Build();
+
+        damageCreated = true;
+    }
 
     private void LeaveSpecialAttack()
     {
-        hitBox.ClearStatusEffectPool();
         attackTimer.Call(START_RANDOM);
+        damageCreated = false;
     }
 
     private void EnterState(string state)

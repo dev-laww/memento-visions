@@ -9,6 +9,8 @@ public partial class LineTelegraph : Node2D
 {
     [Node] private Line2D line2d;
 
+    [Export] public float Duration = 1.75f;
+
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
@@ -30,15 +32,20 @@ public partial class LineTelegraph : Node2D
         line2d.Points = [];
         GlobalPosition = start;
 
+
         var trajectory = end - start;
         var length = trajectory.Length();
         line2d.Rotation = trajectory.Angle();
         line2d.Width = width;
 
+        var tweenMethodDuration = Duration * (0.5f / 1.75f);
+        var tweenIntervalDuration = Duration * (1f / 1.75f);
+        var scaleDuration = Duration * (0.25f / 1.75f);
+
         var tween = CreateTween();
-        tween.TweenMethod(Callable.From((float t) => SetupPoints(t, length)), 0f, 1f, .5f).SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Sine);
-        tween.TweenInterval(1f);
-        tween.TweenProperty(line2d, "scale", new Vector2(1, 0), .25f).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+        tween.TweenMethod(Callable.From((float t) => SetupPoints(t, length)), 0f, 1f, tweenMethodDuration).SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Sine);
+        tween.TweenInterval(tweenIntervalDuration);
+        tween.TweenProperty(line2d, "scale", new Vector2(1, 0), scaleDuration).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
         tween.TweenCallback(Callable.From(QueueFree));
     }
 
