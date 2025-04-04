@@ -1,0 +1,36 @@
+~ start
+#conditional dialogue
+
+#complete quest
+do CurrentScene.CompleteObjectiveAtIndex(1)
+Alex: You! Who are you?!
+???: I see you have defeated my underlings.
+???: But can you do the same to me?
+Alex: I'll knock those teeth of yours out if I'd have to, just to make you talk.
+???: Okay okay I'm just kidding. I go by the name Kevin.
+Kevin: I am only here to keep an eye if those Aswangs are doing what they are supposed to do. 
+Kevin: In other words, I'm just a look-out here.
+- Who are you answering to?!
+- Talk. Now.
+Kevin: Okay chill! It was the Mayor aight? He wants us to terrify and show people fear to let them know that the Mayor is in charge of power!
+Kevin: That's all I know. As underlings of his, we do not questions anything the Mayors wants, we just do anything he ask us to do.
+- I'm running out of patience Kevin.
+- Either talk or else.
+Kevin: Just confront the Mayor! I swear I do not know anything anymore!
+Kevin: He just paid me handsomely to the point that I couldn't reject his offer! Please don't hurt me!
+- WHERE?!
+Kevin: He's in the courtyard of the Everfield City! That's where we meet-up to discuss what he wants me to do along with his Aswang underlings!
+- Go.
+- Hide now.
+Alex: Before I change my mind into pulverizing you instead of showing you mercy for aiding the Mayor.
+Kevin: Just head South when you go. You'll see a jeep that will take you directly to the Mayor.
+Alex: Perhaps it's a good thing I'm lenient towards you.
+Kevin: Thanks. Have a safe ride then.
+Kevin: I just hope you can end all this wrongdoings of the Mayor.
+do CurrentScene.EnableTransitionArea()
+#Alex will be sent to a side quest area before unlocking the next story quest
+
+#start new quest
+
+
+=> END

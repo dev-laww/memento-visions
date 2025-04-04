@@ -32,6 +32,7 @@ public partial class DropManager : Node
         {
             drops = value;
             NotifyPropertyListChanged();
+
         }
     }
 

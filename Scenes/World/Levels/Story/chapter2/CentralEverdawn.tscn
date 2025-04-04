@@ -329,39 +329,30 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="Tikbalang" parent="Enemy" instance=ExtResource("4_3iluj")]
 position = Vector2(-9, 668)
-Type = 0
 
 [node name="Tikbalang3" parent="Enemy" instance=ExtResource("4_3iluj")]
 position = Vector2(317, 716)
-Type = 0
 
 [node name="Tikbalang4" parent="Enemy" instance=ExtResource("4_3iluj")]
 position = Vector2(741, 1045)
-Type = 0
 
 [node name="Tikbalang5" parent="Enemy" instance=ExtResource("4_3iluj")]
 position = Vector2(229, 1036)
-Type = 0
 
 [node name="Tikbalang6" parent="Enemy" instance=ExtResource("4_3iluj")]
 position = Vector2(483, 807)
-Type = 0
 
 [node name="Tikbalang7" parent="Enemy" instance=ExtResource("4_3iluj")]
 position = Vector2(160, 326)
-Type = 0
 
 [node name="Tikbalang8" parent="Enemy" instance=ExtResource("4_3iluj")]
 position = Vector2(392, 377)
-Type = 0
 
 [node name="Tikbalang9" parent="Enemy" instance=ExtResource("4_3iluj")]
 position = Vector2(210, 618)
-Type = 0
 
 [node name="Tikbalang10" parent="Enemy" instance=ExtResource("4_3iluj")]
 position = Vector2(571, 244)
-Type = 0
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false

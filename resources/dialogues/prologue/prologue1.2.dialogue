@@ -1,11 +1,7 @@
 ~ start
-Alex: From the clues I’ve gathered, it seems like the students weren’t harmed. They simply disappeared after encountering a vengeful spirit.
-#Suddenly, the StoryTeller appears.
-StoryTeller: Good observation, Mr. Alejandro Gutierrez. The said spirit didn’t harm or show violence to those wandering children; It merely offered them my kindness.
-- I see… So, those missing people—are they dead?
-StoryTeller: That is for you to find out.
-- If they’re not dead, then they must be somewhere.
-StoryTeller: Narration “As our protagonist goes on its conquest, what could possibly happen as he delves into it?
-- From the clues gathered, they seem to camp here and went outside to gather for supplies. Let’s check the backyard.
-=> END
-
+Chief: Alex, we’ve got another one. Strange occurrences, eerie sightings – the whole village is on edge.
+Chief: The locals are certain it’s an aswang. They’re terrified.
+- Chief, are you sure? Are they running rampant?
+Chief: No, not yet. But the sooner we move, the sooner we can prevent such a tragedy from happening.
+Alex: Fine. I’ll look around.
+=> END!

@@ -14,3 +14,4 @@ resources = [PackedStringArray("StartScreen"), [ExtResource("2_xr7b5")]]
 [node name="CurrentScene" type="Node" parent="."]
 
 [node name="Bar" parent="CurrentScene" instance=ExtResource("3_18ebj")]
+position = Vector2(170, 264)

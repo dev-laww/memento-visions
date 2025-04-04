@@ -440,35 +440,27 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="Tikbalang" parent="Enemy" instance=ExtResource("4_uypdi")]
 position = Vector2(86, 465)
-Type = 0
 
 [node name="Tikbalang2" parent="Enemy" instance=ExtResource("4_uypdi")]
 position = Vector2(-142, 808)
-Type = 0
 
 [node name="Tikbalang3" parent="Enemy" instance=ExtResource("4_uypdi")]
 position = Vector2(904, 576)
-Type = 0
 
 [node name="Tikbalang4" parent="Enemy" instance=ExtResource("4_uypdi")]
 position = Vector2(715, 437)
-Type = 0
 
 [node name="Tikbalang5" parent="Enemy" instance=ExtResource("4_uypdi")]
 position = Vector2(356, 161)
-Type = 0
 
 [node name="Tikbalang8" parent="Enemy" instance=ExtResource("4_uypdi")]
 position = Vector2(324, 389)
-Type = 0
 
 [node name="Tikbalang6" parent="Enemy" instance=ExtResource("4_uypdi")]
 position = Vector2(683, 716)
-Type = 0
 
 [node name="Tikbalang7" parent="Enemy" instance=ExtResource("4_uypdi")]
 position = Vector2(292, 700)
-Type = 0
 
 [node name="Player" parent="." instance=ExtResource("5_4rft8")]
 position = Vector2(715, 866)

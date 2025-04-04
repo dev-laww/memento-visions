@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://dfhk5ud22nohe"
+path="res://.godot/imported/chapter1.dialogue-045cfc74e941493ce8567ebcab8b5b49.tres"
+
+[deps]
+
+source_file="res://resources/dialogues/chapter1/chapter1.dialogue"
+dest_files=["res://.godot/imported/chapter1.dialogue-045cfc74e941493ce8567ebcab8b5b49.tres"]
+
+[params]
+
+defaults=true

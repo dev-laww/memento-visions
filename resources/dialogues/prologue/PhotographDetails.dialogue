@@ -3,16 +3,19 @@ if CurrentScene.ObjectiveInteracted != 2
 	Alex: I need more clues before this.
 	=> END! 
 if CurrentScene.isStoryTellerVisible == true 
-	Alex: A photograph of a group of students—suggesting they may have taken pleasure in targeting this young girl with their pranks or harassment.
+	Alex: A photograph of a group of students—suggesting they may have taken pleasure in targeting this young girl with their pranks and harassment.
 	=> END!
 Alex: A photograph of a group of students—suggesting they may have taken pleasure in targeting this young girl with their pranks or harassment.
-Alex: From the clues I’ve gathered, it seems like the students weren’t harmed. They simply disappeared after encountering a vengeful spirit.
+Alex: The clues i've gathered includes the burned chair-possibly indicating as source of light to this dark-lit place, a diary of a girl-indicating the photo in photography could be the one's bullying her and, the photography of students, who seemed to wander here just to again bully the girl. 
+Alex: As for the place, its isolated and dark, a perfect place to torment someone where no one can hear her shout for help. It seems the students who were here were "tormented" by an another entity which caused them to simply disappear-a vengeful spirit as the records portrayed.
 do CurrentScene.setStoryTellerVisible()
-StoryTeller: Good observation, Mr. Alejandro Gutierrez. The said spirit didn’t harm or show violence to those wandering children; It merely offered them my kindness.
-- I see… So, those missing people—are they dead?
-StoryTeller: That is for you to find out.
-- If they’re not dead, then they must be somewhere.
-StoryTeller: Narration “As our protagonist goes on its conquest, what could possibly happen as he delves into it?
-- From the clues gathered, they seem to camp here and went out
+StoryTeller: Good observation, Mr. Alejandro Gutierrez. The said spirit didn’t harm or show violence to those wandering children; It merely offered them its kindness.
+- I see… So, those missing people—where are \n they? Are they dead?
+StoryTeller: Alex Gutierrez, that is your duty to find out what really happened.
+- If they're not dead, then they \n must be somewhere
+- If they are somewhere, something sinister \n could have happened to them
+StoryTeller: “As our protagonist goes on its conquest, what could possibly happen as he delves into it?
+- A deserted place-
+- I should head out.
 
 => END

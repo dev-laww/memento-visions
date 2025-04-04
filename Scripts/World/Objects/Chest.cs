@@ -46,13 +46,14 @@ public partial class Chest : Node2D
     {
         var spawnPosition = GlobalPosition;
         var drops = dropManager.SpawnDrops(spawnPosition);
+        GD.Print(what: $"Spawned {drops.Count} items");
 
         if (drops.Count != 0)
         {
             for (var i = 0; i < drops.Count; i++)
             {
                 var item = drops[i];
-
+                
                 GetTree().CreateTimer(0.3f * i).Timeout += () =>
                 {
                     var text = FloatingTextManager.SpawnFloatingText($"x{item.Quantity} {item.Item.Name}", spawnPosition);

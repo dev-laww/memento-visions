@@ -1,10 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://bbs4ush0amfqx"]
+[gd_scene load_steps=11 format=3 uid="uid://bbs4ush0amfqx"]
 
 [ext_resource type="PackedScene" uid="uid://t7im5teuo2bt" path="res://Scenes/Components/Managers/DropManager.tscn" id="1_epnoo"]
 [ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="1_qa6pp"]
 [ext_resource type="Script" uid="uid://crn7cpxqe34ts" path="res://Scripts/World/Objects/Chest.cs" id="1_sueos"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="2_epnoo"]
+[ext_resource type="Resource" uid="uid://dpda8p54wl0y7" path="res://resources/items/weapon/sword.tres" id="3_tyhxd"]
+[ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="4_jygv5"]
 [ext_resource type="Texture2D" uid="uid://dsejkr88dhqoc" path="res://assets/world/chest.png" id="5_sueos"]
+
+[sub_resource type="Resource" id="Resource_3h21h"]
+script = ExtResource("4_jygv5")
+Item = ExtResource("3_tyhxd")
+Min = 1
+Max = 1
+Weight = 1
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qa6pp"]
 radius = 22.0907
@@ -16,7 +26,7 @@ size = Vector2(18, 11)
 script = ExtResource("1_sueos")
 
 [node name="DropManager" parent="." instance=ExtResource("1_epnoo")]
-Drops = []
+Drops = [SubResource("Resource_3h21h")]
 
 [node name="Interaction" type="Area2D" parent="."]
 collision_layer = 16

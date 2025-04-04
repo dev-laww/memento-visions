@@ -1,3 +1,4 @@
+using Game.Autoload;
 using Godot;
 using GodotUtilities;
 
@@ -28,7 +29,10 @@ public partial class Chief : Entity
 
         actionTimer.Timeout += OnTimerTimeout;
     }
-
+    private void OnInteract()
+    {
+        OverlayManager.ShowOverlay(OverlayManager.MODE_SELECT);
+    }
     private void OnTimerTimeout()
     {
         var randomNumber = MathUtil.RNG.RandfRange(0, 1);

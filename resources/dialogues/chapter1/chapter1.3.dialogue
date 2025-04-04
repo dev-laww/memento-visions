@@ -1,6 +1,0 @@
-~ start
-Alex: Mayor Santos! Using aswang to silence your own constituents… how could you?
-Mayor Santos: Those who resist progress have to be taught a lesson.
-do CurrentScene.PlayFadeAnimation()
-do CurrentScene.Spawn()
-=> END
