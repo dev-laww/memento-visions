@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://b8egfkscgqbcp"
+path="res://.godot/imported/chiefpt2.dialogue-d6b9feb24b8941a4461ed82209820c69.tres"
+
+[deps]
+
+source_file="res://resources/dialogues/chapter1/chiefpt2.dialogue"
+dest_files=["res://.godot/imported/chiefpt2.dialogue-d6b9feb24b8941a4461ed82209820c69.tres"]
+
+[params]
+
+defaults=true
