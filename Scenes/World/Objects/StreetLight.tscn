@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://dtqgojjodmope"]
+
+[ext_resource type="Texture2D" uid="uid://c1voca36gnrhy" path="res://assets/light/light.png" id="1_okltg"]
+[ext_resource type="Script" uid="uid://bay52sbccd7vb" path="res://Scripts/World/Objects/StreetLight.cs" id="1_xgmf8"]
+[ext_resource type="Texture2D" uid="uid://dabcjbakwl7w0" path="res://assets/tilesets/intramuros.png" id="2_yqepv"]
+[ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="3_jj1ax"]
+[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="4_xgmf8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2si4b"]
+radius = 7.0
+height = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ivmij"]
+radius = 16.0
+
+[node name="Light" type="StaticBody2D"]
+y_sort_enabled = true
+script = ExtResource("1_xgmf8")
+
+[node name="PostLight" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(8, 13)
+scale = Vector2(0.25, 0.242188)
+enabled = false
+texture = ExtResource("1_okltg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("2_yqepv")
+region_enabled = true
+region_rect = Rect2(16.6563, 221.35, 14.8423, 65.5934)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 25)
+shape = SubResource("CapsuleShape2D_2si4b")
+
+[node name="Interaction" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("3_jj1ax")
+InteractionLabel = "Interact"
+interactionLabel = "Interact"
+isInteractable = true
+metadata/_custom_type_script = "uid://cll1v71th1oms"
+
+[node name="Node2D" type="Node2D" parent="Interaction"]
+
+[node name="InteractionUI" parent="Interaction/Node2D" instance=ExtResource("4_xgmf8")]
+offset_left = 28.0
+offset_right = 28.0
+Text = "Interact"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+position = Vector2(0, 23)
+shape = SubResource("CircleShape2D_ivmij")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
