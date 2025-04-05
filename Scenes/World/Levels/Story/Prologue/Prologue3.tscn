@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=4 uid="uid://v06x46jch2vm"]
+[gd_scene load_steps=134 format=4 uid="uid://v06x46jch2vm"]
 
 [ext_resource type="Script" uid="uid://dcmogr8vudmpc" path="res://Scripts/World/Levels/Story/SchoolOutdoor.cs" id="1_2ho0r"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_r2wrx"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="16_xfxeh"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="17_5o4do"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="18_m8iv5"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="18_r0s03"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="19_dy0lu"]
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/characters/npc/storyteller.png" id="20_cp01v"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="21_uhybl"]
@@ -849,18 +850,23 @@ Loot = SubResource("Resource_r2wrx")
 
 [node name="Aswang3" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(770, 1648)
+ExperienceWorth = 20.0
 
 [node name="Aswang4" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(185, 1619)
+ExperienceWorth = 20.0
 
 [node name="Aswang5" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(387, 316)
+ExperienceWorth = 20.0
 
 [node name="Aswang6" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(637, 359)
+ExperienceWorth = 20.0
 
 [node name="Aswang8" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(475, 948)
+ExperienceWorth = 20.0
 
 [node name="Player" parent="." instance=ExtResource("11_6kbwn")]
 position = Vector2(117, 60)
@@ -870,7 +876,7 @@ position = Vector2(506, 1759)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("12_3cvxb")
-TargetScene = "uid://ciqiplx11424"
+TargetScene = "uid://d0qr3o1nxmcpe"
 metadata/_custom_type_script = "uid://davlg2u8drdh4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
@@ -897,9 +903,12 @@ shape = SubResource("CircleShape2D_kc281")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
-position = Vector2(-6, -18)
 
-[node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("24_sqsyd")]
+[node name="InteractionUI" type="Control" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("24_sqsyd")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("18_r0s03")
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -1083,6 +1092,7 @@ material = ExtResource("3_r0s03")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
+frame = 1
 script = ExtResource("21_uhybl")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1132,5 +1142,4 @@ position = Vector2(144, 96)
 shape = SubResource("RectangleShape2D_ytljl")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
-[editable path="Chief/QuestTrigger/Node2D/InteractionUI"]
 [editable path="StoryTeller/DialogueTrigger/Node2D/InteractionUI"]
