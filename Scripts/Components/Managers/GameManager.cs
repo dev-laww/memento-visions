@@ -25,7 +25,8 @@ public partial class GameManager : Node
     private bool isDevConsoleOpen;
 
     public static Node CurrentScene => instance?.currentScene.GetChildren().FirstOrDefault() ??
-                                       GameCamera.Instance.GetTree().CurrentScene;
+                                       GameCamera.Instance.GetTree().CurrentScene ??
+                                       GameCamera.Instance.GetTree().Root;
 
     public static Overlay CurrentOverlay
     {
