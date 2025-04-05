@@ -3,12 +3,6 @@
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_nry1j"]
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_vt2c2"]
 
-[sub_resource type="Resource" id="Resource_tj6t8"]
-script = ExtResource("1_nry1j")
-Type = 2
-Description = "It seems the Storyteller has something to say to you. What could it be?"
-metadata/_custom_type_script = "uid://dpkqc20rlrftv"
-
 [sub_resource type="Resource" id="Resource_qydlh"]
 script = ExtResource("1_nry1j")
 Type = 2
@@ -21,13 +15,19 @@ Type = 2
 Description = "It seems there was a person eavesdropping to the conversation you had with the Mayor. Confront him."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
+[sub_resource type="Resource" id="Resource_nry1j"]
+script = ExtResource("1_nry1j")
+Type = 2
+Description = "Head towards the Jeepney"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
 [resource]
 script = ExtResource("1_vt2c2")
 Id = "quest:find-mayor"
 Title = "Mayor's Testimony"
 Ordered = false
 Description = "The Jeep dropped you off to another location instead of the Everfield City Courtyard. While exploring the area, you came across of what you are looking for-a who."
-objectives = [SubResource("Resource_tj6t8"), SubResource("Resource_qydlh"), SubResource("Resource_busxp")]
+objectives = [SubResource("Resource_qydlh"), SubResource("Resource_busxp"), SubResource("Resource_nry1j")]
 Experience = 0
 Items = []
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

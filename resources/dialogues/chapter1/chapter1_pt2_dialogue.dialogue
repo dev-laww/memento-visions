@@ -30,4 +30,6 @@ Alex: He will destroy everthing.
 Mang Rudy: Okay... Just, be careful youngster! 
 Mang Rudy: Just head back to the Jeep, your next stop should be the Courtyard. This is where the Jeeps usually resides for a stop-over.
 Alex: Thanks, you too old man.
+do CurrentScene.setQuestTriggerOn()
+do CurrentScene.setTransitionAreaOn()
 => END

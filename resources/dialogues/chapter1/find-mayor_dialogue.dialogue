@@ -1,4 +1,5 @@
 ~ start
+do CurrentScene.SetDialogueTriigerOff()
 Alex: Wait, am I in the right place?
 Alex: Doesn't seem like it...
 Alex: The Storyteller should be here I think,
