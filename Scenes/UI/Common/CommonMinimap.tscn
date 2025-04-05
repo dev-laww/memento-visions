@@ -6,10 +6,6 @@
 [ext_resource type="Script" uid="uid://58jqrupdcss0" path="res://Scripts/Components/SmoothSprite2D.cs" id="3_73s7c"]
 [ext_resource type="Texture2D" uid="uid://bu88bn6aesr1s" path="res://assets/ui/minimap.png" id="4_1gfhk"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_73s7c"]
-atlas = ExtResource("4_1gfhk")
-region = Rect2(0, 16, 128, 128)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_bgcsu"]
 atlas = ExtResource("4_1gfhk")
 region = Rect2(0, 0, 16, 16)
@@ -26,6 +22,10 @@ region = Rect2(32, 0, 16, 16)
 atlas = ExtResource("4_1gfhk")
 region = Rect2(112, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_73s7c"]
+atlas = ExtResource("4_1gfhk")
+region = Rect2(0, 16, 128, 128)
+
 [node name="Control" type="Control"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 3
@@ -33,27 +33,6 @@ anchors_preset = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 script = ExtResource("1_sjp8u")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -50.0
-offset_right = 50.0
-offset_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("AtlasTexture_73s7c")
-region_rect = Rect2(0, 0, 128, 128)
-patch_margin_left = 10
-patch_margin_top = 12
-patch_margin_right = 10
-patch_margin_bottom = 12
 
 [node name="Map" type="TextureRect" parent="."]
 layout_mode = 1
@@ -75,6 +54,7 @@ flip_h = true
 
 [node name="Player" type="Sprite2D" parent="Map"]
 unique_name_in_owner = true
+z_index = 1
 texture_filter = 2
 material = ExtResource("2_4bgwg")
 position = Vector2(43, 40)
@@ -85,6 +65,7 @@ metadata/_custom_type_script = "uid://58jqrupdcss0"
 [node name="CommonEnemy" type="Sprite2D" parent="Map"]
 unique_name_in_owner = true
 visible = false
+z_index = 1
 texture_filter = 2
 material = ExtResource("2_4bgwg")
 position = Vector2(25, 25)
@@ -95,6 +76,7 @@ metadata/_custom_type_script = "uid://58jqrupdcss0"
 [node name="BossEnemy" type="Sprite2D" parent="Map"]
 unique_name_in_owner = true
 visible = false
+z_index = 1
 texture_filter = 2
 material = ExtResource("2_4bgwg")
 position = Vector2(75, 25)
@@ -105,9 +87,31 @@ metadata/_custom_type_script = "uid://58jqrupdcss0"
 [node name="Chest" type="Sprite2D" parent="Map"]
 unique_name_in_owner = true
 visible = false
+z_index = 1
 texture_filter = 2
 material = ExtResource("2_4bgwg")
 position = Vector2(75, 75)
 texture = SubResource("AtlasTexture_1gfhk")
 script = ExtResource("3_73s7c")
 metadata/_custom_type_script = "uid://58jqrupdcss0"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_73s7c")
+region_rect = Rect2(0, 0, 128, 128)
+patch_margin_left = 10
+patch_margin_top = 12
+patch_margin_right = 10
+patch_margin_bottom = 12
