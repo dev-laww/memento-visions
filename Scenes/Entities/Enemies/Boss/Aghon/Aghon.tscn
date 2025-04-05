@@ -1759,6 +1759,7 @@ collision_mask = 15
 script = ExtResource("1_bsq0j")
 BossName = "Aghon"
 Type = 1
+ExperienceWorth = 40.0
 Id = "enemy:aghon"
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]

@@ -59,7 +59,7 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
 
         inventoryManager.Updated += OnInventoryUpdate;
 
-        var quickSlotItem = ItemRegistry.Get(SaveManager.Data.Player.QuickUse);
+        var quickSlotItem = ItemRegistry.Get(SaveManager.Data.QuickSlotItem);
         SetQuickSlotItem(quickSlotItem);
 
         Log.Info("Loading inventory...");
@@ -141,8 +141,8 @@ public partial class PlayerInventoryManager : Autoload<PlayerInventoryManager>
     private static void OnInventoryUpdate(ItemGroup group)
     {
         // TODO: add custom listeners on save manager
-        SaveManager.Data.SetItemsData(Instance.inventoryManager.GetItemsAsModel());
-        SaveManager.Data.Player.QuickUse = QuickSlotItem?.Id ?? string.Empty;
+        SaveManager.SetItems(Instance.inventoryManager.GetItemsAsModel());
+        SaveManager.SetQuickSlotItem(QuickSlotItem?.Id ?? string.Empty);
 
         if (group.Item.Id != QuickSlotItem?.Id || group.Quantity > 0) return;
 

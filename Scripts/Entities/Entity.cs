@@ -53,28 +53,33 @@ public abstract partial class Entity : CharacterBody2D
     /// <summary>
     /// Unique name of the entity.
     /// </summary>
-    [Export] public string Id;
+    [Export]
+    public string Id;
 
     /// <summary>
     /// Determines if the entity is an NPC.
     /// </summary>
-    [Export] private bool isNpc;
+    [Export]
+    private bool isNpc;
 
     /// <summary>
     /// Reference to the StatsManager node.
     /// </summary>
-    [Node] public StatsManager StatsManager;
+    [Node]
+    public StatsManager StatsManager;
 
     /// <summary>
     /// Reference to the HurtBox node.
     /// </summary>
-    [Node] private HurtBox HurtBox;
+    [Node]
+    private HurtBox HurtBox;
 
     /// <summary>
     /// Signal emitted when the entity dies.
     /// </summary>
     /// <param name="info">The death info.Contains the victim and the killer.</param>
-    [Signal] public delegate void DeathEventHandler(DeathInfo info);
+    [Signal]
+    public delegate void DeathEventHandler(DeathInfo info);
 
     /// <summary>
     /// State machine for managing entity states.
@@ -123,15 +128,18 @@ public abstract partial class Entity : CharacterBody2D
 
         var velocityManager = GetChildren().OfType<VelocityManager>().FirstOrDefault();
 
-        if (attack.Knockback is not null && velocityManager is not null)
-        {
-            var sourceVelocityManager = attack.Source.GetChildren().OfType<VelocityManager>().FirstOrDefault();
+        if (attack.Knockback is null || velocityManager is null) return;
 
-            attack.Knockback.Direction = sourceVelocityManager.LastFacedDirection.DirectionTo(GlobalPosition).TryNormalize();
+        var sourceVelocityManager = attack.Source.GetChildren().OfType<VelocityManager>().FirstOrDefault();
 
-            var (direction, force) = attack.Knockback;
-            velocityManager.Knockback(direction, force);
-        }
+        if (sourceVelocityManager is null) return;
+
+        // TODO: Fix knockback direction
+        attack.Knockback.Direction = sourceVelocityManager.LastFacedDirection
+            .DirectionTo(GlobalPosition).TryNormalize();
+
+        var (direction, force) = attack.Knockback;
+        velocityManager.Knockback(direction, force);
     }
 
     private void StatDepleted(StatsType type)

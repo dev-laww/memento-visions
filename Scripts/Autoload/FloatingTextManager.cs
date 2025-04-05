@@ -20,6 +20,7 @@ public partial class FloatingTextManager : Autoload<FloatingTextManager>
         public Color? Color;
         public float? Duration;
         public string Text;
+        public bool Deferred;
     }
 
     public static FloatingText SpawnDamageText(Node owner, Vector2 globalPosition, float damage)
@@ -50,7 +51,14 @@ public partial class FloatingTextManager : Autoload<FloatingTextManager>
 
         var floatingText = Instance.resourcePreloader.InstanceSceneOrNull<FloatingText>("FloatingText");
 
-        parent.AddChild(floatingText);
+        if (args.Deferred)
+        {
+            parent.CallDeferred("add_child", floatingText);
+        }
+        else
+        {
+            parent.AddChild(floatingText);
+        }
 
         floatingText.GlobalPosition = args.Position;
 
@@ -67,9 +75,11 @@ public partial class FloatingTextManager : Autoload<FloatingTextManager>
         return floatingText;
     }
 
-    public static FloatingText SpawnFloatingText(string text, Vector2 position) => SpawnFloatingText(new FloatingTextSpawnArgs { Text = text, Position = position });
+    public static FloatingText SpawnFloatingText(string text, Vector2 position) =>
+        SpawnFloatingText(new FloatingTextSpawnArgs { Text = text, Position = position });
 
-    public static FloatingText SpawnFloatingText(string text, Vector2 position, Color color) => SpawnFloatingText(new FloatingTextSpawnArgs { Text = text, Position = position, Color = color });
+    public static FloatingText SpawnFloatingText(string text, Vector2 position, Color color) =>
+        SpawnFloatingText(new FloatingTextSpawnArgs { Text = text, Position = position, Color = color });
 
     private static void OnFloatingTextFinished(Node owner, FloatingText floatingText)
     {

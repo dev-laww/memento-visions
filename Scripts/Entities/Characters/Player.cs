@@ -47,8 +47,8 @@ public partial class Player : Entity
 
         CommandInterpreter.Unregister(this);
 
-        SaveManager.Data.Player.Stats ??= new Stats();
-        SaveManager.Data.Player.Stats.Level = StatsManager.Level;
+        SaveManager.SetLevel(StatsManager.Level);
+        SaveManager.SetExperience(StatsManager.Experience);
 
         SaveManager.Save();
     }
@@ -65,6 +65,7 @@ public partial class Player : Entity
         playback = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
         comboResetTimer.Timeout += OnComboReset;
         StatsManager.LevelUp += OnLevelUp;
+        StatsManager.StatIncreased += OnStatIncreased;
 
         StateMachine.AddStates(Normal);
         StateMachine.AddStates(Attack, EnterAttack, ExitAttack);
@@ -72,9 +73,9 @@ public partial class Player : Entity
 
         StateMachine.SetInitialState(Normal);
 
-        var playerStats = SaveManager.Data.Player.Stats;
+        var data = SaveManager.Data;
 
-        StatsManager.SetLevel(playerStats?.Level ?? 1);
+        StatsManager.SetLevel(data?.Level ?? 1);
     }
 
     public override void OnProcess(double delta)
@@ -97,6 +98,7 @@ public partial class Player : Entity
 
         base.Die(info);
     }
+
     public Vector2 GetPlayerDirection()
     {
         return InputManager.GetVector8();
@@ -104,6 +106,7 @@ public partial class Player : Entity
 
 
     #region States
+
     public void Normal()
     {
         ProcessMovement();
@@ -159,9 +162,11 @@ public partial class Player : Entity
     {
         hurtBox.Enable();
     }
+
     #endregion
 
     #region Utilities
+
     private void UpdateNormalBlendPositions()
     {
         if (InputManager.IsLocked) return;
@@ -198,20 +203,27 @@ public partial class Player : Entity
             VelocityManager.Accelerate(inputDirection);
         }
     }
+
     #endregion
 
     #region SignalListeners
+
     private void OnLevelUp(float level)
     {
         Log.Debug($"Player leveled up to {level}");
-        var text = FloatingTextManager.SpawnFloatingText(new FloatingTextManager.FloatingTextSpawnArgs
+        GetTree().CreateTimer(0.3f).Timeout += () =>
         {
-            Text = $"Level up to {level}!",
-            Position = GlobalPosition,
-            Parent = GetParent(),
-            Color = new Color(1f, 1f, 0.5f),
-        });
-        text.Finished += text.QueueFree;
+            var text = FloatingTextManager.SpawnFloatingText(new FloatingTextManager.FloatingTextSpawnArgs
+            {
+                Text = $"Level up to {level}!",
+                Position = GlobalPosition,
+                Parent = GetParent(),
+                Color = new Color(1f, 1f, 0.5f),
+                Deferred = true
+            });
+
+            text.Finished += text.QueueFree;
+        };
     }
 
     private void OnComboReset()
@@ -219,9 +231,27 @@ public partial class Player : Entity
         combo = 1;
         Log.Debug("Combo reset");
     }
+
+    private void OnStatIncreased(float amount, StatsType type)
+    {
+        if (type != StatsType.Experience) return;
+
+        var text = FloatingTextManager.SpawnFloatingText(new FloatingTextManager.FloatingTextSpawnArgs
+        {
+            Text = $"+{Mathf.RoundToInt(amount)} XP",
+            Position = GlobalPosition,
+            Parent = GetParent(),
+            Color = Colors.Gray,
+            Deferred = true
+        });
+
+        text.Finished += text.QueueFree;
+    }
+
     #endregion
 
     #region Commands
+
     [Command(Name = "heal", Description = "Adds health to the player")]
     private void AddHealth(float value = 100)
     {
@@ -256,5 +286,6 @@ public partial class Player : Entity
 
         StatsManager.AddStatusEffect(statusEffect);
     }
+
     #endregion
 }

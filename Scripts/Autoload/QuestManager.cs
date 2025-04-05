@@ -3,6 +3,7 @@ using System.Linq;
 using Game.Common;
 using Game.Common.Utilities;
 using Game.Data;
+using Game.Utils.Extensions;
 using Godot;
 
 namespace Game.Autoload;
@@ -66,6 +67,12 @@ public partial class QuestManager : Autoload<QuestManager>
                 EmitSignalCompleted(quest);
                 completedQuests.Add(quest);
                 Log.Debug($"{quest} completed.");
+
+                this.GetPlayer()?.StatsManager.IncreaseExperience(quest.Experience);
+                foreach (var item in quest.Items)
+                {
+                    PlayerInventoryManager.AddItem(item);
+                }
             }
             else
             {
