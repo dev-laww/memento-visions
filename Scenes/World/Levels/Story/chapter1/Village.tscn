@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=4 uid="uid://c2qx74ig42sum"]
+[gd_scene load_steps=88 format=4 uid="uid://c2qx74ig42sum"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_1cx0f"]
 [ext_resource type="Script" uid="uid://xi5ph3oued7k" path="res://Scripts/World/Levels/Story/Chapter1/Village.cs" id="1_yyi1k"]
@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="10_rfcst"]
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/characters/npc/storyteller.png" id="11_74shb"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="12_2eimf"]
-[ext_resource type="Resource" uid="uid://bngy8thpfvbcq" path="res://storyteller.dialogue" id="12_xh25p"]
+[ext_resource type="Resource" uid="uid://dr732yvh2p2me" path="res://resources/dialogues/chapter1/storyteller.dialogue" id="13_yyi1k"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="14_2eimf"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="14_xh25p"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="16_r45d3"]
@@ -483,19 +483,19 @@ graph_offset = Vector2(-23, -24)
 [sub_resource type="CircleShape2D" id="CircleShape2D_8vc12"]
 radius = 19.4165
 
-[sub_resource type="Resource" id="Resource_nry1j"]
+[sub_resource type="Resource" id="Resource_busxp"]
 script = ExtResource("14_xh25p")
 Type = 2
-Description = "Head towards the Jeepney"
+Description = "It seems there was a person eavesdropping to the conversation you had with the Mayor. Confront him."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yyi1k"]
 radius = 16.1245
 
-[sub_resource type="Resource" id="Resource_busxp"]
+[sub_resource type="Resource" id="Resource_nry1j"]
 script = ExtResource("14_xh25p")
 Type = 2
-Description = "It seems there was a person eavesdropping to the conversation you had with the Mayor. Confront him."
+Description = "Talk to the Mayor."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xh25p"]
@@ -509,6 +509,12 @@ size = Vector2(177.25, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qboe2"]
 size = Vector2(55.25, 21.25)
+
+[sub_resource type="Resource" id="Resource_qydlh"]
+script = ExtResource("14_xh25p")
+Type = 2
+Description = "Look for the Mayor if he's in the vicinity or not."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xh25p"]
 size = Vector2(54, 20)
@@ -586,6 +592,7 @@ material = ExtResource("1_1cx0f")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
+frame = 2
 script = ExtResource("12_2eimf")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -603,7 +610,7 @@ anim_player = NodePath("../AnimationPlayer")
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("6_my81a")
-DialogueResource = ExtResource("12_xh25p")
+DialogueResource = ExtResource("13_yyi1k")
 ShouldInteract = true
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
@@ -630,8 +637,8 @@ Mode = 1
 ShouldInteract = true
 InteractionLabel = "Mang Rudy"
 DialogueResource = ExtResource("17_r45d3")
-Objective = SubResource("Resource_nry1j")
-ObjectiveIndex = 2
+Objective = SubResource("Resource_busxp")
+ObjectiveIndex = 1
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rudy/QuestTrigger"]
@@ -654,10 +661,10 @@ script = ExtResource("6_r45d3")
 Quest = ExtResource("7_tjaeu")
 Mode = 1
 ShouldInteract = true
-InteractionLabel = "Interact"
+InteractionLabel = "Mayor"
 DialogueResource = ExtResource("17_ynjqs")
-Objective = SubResource("Resource_busxp")
-ObjectiveIndex = 1
+Objective = SubResource("Resource_nry1j")
+ObjectiveIndex = 2
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mayor/QuestTrigger"]
@@ -722,8 +729,8 @@ script = ExtResource("6_r45d3")
 Quest = ExtResource("7_tjaeu")
 Mode = 1
 ShouldInteract = false
-Objective = SubResource("Resource_nry1j")
-ObjectiveIndex = 2
+Objective = SubResource("Resource_qydlh")
+ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger2"]
