@@ -10,4 +10,5 @@ Chief: I'm not sure but right now we have to go. We have to get there to know wh
 Chief: It could be worse than what we could have imagined!
 Alex: Fine. Let's go.
 do CurrentScene.EnableTransitionArea()
+do CurrentScene. CompleteObjectiveAtIndex(1)
 => END!

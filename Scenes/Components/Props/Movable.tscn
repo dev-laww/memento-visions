@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b17pq7t4sro6r" path="res://assets/world/cube.png" id="2_qyxgu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1a3vw"]
-size = Vector2(21, 21)
+size = Vector2(21, 13)
 
 [node name="Movable" type="RigidBody2D"]
 collision_layer = 2
@@ -15,7 +15,8 @@ max_contacts_reported = 4
 script = ExtResource("1_qyxgu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 8.5)
+y_sort_enabled = true
+position = Vector2(-0.5, 12.5)
 shape = SubResource("RectangleShape2D_1a3vw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
