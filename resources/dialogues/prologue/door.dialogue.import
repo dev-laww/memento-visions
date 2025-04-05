@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://fnyq88n24woy"
+path="res://.godot/imported/door.dialogue-359507d11a97fdfc522b3d070b77a793.tres"
+
+[deps]
+
+source_file="res://resources/dialogues/prologue/door.dialogue"
+dest_files=["res://.godot/imported/door.dialogue-359507d11a97fdfc522b3d070b77a793.tres"]
+
+[params]
+
+defaults=true

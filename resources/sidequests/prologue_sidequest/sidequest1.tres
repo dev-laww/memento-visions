@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=5 format=3 uid="uid://bfd8bvsg3sljk"]
+
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_rhibe"]
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_ufogi"]
+
+[sub_resource type="Resource" id="Resource_x2cbe"]
+script = ExtResource("1_rhibe")
+Type = 2
+Description = "Head to the Blacksmith and talk to him to craft a weapon."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="Resource" id="Resource_0nflr"]
+script = ExtResource("1_rhibe")
+Type = 1
+Description = "Equip the crafted weapon. You are now ready to pulverize your enemies!"
+Items = null
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[resource]
+script = ExtResource("1_ufogi")
+Id = "sidequest:sidequest1"
+Title = "Equip a Sword"
+Ordered = true
+Description = "You completed the prologue and rewarded a sword, but how could you create a new weapon to use, besides the sword?"
+objectives = [SubResource("Resource_x2cbe"), SubResource("Resource_0nflr")]
+Experience = 0
+Items = []
+metadata/_custom_type_script = "uid://dssta8xepjmkg"

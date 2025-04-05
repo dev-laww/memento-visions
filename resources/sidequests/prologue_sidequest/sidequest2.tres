@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=5 format=3 uid="uid://cg7fa3tmcnat7"]
+
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_6nx3g"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_sd77v"]
+
+[sub_resource type="Resource" id="Resource_1yyt2"]
+script = ExtResource("1_sd77v")
+Type = 2
+Description = "Talk to the Storyteller to head down to the Frenzy Mode."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="Resource" id="Resource_7yxn7"]
+script = ExtResource("1_sd77v")
+Type = 3
+Description = "The Aswangs are terrorizing the forest. Slay them all to gain experience and their materials!"
+Enemies = [null, null, null, null, null]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[resource]
+script = ExtResource("1_6nx3g")
+Id = "sidequest:sidequest2"
+Title = "Obtain Materials from the Aswangs"
+Ordered = true
+Description = "Gather materials to be used for crafting. The crafted item can be then used for yourself as a buff or debuff, your choice. This quest will hone your skills to the utmost level, bringing your A-game for the Chapter 1."
+objectives = [SubResource("Resource_1yyt2"), SubResource("Resource_7yxn7")]
+Experience = 0
+Items = []
+metadata/_custom_type_script = "uid://dssta8xepjmkg"

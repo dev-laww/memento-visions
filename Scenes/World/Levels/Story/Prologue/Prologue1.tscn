@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://3td8x8h36elv"]
+[gd_scene load_steps=25 format=4 uid="uid://3td8x8h36elv"]
 
 [ext_resource type="Script" uid="uid://bw7smwgpceo61" path="res://Scripts/World/Levels/Story/PrologueBar.cs" id="1_oncee"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="2_7ak36"]
@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://0suhta3uejmr" path="res://resources/quests/Prologue/BarInteraction.tres" id="5_ucy7c"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="7_r42qq"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="8_l7bid"]
-[ext_resource type="Resource" uid="uid://dk2nxvecyh5h3" path="res://resources/dialogues/prologue/prologue1.0.dialogue" id="8_oncee"]
 [ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="9_pxtv0"]
 [ext_resource type="Texture2D" uid="uid://dyxsacj8kktd1" path="res://assets/icons/f.png" id="10_fu5k5"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="11_dqrc3"]
@@ -57,11 +56,11 @@ z_index = 1000
 color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(768, 528, 480, 528, 480, 480, 192, 480, 192, 384, 48, 384, 48, 240, 0, 240, 0, 0, 288, 0, 288, 192, 336, 192, 336, 144, 480, 144, 480, 48, 720, 48, 720, 288, 672, 288, 672, 384, 768, 384)
 script = ExtResource("2_7ak36")
+ParseRootNode = NodePath("../Art")
 NavigationPolygon = SubResource("NavigationPolygon_71mkv")
 agentRadius = 8.0
 chunkSize = 1000
 cellSize = 1000.0
-ParseRootNode = NodePath("../Art")
 metadata/_custom_type_script = "uid://cfscbenslyojv"
 
 [node name="@NavigationRegion2D@41983" type="NavigationRegion2D" parent="NavigationManager"]
@@ -106,9 +105,7 @@ collision_mask = 4
 script = ExtResource("4_dqrc3")
 Quest = ExtResource("5_ucy7c")
 Mode = 0
-ShouldInteract = true
-InteractionLabel = "Interact"
-DialogueResource = ExtResource("8_oncee")
+ShouldInteract = false
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/QuestTrigger"]
@@ -127,7 +124,6 @@ offset_top = -33.0
 offset_bottom = -33.0
 scale = Vector2(0.5, 0.5)
 script = ExtResource("9_pxtv0")
-Text = "Interact"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Chief/QuestTrigger/InteractionUI"]
 layout_mode = 1

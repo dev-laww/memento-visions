@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://ckfjp8n7k4vum"
+path="res://.godot/imported/boulder.dialogue-5c1ca2e9de44a554c55558fabd2f8b6f.tres"
+
+[deps]
+
+source_file="res://resources/dialogues/prologue/boulder.dialogue"
+dest_files=["res://.godot/imported/boulder.dialogue-5c1ca2e9de44a554c55558fabd2f8b6f.tres"]
+
+[params]
+
+defaults=true

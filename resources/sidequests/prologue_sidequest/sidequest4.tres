@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=5 format=3 uid="uid://ci256auh4e86g"]
+
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_t5eqx"]
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="2_wb4er"]
+
+[sub_resource type="Resource" id="Resource_7c80s"]
+script = ExtResource("1_t5eqx")
+Type = 2
+Description = "Talk to the Storyteller to teleport you to the Frenzy Mode."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="Resource" id="Resource_gvegr"]
+script = ExtResource("1_t5eqx")
+Type = 3
+Description = "Kill 15 Aswangs to hone your skills and abilities in dodging and attacking!"
+Enemies = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[resource]
+script = ExtResource("2_wb4er")
+Id = "sidequest:sidequest4"
+Title = "Aswang's Rampage!"
+Ordered = true
+Description = "After fending off the Aswang's on your first visit, the Aswang's swore a revenge on you. Head down to the battlefield and give them a taste of what you're capable of!"
+objectives = [SubResource("Resource_7c80s"), SubResource("Resource_gvegr")]
+Experience = 0
+Items = []
+metadata/_custom_type_script = "uid://dssta8xepjmkg"

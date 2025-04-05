@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://c64wsg4p1yvco"]
+[gd_scene load_steps=26 format=4 uid="uid://c64wsg4p1yvco"]
 
 [ext_resource type="Script" uid="uid://dudaew5h4f4vy" path="res://Scripts/World/Levels/Story/DesolatePlace.cs" id="1_ngxr6"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_3e0ka"]
@@ -18,12 +18,21 @@
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="13_owp6s"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="13_uxpbx"]
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="16_1etyf"]
+[ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="19_aogjn"]
+[ext_resource type="Resource" uid="uid://ckfjp8n7k4vum" path="res://resources/dialogues/prologue/boulder.dialogue" id="20_2umdr"]
+[ext_resource type="Resource" uid="uid://fnyq88n24woy" path="res://resources/dialogues/prologue/door.dialogue" id="21_2umdr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5br0r"]
 radius = 23.0868
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7mfr"]
 size = Vector2(145, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ouky"]
+size = Vector2(7.375, 36.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2umdr"]
+size = Vector2(93, 38)
 
 [node name="Desolate Place" type="Node2D"]
 script = ExtResource("1_ngxr6")
@@ -113,9 +122,6 @@ position = Vector2(-2, -25)
 
 [node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("13_uxpbx")]
 
-[node name="Label" parent="Chief/QuestTrigger/Node2D/InteractionUI/HBoxContainer" index="1"]
-text = "Chief"
-
 [node name="Player" parent="." instance=ExtResource("12_lochm")]
 position = Vector2(58, 107)
 
@@ -135,5 +141,36 @@ shape = SubResource("RectangleShape2D_d7mfr")
 unique_name_in_owner = true
 visible = false
 position = Vector2(1677, 460)
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(1252, 354)
+
+[node name="DialogueTrigger" type="Area2D" parent="Node2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("19_aogjn")
+DialogueResource = ExtResource("20_2umdr")
+metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/DialogueTrigger"]
+position = Vector2(0, -0.25)
+shape = SubResource("RectangleShape2D_4ouky")
+one_way_collision_margin = 0.0
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D2" type="Node2D" parent="."]
+position = Vector2(1055, 361)
+
+[node name="DialogueTrigger" type="Area2D" parent="Node2D2"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("19_aogjn")
+DialogueResource = ExtResource("21_2umdr")
+metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/DialogueTrigger"]
+position = Vector2(2, -6)
+shape = SubResource("RectangleShape2D_2umdr")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [editable path="Chief/QuestTrigger/Node2D/InteractionUI"]
