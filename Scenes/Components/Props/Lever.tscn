@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://by64k6fa2d33l"]
+
+[ext_resource type="Texture2D" uid="uid://cou7nx8okf0pf" path="res://assets/world/Lever.png" id="1_hk57l"]
+[ext_resource type="Script" uid="uid://drku5wl14lq1s" path="res://Scripts/World/Objects/Lever.cs" id="2_e4wm1"]
+[ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="3_u2b42"]
+[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="4_yq8qy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e81sg"]
+size = Vector2(22, 40)
+
+[node name="Lever" type="Sprite2D"]
+texture = ExtResource("1_hk57l")
+hframes = 5
+frame = 3
+script = ExtResource("2_e4wm1")
+
+[node name="Interaction" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("3_u2b42")
+InteractionLabel = "Interact"
+metadata/_custom_type_script = "uid://cll1v71th1oms"
+
+[node name="Node2D" type="Node2D" parent="Interaction"]
+
+[node name="InteractionUI" parent="Interaction/Node2D" instance=ExtResource("4_yq8qy")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+position = Vector2(2, 1)
+shape = SubResource("RectangleShape2D_e81sg")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)

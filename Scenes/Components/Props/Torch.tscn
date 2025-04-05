@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://djjs6g4ap8st1"]
+
+[ext_resource type="Script" uid="uid://bcypua3gtlsds" path="res://Scripts/World/Objects/Torch.cs" id="1_oqylm"]
+[ext_resource type="Texture2D" uid="uid://cna3ssn4ob7y2" path="res://assets/tilesets/forest.png" id="3_oqylm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oqylm"]
+radius = 4.0
+height = 16.0
+
+[sub_resource type="Gradient" id="Gradient_oqylm"]
+colors = PackedColorArray(1, 0.690196, 0.262745, 1, 0.798144, 0.16803, 2.88785e-07, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_uip6t"]
+gradient = SubResource("Gradient_oqylm")
+
+[sub_resource type="Curve" id="Curve_tnncr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.359551), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_i8n7l"]
+curve = SubResource("Curve_tnncr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5tayh"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 20.0
+initial_velocity_min = 10.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_i8n7l")
+color_ramp = SubResource("GradientTexture1D_uip6t")
+turbulence_enabled = true
+turbulence_noise_scale = 3.607
+
+[node name="Torch" type="StaticBody2D"]
+script = ExtResource("1_oqylm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+y_sort_enabled = true
+position = Vector2(1, 0)
+shape = SubResource("CapsuleShape2D_oqylm")
+
+[node name="Torch" type="Sprite2D" parent="."]
+position = Vector2(1, -8)
+texture = ExtResource("3_oqylm")
+region_enabled = true
+region_rect = Rect2(1460, 732, 10, 36)
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, -26)
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_5tayh")
