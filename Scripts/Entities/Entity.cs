@@ -167,7 +167,7 @@ public abstract partial class Entity : CharacterBody2D
 
         GameEvents.EmitEntitySpawned(spawnInfo);
 
-        if (this is Enemy)
+        if (this is Enemy and not Dummy)
             EnemyManager.Register(spawnInfo);
 
         OnReady();

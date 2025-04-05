@@ -1,0 +1,113 @@
+[gd_scene load_steps=11 format=3 uid="uid://cn1hxu3k3xbni"]
+
+[ext_resource type="Script" uid="uid://tlxn6xx1y61f" path="res://Scripts/UI/Common/CommonMinimap.cs" id="1_sjp8u"]
+[ext_resource type="Texture2D" uid="uid://dvowp1x71hnmw" path="res://assets/ui/map.png" id="2_1gfhk"]
+[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_4bgwg"]
+[ext_resource type="Script" uid="uid://58jqrupdcss0" path="res://Scripts/Components/SmoothSprite2D.cs" id="3_73s7c"]
+[ext_resource type="Texture2D" uid="uid://bu88bn6aesr1s" path="res://assets/ui/minimap.png" id="4_1gfhk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73s7c"]
+atlas = ExtResource("4_1gfhk")
+region = Rect2(0, 16, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgcsu"]
+atlas = ExtResource("4_1gfhk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rquv5"]
+atlas = ExtResource("4_1gfhk")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n20t2"]
+atlas = ExtResource("4_1gfhk")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gfhk"]
+atlas = ExtResource("4_1gfhk")
+region = Rect2(112, 0, 16, 16)
+
+[node name="Control" type="Control"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+script = ExtResource("1_sjp8u")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_73s7c")
+region_rect = Rect2(0, 0, 128, 128)
+patch_margin_left = 10
+patch_margin_top = 12
+patch_margin_right = 10
+patch_margin_bottom = 12
+
+[node name="Map" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -40.5
+offset_right = 42.5
+offset_bottom = 40.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(42.5, 40.5)
+texture = ExtResource("2_1gfhk")
+stretch_mode = 1
+flip_h = true
+
+[node name="Player" type="Sprite2D" parent="Map"]
+unique_name_in_owner = true
+texture_filter = 2
+material = ExtResource("2_4bgwg")
+position = Vector2(43, 40)
+texture = SubResource("AtlasTexture_bgcsu")
+script = ExtResource("3_73s7c")
+metadata/_custom_type_script = "uid://58jqrupdcss0"
+
+[node name="CommonEnemy" type="Sprite2D" parent="Map"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 2
+material = ExtResource("2_4bgwg")
+position = Vector2(25, 25)
+texture = SubResource("AtlasTexture_rquv5")
+script = ExtResource("3_73s7c")
+metadata/_custom_type_script = "uid://58jqrupdcss0"
+
+[node name="BossEnemy" type="Sprite2D" parent="Map"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 2
+material = ExtResource("2_4bgwg")
+position = Vector2(75, 25)
+texture = SubResource("AtlasTexture_n20t2")
+script = ExtResource("3_73s7c")
+metadata/_custom_type_script = "uid://58jqrupdcss0"
+
+[node name="Chest" type="Sprite2D" parent="Map"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 2
+material = ExtResource("2_4bgwg")
+position = Vector2(75, 75)
+texture = SubResource("AtlasTexture_1gfhk")
+script = ExtResource("3_73s7c")
+metadata/_custom_type_script = "uid://58jqrupdcss0"

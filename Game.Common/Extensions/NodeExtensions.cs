@@ -43,4 +43,11 @@ public static class NodeExtensions
             }
         }
     }
+
+    public static T Duplicate<T>(this T node) where T : Node
+    {
+        var duplicate = node.Duplicate() as T ?? throw new InvalidOperationException($"Failed to duplicate node of type {typeof(T)}");
+
+        return duplicate;
+    }
 }
