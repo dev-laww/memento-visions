@@ -47,8 +47,8 @@ public partial class Player : Entity
 
         CommandInterpreter.Unregister(this);
 
-        SaveManager.Data.Player.Stats ??= new Stats();
-        SaveManager.Data.Player.Stats.Level = StatsManager.Level;
+        SaveManager.SetLevel(StatsManager.Level);
+        SaveManager.SetExperience(StatsManager.Experience);
 
         SaveManager.Save();
     }
@@ -72,9 +72,9 @@ public partial class Player : Entity
 
         StateMachine.SetInitialState(Normal);
 
-        var playerStats = SaveManager.Data.Player.Stats;
+        var data = SaveManager.Data;
 
-        StatsManager.SetLevel(playerStats?.Level ?? 1);
+        StatsManager.SetLevel(data?.Level ?? 1);
     }
 
     public override void OnProcess(double delta)
@@ -97,6 +97,7 @@ public partial class Player : Entity
 
         base.Die(info);
     }
+
     public Vector2 GetPlayerDirection()
     {
         return InputManager.GetVector8();
@@ -104,6 +105,7 @@ public partial class Player : Entity
 
 
     #region States
+
     public void Normal()
     {
         ProcessMovement();
@@ -159,9 +161,11 @@ public partial class Player : Entity
     {
         hurtBox.Enable();
     }
+
     #endregion
 
     #region Utilities
+
     private void UpdateNormalBlendPositions()
     {
         if (InputManager.IsLocked) return;
@@ -198,9 +202,11 @@ public partial class Player : Entity
             VelocityManager.Accelerate(inputDirection);
         }
     }
+
     #endregion
 
     #region SignalListeners
+
     private void OnLevelUp(float level)
     {
         Log.Debug($"Player leveled up to {level}");
@@ -219,9 +225,11 @@ public partial class Player : Entity
         combo = 1;
         Log.Debug("Combo reset");
     }
+
     #endregion
 
     #region Commands
+
     [Command(Name = "heal", Description = "Adds health to the player")]
     private void AddHealth(float value = 100)
     {
@@ -256,5 +264,6 @@ public partial class Player : Entity
 
         StatsManager.AddStatusEffect(statusEffect);
     }
+
     #endregion
 }

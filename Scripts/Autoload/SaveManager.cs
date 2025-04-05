@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game.Common;
 using Game.Common.Models;
 using Godot;
@@ -53,4 +54,11 @@ public partial class SaveManager : Autoload<SaveManager>
         file.StoreString(json);
         file.Close();
     }
+
+
+    public static void SetItems(List<Item> items) => Data.SetItems(items);
+    public static void SetLevel(float level) => Data.SetLevel(level); 
+    public static void SetExperience(float experience) => Data.SetExperience(experience);
+    public static void SetQuickSlotItem(string item) => Data.SetQuickSlotItem(item);
+    public static void SetEquipped(string item) => Data.SetEquipped(item);
 }

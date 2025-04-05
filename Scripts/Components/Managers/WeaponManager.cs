@@ -28,9 +28,9 @@ public partial class WeaponManager : Node
     {
         player = GetParent<Player>();
 
-        if (SaveManager.Data.Player.Equipped == string.Empty) return;
+        if (SaveManager.Data.Equipped == string.Empty) return;
 
-        var weapon = ItemRegistry.Get(SaveManager.Data.Player.Equipped);
+        var weapon = ItemRegistry.Get(SaveManager.Data.Equipped);
 
         if (weapon == null) return;
 
@@ -49,7 +49,7 @@ public partial class WeaponManager : Node
 
         if (Weapon == null) return;
 
-        SaveManager.Data.Player.Equipped = Weapon.Id;
+        SaveManager.SetEquipped(Weapon.Id);
         SaveManager.Save();
     }
 
@@ -72,7 +72,7 @@ public partial class WeaponManager : Node
         }
 
 
-        SaveManager.Data.Player.Equipped = Weapon.Id;
+        SaveManager.SetEquipped(weapon.Id);
 
         player.StatsManager.IncreaseDamage(weapon.DamagePercentBuff, StatsManager.ModifyMode.Percentage);
         this.GetPlayer()?.Center.CallDeferred("add_child", WeaponComponent);
@@ -88,7 +88,7 @@ public partial class WeaponManager : Node
         Weapon = null;
         WeaponComponent = null;
 
-        SaveManager.Data.Player.Equipped = string.Empty;
+        SaveManager.SetEquipped(string.Empty);
 
         Log.Debug($"Unequipped {Weapon}");
     }
