@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=4 uid="uid://c2qx74ig42sum"]
+[gd_scene load_steps=84 format=4 uid="uid://c2qx74ig42sum"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_1cx0f"]
 [ext_resource type="TileSet" uid="uid://wuwsi02f3fft" path="res://resources/tilesets/intramuros.tres" id="2_imb2w"]
@@ -16,7 +16,9 @@
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="12_2eimf"]
 [ext_resource type="Resource" uid="uid://dr732yvh2p2me" path="res://resources/dialogues/chapter1/storyteller.dialogue" id="13_74shb"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="14_2eimf"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="14_xh25p"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="16_r45d3"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="16_yyi1k"]
 [ext_resource type="Resource" uid="uid://ba4jrntt5jygn" path="res://resources/dialogues/chapter1/chapter1_pt2_dialogue.dialogue" id="17_r45d3"]
 [ext_resource type="Resource" uid="uid://b8egfkscgqbcp" path="res://resources/dialogues/chapter1/chiefpt2.dialogue" id="17_ynjqs"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="20_tjaeu"]
@@ -474,11 +476,35 @@ states/work_exit/position = Vector2(500, 199)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_5rnxu"), "idle", "look", SubResource("AnimationNodeStateMachineTransition_eecew"), "look", "idle", SubResource("AnimationNodeStateMachineTransition_yd0tu"), "fix_hat", "idle", SubResource("AnimationNodeStateMachineTransition_34ku0"), "idle", "fix_hat", SubResource("AnimationNodeStateMachineTransition_37443"), "work_entry", "work", SubResource("AnimationNodeStateMachineTransition_ei8eq"), "work", "work_exit", SubResource("AnimationNodeStateMachineTransition_u6lhy"), "work_exit", "idle", SubResource("AnimationNodeStateMachineTransition_x0uqg"), "idle", "work_entry", SubResource("AnimationNodeStateMachineTransition_4b0j2")]
 graph_offset = Vector2(-23, -24)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_74shb"]
-radius = 15.0333
+[sub_resource type="Resource" id="Resource_tj6t8"]
+script = ExtResource("14_xh25p")
+Type = 2
+Description = "It seems the Storyteller has something to say to you. What could it be?"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8vc12"]
+radius = 17.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1dpy7"]
 radius = 16.0312
+
+[sub_resource type="Resource" id="Resource_busxp"]
+script = ExtResource("14_xh25p")
+Type = 2
+Description = "It seems there was a person eavesdropping to the conversation you had with the Mayor. Confront him."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yyi1k"]
+radius = 16.1245
+
+[sub_resource type="Resource" id="Resource_qydlh"]
+script = ExtResource("14_xh25p")
+Type = 2
+Description = "Look for the Mayor if he's in the vicinity or not."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xh25p"]
+radius = 19.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1dpy7"]
 size = Vector2(177.25, 20)
@@ -561,7 +587,6 @@ material = ExtResource("1_1cx0f")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 1
 script = ExtResource("12_2eimf")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -575,51 +600,38 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_34ku0")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="DialogueTrigger" type="Area2D" parent="StoryTeller"]
-collision_layer = 0
+[node name="QuestTrigger" type="Area2D" parent="StoryTeller"]
+collision_layer = 16
 collision_mask = 4
-script = ExtResource("6_my81a")
+script = ExtResource("6_r45d3")
+Quest = ExtResource("7_tjaeu")
+Mode = 1
+ShouldInteract = true
+InteractionLabel = "Interact"
 DialogueResource = ExtResource("13_74shb")
-ShouldInteract = true
-InteractionLabel = "StoryTeller"
-metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
+Objective = SubResource("Resource_tj6t8")
+ObjectiveIndex = 0
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StoryTeller/DialogueTrigger"]
-position = Vector2(0, -12)
-shape = SubResource("CircleShape2D_74shb")
-debug_color = Color(0.88, 0.525, 0.898, 0.42)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoryTeller/QuestTrigger"]
+position = Vector2(-2, -11)
+shape = SubResource("CircleShape2D_8vc12")
+debug_color = Color(0.953967, 0.422304, 1, 0.42)
 
-[node name="Node2D" type="Node2D" parent="StoryTeller/DialogueTrigger"]
-position = Vector2(0, -33)
+[node name="Node2D" type="Node2D" parent="StoryTeller/QuestTrigger"]
 
-[node name="InteractionUI" parent="StoryTeller/DialogueTrigger/Node2D" instance=ExtResource("14_2eimf")]
+[node name="InteractionUI" type="Control" parent="StoryTeller/QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -32.0
+offset_bottom = -32.0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("16_yyi1k")
 
-[node name="Chief" parent="." instance=ExtResource("16_r45d3")]
-position = Vector2(1229, 516)
+[node name="Rudy" parent="." instance=ExtResource("16_r45d3")]
+position = Vector2(1312, 263)
 
-[node name="DialogueTrigger" type="Area2D" parent="Chief"]
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("6_my81a")
-DialogueResource = ExtResource("17_ynjqs")
-ShouldInteract = true
-InteractionLabel = "Mayor"
-metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/DialogueTrigger"]
-position = Vector2(-1, -8)
-shape = SubResource("CircleShape2D_1dpy7")
-debug_color = Color(0.88, 0.525, 0.898, 0.42)
-
-[node name="Node2D" type="Node2D" parent="Chief/DialogueTrigger"]
-position = Vector2(0, -33)
-
-[node name="InteractionUI" parent="Chief/DialogueTrigger/Node2D" instance=ExtResource("14_2eimf")]
-
-[node name="Chief" parent="Chief" instance=ExtResource("16_r45d3")]
-position = Vector2(83, -253)
-
-[node name="DialogueTrigger" type="Area2D" parent="Chief/Chief"]
+[node name="DialogueTrigger" type="Area2D" parent="Rudy"]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("6_my81a")
@@ -628,15 +640,73 @@ ShouldInteract = true
 InteractionLabel = "Mang Rudy"
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/Chief/DialogueTrigger"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rudy/DialogueTrigger"]
 position = Vector2(-1, -8)
 shape = SubResource("CircleShape2D_1dpy7")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
-[node name="Node2D" type="Node2D" parent="Chief/Chief/DialogueTrigger"]
+[node name="Node2D" type="Node2D" parent="Rudy/DialogueTrigger"]
 position = Vector2(0, -33)
 
-[node name="InteractionUI" parent="Chief/Chief/DialogueTrigger/Node2D" instance=ExtResource("14_2eimf")]
+[node name="InteractionUI" parent="Rudy/DialogueTrigger/Node2D" instance=ExtResource("14_2eimf")]
+
+[node name="QuestTrigger" type="Area2D" parent="Rudy"]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("6_r45d3")
+Quest = ExtResource("7_tjaeu")
+Mode = 1
+ShouldInteract = true
+InteractionLabel = "Mang Rudy"
+DialogueResource = ExtResource("17_r45d3")
+Objective = SubResource("Resource_busxp")
+ObjectiveIndex = 2
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rudy/QuestTrigger"]
+position = Vector2(-1, -9)
+shape = SubResource("CircleShape2D_yyi1k")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="Rudy/QuestTrigger"]
+position = Vector2(4, -33)
+
+[node name="InteractionUI" type="Control" parent="Rudy/QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("16_yyi1k")
+
+[node name="Mayor" parent="." instance=ExtResource("16_r45d3")]
+position = Vector2(1229, 516)
+
+[node name="QuestTrigger" type="Area2D" parent="Mayor"]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("6_r45d3")
+Quest = ExtResource("7_tjaeu")
+Mode = 1
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("17_ynjqs")
+Objective = SubResource("Resource_qydlh")
+ObjectiveIndex = 1
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mayor/QuestTrigger"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_xh25p")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="Mayor/QuestTrigger"]
+
+[node name="InteractionUI" type="Control" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -33.0
+offset_bottom = -33.0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("16_yyi1k")
 
 [node name="QuestTrigger" type="Area2D" parent="."]
 position = Vector2(106, 179)
