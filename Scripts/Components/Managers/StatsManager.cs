@@ -190,11 +190,15 @@ public partial class StatsManager : Node
         Experience += amount;
 
         var requiredExperience = CalculateRequiredExperience(Level + 1);
+        var levelsIncreased = 0;
 
         while (Experience >= requiredExperience)
         {
-            IncreaseLevel(1);
+            Experience -= requiredExperience;
+            levelsIncreased++;
         }
+
+        if (levelsIncreased > 0) IncreaseLevel(levelsIncreased);
     }
 
     public void SetLevel(float value)

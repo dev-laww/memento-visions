@@ -65,6 +65,7 @@ public partial class Player : Entity
         playback = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
         comboResetTimer.Timeout += OnComboReset;
         StatsManager.LevelUp += OnLevelUp;
+        StatsManager.StatIncreased += OnStatIncreased;
 
         StateMachine.AddStates(Normal);
         StateMachine.AddStates(Attack, EnterAttack, ExitAttack);
@@ -210,20 +211,41 @@ public partial class Player : Entity
     private void OnLevelUp(float level)
     {
         Log.Debug($"Player leveled up to {level}");
-        var text = FloatingTextManager.SpawnFloatingText(new FloatingTextManager.FloatingTextSpawnArgs
+        GetTree().CreateTimer(0.3f).Timeout += () =>
         {
-            Text = $"Level up to {level}!",
-            Position = GlobalPosition,
-            Parent = GetParent(),
-            Color = new Color(1f, 1f, 0.5f),
-        });
-        text.Finished += text.QueueFree;
+            var text = FloatingTextManager.SpawnFloatingText(new FloatingTextManager.FloatingTextSpawnArgs
+            {
+                Text = $"Level up to {level}!",
+                Position = GlobalPosition,
+                Parent = GetParent(),
+                Color = new Color(1f, 1f, 0.5f),
+                Deferred = true
+            });
+
+            text.Finished += text.QueueFree;
+        };
     }
 
     private void OnComboReset()
     {
         combo = 1;
         Log.Debug("Combo reset");
+    }
+
+    private void OnStatIncreased(float amount, StatsType type)
+    {
+        if (type != StatsType.Experience) return;
+
+        var text = FloatingTextManager.SpawnFloatingText(new FloatingTextManager.FloatingTextSpawnArgs
+        {
+            Text = $"+{Mathf.RoundToInt(amount)} XP",
+            Position = GlobalPosition,
+            Parent = GetParent(),
+            Color = Colors.Gray,
+            Deferred = true
+        });
+
+        text.Finished += text.QueueFree;
     }
 
     #endregion

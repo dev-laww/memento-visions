@@ -25,7 +25,8 @@ public partial class EnemyManager : Autoload<EnemyManager>
     public static event Action<Enemy> EnemyUnregistered;
     public static event Action<int> EnemyCountChanged;
 
-    public static IReadOnlyList<Enemy> EnemiesOfType(Enemy.EnemyType type) => [.. Instance.enemies.Where(enemy => enemy.Type == type)];
+    public static IReadOnlyList<Enemy> EnemiesOfType(Enemy.EnemyType type) =>
+        [.. Instance.enemies.Where(enemy => enemy.Type == type)];
 
     public static void Register(Entity.SpawnInfo info)
     {
@@ -42,8 +43,11 @@ public partial class EnemyManager : Autoload<EnemyManager>
         Instance.OnEnemyRegistered(enemy);
         EnemyCountChanged?.Invoke(Instance.enemies.Count);
 
-        if (enemy is not Dummy)
-            enemy.StatsManager.SetLevel(Instance.GetPlayer()?.StatsManager.Level ?? 1);
+        if (enemy is not Dummy && Math.Abs(enemy.StatsManager.Level - 1) < 0.1f)
+        {
+            var levelToSet = Instance.GetPlayer()?.StatsManager.Level ?? 1;
+            enemy.StatsManager.SetLevel(levelToSet + 1);
+        }
 
         Log.Debug($"{enemy} added to the registry. {info}");
     }
@@ -54,6 +58,25 @@ public partial class EnemyManager : Autoload<EnemyManager>
         Instance.OnEnemyUnregistered(info.Victim as Enemy);
         EnemyUnregistered?.Invoke(info.Victim as Enemy);
         EnemyCountChanged?.Invoke(Instance.enemies.Count);
+
+        // TODO: check if balanced
+        var enemy = (Enemy)info.Victim;
+        var killer = info.Killer;
+        var multiplier = 1f;
+
+        if (enemy.StatsManager.Level > killer.StatsManager.Level)
+        {
+            multiplier += (enemy.StatsManager.Level - killer.StatsManager.Level) / 10f;
+        }
+        else if (enemy.StatsManager.Level < killer.StatsManager.Level)
+        {
+            multiplier -= (killer.StatsManager.Level - enemy.StatsManager.Level) / 10f;
+        }
+
+        multiplier = Math.Clamp(multiplier, 0.5f, 1.5f);
+
+        var calculatedExperience = multiplier * enemy.ExperienceWorth;
+        killer.StatsManager.IncreaseExperience(calculatedExperience);
 
         Log.Debug($"{info.Victim} removed from the registry. {info}");
     }
