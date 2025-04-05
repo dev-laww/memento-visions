@@ -9,13 +9,6 @@ size = Vector2(12, 12)
 [node name="PressurePlate" type="Node2D"]
 script = ExtResource("1_pytcr")
 
-[node name="sprite" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-z_index = -1
-texture = ExtResource("1_sf8rs")
-region_enabled = true
-region_rect = Rect2(32, 0, 32, 32)
-
 [node name="area" type="Area2D" parent="."]
 unique_name_in_owner = true
 collision_layer = 512
@@ -24,3 +17,10 @@ collision_mask = 518
 [node name="CollisionShape2D" type="CollisionShape2D" parent="area"]
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_pytcr")
+
+[node name="sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+z_index = -1
+texture = ExtResource("1_sf8rs")
+region_enabled = true
+region_rect = Rect2(32, 0, 32, 32)

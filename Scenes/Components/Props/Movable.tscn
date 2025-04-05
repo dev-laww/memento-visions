@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://hl4nthtc26ui"]
 
-[ext_resource type="Texture2D" uid="uid://cna3ssn4ob7y2" path="res://assets/tilesets/forest.png" id="1_jy8pf"]
 [ext_resource type="Script" uid="uid://cfb1bsex6h358" path="res://Scripts/World/Objects/MovableObject.cs" id="1_qyxgu"]
+[ext_resource type="Texture2D" uid="uid://b17pq7t4sro6r" path="res://assets/world/cube.png" id="2_qyxgu"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qyxgu"]
-radius = 11.5
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1a3vw"]
+size = Vector2(21, 21)
 
 [node name="Movable" type="RigidBody2D"]
 collision_layer = 2
@@ -15,10 +15,12 @@ max_contacts_reported = 4
 script = ExtResource("1_qyxgu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6)
-shape = SubResource("CircleShape2D_qyxgu")
+position = Vector2(-0.5, 8.5)
+shape = SubResource("RectangleShape2D_1a3vw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_jy8pf")
+position = Vector2(1.19209e-07, 8)
+scale = Vector2(0.555556, 0.492063)
+texture = ExtResource("2_qyxgu")
 region_enabled = true
-region_rect = Rect2(1346.89, 681.001, 36.3636, 40.4958)
+region_rect = Rect2(0, 1, 63, 63)
