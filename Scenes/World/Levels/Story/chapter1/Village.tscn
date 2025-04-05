@@ -556,7 +556,7 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 polygon = PackedVector2Array(16, 12, 8, 1005, 1440, 997, 1419, 29, 19, -6, 1594, -10, 1541, 1052, -18, 1026, -70, -14, 11, -74)
 
 [node name="Player" parent="." instance=ExtResource("4_imb2w")]
-position = Vector2(579, 267)
+position = Vector2(96, 98)
 
 [node name="StoryTeller" type="CharacterBody2D" parent="."]
 position = Vector2(536, 214)
@@ -586,7 +586,6 @@ material = ExtResource("1_1cx0f")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 2
 script = ExtResource("12_2eimf")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -622,6 +621,7 @@ position = Vector2(1, -32)
 position = Vector2(1312, 263)
 
 [node name="QuestTrigger" type="Area2D" parent="Rudy"]
+scale = Vector2(1.18094, 4.11016)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("6_r45d3")
