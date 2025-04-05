@@ -12,7 +12,7 @@ using GodotUtilities;
 namespace Game;
 
 [Scene]
-public partial class Minimap : SubViewportContainer
+public partial class TerrainMinimap : SubViewportContainer
 {
     [Node] private SubViewport subViewport;
     [Node] private Camera2D camera2D;
