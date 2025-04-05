@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://ciqiplx11424"]
+[gd_scene load_steps=23 format=4 uid="uid://ciqiplx11424"]
 
 [ext_resource type="Script" uid="uid://bmr5usqox5f0h" path="res://Scripts/World/Levels/Story/Bar.cs" id="1_7pkig"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="2_cgm6k"]
@@ -16,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://4wmyo56injo5" path="res://resources/dialogues/chapter1/chapter1.2.dialogue" id="14_cgm6k"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_jtnov"]
 [ext_resource type="PackedScene" uid="uid://dgqrvixy2ocww" path="res://Scenes/Entities/Characters/BlackSmith.tscn" id="16_cdpoc"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="16_cgm6k"]
 
 [sub_resource type="Environment" id="Environment_71mkv"]
 background_mode = 3
@@ -142,9 +143,13 @@ shape = SubResource("CircleShape2D_j24d5")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
-position = Vector2(-1, -34)
+position = Vector2(0, -34)
 
-[node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("15_jtnov")]
+[node name="InteractionUI" type="Control" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("15_jtnov")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("16_cgm6k")
 
 [node name="BlackSmith" parent="." instance=ExtResource("16_cdpoc")]
 position = Vector2(271, 258)
