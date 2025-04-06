@@ -8,6 +8,8 @@ namespace Game.Data;
 public partial class EnemyRegistry : EntityRegistry
 {
     protected override string ResourcePath => Constants.ENEMIES_PATH;
+    
+    public static Enemy GetAsEnemy (string id) => GetAsEntity(id) as Enemy;
 
     public static Enemy PickRandom()
     {
