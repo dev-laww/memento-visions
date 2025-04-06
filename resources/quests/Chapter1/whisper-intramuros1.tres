@@ -1,7 +1,15 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=4 format=3 uid="uid://dpkjhbld0pfm4"]
+[gd_resource type="Resource" script_class="Quest" load_steps=7 format=3 uid="uid://dpkjhbld0pfm4"]
 
+[ext_resource type="Resource" uid="uid://e5dmknfrsqko" path="res://resources/items/consumable/bibingka.tres" id="1_8pvke"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_ka0b6"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_drtg5"]
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="2_ssna1"]
+
+[sub_resource type="Resource" id="Resource_5gdfj"]
+script = ExtResource("2_drtg5")
+Item = ExtResource("1_8pvke")
+Quantity = 2
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 
 [sub_resource type="Resource" id="Resource_1jmwf"]
 script = ExtResource("1_ka0b6")
@@ -16,6 +24,6 @@ Title = "Whispers in Intramuros"
 Ordered = false
 Description = "Mysterious disappearances haunt Everfield City. The Aswang are suspected, but something doesn’t add up. Alejandro must uncover the truth before more lives are lost."
 objectives = [SubResource("Resource_1jmwf")]
-Experience = 0
-Items = []
+Experience = 20
+Items = [SubResource("Resource_5gdfj")]
 metadata/_custom_type_script = "uid://dssta8xepjmkg"
