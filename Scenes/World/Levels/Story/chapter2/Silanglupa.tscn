@@ -1,10 +1,15 @@
-[gd_scene load_steps=79 format=4 uid="uid://b87n4vopknml"]
+[gd_scene load_steps=84 format=4 uid="uid://b87n4vopknml"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_oewv3"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_uvbsj"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_x85mb"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="4_laa1q"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="5_uvbsj"]
+[ext_resource type="PackedScene" uid="uid://djjs6g4ap8st1" path="res://Scenes/Components/Props/Torch.tscn" id="7_qcn46"]
+[ext_resource type="PackedScene" uid="uid://bmxiu0n4a4dua" path="res://Scenes/Components/Props/LeverManager.tscn" id="8_nj2xx"]
+[ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="8_pwtwy"]
+[ext_resource type="PackedScene" uid="uid://by64k6fa2d33l" path="res://Scenes/Components/Props/Lever.tscn" id="9_os7l5"]
+[ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="10_qcn46"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x85mb"]
 
@@ -357,7 +362,7 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 [node name="Elevation" type="TileMapLayer" parent="Tilemap"]
 texture_filter = 2
 material = ExtResource("1_oewv3")
-tile_map_data = PackedByteArray("AAAHAA8AAgACAAcAAAAHAA4AAgACAAYAAAAHAA0AAgACAAYAAAAHAAwAAgACAAYAAAAHAAsAAgACAAUAAAAGAA8AAgABAAcAAAAGAA4AAgABAAYAAAAGAA0AAgABAAYAAAAGAAwAAgABAAYAAAAGAAsAAgABAAUAAAAFAA8AAgABAAcAAAAFAA4AAgABAAYAAAAFAA0AAgABAAYAAAAFAAwAAgABAAYAAAAFAAsAAgABAAUAAAAEAA8AAgABAAcAAAAEAA4AAgABAAYAAAAEAA0AAgABAAYAAAAEAAwAAgABAAYAAAAEAAsAAgAFAAcAAAADAA8AAgABAAcAAAADAA4AAgABAAYAAAADAA0AAgABAAYAAAADAAwAAgABAAYAAAADAAsAAgABAAYAAAACAA8AAgABAAcAAAACAA4AAgABAAYAAAACAA0AAgABAAYAAAACAAwAAgABAAYAAAACAAsAAgABAAYAAAABAA8AAgABAAcAAAABAA4AAgABAAYAAAABAA0AAgABAAYAAAABAAwAAgABAAYAAAABAAsAAgABAAYAAAAAAA8AAgABAAcAAAAAAA4AAgABAAYAAAAAAA0AAgABAAYAAAAAAAwAAgABAAYAAAAAAAsAAgABAAYAAAD//w8AAgABAAcAAAD//w4AAgABAAYAAAD//w0AAgABAAYAAAD//wwAAgABAAYAAAD//wsAAgABAAYAAAD+/w8AAgABAAcAAAD+/w4AAgABAAYAAAD+/w0AAgABAAYAAAD+/wwAAgABAAYAAAD+/wsAAgABAAYAAAD9/w8AAgABAAcAAAD9/w4AAgABAAYAAAD9/w0AAgABAAYAAAD9/wwAAgABAAYAAAD9/wsAAgABAAYAAAD9/woAAgABAAUAAAD8/w8AAgAAAAcAAAD8/w4AAgAAAAYAAAD8/w0AAgAAAAYAAAD8/wwAAgAAAAYAAAD8/wsAAgAAAAYAAAD8/woAAgAAAAUAAAAEAAoAAgACAAUAAAADAAoAAgABAAUAAAACAAoAAgABAAUAAAABAAoAAgABAAUAAAAAAAoAAgABAAUAAAD//woAAgABAAUAAAD+/woAAgABAAUAAAA=")
+tile_map_data = PackedByteArray("AAAHAA8AAgACAAcAAAAHAA4AAgACAAYAAAAHAA0AAgACAAYAAAAHAAwAAgACAAYAAAAHAAsAAgACAAUAAAAGAA8AAgABAAcAAAAGAA4AAgABAAYAAAAGAA0AAgABAAYAAAAGAAwAAgABAAYAAAAGAAsAAgABAAUAAAAFAA8AAgABAAcAAAAFAA4AAgABAAYAAAAFAA0AAgABAAYAAAAFAAwAAgABAAYAAAAFAAsAAgABAAUAAAAEAA4AAgABAAYAAAAEAA0AAgABAAYAAAAEAAwAAgABAAYAAAAEAAsAAgAFAAcAAAADAA4AAgABAAYAAAADAA0AAgABAAYAAAADAAwAAgABAAYAAAADAAsAAgABAAYAAAACAA8AAgABAAcAAAACAA4AAgABAAYAAAACAA0AAgABAAYAAAACAAwAAgABAAYAAAACAAsAAgABAAYAAAABAA8AAgABAAcAAAABAA4AAgABAAYAAAABAA0AAgABAAYAAAABAAwAAgABAAYAAAABAAsAAgABAAYAAAAAAA8AAgABAAcAAAAAAA4AAgABAAYAAAAAAA0AAgABAAYAAAAAAAwAAgABAAYAAAAAAAsAAgABAAYAAAD//w8AAgABAAcAAAD//w4AAgABAAYAAAD//w0AAgABAAYAAAD//wwAAgABAAYAAAD//wsAAgABAAYAAAD+/w8AAgABAAcAAAD+/w4AAgABAAYAAAD+/w0AAgABAAYAAAD+/wwAAgABAAYAAAD+/wsAAgABAAYAAAD9/w8AAgABAAcAAAD9/w4AAgABAAYAAAD9/w0AAgABAAYAAAD9/wwAAgABAAYAAAD9/wsAAgABAAYAAAD9/woAAgABAAUAAAD8/w8AAgAAAAcAAAD8/w4AAgAAAAYAAAD8/w0AAgAAAAYAAAD8/wwAAgAAAAYAAAD8/wsAAgAAAAYAAAD8/woAAgAAAAUAAAAEAAoAAgACAAUAAAADAAoAAgABAAUAAAACAAoAAgABAAUAAAABAAoAAgABAAUAAAAAAAoAAgABAAUAAAD//woAAgABAAUAAAD+/woAAgABAAUAAAA=")
 tile_set = ExtResource("2_uvbsj")
 script = ExtResource("3_x85mb")
 metadata/_custom_type_script = "uid://bc2jlb4w58y24"
@@ -401,8 +406,8 @@ z_index = 1000
 color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(-902, 610, -902, 827, -146, 841, -131, 933, 896, 938, 1047, 933, 1038, 784, 636, 790, 593, 476, 365, 442, 368, 219, 345, 168, 131, 174, 134, 451, 242, 473, 245, 511, 394, 528, 376, 773, -177, 776, -211, 596)
 script = ExtResource("5_uvbsj")
-ParseRootNode = NodePath("../Tilemap")
 NavigationPolygon = SubResource("NavigationPolygon_x85mb")
+ParseRootNode = NodePath("../Tilemap")
 metadata/_custom_type_script = "uid://cfscbenslyojv"
 
 [node name="@NavigationRegion2D@89971" type="NavigationRegion2D" parent="NavigationManager"]
@@ -620,3 +625,53 @@ navigation_polygon = SubResource("NavigationPolygon_ka2ng")
 
 [node name="@NavigationRegion2D@90042" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_co3tm")
+
+[node name="Player" parent="." instance=ExtResource("8_pwtwy")]
+position = Vector2(-63, 532)
+scale = Vector2(1.14925, 0.83888)
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-90, 571)
+
+[node name="Torch" parent="Node2D" instance=ExtResource("7_qcn46")]
+position = Vector2(-89, -71)
+
+[node name="Torch2" parent="Node2D" instance=ExtResource("7_qcn46")]
+position = Vector2(-86, 168)
+
+[node name="Torch3" parent="Node2D" instance=ExtResource("7_qcn46")]
+position = Vector2(315, -74)
+
+[node name="Torch4" parent="Node2D" instance=ExtResource("7_qcn46")]
+position = Vector2(452, -20)
+
+[node name="Torch5" parent="Node2D" instance=ExtResource("7_qcn46")]
+position = Vector2(451, 169)
+
+[node name="LeverManager" parent="." instance=ExtResource("8_nj2xx")]
+position = Vector2(56, 606)
+
+[node name="Lever" parent="LeverManager" instance=ExtResource("9_os7l5")]
+position = Vector2(-231, 135)
+scale = Vector2(0.6875, 0.8125)
+
+[node name="Lever2" parent="LeverManager" instance=ExtResource("9_os7l5")]
+position = Vector2(307, -57)
+scale = Vector2(0.6875, 0.8125)
+
+[node name="Lever3" parent="LeverManager" instance=ExtResource("9_os7l5")]
+position = Vector2(170, -110)
+scale = Vector2(0.6875, 0.8125)
+
+[node name="Lever4" parent="LeverManager" instance=ExtResource("9_os7l5")]
+position = Vector2(306, 132)
+scale = Vector2(0.6875, 0.8125)
+
+[node name="Lever5" parent="LeverManager" instance=ExtResource("9_os7l5")]
+position = Vector2(-234, -106)
+scale = Vector2(0.6875, 0.8125)
+
+[node name="Chest" parent="." instance=ExtResource("10_qcn46")]
+visible = false
+position = Vector2(119, 554)
+scale = Vector2(1.70826, 1.20127)
