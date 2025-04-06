@@ -1,4 +1,4 @@
-[gd_scene load_steps=188 format=4 uid="uid://d3dl8qe3i4hs5"]
+[gd_scene load_steps=190 format=4 uid="uid://d3dl8qe3i4hs5"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_edvum"]
 [ext_resource type="Script" uid="uid://cy5yn6ijpgu1n" path="res://Scripts/World/Levels/Story/Chapter1/EverfieldCity.cs" id="1_hf60o"]
@@ -29,8 +29,10 @@
 [ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="27_7ym34"]
 [ext_resource type="PackedScene" uid="uid://6rk1l15nvvdr" path="res://Scenes/World/PuzzleComponent/TorchPuzzleManager.tscn" id="28_e2cbw"]
 [ext_resource type="PackedScene" uid="uid://cwus4c1b4vpr" path="res://Scenes/World/PuzzleComponent/PressurePlate.tscn" id="28_ro4io"]
+[ext_resource type="Resource" uid="uid://dcacmt05pm02q" path="res://resources/loot_tables/2.tres" id="29_4wwhf"]
 [ext_resource type="PackedScene" uid="uid://hl4nthtc26ui" path="res://Scenes/World/PuzzleComponent/Movable.tscn" id="29_55v40"]
 [ext_resource type="PackedScene" uid="uid://dtqgojjodmope" path="res://Scenes/World/PuzzleComponent/StreetLight.tscn" id="29_ro4io"]
+[ext_resource type="Resource" uid="uid://clfbur06xipdm" path="res://resources/loot_tables/10.tres" id="29_t63a8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kycha"]
 radius = 14.0
@@ -1190,96 +1192,72 @@ position = Vector2(-275, 485)
 
 [node name="StatsManager" parent="Enemy/Aswang" index="5"]
 Level = 4.0
-MaxHealth = 221.126
-Defense = 9.56287
-Damage = 33.0
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang" index="12"]
-frame = 0
+MaxHealth = 292.252
+Defense = 19.1257
+Damage = 46.0
 
 [node name="Aswang2" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(87, 58)
 
 [node name="StatsManager" parent="Enemy/Aswang2" index="5"]
 Level = 4.0
-MaxHealth = 221.126
-Defense = 9.56287
-Damage = 33.0
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang2" index="12"]
-frame = 0
+MaxHealth = 292.252
+Defense = 19.1257
+Damage = 46.0
 
 [node name="Aswang3" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(123, 197)
 
 [node name="StatsManager" parent="Enemy/Aswang3" index="5"]
 Level = 4.0
-MaxHealth = 221.126
-Defense = 9.56287
-Damage = 33.0
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang3" index="12"]
-frame = 0
+MaxHealth = 292.252
+Defense = 19.1257
+Damage = 46.0
 
 [node name="Aswang4" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(49, -155)
 
 [node name="StatsManager" parent="Enemy/Aswang4" index="5"]
 Level = 3.0
-MaxHealth = 196.225
-Defense = 6.17117
-Damage = 28.1962
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang4" index="12"]
-frame = 0
+MaxHealth = 242.45
+Defense = 12.3423
+Damage = 36.3923
 
 [node name="Aswang5" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(136, 368)
 
 [node name="StatsManager" parent="Enemy/Aswang5" index="5"]
 Level = 5.0
-MaxHealth = 247.119
-Defense = 13.1033
-Damage = 38.1803
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang5" index="12"]
-frame = 0
+MaxHealth = 344.238
+Defense = 26.2066
+Damage = 56.3606
 
 [node name="Aswang6" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-184, 591)
 
 [node name="StatsManager" parent="Enemy/Aswang6" index="5"]
 Level = 4.0
-MaxHealth = 221.126
-Defense = 9.56287
-Damage = 33.0
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang6" index="12"]
-frame = 0
+MaxHealth = 292.252
+Defense = 19.1257
+Damage = 46.0
 
 [node name="Aswang7" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-156, 70)
 
 [node name="StatsManager" parent="Enemy/Aswang7" index="5"]
 Level = 4.0
-MaxHealth = 221.126
-Defense = 9.56287
-Damage = 33.0
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang7" index="12"]
-frame = 0
+MaxHealth = 292.252
+Defense = 19.1257
+Damage = 46.0
 
 [node name="Aswang8" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-34, 484)
 
 [node name="StatsManager" parent="Enemy/Aswang8" index="5"]
 Level = 4.0
-MaxHealth = 221.126
-Defense = 9.56287
-Damage = 33.0
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang8" index="12"]
-frame = 0
+MaxHealth = 292.252
+Defense = 19.1257
+Damage = 46.0
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -1622,6 +1600,7 @@ material = ExtResource("1_edvum")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
+frame = 2
 script = ExtResource("18_8kgvc")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1658,6 +1637,7 @@ position = Vector2(0, -32)
 unique_name_in_owner = true
 visible = false
 position = Vector2(57, 452)
+Loot = ExtResource("29_4wwhf")
 
 [node name="Puzzle 2" type="Node2D" parent="."]
 position = Vector2(1045, 59)
@@ -1666,6 +1646,7 @@ position = Vector2(1045, 59)
 unique_name_in_owner = true
 visible = false
 position = Vector2(-52, 145)
+Loot = ExtResource("29_t63a8")
 
 [node name="Plate" parent="Puzzle 2" instance=ExtResource("28_ro4io")]
 unique_name_in_owner = true

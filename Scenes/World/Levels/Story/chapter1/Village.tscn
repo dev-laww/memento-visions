@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=4 uid="uid://c2qx74ig42sum"]
+[gd_scene load_steps=92 format=4 uid="uid://c2qx74ig42sum"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_1cx0f"]
 [ext_resource type="Script" uid="uid://xi5ph3oued7k" path="res://Scripts/World/Levels/Story/Chapter1/Village.cs" id="1_yyi1k"]
@@ -26,8 +26,10 @@
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="20_tjaeu"]
 [ext_resource type="PackedScene" uid="uid://djjs6g4ap8st1" path="res://Scenes/World/PuzzleComponent/Torch.tscn" id="23_8vc12"]
 [ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="26_0d1sk"]
+[ext_resource type="Resource" uid="uid://clfbur06xipdm" path="res://resources/loot_tables/10.tres" id="27_kk6yg"]
 [ext_resource type="PackedScene" uid="uid://6rk1l15nvvdr" path="res://Scenes/World/PuzzleComponent/TorchPuzzleManager.tscn" id="27_lmktk"]
 [ext_resource type="PackedScene" uid="uid://dtqgojjodmope" path="res://Scenes/World/PuzzleComponent/StreetLight.tscn" id="28_lesfh"]
+[ext_resource type="Resource" uid="uid://bx16wb3x71qgf" path="res://resources/loot_tables/4.tres" id="28_qjdf3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_37443"]
 radius = 15.0333
@@ -595,7 +597,7 @@ material = ExtResource("1_1cx0f")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 3
+frame = 1
 script = ExtResource("12_2eimf")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -781,10 +783,13 @@ scale = Vector2(0.71875, 0.6875)
 unique_name_in_owner = true
 visible = false
 position = Vector2(576, 324)
+Loot = ExtResource("27_kk6yg")
 
 [node name="Chest2" parent="." instance=ExtResource("26_0d1sk")]
 unique_name_in_owner = true
+visible = false
 position = Vector2(845, 739)
+Loot = ExtResource("28_qjdf3")
 
 [node name="LightPuzzle" parent="." instance=ExtResource("27_lmktk")]
 position = Vector2(766, 782)
