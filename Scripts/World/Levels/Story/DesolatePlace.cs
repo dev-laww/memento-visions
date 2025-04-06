@@ -14,6 +14,7 @@ public partial class DesolatePlace : Node2D
     [Node] private TransitionArea TransitionArea;
     [Node] private SmoothTileMapLayer SecretDoor;
     [Node]private PressurePlate PressurePlate;
+    [Node] private DialogueTrigger DialogueDoor;
     public bool isInteracted = false;
     public int ObjectiveInteracted = 0;
     public bool isStoryTellerVisible = false;
@@ -35,6 +36,10 @@ public partial class DesolatePlace : Node2D
         ((StoryTeller)StoryTeller).setMonitoringOff();
     }
 
+    public void setDialogueDoorOff()
+    {
+        DialogueDoor.Monitoring = false;
+    }
     public void DisbableDoor()
     {
         SecretDoor.Enabled = false;

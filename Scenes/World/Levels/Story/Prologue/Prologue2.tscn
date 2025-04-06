@@ -161,14 +161,15 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="Node2D2" type="Node2D" parent="."]
 position = Vector2(1055, 361)
 
-[node name="DialogueTrigger" type="Area2D" parent="Node2D2"]
+[node name="DialogueDoor" type="Area2D" parent="Node2D2"]
+unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("19_aogjn")
 DialogueResource = ExtResource("21_2umdr")
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/DialogueTrigger"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/DialogueDoor"]
 position = Vector2(2, -6)
 shape = SubResource("RectangleShape2D_2umdr")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)

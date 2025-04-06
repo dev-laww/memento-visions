@@ -13,6 +13,7 @@ public partial class SchoolOutdoor : Node2D
     public int ObjectiveInteracted = 0;
     public bool isStoryTellerVisible = true;
     [Node] TransitionArea TransitionArea;
+    [Node] private DialogueTrigger DialoguePrologue;
 
 
     public override void _Notification(int what)
@@ -26,6 +27,10 @@ public partial class SchoolOutdoor : Node2D
     {
         base._Ready();
         
+    }
+    public void setDialoguePrologueOff()
+    {
+        DialoguePrologue.Monitoring = false;
     }
 
 
