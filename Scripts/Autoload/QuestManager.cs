@@ -42,10 +42,22 @@ public partial class QuestManager : Autoload<QuestManager>
 
     public override void _EnterTree()
     {
-        // TODO: load quests from save file
         base._EnterTree();
 
         CommandInterpreter.Register(this);
+
+        foreach (var questId in SaveManager.Data.GetQuests())
+        {
+            var quest = QuestRegistry.Get(questId);
+
+            if (quest is null)
+            {
+                Log.Error($"Quest {questId} not found.");
+                continue;
+            }
+
+            Add(quest);
+        }
     }
 
     public override void _ExitTree()
@@ -53,12 +65,13 @@ public partial class QuestManager : Autoload<QuestManager>
         base._ExitTree();
 
         CommandInterpreter.Unregister(this);
+
+        var questsIds = quests.Select(q => q.Id).ToList();
+        SaveManager.Data.SetQuests(questsIds);
     }
 
     public override void _Process(double delta)
     {
-        if (Engine.IsEditorHint()) return;
-
         var completedQuests = new List<Quest>();
 
         foreach (var quest in quests)
