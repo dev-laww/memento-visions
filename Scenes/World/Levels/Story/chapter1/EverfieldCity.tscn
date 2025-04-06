@@ -1594,11 +1594,11 @@ unique_name_in_owner = true
 visible = false
 position = Vector2(-52, 145)
 
-[node name="PressurePlate" parent="Puzzle 2" instance=ExtResource("28_ro4io")]
+[node name="Plate" parent="Puzzle 2" instance=ExtResource("28_ro4io")]
 unique_name_in_owner = true
 position = Vector2(5, 141)
 
-[node name="PressurePlate2" parent="Puzzle 2" instance=ExtResource("28_ro4io")]
+[node name="Plate2" parent="Puzzle 2" instance=ExtResource("28_ro4io")]
 unique_name_in_owner = true
 position = Vector2(-113, 142)
 

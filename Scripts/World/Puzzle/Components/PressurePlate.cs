@@ -34,18 +34,18 @@ public partial class PressurePlate : Node2D
     private void OnBodyEntered(Node2D body)
     {
       bodies += 1;
-      checkActive();
+      CheckActive();
       GD.Print("Body Entered");
     }
     
     private void OnBodyExited(Node2D body)
     {
         bodies -= 1;
-        checkActive();
+        CheckActive();
         GD.Print("Body Exited");
     }
     
-    private void checkActive()
+    private void CheckActive()
     {
         if (bodies > 0 && !isActive)
         {
@@ -53,13 +53,13 @@ public partial class PressurePlate : Node2D
             var tempRect = sprite.RegionRect;
             tempRect.Position = new Vector2(rect.Position.X - 32, tempRect.Position.Y);
             sprite.RegionRect = tempRect;
-            EmitSignal(nameof(Activated));
+            EmitSignalActivated();
         }
         else if (bodies == 0 && isActive)
         {
             isActive = false;
             sprite.RegionRect = rect;
-            EmitSignal(nameof(Deactivated));
+            EmitSignalDeactivated();
         }
     }
 }
