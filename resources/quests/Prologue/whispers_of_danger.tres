@@ -11,7 +11,7 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
 script = ExtResource("2_wh8fs")
-Id = "quest:WhisperofDanger"
+Id = "quest:whispers_of_danger"
 Title = "Whispers of Danger"
 Ordered = false
 Description = "Strange events have unsettled the village—whispers of an Aswang lurking in the shadows. The Chief is gathering information, and the locals are terrified. Before panic spreads, you must act. Speak to the Chief and decide your next move."

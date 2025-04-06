@@ -45,7 +45,7 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
 script = ExtResource("1_vt2c2")
-Id = "quest:find-mayor"
+Id = "quest:find_mayor"
 Title = "Mayor's Testimony"
 Ordered = false
 Description = "The Jeep dropped you off to another location instead of the Everfield City Courtyard. While exploring the area, you came across of what you are looking for-a who."

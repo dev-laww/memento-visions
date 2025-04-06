@@ -19,10 +19,10 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
 script = ExtResource("3_n1c2g")
-Id = "e151dd1b-2ef3-49de-b220-8e3b3b6c5123"
+Id = "quest:boss_quest"
 Title = "Breaking the Bond"
 Ordered = false
-Description = "engages in a roaring duel with Mayor Santos, avoiding lightning strikes and retaliating to locate a gap. The amulet must be broken with a forceful blow in order to release the aswang and put an end to the mayor's reign of terror."
+Description = "Engages in a roaring duel with Mayor Santos, avoiding lightning strikes and retaliating to locate a gap. The amulet must be broken with a forceful blow in order to release the aswang and put an end to the mayor's reign of terror."
 objectives = [SubResource("Resource_534js")]
 Experience = 0
 Items = []

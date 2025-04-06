@@ -48,7 +48,7 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
 script = ExtResource("3_r2ecs")
-Id = "d7d4c9c4-4813-47f7-8da0-f4a2b98068c0"
+Id = "quest:night_of_shadows"
 Title = "Night of Shadow"
 Ordered = true
 Description = "You spotted three aswang around the school surroundings. Track and eliminate them"

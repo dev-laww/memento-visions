@@ -53,7 +53,7 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
 script = ExtResource("3_xit71")
-Id = "quest:Testimony"
+Id = "quest:testimony"
 Title = "The Aswang’s Testimony"
 Ordered = true
 Description = "Mayor Santos has been using the Aswang to instill fear and silence opposition. After confronting him, Alejandro must fight off the creatures, track down a surviving Aswang, and extract the truth about the mayor’s dark pact."

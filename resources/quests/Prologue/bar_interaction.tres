@@ -11,7 +11,7 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
 script = ExtResource("2_07o3l")
-Id = "2702394e-ceba-4a80-b4a1-a148754da99a"
+Id = "quest:bar_interaction"
 Title = "First Steps into Darkness"
 Ordered = true
 Description = "In a dimly lit bar, Alex meets Chief to discuss a chilling case—rumors of a vengeful spirit linked to recent disappearances. Before stepping into the unknown, he must gather all the details."

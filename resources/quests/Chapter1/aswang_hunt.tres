@@ -26,7 +26,7 @@ Item = ExtResource("4_qdjvi")
 Quantity = 2
 metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 
-[sub_resource type="Resource" id="Resource_3mkcf"]
+[sub_resource type="Resource" id="Resource_hi571"]
 script = ExtResource("1_kcivv")
 Id = "enemy:aswang"
 Amount = 8
@@ -36,18 +36,18 @@ metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 script = ExtResource("2_symma")
 Type = 3
 Description = "Defeat 8 Aswang and question survivors for clues."
-Enemies = [SubResource("Resource_3mkcf")]
+Enemies = [SubResource("Resource_hi571")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="Resource" id="Resource_kcivv"]
 script = ExtResource("2_symma")
 Type = 2
-Description = " Approach the Aswang and question it for answers."
+Description = "Approach the Aswang and question it for answers."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
 script = ExtResource("3_kv4sf")
-Id = "quest: aswanghunt"
+Id = "quest:aswang_hunt"
 Title = "The Mayor’s Dark Pact"
 Ordered = false
 Description = "The Aswang grow bolder. Eliminate them and uncover who’s pulling the strings."
