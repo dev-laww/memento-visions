@@ -12,7 +12,7 @@ public abstract partial class Enemy : Entity
         Boss
     }
 
-    public string BossName { get; private set; }
+    public string EnemyName { get; private set; }
     public EnemyType Type { get; private set; }
     public override string ToString() => $"<Enemy ({Id})>";
 
@@ -20,15 +20,14 @@ public abstract partial class Enemy : Entity
     {
         var propertyList = new Array<Dictionary>();
 
-        if (Type == EnemyType.Boss)
+
+        propertyList.Add(new Dictionary
         {
-            propertyList.Add(new Dictionary
-            {
-                { "name", PropertyName.BossName },
-                { "type", (int)Variant.Type.String },
-                { "usage", (int)PropertyUsageFlags.Default }
-            });
-        }
+            { "name", PropertyName.EnemyName },
+            { "type", (int)Variant.Type.String },
+            { "usage", (int)PropertyUsageFlags.Default }
+        });
+
 
         propertyList.Add(new Dictionary
         {

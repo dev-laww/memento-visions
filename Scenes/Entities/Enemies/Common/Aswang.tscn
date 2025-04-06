@@ -1127,6 +1127,7 @@ transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition
 [node name="Aswang" type="CharacterBody2D"]
 collision_mask = 15
 script = ExtResource("1_qdfm2")
+EnemyName = "Aswang"
 Type = 0
 Id = "enemy:aswang"
 
@@ -1210,7 +1211,7 @@ position = Vector2(0, -26)
 sprite_frames = SubResource("SpriteFrames_5bdsy")
 animation = &"move_down"
 autoplay = "move_down"
-frame = 1
+frame = 2
 script = ExtResource("8_cvtll")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

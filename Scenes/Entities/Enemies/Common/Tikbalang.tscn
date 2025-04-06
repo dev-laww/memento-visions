@@ -1233,6 +1233,7 @@ graph_offset = Vector2(19, -43)
 [node name="Tikbalang" type="CharacterBody2D"]
 collision_mask = 15
 script = ExtResource("1_4ml10")
+EnemyName = "Tikbalang"
 Type = 0
 Id = "enemy:tikbalang"
 
@@ -1308,7 +1309,7 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_472wo")
 animation = &"idle_down"
 autoplay = "idle_down"
-frame = 1
+frame = 2
 script = ExtResource("9_6pqlh")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

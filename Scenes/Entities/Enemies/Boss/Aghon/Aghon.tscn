@@ -1757,9 +1757,8 @@ graph_offset = Vector2(1, -99)
 [node name="Aghon" type="CharacterBody2D"]
 collision_mask = 15
 script = ExtResource("1_bsq0j")
-BossName = "Aghon"
+EnemyName = "Aghon"
 Type = 1
-ExperienceWorth = 40.0
 Id = "enemy:aghon"
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]

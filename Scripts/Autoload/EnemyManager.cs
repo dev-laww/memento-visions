@@ -104,7 +104,7 @@ public partial class EnemyManager : Autoload<EnemyManager>
 
         healthBarsContainer.AddChild(healthBar);
 
-        healthBar.BossName = enemy.BossName;
+        healthBar.BossName = enemy.EnemyName;
         healthBar.HealthBar.Initialize(enemy.StatsManager);
         healthBars[enemy] = healthBar;
     }
