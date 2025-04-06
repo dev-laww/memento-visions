@@ -7,8 +7,8 @@
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_pu5lx"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="4_32qxv"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="5_hn08j"]
-[ext_resource type="Resource" path="res://resources/quests/Chapter1/aswang_hunt.tres" id="6_hf60o"]
-[ext_resource type="Resource" path="res://resources/quests/Chapter1/testimony.tres" id="8_7adkd"]
+[ext_resource type="Resource" uid="uid://cpgaa23upm6hk" path="res://resources/quests/Chapter1/aswang_hunt.tres" id="6_hf60o"]
+[ext_resource type="Resource" uid="uid://dubpfapg14rna" path="res://resources/quests/Chapter1/testimony.tres" id="8_7adkd"]
 [ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="8_516uf"]
 [ext_resource type="Resource" uid="uid://cd607lyv1rtkf" path="res://resources/dialogues/chapter1/chief.dialogue" id="8_aqpjb"]
 [ext_resource type="Resource" uid="uid://dfhk5ud22nohe" path="res://resources/dialogues/chapter1/chapter1.dialogue" id="9_kycha"]
@@ -1180,35 +1180,27 @@ position = Vector2(266, 615)
 
 [node name="Aswang" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-275, 485)
-ExperienceWorth = 20.0
 
 [node name="Aswang2" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(87, 58)
-ExperienceWorth = 20.0
 
 [node name="Aswang3" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(123, 197)
-ExperienceWorth = 20.0
 
 [node name="Aswang4" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(49, -155)
-ExperienceWorth = 20.0
 
 [node name="Aswang5" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(136, 368)
-ExperienceWorth = 20.0
 
 [node name="Aswang6" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-184, 591)
-ExperienceWorth = 20.0
 
 [node name="Aswang7" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-156, 70)
-ExperienceWorth = 20.0
 
 [node name="Aswang8" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-34, 484)
-ExperienceWorth = 20.0
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
