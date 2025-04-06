@@ -12,7 +12,8 @@ public partial class Strength : StatusEffect
     public override void Apply()
     {
         TargetStatsManager?.IncreaseDamage(Buff, Mode);
-        FloatingTextManager.SpawnFloatingText("Swift", Target.GlobalPosition);
+        var text = FloatingTextManager.SpawnFloatingText("Swift", Target.GlobalPosition);
+        text.Finished += text.QueueFree;
     }
 
     public override void Remove()

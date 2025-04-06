@@ -10,7 +10,8 @@ public partial class Swiftness : StatusEffect
     public override void Apply()
     {
         TargetStatsManager?.ApplySpeedModifier(Id, SpeedAmount);
-        FloatingTextManager.SpawnFloatingText("Swift", Target.GlobalPosition);
+        var text = FloatingTextManager.SpawnFloatingText("Swift", Target.GlobalPosition);
+        text.Finished += text.QueueFree;
     }
 
     public override void Remove()

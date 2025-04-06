@@ -12,7 +12,8 @@ public partial class Toughness : StatusEffect
     public override void Apply()
     {
         TargetStatsManager?.IncreaseDefense(Amount, Mode);
-        FloatingTextManager.SpawnFloatingText("Tough", Target.GlobalPosition);
+        var text = FloatingTextManager.SpawnFloatingText("Tough", Target.GlobalPosition);
+        text.Finished += text.QueueFree;
     }
 
     public override void Remove()
