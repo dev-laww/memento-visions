@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.CommandLine.IO;
 using System.Linq;
 using Game.Common;
 using Game.Common.Utilities;
@@ -11,17 +12,10 @@ namespace Game.Autoload;
 [Icon("res://assets/icons/quest-manager.svg")]
 public partial class QuestManager : Autoload<QuestManager>
 {
-    [Signal]
-    public delegate void AddedEventHandler(Quest quest);
-
-    [Signal]
-    public delegate void UpdatedEventHandler(Quest quest);
-
-    [Signal]
-    public delegate void CompletedEventHandler(Quest quest);
-
-    [Signal]
-    public delegate void RemovedEventHandler(Quest quest);
+    [Signal] public delegate void AddedEventHandler(Quest quest);
+    [Signal] public delegate void UpdatedEventHandler(Quest quest);
+    [Signal] public delegate void CompletedEventHandler(Quest quest);
+    [Signal] public delegate void RemovedEventHandler(Quest quest);
 
     // TODO: move signals to source generator
     public static event AddedEventHandler QuestAdded
@@ -50,6 +44,15 @@ public partial class QuestManager : Autoload<QuestManager>
     {
         // TODO: load quests from save file
         base._EnterTree();
+
+        CommandInterpreter.Register(this);
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+
+        CommandInterpreter.Unregister(this);
     }
 
     public override void _Process(double delta)
@@ -124,5 +127,39 @@ public partial class QuestManager : Autoload<QuestManager>
         Instance.EmitSignalRemoved(quest);
 
         Log.Info($"{quest} removed.");
+    }
+
+    [Command(Name = "quest_add", Description = "Adds a quest to the quest manager.")]
+    private void AddQuestCommand(string id)
+    {
+        var quest = QuestRegistry.Get(id);
+
+        if (quest is null)
+        {
+            DeveloperConsole.Console.Error.WriteLine("Quest not found.");
+            return;
+        }
+
+        if (quests.Contains(quest))
+        {
+            DeveloperConsole.Console.Error.WriteLine("Quest already added.");
+            return;
+        }
+
+        Add(quest);
+    }
+
+    [Command(Name = "quest_remove", Description = "Removes a quest from the quest manager.")]
+    private void RemoveQuestCommand(string id)
+    {
+        var quest = quests.FirstOrDefault(q => q.Id == id);
+
+        if (quest is null)
+        {
+            DeveloperConsole.Console.Error.WriteLine("Quest not found.");
+            return;
+        }
+
+        Remove(quest.Id);
     }
 }
