@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using Game.Autoload;
 using Game.Common;
-using Game.Common.Extensions;
 using Game.Data;
-using Game.Entities;
 using Game.UI.Common;
 using Game.Utils.Extensions;
 using Godot;
@@ -31,6 +29,8 @@ public partial class Crafting : Overlay
     [Node] private TextureButton decreaseButton;
     [Node] private Button craftButton;
     [Node] private HBoxContainer quantityControl;
+
+    [Signal] public delegate void ItemCraftedEventHandler();
 
     private List<Slot> slots;
     private Recipe selectedRecipe;
@@ -149,11 +149,8 @@ public partial class Crafting : Overlay
     {
         if (selectedRecipe is null) return;
 
-        var blackSmith = GetTree().Root.GetFirstChildOrNull<BlackSmith>();
-
-        blackSmith?.Work();
-
         Create(quantity);
+        EmitSignalItemCrafted();
         Close();
     }
 
