@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bg32n0pmt15qc"]
+[gd_scene load_steps=12 format=3 uid="uid://bg32n0pmt15qc"]
 
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="1_6t02b"]
 [ext_resource type="Script" uid="uid://dmv8sparxyw4k" path="res://Scripts/UI/Overlays/ModeSelect.cs" id="1_bao6r"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="2_2wb6e"]
 [ext_resource type="Material" uid="uid://bkm4tri52hhdr" path="res://resources/shaders/blur.tres" id="2_rq77x"]
 [ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="4_fray8"]
+[ext_resource type="Texture2D" uid="uid://c3uq6b0urr2n1" path="res://assets/ui/story.png" id="6_k01b4"]
+[ext_resource type="Texture2D" uid="uid://csk3g0jlmxo2v" path="res://assets/ui/frenzy.png" id="7_wr343"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fray8"]
 
@@ -16,9 +18,6 @@ texture_margin_top = 5.0
 texture_margin_right = 3.0
 texture_margin_bottom = 5.0
 region_rect = Rect2(0, 0, 32, 32)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6t02b"]
-size = Vector2(150, 150)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bao6r"]
 font = ExtResource("4_fray8")
@@ -117,7 +116,7 @@ theme_override_constants/separation = 10
 
 [node name="TextureRect" type="TextureRect" parent="StoryModeButton/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-texture = SubResource("PlaceholderTexture2D_6t02b")
+texture = ExtResource("6_k01b4")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StoryModeButton/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -192,7 +191,7 @@ theme_override_constants/separation = 10
 
 [node name="TextureRect" type="TextureRect" parent="FrenzyModeButton/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-texture = SubResource("PlaceholderTexture2D_6t02b")
+texture = ExtResource("7_wr343")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FrenzyModeButton/MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
