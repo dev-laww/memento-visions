@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://bngy8thpfvbcq"
+path="res://.godot/imported/storyteller.dialogue-bc2118958e4e99112fdea46e025638bb.tres"
+
+[deps]
+
+source_file="res://resources/dialogues/prologue/storyteller.dialogue"
+dest_files=["res://.godot/imported/storyteller.dialogue-bc2118958e4e99112fdea46e025638bb.tres"]
+
+[params]
+
+defaults=true
