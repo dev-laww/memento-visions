@@ -523,7 +523,7 @@ size = Vector2(54, 20)
 
 [node name="Village" type="Node2D"]
 script = ExtResource("1_yyi1k")
-Id = "1.3"
+Id = "chapter_1.3"
 
 [node name="Tilemap" type="Node2D" parent="."]
 
@@ -786,17 +786,17 @@ position = Vector2(576, 324)
 unique_name_in_owner = true
 position = Vector2(845, 739)
 
-[node name="TorchSequence" parent="." instance=ExtResource("27_lmktk")]
+[node name="LightPuzzle" parent="." instance=ExtResource("27_lmktk")]
 position = Vector2(766, 782)
 
-[node name="Light" parent="TorchSequence" instance=ExtResource("28_lesfh")]
+[node name="Light" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
 position = Vector2(-60, 119)
 
-[node name="Light2" parent="TorchSequence" instance=ExtResource("28_lesfh")]
+[node name="Light2" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
 position = Vector2(66, 119)
 
-[node name="Light3" parent="TorchSequence" instance=ExtResource("28_lesfh")]
+[node name="Light3" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
 position = Vector2(-62, -9)
 
-[node name="Light4" parent="TorchSequence" instance=ExtResource("28_lesfh")]
+[node name="Light4" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
 position = Vector2(66, -6)

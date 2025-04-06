@@ -2,8 +2,6 @@ using Game.Autoload;
 using Game.Common;
 using Game.Components;
 using Game.Data;
-using Game.UI.Screens;
-using Game.Utils;
 using Godot;
 using GodotUtilities;
 
@@ -50,7 +48,7 @@ public partial class ModeSelect : Overlay
                 return;
             }
 
-            GameManager.ChangeScene(scene.ResourcePath);
+            GameManager.ChangeScene(scene);
         };
     }
 

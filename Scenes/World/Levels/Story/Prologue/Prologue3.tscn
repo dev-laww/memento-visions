@@ -799,7 +799,7 @@ size = Vector2(20, 94)
 [node name="SchoolOutdoor" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_2ho0r")
-Id = "0.3"
+Id = "prologue_0.3"
 
 [node name="TelegraphCanvas" parent="." instance=ExtResource("2_r2wrx")]
 z_index = -1

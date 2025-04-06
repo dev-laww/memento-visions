@@ -1,30 +1,57 @@
-﻿using Game.Common;
-using Game.Common.Abstract;
+﻿using System.Collections.Generic;
+using FuzzySharp;
 using Game.Common.Utilities;
-using Game.World;
 using Godot;
+using Game.Common;
+using Game.World;
 
 namespace Game.Data;
 
-public partial class LevelRegistry : Registry<PackedScene, LevelRegistry>
+#nullable enable
+public partial class LevelRegistry : RefCounted
 {
-    protected override string ResourcePath => Constants.LEVELS_PATH;
+    private static readonly Dictionary<string, string> scenes = [];
 
-    protected override void LoadResources()
+    static LevelRegistry()
     {
-        var files = DirAccessUtils.GetFilesRecursively(Instance.Value.ResourcePath);
+        LoadScenes();
+    }
+
+    public static string? Get(string id)
+    {
+        scenes.TryGetValue(id, out var scene);
+
+        if (scene != null) return scene;
+
+        var matches = Process.ExtractOne(id, [.. scenes.Keys]);
+
+        if (matches.Score < 80) return null;
+
+        scenes.TryGetValue(matches.Value, out scene);
+
+        return scene;
+    }
+
+    public static bool Get(string id, out string? scene)
+    {
+        scene = Get(id);
+
+        return scene != null;
+    }
+
+    private static void LoadScenes()
+    {
+        var files = DirAccessUtils.GetFilesRecursively(Constants.LEVELS_PATH);
 
         foreach (var file in files)
         {
             if (!file.EndsWith(".tscn")) continue;
 
-            var resource = ResourceLoader.Load<PackedScene>(file);
+            var level = ResourceLoader.Load<PackedScene>(file).InstantiateOrNull<BaseLevel>();
 
-            if (resource == null) continue;
+            if (level == null) continue;
 
-            var level = resource.Instantiate<BaseLevel>();
-
-            Resources[level.Id] = resource;
+            scenes[level.Id] = file;
         }
     }
 }

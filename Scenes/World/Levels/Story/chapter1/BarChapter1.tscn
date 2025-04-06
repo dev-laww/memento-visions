@@ -38,7 +38,7 @@ radius = 33.7343
 [node name="BarPrologue" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_7pkig")
-Id = "1.1"
+Id = "chapter_1.1"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_71mkv")

@@ -298,8 +298,8 @@ color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(-455, 922, 866, 891, 865, 243, 647, 244, 603, 229, 651, 221, 854, 216, 829, 160, 804, 109, 804, 62, 16, 40, -9, -16, -103, -7, -128, 66, -125, 637, 367, 649, 367, 549, 248, 543, 214, 505, 223, 376, 273, 357, 283, 213, 496, 204, 523, 248, 302, 254, 292, 332, 248, 408, 254, 517, 389, 534, 394, 662, 366, 679, -433, 678, -446, 727)
 uv = PackedVector2Array(-455, 922, 866, 891, 873, 229, 647, 244, 603, 229, 644, 207, 857, 197, 829, 160, 804, 109, 804, 62, 16, 40, -9, -16, -103, -7, -128, 66, -125, 637, 367, 649, 367, 549, 248, 543, 214, 505, 223, 376, 273, 357, 283, 213, 496, 204, 534, 254, 302, 254, 292, 332, 248, 408, 254, 517, 408, 514, 399, 665, 364, 687, -433, 678, -454.668, 528.379)
 script = ExtResource("4_nwd2x")
-NavigationPolygon = SubResource("NavigationPolygon_nwd2x")
 ParseRootNode = NodePath("../Node2D")
+NavigationPolygon = SubResource("NavigationPolygon_nwd2x")
 metadata/_custom_type_script = "uid://cfscbenslyojv"
 
 [node name="@NavigationRegion2D@64599" type="NavigationRegion2D" parent="NavigationManager"]

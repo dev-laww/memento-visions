@@ -11,7 +11,7 @@ public class Save
     [JsonProperty("equipped")] public string Equipped { get; private set; } = string.Empty;
     [JsonProperty("quick_slot")] public string QuickSlotItem { get; private set; } = string.Empty;
 
-    [JsonProperty("current_chapter", DefaultValueHandling = DefaultValueHandling.Populate), DefaultValue("0.1")]
+    [JsonProperty("current_chapter", DefaultValueHandling = DefaultValueHandling.Populate), DefaultValue("prologue_0.1")]
     public string CurrentChapter { get; private set; }
 
     [JsonProperty("quests")] private List<string> quests = [];

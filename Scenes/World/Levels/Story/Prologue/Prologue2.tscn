@@ -36,7 +36,7 @@ size = Vector2(93, 38)
 
 [node name="Desolate Place" type="Node2D"]
 script = ExtResource("1_ngxr6")
-Id = "0.2"
+Id = "prologue_0.2"
 
 [node name="Art" type="Node2D" parent="."]
 
