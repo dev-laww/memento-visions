@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="9_4ouky"]
 [ext_resource type="PackedScene" uid="uid://hl4nthtc26ui" path="res://Scenes/World/PuzzleComponent/Movable.tscn" id="10_u5vmp"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="10_uxpbx"]
-[ext_resource type="Resource" path="res://resources/quests/Prologue/prologue_1.tres" id="11_2mjol"]
+[ext_resource type="Resource" uid="uid://c8sti11mk0wm1" path="res://resources/quests/Prologue/prologue_1.tres" id="11_2mjol"]
 [ext_resource type="Resource" uid="uid://hauoimw2ybjp" path="res://resources/dialogues/prologue/prologue1.1.dialogue" id="12_4ouky"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="12_lochm"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="13_owp6s"]
@@ -94,7 +94,7 @@ position = Vector2(1161, 44)
 position = Vector2(1607, 520)
 
 [node name="Movable" parent="Art" instance=ExtResource("10_u5vmp")]
-position = Vector2(1319, 307)
+position = Vector2(1317, 299)
 pushSpeed = 8.0
 
 [node name="Chief" parent="." instance=ExtResource("9_4ouky")]
@@ -109,7 +109,7 @@ script = ExtResource("10_uxpbx")
 Quest = ExtResource("11_2mjol")
 Mode = 0
 ShouldInteract = true
-InteractionLabel = "Interact"
+InteractionLabel = "Chief"
 DialogueResource = ExtResource("12_4ouky")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -121,6 +121,9 @@ debug_color = Color(0.427269, 0.718892, 0.882021, 0.42)
 position = Vector2(-2, -25)
 
 [node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("13_uxpbx")]
+
+[node name="Label" parent="Chief/QuestTrigger/Node2D/InteractionUI/HBoxContainer" index="1"]
+text = "Chief"
 
 [node name="Player" parent="." instance=ExtResource("12_lochm")]
 position = Vector2(58, 107)
@@ -145,14 +148,16 @@ position = Vector2(1677, 460)
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(1252, 354)
 
-[node name="DialogueTrigger" type="Area2D" parent="Node2D"]
+[node name="Boulder" type="Area2D" parent="Node2D"]
+unique_name_in_owner = true
+scale = Vector2(1.0217, 1)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("19_aogjn")
 DialogueResource = ExtResource("20_2umdr")
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/DialogueTrigger"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Boulder"]
 position = Vector2(0, -0.25)
 shape = SubResource("RectangleShape2D_4ouky")
 one_way_collision_margin = 0.0

@@ -1,3 +1,4 @@
 ~ start
 Pro Tips: Push the boulder to the pressure plate. \nWho knows what mystery it will show to us?
+do CurrentScene.setDialogueBoulderOff()
 => END
