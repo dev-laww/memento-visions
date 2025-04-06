@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bmxiu0n4a4dua"]
 
-[ext_resource type="Script" uid="uid://b7m6olk5uwk1v" path="res://Scripts/World/Objects/LeverManager.cs" id="1_wiwfb"]
+[ext_resource type="Script" uid="uid://bea0cqh3ykfw8" path="res://Scripts/World/Puzzle/Managers/LeverManager.cs" id="1_wiwfb"]
 
 [node name="LeverManager" type="Node2D"]
 script = ExtResource("1_wiwfb")

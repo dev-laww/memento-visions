@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://djjs6g4ap8st1"]
 
-[ext_resource type="Script" uid="uid://bcypua3gtlsds" path="res://Scripts/World/Objects/Torch.cs" id="1_oqylm"]
+[ext_resource type="Script" uid="uid://bkysuqodne2ot" path="res://Scripts/World/Puzzle/Components/Torch.cs" id="1_oqylm"]
 [ext_resource type="Texture2D" uid="uid://cna3ssn4ob7y2" path="res://assets/tilesets/forest.png" id="3_oqylm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oqylm"]

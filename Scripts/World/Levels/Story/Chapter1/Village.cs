@@ -1,7 +1,7 @@
 using Godot;
 using System;
 using Game.Components;
-using Game.World.Objects;
+using Game.World.Puzzle;
 using GodotUtilities;
 
 namespace Game.World.Levels.Story.Chapter1;

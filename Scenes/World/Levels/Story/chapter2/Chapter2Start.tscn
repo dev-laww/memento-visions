@@ -3,8 +3,8 @@
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_me3ug"]
 [ext_resource type="TileSet" uid="uid://wuwsi02f3fft" path="res://resources/tilesets/intramuros.tres" id="2_8vye7"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_iij52"]
-[ext_resource type="PackedScene" uid="uid://6rk1l15nvvdr" path="res://Scenes/Components/Props/TorchPuzzleManager.tscn" id="4_iij52"]
-[ext_resource type="PackedScene" uid="uid://dtqgojjodmope" path="res://Scenes/World/Objects/StreetLight.tscn" id="5_7xk6u"]
+[ext_resource type="PackedScene" uid="uid://6rk1l15nvvdr" path="res://Scenes/World/PuzzleComponent/TorchPuzzleManager.tscn" id="4_iij52"]
+[ext_resource type="PackedScene" uid="uid://dtqgojjodmope" path="res://Scenes/World/PuzzleComponent/StreetLight.tscn" id="5_7xk6u"]
 
 [node name="SmallVille" type="Node2D"]
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GodotUtilities;
 
-namespace Game.World.Objects;
+namespace Game.World.Puzzle;
 
 [Scene]
 public partial class LeverManager : Node2D

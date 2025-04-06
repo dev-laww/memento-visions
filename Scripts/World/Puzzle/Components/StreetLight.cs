@@ -3,7 +3,7 @@ using System;
 using Game.Components;
 using GodotUtilities;
 
-namespace Game.World.Objects;
+namespace Game.World.Puzzle;
 
 [Scene]
 public partial class StreetLight : StaticBody2D

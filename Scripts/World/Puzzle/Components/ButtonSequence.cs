@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using GodotUtilities;
 using Godot.Collections;
 
-namespace Game.World.Objects;
+namespace Game.World.Puzzle;
 
 [Scene]
 public partial class ButtonSequence : Node2D

@@ -2,7 +2,7 @@ using Godot;
 using System;
 using GodotUtilities;
 
-namespace Game.World.Objects;
+namespace Game.World.Puzzle;
 
 [Scene]
 public partial class MovableObject : RigidBody2D

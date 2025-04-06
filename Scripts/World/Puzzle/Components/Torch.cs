@@ -2,7 +2,7 @@ using Godot;
 using Game.Components;
 using GodotUtilities;
 
-namespace Game.World.Objects;
+namespace Game.World.Puzzle;
 
 [Scene]
 public partial class Torch : StaticBody2D

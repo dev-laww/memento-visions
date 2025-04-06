@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="4_gbkxn"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="4_nwd2x"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="6_dulkf"]
-[ext_resource type="PackedScene" uid="uid://djjs6g4ap8st1" path="res://Scenes/Components/Props/Torch.tscn" id="7_hof1k"]
-[ext_resource type="PackedScene" uid="uid://bmxiu0n4a4dua" path="res://Scenes/Components/Props/LeverManager.tscn" id="8_xiotl"]
-[ext_resource type="PackedScene" uid="uid://by64k6fa2d33l" path="res://Scenes/Components/Props/Lever.tscn" id="9_uqno6"]
+[ext_resource type="PackedScene" uid="uid://djjs6g4ap8st1" path="res://Scenes/World/PuzzleComponent/Torch.tscn" id="7_hof1k"]
+[ext_resource type="PackedScene" uid="uid://bmxiu0n4a4dua" path="res://Scenes/World/PuzzleComponent/LeverManager.tscn" id="8_xiotl"]
+[ext_resource type="PackedScene" uid="uid://by64k6fa2d33l" path="res://Scenes/World/PuzzleComponent/Lever.tscn" id="9_uqno6"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nwd2x"]
 

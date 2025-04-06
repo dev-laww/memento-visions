@@ -5,10 +5,10 @@
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_x85mb"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="4_laa1q"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="5_uvbsj"]
-[ext_resource type="PackedScene" uid="uid://djjs6g4ap8st1" path="res://Scenes/Components/Props/Torch.tscn" id="7_qcn46"]
-[ext_resource type="PackedScene" uid="uid://bmxiu0n4a4dua" path="res://Scenes/Components/Props/LeverManager.tscn" id="8_nj2xx"]
+[ext_resource type="PackedScene" uid="uid://djjs6g4ap8st1" path="res://Scenes/World/PuzzleComponent/Torch.tscn" id="7_qcn46"]
+[ext_resource type="PackedScene" uid="uid://bmxiu0n4a4dua" path="res://Scenes/World/PuzzleComponent/LeverManager.tscn" id="8_nj2xx"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="8_pwtwy"]
-[ext_resource type="PackedScene" uid="uid://by64k6fa2d33l" path="res://Scenes/Components/Props/Lever.tscn" id="9_os7l5"]
+[ext_resource type="PackedScene" uid="uid://by64k6fa2d33l" path="res://Scenes/World/PuzzleComponent/Lever.tscn" id="9_os7l5"]
 [ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="10_qcn46"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x85mb"]

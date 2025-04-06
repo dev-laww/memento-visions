@@ -1,5 +1,5 @@
 using Game.Utils.Extensions;
-using Game.World.Objects;
+using Game.World.Puzzle;
 using Godot;
 
 namespace Game.Scripts.Components.Area;

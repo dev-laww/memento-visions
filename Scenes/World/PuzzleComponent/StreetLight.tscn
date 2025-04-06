@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dtqgojjodmope"]
 
 [ext_resource type="Texture2D" uid="uid://c1voca36gnrhy" path="res://assets/light/light.png" id="1_okltg"]
-[ext_resource type="Script" uid="uid://bay52sbccd7vb" path="res://Scripts/World/Objects/StreetLight.cs" id="1_xgmf8"]
+[ext_resource type="Script" uid="uid://cu80jrvd5715a" path="res://Scripts/World/Puzzle/Components/StreetLight.cs" id="1_xgmf8"]
 [ext_resource type="Texture2D" uid="uid://dabcjbakwl7w0" path="res://assets/tilesets/intramuros.png" id="2_yqepv"]
 [ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="3_jj1ax"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="4_xgmf8"]

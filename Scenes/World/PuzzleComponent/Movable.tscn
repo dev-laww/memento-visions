@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://hl4nthtc26ui"]
 
-[ext_resource type="Script" uid="uid://cfb1bsex6h358" path="res://Scripts/World/Objects/MovableObject.cs" id="1_qyxgu"]
+[ext_resource type="Script" uid="uid://dpxhduvlm5hu5" path="res://Scripts/World/Puzzle/Components/MovableObject.cs" id="1_qyxgu"]
 [ext_resource type="Texture2D" uid="uid://b17pq7t4sro6r" path="res://assets/world/cube.png" id="2_qyxgu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1a3vw"]

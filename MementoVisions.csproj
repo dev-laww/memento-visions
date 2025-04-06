@@ -20,6 +20,33 @@
     <Compile Update="Game.SourceGenerators\**;Game.Common\**">
       <Visible>false</Visible>
     </Compile>
+    <Compile Update="Scripts\World\Puzzle\Components\Button.cs">
+      <Namespace>Game</Namespace>
+    </Compile>
+    <Compile Update="Scripts\World\Puzzle\Components\StreetLight.cs">
+      <Namespace>Game</Namespace>
+    </Compile>
+    <Compile Update="Scripts\World\Puzzle\Components\Torch.cs">
+      <Namespace>Game</Namespace>
+    </Compile>
+    <Compile Update="Scripts\World\Puzzle\Components\PressurePlate.cs">
+      <Namespace>Game</Namespace>
+    </Compile>
+    <Compile Update="Scripts\World\Puzzle\Components\MovableObject.cs">
+      <Namespace>Game</Namespace>
+    </Compile>
+    <Compile Update="Scripts\World\Puzzle\Components\Lever.cs">
+      <Namespace>Game</Namespace>
+    </Compile>
+    <Compile Update="Scripts\World\Puzzle\Components\ButtonSequence.cs">
+      <Namespace>Game</Namespace>
+    </Compile>
+    <Compile Update="Scripts\World\Puzzle\Managers\TorchPuzzleManager.cs">
+      <Namespace>Game</Namespace>
+    </Compile>
+    <Compile Update="Scripts\World\Puzzle\Managers\LeverManager.cs">
+      <Namespace>Game</Namespace>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Delaunator" Version="1.0.10" />

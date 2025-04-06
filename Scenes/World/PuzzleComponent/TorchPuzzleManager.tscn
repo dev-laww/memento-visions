@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://6rk1l15nvvdr"]
 
-[ext_resource type="Script" uid="uid://8v6vn4yhl5vv" path="res://Scripts/World/Objects/TorchPuzzleManager.cs" id="1_ym5xc"]
+[ext_resource type="Script" uid="uid://db8nhu4bnaoex" path="res://Scripts/World/Puzzle/Managers/TorchPuzzleManager.cs" id="1_sreku"]
 [ext_resource type="Texture2D" uid="uid://evj5fywn0us5" path="res://assets/world/arrow-red.png" id="2_ym5xc"]
 [ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="3_6fxp3"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="4_xddo1"]
@@ -9,9 +9,7 @@
 radius = 29.0172
 
 [node name="TorchSequence" type="Node2D"]
-script = ExtResource("1_ym5xc")
-displaySequenceDelay = null
-resetDelay = null
+script = ExtResource("1_sreku")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ym5xc")
@@ -22,14 +20,11 @@ collision_layer = 16
 collision_mask = 4
 script = ExtResource("3_6fxp3")
 InteractionLabel = "Interact"
-interactionLabel = "Interact"
-isInteractable = true
 metadata/_custom_type_script = "uid://cll1v71th1oms"
 
 [node name="Node2D" type="Node2D" parent="interaction"]
 
 [node name="InteractionUI" parent="interaction/Node2D" instance=ExtResource("4_xddo1")]
-Text = "Interact"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interaction"]
 shape = SubResource("CircleShape2D_nc7kq")

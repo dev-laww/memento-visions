@@ -4,7 +4,7 @@ using Godot;
 using Godot.Collections;
 using GodotUtilities;
 
-namespace Game.World.Objects;
+namespace Game.World.Puzzle;
 
 [Scene]
 public partial class Lever : Sprite2D

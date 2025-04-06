@@ -3,7 +3,7 @@ using System;
 using Game.Components;
 using Game.Entities;
 using Game.Data;
-using Game.World.Objects;
+using Game.World.Puzzle;
 using GodotUtilities;
 namespace Game.Levels.Story;
 

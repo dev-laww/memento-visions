@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Game.Components;
 using GodotUtilities;
 
-namespace Game.World.Objects;
+namespace Game.World.Puzzle;
 
 [Scene]
 public partial class TorchPuzzleManager : Node

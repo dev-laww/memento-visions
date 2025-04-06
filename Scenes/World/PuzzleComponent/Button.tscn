@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqddynirv12mp"]
 
-[ext_resource type="Script" uid="uid://c2py4nqhs3fvq" path="res://Scripts/World/Objects/Button.cs" id="2_34a3d"]
+[ext_resource type="Script" uid="uid://bpamsy8461u41" path="res://Scripts/World/Puzzle/Components/Button.cs" id="2_34a3d"]
 [ext_resource type="Texture2D" uid="uid://h5riygun8flq" path="res://assets/world/PressurePlate.png" id="2_q2a6o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tt8t1"]
