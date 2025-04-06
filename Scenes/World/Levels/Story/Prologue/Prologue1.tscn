@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://3td8x8h36elv"]
+[gd_scene load_steps=25 format=4 uid="uid://3td8x8h36elv"]
 
 [ext_resource type="Script" uid="uid://bw7smwgpceo61" path="res://Scripts/World/Levels/Story/PrologueBar.cs" id="1_oncee"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="2_7ak36"]
@@ -8,7 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="7_r42qq"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="8_l7bid"]
 [ext_resource type="Resource" uid="uid://0suhta3uejmr" path="res://resources/quests/Prologue/bar_interaction.tres" id="9_7ak36"]
+[ext_resource type="Resource" uid="uid://dk2nxvecyh5h3" path="res://resources/dialogues/prologue/prologue1.0.dialogue" id="9_fu5k5"]
+[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="10_dqrc3"]
 [ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemies/Common/Dummy.tscn" id="11_f5n2n"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="11_ucy7c"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="12_e44kk"]
 [ext_resource type="TileSet" uid="uid://c1mmutvocnp5g" path="res://resources/tilesets/bar/props.tres" id="13_bgadp"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="14_6utg0"]
@@ -104,12 +107,22 @@ collision_mask = 4
 script = ExtResource("4_dqrc3")
 Quest = ExtResource("9_7ak36")
 Mode = 0
-ShouldInteract = false
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("9_fu5k5")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/QuestTrigger"]
 shape = SubResource("CircleShape2D_coaxs")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
+
+[node name="InteractionUI" type="Control" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("10_dqrc3")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("11_ucy7c")
 
 [node name="Dummy4" parent="." instance=ExtResource("11_f5n2n")]
 position = Vector2(739, 447)

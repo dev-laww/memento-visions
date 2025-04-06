@@ -851,17 +851,47 @@ Loot = SubResource("Resource_r2wrx")
 [node name="Aswang3" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(770, 1648)
 
+[node name="StatsManager" parent="Enemies/Aswang3" index="5"]
+Level = 3.0
+MaxHealth = 196.225
+Defense = 6.17117
+Damage = 28.1962
+
 [node name="Aswang4" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(185, 1619)
+
+[node name="StatsManager" parent="Enemies/Aswang4" index="5"]
+Level = 3.0
+MaxHealth = 196.225
+Defense = 6.17117
+Damage = 28.1962
 
 [node name="Aswang5" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(387, 316)
 
+[node name="StatsManager" parent="Enemies/Aswang5" index="5"]
+Level = 2.0
+MaxHealth = 172.482
+Defense = 2.96229
+Damage = 23.8284
+
 [node name="Aswang6" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(637, 359)
 
+[node name="StatsManager" parent="Enemies/Aswang6" index="5"]
+Level = 2.0
+MaxHealth = 172.482
+Defense = 2.96229
+Damage = 23.8284
+
 [node name="Aswang8" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(475, 948)
+
+[node name="StatsManager" parent="Enemies/Aswang8" index="5"]
+Level = 2.0
+MaxHealth = 172.482
+Defense = 2.96229
+Damage = 23.8284
 
 [node name="Player" parent="." instance=ExtResource("11_6kbwn")]
 position = Vector2(117, 60)
@@ -1083,7 +1113,7 @@ material = ExtResource("3_r0s03")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 3
+frame = 2
 script = ExtResource("21_uhybl")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1134,4 +1164,9 @@ position = Vector2(144, 96)
 shape = SubResource("RectangleShape2D_ytljl")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
+[editable path="Enemies/Aswang3"]
+[editable path="Enemies/Aswang4"]
+[editable path="Enemies/Aswang5"]
+[editable path="Enemies/Aswang6"]
+[editable path="Enemies/Aswang8"]
 [editable path="StoryTeller/DialogueTrigger/Node2D/InteractionUI"]

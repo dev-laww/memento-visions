@@ -2,7 +2,7 @@
 #conditional dialogue
 
 #complete quest
-do CurrentScene.CompleteObjectiveAtIndex(1)
+do CurrentScene.CompleteQuest(1)
 Alex: You! Who are you?!
 ???: I see you have defeated my underlings.
 ???: But can you do the same to me?
