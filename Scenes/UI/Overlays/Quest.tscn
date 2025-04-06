@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cuymxmsjlw48y"]
+[gd_scene load_steps=13 format=3 uid="uid://cuymxmsjlw48y"]
 
 [ext_resource type="Script" uid="uid://d11g3gbjm7cot" path="res://Scripts/UI/Overlays/Quest.cs" id="1_18xdc"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_y52qg"]
@@ -24,6 +24,13 @@ load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.c
 atlas = SubResource("CompressedTexture2D_sfl0v")
 region = Rect2(128, 32, 32, 32)
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_18xdc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_18xdc"]
+font = ExtResource("5_488ye")
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Quest" type="CanvasLayer"]
 script = ExtResource("1_18xdc")
 
@@ -34,7 +41,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_y52qg")
+theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -55,182 +65,107 @@ texture_disabled = SubResource("AtlasTexture_wu2a5")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("4_gsxto")
-region_rect = Rect2(0, 0, 32, 32)
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/NinePatchRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer"]
-layout_mode = 2
-
-[node name="QuestTree" type="Tree" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer"]
+[node name="QuestTitlesContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
-clip_contents = false
-custom_minimum_size = Vector2(230, 0)
-layout_direction = 1
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("2_y52qg")
-theme_override_constants/button_margin = 10
-column_titles_visible = true
-allow_search = false
-hide_folding = true
-enable_recursive_folding = false
-hide_root = true
-select_mode = 1
-scroll_horizontal_enabled = false
+theme_override_constants/separation = 10
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer"]
+[node name="QuestTitle" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/QuestTitlesContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_18xdc")
+text = "Quest Title"
+
+[node name="QuestInfo" type="NinePatchRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("4_gsxto")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
+patch_margin_left = 3
+patch_margin_top = 5
+patch_margin_right = 3
+patch_margin_bottom = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/QuestInfo"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer"]
-clip_contents = true
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/QuestInfo/MarginContainer"]
 layout_mode = 2
-size_flags_stretch_ratio = 20.0
-theme = ExtResource("2_y52qg")
 theme_override_constants/separation = 20
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/QuestInfo/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("2_y52qg")
-theme_override_fonts/font = ExtResource("5_488ye")
-theme_override_font_sizes/font_size = 26
-horizontal_alignment = 1
-uppercase = true
+text = "Quest Title"
+label_settings = SubResource("LabelSettings_18xdc")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/QuestInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("4_gsxto")
-region_rect = Rect2(-0.336523, -0.0132232, 32.3036, 31.6703)
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
-
-[node name="Objectives" type="RichTextLabel" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/NinePatchRect"]
+[node name="Description" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/QuestInfo/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = 7.0
-offset_right = -9.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(183, 54.5)
-size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_italics_font_size = 8
+theme_override_font_sizes/italics_font_size = 8
+theme_override_font_sizes/mono_font_size = 8
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 8
 bbcode_enabled = true
-fit_content = true
-scroll_following = true
+text = "Quest Description"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
-
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("4_gsxto")
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
-
-[node name="Description" type="RichTextLabel" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/VBoxContainer2/NinePatchRect"]
+[node name="Objectives" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/QuestInfo/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 9.0
-offset_top = 7.0
-offset_right = -12.0
-offset_bottom = -7.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(172.5, 35)
-theme_override_font_sizes/normal_font_size = 12
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/bold_italics_font_size = 8
+theme_override_font_sizes/italics_font_size = 8
+theme_override_font_sizes/mono_font_size = 8
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 8
 bbcode_enabled = true
-fit_content = true
-scroll_following = true
-justification_flags = 171
+text = "Quest Objectives"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+[node name="Rewards" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/QuestInfo/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.65
-
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("4_gsxto")
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
-
-[node name="Reward" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer2/NinePatchRect"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = 5.0
-offset_right = -14.0
-offset_bottom = -9.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(173.5, 17)
-size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("5_488ye")
-theme_override_font_sizes/font_size = 10
-vertical_alignment = 2
+theme_override_font_sizes/bold_italics_font_size = 8
+theme_override_font_sizes/italics_font_size = 8
+theme_override_font_sizes/mono_font_size = 8
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 8
+bbcode_enabled = true
+text = "x1 Item
+x100 xp"
