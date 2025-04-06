@@ -10,7 +10,7 @@ namespace Game.Levels.Story;
 [Scene]
 public partial class Bar : Node2D
 {
-    private Quest quest = ResourceLoader.Load<Quest>("res://resources/quests/Prologue/night-of-shadows.tres");
+    private Quest quest = ResourceLoader.Load<Quest>("res://resources/quests/Prologue/night_of_shadows.tres");
     [Node] private TransitionArea TransitionArea;
     public override void _Notification(int what)
     {
