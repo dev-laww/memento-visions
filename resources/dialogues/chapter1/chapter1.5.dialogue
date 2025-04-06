@@ -1,4 +1,6 @@
 ~ start
 Mayor Santos: This city needs strength, and only I can bring it progress.
 Alex: Progress built on the bodies of innocent people? I don’t think so.
+do CurrentScene. PlayFadeAnimation()
+do CurrentScene.Spawn()
 => END
