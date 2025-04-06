@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://benoaphq2f8wm"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://benoaphq2f8wm"]
 
+[ext_resource type="Script" uid="uid://dv2844renhntw" path="res://Scripts/Data/Item/Consumable/BananaCue.cs" id="1_hfgxx"]
 [ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_w0ouh"]
-[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_air7k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w0ouh"]
 atlas = ExtResource("1_w0ouh")
@@ -9,7 +9,7 @@ region = Rect2(80, 16, 16, 16)
 
 [resource]
 resource_name = "Banana Cue"
-script = ExtResource("2_air7k")
+script = ExtResource("1_hfgxx")
 Id = "item:banana_cue"
 Icon = SubResource("AtlasTexture_w0ouh")
 Name = "Banana Cue"

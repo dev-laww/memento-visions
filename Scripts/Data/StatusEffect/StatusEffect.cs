@@ -19,7 +19,7 @@ public partial class StatusEffect : Resource
 
     [Export] public string Id;
     [Export] public string StatusEffectName;
-    [Export] public float Duration { get; private set; }
+    [Export] public float Duration;
     [Export(PropertyHint.MultilineText)] public string Description;
     [Export] public int MaxStacks = 1;
 

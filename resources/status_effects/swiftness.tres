@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dxf5kcoxex0e6"]
+
+[ext_resource type="Script" uid="uid://co1v2a8p8tuu8" path="res://Scripts/Data/StatusEffect/Swiftness.cs" id="1_6rmuh"]
+
+[resource]
+script = ExtResource("1_6rmuh")
+SpeedAmount = 0.5
+Id = "status_effect:swiftness"
+StatusEffectName = "Swiftness"
+Duration = 30.0
+Description = ""
+MaxStacks = 1
+metadata/_custom_type_script = "uid://clu5oggovs0qe"

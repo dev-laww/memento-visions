@@ -1,17 +1,17 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://du6n3qtjkmo27"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://du6n3qtjkmo27"]
 
 [ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_gs888"]
-[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_twy13"]
+[ext_resource type="Script" uid="uid://dw04lp5hq0xq0" path="res://Scripts/Data/Item/Consumable/TsaangGubat.cs" id="2_gs888"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yc3e6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_twy13"]
 atlas = ExtResource("1_gs888")
 region = Rect2(96, 32, 16, 16)
 
 [resource]
 resource_name = "Tsaang Gubat"
-script = ExtResource("2_twy13")
+script = ExtResource("2_gs888")
 Id = "item:tsaang_gubat"
-Icon = SubResource("AtlasTexture_yc3e6")
+Icon = SubResource("AtlasTexture_twy13")
 Name = "Tsaang Gubat"
 ItemCategory = 0
 Description = "A wild herbal tea with an earthy, slightly bitter taste. Known for its distinct aroma and deep, soothing flavor.

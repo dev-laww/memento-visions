@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://i61h4rqp41x0"]
+
+[ext_resource type="Script" uid="uid://da3memv6rqifw" path="res://Scripts/Data/StatusEffect/Toughness.cs" id="1_uh64g"]
+
+[resource]
+script = ExtResource("1_uh64g")
+Amount = 10.0
+Mode = 1
+Id = "status_effect:toughness"
+StatusEffectName = "Toughness"
+Duration = 10.0
+Description = ""
+MaxStacks = 1
+metadata/_custom_type_script = "uid://clu5oggovs0qe"

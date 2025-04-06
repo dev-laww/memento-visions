@@ -1,17 +1,17 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://ct2y0f318jxyf"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://ct2y0f318jxyf"]
 
 [ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_uvlj0"]
-[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_mk0tq"]
+[ext_resource type="Script" uid="uid://cmg3f73o1lech" path="res://Scripts/Data/Item/Consumable/Salabat.cs" id="2_mcwtw"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6osf0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7m7ed"]
 atlas = ExtResource("1_uvlj0")
 region = Rect2(0, 0, 16, 16)
 
 [resource]
 resource_name = "Salabat"
-script = ExtResource("2_mk0tq")
+script = ExtResource("2_mcwtw")
 Id = "item:salabat"
-Icon = SubResource("AtlasTexture_6osf0")
+Icon = SubResource("AtlasTexture_7m7ed")
 Name = "Salabat"
 ItemCategory = 0
 Description = "Warm herbal drink known for its restorative properties.

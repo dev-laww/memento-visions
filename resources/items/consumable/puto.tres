@@ -1,21 +1,21 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dx7hcjqmrqnj1"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://dx7hcjqmrqnj1"]
 
 [ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_gk8bu"]
-[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_dur1c"]
+[ext_resource type="Script" uid="uid://mx6ainol0igm" path="res://Scripts/Data/Item/Consumable/Puto.cs" id="2_gk8bu"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fauw7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dur1c"]
 atlas = ExtResource("1_gk8bu")
 region = Rect2(64, 32, 16, 16)
 
 [resource]
 resource_name = "Puto"
-script = ExtResource("2_dur1c")
+script = ExtResource("2_gk8bu")
 Id = "item:puto"
-Icon = SubResource("AtlasTexture_fauw7")
+Icon = SubResource("AtlasTexture_dur1c")
 Name = "Puto"
 ItemCategory = 0
 Description = "A soft, fluffy rice cake with a mildly sweet taste, often enjoyed as a light and delicate treat.
 
 Usage: 
-Reduces incoming damage by 15% and restores 5% of HP when consumed."
+Reduces incoming damage by 15% for 10 seconds and restores 5% of HP when consumed."
 metadata/_custom_type_script = "uid://b772648mucsjw"

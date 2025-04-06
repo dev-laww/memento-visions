@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://damsdw5nwud3f"]
+
+[ext_resource type="Script" uid="uid://daunwinxt8sn2" path="res://Scripts/Data/StatusEffect/Strength.cs" id="1_qvhwi"]
+
+[resource]
+script = ExtResource("1_qvhwi")
+buff = 0.5
+mode = 0
+Id = "status_effect:strength"
+StatusEffectName = "Strength"
+Duration = 10.0
+Description = ""
+MaxStacks = 1
+metadata/_custom_type_script = "uid://clu5oggovs0qe"

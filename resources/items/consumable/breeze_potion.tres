@@ -1,17 +1,17 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://cynqml7na5ksi"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://cynqml7na5ksi"]
 
 [ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_lpk1o"]
-[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_wn5ri"]
+[ext_resource type="Script" uid="uid://b6w7vrmyurg51" path="res://Scripts/Data/Item/Consumable/BreezePotion.cs" id="2_lpk1o"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_058v3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wn5ri"]
 atlas = ExtResource("1_lpk1o")
 region = Rect2(48, 16, 16, 16)
 
 [resource]
 resource_name = "Breeze Potion"
-script = ExtResource("2_wn5ri")
+script = ExtResource("2_lpk1o")
 Id = "item:breeze_potion"
-Icon = SubResource("AtlasTexture_058v3")
+Icon = SubResource("AtlasTexture_wn5ri")
 Name = "Breeze Potion"
 ItemCategory = 1
 Description = "A light, ethereal potion infused with the blessing of Aghon. It carries the essence of a gentle breeze, refreshing the body and calming the soul.

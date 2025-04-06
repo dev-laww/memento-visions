@@ -1,21 +1,21 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://7cbhpfgtsp6y"]
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://7cbhpfgtsp6y"]
 
 [ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_q401a"]
-[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_2swa1"]
+[ext_resource type="Script" uid="uid://c7ma8dme4d7mo" path="res://Scripts/Data/Item/Consumable/Taho.cs" id="2_q401a"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_q401a"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2swa1"]
 atlas = ExtResource("1_q401a")
 region = Rect2(80, 32, 16, 16)
 
 [resource]
 resource_name = "Taho"
-script = ExtResource("2_2swa1")
+script = ExtResource("2_q401a")
 Id = "id:taho"
-Icon = SubResource("AtlasTexture_q401a")
+Icon = SubResource("AtlasTexture_2swa1")
 Name = "Taho"
 ItemCategory = 0
 Description = "A warm, velvety mass draped in golden syrup, with soft, translucent orbs nestled within. Its surface glistens, rich with sweetness, yielding effortlessly to touch.
 
 Usage:
-Reduces incoming damage by 15% and restores 10% of HP when consumed."
+Reduces incoming damage by 15% for 30 seconds and restores 15% of HP when consumed."
 metadata/_custom_type_script = "uid://b772648mucsjw"
