@@ -595,7 +595,7 @@ material = ExtResource("1_1cx0f")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 1
+frame = 3
 script = ExtResource("12_2eimf")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -782,23 +782,21 @@ unique_name_in_owner = true
 visible = false
 position = Vector2(576, 324)
 
-[node name="LightPuzzle" parent="." instance=ExtResource("27_lmktk")]
-unique_name_in_owner = true
-position = Vector2(767, 791)
-
-[node name="Light" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
-position = Vector2(-59, 107)
-
-[node name="Light2" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
-position = Vector2(60, 107)
-
-[node name="Light3" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
-position = Vector2(-59, -12)
-
-[node name="Light4" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
-position = Vector2(63, -12)
-
 [node name="Chest2" parent="." instance=ExtResource("26_0d1sk")]
 unique_name_in_owner = true
-visible = false
-position = Vector2(825, 853)
+position = Vector2(845, 739)
+
+[node name="TorchSequence" parent="." instance=ExtResource("27_lmktk")]
+position = Vector2(766, 782)
+
+[node name="Light" parent="TorchSequence" instance=ExtResource("28_lesfh")]
+position = Vector2(-60, 119)
+
+[node name="Light2" parent="TorchSequence" instance=ExtResource("28_lesfh")]
+position = Vector2(66, 119)
+
+[node name="Light3" parent="TorchSequence" instance=ExtResource("28_lesfh")]
+position = Vector2(-62, -9)
+
+[node name="Light4" parent="TorchSequence" instance=ExtResource("28_lesfh")]
+position = Vector2(66, -6)

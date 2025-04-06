@@ -11,21 +11,21 @@ namespace Game.World.Puzzle;
 [Scene]
 public partial class TorchPuzzleManager : Node
 {
-    [Node] private Interaction interaction;
-    [Export] private float displaySequenceDelay = 1.0f;
-    [Export] private float resetDelay = 5.0f;
-    [Export] private int sequenceLength = 4;
+    [Node] private Interaction _interaction;
+    [Export] private float _displaySequenceDelay = 1.0f;
+    [Export] private float _resetDelay = 20.0f;
+    [Export] private int _sequenceLength = 4;
     
     [Signal] public delegate void PuzzleSolvedEventHandler();
     [Signal] public delegate void PuzzleFailedEventHandler();
 
-    private StreetLight[] torches;
-    private int[] correctSequence;
-    private readonly List<int> playerSequence = new();
-    private Timer resetTimer;
+    private StreetLight[] _torches;
+    private int[] _correctSequence;
+    private readonly List<int> _playerSequence = new();
+    private Timer _resetTimer;
     
     private enum PuzzleState { Inactive, ShowingSequence, Active }
-    private PuzzleState currentState;
+    private PuzzleState _currentState;
 
     public override void _Notification(int what)
     {
@@ -35,36 +35,43 @@ public partial class TorchPuzzleManager : Node
 
     public override void _Ready()
     {
-        interaction.Interacted += StartPuzzle;
+        _interaction.Interacted += StartPuzzle;
         InitializeTorches();
         ValidateTorches();
+        InitializeResetTimer();
         GenerateNewSequence();
     }
 
     private void InitializeTorches()
     {
-        torches = GetChildren()
+        _torches = GetChildren()
             .Where(child => child is StreetLight)
             .Cast<StreetLight>()
             .ToArray();
 
-        foreach (var (torch, index) in torches.WithIndex())
+        foreach (var (torch, index) in _torches.WithIndex())
             torch.TorchLit += () => OnTorchLit(index);
     }
 
     private void ValidateTorches()
     {
-        if (torches.Length == 0)
+        if (_torches.Length == 0)
             GD.PushError("No StreetLight nodes found in children!");
         
-        if (sequenceLength > torches.Length)
+        if (_sequenceLength > _torches.Length)
             GD.PushError("Sequence length exceeds available torches!");
     }
-    
+
+    private void InitializeResetTimer()
+    {
+        _resetTimer = new Timer { OneShot = true };
+        AddChild(_resetTimer);
+        _resetTimer.Timeout += OnPuzzleFailed;
+    }
 
     public void StartPuzzle()
     {
-        if (currentState != PuzzleState.Inactive) return;
+        if (_currentState != PuzzleState.Inactive) return;
         
         ResetPuzzleState();
         _ = ShowSequenceAsync();
@@ -72,33 +79,33 @@ public partial class TorchPuzzleManager : Node
 
     private async Task ShowSequenceAsync()
     {
-        currentState = PuzzleState.ShowingSequence;
+        _currentState = PuzzleState.ShowingSequence;
         
-        foreach (var index in correctSequence)
+        foreach (var index in _correctSequence)
         {
             ResetAllTorches();
-            torches[index].LightUp(true);
-            await ToSignal(GetTree().CreateTimer(displaySequenceDelay), "timeout");
+            _torches[index].LightUp(true);
+            await ToSignal(GetTree().CreateTimer(_displaySequenceDelay), "timeout");
         }
         
         ResetAllTorches();
-        currentState = PuzzleState.Active;
-        resetTimer.Start(resetDelay);
+        _currentState = PuzzleState.Active;
+        _resetTimer.Start(_resetDelay);
     }
 
     private void GenerateNewSequence()
     {
-        var indices = Enumerable.Range(0, torches.Length).ToArray();
+        var indices = Enumerable.Range(0, _torches.Length).ToArray();
         indices.Shuffle();
-        correctSequence = indices.Take(sequenceLength).ToArray();
+        _correctSequence = indices.Take(_sequenceLength).ToArray();
     }
 
     private void OnTorchLit(int torchIndex)
     {
-        if (currentState != PuzzleState.Active) return;
+        if (_currentState != PuzzleState.Active) return;
 
-        resetTimer.Start(resetDelay);
-        playerSequence.Add(torchIndex);
+        _resetTimer.Start(_resetDelay); // Reset timeout
+        _playerSequence.Add(torchIndex);
 
         if (!ValidateCurrentStep())
         {
@@ -106,43 +113,43 @@ public partial class TorchPuzzleManager : Node
             return;
         }
 
-        if (playerSequence.Count == correctSequence.Length)
+        if (_playerSequence.Count == _correctSequence.Length)
             OnPuzzleSolved();
     }
 
     private bool ValidateCurrentStep()
     {
-        var currentStep = playerSequence.Count - 1;
-        return playerSequence[currentStep] == correctSequence[currentStep];
+        var currentStep = _playerSequence.Count - 1;
+        return _playerSequence[currentStep] == _correctSequence[currentStep];
     }
 
     private void OnPuzzleSolved()
     {
-        currentState = PuzzleState.Inactive;
-        resetTimer.Stop();
-        EmitSignalPuzzleSolved();
+        _currentState = PuzzleState.Inactive;
+        _resetTimer.Stop();
+        EmitSignal(nameof(PuzzleSolved));
         GD.Print("Puzzle solved!");
     }
 
     private void OnPuzzleFailed()
     {
-        currentState = PuzzleState.Inactive;
-        resetTimer.Stop();
+        _currentState = PuzzleState.Inactive;
+        _resetTimer.Stop();
         ResetAllTorches();
-        EmitSignalPuzzleFailed();
+        EmitSignal(nameof(PuzzleFailed));
         GD.Print("Puzzle failed!");
     }
 
     private void ResetPuzzleState()
     {
-        playerSequence.Clear();
+        _playerSequence.Clear();
         GenerateNewSequence();
         ResetAllTorches();
     }
 
     private void ResetAllTorches()
     {
-        foreach (var torch in torches)
+        foreach (var torch in _torches)
             torch.ResetLight();
     }
 }
