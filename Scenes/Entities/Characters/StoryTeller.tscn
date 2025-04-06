@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://d2hrj4ebc2ra6"]
+[gd_scene load_steps=60 format=3 uid="uid://d2hrj4ebc2ra6"]
 
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="1_inirs"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_37443"]
@@ -6,11 +6,6 @@
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="3_5rnxu"]
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/characters/npc/storyteller.png" id="3_u6lhy"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="4_5rnxu"]
-[ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="7_34ku0"]
-[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="8_ei8eq"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_34ku0"]
-radius = 21.0238
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_37443"]
 radius = 4.12311
@@ -496,22 +491,6 @@ metadata/_custom_type_script = "uid://clh46y8w17vem"
 script = ExtResource("3_5rnxu")
 metadata/_custom_type_script = "uid://dnpva4sn53c1r"
 
-[node name="Interaction" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 4
-script = ExtResource("7_34ku0")
-InteractionLabel = "Interact"
-metadata/_custom_type_script = "uid://cll1v71th1oms"
-
-[node name="Node2D" type="Node2D" parent="Interaction"]
-position = Vector2(0, -34)
-
-[node name="InteractionUI" parent="Interaction/Node2D" instance=ExtResource("8_ei8eq")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
-shape = SubResource("CircleShape2D_34ku0")
-debug_color = Color(0.88, 0.525, 0.898, 0.42)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_37443")
 
@@ -520,9 +499,7 @@ texture_filter = 2
 material = ExtResource("2_37443")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
-animation = &"work_exit"
-frame = 3
-frame_progress = 1.0
+animation = &"idle"
 script = ExtResource("4_5rnxu")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

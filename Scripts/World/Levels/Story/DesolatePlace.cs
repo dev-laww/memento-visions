@@ -9,16 +9,16 @@ namespace Game.Levels.Story;
 
 [Scene]
 public partial class DesolatePlace : Node2D
-{   
+{
     [Node] private Entity StoryTeller;
     [Node] private TransitionArea TransitionArea;
     [Node] private SmoothTileMapLayer SecretDoor;
-    [Node]private PressurePlate PressurePlate;
+    [Node] private PressurePlate PressurePlate;
     [Node] private DialogueTrigger DialogueDoor;
     public bool isInteracted = false;
     public int ObjectiveInteracted = 0;
     public bool isStoryTellerVisible = false;
-    
+
 
     public override void _Notification(int what)
     {
@@ -33,7 +33,6 @@ public partial class DesolatePlace : Node2D
         TransitionArea.Monitoring = false;
         PressurePlate.Activated += DisbableDoor;
         PressurePlate.Deactivated += EnableDoor;
-        ((StoryTeller)StoryTeller).setMonitoringOff();
     }
 
     public void setDialogueDoorOff()
@@ -57,6 +56,4 @@ public partial class DesolatePlace : Node2D
         isStoryTellerVisible = true;
         TransitionArea.Monitoring = true;
     }
-    
-    
 }
