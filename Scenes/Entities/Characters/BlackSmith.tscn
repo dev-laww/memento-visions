@@ -1,16 +1,11 @@
-[gd_scene load_steps=86 format=3 uid="uid://dgqrvixy2ocww"]
+[gd_scene load_steps=83 format=3 uid="uid://dgqrvixy2ocww"]
 
-[ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="1_hw0pw"]
 [ext_resource type="Script" uid="uid://dlhoi4y35jo82" path="res://Scripts/Entities/Characters/BlackSmith.cs" id="1_m0lkp"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_byyuo"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_fbx4l"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="4_iumo3"]
 [ext_resource type="Texture2D" uid="uid://cedupdnagtvrd" path="res://assets/entities/characters/npc/black-smith.png" id="5_eh65q"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="6_j0jn0"]
-[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="7_fbx4l"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_fbx4l"]
-radius = 22.0227
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rtbut"]
 radius = 4.0
@@ -662,7 +657,7 @@ states/work_entry/position = Vector2(490, -24)
 states/work_exit/node = SubResource("AnimationNodeAnimation_w6u4a")
 states/work_exit/position = Vector2(490, 66)
 transitions = ["Start", "breath", SubResource("AnimationNodeStateMachineTransition_0mie7"), "breath", "hammer_up", SubResource("AnimationNodeStateMachineTransition_3qwjf"), "hammer_up", "breath_hammer", SubResource("AnimationNodeStateMachineTransition_w6u4a"), "hammer_down", "breath", SubResource("AnimationNodeStateMachineTransition_5okcv"), "breath_hammer", "hammer_down", SubResource("AnimationNodeStateMachineTransition_0e505"), "breath", "work_entry", SubResource("AnimationNodeStateMachineTransition_4w6bp"), "work_entry", "work", SubResource("AnimationNodeStateMachineTransition_rq4ft"), "work_exit", "breath", SubResource("AnimationNodeStateMachineTransition_g5yu0"), "work", "work_exit", SubResource("AnimationNodeStateMachineTransition_ldhcb")]
-graph_offset = Vector2(2, -65)
+graph_offset = Vector2(145, -71)
 
 [node name="BlackSmith" type="CharacterBody2D"]
 collision_mask = 15
@@ -681,23 +676,6 @@ metadata/_custom_type_script = "uid://clh46y8w17vem"
 [node name="StatsManager" type="Node" parent="."]
 script = ExtResource("2_byyuo")
 metadata/_custom_type_script = "uid://dnpva4sn53c1r"
-
-[node name="Interaction" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 4
-script = ExtResource("1_hw0pw")
-InteractionLabel = "Craft"
-metadata/_custom_type_script = "uid://cll1v71th1oms"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
-shape = SubResource("CircleShape2D_fbx4l")
-debug_color = Color(0.88, 0.525, 0.898, 0.42)
-
-[node name="Node2D" type="Node2D" parent="Interaction"]
-position = Vector2(0, -35)
-
-[node name="InteractionUI" parent="Interaction/Node2D" instance=ExtResource("7_fbx4l")]
-unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.57079
