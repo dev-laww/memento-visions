@@ -16,5 +16,12 @@ public partial class Start : CanvasLayer
         WireNodes();
     }
 
-    public override void _Ready() => button.Pressed += () => GameManager.ChangeScene("res://Scenes/World/Bar.tscn");
+    public override void _Ready()
+    {
+        button.Pressed += () =>
+        {
+            GameManager.ChangeScene("res://Scenes/World/Bar.tscn");
+            button.Disabled = true;
+        };
+    }
 }
