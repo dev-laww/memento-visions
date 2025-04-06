@@ -76,6 +76,7 @@ public partial class Player : Entity
         var data = SaveManager.Data;
 
         StatsManager.SetLevel(data?.Level ?? 1);
+        StatsManager.SetExperience(data?.Experience ?? 0);
     }
 
     public override void OnProcess(double delta)
