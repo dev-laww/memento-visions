@@ -6,7 +6,7 @@ using GodotUtilities;
 namespace Game.World;
 
 [Scene]
-public partial class SchoolOutdoor : Node2D
+public partial class SchoolOutdoor : BaseLevel
 {
     [Node] private Entity StoryTeller;
     public int ObjectiveInteracted = 0;

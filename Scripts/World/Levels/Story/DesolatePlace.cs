@@ -9,7 +9,7 @@ using GodotUtilities;
 namespace Game.World;
 
 [Scene]
-public partial class DesolatePlace : Node2D
+public partial class DesolatePlace : BaseLevel
 {
     [Node] private Entity StoryTeller;
     [Node] private TransitionArea TransitionArea;

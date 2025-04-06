@@ -6,7 +6,7 @@ using GodotUtilities;
 namespace Game.World;
 
 [Scene]
-public partial class TownSquare : Node2D
+public partial class TownSquare : BaseLevel
 {
     [Node] private Entity Mayor;
     [Node] private AnimationPlayer AnimationPlayer;

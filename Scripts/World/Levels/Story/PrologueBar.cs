@@ -5,7 +5,7 @@ using GodotUtilities;
 namespace Game.World;
 
 [Scene]
-public partial class PrologueBar : Node2D
+public partial class PrologueBar : BaseLevel
 {
     public bool isInteracted = false;
     [Node] private TransitionArea TransitionArea;

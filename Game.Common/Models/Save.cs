@@ -9,6 +9,7 @@ public class Save
     [JsonProperty("items")] public List<Item> Items { get; private set; } = [];
     [JsonProperty("equipped")] public string Equipped { get; private set; } = string.Empty;
     [JsonProperty("quick_slot")] public string QuickSlotItem { get; private set; } = string.Empty;
+    [JsonProperty("current_chapter")] public string CurrentChapter { get; private set; } = string.Empty;
     [JsonProperty("quests")] private List<string> quests = [];
 
     public void SetItems(List<Item> items) => Items = items;
@@ -34,5 +35,10 @@ public class Save
     public void SetQuests(List<string> quests)
     {
         this.quests = quests;
+    }
+
+    public void SetCurrentChapter(string chapter)
+    {
+        CurrentChapter = chapter;
     }
 }

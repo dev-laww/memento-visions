@@ -8,7 +8,7 @@ using GodotUtilities;
 namespace Game.World;
 
 [Scene]
-public partial class EverfieldCity : Node2D
+public partial class EverfieldCity : BaseLevel
 {
     [Node] private Entity Chief2;
     [Node] private TransitionArea TransitionArea;

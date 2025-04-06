@@ -7,7 +7,7 @@ using GodotUtilities;
 namespace Game.World;
 
 [Scene]
-public partial class Village : Node2D
+public partial class Village : BaseLevel
 {
     [Node] private TransitionArea TransitionArea;
     [Node] private DialogueTrigger DialogueTrigger;
