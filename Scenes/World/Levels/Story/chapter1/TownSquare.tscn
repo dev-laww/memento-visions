@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=4 uid="uid://jdy1vpq1yng4"]
+[gd_scene load_steps=126 format=4 uid="uid://jdy1vpq1yng4"]
 
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="1_5yg8b"]
 [ext_resource type="Script" uid="uid://bww7pdfaugnj3" path="res://Scripts/World/Levels/Story/Chapter1/TownSquare.cs" id="1_k56vb"]
@@ -8,10 +8,13 @@
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="5_6brkl"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="6_16p58"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="7_m44gr"]
-[ext_resource type="Resource" uid="uid://dubpfapg14rna" path="res://resources/quests/Chapter1/quest-testimony3.tres" id="9_5yg8b"]
+[ext_resource type="Resource" uid="uid://p1ig2gfq1hmt" path="res://resources/quests/Chapter1/BossQuest.tres" id="9_uqojl"]
+[ext_resource type="Resource" uid="uid://dep0nuy2sjapb" path="res://resources/dialogues/chapter1/chapter1.5.dialogue" id="10_khwcc"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="11_xbr3h"]
 [ext_resource type="Script" uid="uid://bhqbwv1yagshy" path="res://Scripts/Components/Spawner.cs" id="12_8tuqj"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="12_uqojl"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="13_j760s"]
+[ext_resource type="PackedScene" uid="uid://c6ddutu3xqvkn" path="res://Scenes/Entities/Enemies/Boss/Aghon/Aghon.tscn" id="13_uqojl"]
 [ext_resource type="Script" uid="uid://bry0o66fh4vsu" path="res://Scripts/Data/Entity/EnemySpawnEntry.cs" id="13_xbr3h"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_i1ehx"]
@@ -510,6 +513,7 @@ radius = 29.1548
 [sub_resource type="Resource" id="Resource_v4bk2"]
 resource_local_to_scene = true
 script = ExtResource("13_xbr3h")
+enemyScene = ExtResource("13_uqojl")
 spawnChance = 1.0
 Weight = 1
 Min = -1.0
@@ -921,31 +925,37 @@ navigation_polygon = SubResource("NavigationPolygon_okm4p")
 [node name="@NavigationRegion2D@59430" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_bgshn")
 
-[node name="Chief" parent="." instance=ExtResource("6_16p58")]
-position = Vector2(437, 257)
+[node name="Mayor" parent="." instance=ExtResource("6_16p58")]
+unique_name_in_owner = true
+position = Vector2(437, 259)
 
-[node name="QuestTrigger" type="Area2D" parent="Chief"]
+[node name="QuestTrigger" type="Area2D" parent="Mayor"]
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("7_m44gr")
-Quest = ExtResource("9_5yg8b")
-Mode = 1
-ShouldInteract = false
-Objective = null
-ObjectiveIndex = 0
+Quest = ExtResource("9_uqojl")
+Mode = 0
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("10_khwcc")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/QuestTrigger"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mayor/QuestTrigger"]
 shape = SubResource("CircleShape2D_8tuqj")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
-[node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
+[node name="Node2D" type="Node2D" parent="Mayor/QuestTrigger"]
 
-[node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("11_xbr3h")]
+[node name="InteractionUI" type="Control" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("11_xbr3h")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("12_uqojl")
 
-[node name="Spawner" type="Node" parent="."]
+[node name="Spawner" type="Node" parent="." node_paths=PackedStringArray("spawnRoot")]
 unique_name_in_owner = true
 script = ExtResource("12_8tuqj")
+spawnRoot = NodePath("..")
 Noise = SubResource("FastNoiseLite_khwcc")
 SpawnEntries = Array[ExtResource("13_xbr3h")]([SubResource("Resource_v4bk2"), SubResource("Resource_matur"), SubResource("Resource_ld255"), SubResource("Resource_76id6"), SubResource("Resource_npnnp")])
 metadata/_custom_type_script = "uid://bhqbwv1yagshy"

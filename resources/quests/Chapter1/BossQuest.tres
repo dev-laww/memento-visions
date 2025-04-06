@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=6 format=3 uid="uid://p1ig2gfq1hmt"]
+
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="1_df3dk"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="2_vaxtg"]
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="3_n1c2g"]
+
+[sub_resource type="Resource" id="Resource_py1je"]
+script = ExtResource("1_df3dk")
+Id = "enemy:aghon"
+Amount = 1
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_534js"]
+script = ExtResource("2_vaxtg")
+Type = 3
+Description = "Eliminate Enemy Aghon"
+Enemies = [SubResource("Resource_py1je")]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[resource]
+script = ExtResource("3_n1c2g")
+Id = "e151dd1b-2ef3-49de-b220-8e3b3b6c5123"
+Title = "Breaking the Bond"
+Ordered = false
+Description = "engages in a roaring duel with Mayor Santos, avoiding lightning strikes and retaliating to locate a gap. The amulet must be broken with a forceful blow in order to release the aswang and put an end to the mayor's reign of terror."
+objectives = [SubResource("Resource_534js")]
+Experience = 0
+Items = []
+metadata/_custom_type_script = "uid://dssta8xepjmkg"
