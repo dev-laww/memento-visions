@@ -196,6 +196,7 @@ public partial class StatsManager : Node
         {
             Experience -= requiredExperience;
             levelsIncreased++;
+            requiredExperience = CalculateRequiredExperience(Level + levelsIncreased + 1);
         }
 
         if (levelsIncreased > 0) IncreaseLevel(levelsIncreased);
@@ -205,6 +206,11 @@ public partial class StatsManager : Node
     {
         Level = value;
         ApplyLevelToStats();
+    }
+
+    public void SetExperience(float value)
+    {
+        experience = value;
     }
 
     private void ApplyLevelToStats()
@@ -339,7 +345,8 @@ public partial class StatsManager : Node
         }
     }
 
-    private float CalculateRequiredExperience(float lvl) => (float)(lvl * 4 + Math.Pow(level, 1.8) + 10);
+    private static float CalculateRequiredExperience(float lvl) => (float)(lvl * 4 + Math.Pow(lvl, 1.8) + 10);
+    public static float CalculateExperienceReward(float lvl) => (float)(lvl * 2 + Math.Pow(lvl, 1.2));
 
     public override string[] _GetConfigurationWarnings()
     {

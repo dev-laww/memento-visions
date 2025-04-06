@@ -14,7 +14,6 @@ public abstract partial class Enemy : Entity
 
     public string BossName { get; private set; }
     public EnemyType Type { get; private set; }
-    public float ExperienceWorth { get; private set; } = 20f;
     public override string ToString() => $"<Enemy ({Id})>";
 
     public override Array<Dictionary> _GetPropertyList()
@@ -38,13 +37,6 @@ public abstract partial class Enemy : Entity
             { "usage", (int)PropertyUsageFlags.Default },
             { "hint", (int)PropertyHint.Enum },
             { "hint_string", "Common,Boss" }
-        });
-        
-        propertyList.Add(new Dictionary
-        {
-            { "name", PropertyName.ExperienceWorth },
-            { "type", (int)Variant.Type.Float },
-            { "usage", (int)PropertyUsageFlags.Default }
         });
 
         return propertyList;

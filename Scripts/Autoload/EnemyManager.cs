@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Common;
+using Game.Components;
 using Game.Entities;
 using Game.UI.Common;
 using Game.Utils.Extensions;
@@ -59,23 +60,12 @@ public partial class EnemyManager : Autoload<EnemyManager>
         EnemyUnregistered?.Invoke(info.Victim as Enemy);
         EnemyCountChanged?.Invoke(Instance.enemies.Count);
 
-        // TODO: check if balanced
         var enemy = (Enemy)info.Victim;
         var killer = info.Killer;
-        var multiplier = 1f;
-
-        if (enemy.StatsManager.Level > killer.StatsManager.Level)
-        {
-            multiplier += (enemy.StatsManager.Level - killer.StatsManager.Level) / 10f;
-        }
-        else if (enemy.StatsManager.Level < killer.StatsManager.Level)
-        {
-            multiplier -= (killer.StatsManager.Level - enemy.StatsManager.Level) / 10f;
-        }
-
+        var multiplier = 1f + (enemy.StatsManager.Level - killer.StatsManager.Level) / 10f;
         multiplier = Math.Clamp(multiplier, 0.5f, 1.5f);
 
-        var calculatedExperience = multiplier * enemy.ExperienceWorth;
+        var calculatedExperience = StatsManager.CalculateExperienceReward(killer.StatsManager.Level) * multiplier;
         killer.StatsManager.IncreaseExperience(calculatedExperience);
 
         Log.Debug($"{info.Victim} removed from the registry. {info}");
