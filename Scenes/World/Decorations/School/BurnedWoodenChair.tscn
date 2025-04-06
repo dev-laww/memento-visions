@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://58jqrupdcss0" path="res://Scripts/Components/SmoothSprite2D.cs" id="3_odju6"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="4_vkrxr"]
 [ext_resource type="Resource" uid="uid://bb54w5sxnh122" path="res://resources/dialogues/prologue/BurnedChairDesc.dialogue" id="5_kykbt"]
-[ext_resource type="Resource" uid="uid://bcsrr6l46xq2" path="res://resources/quests/Prologue/prologue1.tres" id="5_yosd6"]
+[ext_resource type="Resource" path="res://resources/quests/Prologue/prologue_1.tres" id="5_yosd6"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="6_hk2xv"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="6_i3y0y"]
 

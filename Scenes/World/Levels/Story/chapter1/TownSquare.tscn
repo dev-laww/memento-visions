@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=4 uid="uid://jdy1vpq1yng4"]
+[gd_scene load_steps=125 format=4 uid="uid://jdy1vpq1yng4"]
 
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="1_5yg8b"]
 [ext_resource type="Script" uid="uid://bww7pdfaugnj3" path="res://Scripts/World/Levels/Story/Chapter1/TownSquare.cs" id="1_k56vb"]
@@ -8,11 +8,10 @@
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="5_6brkl"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="6_16p58"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="7_m44gr"]
-[ext_resource type="Resource" uid="uid://p1ig2gfq1hmt" path="res://resources/quests/Chapter1/boss_quest.tres" id="9_uqojl"]
+[ext_resource type="Resource" path="res://resources/quests/Chapter1/boss_quest.tres" id="9_uqojl"]
 [ext_resource type="Resource" uid="uid://dep0nuy2sjapb" path="res://resources/dialogues/chapter1/chapter1.5.dialogue" id="10_khwcc"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="11_xbr3h"]
 [ext_resource type="Script" uid="uid://bhqbwv1yagshy" path="res://Scripts/Components/Spawner.cs" id="12_8tuqj"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="12_uqojl"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="13_j760s"]
 [ext_resource type="PackedScene" uid="uid://c6ddutu3xqvkn" path="res://Scenes/Entities/Enemies/Boss/Aghon/Aghon.tscn" id="13_uqojl"]
 [ext_resource type="Script" uid="uid://bry0o66fh4vsu" path="res://Scripts/Data/Entity/EnemySpawnEntry.cs" id="13_xbr3h"]
@@ -946,11 +945,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Mayor/QuestTrigger"]
 
-[node name="InteractionUI" type="Control" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("11_xbr3h")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("12_uqojl")
+[node name="InteractionUI" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("11_xbr3h")]
 
 [node name="Spawner" type="Node" parent="." node_paths=PackedStringArray("spawnRoot")]
 unique_name_in_owner = true

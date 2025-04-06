@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=6 format=3 uid="uid://p1ig2gfq1hmt"]
+[gd_resource type="Resource" script_class="Quest" load_steps=6 format=3 uid="uid://bmfojvkeiy1pi"]
 
 [ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="1_df3dk"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="2_vaxtg"]

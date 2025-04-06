@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="2_7ak36"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="3_fu5k5"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="4_dqrc3"]
-[ext_resource type="Resource" uid="uid://0suhta3uejmr" path="res://resources/quests/Prologue/BarInteraction.tres" id="5_ucy7c"]
+[ext_resource type="Resource" path="res://resources/quests/Prologue/prologue_1.tres" id="5_ucy7c"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="7_r42qq"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="8_l7bid"]
 [ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="9_pxtv0"]

@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="6_my81a"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="6_r45d3"]
 [ext_resource type="PackedScene" uid="uid://bmxiu0n4a4dua" path="res://Scenes/World/PuzzleComponent/LeverManager.tscn" id="6_xh25p"]
-[ext_resource type="Resource" uid="uid://cv1uxwlv2liuj" path="res://resources/quests/Chapter1/find-mayor_village.tres" id="7_tjaeu"]
+[ext_resource type="Resource" path="res://resources/quests/Chapter1/find_mayor.tres" id="7_tjaeu"]
 [ext_resource type="PackedScene" uid="uid://by64k6fa2d33l" path="res://Scenes/World/PuzzleComponent/Lever.tscn" id="7_yyi1k"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="8_5s4cp"]
 [ext_resource type="Resource" uid="uid://cljpwqykcd03o" path="res://resources/dialogues/chapter1/find-mayor_dialogue.dialogue" id="8_qboe2"]

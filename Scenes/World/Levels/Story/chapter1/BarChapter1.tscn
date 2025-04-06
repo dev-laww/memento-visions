@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="10_xl1pr"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="11_72xov"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="12_shkw5"]
-[ext_resource type="Resource" uid="uid://dpkjhbld0pfm4" path="res://resources/quests/Chapter1/whisper-intramuros1.tres" id="13_53sbg"]
+[ext_resource type="Resource" path="res://resources/quests/Chapter1/whispers_in_intramuros_1.tres" id="13_53sbg"]
 [ext_resource type="Resource" uid="uid://4wmyo56injo5" path="res://resources/dialogues/chapter1/chapter1.2.dialogue" id="14_cgm6k"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_jtnov"]
 [ext_resource type="PackedScene" uid="uid://dgqrvixy2ocww" path="res://Scenes/Entities/Characters/BlackSmith.tscn" id="16_cdpoc"]

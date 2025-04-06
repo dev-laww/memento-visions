@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://58jqrupdcss0" path="res://Scripts/Components/SmoothSprite2D.cs" id="3_tkva0"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="4_5f4dp"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="5_1flri"]
-[ext_resource type="Resource" uid="uid://bcsrr6l46xq2" path="res://resources/quests/Prologue/prologue1.tres" id="5_afc1n"]
+[ext_resource type="Resource" path="res://resources/quests/Prologue/prologue_1.tres" id="5_afc1n"]
 [ext_resource type="Resource" uid="uid://duruvlye3dyyc" path="res://resources/dialogues/prologue/PhotographDetails.dialogue" id="5_qbwjs"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="7_25tis"]
 [ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="9_nftxq"]

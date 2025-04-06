@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="9_4ouky"]
 [ext_resource type="PackedScene" uid="uid://hl4nthtc26ui" path="res://Scenes/World/PuzzleComponent/Movable.tscn" id="10_u5vmp"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="10_uxpbx"]
-[ext_resource type="Resource" uid="uid://bcsrr6l46xq2" path="res://resources/quests/Prologue/prologue1.tres" id="11_2mjol"]
+[ext_resource type="Resource" path="res://resources/quests/Prologue/prologue_1.tres" id="11_2mjol"]
 [ext_resource type="Resource" uid="uid://hauoimw2ybjp" path="res://resources/dialogues/prologue/prologue1.1.dialogue" id="12_4ouky"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="12_lochm"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="13_owp6s"]

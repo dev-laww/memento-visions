@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=13 format=3 uid="uid://bcsrr6l46xq2"]
+[gd_resource type="Resource" script_class="Quest" load_steps=13 format=3 uid="uid://c8sti11mk0wm1"]
 
 [ext_resource type="Resource" uid="uid://efbp6aphwl23" path="res://resources/items/material/aswang_elixir.tres" id="1_b6lpj"]
 [ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_1y6ia"]

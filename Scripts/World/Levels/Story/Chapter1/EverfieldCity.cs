@@ -12,8 +12,8 @@ public partial class EverfieldCity : Node2D
 {
     [Node] private Entity Chief2;
     [Node] private TransitionArea TransitionArea;
-    private Quest quest = ResourceLoader.Load<Quest>("res://resources/quests/Chapter1/aswang-hunt2.tres");
-    private Quest quest1 = ResourceLoader.Load<Quest>("res://resources/quests/Chapter1/whisper-intramuros1.tres");
+    private Quest quest = ResourceLoader.Load<Quest>("res://resources/quests/Chapter1/aswang_hunt.tres");
+    private Quest quest1 = ResourceLoader.Load<Quest>("res://resources/quests/Prologue/whispers_of_danger.tres");
 
     public override void _Notification(int what)
     {
