@@ -1,9 +1,10 @@
-[gd_scene load_steps=62 format=3 uid="uid://defbwilwt3lnr"]
+[gd_scene load_steps=63 format=3 uid="uid://defbwilwt3lnr"]
 
 [ext_resource type="Script" uid="uid://dieuyuvkt2usl" path="res://Scripts/Entities/Characters/Witch.cs" id="1_gnirw"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_2mfdo"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_76gbe"]
 [ext_resource type="Texture2D" uid="uid://rt82n10gt3dw" path="res://assets/entities/characters/npc/witch.png" id="3_76gbe"]
+[ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="3_dsfs5"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="4_dsfs5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2mfdo"]
@@ -477,6 +478,7 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-53, -76)
 
 [node name="Witch" type="CharacterBody2D"]
+collision_mask = 15
 script = ExtResource("1_gnirw")
 Id = "npc:witch"
 isNpc = true
@@ -489,6 +491,10 @@ min_wait_time = 4.0
 max_wait_time = 7.0
 metadata/_custom_type_script = "uid://clh46y8w17vem"
 
+[node name="StatsManager" type="Node" parent="."]
+script = ExtResource("3_dsfs5")
+metadata/_custom_type_script = "uid://dnpva4sn53c1r"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2mfdo")
 
@@ -498,7 +504,6 @@ material = ExtResource("2_2mfdo")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_qiaeq")
 animation = &"idle"
-frame = 6
 script = ExtResource("4_dsfs5")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
