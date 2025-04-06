@@ -6,7 +6,7 @@ namespace Game.World;
 [GlobalClass]
 public partial class BaseLevel : Node2D
 {
-    [Export] private string Id;
+    [Export] public string Id;
 
     public sealed override void _EnterTree()
     {

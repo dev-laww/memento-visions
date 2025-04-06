@@ -1,11 +1,13 @@
+using Game.Autoload;
+using Game.Common;
 using Game.Components;
+using Game.Data;
 using Game.UI.Screens;
 using Game.Utils;
 using Godot;
 using GodotUtilities;
 
 namespace Game.UI.Overlays;
-
 
 [Scene]
 public partial class ModeSelect : Overlay
@@ -39,7 +41,16 @@ public partial class ModeSelect : Overlay
         storyModeButton.Pressed += () =>
         {
             Close();
-            GameManager.ChangeScene("res://Scenes/World/Levels/Story.tscn");
+            var currentChapter = SaveManager.Data.CurrentChapter;
+            var scene = LevelRegistry.Get(currentChapter);
+
+            if (scene == null)
+            {
+                Log.Error($"No scene found for chapter {currentChapter}");
+                return;
+            }
+
+            GameManager.ChangeScene(scene.ResourcePath);
         };
     }
 
