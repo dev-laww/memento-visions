@@ -13,7 +13,7 @@ public partial class PressurePlate : Node2D
     [Signal] public delegate void DeactivatedEventHandler();
 
     private int bodies = 0;
-    bool isActive = false;
+    public  bool isActive = false;
     private Rect2 rect;
     
     

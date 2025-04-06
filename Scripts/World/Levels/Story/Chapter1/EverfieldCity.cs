@@ -3,6 +3,8 @@ using Game.Autoload;
 using Game.Components;
 using Game.Data;
 using Game.Entities;
+using Game.World;
+using Game.World.Puzzle;
 using GodotUtilities;
 
 namespace Game.World;
@@ -12,8 +14,12 @@ public partial class EverfieldCity : BaseLevel
 {
     [Node] private Entity Chief2;
     [Node] private TransitionArea TransitionArea;
-    private Quest quest = ResourceLoader.Load<Quest>("res://resources/quests/Chapter1/aswang_hunt.tres");
-    private Quest quest1 = ResourceLoader.Load<Quest>("res://resources/quests/Prologue/whispers_of_danger.tres");
+    [Node] private TorchPuzzleManager TorchSequence;
+    [Node] private PressurePlate Plate, Plate2;
+    [Node] private Chest Chest,Chest2;
+    private bool plate1, plate2;
+    private Quest quest = QuestRegistry.Get("quest:aswang_hunt");
+    private Quest quest1 = QuestRegistry.Get("quest:whispers_in_intramuros");
 
     public override void _Notification(int what)
     {
@@ -27,11 +33,28 @@ public partial class EverfieldCity : BaseLevel
         base._Ready();
         QuestManager.QuestUpdated += OnQuestUpdated;
         TransitionArea.Monitoring = false;
+        TorchSequence.PuzzleSolved += OnPuzzleSolved;
+        Plate.Activated += OnPlatePressed;
+        Plate2.Activated += OnPlatePressed;
+
+    }
+    
+    private void OnPuzzleSolved()
+    {
+      Chest.Visible = true; 
+      
     }
 
     public void EnableTransitionArea()
     {
         TransitionArea.Monitoring = true;
+    }
+    private void OnPlatePressed()
+    {
+        if (Plate.isActive && Plate2.isActive)
+        {
+            Chest2.Visible = true; 
+        }
     }
 
     private void OnQuestUpdated(Quest updatedQuest)

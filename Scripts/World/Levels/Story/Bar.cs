@@ -8,7 +8,7 @@ namespace Game.World;
 [Scene]
 public partial class Bar : BaseLevel
 {
-    private Quest quest = ResourceLoader.Load<Quest>("res://resources/quests/Prologue/night_of_shadows.tres");
+    private Quest quest = QuestRegistry.Get("quest:night_of_shadows");
 
     [Node] private TransitionArea TransitionArea;
 

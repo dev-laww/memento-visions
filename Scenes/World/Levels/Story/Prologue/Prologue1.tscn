@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="2_7ak36"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="3_fu5k5"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="4_dqrc3"]
-[ext_resource type="Resource" uid="uid://c8sti11mk0wm1" path="res://resources/quests/Prologue/prologue_1.tres" id="5_ucy7c"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="6_ucy7c"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="7_r42qq"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="8_l7bid"]
 [ext_resource type="Resource" uid="uid://dk2nxvecyh5h3" path="res://resources/dialogues/prologue/prologue1.0.dialogue" id="9_3l8in"]
+[ext_resource type="Resource" uid="uid://0suhta3uejmr" path="res://resources/quests/Prologue/bar_interaction.tres" id="9_7ak36"]
 [ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemies/Common/Dummy.tscn" id="11_f5n2n"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="12_e44kk"]
 [ext_resource type="TileSet" uid="uid://c1mmutvocnp5g" path="res://resources/tilesets/bar/props.tres" id="13_bgadp"]
@@ -32,10 +32,10 @@ agent_radius = 8.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hn57r"]
 
-[sub_resource type="Resource" id="Resource_6f01l"]
+[sub_resource type="Resource" id="Resource_ccy1y"]
 script = ExtResource("6_ucy7c")
 Type = 2
-Description = "Investigate the Burned wooden chair"
+Description = "Head to the Haunted School – The real horror begins."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lx1uq"]
@@ -82,10 +82,10 @@ shape = SubResource("RectangleShape2D_hn57r")
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("4_dqrc3")
-Quest = ExtResource("5_ucy7c")
+Quest = ExtResource("9_7ak36")
 Mode = 1
 ShouldInteract = false
-Objective = SubResource("Resource_6f01l")
+Objective = SubResource("Resource_ccy1y")
 ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -103,7 +103,7 @@ position = Vector2(36, 171)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("4_dqrc3")
-Quest = ExtResource("5_ucy7c")
+Quest = ExtResource("9_7ak36")
 Mode = 0
 ShouldInteract = true
 InteractionLabel = "Chief"
