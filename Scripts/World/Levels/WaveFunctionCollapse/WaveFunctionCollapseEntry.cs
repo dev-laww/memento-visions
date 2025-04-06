@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Game.Levels;
+namespace Game.World;
 
 [Tool]
 [GlobalClass]

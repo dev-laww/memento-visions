@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Autoload;
@@ -9,11 +8,10 @@ using Game.Entities;
 using Game.UI.Screens;
 using Game.Utils;
 using Game.Utils.Extensions;
-using Game.World;
 using Godot;
 using GodotUtilities;
 
-namespace Game;
+namespace Game.World;
 
 [Tool]
 [Scene]

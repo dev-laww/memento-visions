@@ -5,7 +5,8 @@ using Game.Entities;
 using Game.Data;
 using Game.World.Puzzle;
 using GodotUtilities;
-namespace Game.Levels.Story;
+
+namespace Game.World;
 
 [Scene]
 public partial class DesolatePlace : Node2D
@@ -32,7 +33,7 @@ public partial class DesolatePlace : Node2D
     {
         base._Ready();
         TransitionArea.Monitoring = false;
-        PressurePlate.Activated += DisbableDoor;
+        PressurePlate.Activated += DisableDoor;
         PressurePlate.Deactivated += EnableDoor;
     }
 
@@ -40,14 +41,17 @@ public partial class DesolatePlace : Node2D
     {
         DialogueDoor.Monitoring = false;
     }
-    public void DisbableDoor()
+
+    public void DisableDoor()
     {
         SecretDoor.Enabled = false;
     }
+
     public void EnableDoor()
     {
         SecretDoor.Enabled = true;
     }
+
     public void setDialogueBoulderOff()
     {
         Boulder.Monitoring = false;

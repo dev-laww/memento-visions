@@ -10,7 +10,7 @@ using Godot;
 using Godot.Collections;
 using GodotUtilities;
 
-namespace Game.Levels;
+namespace Game.World;
 
 // TODO: Add doors
 // TODO: Add enemy spawn system
@@ -74,19 +74,19 @@ public partial class Dungeon : Node2D
         PathFindHallways();
         TileMap.SetCellsTerrainConnect(terrain, 0, 0);
         for (var i = 0; i < gridSize.X; i++)
-            for (var j = 0; j < gridSize.Y; j++)
-            {
-                var cell = new Vector2I(i, j);
+        for (var j = 0; j < gridSize.Y; j++)
+        {
+            var cell = new Vector2I(i, j);
 
-                Ground.SetCell(cell, atlasCoords: new Vector2I(0, 4), sourceId: 4);
+            Ground.SetCell(cell, atlasCoords: new Vector2I(0, 4), sourceId: 4);
 
 
-                if (grid[i, j] != CellType.None) continue;
+            if (grid[i, j] != CellType.None) continue;
 
-                var atlas = new Vector2I(0, 0);
+            var atlas = new Vector2I(0, 0);
 
-                TileMap.SetCell(cell, atlasCoords: atlas, sourceId: 4);
-            }
+            TileMap.SetCell(cell, atlasCoords: atlas, sourceId: 4);
+        }
     }
 
     private void PlaceRooms()

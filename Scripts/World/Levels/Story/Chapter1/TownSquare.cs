@@ -3,7 +3,7 @@ using Godot;
 using Game.Entities;
 using GodotUtilities;
 
-namespace Game.Levels.Story;
+namespace Game.World;
 
 [Scene]
 public partial class TownSquare : Node2D

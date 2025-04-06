@@ -4,17 +4,17 @@ using Game.Components;
 using Game.World.Puzzle;
 using GodotUtilities;
 
-namespace Game.World.Levels.Story.Chapter1;
+namespace Game.World;
 
 [Scene]
 public partial class Village : Node2D
 {
-
     [Node] private TransitionArea TransitionArea;
     [Node] private DialogueTrigger DialogueTrigger;
     [Node] private QuestTrigger QuestTrigger2;
     [Node] private Chest Chest;
     [Node] private LeverManager LeverManager;
+
     public override void _Notification(int what)
     {
         if (what == NotificationSceneInstantiated && !Engine.IsEditorHint())
@@ -27,9 +27,8 @@ public partial class Village : Node2D
         QuestTrigger2.Monitoring = false;
         TransitionArea.Monitoring = false;
         LeverManager.IsComplete += OnLeverPuzzleComplete;
-
     }
-    
+
     private void OnLeverPuzzleComplete()
     {
         Chest.Visible = true;
@@ -39,12 +38,12 @@ public partial class Village : Node2D
     {
         DialogueTrigger.Monitoring = false;
     }
-    
+
     public void setQuestTriggerOn()
     {
         QuestTrigger2.Monitoring = true;
     }
-    
+
     public void setTransitionAreaOn()
     {
         TransitionArea.Monitoring = true;

@@ -1,9 +1,7 @@
 #if TOOLS
 
 using Godot;
-using Game.Levels;
-using Game.Common;
-using System.Linq;
+using Game.World;
 
 namespace ProjectPlugin.InspectorPlugin;
 

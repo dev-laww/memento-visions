@@ -1,14 +1,15 @@
 using Godot;
-using System;
 using Game.Components;
 using GodotUtilities;
+
+namespace Game.World;
 
 [Scene]
 public partial class PrologueBar : Node2D
 {
     public bool isInteracted = false;
     [Node] private TransitionArea TransitionArea;
-    
+
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
@@ -21,11 +22,9 @@ public partial class PrologueBar : Node2D
         base._Ready();
         TransitionArea.Monitoring = false;
     }
+
     public void EnableTransitionArea()
     {
         TransitionArea.Monitoring = true;
     }
-    
-    
-
 }

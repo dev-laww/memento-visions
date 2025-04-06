@@ -1,10 +1,9 @@
 using Godot;
-using System;
 using Game.Components;
 using Game.Entities;
-using Game.Data;
 using GodotUtilities;
-namespace Game.Levels.Story;
+
+namespace Game.World;
 
 [Scene]
 public partial class SchoolOutdoor : Node2D
@@ -23,11 +22,6 @@ public partial class SchoolOutdoor : Node2D
         WireNodes();
     }
 
-    public override void _Ready()
-    {
-        base._Ready();
-        
-    }
     public void setDialoguePrologueOff()
     {
         DialoguePrologue.Monitoring = false;
@@ -40,6 +34,4 @@ public partial class SchoolOutdoor : Node2D
         StoryTeller.Visible = true;
         isStoryTellerVisible = true;
     }
-
-
 }
