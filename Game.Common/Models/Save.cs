@@ -10,8 +10,10 @@ public class Save
     [JsonProperty("items")] public List<Item> Items { get; private set; } = [];
     [JsonProperty("equipped")] public string Equipped { get; private set; } = string.Empty;
     [JsonProperty("quick_slot")] public string QuickSlotItem { get; private set; } = string.Empty;
+    [JsonProperty("unlocked_recipes")] public List<string> UnlockedRecipes { get; private set; } = [];
 
-    [JsonProperty("current_chapter", DefaultValueHandling = DefaultValueHandling.Populate), DefaultValue("prologue_0.1")]
+    [JsonProperty("current_chapter", DefaultValueHandling = DefaultValueHandling.Populate),
+     DefaultValue("prologue_0.1")]
     public string CurrentChapter { get; private set; }
 
     [JsonProperty("quests")] private List<string> quests = [];

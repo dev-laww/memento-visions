@@ -62,4 +62,5 @@ public partial class SaveManager : Autoload<SaveManager>
     public static void SetQuickSlotItem(string item) => Data.SetQuickSlotItem(item);
     public static void SetEquipped(string item) => Data.SetEquipped(item);
     public static void SetCurrentChapter(string chapter) => Data.SetCurrentChapter(chapter);
+    public static void UnlockRecipe(string itemId) => Data.UnlockedRecipes.Add(itemId);
 }

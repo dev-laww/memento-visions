@@ -55,7 +55,7 @@ public partial class Crafting : Overlay
         increaseButton.Pressed += OnIncreaseButtonPress;
         decreaseButton.Pressed += OnDecreaseButtonPress;
         craftButton.Pressed += OnCraftButtonPress;
-        PlayerInventoryManager.Updated += _ => Reset();
+        PlayerInventoryManager.Updated += OnInventoryUpdated;
 
         PopulateSlots();
         Reset();
@@ -65,14 +65,14 @@ public partial class Crafting : Overlay
     {
         base._ExitTree();
 
-        PlayerInventoryManager.Updated -= _ => Reset();
+        PlayerInventoryManager.Updated -= OnInventoryUpdated;
     }
-
 
     private void PopulateSlots()
     {
         var recipes = RecipeRegistry.GetRecipes(Recipe.Type.Craftable);
 
+        recipes = recipes.Where(recipe => SaveManager.Data.UnlockedRecipes.Contains(recipe.Result.Item.Id)).ToList();
 
         for (var i = 0; i < recipes.Count; i++)
         {
@@ -109,16 +109,18 @@ public partial class Crafting : Overlay
         selectedItemName.Text = item?.Item.Name;
         selectedItemCategory.Text = item?.Item.ItemCategory.ToString();
 
-        selectedItemDescription.Text = new StringBuilder().AppendLine(item?.Item.Description)
-            .AppendLine()
-            .AppendLine("Ingredients:")
-            .AppendLine()
-            .AppendJoin(
-                "\n",
-                selectedRecipe?.GetIngredients().Select(ingredient =>
-                    $"{ingredient.Quantity}x {ingredient.Item.Name}") ?? Array.Empty<string>()
-            )
-            .ToString();
+        selectedItemDescription.Text = item is not null
+            ? new StringBuilder().AppendLine(item?.Item.Description)
+                .AppendLine()
+                .AppendLine("Ingredients:")
+                .AppendLine()
+                .AppendJoin(
+                    "\n",
+                    selectedRecipe?.GetIngredients().Select(ingredient =>
+                        $"{ingredient.Quantity}x {ingredient.Item.Name}") ?? Array.Empty<string>()
+                )
+                .ToString()
+            : string.Empty;
 
         quantity = 1;
         quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
@@ -218,4 +220,6 @@ public partial class Crafting : Overlay
         Reset();
         Log.Debug($"Created {item}.");
     }
+
+    private void OnInventoryUpdated(ItemGroup _) => Reset();
 }
