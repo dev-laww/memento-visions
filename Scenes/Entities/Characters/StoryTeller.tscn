@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://d2hrj4ebc2ra6"]
+[gd_scene load_steps=63 format=3 uid="uid://d2hrj4ebc2ra6"]
 
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="1_inirs"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_37443"]
@@ -31,6 +31,10 @@ region = Rect2(128, 128, 64, 64)
 atlas = ExtResource("3_u6lhy")
 region = Rect2(192, 128, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_anuqw"]
+atlas = ExtResource("3_u6lhy")
+region = Rect2(256, 128, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_eecew"]
 atlas = ExtResource("3_u6lhy")
 region = Rect2(0, 0, 64, 64)
@@ -62,6 +66,10 @@ region = Rect2(128, 64, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_gje58"]
 atlas = ExtResource("3_u6lhy")
 region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxrlp"]
+atlas = ExtResource("3_u6lhy")
+region = Rect2(256, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cbrx3"]
 atlas = ExtResource("3_u6lhy")
@@ -129,6 +137,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x0uqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_anuqw")
 }],
 "loop": false,
 "name": &"fix_hat",
@@ -163,6 +174,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gje58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxrlp")
 }],
 "loop": false,
 "name": &"look",
@@ -506,8 +520,9 @@ texture_filter = 2
 material = ExtResource("2_37443")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
-animation = &"idle"
+animation = &"work_exit"
 frame = 3
+frame_progress = 1.0
 script = ExtResource("4_5rnxu")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
