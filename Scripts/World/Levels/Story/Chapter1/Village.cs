@@ -12,8 +12,9 @@ public partial class Village : BaseLevel
     [Node] private TransitionArea TransitionArea;
     [Node] private DialogueTrigger DialogueTrigger;
     [Node] private QuestTrigger QuestTrigger2;
-    [Node] private Chest Chest;
+    [Node] private Chest Chest , Chest2;
     [Node] private LeverManager LeverManager;
+    [Node]  private TorchPuzzleManager LightPuzzle;
 
     public override void _Notification(int what)
     {
@@ -27,11 +28,16 @@ public partial class Village : BaseLevel
         QuestTrigger2.Monitoring = false;
         TransitionArea.Monitoring = false;
         LeverManager.IsComplete += OnLeverPuzzleComplete;
+        LightPuzzle.PuzzleSolved += OnLightPuzzleComplete;
     }
 
     private void OnLeverPuzzleComplete()
     {
         Chest.Visible = true;
+    }
+    private void OnLightPuzzleComplete()
+    {
+        Chest2.Visible = true;
     }
 
     public void SetDialogueTriigerOff()
