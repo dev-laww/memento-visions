@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Newtonsoft.Json;
 
 namespace Game.Common.Models;
@@ -9,7 +10,10 @@ public class Save
     [JsonProperty("items")] public List<Item> Items { get; private set; } = [];
     [JsonProperty("equipped")] public string Equipped { get; private set; } = string.Empty;
     [JsonProperty("quick_slot")] public string QuickSlotItem { get; private set; } = string.Empty;
-    [JsonProperty("current_chapter")] public string CurrentChapter { get; private set; } = string.Empty;
+
+    [JsonProperty("current_chapter", DefaultValueHandling = DefaultValueHandling.Populate), DefaultValue("0.1")]
+    public string CurrentChapter { get; private set; }
+
     [JsonProperty("quests")] private List<string> quests = [];
 
     public void SetItems(List<Item> items) => Items = items;
