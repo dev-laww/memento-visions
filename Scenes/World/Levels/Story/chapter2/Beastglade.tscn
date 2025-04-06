@@ -1,10 +1,14 @@
-[gd_scene load_steps=49 format=4 uid="uid://u1iww5n58onj"]
+[gd_scene load_steps=53 format=4 uid="uid://u1iww5n58onj"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_lg4ae"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="2_daurs"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_gbkxn"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="4_gbkxn"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="4_nwd2x"]
+[ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="6_dulkf"]
+[ext_resource type="PackedScene" uid="uid://djjs6g4ap8st1" path="res://Scenes/Components/Props/Torch.tscn" id="7_hof1k"]
+[ext_resource type="PackedScene" uid="uid://bmxiu0n4a4dua" path="res://Scenes/Components/Props/LeverManager.tscn" id="8_xiotl"]
+[ext_resource type="PackedScene" uid="uid://by64k6fa2d33l" path="res://Scenes/Components/Props/Lever.tscn" id="9_uqno6"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nwd2x"]
 
@@ -251,7 +255,7 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 [node name="Props" type="TileMapLayer" parent="Node2D"]
 texture_filter = 2
 material = ExtResource("1_lg4ae")
-tile_map_data = PackedByteArray("AAAIAAQAAQAcAA4AAAAOABEAAQAcABAAAAAHABEAAQAbAA4AAAD//xEAAQAdAA8AAAAJAAUAAQAfAA8AAAACAAMAAQAdABAAAAAAAAMAAQAeABAAAAABAAQAAQAZAA8AAAAIABAAAQAcAA8AAAD3/xAAAQAcABAAAAD+/wEAAQAbAA8AAAAAAAEAAQAcAA8AAAA=")
+tile_map_data = PackedByteArray("AAAOABEAAQAcABAAAAAHABEAAQAbAA4AAAD//xEAAQAdAA8AAAAJAAUAAQAfAA8AAAACAAMAAQAdABAAAAAAAAMAAQAeABAAAAABAAQAAQAZAA8AAAAIABAAAQAcAA8AAAD3/xAAAQAcABAAAAD+/wEAAQAbAA8AAAAAAAEAAQAcAA8AAAAKAAUAAAAdAAYAAAAKAAQAAAAdAAYAAAAKAAMAAAAdAAYAAAA=")
 tile_set = ExtResource("2_gbkxn")
 script = ExtResource("2_daurs")
 metadata/_custom_type_script = "uid://bc2jlb4w58y24"
@@ -294,8 +298,8 @@ color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(-455, 922, 866, 891, 865, 243, 647, 244, 603, 229, 651, 221, 854, 216, 829, 160, 804, 109, 804, 62, 16, 40, -9, -16, -103, -7, -128, 66, -125, 637, 367, 649, 367, 549, 248, 543, 214, 505, 223, 376, 273, 357, 283, 213, 496, 204, 523, 248, 302, 254, 292, 332, 248, 408, 254, 517, 389, 534, 394, 662, 366, 679, -433, 678, -446, 727)
 uv = PackedVector2Array(-455, 922, 866, 891, 873, 229, 647, 244, 603, 229, 644, 207, 857, 197, 829, 160, 804, 109, 804, 62, 16, 40, -9, -16, -103, -7, -128, 66, -125, 637, 367, 649, 367, 549, 248, 543, 214, 505, 223, 376, 273, 357, 283, 213, 496, 204, 534, 254, 302, 254, 292, 332, 248, 408, 254, 517, 408, 514, 399, 665, 364, 687, -433, 678, -454.668, 528.379)
 script = ExtResource("4_nwd2x")
-ParseRootNode = NodePath("../Node2D")
 NavigationPolygon = SubResource("NavigationPolygon_nwd2x")
+ParseRootNode = NodePath("../Node2D")
 metadata/_custom_type_script = "uid://cfscbenslyojv"
 
 [node name="@NavigationRegion2D@64599" type="NavigationRegion2D" parent="NavigationManager"]
@@ -423,3 +427,44 @@ navigation_polygon = SubResource("NavigationPolygon_gkeki")
 
 [node name="@NavigationRegion2D@64640" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_kw3uc")
+
+[node name="Player" parent="." instance=ExtResource("6_dulkf")]
+position = Vector2(583, 505)
+
+[node name="Node2D2" type="Node2D" parent="."]
+position = Vector2(291, 233)
+
+[node name="Torch" parent="Node2D2" instance=ExtResource("7_hof1k")]
+position = Vector2(0, 7)
+scale = Vector2(1.39545, 1.33063)
+
+[node name="Torch2" parent="Node2D2" instance=ExtResource("7_hof1k")]
+position = Vector2(564, 10)
+scale = Vector2(1.39545, 1.33063)
+
+[node name="Torch3" parent="Node2D2" instance=ExtResource("7_hof1k")]
+position = Vector2(-48, 289)
+scale = Vector2(1.39545, 1.33063)
+
+[node name="Torch4" parent="Node2D2" instance=ExtResource("7_hof1k")]
+position = Vector2(-48, 156)
+scale = Vector2(1.39545, 1.33063)
+
+[node name="LeverManager" parent="." instance=ExtResource("8_xiotl")]
+position = Vector2(497, 367)
+
+[node name="Lever2" parent="LeverManager" instance=ExtResource("9_uqno6")]
+position = Vector2(-253, 20)
+scale = Vector2(0.875, 0.812499)
+
+[node name="Lever3" parent="LeverManager" instance=ExtResource("9_uqno6")]
+position = Vector2(360, -124)
+scale = Vector2(0.875, 0.812499)
+
+[node name="Lever4" parent="LeverManager" instance=ExtResource("9_uqno6")]
+position = Vector2(-253, 153)
+scale = Vector2(0.875, 0.812499)
+
+[node name="Lever5" parent="LeverManager" instance=ExtResource("9_uqno6")]
+position = Vector2(-205, -128)
+scale = Vector2(0.875, 0.812499)

@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=4 uid="uid://du6gsft33r8su"]
+[gd_scene load_steps=6 format=4 uid="uid://du6gsft33r8su"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_me3ug"]
 [ext_resource type="TileSet" uid="uid://wuwsi02f3fft" path="res://resources/tilesets/intramuros.tres" id="2_8vye7"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_iij52"]
+[ext_resource type="PackedScene" uid="uid://6rk1l15nvvdr" path="res://Scenes/Components/Props/TorchPuzzleManager.tscn" id="4_iij52"]
+[ext_resource type="PackedScene" uid="uid://dtqgojjodmope" path="res://Scenes/World/Objects/StreetLight.tscn" id="5_7xk6u"]
 
 [node name="SmallVille" type="Node2D"]
 
@@ -23,3 +25,18 @@ tile_map_data = PackedByteArray("AAANAAIAAAASAAkAAAANAAMAAAASAAoAAAANAAQAAAASAAs
 tile_set = ExtResource("2_8vye7")
 script = ExtResource("3_iij52")
 metadata/_custom_type_script = "uid://bc2jlb4w58y24"
+
+[node name="TorchSequence" parent="." instance=ExtResource("4_iij52")]
+position = Vector2(119, 573)
+
+[node name="Light" parent="TorchSequence" instance=ExtResource("5_7xk6u")]
+position = Vector2(-168, 23)
+
+[node name="Light2" parent="TorchSequence" instance=ExtResource("5_7xk6u")]
+position = Vector2(-74, 119)
+
+[node name="Light3" parent="TorchSequence" instance=ExtResource("5_7xk6u")]
+position = Vector2(-169, 120)
+
+[node name="Light4" parent="TorchSequence" instance=ExtResource("5_7xk6u")]
+position = Vector2(-71, 24)

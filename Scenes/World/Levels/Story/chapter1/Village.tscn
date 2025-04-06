@@ -495,7 +495,7 @@ radius = 16.1245
 [sub_resource type="Resource" id="Resource_nry1j"]
 script = ExtResource("14_xh25p")
 Type = 2
-Description = "Talk to the Mayor."
+Description = "Head towards the Jeepney"
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xh25p"]
@@ -562,7 +562,7 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 polygon = PackedVector2Array(16, 12, 8, 1005, 1440, 997, 1419, 29, 19, -6, 1594, -10, 1541, 1052, -18, 1026, -70, -14, 11, -74)
 
 [node name="Player" parent="." instance=ExtResource("4_imb2w")]
-position = Vector2(96, 98)
+position = Vector2(101, 96)
 
 [node name="StoryTeller" type="CharacterBody2D" parent="."]
 position = Vector2(536, 214)
@@ -628,7 +628,7 @@ position = Vector2(1, -32)
 position = Vector2(1312, 263)
 
 [node name="QuestTrigger" type="Area2D" parent="Rudy"]
-scale = Vector2(1.18094, 4.11016)
+scale = Vector2(0.762353, 1.05389)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("6_r45d3")
@@ -642,7 +642,7 @@ ObjectiveIndex = 1
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rudy/QuestTrigger"]
-position = Vector2(-1, -9)
+position = Vector2(-2.54038, -8.02888)
 shape = SubResource("CircleShape2D_yyi1k")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
@@ -748,7 +748,7 @@ position = Vector2(-66, 45)
 position = Vector2(-143, 45)
 
 [node name="Torch3" parent="torch" instance=ExtResource("23_8vc12")]
-position = Vector2(-66, -6)
+position = Vector2(-68, -1)
 
 [node name="Torch4" parent="torch" instance=ExtResource("23_8vc12")]
 position = Vector2(-143, -1)
@@ -758,21 +758,21 @@ unique_name_in_owner = true
 position = Vector2(555, 291)
 TorchesPath = NodePath("../torch")
 
-[node name="Lever" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
-position = Vector2(78, 1)
-Torches = [NodePath("../../torch/Torch"), NodePath("../../torch/Torch4"), NodePath("../../torch/Torch4")]
+[node name="Lever" parent="LeverManager" instance=ExtResource("7_yyi1k")]
+position = Vector2(58, 6)
+scale = Vector2(0.65625, 0.75)
 
-[node name="Lever2" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
-position = Vector2(-62, 1)
-Torches = [NodePath("../../torch/Torch"), NodePath("../../torch/Torch2"), NodePath("../../torch/Torch3")]
+[node name="Lever2" parent="LeverManager" instance=ExtResource("7_yyi1k")]
+position = Vector2(-17, 6)
+scale = Vector2(0.6875, 0.65625)
 
-[node name="Lever3" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
-position = Vector2(78, 51)
-Torches = [NodePath("../../torch/Torch2"), NodePath("../../torch/Torch3"), NodePath("../../torch/Torch4")]
+[node name="Lever3" parent="LeverManager" instance=ExtResource("7_yyi1k")]
+position = Vector2(60, 52)
+scale = Vector2(0.65625, 0.75)
 
-[node name="Lever4" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
-position = Vector2(-63, 49)
-Torches = [NodePath("../../torch/Torch2"), NodePath("../../torch/Torch3")]
+[node name="Lever4" parent="LeverManager" instance=ExtResource("7_yyi1k")]
+position = Vector2(-17, 52)
+scale = Vector2(0.71875, 0.6875)
 
 [node name="Chest" parent="." instance=ExtResource("26_0d1sk")]
 unique_name_in_owner = true
