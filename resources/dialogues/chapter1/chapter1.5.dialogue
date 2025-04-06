@@ -1,6 +1,8 @@
 ~ start
-Mayor Santos: This city needs strength, and only I can bring it progress.
-Alex: Progress built on the bodies of innocent people? I don’t think so.
-do CurrentScene. PlayFadeAnimation()
-do CurrentScene.Spawn()
+StoryTeller: "The wind whispers of a path unseen… are you listening, Alex?"
+StoryTeller: The one you are looking for...
+StoryTeller: He's here.
+- Wai-What?
+- My long-lost dad?
+StoryTeller: Venture forth, Alex, and what you seek shall reveal itself.
 => END

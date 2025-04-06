@@ -1,8 +1,8 @@
 ~ start
-StoryTeller: Alex Gutierrez went to the Everfield City, a thriving urban place nestled at the center of the ancient forestlands, now wrapped in a chaos due to the report of the Chief.
-StoryTeller: What was once bustling with life and commerce is now overrun by someone, who has a thirst for power, and would not stop at anything until he achieved everything.
-StoryTeller: And with the Aswangs running amok, what could possibly be the reason behind for this?
-StoryTeller: Or could they have been connected all along?
-StoryTeller: Will Alex Gutierrez succeed in solving this case?
-StoryTeller: Or will he meet his demise at this place? 
+do CurrentScene.SetDialogueTriigerOff()
+Alex: Wait, am I in the right place?
+Alex: Doesn't seem like it...
+Alex: The Storyteller should be here, I think.
+Alex: Let's see If I can find him.
+Alex: Maybe I can gather some clues from him about this place.
 => END

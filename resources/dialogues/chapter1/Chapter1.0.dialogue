@@ -1,0 +1,14 @@
+~ start
+Alex: Hey Chief! Why do you have to call me here when you could just do your job instead of passing it to me?
+Chief: Alex, we’ve got another one. Strange occurrences, eerie sightings – the whole village is on edge.
+Alex: Come on Chief, Aswangs shouldn't be near the Everfield City. 
+Alex: They are known to be territorial and would only attack when their territories are threatend as said in the pact! 
+Chief: The locals are certain it’s an Aswang. 
+Chief: They’re terrified Alex, we have to help them!
+Alex: Chief, are you sure? That the Aswangs are running rampant?
+Chief: I'm not sure but right now we have to go. We have to get there to know what the situation could be.
+Chief: It could be worse than what we could have imagined!
+Alex: Fine. Let's go.
+do CurrentScene.EnableTransitionArea()
+do CurrentScene.CompleteObjectiveAtIndex(1)
+=> END!

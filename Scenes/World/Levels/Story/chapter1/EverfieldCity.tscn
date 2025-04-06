@@ -10,22 +10,22 @@
 [ext_resource type="Resource" uid="uid://cpgaa23upm6hk" path="res://resources/quests/Chapter1/aswang_hunt.tres" id="6_hf60o"]
 [ext_resource type="Resource" uid="uid://dubpfapg14rna" path="res://resources/quests/Chapter1/testimony.tres" id="8_7adkd"]
 [ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="8_516uf"]
-[ext_resource type="Resource" uid="uid://cd607lyv1rtkf" path="res://resources/dialogues/chapter1/chief.dialogue" id="8_aqpjb"]
-[ext_resource type="Resource" uid="uid://dfhk5ud22nohe" path="res://resources/dialogues/chapter1/chapter1.dialogue" id="9_kycha"]
+[ext_resource type="Resource" uid="uid://cd607lyv1rtkf" path="res://resources/dialogues/chapter1/chief_npc.dialogue" id="8_aqpjb"]
+[ext_resource type="Resource" uid="uid://dfhk5ud22nohe" path="res://resources/dialogues/chapter1/chapter1.3.dialogue" id="9_kycha"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="10_7adkd"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="10_grhu3"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="11_dclhn"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="11_hn08j"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="12_hf60o"]
-[ext_resource type="Resource" uid="uid://d38r8diakp5jt" path="res://resources/dialogues/chapter1/chief3.dialogue" id="13_8kgvc"]
+[ext_resource type="Resource" uid="uid://d38r8diakp5jt" path="res://resources/dialogues/chapter1/chief3_npc.dialogue" id="13_8kgvc"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="14_5xymq"]
-[ext_resource type="Resource" uid="uid://btgac1rf6bqox" path="res://resources/dialogues/chapter1/chief6.dialogue" id="14_8kgvc"]
+[ext_resource type="Resource" uid="uid://btgac1rf6bqox" path="res://resources/dialogues/chapter1/chief6_npc.dialogue" id="14_8kgvc"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="15_2ke1t"]
-[ext_resource type="Resource" uid="uid://bvch8blxsmpmn" path="res://resources/dialogues/chapter1/chapter1.1.dialogue" id="15_8kgvc"]
+[ext_resource type="Resource" uid="uid://bvch8blxsmpmn" path="res://resources/dialogues/chapter1/chapter1.2.dialogue" id="15_8kgvc"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="16_up7eu"]
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/characters/npc/storyteller.png" id="17_kycha"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="18_8kgvc"]
-[ext_resource type="Resource" uid="uid://ctatcaqd2g4ox" path="res://resources/dialogues/chapter1/chapter1.4.dialogue" id="20_2ke1t"]
+[ext_resource type="Resource" uid="uid://ctatcaqd2g4ox" path="res://resources/dialogues/chapter1/chapter1.1.dialogue" id="20_2ke1t"]
 [ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="27_7ym34"]
 [ext_resource type="PackedScene" uid="uid://6rk1l15nvvdr" path="res://Scenes/World/PuzzleComponent/TorchPuzzleManager.tscn" id="28_e2cbw"]
 [ext_resource type="PackedScene" uid="uid://cwus4c1b4vpr" path="res://Scenes/World/PuzzleComponent/PressurePlate.tscn" id="28_ro4io"]
@@ -1076,7 +1076,6 @@ position = Vector2(0, -32)
 
 [node name="Chief2" parent="npc" instance=ExtResource("4_32qxv")]
 unique_name_in_owner = true
-visible = false
 position = Vector2(-112, 977)
 
 [node name="QuestTrigger" type="Area2D" parent="npc/Chief2"]
@@ -1190,96 +1189,96 @@ position = Vector2(-275, 485)
 
 [node name="StatsManager" parent="Enemy/Aswang" index="5"]
 Level = 4.0
-MaxHealth = 221.126
-Defense = 9.56287
-Damage = 33.0
+MaxHealth = 719.008
+Defense = 76.5031
+Damage = 124.0
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang" index="12"]
-frame = 0
+frame = 1
 
 [node name="Aswang2" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(87, 58)
 
 [node name="StatsManager" parent="Enemy/Aswang2" index="5"]
 Level = 4.0
-MaxHealth = 221.126
-Defense = 9.56287
-Damage = 33.0
+MaxHealth = 719.008
+Defense = 76.5031
+Damage = 124.0
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang2" index="12"]
-frame = 0
+frame = 1
 
 [node name="Aswang3" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(123, 197)
 
 [node name="StatsManager" parent="Enemy/Aswang3" index="5"]
 Level = 4.0
-MaxHealth = 221.126
-Defense = 9.56287
-Damage = 33.0
+MaxHealth = 719.008
+Defense = 76.5031
+Damage = 124.0
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang3" index="12"]
-frame = 0
+frame = 1
 
 [node name="Aswang4" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(49, -155)
 
 [node name="StatsManager" parent="Enemy/Aswang4" index="5"]
 Level = 3.0
-MaxHealth = 196.225
-Defense = 6.17117
-Damage = 28.1962
+MaxHealth = 519.8
+Defense = 49.3695
+Damage = 85.5694
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang4" index="12"]
-frame = 0
+frame = 1
 
 [node name="Aswang5" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(136, 368)
 
 [node name="StatsManager" parent="Enemy/Aswang5" index="5"]
 Level = 5.0
-MaxHealth = 247.119
-Defense = 13.1033
-Damage = 38.1803
+MaxHealth = 926.956
+Defense = 104.826
+Damage = 165.442
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang5" index="12"]
-frame = 0
+frame = 1
 
 [node name="Aswang6" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-184, 591)
 
 [node name="StatsManager" parent="Enemy/Aswang6" index="5"]
 Level = 4.0
-MaxHealth = 221.126
-Defense = 9.56287
-Damage = 33.0
+MaxHealth = 719.008
+Defense = 76.5031
+Damage = 124.0
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang6" index="12"]
-frame = 0
+frame = 1
 
 [node name="Aswang7" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-156, 70)
 
 [node name="StatsManager" parent="Enemy/Aswang7" index="5"]
 Level = 4.0
-MaxHealth = 221.126
-Defense = 9.56287
-Damage = 33.0
+MaxHealth = 719.008
+Defense = 76.5031
+Damage = 124.0
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang7" index="12"]
-frame = 0
+frame = 1
 
 [node name="Aswang8" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-34, 484)
 
 [node name="StatsManager" parent="Enemy/Aswang8" index="5"]
 Level = 4.0
-MaxHealth = 221.126
-Defense = 9.56287
-Damage = 33.0
+MaxHealth = 719.008
+Defense = 76.5031
+Damage = 124.0
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang8" index="12"]
-frame = 0
+frame = 1
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -1622,6 +1621,7 @@ material = ExtResource("1_edvum")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
+frame = 1
 script = ExtResource("18_8kgvc")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

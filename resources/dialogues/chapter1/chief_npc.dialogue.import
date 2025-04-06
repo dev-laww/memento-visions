@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://cd607lyv1rtkf"
+path="res://.godot/imported/chief_npc.dialogue-71538785c5a5581055d37dbc9db90773.tres"
+
+[deps]
+
+source_file="res://resources/dialogues/chapter1/chief_npc.dialogue"
+dest_files=["res://.godot/imported/chief_npc.dialogue-71538785c5a5581055d37dbc9db90773.tres"]
+
+[params]
+
+defaults=true

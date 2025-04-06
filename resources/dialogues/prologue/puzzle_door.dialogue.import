@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://fnyq88n24woy"
+path="res://.godot/imported/puzzle_door.dialogue-c798625e14b151a0a18be8296c00c624.tres"
+
+[deps]
+
+source_file="res://resources/dialogues/prologue/puzzle_door.dialogue"
+dest_files=["res://.godot/imported/puzzle_door.dialogue-c798625e14b151a0a18be8296c00c624.tres"]
+
+[params]
+
+defaults=true

@@ -1,14 +1,31 @@
 ~ start
-Alex: Hey Chief! Why do you have to call me here when you could just do your job instead of passing it to me?
-Chief: Alex, we’ve got another one. Strange occurrences, eerie sightings – the whole village is on edge.
-Alex: Come on Chief, Aswangs shouldn't be near the Everfield City. 
-Alex: They are known to be territorial and would only attack when their territories are threatend as said in the pact! 
-Chief: The locals are certain it’s an Aswang. 
-Chief: They’re terrified Alex, we have to help them!
-Alex: Chief, are you sure? That the Aswangs are running rampant?
-Chief: I'm not sure but right now we have to go. We have to get there to know what the situation could be.
-Chief: It could be worse than what we could have imagined!
-Alex: Fine. Let's go.
-do CurrentScene.EnableTransitionArea()
-do CurrentScene.CompleteObjectiveAtIndex(1)
-=> END!
+do CurrentScene.CompleteObjectiveAtIndex(0)
+Alex: Hello! May I talk to you? 
+Alex: I need to know what’s the situation here. 
+Alex: The Chief told me that something is going on here but I need to know the full picture in order for me to do something.
+Tisoy: If you want us to help, keep those savage creatures away from this city!
+Tisoy: FROM US!
+Tisoy: With their ravaging and sharp claws, they killed my family! I'm the sole survivor because my wife protected me even though I do not need her protection.
+Tisoy: Please, I'm begging you. Send those things away from us. We've already lost our precious families, what can they take more?
+Alex: Already killed, you say? Hmmm... 
+Alex: But why are they here? And what could’ve caused them to act aggressively like this?
+Alex: Look. I know you’re terrified right now, but can you tell me something more useful to pinpoint what’s causing them to act like this?
+Alex: Anything would help.
+Manny: There’s someone behind them, I'm sure of it.
+Manny: Sort of commanding them to act in a way they usually wouldn’t. 
+Manny: It’s like, they have a goal to achieve by using the lives of people as payment.
+- How can you be sure?
+- What...?
+Manny: Yes I'm sure. While I was helping Tisoy get backed up after stumbling, I looked back.
+Manny: A person holding something like an amulet, shining bright on the corner.
+Manny: After that person showed up, the Aswangs, who're running amok and causing chaos to us, suddenly behaved like dogs.
+Manny: They went back similar to their trainer commanding them to stop what they are doing and to retreat as if they have achieved what they wanted to do.
+Alex: Commanding the Aswang like they’re trained dogs... I think I know someone in higher position who could do that.
+Alex: Thank you for that, I'll be sure to check.
+Tisoy: Enough chit-chat. There are still Aswangs here, can you take care of it?
+- Don't worry.
+	Alex: Don't worry. I'll be doing so. It's my job anyway.
+	=> END
+- No need to tell me.
+	Alex: Just go to a safe place. I'll take care of it.
+	=> END

@@ -1,7 +1,5 @@
 ~ start
-Chief: Alex, we’ve got another one. Strange occurrences, eerie sightings – the whole village is on edge.
-Chief: The locals are certain it’s an aswang. They’re terrified.
-- Chief, are you sure? Are they running rampant?
-Chief: No, not yet. But the sooner we move, the sooner we can prevent such a tragedy from happening.
-- Fine. I’ll look around.
-=> END!
+set CurrentScene.ObjectiveInteracted +=1
+Alex: A diary belonging to a young girl—its contents suggest she has endured significant bullying, possibly at the hands of someone she fears.
+
+=> END

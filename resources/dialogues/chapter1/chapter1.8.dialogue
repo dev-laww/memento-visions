@@ -1,0 +1,22 @@
+~ start
+Mayor Santos: Alejandro Gutierrez... I told you we would meet soon enough.
+Alex: Mayor...
+Alex: What are you doing to the townsfolk?
+Mayor Santos: What am I doing? Hmmm... Let's see.
+Mayor Santos: This town needs a hierarchy and as of now, I'm on the top of it. To assert my dominance, I have to instill fear unto the hearts of the townsfolk.
+- Why are you doing this?
+- Mayor, what are you trying to achieve?
+Mayor Santos: It's never kindness that unites people Alex-it's the fear...etched into their hearts, the kind that lets those in power control and manipulate them without question.
+Mayor Santos: And in this case... I have the power to do so.
+Mayor Santos: Using terror as a tool to maintain control over them is merely child's play.
+Mayor Santos: You just wind up here sooner that I anticipated.
+Alex: But what is it that you're trying to do? To make them do for you by controlling them?
+Mayor Santos: You really need to gather your facts straight Alex.
+Mayor Santos: This town... is on the verge of destruction.
+Mayor Santos: As the Mayor, it is my duty to protect them... and this is how I do it.
+Mayor Santos: Stop me as you please.
+Mayor Santos: With my unwavering resolve, no one shall ever undermine me and my ideals.
+Alex: That's where you're wrong Mayor.
+do CurrentScene. PlayFadeAnimation()
+do CurrentScene.Spawn()
+=> END

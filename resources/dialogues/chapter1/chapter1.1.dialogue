@@ -1,31 +1,8 @@
 ~ start
-do CurrentScene.CompleteObjectiveAtIndex(0)
-Alex: Hello! May I talk to you? 
-Alex: I need to know what’s the situation here. 
-Alex: The Chief told me that something is going on here but I need to know the full picture in order for me to do something.
-Tisoy: If you want us to help, keep those savage creatures away from this city!
-Tisoy: FROM US!
-Tisoy: With their ravaging and sharp claws, they killed my family! I'm the sole survivor because my wife protected me even though I do not need her protection.
-Tisoy: Please, I'm begging you. Send those things away from us. We've already lost our precious families, what can they take more?
-Alex: Already killed, you say? Hmmm... 
-Alex: But why are they here? And what could’ve caused them to act aggressively like this?
-Alex: Look. I know you’re terrified right now, but can you tell me something more useful to pinpoint what’s causing them to act like this?
-Alex: Anything would help.
-Manny: There’s someone behind them, I'm sure of it.
-Manny: Sort of commanding them to act in a way they usually wouldn’t. 
-Manny: It’s like, they have a goal to achieve by using the lives of people as payment.
-- How can you be sure?
-- What...?
-Manny: Yes I'm sure. While I was helping Tisoy get backed up after stumbling, I looked back.
-Manny: A person holding something like an amulet, shining bright on the corner.
-Manny: After that person showed up, the Aswangs, who're running amok and causing chaos to us, suddenly behaved like dogs.
-Manny: They went back similar to their trainer commanding them to stop what they are doing and to retreat as if they have achieved what they wanted to do.
-Alex: Commanding the Aswang like they’re trained dogs... I think I know someone in higher position who could do that.
-Alex: Thank you for that, I'll be sure to check.
-Tisoy: Enough chit-chat. There are still Aswangs here, can you take care of it?
-- Don't worry.
-	Alex: Don't worry. I'll be doing so. It's my job anyway.
-	=> END
-- No need to tell me.
-	Alex: Just go to a safe place. I'll take care of it.
-	=> END
+StoryTeller: Alex Gutierrez went to the Everfield City, a thriving urban place nestled at the center of the ancient forestlands, now wrapped in a chaos due to the report of the Chief.
+StoryTeller: What was once bustling with life and commerce is now overrun by someone, who has a thirst for power, and would not stop at anything until he achieved everything.
+StoryTeller: And with the Aswangs running amok, what could possibly be the reason behind for this?
+StoryTeller: Or could they have been connected all along?
+StoryTeller: Will Alex Gutierrez succeed in solving this case?
+StoryTeller: Or will he meet his demise at this place? 
+=> END

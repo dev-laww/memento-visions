@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=15 format=3 uid="uid://dubpfapg14rna"]
+[gd_resource type="Resource" script_class="Quest" load_steps=14 format=3 uid="uid://dubpfapg14rna"]
 
 [ext_resource type="Resource" uid="uid://benoaphq2f8wm" path="res://resources/items/consumable/banana_cue.tres" id="1_qda8y"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_wjjxm"]
@@ -26,16 +26,10 @@ Item = ExtResource("4_s4vud")
 Quantity = 3
 metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 
-[sub_resource type="Resource" id="Resource_7r86a"]
-script = ExtResource("1_wjjxm")
-Type = 2
-Description = "Confront the mayor about his connection to the Aswang."
-metadata/_custom_type_script = "uid://dpkqc20rlrftv"
-
 [sub_resource type="Resource" id="Resource_j1jvf"]
 script = ExtResource("2_7j58d")
 Id = "enemy:aswang"
-Amount = 8
+Amount = 5
 metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 
 [sub_resource type="Resource" id="Resource_y1bnb"]
@@ -57,7 +51,7 @@ Id = "quest:testimony"
 Title = "The Aswang’s Testimony"
 Ordered = true
 Description = "Mayor Santos has been using the Aswang to instill fear and silence opposition. After confronting him, you must fight off the creatures, track down a surviving Aswang, and extract the truth about the mayor’s dark pact."
-objectives = [SubResource("Resource_7r86a"), SubResource("Resource_y1bnb"), SubResource("Resource_n7jaw")]
+objectives = [SubResource("Resource_y1bnb"), SubResource("Resource_n7jaw")]
 Experience = 50
 Items = [SubResource("Resource_ygkk7"), SubResource("Resource_ti87e"), SubResource("Resource_qkgiq")]
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

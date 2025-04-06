@@ -8,14 +8,16 @@ if CurrentScene.isStoryTellerVisible == true
 Alex: A photograph of a group of students—suggesting they may have taken pleasure in targeting this young girl with their pranks or harassment.
 Alex: The clues i've gathered includes the burned chair-possibly indicating as source of light to this dark-lit place, a diary of a girl-indicating the photo in photography could be the one's bullying her and, the photography of students, who seemed to wander here just to again bully the girl. 
 Alex: As for the place, its isolated and dark, a perfect place to torment someone where no one can hear her shout for help. It seems the students who were here were "tormented" by an another entity which caused them to simply disappear-a vengeful spirit as the records portrayed.
+Alex: Or could they have ran away outside? Hmmm...
 do CurrentScene.setStoryTellerVisible()
 StoryTeller: Good observation, Mr. Alejandro Gutierrez. The said spirit didn’t harm or show violence to those wandering children; It merely offered them its kindness.
-- I see… So, those missing people—where are \n they? Are they dead?
+StoryTeller: But when it showed up, they ran away. Never knowing what awaits them outside.
+- I see… So, those people—where are \n they? Are they dead?
 StoryTeller: Alex Gutierrez, that is your duty to find out what really happened.
 - If they're not dead, then they \n must be somewhere
 - If they are somewhere, something sinister \n could have happened to them
 StoryTeller: “As our protagonist goes on its conquest, what could possibly happen as he delves into it?
-- A deserted place-
-- I should head out.
+- A deserted place like this-
+- I should head out to find out.
 
 => END

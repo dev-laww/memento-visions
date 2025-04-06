@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://ckfjp8n7k4vum"
+path="res://.godot/imported/puzzle_boulder.dialogue-1d4c046ea42807cc4c62bb0ed0e3ab39.tres"
+
+[deps]
+
+source_file="res://resources/dialogues/prologue/puzzle_boulder.dialogue"
+dest_files=["res://.godot/imported/puzzle_boulder.dialogue-1d4c046ea42807cc4c62bb0ed0e3ab39.tres"]
+
+[params]
+
+defaults=true

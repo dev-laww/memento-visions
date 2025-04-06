@@ -29,13 +29,13 @@ metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 [sub_resource type="Resource" id="Resource_hi571"]
 script = ExtResource("1_kcivv")
 Id = "enemy:aswang"
-Amount = 8
+Amount = 5
 metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 
 [sub_resource type="Resource" id="Resource_riumb"]
 script = ExtResource("2_symma")
 Type = 3
-Description = "Defeat 8 Aswang and question survivors for clues."
+Description = "Defeat 5 Aswang and question survivors for clues."
 Enemies = [SubResource("Resource_hi571")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 

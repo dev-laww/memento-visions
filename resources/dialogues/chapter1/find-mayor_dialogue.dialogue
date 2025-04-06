@@ -1,8 +1,0 @@
-~ start
-do CurrentScene.SetDialogueTriigerOff()
-Alex: Wait, am I in the right place?
-Alex: Doesn't seem like it...
-Alex: The Storyteller should be here, I think.
-Alex: Let's see If I can find him.
-Alex: Maybe I can gather some clues from him about this place.
-=> END
