@@ -26,7 +26,7 @@ public partial class Village : Node2D
         base._Ready();
         QuestTrigger2.Monitoring = false;
         TransitionArea.Monitoring = false;
-        LeverManager.isComplete += OnLeverPuzzleComplete;
+        LeverManager.IsComplete += OnLeverPuzzleComplete;
 
     }
     

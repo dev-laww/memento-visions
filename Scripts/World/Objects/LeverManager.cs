@@ -8,23 +8,21 @@ namespace Game.World.Objects;
 [Scene]
 public partial class LeverManager : Node2D
 {
-    [Signal] public delegate void isCompleteEventHandler();
-    [Signal] public delegate void isInactiveEventHandler();
+    [Signal] public delegate void IsCompleteEventHandler();
 
-    [Export] public NodePath TorchesPath; // CRUCIAL - Restored the export path
+    [Export] public NodePath TorchesPath;
     private Dictionary<Torch, int> toggleCounts = new();
     private List<Torch> allTorches = new();
 
     public override void _Ready()
     {
-        // Get torches from the specified path
         var torchesNode = GetNode(TorchesPath);
         allTorches = torchesNode.GetChildren().OfType<Torch>().ToList();
         
         foreach (var torch in allTorches)
         {
             toggleCounts[torch] = 0;
-            torch.LightUp(false); // Initialize all torches as off
+            torch.LightUp(false);
         }
     }
 
@@ -33,7 +31,6 @@ public partial class LeverManager : Node2D
         foreach (var torch in affectedTorches)
         {
             toggleCounts[torch] += isActivated ? 1 : -1;
-            // Ensure count never goes negative (for cleaner debugging)
             if (toggleCounts[torch] < 0) toggleCounts[torch] = 0;
         }
         CheckPuzzleState();
@@ -46,7 +43,6 @@ public partial class LeverManager : Node2D
 
         foreach (var torch in allTorches)
         {
-            // Proper odd/even check that works for all integers
             bool isLit = (toggleCounts[torch] % 2) != 0;
             torch.LightUp(isLit);
 
@@ -55,12 +51,8 @@ public partial class LeverManager : Node2D
 
         if (allLit)
         {
-            EmitSignalisComplete();
+            EmitSignalIsComplete();
             GD.Print("PUZZLE SOLVED! All torches lit.");
-        }
-        else
-        {
-            EmitSignalisInactive();
         }
     }
 }
