@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Autoload;
@@ -91,17 +92,22 @@ public partial class CommonMinimap : Control
             enemySprite.Show();
             map.AddChild(enemySprite);
             sprites[enemy] = enemySprite;
-            enemy.TreeExited += () => OnEnemyUnregistered(enemy);
+            
+            var weakEnemy = new WeakReference<Enemy>(enemy);
+            enemy.TreeExited += () =>
+            {
+                if (weakEnemy.TryGetTarget(out var targetEnemy))
+                {
+                    OnEnemyUnregistered(targetEnemy);
+                }
+            };
         }
-        catch { }
+        catch{ }
     }
 
     public void OnEnemyUnregistered(Enemy enemy)
     {
         if (!sprites.TryGetValue(enemy, out var enemySprite)) return;
-
-        enemySprite.QueueFree();
         sprites.Remove(enemy);
     }
 }
-
