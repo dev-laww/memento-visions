@@ -13,7 +13,7 @@ using GodotUtilities;
 namespace Game.UI.Overlays;
 
 [Scene]
-public partial class Crafting : Overlay
+public partial class Concoct : Overlay
 {
     [Node] private ResourcePreloader resourcePreloader;
     [Node] private TextureButton closeButton;
@@ -71,7 +71,7 @@ public partial class Crafting : Overlay
 
     private void PopulateSlots()
     {
-        var recipes = RecipeRegistry.GetRecipes(Recipe.Type.Craftable);
+        var recipes = RecipeRegistry.GetRecipes(Recipe.Type.Consumable);
 
 
         for (var i = 0; i < recipes.Count; i++)

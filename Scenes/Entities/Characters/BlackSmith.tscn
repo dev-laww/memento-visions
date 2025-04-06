@@ -593,17 +593,17 @@ _data = {
 &"work_exit": SubResource("Animation_w6u4a")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_byyuo"]
-animation = &"breath"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fbx4l"]
-animation = &"breath_hammer"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3kde4"]
 animation = &"hammer_down"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ej0f5"]
 animation = &"hammer_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_byyuo"]
+animation = &"breath"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fbx4l"]
+animation = &"breath_hammer"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0mie7"]
 animation = &"work"
@@ -642,21 +642,21 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ldhcb"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0e505"]
-states/breath/node = SubResource("AnimationNodeAnimation_byyuo")
-states/breath/position = Vector2(376, 100)
-states/breath_hammer/node = SubResource("AnimationNodeAnimation_fbx4l")
-states/breath_hammer/position = Vector2(646, 155)
 states/hammer_down/node = SubResource("AnimationNodeAnimation_3kde4")
 states/hammer_down/position = Vector2(490, 248)
 states/hammer_up/node = SubResource("AnimationNodeAnimation_ej0f5")
 states/hammer_up/position = Vector2(490, 155)
+states/idle/node = SubResource("AnimationNodeAnimation_byyuo")
+states/idle/position = Vector2(376, 100)
+states/idle_hammer/node = SubResource("AnimationNodeAnimation_fbx4l")
+states/idle_hammer/position = Vector2(646, 155)
 states/work/node = SubResource("AnimationNodeAnimation_0mie7")
 states/work/position = Vector2(646, -18)
 states/work_entry/node = SubResource("AnimationNodeAnimation_3qwjf")
 states/work_entry/position = Vector2(490, -24)
 states/work_exit/node = SubResource("AnimationNodeAnimation_w6u4a")
 states/work_exit/position = Vector2(490, 66)
-transitions = ["Start", "breath", SubResource("AnimationNodeStateMachineTransition_0mie7"), "breath", "hammer_up", SubResource("AnimationNodeStateMachineTransition_3qwjf"), "hammer_up", "breath_hammer", SubResource("AnimationNodeStateMachineTransition_w6u4a"), "hammer_down", "breath", SubResource("AnimationNodeStateMachineTransition_5okcv"), "breath_hammer", "hammer_down", SubResource("AnimationNodeStateMachineTransition_0e505"), "breath", "work_entry", SubResource("AnimationNodeStateMachineTransition_4w6bp"), "work_entry", "work", SubResource("AnimationNodeStateMachineTransition_rq4ft"), "work_exit", "breath", SubResource("AnimationNodeStateMachineTransition_g5yu0"), "work", "work_exit", SubResource("AnimationNodeStateMachineTransition_ldhcb")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_0mie7"), "idle", "hammer_up", SubResource("AnimationNodeStateMachineTransition_3qwjf"), "hammer_up", "idle_hammer", SubResource("AnimationNodeStateMachineTransition_w6u4a"), "hammer_down", "idle", SubResource("AnimationNodeStateMachineTransition_5okcv"), "idle_hammer", "hammer_down", SubResource("AnimationNodeStateMachineTransition_0e505"), "idle", "work_entry", SubResource("AnimationNodeStateMachineTransition_4w6bp"), "work_entry", "work", SubResource("AnimationNodeStateMachineTransition_rq4ft"), "work_exit", "idle", SubResource("AnimationNodeStateMachineTransition_g5yu0"), "work", "work_exit", SubResource("AnimationNodeStateMachineTransition_ldhcb")]
 graph_offset = Vector2(145, -71)
 
 [node name="BlackSmith" type="CharacterBody2D"]
@@ -688,7 +688,7 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_qdt71")
 animation = &"breath"
 autoplay = "breath"
-frame = 1
+frame = 3
 script = ExtResource("6_j0jn0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

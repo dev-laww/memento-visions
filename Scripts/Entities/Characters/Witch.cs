@@ -36,7 +36,7 @@ public partial class Witch : Entity
         playback.Travel("work");
     }
 
-    public void EndWork()
+    public void Idle()
     {
         playback.Travel("idle");
     }

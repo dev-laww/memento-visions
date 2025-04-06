@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsmme5xlgs3wi"]
+[gd_scene load_steps=10 format=3 uid="uid://bsmme5xlgs3wi"]
 
 [ext_resource type="Script" uid="uid://bd4th0nixbur3" path="res://Scripts/Autoload/OverlayManager.cs" id="1_qmxs7"]
+[ext_resource type="PackedScene" uid="uid://lb5hy70yttxc" path="res://Scenes/UI/Overlays/Concoct.tscn" id="2_4pl1h"]
 [ext_resource type="PackedScene" uid="uid://dd1jerr3yxfmm" path="res://Scenes/UI/Overlays/Crafting.tscn" id="2_kg6mn"]
 [ext_resource type="PackedScene" uid="uid://dmijoehq6y18t" path="res://Scenes/UI/Overlays/DeveloperConsole.tscn" id="3_rcr8j"]
 [ext_resource type="PackedScene" uid="uid://c6kt3qbs62e4i" path="res://Scenes/UI/Overlays/HeadsUpDisplay.tscn" id="4_4pl1h"]
@@ -13,4 +14,4 @@
 script = ExtResource("1_qmxs7")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
-resources = [PackedStringArray("Crafting", "DeveloperConsole", "HeadsUpDisplay", "Inventory", "Menu", "ModeSelect", "Quest"), [ExtResource("2_kg6mn"), ExtResource("3_rcr8j"), ExtResource("4_4pl1h"), ExtResource("5_snhm1"), ExtResource("6_4coeh"), ExtResource("7_rcr8j"), ExtResource("7_j8p2r")]]
+resources = [PackedStringArray("Concoct", "Crafting", "DeveloperConsole", "HeadsUpDisplay", "Inventory", "Menu", "ModeSelect", "Quest"), [ExtResource("2_4pl1h"), ExtResource("2_kg6mn"), ExtResource("3_rcr8j"), ExtResource("4_4pl1h"), ExtResource("5_snhm1"), ExtResource("6_4coeh"), ExtResource("7_rcr8j"), ExtResource("7_j8p2r")]]

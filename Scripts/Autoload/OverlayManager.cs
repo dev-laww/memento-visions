@@ -15,6 +15,7 @@ public partial class OverlayManager : Autoload<OverlayManager>
     public const string MENU = "Menu";
     public const string QUEST = "Quest";
     public const string MODE_SELECT = "ModeSelect";
+    public const string CONCOCT = "Concoct";
 
     [Node] private ResourcePreloader resourcePreloader;
 
@@ -29,21 +30,21 @@ public partial class OverlayManager : Autoload<OverlayManager>
         WireNodes();
     }
 
-    public static void ShowOverlay(string name)
+    public static Overlay ShowOverlay(string name)
     {
         var targetOverlay = Instance.resourcePreloader.InstanceSceneOrNull<Overlay>(name);
 
-        if (targetOverlay == null) return;
+        if (targetOverlay == null) return null;
 
         var shouldClose = currentOverlayName == name || (name == MENU && CurrentOverlay != null);
 
         if (shouldClose)
         {
             HideOverlay();
-            return;
+            return null;
         }
 
-        if (CurrentOverlay != null) return;
+        if (CurrentOverlay != null) return null;
 
         CurrentOverlay = targetOverlay;
         targetOverlay.TreeExiting += OnOverlayClosed;
@@ -53,6 +54,8 @@ public partial class OverlayManager : Autoload<OverlayManager>
         Instance.GetPlayer()?.InputManager.AddLock();
         Instance.GetViewport().SetInputAsHandled();
         Log.Debug($"Overlay {name} opended.");
+
+        return CurrentOverlay;
     }
 
     public static void HideOverlay()
