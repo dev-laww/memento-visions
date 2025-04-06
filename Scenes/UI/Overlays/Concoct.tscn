@@ -1,0 +1,628 @@
+[gd_scene load_steps=26 format=3 uid="uid://lb5hy70yttxc"]
+
+[ext_resource type="Script" uid="uid://clb850msqpl2d" path="res://Scripts/UI/Overlays/Concoct.cs" id="1_bxqnx"]
+[ext_resource type="PackedScene" uid="uid://svqrge4l63b4" path="res://Scenes/UI/Common/Slot.tscn" id="2_lljrw"]
+[ext_resource type="PackedScene" uid="uid://cb8psn10ig05k" path="res://Scenes/UI/Common/CloseButton.tscn" id="3_gbj5m"]
+[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="4_kbvc5"]
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="5_l8lmx"]
+[ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/items/temp/Item5.png" id="6_7yjbr"]
+[ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="7_jylt2"]
+[ext_resource type="Material" uid="uid://bkm4tri52hhdr" path="res://resources/shaders/blur.tres" id="8_w4gbd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rusr7"]
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpnfh"]
+atlas = ExtResource("7_jylt2")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ub185"]
+load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkhci"]
+atlas = SubResource("CompressedTexture2D_ub185")
+region = Rect2(112, 32, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_a253b"]
+load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_voowc"]
+atlas = SubResource("CompressedTexture2D_a253b")
+region = Rect2(176, 32, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3foco"]
+load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nonmw"]
+atlas = SubResource("CompressedTexture2D_3foco")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_i4xb2"]
+load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewr14"]
+atlas = SubResource("CompressedTexture2D_i4xb2")
+region = Rect2(96, 32, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_okm42"]
+load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dah48"]
+atlas = SubResource("CompressedTexture2D_okm42")
+region = Rect2(160, 32, 16, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ntkyg"]
+font_size = 8
+
+[sub_resource type="Animation" id="Animation_1xted"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/CenterContainer:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/CenterContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4i317"]
+resource_name = "close-popup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/CenterContainer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.210224, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/CenterContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.267943, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_jvve5"]
+resource_name = "show-pop-up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/CenterContainer:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.138696, 0.210224),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/CenterContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.241484, 0.133972),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7r2pd"]
+_data = {
+&"RESET": SubResource("Animation_1xted"),
+&"hide-popup": SubResource("Animation_4i317"),
+&"show-popup": SubResource("Animation_jvve5")
+}
+
+[node name="Concoct" type="CanvasLayer"]
+script = ExtResource("1_bxqnx")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("slot"), [ExtResource("2_lljrw")]]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="CloseButton" parent="MarginContainer/VBoxContainer/Header" instance=ExtResource("3_gbj5m")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_kbvc5")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_l8lmx")
+horizontal_scroll_mode = 3
+
+[node name="SlotsContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 13
+
+[node name="Slot" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot2" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot3" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot4" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot5" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot6" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot7" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot8" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot9" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot10" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot11" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot12" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot13" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot14" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot15" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot16" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot17" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot18" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot19" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot20" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot21" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot22" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot23" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot24" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot25" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot26" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot27" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot28" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot29" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot30" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot31" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot32" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot33" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot34" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot35" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot36" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot37" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot38" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot39" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot40" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot41" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot42" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot43" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot44" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot45" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot46" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot47" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot48" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot49" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot50" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot51" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot52" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot53" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot54" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Slot55" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/ScrollContainer/SlotsContainer" instance=ExtResource("2_lljrw")]
+layout_mode = 2
+
+[node name="Details" type="NinePatchRect" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+texture = ExtResource("4_kbvc5")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SelectedItemIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_7yjbr")
+
+[node name="SelectedItemDetails" type="VBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 125)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SelectedItemName" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_l8lmx")
+theme_override_font_sizes/font_size = 24
+text = "Item Name"
+label_settings = SubResource("LabelSettings_rusr7")
+
+[node name="SelectedItemCategory" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_l8lmx")
+theme_override_font_sizes/font_size = 8
+text = "Item Category"
+
+[node name="SelectedItemDescription" type="RichTextLabel" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("5_l8lmx")
+theme_override_font_sizes/normal_font_size = 8
+text = "Ingredient x1
+Another Ingredient x3
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet urna magna. Pellentesque fermentum consectetur nisi, quis bibendum enim fringilla non. Nunc posuere nec lorem in iaculis."
+
+[node name="QuantityControl" type="HBoxContainer" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="DecreaseButton" type="TextureButton" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/QuantityControl"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_jpnfh")
+texture_pressed = SubResource("AtlasTexture_fkhci")
+texture_disabled = SubResource("AtlasTexture_voowc")
+
+[node name="QuantityInput" type="Label" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/QuantityControl"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("5_l8lmx")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IncreaseButton" type="TextureButton" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/QuantityControl"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_nonmw")
+texture_pressed = SubResource("AtlasTexture_ewr14")
+texture_disabled = SubResource("AtlasTexture_dah48")
+
+[node name="CraftButton" type="Button" parent="MarginContainer/VBoxContainer/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 8
+mouse_default_cursor_shape = 2
+theme = ExtResource("5_l8lmx")
+text = "Craft"
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(320, 180)
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+material = ExtResource("8_w4gbd")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00141, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(320, 180)
+size_flags_vertical = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/CenterContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("4_kbvc5")
+patch_margin_left = 3
+patch_margin_top = 5
+patch_margin_right = 3
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/CenterContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="CraftedItemIcon" type="TextureRect" parent="Control/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("6_7yjbr")
+
+[node name="CraftedItemName" type="Label" parent="Control/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_l8lmx")
+theme_override_font_sizes/font_size = 24
+text = "Item Name"
+label_settings = SubResource("LabelSettings_rusr7")
+
+[node name="CraftedItemQuantity" type="Label" parent="Control/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_l8lmx")
+theme_override_font_sizes/font_size = 24
+text = "x999"
+label_settings = SubResource("LabelSettings_ntkyg")
+horizontal_alignment = 1
+
+[node name="OkayButton" type="Button" parent="Control/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("5_l8lmx")
+text = "Okay"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7r2pd")
+}

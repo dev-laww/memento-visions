@@ -46,7 +46,33 @@ public partial class Bar : Node2D
 
     private void OnWitchInteracted()
     {
-        GD.Print("Witch Interacted");
+        var concoctOverlay = (Concoct)OverlayManager.ShowOverlay(OverlayManager.CONCOCT);
+
+        concoctOverlay.ItemCrafted += OnConcoct;
+    }
+
+    private void OnConcoct()
+    {
+        var player = this.GetPlayer();
+        CinematicManager.StartCinematic(witch.GlobalPosition);
+        player.InputManager.AddLock();
+        witchInteraction.HideUI();
+
+        witch.Work();
+
+        GetTree().CreateTimer(4f).Timeout += () =>
+        {
+            witch.Idle();
+
+            GetTree().CreateTimer(1f).Timeout += () =>
+            {
+                CinematicManager.EndCinematic();
+                player.InputManager.RemoveLock();
+                witchInteraction.ShowUI();
+            };
+
+            GetTree().CreateTimer(1.3f).Timeout += OnWitchInteracted;
+        };
     }
 
     private void OnCraft()

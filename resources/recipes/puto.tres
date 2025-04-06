@@ -27,6 +27,6 @@ metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 [resource]
 script = ExtResource("6_fotk7")
 Result = SubResource("Resource_e2jwi")
-RecipeType = 0
+RecipeType = 1
 Ingredients = [SubResource("Resource_bqvda"), SubResource("Resource_c4yri")]
 metadata/_custom_type_script = "uid://djs3qll7uwkya"

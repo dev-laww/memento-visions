@@ -13,7 +13,7 @@ public partial class BlackSmith : Entity
     [Node] private Timer hammerUpTimer;
 
     private AnimationNodeStateMachinePlayback playback;
-    private string currentAnimation = "hammer_up";
+    private string currentAnimation = "idle";
 
     public override void _Notification(int what)
     {
@@ -29,16 +29,11 @@ public partial class BlackSmith : Entity
         playback = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
     }
 
-    private static void OnInteracted()
-    {
-        OverlayManager.ShowOverlay(OverlayManager.CRAFTING);
-    }
-
     private void OnHammerUpTimeout()
     {
         playback.Travel(currentAnimation);
         hammerUpTimer.Call("start_random");
-        currentAnimation = currentAnimation == "breath" ? "hammer_up" : "breath";
+        currentAnimation = currentAnimation == "idle" ? "idle_hammer" : "idle";
     }
 
     public void Work()
