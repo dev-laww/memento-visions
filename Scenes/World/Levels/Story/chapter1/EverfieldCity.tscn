@@ -1,4 +1,4 @@
-[gd_scene load_steps=188 format=4 uid="uid://d3dl8qe3i4hs5"]
+[gd_scene load_steps=199 format=4 uid="uid://d3dl8qe3i4hs5"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_edvum"]
 [ext_resource type="Script" uid="uid://cy5yn6ijpgu1n" path="res://Scripts/World/Levels/Story/Chapter1/EverfieldCity.cs" id="1_hf60o"]
@@ -17,15 +17,20 @@
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="11_dclhn"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="11_hn08j"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="12_hf60o"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="13_5n2fm"]
 [ext_resource type="Resource" uid="uid://d38r8diakp5jt" path="res://resources/dialogues/chapter1/chief3_npc.dialogue" id="13_8kgvc"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="14_5xymq"]
 [ext_resource type="Resource" uid="uid://btgac1rf6bqox" path="res://resources/dialogues/chapter1/chief6_npc.dialogue" id="14_8kgvc"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="14_pc0uh"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="15_2ke1t"]
 [ext_resource type="Resource" uid="uid://bvch8blxsmpmn" path="res://resources/dialogues/chapter1/chapter1.2.dialogue" id="15_8kgvc"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="16_up7eu"]
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/characters/npc/storyteller.png" id="17_kycha"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="18_8kgvc"]
 [ext_resource type="Resource" uid="uid://ctatcaqd2g4ox" path="res://resources/dialogues/chapter1/chapter1.1.dialogue" id="20_2ke1t"]
+[ext_resource type="Resource" uid="uid://cocs17ig06umk" path="res://resources/items/material/vampiric_claw.tres" id="20_pje1s"]
+[ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="21_iod6s"]
+[ext_resource type="Resource" uid="uid://efbp6aphwl23" path="res://resources/items/material/aswang_elixir.tres" id="22_fghhu"]
 [ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="27_7ym34"]
 [ext_resource type="PackedScene" uid="uid://6rk1l15nvvdr" path="res://Scenes/World/PuzzleComponent/TorchPuzzleManager.tscn" id="28_e2cbw"]
 [ext_resource type="PackedScene" uid="uid://cwus4c1b4vpr" path="res://Scenes/World/PuzzleComponent/PressurePlate.tscn" id="28_ro4io"]
@@ -34,6 +39,23 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kycha"]
 radius = 14.0
+
+[sub_resource type="Resource" id="Resource_j1jvf"]
+script = ExtResource("13_5n2fm")
+Id = "enemy:aswang"
+Amount = 5
+Quantity = 0
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_y1bnb"]
+script = ExtResource("14_pc0uh")
+Type = 3
+Description = "Fight off the creatures he leaves behind. "
+Items = null
+Enemies = [SubResource("Resource_j1jvf")]
+Completed = false
+type = 3
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_84djs"]
 radius = 14.0
@@ -46,8 +68,41 @@ radius = 14.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_3h1fx"]
 radius = 13.0
 
+[sub_resource type="Resource" id="Resource_hi571"]
+script = ExtResource("13_5n2fm")
+Id = "enemy:aswang"
+Amount = 5
+Quantity = 0
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_riumb"]
+script = ExtResource("14_pc0uh")
+Type = 3
+Description = "Defeat 5 Aswang and question survivors for clues."
+Items = null
+Enemies = [SubResource("Resource_hi571")]
+Completed = false
+type = 3
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yr40k"]
 size = Vector2(69.238, 30.3673)
+
+[sub_resource type="Resource" id="Resource_0pshh"]
+script = ExtResource("21_iod6s")
+Item = ExtResource("20_pje1s")
+Min = 3
+Max = 5
+Weight = 3
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_6fh3g"]
+script = ExtResource("21_iod6s")
+Item = ExtResource("22_fghhu")
+Min = 3
+Max = 5
+Weight = 3
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_hn08j"]
 
@@ -1017,8 +1072,10 @@ y_sort_enabled = true
 script = ExtResource("1_hf60o")
 Id = "chapter_1.2"
 
-[node name="TelegraphCanvas" parent="." instance=ExtResource("2_hn08j")]
+[node name="TelegraphCanvas" parent="." node_paths=PackedStringArray("resourcePreloader") instance=ExtResource("2_hn08j")]
 z_index = -1
+resourcePreloader = NodePath("ResourcePreloader")
+time = 3.18493
 
 [node name="Tileset" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -1052,8 +1109,15 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="npc" type="Node2D" parent="."]
 
-[node name="Chief" parent="npc" instance=ExtResource("4_32qxv")]
+[node name="Chief" parent="npc" node_paths=PackedStringArray("StatsManager", "actionTimer", "animationTree") instance=ExtResource("4_32qxv")]
 position = Vector2(548, 337)
+StatsManager = NodePath("StatsManager")
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+actionTimer = NodePath("ActionTimer")
+animationTree = NodePath("AnimationTree")
+playback = null
 
 [node name="DialogueTrigger" type="Area2D" parent="npc/Chief"]
 collision_layer = 0
@@ -1062,6 +1126,12 @@ script = ExtResource("11_dclhn")
 DialogueResource = ExtResource("8_aqpjb")
 ShouldInteract = true
 InteractionLabel = "Dodong Daldal"
+IsDialogueActive = false
+shouldInteract = true
+interactionLabel = "Dodong Daldal"
+dialogueResource = ExtResource("8_aqpjb")
+isInteractable = true
+isDialogueActive = false
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief/DialogueTrigger"]
@@ -1073,10 +1143,18 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 position = Vector2(0, -32)
 
 [node name="InteractionUI" parent="npc/Chief/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
+Text = "Interact"
 
-[node name="Chief2" parent="npc" instance=ExtResource("4_32qxv")]
+[node name="Chief2" parent="npc" node_paths=PackedStringArray("StatsManager", "actionTimer", "animationTree") instance=ExtResource("4_32qxv")]
 unique_name_in_owner = true
 position = Vector2(-112, 977)
+StatsManager = NodePath("StatsManager")
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+actionTimer = NodePath("ActionTimer")
+animationTree = NodePath("AnimationTree")
+playback = null
 
 [node name="QuestTrigger" type="Area2D" parent="npc/Chief2"]
 z_index = 1
@@ -1084,11 +1162,21 @@ position = Vector2(-1, -2)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("5_hn08j")
-Quest = ExtResource("8_7adkd")
 Mode = 0
+Quest = ExtResource("8_7adkd")
+ObjectiveIndex = 0
 ShouldInteract = true
 InteractionLabel = "Kevin"
 DialogueResource = ExtResource("9_kycha")
+IsDialogueActive = false
+Objective = SubResource("Resource_y1bnb")
+dialogueResource = ExtResource("9_kycha")
+shouldInteract = true
+interactionLabel = "Kevin"
+_quest = ExtResource("8_7adkd")
+_objectiveIndex = 0
+mode = 0
+isDialogueActive = false
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief2/QuestTrigger"]
@@ -1099,10 +1187,18 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="Node2D" type="Node2D" parent="npc/Chief2/QuestTrigger"]
 
 [node name="InteractionUI" parent="npc/Chief2/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
+Text = "Kevin"
 
-[node name="Chief3" parent="npc" instance=ExtResource("4_32qxv")]
+[node name="Chief3" parent="npc" node_paths=PackedStringArray("StatsManager", "actionTimer", "animationTree") instance=ExtResource("4_32qxv")]
 material = SubResource("ShaderMaterial_kycha")
 position = Vector2(907, 259)
+StatsManager = NodePath("StatsManager")
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+actionTimer = NodePath("ActionTimer")
+animationTree = NodePath("AnimationTree")
+playback = null
 
 [node name="DialogueTrigger" type="Area2D" parent="npc/Chief3"]
 z_index = 1
@@ -1112,6 +1208,12 @@ script = ExtResource("11_dclhn")
 DialogueResource = ExtResource("13_8kgvc")
 ShouldInteract = true
 InteractionLabel = "Paquito Weyt"
+IsDialogueActive = false
+shouldInteract = true
+interactionLabel = "Paquito Weyt"
+dialogueResource = ExtResource("13_8kgvc")
+isInteractable = true
+isDialogueActive = false
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief3/DialogueTrigger"]
@@ -1123,9 +1225,17 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 position = Vector2(0, -33)
 
 [node name="InteractionUI" parent="npc/Chief3/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
+Text = "Interact"
 
-[node name="Chief6" parent="npc" instance=ExtResource("4_32qxv")]
+[node name="Chief6" parent="npc" node_paths=PackedStringArray("StatsManager", "actionTimer", "animationTree") instance=ExtResource("4_32qxv")]
 position = Vector2(516, 282)
+StatsManager = NodePath("StatsManager")
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+actionTimer = NodePath("ActionTimer")
+animationTree = NodePath("AnimationTree")
+playback = null
 
 [node name="DialogueTrigger" type="Area2D" parent="npc/Chief6"]
 collision_layer = 0
@@ -1134,6 +1244,12 @@ script = ExtResource("11_dclhn")
 DialogueResource = ExtResource("14_8kgvc")
 ShouldInteract = true
 InteractionLabel = "Tikyo Tiktilaok"
+IsDialogueActive = false
+shouldInteract = true
+interactionLabel = "Tikyo Tiktilaok"
+dialogueResource = ExtResource("14_8kgvc")
+isInteractable = true
+isDialogueActive = false
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief6/DialogueTrigger"]
@@ -1146,9 +1262,17 @@ z_index = 1
 position = Vector2(0, -32)
 
 [node name="InteractionUI" parent="npc/Chief6/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
+Text = "Interact"
 
-[node name="Chief5" parent="npc" instance=ExtResource("4_32qxv")]
+[node name="Chief5" parent="npc" node_paths=PackedStringArray("StatsManager", "actionTimer", "animationTree") instance=ExtResource("4_32qxv")]
 position = Vector2(173, 169)
+StatsManager = NodePath("StatsManager")
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+actionTimer = NodePath("ActionTimer")
+animationTree = NodePath("AnimationTree")
+playback = null
 
 [node name="QuestTrigger" type="Area2D" parent="npc/Chief5"]
 position = Vector2(-23, -41)
@@ -1156,11 +1280,21 @@ scale = Vector2(1.14304, 1.01698)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("5_hn08j")
-Quest = ExtResource("6_hf60o")
 Mode = 0
+Quest = ExtResource("6_hf60o")
+ObjectiveIndex = 0
 ShouldInteract = true
 InteractionLabel = "Tisoy & Manny"
 DialogueResource = ExtResource("15_8kgvc")
+IsDialogueActive = false
+Objective = SubResource("Resource_riumb")
+dialogueResource = ExtResource("15_8kgvc")
+shouldInteract = true
+interactionLabel = "Tisoy & Manny"
+_quest = ExtResource("6_hf60o")
+_objectiveIndex = 0
+mode = 0
+isDialogueActive = false
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief5/QuestTrigger"]
@@ -1171,9 +1305,17 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="Node2D" type="Node2D" parent="npc/Chief5/QuestTrigger"]
 
 [node name="InteractionUI" parent="npc/Chief5/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
+Text = "Tisoy & Manny"
 
-[node name="Chief4" parent="npc" instance=ExtResource("4_32qxv")]
+[node name="Chief4" parent="npc" node_paths=PackedStringArray("StatsManager", "actionTimer", "animationTree") instance=ExtResource("4_32qxv")]
 position = Vector2(130, 169)
+StatsManager = NodePath("StatsManager")
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+actionTimer = NodePath("ActionTimer")
+animationTree = NodePath("AnimationTree")
+playback = null
 
 [node name="collision" type="StaticBody2D" parent="."]
 visible = false
@@ -1184,103 +1326,591 @@ polygon = PackedVector2Array(-774, -97, -806, 1437, 175, 1433, 179, 1242, 1539, 
 [node name="Enemy" type="Node2D" parent="."]
 position = Vector2(266, 615)
 
-[node name="Aswang" parent="Enemy" instance=ExtResource("8_516uf")]
+[node name="Aswang" parent="Enemy" node_paths=PackedStringArray("StatsManager", "animationTree", "velocityManager", "pathFindManager", "specialAttackTimer", "specialAttackWindUpTimer", "patrolTimer", "hitBox") instance=ExtResource("8_516uf")]
 position = Vector2(-275, 485)
+StatsManager = NodePath("StatsManager")
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+animationTree = NodePath("AnimationTree")
+velocityManager = NodePath("VelocityManager")
+pathFindManager = NodePath("PathFindManager")
+specialAttackTimer = NodePath("SpecialAttackTimer")
+specialAttackWindUpTimer = NodePath("SpecialAttackWindUpTimer")
+patrolTimer = NodePath("PatrolTimer")
+hitBox = NodePath("HitBox")
+playback = null
+initialPosition = Vector2(0, 0)
+chargeOrigin = Vector2(0, 0)
+chargeDestination = Vector2(0, 0)
+chargeDirection = Vector2(0, 0)
+damageComponent = null
+isShowingAttackIndicator = false
+attackState = ""
+previousDistance = 3.40282e+38
 
-[node name="StatsManager" parent="Enemy/Aswang" index="5"]
+[node name="HealthNumberManager" parent="Enemy/Aswang" index="4" node_paths=PackedStringArray("manager")]
+manager = NodePath("../StatsManager")
+
+[node name="StatsManager" parent="Enemy/Aswang" index="5" node_paths=PackedStringArray("Entity")]
 Level = 4.0
-MaxHealth = 719.008
-Defense = 76.5031
-Damage = 124.0
+Health = 790.134
+Defense = 86.066
+Damage = 137.0
+LastReceivedAttack = null
+MaxHealth = 790.134
+speed = 100.0
+damage = 137.0
+health = 790.134
+experience = 0.0
+level = 4.0
+defense = 86.066
+Entity = NodePath("..")
+baseMaxHealth = 719.008
+baseDamage = 124.0
+baseDefense = 76.5031
+
+[node name="VelocityManager" parent="Enemy/Aswang" index="6" node_paths=PackedStringArray("statsManager")]
+Velocity = Vector2(0, 0)
+LastFacedDirection = Vector2(0, 1)
+IsDashing = false
+dashQueue = Array[Vector2]([])
+isDashing = false
+knockbacked = false
+statsManager = NodePath("../StatsManager")
+
+[node name="DropManager" parent="Enemy/Aswang" index="7" node_paths=PackedStringArray("resourcePreloader")]
+resourcePreloader = NodePath("ResourcePreloader")
+drops = [SubResource("Resource_0pshh"), SubResource("Resource_6fh3g")]
+
+[node name="PathFindManager" parent="Enemy/Aswang" index="8" node_paths=PackedStringArray("NavigationAgent2D", "intervalTimer", "velocityManager")]
+NavigationAgent2D = NodePath("NavigationAgent2D")
+intervalTimer = NodePath("IntervalTimer")
+velocityManager = NodePath("../VelocityManager")
+
+[node name="HurtBox" parent="Enemy/Aswang" index="9" node_paths=PackedStringArray("statsManager")]
+shape = null
+statsManager = NodePath("../StatsManager")
+
+[node name="HitBox" parent="Enemy/Aswang" index="10"]
+HitBoxOwner = null
+attackOverride = null
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang" index="12"]
-frame = 1
+frame = 0
 
-[node name="Aswang2" parent="Enemy" instance=ExtResource("8_516uf")]
+[node name="Aswang2" parent="Enemy" node_paths=PackedStringArray("StatsManager", "animationTree", "velocityManager", "pathFindManager", "specialAttackTimer", "specialAttackWindUpTimer", "patrolTimer", "hitBox") instance=ExtResource("8_516uf")]
 position = Vector2(87, 58)
+StatsManager = NodePath("StatsManager")
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+animationTree = NodePath("AnimationTree")
+velocityManager = NodePath("VelocityManager")
+pathFindManager = NodePath("PathFindManager")
+specialAttackTimer = NodePath("SpecialAttackTimer")
+specialAttackWindUpTimer = NodePath("SpecialAttackWindUpTimer")
+patrolTimer = NodePath("PatrolTimer")
+hitBox = NodePath("HitBox")
+playback = null
+initialPosition = Vector2(0, 0)
+chargeOrigin = Vector2(0, 0)
+chargeDestination = Vector2(0, 0)
+chargeDirection = Vector2(0, 0)
+damageComponent = null
+isShowingAttackIndicator = false
+attackState = ""
+previousDistance = 3.40282e+38
 
-[node name="StatsManager" parent="Enemy/Aswang2" index="5"]
+[node name="HealthNumberManager" parent="Enemy/Aswang2" index="4" node_paths=PackedStringArray("manager")]
+manager = NodePath("../StatsManager")
+
+[node name="StatsManager" parent="Enemy/Aswang2" index="5" node_paths=PackedStringArray("Entity")]
 Level = 4.0
-MaxHealth = 719.008
-Defense = 76.5031
-Damage = 124.0
+Health = 790.134
+Defense = 86.066
+Damage = 137.0
+LastReceivedAttack = null
+MaxHealth = 790.134
+speed = 100.0
+damage = 137.0
+health = 790.134
+experience = 0.0
+level = 4.0
+defense = 86.066
+Entity = NodePath("..")
+baseMaxHealth = 719.008
+baseDamage = 124.0
+baseDefense = 76.5031
+
+[node name="VelocityManager" parent="Enemy/Aswang2" index="6" node_paths=PackedStringArray("statsManager")]
+Velocity = Vector2(0, 0)
+LastFacedDirection = Vector2(0, 1)
+IsDashing = false
+dashQueue = Array[Vector2]([])
+isDashing = false
+knockbacked = false
+statsManager = NodePath("../StatsManager")
+
+[node name="DropManager" parent="Enemy/Aswang2" index="7" node_paths=PackedStringArray("resourcePreloader")]
+resourcePreloader = NodePath("ResourcePreloader")
+drops = [SubResource("Resource_0pshh"), SubResource("Resource_6fh3g")]
+
+[node name="PathFindManager" parent="Enemy/Aswang2" index="8" node_paths=PackedStringArray("NavigationAgent2D", "intervalTimer", "velocityManager")]
+NavigationAgent2D = NodePath("NavigationAgent2D")
+intervalTimer = NodePath("IntervalTimer")
+velocityManager = NodePath("../VelocityManager")
+
+[node name="HurtBox" parent="Enemy/Aswang2" index="9" node_paths=PackedStringArray("statsManager")]
+shape = null
+statsManager = NodePath("../StatsManager")
+
+[node name="HitBox" parent="Enemy/Aswang2" index="10"]
+HitBoxOwner = null
+attackOverride = null
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang2" index="12"]
-frame = 1
+frame = 0
 
-[node name="Aswang3" parent="Enemy" instance=ExtResource("8_516uf")]
+[node name="Aswang3" parent="Enemy" node_paths=PackedStringArray("StatsManager", "animationTree", "velocityManager", "pathFindManager", "specialAttackTimer", "specialAttackWindUpTimer", "patrolTimer", "hitBox") instance=ExtResource("8_516uf")]
 position = Vector2(123, 197)
+StatsManager = NodePath("StatsManager")
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+animationTree = NodePath("AnimationTree")
+velocityManager = NodePath("VelocityManager")
+pathFindManager = NodePath("PathFindManager")
+specialAttackTimer = NodePath("SpecialAttackTimer")
+specialAttackWindUpTimer = NodePath("SpecialAttackWindUpTimer")
+patrolTimer = NodePath("PatrolTimer")
+hitBox = NodePath("HitBox")
+playback = null
+initialPosition = Vector2(0, 0)
+chargeOrigin = Vector2(0, 0)
+chargeDestination = Vector2(0, 0)
+chargeDirection = Vector2(0, 0)
+damageComponent = null
+isShowingAttackIndicator = false
+attackState = ""
+previousDistance = 3.40282e+38
 
-[node name="StatsManager" parent="Enemy/Aswang3" index="5"]
+[node name="HealthNumberManager" parent="Enemy/Aswang3" index="4" node_paths=PackedStringArray("manager")]
+manager = NodePath("../StatsManager")
+
+[node name="StatsManager" parent="Enemy/Aswang3" index="5" node_paths=PackedStringArray("Entity")]
 Level = 4.0
-MaxHealth = 719.008
-Defense = 76.5031
-Damage = 124.0
+Health = 790.134
+Defense = 86.066
+Damage = 137.0
+LastReceivedAttack = null
+MaxHealth = 790.134
+speed = 100.0
+damage = 137.0
+health = 790.134
+experience = 0.0
+level = 4.0
+defense = 86.066
+Entity = NodePath("..")
+baseMaxHealth = 719.008
+baseDamage = 124.0
+baseDefense = 76.5031
+
+[node name="VelocityManager" parent="Enemy/Aswang3" index="6" node_paths=PackedStringArray("statsManager")]
+Velocity = Vector2(0, 0)
+LastFacedDirection = Vector2(0, 1)
+IsDashing = false
+dashQueue = Array[Vector2]([])
+isDashing = false
+knockbacked = false
+statsManager = NodePath("../StatsManager")
+
+[node name="DropManager" parent="Enemy/Aswang3" index="7" node_paths=PackedStringArray("resourcePreloader")]
+resourcePreloader = NodePath("ResourcePreloader")
+drops = [SubResource("Resource_0pshh"), SubResource("Resource_6fh3g")]
+
+[node name="PathFindManager" parent="Enemy/Aswang3" index="8" node_paths=PackedStringArray("NavigationAgent2D", "intervalTimer", "velocityManager")]
+NavigationAgent2D = NodePath("NavigationAgent2D")
+intervalTimer = NodePath("IntervalTimer")
+velocityManager = NodePath("../VelocityManager")
+
+[node name="HurtBox" parent="Enemy/Aswang3" index="9" node_paths=PackedStringArray("statsManager")]
+shape = null
+statsManager = NodePath("../StatsManager")
+
+[node name="HitBox" parent="Enemy/Aswang3" index="10"]
+HitBoxOwner = null
+attackOverride = null
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang3" index="12"]
-frame = 1
+frame = 0
 
-[node name="Aswang4" parent="Enemy" instance=ExtResource("8_516uf")]
+[node name="Aswang4" parent="Enemy" node_paths=PackedStringArray("StatsManager", "animationTree", "velocityManager", "pathFindManager", "specialAttackTimer", "specialAttackWindUpTimer", "patrolTimer", "hitBox") instance=ExtResource("8_516uf")]
 position = Vector2(49, -155)
+StatsManager = NodePath("StatsManager")
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+animationTree = NodePath("AnimationTree")
+velocityManager = NodePath("VelocityManager")
+pathFindManager = NodePath("PathFindManager")
+specialAttackTimer = NodePath("SpecialAttackTimer")
+specialAttackWindUpTimer = NodePath("SpecialAttackWindUpTimer")
+patrolTimer = NodePath("PatrolTimer")
+hitBox = NodePath("HitBox")
+playback = null
+initialPosition = Vector2(0, 0)
+chargeOrigin = Vector2(0, 0)
+chargeDestination = Vector2(0, 0)
+chargeDirection = Vector2(0, 0)
+damageComponent = null
+isShowingAttackIndicator = false
+attackState = ""
+previousDistance = 3.40282e+38
 
-[node name="StatsManager" parent="Enemy/Aswang4" index="5"]
+[node name="HealthNumberManager" parent="Enemy/Aswang4" index="4" node_paths=PackedStringArray("manager")]
+manager = NodePath("../StatsManager")
+
+[node name="StatsManager" parent="Enemy/Aswang4" index="5" node_paths=PackedStringArray("Entity")]
 Level = 3.0
-MaxHealth = 519.8
-Defense = 49.3695
-Damage = 85.5694
+Health = 566.025
+Defense = 55.5407
+Damage = 93.7655
+LastReceivedAttack = null
+MaxHealth = 566.025
+speed = 100.0
+damage = 93.7655
+health = 566.025
+experience = 0.0
+level = 3.0
+defense = 55.5407
+Entity = NodePath("..")
+baseMaxHealth = 519.8
+baseDamage = 85.5694
+baseDefense = 49.3695
+
+[node name="VelocityManager" parent="Enemy/Aswang4" index="6" node_paths=PackedStringArray("statsManager")]
+Velocity = Vector2(0, 0)
+LastFacedDirection = Vector2(0, 1)
+IsDashing = false
+dashQueue = Array[Vector2]([])
+isDashing = false
+knockbacked = false
+statsManager = NodePath("../StatsManager")
+
+[node name="DropManager" parent="Enemy/Aswang4" index="7" node_paths=PackedStringArray("resourcePreloader")]
+resourcePreloader = NodePath("ResourcePreloader")
+drops = [SubResource("Resource_0pshh"), SubResource("Resource_6fh3g")]
+
+[node name="PathFindManager" parent="Enemy/Aswang4" index="8" node_paths=PackedStringArray("NavigationAgent2D", "intervalTimer", "velocityManager")]
+NavigationAgent2D = NodePath("NavigationAgent2D")
+intervalTimer = NodePath("IntervalTimer")
+velocityManager = NodePath("../VelocityManager")
+
+[node name="HurtBox" parent="Enemy/Aswang4" index="9" node_paths=PackedStringArray("statsManager")]
+shape = null
+statsManager = NodePath("../StatsManager")
+
+[node name="HitBox" parent="Enemy/Aswang4" index="10"]
+HitBoxOwner = null
+attackOverride = null
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang4" index="12"]
-frame = 1
+frame = 0
 
-[node name="Aswang5" parent="Enemy" instance=ExtResource("8_516uf")]
+[node name="Aswang5" parent="Enemy" node_paths=PackedStringArray("StatsManager", "animationTree", "velocityManager", "pathFindManager", "specialAttackTimer", "specialAttackWindUpTimer", "patrolTimer", "hitBox") instance=ExtResource("8_516uf")]
 position = Vector2(136, 368)
+StatsManager = NodePath("StatsManager")
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+animationTree = NodePath("AnimationTree")
+velocityManager = NodePath("VelocityManager")
+pathFindManager = NodePath("PathFindManager")
+specialAttackTimer = NodePath("SpecialAttackTimer")
+specialAttackWindUpTimer = NodePath("SpecialAttackWindUpTimer")
+patrolTimer = NodePath("PatrolTimer")
+hitBox = NodePath("HitBox")
+playback = null
+initialPosition = Vector2(0, 0)
+chargeOrigin = Vector2(0, 0)
+chargeDestination = Vector2(0, 0)
+chargeDirection = Vector2(0, 0)
+damageComponent = null
+isShowingAttackIndicator = false
+attackState = ""
+previousDistance = 3.40282e+38
 
-[node name="StatsManager" parent="Enemy/Aswang5" index="5"]
+[node name="HealthNumberManager" parent="Enemy/Aswang5" index="4" node_paths=PackedStringArray("manager")]
+manager = NodePath("../StatsManager")
+
+[node name="StatsManager" parent="Enemy/Aswang5" index="5" node_paths=PackedStringArray("Entity")]
 Level = 5.0
-MaxHealth = 926.956
-Defense = 104.826
-Damage = 165.442
+Health = 1024.08
+Defense = 117.929
+Damage = 183.622
+LastReceivedAttack = null
+MaxHealth = 1024.08
+speed = 100.0
+damage = 183.622
+health = 1024.08
+experience = 0.0
+level = 5.0
+defense = 117.929
+Entity = NodePath("..")
+baseMaxHealth = 926.956
+baseDamage = 165.442
+baseDefense = 104.826
+
+[node name="VelocityManager" parent="Enemy/Aswang5" index="6" node_paths=PackedStringArray("statsManager")]
+Velocity = Vector2(0, 0)
+LastFacedDirection = Vector2(0, 1)
+IsDashing = false
+dashQueue = Array[Vector2]([])
+isDashing = false
+knockbacked = false
+statsManager = NodePath("../StatsManager")
+
+[node name="DropManager" parent="Enemy/Aswang5" index="7" node_paths=PackedStringArray("resourcePreloader")]
+resourcePreloader = NodePath("ResourcePreloader")
+drops = [SubResource("Resource_0pshh"), SubResource("Resource_6fh3g")]
+
+[node name="PathFindManager" parent="Enemy/Aswang5" index="8" node_paths=PackedStringArray("NavigationAgent2D", "intervalTimer", "velocityManager")]
+NavigationAgent2D = NodePath("NavigationAgent2D")
+intervalTimer = NodePath("IntervalTimer")
+velocityManager = NodePath("../VelocityManager")
+
+[node name="HurtBox" parent="Enemy/Aswang5" index="9" node_paths=PackedStringArray("statsManager")]
+shape = null
+statsManager = NodePath("../StatsManager")
+
+[node name="HitBox" parent="Enemy/Aswang5" index="10"]
+HitBoxOwner = null
+attackOverride = null
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang5" index="12"]
-frame = 1
+frame = 0
 
-[node name="Aswang6" parent="Enemy" instance=ExtResource("8_516uf")]
+[node name="Aswang6" parent="Enemy" node_paths=PackedStringArray("StatsManager", "animationTree", "velocityManager", "pathFindManager", "specialAttackTimer", "specialAttackWindUpTimer", "patrolTimer", "hitBox") instance=ExtResource("8_516uf")]
 position = Vector2(-184, 591)
+StatsManager = NodePath("StatsManager")
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+animationTree = NodePath("AnimationTree")
+velocityManager = NodePath("VelocityManager")
+pathFindManager = NodePath("PathFindManager")
+specialAttackTimer = NodePath("SpecialAttackTimer")
+specialAttackWindUpTimer = NodePath("SpecialAttackWindUpTimer")
+patrolTimer = NodePath("PatrolTimer")
+hitBox = NodePath("HitBox")
+playback = null
+initialPosition = Vector2(0, 0)
+chargeOrigin = Vector2(0, 0)
+chargeDestination = Vector2(0, 0)
+chargeDirection = Vector2(0, 0)
+damageComponent = null
+isShowingAttackIndicator = false
+attackState = ""
+previousDistance = 3.40282e+38
 
-[node name="StatsManager" parent="Enemy/Aswang6" index="5"]
+[node name="HealthNumberManager" parent="Enemy/Aswang6" index="4" node_paths=PackedStringArray("manager")]
+manager = NodePath("../StatsManager")
+
+[node name="StatsManager" parent="Enemy/Aswang6" index="5" node_paths=PackedStringArray("Entity")]
 Level = 4.0
-MaxHealth = 719.008
-Defense = 76.5031
-Damage = 124.0
+Health = 790.134
+Defense = 86.066
+Damage = 137.0
+LastReceivedAttack = null
+MaxHealth = 790.134
+speed = 100.0
+damage = 137.0
+health = 790.134
+experience = 0.0
+level = 4.0
+defense = 86.066
+Entity = NodePath("..")
+baseMaxHealth = 719.008
+baseDamage = 124.0
+baseDefense = 76.5031
+
+[node name="VelocityManager" parent="Enemy/Aswang6" index="6" node_paths=PackedStringArray("statsManager")]
+Velocity = Vector2(0, 0)
+LastFacedDirection = Vector2(0, 1)
+IsDashing = false
+dashQueue = Array[Vector2]([])
+isDashing = false
+knockbacked = false
+statsManager = NodePath("../StatsManager")
+
+[node name="DropManager" parent="Enemy/Aswang6" index="7" node_paths=PackedStringArray("resourcePreloader")]
+resourcePreloader = NodePath("ResourcePreloader")
+drops = [SubResource("Resource_0pshh"), SubResource("Resource_6fh3g")]
+
+[node name="PathFindManager" parent="Enemy/Aswang6" index="8" node_paths=PackedStringArray("NavigationAgent2D", "intervalTimer", "velocityManager")]
+NavigationAgent2D = NodePath("NavigationAgent2D")
+intervalTimer = NodePath("IntervalTimer")
+velocityManager = NodePath("../VelocityManager")
+
+[node name="HurtBox" parent="Enemy/Aswang6" index="9" node_paths=PackedStringArray("statsManager")]
+shape = null
+statsManager = NodePath("../StatsManager")
+
+[node name="HitBox" parent="Enemy/Aswang6" index="10"]
+HitBoxOwner = null
+attackOverride = null
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang6" index="12"]
-frame = 1
+frame = 0
 
-[node name="Aswang7" parent="Enemy" instance=ExtResource("8_516uf")]
+[node name="Aswang7" parent="Enemy" node_paths=PackedStringArray("StatsManager", "animationTree", "velocityManager", "pathFindManager", "specialAttackTimer", "specialAttackWindUpTimer", "patrolTimer", "hitBox") instance=ExtResource("8_516uf")]
 position = Vector2(-156, 70)
+StatsManager = NodePath("StatsManager")
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+animationTree = NodePath("AnimationTree")
+velocityManager = NodePath("VelocityManager")
+pathFindManager = NodePath("PathFindManager")
+specialAttackTimer = NodePath("SpecialAttackTimer")
+specialAttackWindUpTimer = NodePath("SpecialAttackWindUpTimer")
+patrolTimer = NodePath("PatrolTimer")
+hitBox = NodePath("HitBox")
+playback = null
+initialPosition = Vector2(0, 0)
+chargeOrigin = Vector2(0, 0)
+chargeDestination = Vector2(0, 0)
+chargeDirection = Vector2(0, 0)
+damageComponent = null
+isShowingAttackIndicator = false
+attackState = ""
+previousDistance = 3.40282e+38
 
-[node name="StatsManager" parent="Enemy/Aswang7" index="5"]
+[node name="HealthNumberManager" parent="Enemy/Aswang7" index="4" node_paths=PackedStringArray("manager")]
+manager = NodePath("../StatsManager")
+
+[node name="StatsManager" parent="Enemy/Aswang7" index="5" node_paths=PackedStringArray("Entity")]
 Level = 4.0
-MaxHealth = 719.008
-Defense = 76.5031
-Damage = 124.0
+Health = 790.134
+Defense = 86.066
+Damage = 137.0
+LastReceivedAttack = null
+MaxHealth = 790.134
+speed = 100.0
+damage = 137.0
+health = 790.134
+experience = 0.0
+level = 4.0
+defense = 86.066
+Entity = NodePath("..")
+baseMaxHealth = 719.008
+baseDamage = 124.0
+baseDefense = 76.5031
+
+[node name="VelocityManager" parent="Enemy/Aswang7" index="6" node_paths=PackedStringArray("statsManager")]
+Velocity = Vector2(0, 0)
+LastFacedDirection = Vector2(0, 1)
+IsDashing = false
+dashQueue = Array[Vector2]([])
+isDashing = false
+knockbacked = false
+statsManager = NodePath("../StatsManager")
+
+[node name="DropManager" parent="Enemy/Aswang7" index="7" node_paths=PackedStringArray("resourcePreloader")]
+resourcePreloader = NodePath("ResourcePreloader")
+drops = [SubResource("Resource_0pshh"), SubResource("Resource_6fh3g")]
+
+[node name="PathFindManager" parent="Enemy/Aswang7" index="8" node_paths=PackedStringArray("NavigationAgent2D", "intervalTimer", "velocityManager")]
+NavigationAgent2D = NodePath("NavigationAgent2D")
+intervalTimer = NodePath("IntervalTimer")
+velocityManager = NodePath("../VelocityManager")
+
+[node name="HurtBox" parent="Enemy/Aswang7" index="9" node_paths=PackedStringArray("statsManager")]
+shape = null
+statsManager = NodePath("../StatsManager")
+
+[node name="HitBox" parent="Enemy/Aswang7" index="10"]
+HitBoxOwner = null
+attackOverride = null
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang7" index="12"]
-frame = 1
+frame = 0
 
-[node name="Aswang8" parent="Enemy" instance=ExtResource("8_516uf")]
+[node name="Aswang8" parent="Enemy" node_paths=PackedStringArray("StatsManager", "animationTree", "velocityManager", "pathFindManager", "specialAttackTimer", "specialAttackWindUpTimer", "patrolTimer", "hitBox") instance=ExtResource("8_516uf")]
 position = Vector2(-34, 484)
+StatsManager = NodePath("StatsManager")
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+animationTree = NodePath("AnimationTree")
+velocityManager = NodePath("VelocityManager")
+pathFindManager = NodePath("PathFindManager")
+specialAttackTimer = NodePath("SpecialAttackTimer")
+specialAttackWindUpTimer = NodePath("SpecialAttackWindUpTimer")
+patrolTimer = NodePath("PatrolTimer")
+hitBox = NodePath("HitBox")
+playback = null
+initialPosition = Vector2(0, 0)
+chargeOrigin = Vector2(0, 0)
+chargeDestination = Vector2(0, 0)
+chargeDirection = Vector2(0, 0)
+damageComponent = null
+isShowingAttackIndicator = false
+attackState = ""
+previousDistance = 3.40282e+38
 
-[node name="StatsManager" parent="Enemy/Aswang8" index="5"]
+[node name="HealthNumberManager" parent="Enemy/Aswang8" index="4" node_paths=PackedStringArray("manager")]
+manager = NodePath("../StatsManager")
+
+[node name="StatsManager" parent="Enemy/Aswang8" index="5" node_paths=PackedStringArray("Entity")]
 Level = 4.0
-MaxHealth = 719.008
-Defense = 76.5031
-Damage = 124.0
+Health = 790.134
+Defense = 86.066
+Damage = 137.0
+LastReceivedAttack = null
+MaxHealth = 790.134
+speed = 100.0
+damage = 137.0
+health = 790.134
+experience = 0.0
+level = 4.0
+defense = 86.066
+Entity = NodePath("..")
+baseMaxHealth = 719.008
+baseDamage = 124.0
+baseDefense = 76.5031
+
+[node name="VelocityManager" parent="Enemy/Aswang8" index="6" node_paths=PackedStringArray("statsManager")]
+Velocity = Vector2(0, 0)
+LastFacedDirection = Vector2(0, 1)
+IsDashing = false
+dashQueue = Array[Vector2]([])
+isDashing = false
+knockbacked = false
+statsManager = NodePath("../StatsManager")
+
+[node name="DropManager" parent="Enemy/Aswang8" index="7" node_paths=PackedStringArray("resourcePreloader")]
+resourcePreloader = NodePath("ResourcePreloader")
+drops = [SubResource("Resource_0pshh"), SubResource("Resource_6fh3g")]
+
+[node name="PathFindManager" parent="Enemy/Aswang8" index="8" node_paths=PackedStringArray("NavigationAgent2D", "intervalTimer", "velocityManager")]
+NavigationAgent2D = NodePath("NavigationAgent2D")
+intervalTimer = NodePath("IntervalTimer")
+velocityManager = NodePath("../VelocityManager")
+
+[node name="HurtBox" parent="Enemy/Aswang8" index="9" node_paths=PackedStringArray("statsManager")]
+shape = null
+statsManager = NodePath("../StatsManager")
+
+[node name="HitBox" parent="Enemy/Aswang8" index="10"]
+HitBoxOwner = null
+attackOverride = null
 
 [node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang8" index="12"]
-frame = 1
+frame = 0
 
-[node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
+[node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode", "_parseRootNode")]
 visible = false
 z_index = 1000
 color = Color(1, 1, 1, 0)
@@ -1288,6 +1918,8 @@ polygon = PackedVector2Array(-762, -47, -795, 1407, -795, 1407, 153, 1415, 153, 
 script = ExtResource("10_grhu3")
 ParseRootNode = NodePath("../Tileset")
 NavigationPolygon = SubResource("NavigationPolygon_hn08j")
+_parseRootNode = NodePath("../Tileset")
+_navigationPolygon = SubResource("NavigationPolygon_hn08j")
 metadata/_custom_type_script = "uid://cfscbenslyojv"
 
 [node name="@NavigationRegion2D@60431" type="NavigationRegion2D" parent="NavigationManager"]
@@ -1585,6 +2217,7 @@ collision_layer = 0
 collision_mask = 4
 script = ExtResource("11_hn08j")
 TargetScene = "uid://c2qx74ig42sum"
+targetScene = "uid://c2qx74ig42sum"
 metadata/_custom_type_script = "uid://davlg2u8drdh4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
@@ -1593,6 +2226,21 @@ shape = SubResource("RectangleShape2D_hf60o")
 
 [node name="Player" parent="." instance=ExtResource("12_hf60o")]
 position = Vector2(626, 30)
+StatsManager = null
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+hurtBox = null
+animationTree = null
+comboResetTimer = null
+resourcePreloader = null
+VelocityManager = null
+WeaponManager = null
+InputManager = null
+Center = null
+playback = null
+combo = 1
+isAttacking = false
 
 [node name="StoryTeller" type="CharacterBody2D" parent="."]
 position = Vector2(413, 45)
@@ -1600,6 +2248,13 @@ collision_mask = 15
 script = ExtResource("14_5xymq")
 Id = "npc:storyteller"
 isNpc = true
+StatsManager = null
+HurtBox = null
+deathInfo = null
+spawnInfo = null
+actionTimer = null
+animationTree = null
+playback = null
 
 [node name="ActionTimer" type="Timer" parent="StoryTeller"]
 autostart = true
@@ -1608,8 +2263,20 @@ min_wait_time = 4.0
 max_wait_time = 10.0
 metadata/_custom_type_script = "uid://clh46y8w17vem"
 
-[node name="StatsManager" type="Node" parent="StoryTeller"]
+[node name="StatsManager" type="Node" parent="StoryTeller" node_paths=PackedStringArray("Entity")]
 script = ExtResource("16_up7eu")
+Health = 100.0
+LastReceivedAttack = null
+speed = 100.0
+damage = 0.0
+health = 100.0
+experience = 0.0
+level = 1.0
+defense = 0.0
+Entity = NodePath("..")
+baseMaxHealth = 100.0
+baseDamage = 0.0
+baseDefense = 0.0
 metadata/_custom_type_script = "uid://dnpva4sn53c1r"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StoryTeller"]
@@ -1621,7 +2288,6 @@ material = ExtResource("1_edvum")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 1
 script = ExtResource("18_8kgvc")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1642,6 +2308,12 @@ script = ExtResource("11_dclhn")
 DialogueResource = ExtResource("20_2ke1t")
 ShouldInteract = true
 InteractionLabel = "StoryTeller"
+IsDialogueActive = false
+shouldInteract = true
+interactionLabel = "StoryTeller"
+dialogueResource = ExtResource("20_2ke1t")
+isInteractable = true
+isDialogueActive = false
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StoryTeller/DialogueTrigger"]
@@ -1653,19 +2325,26 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 position = Vector2(0, -32)
 
 [node name="InteractionUI" parent="StoryTeller/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
+Text = "Interact"
 
-[node name="Chest" parent="." instance=ExtResource("27_7ym34")]
+[node name="Chest" parent="." node_paths=PackedStringArray("dropManager", "interaction") instance=ExtResource("27_7ym34")]
 unique_name_in_owner = true
 visible = false
 position = Vector2(57, 452)
+dropManager = NodePath("DropManager")
+interaction = NodePath("Interaction")
+loot = null
 
 [node name="Puzzle 2" type="Node2D" parent="."]
 position = Vector2(1045, 59)
 
-[node name="Chest2" parent="Puzzle 2" instance=ExtResource("27_7ym34")]
+[node name="Chest2" parent="Puzzle 2" node_paths=PackedStringArray("dropManager", "interaction") instance=ExtResource("27_7ym34")]
 unique_name_in_owner = true
 visible = false
 position = Vector2(-52, 145)
+dropManager = NodePath("DropManager")
+interaction = NodePath("Interaction")
+loot = null
 
 [node name="Plate" parent="Puzzle 2" instance=ExtResource("28_ro4io")]
 unique_name_in_owner = true
@@ -1677,13 +2356,18 @@ position = Vector2(-113, 142)
 
 [node name="Movable2" parent="Puzzle 2" instance=ExtResource("29_55v40")]
 position = Vector2(-113, 59)
+pushSpeed = null
 
 [node name="Movable" parent="Puzzle 2" instance=ExtResource("29_55v40")]
 position = Vector2(5, 59)
+pushSpeed = null
 
 [node name="TorchSequence" parent="." instance=ExtResource("28_e2cbw")]
 unique_name_in_owner = true
 position = Vector2(74, 421)
+_displaySequenceDelay = null
+_resetDelay = null
+_sequenceLength = null
 
 [node name="Light" parent="TorchSequence" instance=ExtResource("29_ro4io")]
 position = Vector2(122, -15)
