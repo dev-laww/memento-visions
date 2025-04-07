@@ -92,17 +92,17 @@ public partial class CommonMinimap : Control
             enemySprite.Show();
             map.AddChild(enemySprite);
             sprites[enemy] = enemySprite;
-            
-            enemy.TreeExiting += () =>
-                    OnEnemyUnregistered(enemy);
-                    
+
+            enemy.Death += _ => OnEnemyUnregistered(enemy);
         }
-        catch{ }
+        catch { }
     }
 
     public void OnEnemyUnregistered(Enemy enemy)
     {
-        if (!sprites.TryGetValue(enemy, out var enemySprite)) return;
+        if (!sprites.TryGetValue(enemy, out var enemySprite) || !IsInstanceValid(enemySprite)) return;
+
+        enemySprite.QueueFree();
         sprites.Remove(enemy);
     }
 }
