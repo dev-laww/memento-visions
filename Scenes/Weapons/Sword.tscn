@@ -1,9 +1,11 @@
-[gd_scene load_steps=187 format=3 uid="uid://bj127mbpsv45j"]
+[gd_scene load_steps=189 format=3 uid="uid://bj127mbpsv45j"]
 
 [ext_resource type="Script" uid="uid://dqgmaq0t8abpt" path="res://Scripts/Components/Battle/WeaponComponent.cs" id="1_rgxvb"]
 [ext_resource type="Texture2D" uid="uid://bdv2qv5tbqkr5" path="res://assets/weapons/sword/spritesheet.png" id="2_a54vs"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_y4or8"]
+[ext_resource type="AudioStream" uid="uid://cwgyxflimhxwf" path="res://assets/sfx/weapon/dd2_monk_staff_swing_3.wav" id="3_10xpx"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="3_72hrq"]
+[ext_resource type="AudioStream" uid="uid://db802iep2reu1" path="res://assets/sfx/weapon/NPC_Hit_1.wav" id="3_akyv1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_akyv1"]
 atlas = ExtResource("2_a54vs")
@@ -1993,6 +1995,8 @@ transitions = ["animate", "End", SubResource("AnimationNodeStateMachineTransitio
 [node name="Sword" type="Node2D"]
 script = ExtResource("1_rgxvb")
 Animations = SubResource("SpriteFrames_6nwni")
+AttackSound = ExtResource("3_10xpx")
+HitSound = ExtResource("3_akyv1")
 
 [node name="Assets" type="Node2D" parent="."]
 visible = false
@@ -2007,9 +2011,11 @@ script = ExtResource("3_72hrq")
 
 [node name="AttackSfx" type="AudioStreamPlayer2D" parent="Assets"]
 unique_name_in_owner = true
+stream = ExtResource("3_10xpx")
 
 [node name="HitSfx" type="AudioStreamPlayer2D" parent="Assets"]
 unique_name_in_owner = true
+stream = ExtResource("3_akyv1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

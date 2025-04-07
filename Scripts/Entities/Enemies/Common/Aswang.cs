@@ -23,6 +23,8 @@ public partial class Aswang : Enemy
     [Node] private Timer specialAttackWindUpTimer;
     [Node] private Timer patrolTimer;
     [Node] private HitBox hitBox;
+    [Node] private AudioStreamPlayer2D sfxAttack ;
+    [Node] private AudioStreamPlayer2D sfxWindUp;
 
     private AnimationNodeStateMachinePlayback playback;
     private Vector2 initialPosition;
@@ -120,12 +122,14 @@ public partial class Aswang : Enemy
 
     private void EnterAttackWindUp()
     {
+        sfxWindUp.Play();
         isShowingAttackIndicator = false;
         chargeOrigin = GlobalPosition;
     }
 
     private void AttackWindUp()
-    {
+    {  
+        
         velocityManager.Decelerate();
 
         if (
@@ -161,6 +165,7 @@ public partial class Aswang : Enemy
 
     private void EnterAttack()
     {
+        sfxAttack.Play();
         StatsManager.ApplySpeedModifier("attack", 2f);
         pathFindManager.NavigationAgent2D.AvoidanceEnabled = false;
 

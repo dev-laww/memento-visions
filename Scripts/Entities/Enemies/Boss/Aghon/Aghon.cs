@@ -28,6 +28,10 @@ public partial class Aghon : Enemy
     [Node] private Timer specialAttackTimer2;
     [Node] private Timer blinkTimer;
     [Node] private ResourcePreloader resourcePreloader;
+    [Node] private AudioStreamPlayer2D sfxCloud;
+    [Node] private AudioStreamPlayer2D sfxPunch;
+    [Node] private AudioStreamPlayer2D sfxSpear;
+    [Node] private AudioStreamPlayer2D sfxLightning;
 
 
     private AnimationNodeStateMachinePlayback playback;
@@ -146,6 +150,7 @@ public partial class Aghon : Enemy
 
     private void EnterCommonAttack()
     {
+        sfxPunch.Play();
         playback.Travel(COMMON_ATTACK);
 
         new DamageFactory.HitBoxBuilder(GlobalPosition)
@@ -172,6 +177,7 @@ public partial class Aghon : Enemy
 
     private async void TransformToSecondPhase()
     {
+        sfxLightning.Play();
         await ToSignal(animationTree, "animation_finished");
         await ToSignal(GetTree().CreateTimer(1f), "timeout");
 
@@ -192,6 +198,7 @@ public partial class Aghon : Enemy
 
     private async void ShockWavePunch()
     {
+        sfxPunch.Play();
         await ToSignal(animationTree, "animation_finished");
 
         specialAttackTimer1.Call(START_RANDOM);
@@ -201,6 +208,7 @@ public partial class Aghon : Enemy
 
     private void EnterShockWavePunch()
     {
+        sfxSpear.Play();
         playback.Travel(SPECIAL_ATTACK_1);
 
         var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
@@ -224,6 +232,7 @@ public partial class Aghon : Enemy
 
     private void EnterSpearThrow()
     {
+        sfxSpear.Play();
         playback.Travel(SPECIAL_ATTACK_2);
 
         var spear = resourcePreloader.InstanceSceneOrNull<Spear>();
@@ -233,6 +242,7 @@ public partial class Aghon : Enemy
 
     private async void Blink()
     {
+        sfxCloud.Play();
         if (blinkTimer.IsStopped() && !blinked)
         {
             var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
@@ -261,6 +271,7 @@ public partial class Aghon : Enemy
 
     private void EnterBlink()
     {
+        sfxLightning.Play();
         playback.Travel(SPECIAL_ATTACK_1);
         blinkTimer.Start();
     }
@@ -275,6 +286,7 @@ public partial class Aghon : Enemy
 
     private void EnterSpawnCloud()
     {
+        sfxCloud.Play();
         playback.Travel(SPECIAL_ATTACK_2);
 
         if (spawnedClouds >= MAX_SPAWNED_CLOUDS)

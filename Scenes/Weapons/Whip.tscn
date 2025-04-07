@@ -1,9 +1,11 @@
-[gd_scene load_steps=195 format=3 uid="uid://bs801y15b1a7e"]
+[gd_scene load_steps=197 format=3 uid="uid://bs801y15b1a7e"]
 
 [ext_resource type="Script" uid="uid://dqgmaq0t8abpt" path="res://Scripts/Components/Battle/WeaponComponent.cs" id="1_l52ud"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_2jaom"]
 [ext_resource type="Texture2D" uid="uid://n76ely80kbv7" path="res://assets/weapons/whip/spritesheet.png" id="2_n30hd"]
+[ext_resource type="AudioStream" uid="uid://cxgufi8av2pow" path="res://assets/sfx/weapon/dd2_monk_staff_swing_0.wav" id="3_n1qkm"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="3_n30hd"]
+[ext_resource type="AudioStream" uid="uid://bwd7w2fgmsfoi" path="res://assets/sfx/weapon/dd2_lightning_bug_zap_2.wav" id="4_n1qkm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v7oyq"]
 atlas = ExtResource("2_n30hd")
@@ -2061,6 +2063,8 @@ transitions = ["animate", "End", SubResource("AnimationNodeStateMachineTransitio
 [node name="Whip" type="Node2D"]
 script = ExtResource("1_l52ud")
 Animations = SubResource("SpriteFrames_l52ud")
+AttackSound = ExtResource("3_n1qkm")
+HitSound = ExtResource("4_n1qkm")
 metadata/_custom_type_script = "uid://dqgmaq0t8abpt"
 
 [node name="Assets" type="Node2D" parent="."]
@@ -2072,13 +2076,16 @@ texture_filter = 2
 material = ExtResource("2_2jaom")
 sprite_frames = SubResource("SpriteFrames_l52ud")
 animation = &"south_1"
+frame = 3
 script = ExtResource("3_n30hd")
 
 [node name="AttackSfx" type="AudioStreamPlayer2D" parent="Assets"]
 unique_name_in_owner = true
+stream = ExtResource("3_n1qkm")
 
 [node name="HitSfx" type="AudioStreamPlayer2D" parent="Assets"]
 unique_name_in_owner = true
+stream = ExtResource("4_n1qkm")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
