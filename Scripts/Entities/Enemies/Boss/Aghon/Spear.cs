@@ -14,7 +14,10 @@ public partial class Spear : Node2D
     private const float SPEAR_RADIUS = 50f;
     private const int ELECTRIC_SHOCKS_COUNT = 5;
 
-    [Node] private Sprite2D sprite2D;
+    [Node] private AnimationTree animationTree;
+    [Node] private AnimatedSprite2D smoothAnimatedSprite2D;
+
+    private AnimationNodeStateMachinePlayback playback;
 
     public override void _Notification(int what)
     {
@@ -25,17 +28,19 @@ public partial class Spear : Node2D
 
     public override void _Ready()
     {
+        playback = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
+
         var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
         var canvas = this.GetTelegraphCanvas();
         var aghon = GetTree().Root.GetFirstChildOrNull<Aghon>();
         var direction = (aghon.GlobalPosition - playerPosition).Normalized();
 
         GlobalPosition = playerPosition;
-        Rotation = direction.X > 0 ? 140f : 0f; // flip the actual sprite instead of rotating the node
+        smoothAnimatedSprite2D.FlipH = direction.X > 0;
 
         var telegraph = new TelegraphFactory.CircleTelegraphBuilder(canvas, playerPosition)
             .SetRadius(SPEAR_RADIUS)
-            .SetDelay(.5f)
+            .SetDelay(.3f)
             .Build();
 
         telegraph.TreeExiting += OnTelegraphFinished;
@@ -45,6 +50,8 @@ public partial class Spear : Node2D
     private void OnTelegraphFinished()
     {
         var aghon = GetTree().Root.GetFirstChildOrNull<Aghon>();
+
+        playback.Travel("entry");
 
         new DamageFactory.HitBoxBuilder(GlobalPosition)
             .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
@@ -68,7 +75,11 @@ public partial class Spear : Node2D
             lastHitBox = hitbox;
         }
 
-        lastHitBox.TreeExiting += QueueFree;
+        lastHitBox.TreeExiting += () =>
+        {
+            playback.Travel("exit");
+            animationTree.AnimationFinished += _ => QueueFree();
+        };
     }
 }
 
