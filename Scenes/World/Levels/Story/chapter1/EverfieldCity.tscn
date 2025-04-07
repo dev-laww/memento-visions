@@ -1,4 +1,4 @@
-[gd_scene load_steps=188 format=4 uid="uid://d3dl8qe3i4hs5"]
+[gd_scene load_steps=191 format=4 uid="uid://d3dl8qe3i4hs5"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_edvum"]
 [ext_resource type="Script" uid="uid://cy5yn6ijpgu1n" path="res://Scripts/World/Levels/Story/Chapter1/EverfieldCity.cs" id="1_hf60o"]
@@ -22,10 +22,13 @@
 [ext_resource type="Resource" uid="uid://btgac1rf6bqox" path="res://resources/dialogues/chapter1/chief6_npc.dialogue" id="14_8kgvc"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="15_2ke1t"]
 [ext_resource type="Resource" uid="uid://bvch8blxsmpmn" path="res://resources/dialogues/chapter1/chapter1.2.dialogue" id="15_8kgvc"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="15_t63a8"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="16_up7eu"]
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/characters/npc/storyteller.png" id="17_kycha"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="18_8kgvc"]
 [ext_resource type="Resource" uid="uid://ctatcaqd2g4ox" path="res://resources/dialogues/chapter1/chapter1.1.dialogue" id="20_2ke1t"]
+[ext_resource type="Resource" uid="uid://cudjo0ldkq0qo" path="res://resources/loot_tables/3.tres" id="24_3h1fx"]
+[ext_resource type="Resource" uid="uid://nl6c5ox51mv8" path="res://resources/loot_tables/8.tres" id="24_7ym34"]
 [ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="27_7ym34"]
 [ext_resource type="PackedScene" uid="uid://6rk1l15nvvdr" path="res://Scenes/World/PuzzleComponent/TorchPuzzleManager.tscn" id="28_e2cbw"]
 [ext_resource type="PackedScene" uid="uid://cwus4c1b4vpr" path="res://Scenes/World/PuzzleComponent/PressurePlate.tscn" id="28_ro4io"]
@@ -1087,7 +1090,7 @@ script = ExtResource("5_hn08j")
 Quest = ExtResource("8_7adkd")
 Mode = 0
 ShouldInteract = true
-InteractionLabel = "Kevin"
+InteractionLabel = "Interact"
 DialogueResource = ExtResource("9_kycha")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -1098,7 +1101,11 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="npc/Chief2/QuestTrigger"]
 
-[node name="InteractionUI" parent="npc/Chief2/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
+[node name="InteractionUI" type="Control" parent="npc/Chief2/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("15_t63a8")
 
 [node name="Chief3" parent="npc" instance=ExtResource("4_32qxv")]
 material = SubResource("ShaderMaterial_kycha")
@@ -1148,6 +1155,7 @@ position = Vector2(0, -32)
 [node name="InteractionUI" parent="npc/Chief6/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
 [node name="Chief5" parent="npc" instance=ExtResource("4_32qxv")]
+unique_name_in_owner = true
 position = Vector2(173, 169)
 
 [node name="QuestTrigger" type="Area2D" parent="npc/Chief5"]
@@ -1159,7 +1167,7 @@ script = ExtResource("5_hn08j")
 Quest = ExtResource("6_hf60o")
 Mode = 0
 ShouldInteract = true
-InteractionLabel = "Tisoy & Manny"
+InteractionLabel = "Interact"
 DialogueResource = ExtResource("15_8kgvc")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -1170,7 +1178,11 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="npc/Chief5/QuestTrigger"]
 
-[node name="InteractionUI" parent="npc/Chief5/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
+[node name="InteractionUI" type="Control" parent="npc/Chief5/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("15_t63a8")
 
 [node name="Chief4" parent="npc" instance=ExtResource("4_32qxv")]
 position = Vector2(130, 169)
@@ -1186,27 +1198,35 @@ position = Vector2(266, 615)
 
 [node name="Aswang" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-275, 485)
+EnemyName = ""
 
 [node name="Aswang2" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(87, 58)
+EnemyName = ""
 
 [node name="Aswang3" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(123, 197)
+EnemyName = ""
 
 [node name="Aswang4" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(49, -155)
+EnemyName = ""
 
 [node name="Aswang5" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(136, 368)
+EnemyName = ""
 
 [node name="Aswang6" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-184, 591)
+EnemyName = ""
 
 [node name="Aswang7" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-156, 70)
+EnemyName = ""
 
 [node name="Aswang8" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-34, 484)
+EnemyName = ""
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -1549,7 +1569,7 @@ material = ExtResource("1_edvum")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 3
+frame = 1
 script = ExtResource("18_8kgvc")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1586,6 +1606,7 @@ position = Vector2(0, -32)
 unique_name_in_owner = true
 visible = false
 position = Vector2(57, 452)
+Loot = ExtResource("24_7ym34")
 
 [node name="Puzzle 2" type="Node2D" parent="."]
 position = Vector2(1045, 59)
@@ -1594,6 +1615,7 @@ position = Vector2(1045, 59)
 unique_name_in_owner = true
 visible = false
 position = Vector2(-52, 145)
+Loot = ExtResource("24_3h1fx")
 
 [node name="Plate" parent="Puzzle 2" instance=ExtResource("28_ro4io")]
 unique_name_in_owner = true
@@ -1605,18 +1627,13 @@ position = Vector2(-113, 142)
 
 [node name="Movable2" parent="Puzzle 2" instance=ExtResource("29_55v40")]
 position = Vector2(-113, 59)
-pushSpeed = null
 
 [node name="Movable" parent="Puzzle 2" instance=ExtResource("29_55v40")]
 position = Vector2(5, 59)
-pushSpeed = null
 
 [node name="TorchSequence" parent="." instance=ExtResource("28_e2cbw")]
 unique_name_in_owner = true
 position = Vector2(74, 421)
-_displaySequenceDelay = null
-_resetDelay = null
-_sequenceLength = null
 
 [node name="Light" parent="TorchSequence" instance=ExtResource("29_ro4io")]
 position = Vector2(122, -15)

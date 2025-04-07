@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=4 uid="uid://v06x46jch2vm"]
+[gd_scene load_steps=129 format=4 uid="uid://v06x46jch2vm"]
 
 [ext_resource type="Script" uid="uid://dcmogr8vudmpc" path="res://Scripts/World/Levels/Story/SchoolOutdoor.cs" id="1_2ho0r"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_r2wrx"]
@@ -6,16 +6,14 @@
 [ext_resource type="TileSet" uid="uid://i2hb45su1nbs" path="res://resources/tilesets/school.tres" id="4_ytljl"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="5_2t7qd"]
 [ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="6_16xaq"]
-[ext_resource type="Resource" uid="uid://dpda8p54wl0y7" path="res://resources/items/weapon/sword.tres" id="7_otmxb"]
-[ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="8_k62lt"]
-[ext_resource type="Script" uid="uid://2133v7vmi65q" path="res://Scripts/Data/Loot/LootTable.cs" id="9_6ep2w"]
+[ext_resource type="Resource" uid="uid://clfbur06xipdm" path="res://resources/loot_tables/10.tres" id="7_inuu7"]
 [ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="10_xkjgd"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="11_6kbwn"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="12_3cvxb"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="13_tmhst"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="14_xsvii"]
 [ext_resource type="Resource" uid="uid://bb0a0gl7qcddj" path="res://resources/quests/Prologue/night_of_shadows.tres" id="15_uwu2f"]
-[ext_resource type="Resource" uid="uid://yh060giw306t" path="res://resources/dialogues/prologue/AttackTutorial.dialogue" id="16_r2wrx"]
+[ext_resource type="Resource" uid="uid://yh060giw306t" path="res://resources/dialogues/prologue/prologue1.6.dialogue" id="16_r2wrx"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="16_xfxeh"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="17_5o4do"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="18_m8iv5"]
@@ -23,23 +21,9 @@
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/characters/npc/storyteller.png" id="20_cp01v"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="21_uhybl"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="22_5n0qf"]
-[ext_resource type="Resource" uid="uid://bj8l78qd3fsks" path="res://resources/dialogues/prologue/endprologue.dialogue" id="23_5jfbt"]
+[ext_resource type="Resource" uid="uid://bj8l78qd3fsks" path="res://resources/dialogues/prologue/prologue1.7.dialogue" id="23_5jfbt"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="24_sqsyd"]
-[ext_resource type="Resource" uid="uid://cqqlth0pruv27" path="res://resources/dialogues/prologue/prologue3_player.dialogue" id="26_r2wrx"]
-
-[sub_resource type="Resource" id="Resource_5qybx"]
-script = ExtResource("8_k62lt")
-Item = ExtResource("7_otmxb")
-Min = 1
-Max = 1
-Weight = 1
-metadata/_custom_type_script = "uid://4ubxomqok4pv"
-
-[sub_resource type="Resource" id="Resource_r2wrx"]
-resource_local_to_scene = true
-script = ExtResource("9_6ep2w")
-Drops = [SubResource("Resource_5qybx")]
-metadata/_custom_type_script = "uid://2133v7vmi65q"
+[ext_resource type="Resource" uid="uid://cqqlth0pruv27" path="res://resources/dialogues/prologue/prologue1.5.dialogue" id="26_r2wrx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cymrg"]
 size = Vector2(47, 29)
@@ -844,7 +828,7 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 [node name="Chest" parent="Art" instance=ExtResource("6_16xaq")]
 position = Vector2(349, 59)
 disable_mode = 2
-Loot = SubResource("Resource_r2wrx")
+Loot = ExtResource("7_inuu7")
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -853,45 +837,60 @@ position = Vector2(770, 1648)
 
 [node name="StatsManager" parent="Enemies/Aswang3" index="5"]
 Level = 3.0
-MaxHealth = 196.225
-Defense = 6.17117
-Damage = 28.1962
+MaxHealth = 242.45
+Defense = 12.3423
+Damage = 36.3923
+
+[node name="SmoothAnimatedSprite2D" parent="Enemies/Aswang3" index="12"]
+frame = 3
 
 [node name="Aswang4" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(185, 1619)
 
 [node name="StatsManager" parent="Enemies/Aswang4" index="5"]
 Level = 3.0
-MaxHealth = 196.225
-Defense = 6.17117
-Damage = 28.1962
+MaxHealth = 242.45
+Defense = 12.3423
+Damage = 36.3923
+
+[node name="SmoothAnimatedSprite2D" parent="Enemies/Aswang4" index="12"]
+frame = 3
 
 [node name="Aswang5" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(387, 316)
 
 [node name="StatsManager" parent="Enemies/Aswang5" index="5"]
 Level = 2.0
-MaxHealth = 172.482
-Defense = 2.96229
-Damage = 23.8284
+MaxHealth = 194.964
+Defense = 5.92458
+Damage = 27.6568
+
+[node name="SmoothAnimatedSprite2D" parent="Enemies/Aswang5" index="12"]
+frame = 3
 
 [node name="Aswang6" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(637, 359)
 
 [node name="StatsManager" parent="Enemies/Aswang6" index="5"]
 Level = 2.0
-MaxHealth = 172.482
-Defense = 2.96229
-Damage = 23.8284
+MaxHealth = 194.964
+Defense = 5.92458
+Damage = 27.6568
+
+[node name="SmoothAnimatedSprite2D" parent="Enemies/Aswang6" index="12"]
+frame = 3
 
 [node name="Aswang8" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(475, 948)
 
 [node name="StatsManager" parent="Enemies/Aswang8" index="5"]
 Level = 2.0
-MaxHealth = 172.482
-Defense = 2.96229
-Damage = 23.8284
+MaxHealth = 194.964
+Defense = 5.92458
+Damage = 27.6568
+
+[node name="SmoothAnimatedSprite2D" parent="Enemies/Aswang8" index="12"]
+frame = 3
 
 [node name="Player" parent="." instance=ExtResource("11_6kbwn")]
 position = Vector2(117, 60)
@@ -1113,7 +1112,7 @@ material = ExtResource("3_r0s03")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 2
+frame = 3
 script = ExtResource("21_uhybl")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

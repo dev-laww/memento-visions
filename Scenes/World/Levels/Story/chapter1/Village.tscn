@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=4 uid="uid://c2qx74ig42sum"]
+[gd_scene load_steps=93 format=4 uid="uid://c2qx74ig42sum"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_1cx0f"]
 [ext_resource type="Script" uid="uid://xi5ph3oued7k" path="res://Scripts/World/Levels/Story/Chapter1/Village.cs" id="1_yyi1k"]
@@ -12,19 +12,22 @@
 [ext_resource type="Resource" uid="uid://cv1uxwlv2liuj" path="res://resources/quests/Chapter1/find_mayor.tres" id="7_tjaeu"]
 [ext_resource type="PackedScene" uid="uid://by64k6fa2d33l" path="res://Scenes/World/PuzzleComponent/Lever.tscn" id="7_yyi1k"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="8_5s4cp"]
-[ext_resource type="Resource" uid="uid://cljpwqykcd03o" path="res://resources/dialogues/chapter1/find-mayor_dialogue.dialogue" id="8_qboe2"]
+[ext_resource type="Resource" uid="uid://cljpwqykcd03o" path="res://resources/dialogues/chapter1/chapter1.4.dialogue" id="8_qboe2"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="9_t2vyw"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="10_rfcst"]
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/characters/npc/storyteller.png" id="11_74shb"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="12_2eimf"]
-[ext_resource type="Resource" uid="uid://dr732yvh2p2me" path="res://resources/dialogues/chapter1/storyteller.dialogue" id="13_yyi1k"]
+[ext_resource type="Resource" uid="uid://dr732yvh2p2me" path="res://resources/dialogues/chapter1/chapter1.5.dialogue" id="13_yyi1k"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="14_2eimf"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="14_xh25p"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="16_r45d3"]
-[ext_resource type="Resource" uid="uid://ba4jrntt5jygn" path="res://resources/dialogues/chapter1/chapter1_pt2_dialogue.dialogue" id="17_r45d3"]
-[ext_resource type="Resource" uid="uid://b8egfkscgqbcp" path="res://resources/dialogues/chapter1/chiefpt2.dialogue" id="17_ynjqs"]
+[ext_resource type="Resource" uid="uid://ba4jrntt5jygn" path="res://resources/dialogues/chapter1/chapter1.7.dialogue" id="17_r45d3"]
+[ext_resource type="Resource" uid="uid://b8egfkscgqbcp" path="res://resources/dialogues/chapter1/chapter1.6.dialogue" id="17_ynjqs"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="19_kk6yg"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="20_tjaeu"]
+[ext_resource type="Resource" uid="uid://clfbur06xipdm" path="res://resources/loot_tables/10.tres" id="23_0d1sk"]
 [ext_resource type="PackedScene" uid="uid://djjs6g4ap8st1" path="res://Scenes/World/PuzzleComponent/Torch.tscn" id="23_8vc12"]
+[ext_resource type="Resource" uid="uid://bx16wb3x71qgf" path="res://resources/loot_tables/4.tres" id="24_akscv"]
 [ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="26_0d1sk"]
 [ext_resource type="PackedScene" uid="uid://6rk1l15nvvdr" path="res://Scenes/World/PuzzleComponent/TorchPuzzleManager.tscn" id="27_lmktk"]
 [ext_resource type="PackedScene" uid="uid://dtqgojjodmope" path="res://Scenes/World/PuzzleComponent/StreetLight.tscn" id="28_lesfh"]
@@ -494,10 +497,10 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 [sub_resource type="CircleShape2D" id="CircleShape2D_yyi1k"]
 radius = 16.1245
 
-[sub_resource type="Resource" id="Resource_nry1j"]
+[sub_resource type="Resource" id="Resource_qydlh"]
 script = ExtResource("14_xh25p")
 Type = 2
-Description = "Head towards the Jeepney"
+Description = "Look for the Mayor if he's in the vicinity or not."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xh25p"]
@@ -512,10 +515,10 @@ size = Vector2(177.25, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qboe2"]
 size = Vector2(55.25, 21.25)
 
-[sub_resource type="Resource" id="Resource_qydlh"]
+[sub_resource type="Resource" id="Resource_nry1j"]
 script = ExtResource("14_xh25p")
 Type = 2
-Description = "Look for the Mayor if he's in the vicinity or not."
+Description = "Head towards the Jeepney"
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xh25p"]
@@ -565,7 +568,7 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 polygon = PackedVector2Array(16, 12, 8, 1005, 1440, 997, 1419, 29, 19, -6, 1594, -10, 1541, 1052, -18, 1026, -70, -14, 11, -74)
 
 [node name="Player" parent="." instance=ExtResource("4_imb2w")]
-position = Vector2(101, 96)
+position = Vector2(776, 704)
 
 [node name="StoryTeller" type="CharacterBody2D" parent="."]
 position = Vector2(536, 214)
@@ -595,7 +598,6 @@ material = ExtResource("1_1cx0f")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 3
 script = ExtResource("12_2eimf")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -631,14 +633,14 @@ position = Vector2(1, -32)
 position = Vector2(1312, 263)
 
 [node name="QuestTrigger" type="Area2D" parent="Rudy"]
-scale = Vector2(0.762353, 1.05389)
+scale = Vector2(0.762353, 1.04765)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("6_r45d3")
 Quest = ExtResource("7_tjaeu")
 Mode = 1
 ShouldInteract = true
-InteractionLabel = "Mang Rudy"
+InteractionLabel = "Interact"
 DialogueResource = ExtResource("17_r45d3")
 Objective = SubResource("Resource_busxp")
 ObjectiveIndex = 1
@@ -650,24 +652,28 @@ shape = SubResource("CircleShape2D_yyi1k")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Rudy/QuestTrigger"]
-position = Vector2(4, -33)
 
-[node name="InteractionUI" parent="Rudy/QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
+[node name="InteractionUI" type="Control" parent="Rudy/QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("19_kk6yg")
 
 [node name="Mayor" parent="." instance=ExtResource("16_r45d3")]
 position = Vector2(1229, 516)
 
 [node name="QuestTrigger" type="Area2D" parent="Mayor"]
+scale = Vector2(1, 0.994537)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("6_r45d3")
 Quest = ExtResource("7_tjaeu")
 Mode = 1
 ShouldInteract = true
-InteractionLabel = "Mayor"
+InteractionLabel = "Interact"
 DialogueResource = ExtResource("17_ynjqs")
-Objective = SubResource("Resource_nry1j")
-ObjectiveIndex = 2
+Objective = SubResource("Resource_qydlh")
+ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mayor/QuestTrigger"]
@@ -677,9 +683,11 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Mayor/QuestTrigger"]
 
-[node name="InteractionUI" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
-offset_top = -33.0
-offset_bottom = -33.0
+[node name="InteractionUI" type="Control" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("19_kk6yg")
 
 [node name="QuestTrigger" type="Area2D" parent="."]
 position = Vector2(106, 179)
@@ -712,6 +720,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="TransitionArea" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 position = Vector2(95, 53)
 collision_layer = 0
 collision_mask = 4
@@ -725,6 +734,7 @@ shape = SubResource("RectangleShape2D_qboe2")
 
 [node name="QuestTrigger2" type="Area2D" parent="."]
 unique_name_in_owner = true
+visible = false
 position = Vector2(95, 53)
 collision_layer = 16
 collision_mask = 4
@@ -732,8 +742,8 @@ script = ExtResource("6_r45d3")
 Quest = ExtResource("7_tjaeu")
 Mode = 1
 ShouldInteract = false
-Objective = SubResource("Resource_qydlh")
-ObjectiveIndex = 0
+Objective = SubResource("Resource_nry1j")
+ObjectiveIndex = 2
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger2"]
@@ -761,32 +771,40 @@ unique_name_in_owner = true
 position = Vector2(555, 291)
 TorchesPath = NodePath("../torch")
 
-[node name="Lever" parent="LeverManager" instance=ExtResource("7_yyi1k")]
+[node name="Lever" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
 position = Vector2(58, 6)
 scale = Vector2(0.65625, 0.75)
+Torches = [NodePath("../../torch/Torch"), NodePath("../../torch/Torch2"), NodePath("../../torch/Torch4")]
 
-[node name="Lever2" parent="LeverManager" instance=ExtResource("7_yyi1k")]
+[node name="Lever2" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
 position = Vector2(-17, 6)
 scale = Vector2(0.6875, 0.65625)
+Torches = [NodePath("../../torch/Torch"), NodePath("../../torch/Torch2"), NodePath("../../torch/Torch3")]
 
-[node name="Lever3" parent="LeverManager" instance=ExtResource("7_yyi1k")]
+[node name="Lever3" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
 position = Vector2(60, 52)
 scale = Vector2(0.65625, 0.75)
+Torches = [NodePath("../../torch/Torch2"), NodePath("../../torch/Torch3"), NodePath("../../torch/Torch4")]
 
-[node name="Lever4" parent="LeverManager" instance=ExtResource("7_yyi1k")]
+[node name="Lever4" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
 position = Vector2(-17, 52)
 scale = Vector2(0.71875, 0.6875)
+Torches = [NodePath("../../torch/Torch3"), NodePath("../../torch/Torch2")]
 
 [node name="Chest" parent="." instance=ExtResource("26_0d1sk")]
 unique_name_in_owner = true
 visible = false
 position = Vector2(576, 324)
+Loot = ExtResource("23_0d1sk")
 
 [node name="Chest2" parent="." instance=ExtResource("26_0d1sk")]
 unique_name_in_owner = true
+visible = false
 position = Vector2(845, 739)
+Loot = ExtResource("24_akscv")
 
 [node name="LightPuzzle" parent="." instance=ExtResource("27_lmktk")]
+unique_name_in_owner = true
 position = Vector2(766, 782)
 
 [node name="Light" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
