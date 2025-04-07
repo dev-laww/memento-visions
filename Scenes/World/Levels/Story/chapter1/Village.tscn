@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=4 uid="uid://c2qx74ig42sum"]
+[gd_scene load_steps=92 format=4 uid="uid://c2qx74ig42sum"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_1cx0f"]
 [ext_resource type="Script" uid="uid://xi5ph3oued7k" path="res://Scripts/World/Levels/Story/Chapter1/Village.cs" id="1_yyi1k"]
@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="16_r45d3"]
 [ext_resource type="Resource" uid="uid://ba4jrntt5jygn" path="res://resources/dialogues/chapter1/chapter1.7.dialogue" id="17_r45d3"]
 [ext_resource type="Resource" uid="uid://b8egfkscgqbcp" path="res://resources/dialogues/chapter1/chapter1.6.dialogue" id="17_ynjqs"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="19_kk6yg"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="20_tjaeu"]
 [ext_resource type="Resource" uid="uid://clfbur06xipdm" path="res://resources/loot_tables/10.tres" id="23_0d1sk"]
 [ext_resource type="PackedScene" uid="uid://djjs6g4ap8st1" path="res://Scenes/World/PuzzleComponent/Torch.tscn" id="23_8vc12"]
@@ -568,7 +567,7 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 polygon = PackedVector2Array(16, 12, 8, 1005, 1440, 997, 1419, 29, 19, -6, 1594, -10, 1541, 1052, -18, 1026, -70, -14, 11, -74)
 
 [node name="Player" parent="." instance=ExtResource("4_imb2w")]
-position = Vector2(776, 704)
+position = Vector2(83, 120)
 
 [node name="StoryTeller" type="CharacterBody2D" parent="."]
 position = Vector2(536, 214)
@@ -598,6 +597,7 @@ material = ExtResource("1_1cx0f")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
+frame = 1
 script = ExtResource("12_2eimf")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -653,11 +653,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Rudy/QuestTrigger"]
 
-[node name="InteractionUI" type="Control" parent="Rudy/QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("19_kk6yg")
+[node name="InteractionUI" parent="Rudy/QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
 
 [node name="Mayor" parent="." instance=ExtResource("16_r45d3")]
 position = Vector2(1229, 516)
@@ -683,11 +679,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Mayor/QuestTrigger"]
 
-[node name="InteractionUI" type="Control" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("19_kk6yg")
+[node name="InteractionUI" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
 
 [node name="QuestTrigger" type="Area2D" parent="."]
 position = Vector2(106, 179)
