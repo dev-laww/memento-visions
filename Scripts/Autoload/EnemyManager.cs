@@ -95,8 +95,10 @@ public partial class EnemyManager : Autoload<EnemyManager>
         }
     }
 
-    private void OnEnemyRegistered(Enemy enemy)
+    private async void OnEnemyRegistered(Enemy enemy)
     {
+        await ToSignal(GetTree().CreateTimer(0.1f), "timeout");
+
         if (enemy.Type != Enemy.EnemyType.Boss) return;
 
         var healthBar = resourcePreloader.InstanceSceneOrNull<BossHealthBar>();
