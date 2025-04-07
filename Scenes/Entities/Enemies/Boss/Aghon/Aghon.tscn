@@ -19,7 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://tun085q036cg" path="res://assets/sfx/enemy/AghonCloud.wav" id="17_pkc2u"]
 [ext_resource type="AudioStream" uid="uid://dtdt8li5hv11f" path="res://assets/sfx/enemy/AghonPunch.wav" id="18_nbnbd"]
 [ext_resource type="AudioStream" uid="uid://b8mh6t4gf6s45" path="res://assets/sfx/enemy/AghonRod.wav" id="19_iebin"]
-[ext_resource type="AudioStream" uid="uid://d2amd225s2lry" path="res://assets/sfx/enemy/Aghon.wav" id="20_7wnkp"]
+[ext_resource type="AudioStream" uid="uid://d2amd225s2lry" path="res://assets/sfx/enemy/AghonLightning.wav" id="20_7wnkp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lt36k"]
 size = Vector2(28, 44)
@@ -1761,6 +1761,8 @@ graph_offset = Vector2(1, -99)
 [node name="Aghon" type="CharacterBody2D"]
 collision_mask = 15
 script = ExtResource("1_bsq0j")
+EnemyName = "Aghon"
+Type = 1
 Id = "enemy:aghon"
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
@@ -1842,7 +1844,6 @@ position = Vector2(0, -23)
 sprite_frames = SubResource("SpriteFrames_lpr6g")
 animation = &"south"
 autoplay = "south"
-frame = 1
 script = ExtResource("8_bxdfj")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

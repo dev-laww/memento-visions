@@ -1,3 +1,4 @@
+using System.Collections;
 using Game.Autoload;
 using Game.Components;
 using Game.Data;
@@ -12,13 +13,16 @@ namespace Game.Entities;
 [Scene]
 public partial class ShockWave : Node2D
 {
-    private const float ATTACK_WIDTH = 64f;
+    public const float ATTACK_WIDTH = 64f;
     public const float ATTACK_LENGTH = 250f;
     private const int ELECTRIC_SHOCKS_COUNT = 5;
+
+    [Node] private AnimationTree animationTree;
 
     private Vector2 origin;
     private Vector2 destination;
     private Aghon aghon;
+    private AnimationNodeStateMachinePlayback playback;
 
     public override void _Notification(int what)
     {
@@ -32,22 +36,10 @@ public partial class ShockWave : Node2D
         this.origin = origin;
         this.destination = destination;
         this.aghon = aghon;
-
-        var canvas = this.GetTelegraphCanvas();
-        var telegraph = new TelegraphFactory.LineTelegraphBuilder(canvas, origin)
-            .SetDestitnation(destination)
-            .SetWidth(ATTACK_WIDTH)
-            .SetDuration(0.4f)
-            .Build();
-
+        playback = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
         Rotation = (destination - origin).Angle();
         GlobalPosition = origin;
 
-        telegraph.TreeExiting += OnTelegraphFinished;
-    }
-
-    private void OnTelegraphFinished()
-    {
         new DamageFactory.HitBoxBuilder(origin)
            .AddStatusEffectToPool(new StatusEffect.Info { Id = "electrocute", IsGuaranteed = true })
            .SetDamage(aghon.StatsManager.Damage * .8f)
@@ -57,6 +49,9 @@ public partial class ShockWave : Node2D
            .SetShape(new RectangleShape2D { Size = new Vector2(ATTACK_LENGTH, ATTACK_WIDTH) })
            .SetOwner(aghon)
            .Build();
+
+        playback.Travel("loop");
+        GameCamera.Shake(0.5f);
 
         HitBox lastHitBox = null;
 
@@ -78,7 +73,11 @@ public partial class ShockWave : Node2D
 
         if (lastHitBox is null) return;
 
-        lastHitBox.TreeExiting += QueueFree;
+        lastHitBox.TreeExiting += () =>
+        {
+            animationTree.AnimationFinished += _ => QueueFree();
+            playback.Travel("exit");
+        };
     }
 }
 

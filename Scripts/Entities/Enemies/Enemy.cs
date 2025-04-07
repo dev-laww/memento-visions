@@ -13,8 +13,8 @@ public abstract partial class Enemy : Entity
         Boss
     }
 
-    public string EnemyName { get; private set; }
-    public EnemyType Type { get; private set; }
+    [Export] public string EnemyName { get; private set; }
+    [Export] public EnemyType Type { get; private set; }
     public override string ToString() => $"<Enemy ({Id})>";
 
     private Tween tween;

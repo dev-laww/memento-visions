@@ -19,6 +19,7 @@ public partial class Aghon : Enemy
     private const string SPECIAL_ATTACK_1 = "special_attack_1";
     private const string SPECIAL_ATTACK_2 = "special_attack_2";
     private const int MAX_SPAWNED_CLOUDS = 3;
+    private const float DISTANCE_TO_PLAYER = 16f;
 
     [Node] private AnimationTree animationTree;
     [Node] private VelocityManager velocityManager;
@@ -87,7 +88,7 @@ public partial class Aghon : Enemy
         var playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
         pathFindManager.SetTargetPosition(playerPosition);
 
-        if (GlobalPosition.DistanceSquaredTo(playerPosition) > 64 * 64)
+        if (GlobalPosition.DistanceSquaredTo(playerPosition) > DISTANCE_TO_PLAYER * DISTANCE_TO_PLAYER)
         {
             pathFindManager.Follow();
         }
@@ -131,7 +132,7 @@ public partial class Aghon : Enemy
         var distanceToTarget = GlobalPosition.DistanceSquaredTo(pathFindManager.GetTargetPosition());
         pathFindManager.Follow();
 
-        if (!pathFindManager.NavigationAgent2D.IsNavigationFinished() && distanceToTarget > 32 * 32) return;
+        if (!pathFindManager.NavigationAgent2D.IsNavigationFinished() && distanceToTarget > DISTANCE_TO_PLAYER * DISTANCE_TO_PLAYER) return;
 
         StateMachine.ChangeState(CommonAttack);
     }
@@ -203,7 +204,6 @@ public partial class Aghon : Enemy
 
         specialAttackTimer1.Call(START_RANDOM);
         StateMachine.ChangeState(Normal);
-        GameCamera.Shake(0.5f);
     }
 
     private void EnterShockWavePunch()
@@ -216,11 +216,22 @@ public partial class Aghon : Enemy
         var attackOrigin = GlobalPosition;
         var attackDestination = attackOrigin + (direction * ShockWave.ATTACK_LENGTH);
 
-        var shockWave = resourcePreloader.InstanceSceneOrNull<ShockWave>();
+        var canvas = this.GetTelegraphCanvas();
 
-        GetTree().Root.AddChild(shockWave);
+        var telegraph = new TelegraphFactory.LineTelegraphBuilder(canvas, attackOrigin)
+            .SetDestitnation(attackDestination)
+            .SetWidth(64f)
+            .SetDuration(1f)
+            .Build();
 
-        shockWave.Start(attackOrigin, attackDestination, this);
+        telegraph.TreeExiting += () =>
+        {
+            var shockWave = resourcePreloader.InstanceSceneOrNull<ShockWave>();
+
+            GetTree().Root.AddChild(shockWave);
+
+            shockWave.Start(attackOrigin, attackDestination, this);
+        };
     }
 
     private async void SpearThrow()

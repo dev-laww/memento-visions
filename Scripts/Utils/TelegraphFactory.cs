@@ -47,6 +47,8 @@ public static class TelegraphFactory
         {
             var instance = LineTelegraphScene.Instantiate<LineTelegraph>();
 
+            instance.Duration = duration;
+
             canvas.AddChild(instance);
             canvas.GetTree().CreateTimer(delay).Timeout += () => instance.Start(position, destination, width);
             return instance;
