@@ -93,14 +93,9 @@ public partial class CommonMinimap : Control
             map.AddChild(enemySprite);
             sprites[enemy] = enemySprite;
             
-            var weakEnemy = new WeakReference<Enemy>(enemy);
-            enemy.TreeExited += () =>
-            {
-                if (weakEnemy.TryGetTarget(out var targetEnemy))
-                {
-                    OnEnemyUnregistered(targetEnemy);
-                }
-            };
+            enemy.TreeExiting += () =>
+                    OnEnemyUnregistered(enemy);
+                    
         }
         catch{ }
     }
