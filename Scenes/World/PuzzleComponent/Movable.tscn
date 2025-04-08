@@ -1,26 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://hl4nthtc26ui"]
+[gd_scene load_steps=3 format=3 uid="uid://hl4nthtc26ui"]
 
-[ext_resource type="Script" uid="uid://dpxhduvlm5hu5" path="res://Scripts/World/Puzzle/Components/MovableObject.cs" id="1_qyxgu"]
 [ext_resource type="Texture2D" uid="uid://b17pq7t4sro6r" path="res://assets/world/cube.png" id="2_qyxgu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1a3vw"]
-size = Vector2(21, 13)
+size = Vector2(21, 11.5)
 
 [node name="Movable" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 5
+mass = 25.0
 gravity_scale = 0.0
 lock_rotation = true
 max_contacts_reported = 4
-script = ExtResource("1_qyxgu")
+linear_damp = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
-position = Vector2(-0.5, 12.5)
+position = Vector2(1.33514e-05, 0.749992)
 shape = SubResource("RectangleShape2D_1a3vw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1.19209e-07, 8)
+position = Vector2(0.500013, -4.50002)
 scale = Vector2(0.555556, 0.492063)
 texture = ExtResource("2_qyxgu")
 region_enabled = true

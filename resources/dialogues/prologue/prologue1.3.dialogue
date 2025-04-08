@@ -1,5 +1,5 @@
 ~ start
-set CurrentScene.ObjectiveInteracted +=1
+set CurrentScene.objectivesInteracted += 1
 Alex: A diary belonging to a young girl—its contents suggest she has endured significant bullying, possibly at the hands of someone she fears.
-
+do CurrentScene.diaryTrigger.queue_free()
 => END

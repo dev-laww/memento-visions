@@ -1,3 +1,4 @@
+using System.ComponentModel.Design.Serialization;
 using Game.Components;
 using Game.UI.Screens;
 using Godot;
@@ -22,10 +23,21 @@ public partial class CinematicManager : Autoload<CinematicManager>
         WireNodes();
     }
 
-    public static void StartCinematic(Vector2 position = default)
+    public static async void StartCinematic(Vector2 position = default)
     {
+        if (Instance.cinematic != null)
+        {
+            Instance.cinematic.Stop();
+            await Instance.ToSignal(Instance.cinematic, Cinematic.SignalName.CinematicEnded);
+        }
+
         Instance.cinematic = Instance.resourcePreloader.InstanceSceneOrNull<Cinematic>();
-        Instance.cinematic.CinematicEnded += GameCamera.ClearTargetPositionOverride;
+        Instance.cinematic.CinematicEnded += () =>
+        {
+            GameCamera.ClearTargetPositionOverride();
+            Instance.cinematic?.QueueFree();
+            Instance.cinematic = null;
+        };
 
         GameManager.CurrentScene.AddChild(Instance.cinematic);
 

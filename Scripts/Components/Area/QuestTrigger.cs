@@ -135,6 +135,9 @@ public partial class QuestTrigger : Area2D, IInteractable
             return;
         }
 
+        if (!QuestManager.IsActive(Quest) && Mode == TriggerMode.Complete)
+            return;
+
         InteractionManager.Register(this);
     }
 

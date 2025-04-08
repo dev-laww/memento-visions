@@ -19,7 +19,6 @@ public partial class PressurePlate : Node2D
     
     public override void _Ready()
     {
-        base._Ready();
         area.BodyEntered += OnBodyEntered;
         area.BodyExited += OnBodyExited;
         rect = sprite.RegionRect;
@@ -35,14 +34,12 @@ public partial class PressurePlate : Node2D
     {
       bodies += 1;
       CheckActive();
-      GD.Print("Body Entered");
     }
     
     private void OnBodyExited(Node2D body)
     {
         bodies -= 1;
         CheckActive();
-        GD.Print("Body Exited");
     }
     
     private void CheckActive()

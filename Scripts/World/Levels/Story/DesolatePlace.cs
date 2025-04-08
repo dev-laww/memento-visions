@@ -1,26 +1,29 @@
 using Godot;
-using System;
 using Game.Components;
-using Game.Entities;
-using Game.Data;
 using Game.World.Puzzle;
 using GodotUtilities;
+using Game.Autoload;
+using Game.Utils.Extensions;
+using Game.Entities;
 
 namespace Game.World;
 
 [Scene]
 public partial class DesolatePlace : BaseLevel
 {
-    [Node] private Entity StoryTeller;
-    [Node] private TransitionArea TransitionArea;
-    [Node] private SmoothTileMapLayer SecretDoor;
-    [Node] private PressurePlate PressurePlate;
-    [Node] private DialogueTrigger DialogueDoor;
-    [Node] private DialogueTrigger Boulder;
-    public bool isInteracted = false;
-    public int ObjectiveInteracted = 0;
-    public bool isStoryTellerVisible = false;
+    [Node] private TransitionArea transitionArea;
+    [Node] private SmoothTileMapLayer secretDoor;
+    [Node] private PressurePlate pressurePlate;
+    [Node] private DialogueTrigger door;
+    [Node] private AnimationPlayer animationPlayer;
+    [Node] private Entity storyTeller;
+    [Node] private QuestTrigger photographTrigger;
+    [Node] private QuestTrigger chairTrigger;
+    [Node] private QuestTrigger diaryTrigger;
 
+    private bool isInteracted;
+    private bool isDoorTipShown;
+    private int objectivesInteracted = 0;
 
     public override void _Notification(int what)
     {
@@ -31,38 +34,43 @@ public partial class DesolatePlace : BaseLevel
 
     public override void _Ready()
     {
-        base._Ready();
-        TransitionArea.Monitoring = false;
-        PressurePlate.Activated += DisableDoor;
-        PressurePlate.Deactivated += EnableDoor;
+        transitionArea.Toggle(false);
+        pressurePlate.Activated += DisableDoor;
+        pressurePlate.Deactivated += EnableDoor;
     }
 
-    public void setDialogueDoorOff()
+    private void DisableDoor()
     {
-        DialogueDoor.Monitoring = false;
+        if (storyTeller.Visible) return;
+
+        door.Toggle(false);
+        CinematicManager.StartCinematic(door.GlobalPosition);
+        this.GetPlayer()?.InputManager.AddLock();
+
+        GetTree().CreateTimer(1f).Timeout += () => secretDoor.Enabled = false;
+
+        GetTree().CreateTimer(3f).Timeout += () =>
+        {
+            this.GetPlayer()?.InputManager.RemoveLock();
+            CinematicManager.EndCinematic();
+        };
     }
 
-    public void DisableDoor()
+    private void EnableDoor()
     {
-        SecretDoor.Enabled = false;
-    }
+        if (storyTeller.Visible) return;
 
-    public void EnableDoor()
-    {
-        SecretDoor.Enabled = true;
-    }
+        door.Toggle(!isDoorTipShown);
+        CinematicManager.StartCinematic(door.GlobalPosition);
+        this.GetPlayer()?.InputManager.AddLock();
 
-    public void setDialogueBoulderOff()
-    {
-        Boulder.Monitoring = false;
-    }
+        GetTree().CreateTimer(1f).Timeout += () => secretDoor.Enabled = true;
 
-    public void setStoryTellerVisible()
-    {
-        GD.Print("setStoryTellerVisible");
-        ((StoryTeller)StoryTeller).Work();
-        StoryTeller.Visible = true;
-        isStoryTellerVisible = true;
-        TransitionArea.Monitoring = true;
+        GetTree().CreateTimer(3f).Timeout += () =>
+        {
+            this.GetPlayer()?.InputManager.RemoveLock();
+            CinematicManager.EndCinematic();
+            isDoorTipShown = true;
+        };
     }
 }
