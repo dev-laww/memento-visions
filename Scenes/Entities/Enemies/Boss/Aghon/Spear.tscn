@@ -1,9 +1,12 @@
-[gd_scene load_steps=31 format=3 uid="uid://cqnxlvlmyqede"]
+[gd_scene load_steps=34 format=3 uid="uid://cqnxlvlmyqede"]
 
 [ext_resource type="Script" uid="uid://xuhp4et655x7" path="res://Scripts/Entities/Enemies/Boss/Aghon/Spear.cs" id="1_mdl3n"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_v40og"]
 [ext_resource type="Texture2D" uid="uid://1okcraa0ywl6" path="res://assets/entities/enemy/boss/aghon/spear.png" id="3_cqyj8"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="4_dh32q"]
+[ext_resource type="AudioStream" uid="uid://tun085q036cg" path="res://assets/sfx/enemy/AghonCloud.wav" id="5_qmlka"]
+[ext_resource type="AudioStream" uid="uid://dtdt8li5hv11f" path="res://assets/sfx/enemy/AghonPunch.wav" id="6_syuw6"]
+[ext_resource type="AudioStream" uid="uid://b8mh6t4gf6s45" path="res://assets/sfx/enemy/AghonRod.wav" id="7_4ww4s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cqyj8"]
 atlas = ExtResource("3_cqyj8")
@@ -261,3 +264,24 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_ynja5")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="sfx" type="Node2D" parent="."]
+
+[node name="sfxCloud" type="AudioStreamPlayer2D" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("5_qmlka")
+bus = &"SFX"
+
+[node name="sfxPunch" type="AudioStreamPlayer2D" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("6_syuw6")
+bus = &"SFX"
+
+[node name="sfxSpear" type="AudioStreamPlayer2D" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("7_4ww4s")
+bus = &"SFX"
+
+[node name="sfxLightning" type="AudioStreamPlayer2D" parent="sfx"]
+unique_name_in_owner = true
+bus = &"SFX"

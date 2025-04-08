@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dmn3rg1q3a1r1"]
+[gd_scene load_steps=41 format=3 uid="uid://dmn3rg1q3a1r1"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_chyat"]
 [ext_resource type="Script" uid="uid://d2o7fih5kpq6u" path="res://Scripts/Entities/Enemies/Boss/Aghon/Cloud.cs" id="1_l3sl2"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cup5c3p5fcfyu" path="res://Scenes/Components/Managers/PathFindManager.tscn" id="4_676tf"]
 [ext_resource type="Texture2D" uid="uid://c182yponsx216" path="res://assets/entities/enemy/boss/aghon/cloud.png" id="6_8kcqy"]
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="7_orcgk"]
+[ext_resource type="AudioStream" uid="uid://tun085q036cg" path="res://assets/sfx/enemy/AghonCloud.wav" id="10_jusm0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kcqy"]
 atlas = ExtResource("6_8kcqy")
@@ -252,7 +253,6 @@ graph_offset = Vector2(-43, 3)
 [node name="Cloud" type="CharacterBody2D"]
 collision_mask = 15
 script = ExtResource("1_l3sl2")
-Type = 0
 Id = "enemy:cloud"
 
 [node name="ZapTimer" type="Timer" parent="."]
@@ -288,7 +288,6 @@ material = ExtResource("1_chyat")
 position = Vector2(14, -32)
 sprite_frames = SubResource("SpriteFrames_chyat")
 animation = &"idle"
-frame = 3
 script = ExtResource("2_l3sl2")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -317,5 +316,12 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_8kcqy")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="sfx" type="Node2D" parent="."]
+
+[node name="sfxCloud" type="AudioStreamPlayer2D" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("10_jusm0")
+bus = &"SFX"
 
 [editable path="PathFindManager"]

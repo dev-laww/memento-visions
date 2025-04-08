@@ -19,6 +19,7 @@ public partial class Cloud : Enemy
     [Node] private Timer zapTimer;
     [Node] private VelocityManager velocityManager;
     [Node] private PathFindManager pathFindManager;
+    [Node] private AudioStreamPlayer2D sfxCloud;
 
     private AnimationNodeStateMachinePlayback playback;
     private int currentZapCount = 0;
@@ -106,6 +107,7 @@ public partial class Cloud : Enemy
 
     private void EnterZap()
     {
+        sfxCloud.Play();
         currentZapCount++;
         playback.Travel("zap");
     }

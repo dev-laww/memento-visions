@@ -16,6 +16,8 @@ public partial class Spear : Node2D
 
     [Node] private AnimationTree animationTree;
     [Node] private AnimatedSprite2D smoothAnimatedSprite2D;
+    [Node] private AudioStreamPlayer2D sfxCloud;
+    [Node] private AudioStreamPlayer2D sfxSpear;
 
     private AnimationNodeStateMachinePlayback playback;
 
@@ -50,7 +52,7 @@ public partial class Spear : Node2D
     private void OnTelegraphFinished()
     {
         var aghon = GetTree().Root.GetFirstChildOrNull<Aghon>();
-
+        sfxSpear.Play();
         playback.Travel("entry");
 
         new DamageFactory.HitBoxBuilder(GlobalPosition)
@@ -77,6 +79,7 @@ public partial class Spear : Node2D
 
         lastHitBox.TreeExiting += () =>
         {
+            sfxCloud.Play();
             playback.Travel("exit");
             animationTree.AnimationFinished += _ => QueueFree();
         };
