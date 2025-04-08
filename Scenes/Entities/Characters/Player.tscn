@@ -22,6 +22,9 @@
 radius = 9.0
 height = 28.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xqgt3"]
+radius = 8.13941
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_c8fx8"]
 radius = 5.0
 
@@ -7739,9 +7742,6 @@ states/whip/position = Vector2(509, -7)
 transitions = ["idle", "move", SubResource("AnimationNodeStateMachineTransition_srhpj"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_fqtcb"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_c8fx8"), "sword_and_dagger", "move", SubResource("AnimationNodeStateMachineTransition_2uqso"), "sword_and_dagger", "idle", SubResource("AnimationNodeStateMachineTransition_0k36x"), "move", "sword_and_dagger", SubResource("AnimationNodeStateMachineTransition_70mij"), "idle", "sword_and_dagger", SubResource("AnimationNodeStateMachineTransition_b6xmj"), "whip", "move", SubResource("AnimationNodeStateMachineTransition_75tfg"), "whip", "idle", SubResource("AnimationNodeStateMachineTransition_13gvp"), "idle", "whip", SubResource("AnimationNodeStateMachineTransition_wwkb6"), "move", "whip", SubResource("AnimationNodeStateMachineTransition_00fp1")]
 graph_offset = Vector2(-42, 47)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xqgt3"]
-radius = 8.13941
-
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 4
 collision_mask = 1019
@@ -7800,6 +7800,18 @@ StatsManager = NodePath("../StatsManager")
 shape = SubResource("CapsuleShape2D_n7xh7")
 debug_color = Color(1, 0.3, 0.4, 0.4)
 
+[node name="PushArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+collision_layer = 0
+collision_mask = 3
+monitorable = false
+script = ExtResource("17_xqgt3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea"]
+shape = SubResource("CircleShape2D_xqgt3")
+debug_color = Color(0.289207, 0.595865, 0.574471, 0.42)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_c8fx8")
@@ -7813,6 +7825,7 @@ material = ExtResource("9_5oqto")
 sprite_frames = SubResource("SpriteFrames_5oqto")
 animation = &"south"
 autoplay = "south"
+frame = 2
 script = ExtResource("10_5oqto")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -7861,18 +7874,6 @@ parameters/idle/blend_position = Vector2(0, 0)
 parameters/move/blend_position = Vector2(0, 0)
 parameters/sword_and_dagger/blend_position = Vector2(0, 0)
 parameters/whip/blend_position = Vector2(0, 0)
-
-[node name="PushArea" type="Area2D" parent="."]
-unique_name_in_owner = true
-collision_layer = 0
-collision_mask = 3
-monitorable = false
-script = ExtResource("17_xqgt3")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea"]
-position = Vector2(0, -3.5)
-shape = SubResource("CircleShape2D_xqgt3")
-debug_color = Color(0.289207, 0.595865, 0.574471, 0.42)
 
 [node name="sfx" type="Node2D" parent="."]
 
