@@ -10,6 +10,7 @@ public class Save
     [JsonProperty("items")] public List<Item> Items { get; private set; } = [];
     [JsonProperty("equipped")] public string Equipped { get; private set; } = string.Empty;
     [JsonProperty("quick_slot")] public string QuickSlotItem { get; private set; } = string.Empty;
+    [JsonProperty("frenzy_mode_unlocked")] public bool FrenzyModeUnlocked { get; private set; }
     [JsonProperty("unlocked_recipes")] public List<string> UnlockedRecipes { get; private set; } = [];
 
     [JsonProperty("current_chapter", DefaultValueHandling = DefaultValueHandling.Populate),
@@ -46,5 +47,10 @@ public class Save
     public void SetCurrentChapter(string chapter)
     {
         CurrentChapter = chapter;
+    }
+
+    public void UnlockFrenzyMode()
+    {
+        FrenzyModeUnlocked = true;
     }
 }

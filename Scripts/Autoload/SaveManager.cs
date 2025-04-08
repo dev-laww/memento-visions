@@ -57,7 +57,7 @@ public partial class SaveManager : Autoload<SaveManager>
 
 
     public static void SetItems(List<Item> items) => Data.SetItems(items);
-    public static void SetLevel(float level) => Data.SetLevel(level); 
+    public static void SetLevel(float level) => Data.SetLevel(level);
     public static void SetExperience(float experience) => Data.SetExperience(experience);
     public static void SetQuickSlotItem(string item) => Data.SetQuickSlotItem(item);
     public static void SetEquipped(string item) => Data.SetEquipped(item);
@@ -66,4 +66,5 @@ public partial class SaveManager : Autoload<SaveManager>
     public static void SetQuests(List<string> quests) => Data.SetQuests(quests);
     public static void AddQuest(string quest) => Data.AddQuest(quest);
     public static void RemoveQuest(string quest) => Data.RemoveQuest(quest);
+    public static void UnlockFrenzyMode() => Data.UnlockFrenzyMode();
 }
