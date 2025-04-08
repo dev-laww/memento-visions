@@ -3,10 +3,11 @@ if CurrentScene.isInteracted == true
 	Chief: Let's head to what they call the haunted place.
 	do CurrentScene.screenMarker.Toggle(true)
 	=> END
-Chief: Nice  to finally Meet you, Alejandro Gutierrez… or should I call you Alex?
+Chief: Nice  to finally meet you, Alejandro Gutierrez… or should I call you Alex?
 - Alex is fine, Chief. Now, what do we have here?
-Chief: There have been eerie whispers coming from this area at night. Some say it's just the wind, others believe it's something... unnatural.
-Chief: No one dares to stay long enough to find out but, I need someone who isn’t afraid to uncover the truth.
+Chief: We have received reports about a certain area that happnes at night. Some say it's just the wind, others believe it's something... unnatural.
+Chief: No one dares to stay long enough to find out and I need someone who isn’t afraid to uncover it.
+- I'm in.
 Alex: Whispers in the dark, huh? Sounds like a mystery worth solving.”
 do CurrentScene.chiefInteraction.Toggle(false)
 do CurrentScene.transitionArea.Toggle(true)
