@@ -49,7 +49,7 @@ public partial class HeadsUpDisplay : Overlay
             return;
         }
 
-        GetTree().CreateTimer(0.4f).Timeout += () =>
+        GetTree().CreateTimer(0.1f).Timeout += () =>
         {
             healthBar.Initialize(player.StatsManager);
         };
