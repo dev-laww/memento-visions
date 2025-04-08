@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://du6gsft33r8su"]
+[gd_scene load_steps=19 format=4 uid="uid://du6gsft33r8su"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_x2e5n"]
 [ext_resource type="TileSet" uid="uid://wuwsi02f3fft" path="res://resources/tilesets/intramuros.tres" id="2_wh3ic"]
@@ -10,12 +10,7 @@
 [ext_resource type="Resource" uid="uid://c1v7mbfe3knd8" path="res://resources/dialogues/chapter2/chapter2.0.dialogue" id="8_8o71o"]
 [ext_resource type="PackedScene" uid="uid://defbwilwt3lnr" path="res://Scenes/Entities/Characters/Witch.tscn" id="9_6u2fg"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="10_7fqr5"]
-[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="11_pbxto"]
-[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="12_hgfg3"]
-[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="13_hn6od"]
-[ext_resource type="Resource" uid="uid://c6xlurnbhc5sx" path="res://resources/dialogues/chapter2/chapter2.1.dialogue" id="14_shtid"]
-[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_xoyfs"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="16_u5kfp"]
+[ext_resource type="Resource" uid="uid://b3pnov4n41331" path="res://resources/quests/Chapter2/quest2.0.tres" id="11_kyjmd"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="17_trg5q"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="18_x263p"]
 [ext_resource type="Resource" uid="uid://bhvvo64xqww4i" path="res://resources/dialogues/chapter2/chapter2.2.dialogue" id="19_kpj6m"]
@@ -23,38 +18,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ws2j0"]
 radius = 14.0
 
-[sub_resource type="Resource" id="Resource_76d0m"]
-script = ExtResource("11_pbxto")
-Type = 2
-Description = "Talk to the vendor who was affected by the havoc."
-metadata/_custom_type_script = "uid://dpkqc20rlrftv"
-
-[sub_resource type="Resource" id="Resource_pjpjy"]
-script = ExtResource("12_hgfg3")
-Id = "enemy:Tikbalang"
-Amount = 2
-metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
-
-[sub_resource type="Resource" id="Resource_2sfsm"]
-script = ExtResource("11_pbxto")
-Type = 3
-Description = "Kill the 2 tikbalang still left on the scene. "
-Enemies = [SubResource("Resource_pjpjy")]
-metadata/_custom_type_script = "uid://dpkqc20rlrftv"
-
-[sub_resource type="Resource" id="Resource_bsqol"]
-script = ExtResource("13_hn6od")
-Id = "quest:echoes_of_void"
-Title = "Echoes of the Void"
-Ordered = false
-Description = "Stalls are overturned, vendors muttering prayers as they attempt to gather their scattered wares. A mysterious woman in robe appears and helps them clean the messes left by the mysterious creature that wreaked havoc. "
-objectives = [SubResource("Resource_76d0m"), SubResource("Resource_2sfsm")]
-Experience = 0
-Items = []
-metadata/_custom_type_script = "uid://dssta8xepjmkg"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_pjpjy"]
-radius = 15.1327
+[sub_resource type="CircleShape2D" id="CircleShape2D_bj64g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8uqde"]
 size = Vector2(42, 30)
@@ -116,27 +80,18 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 position = Vector2(578, 467)
 
 [node name="QuestTrigger" type="Area2D" parent="Witch"]
+position = Vector2(0, 1)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("10_7fqr5")
-Quest = SubResource("Resource_bsqol")
+Quest = ExtResource("11_kyjmd")
 Mode = 0
-ShouldInteract = true
-InteractionLabel = "Interact"
-DialogueResource = ExtResource("14_shtid")
+ShouldInteract = false
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Witch/QuestTrigger"]
-shape = SubResource("CircleShape2D_pjpjy")
+shape = SubResource("CircleShape2D_bj64g")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
-
-[node name="Node2D" type="Node2D" parent="Witch/QuestTrigger"]
-
-[node name="InteractionUI" type="Control" parent="Witch/QuestTrigger/Node2D" instance=ExtResource("15_xoyfs")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("16_u5kfp")
 
 [node name="Tikbalang" parent="." instance=ExtResource("17_trg5q")]
 position = Vector2(-146, 749)

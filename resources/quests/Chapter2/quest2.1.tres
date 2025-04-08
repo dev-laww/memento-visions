@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=7 format=3 uid="uid://dh5orsty66kxw"]
+
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_mjmn0"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="1_mqae3"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="2_lsukp"]
+
+[sub_resource type="Resource" id="Resource_bbhv0"]
+script = ExtResource("1_mqae3")
+Id = "enemy:tikbalang"
+Amount = 5
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_mqae3"]
+script = ExtResource("1_mqae3")
+Id = "enemy:aswang"
+Amount = 3
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_phlfv"]
+script = ExtResource("2_lsukp")
+Type = 3
+Description = "Kill the Tikbalangs and Aswangs that chased the Chief."
+Enemies = [SubResource("Resource_bbhv0"), SubResource("Resource_mqae3")]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[resource]
+script = ExtResource("1_mjmn0")
+Id = "quest:forest_awakening"
+Title = "The Everdawn Forest's Awakening"
+Ordered = false
+Description = "Just outside of the Everfield City, the Everdawn Forest seems to be different that it should be. The Chief tells you that something is going on further and that he ran back to warn you."
+objectives = [SubResource("Resource_phlfv")]
+Experience = 0
+Items = []
+metadata/_custom_type_script = "uid://dssta8xepjmkg"

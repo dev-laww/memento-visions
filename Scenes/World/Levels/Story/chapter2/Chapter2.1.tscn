@@ -1,17 +1,21 @@
-[gd_scene load_steps=68 format=4 uid="uid://d0njwb8s1yg5h"]
+[gd_scene load_steps=70 format=4 uid="uid://d0njwb8s1yg5h"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_cro4b"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_5srok"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_gw6o1"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="4_wyqtt"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="5_7wp0m"]
+[ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="5_q65kr"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="6_q65kr"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="7_gw6o1"]
-[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="8_7wp0m"]
-[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="8_wyqtt"]
-[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="9_q65kr"]
+[ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="7_wyqtt"]
+[ext_resource type="Resource" uid="uid://dh5orsty66kxw" path="res://resources/quests/Chapter2/quest2.1.tres" id="9_wyqtt"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="11_6r78w"]
-[ext_resource type="Resource" uid="uid://cglb2gps24kor" path="res://resources/dialogues/chapter2/chapter2.3.dialogue" id="12_rk8lg"]
+[ext_resource type="Resource" uid="uid://b8xephrl31kc2" path="res://resources/dialogues/chapter2/chapter2.4.dialogue" id="11_rk8lg"]
+[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="12_ktsv1"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="13_eghu3"]
+[ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="14_ktsv1"]
+[ext_resource type="Resource" uid="uid://cvju1srbyvutd" path="res://resources/dialogues/chapter2/chapter2.5.dialogue" id="16_dy4qf"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_btr1b"]
 
@@ -249,35 +253,14 @@ border_size = 256.0
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="Resource" id="Resource_6r78w"]
-script = ExtResource("8_7wp0m")
-Id = "enemy:Tikbalang"
-Amount = 5
-metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+[sub_resource type="CircleShape2D" id="CircleShape2D_7wp0m"]
+radius = 16.0
 
-[sub_resource type="Resource" id="Resource_rk8lg"]
-script = ExtResource("9_q65kr")
-Type = 3
-Description = "Kill 5 Tikbalangs that are waiting for your arrival. They seem to be gesturing to show them what you are made of."
-Enemies = [SubResource("Resource_6r78w")]
-metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eghu3"]
+size = Vector2(108, 20)
 
-[sub_resource type="Resource" id="Resource_7wp0m"]
-script = ExtResource("8_wyqtt")
-Id = "quest:forest_awakening"
-Title = "The Everdawn Forest's Awakening"
-Ordered = false
-Description = "The outskirts of the townsquare, called the Everdawn Forest-filled with mythical creatures, ready to wreack havoc anytime soon if not controlled by Alex."
-objectives = [SubResource("Resource_rk8lg")]
-Experience = 0
-Items = []
-metadata/_custom_type_script = "uid://dssta8xepjmkg"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q65kr"]
-size = Vector2(99, 20)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ktsv1"]
-size = Vector2(99, 20)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5gld6"]
+size = Vector2(20, 65)
 
 [node name="Node2D" type="Node2D"]
 
@@ -329,7 +312,7 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 position = Vector2(493, 1023)
 
 [node name="Tikbalang2" parent="Enemy" instance=ExtResource("4_wyqtt")]
-position = Vector2(135, 261)
+position = Vector2(287, 222)
 
 [node name="Tikbalang3" parent="Enemy" instance=ExtResource("4_wyqtt")]
 position = Vector2(94, 807)
@@ -343,8 +326,17 @@ position = Vector2(493, 568)
 [node name="Tikbalang6" parent="Enemy" instance=ExtResource("4_wyqtt")]
 position = Vector2(672, 1029)
 
+[node name="Aswang" parent="Enemy" instance=ExtResource("5_q65kr")]
+position = Vector2(607, 883)
+
+[node name="Aswang2" parent="Enemy" instance=ExtResource("5_q65kr")]
+position = Vector2(155, 970)
+
+[node name="Aswang3" parent="Enemy" instance=ExtResource("5_q65kr")]
+position = Vector2(557, 339)
+
 [node name="Player" parent="." instance=ExtResource("5_7wp0m")]
-position = Vector2(290, 1188)
+position = Vector2(287, 1323)
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -503,27 +495,52 @@ navigation_polygon = SubResource("NavigationPolygon_i4pfm")
 [node name="@NavigationRegion2D@88692" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_6nx8t")
 
-[node name="QuestTrigger" type="Area2D" parent="."]
-position = Vector2(288, 1127)
+[node name="Chief" parent="." instance=ExtResource("7_wyqtt")]
+position = Vector2(265, 1184)
+
+[node name="QuestTrigger" type="Area2D" parent="Chief"]
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("7_gw6o1")
-Quest = SubResource("Resource_7wp0m")
+Quest = ExtResource("9_wyqtt")
 Mode = 0
-ShouldInteract = false
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("11_rk8lg")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
-shape = SubResource("RectangleShape2D_q65kr")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/QuestTrigger"]
+shape = SubResource("CircleShape2D_7wp0m")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
-[node name="DialogueTrigger" type="Area2D" parent="QuestTrigger"]
+[node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
+
+[node name="InteractionUI" type="Control" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("12_ktsv1")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("13_eghu3")
+
+[node name="TransitionArea" type="Area2D" parent="."]
+position = Vector2(59, 171)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("14_ktsv1")
+TargetScene = "uid://criyou87dacyh"
+metadata/_custom_type_script = "uid://davlg2u8drdh4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
+shape = SubResource("RectangleShape2D_eghu3")
+debug_color = Color(0.849658, 0.000898505, 0.900808, 0.42)
+
+[node name="DialogueTrigger" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("11_6r78w")
-DialogueResource = ExtResource("12_rk8lg")
+DialogueResource = ExtResource("16_dy4qf")
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger/DialogueTrigger"]
-shape = SubResource("RectangleShape2D_ktsv1")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueTrigger"]
+position = Vector2(144, 246.5)
+shape = SubResource("RectangleShape2D_5gld6")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)

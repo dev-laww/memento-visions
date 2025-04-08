@@ -1,11 +1,21 @@
-[gd_scene load_steps=64 format=4 uid="uid://criyou87dacyh"]
+[gd_scene load_steps=78 format=4 uid="uid://criyou87dacyh"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_tj5o5"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_565dr"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_o6n3x"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="4_ot0yb"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="5_60ff3"]
+[ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="5_vhqjr"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="6_vhqjr"]
+[ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="7_o6n3x"]
+[ext_resource type="Resource" uid="uid://dbarykfwy3l5a" path="res://resources/dialogues/chapter2/chapter2.6.dialogue" id="8_60ff3"]
+[ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="8_ot0yb"]
+[ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="8_vhqjr"]
+[ext_resource type="Resource" uid="uid://bw6fossxbjly1" path="res://resources/quests/Chapter2/quest2.2.tres" id="10_wlw4r"]
+[ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="13_o8kv0"]
+[ext_resource type="Resource" uid="uid://cx3y2g4y3fymi" path="res://resources/dialogues/chapter2/chapter2.7.dialogue" id="14_dry5l"]
+[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_c37h7"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="16_e5cwo"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nfvny"]
 
@@ -277,6 +287,17 @@ border_size = 256.0
 parsed_geometry_type = 1
 border_size = 256.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_60ff3"]
+size = Vector2(80, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wlw4r"]
+size = Vector2(20, 78)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vhqjr"]
+size = Vector2(20, 78)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0mh2c"]
+
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
 
@@ -328,7 +349,7 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 [node name="Enemy" type="Node2D" parent="."]
 
 [node name="Tikbalang" parent="Enemy" instance=ExtResource("4_ot0yb")]
-position = Vector2(-9, 668)
+position = Vector2(7, 1084)
 
 [node name="Tikbalang3" parent="Enemy" instance=ExtResource("4_ot0yb")]
 position = Vector2(317, 716)
@@ -351,8 +372,14 @@ position = Vector2(392, 377)
 [node name="Tikbalang9" parent="Enemy" instance=ExtResource("4_ot0yb")]
 position = Vector2(210, 618)
 
-[node name="Tikbalang10" parent="Enemy" instance=ExtResource("4_ot0yb")]
-position = Vector2(571, 244)
+[node name="Aswang" parent="Enemy" instance=ExtResource("5_vhqjr")]
+position = Vector2(262, 829)
+
+[node name="Aswang2" parent="Enemy" instance=ExtResource("5_vhqjr")]
+position = Vector2(531, 1070)
+
+[node name="Aswang3" parent="Enemy" instance=ExtResource("5_vhqjr")]
+position = Vector2(464, 331)
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -533,4 +560,65 @@ navigation_polygon = SubResource("NavigationPolygon_okwfh")
 navigation_polygon = SubResource("NavigationPolygon_d5xo0")
 
 [node name="Player" parent="." instance=ExtResource("6_vhqjr")]
-position = Vector2(290, 1218)
+position = Vector2(-201, 678)
+
+[node name="TransitionArea" type="Area2D" parent="."]
+position = Vector2(844, 1011)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("8_ot0yb")
+TargetScene = "uid://b87n4vopknml"
+metadata/_custom_type_script = "uid://davlg2u8drdh4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_60ff3")
+
+[node name="QuestTrigger" type="Area2D" parent="."]
+position = Vector2(-24, 675)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("8_vhqjr")
+Quest = ExtResource("10_wlw4r")
+Mode = 0
+ShouldInteract = false
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
+shape = SubResource("RectangleShape2D_wlw4r")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="DialogueTrigger" type="Area2D" parent="QuestTrigger"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("7_o6n3x")
+DialogueResource = ExtResource("8_60ff3")
+metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger/DialogueTrigger"]
+shape = SubResource("RectangleShape2D_vhqjr")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="StoryTeller" parent="." instance=ExtResource("13_o8kv0")]
+position = Vector2(284, 493)
+
+[node name="DialogueTrigger" type="Area2D" parent="StoryTeller"]
+position = Vector2(0, -3)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("7_o6n3x")
+DialogueResource = ExtResource("14_dry5l")
+ShouldInteract = true
+metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoryTeller/DialogueTrigger"]
+shape = SubResource("CircleShape2D_0mh2c")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="StoryTeller/DialogueTrigger"]
+
+[node name="InteractionUI" type="Control" parent="StoryTeller/DialogueTrigger/Node2D" instance=ExtResource("15_c37h7")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("16_e5cwo")
