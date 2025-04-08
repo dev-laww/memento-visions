@@ -1,6 +1,6 @@
-using Game.Components;
-using Godot;
+using Game.Autoload;
 using Game.Entities;
+using Godot;
 using GodotUtilities;
 
 namespace Game.World;
@@ -8,9 +8,9 @@ namespace Game.World;
 [Scene]
 public partial class TownSquare : BaseLevel
 {
-    [Node] private Entity Mayor;
-    [Node] private AnimationPlayer AnimationPlayer;
-    [Node] private Spawner Spawner;
+    [Node] private Entity mayor;
+    [Node] private ResourcePreloader resourcePreloader;
+    [Node] private AnimationPlayer animationPlayer;
 
 
     public override void _Notification(int what)
@@ -23,14 +23,26 @@ public partial class TownSquare : BaseLevel
 
     public void PlayFadeAnimation()
     {
-        AnimationPlayer.Play("Fade");
+        animationPlayer.Play("Fade");
     }
 
     public void Spawn()
     {
-        Mayor.Visible = false;
-        Vector2 specificPosition = new Vector2(437, 259);
-        Spawner.SpawnBoss(specificPosition);
+        mayor.Visible = false;
+
+        for (var i = 0; i < 5; i++)
+        {
+            var aswang = resourcePreloader.InstanceSceneOrNull<Aswang>();
+            aswang.GlobalPosition = mayor.GlobalPosition + new Vector2(0, 100) * MathUtil.RNG.RandDirection();
+
+            AddChild(aswang);
+        }
+
+        var aghon = resourcePreloader.InstanceSceneOrNull<Aghon>();
+        aghon.GlobalPosition = mayor.GlobalPosition;
+        aghon.Death += _ => SaveManager.UnlockFrenzyMode();
+
+        AddChild(aghon);
     }
 
     public void RuntoMarker() { }
