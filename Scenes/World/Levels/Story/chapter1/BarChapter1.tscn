@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="11_72xov"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="12_shkw5"]
 [ext_resource type="Resource" uid="uid://dpkjhbld0pfm4" path="res://resources/quests/Chapter1/whispers_in_intramuros_1.tres" id="13_53sbg"]
-[ext_resource type="Resource" uid="uid://cygxg5r2yja7d" path="res://resources/dialogues/chapter1/Chapter1.0.dialogue" id="14_7pkig"]
+[ext_resource type="Resource" uid="uid://c82r84uxq7lxc" path="res://resources/dialogues/chapter1/Chapter1.0.dialogue" id="14_7pkig"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_jtnov"]
 [ext_resource type="PackedScene" uid="uid://dgqrvixy2ocww" path="res://Scenes/Entities/Characters/BlackSmith.tscn" id="16_cdpoc"]
 
@@ -150,4 +150,7 @@ position = Vector2(0, -32)
 [node name="BlackSmith" parent="." instance=ExtResource("16_cdpoc")]
 position = Vector2(271, 258)
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="sfx" type="Node2D" parent="."]
+
+[node name="sfxBar" type="AudioStreamPlayer2D" parent="sfx"]
+unique_name_in_owner = true

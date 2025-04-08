@@ -19,8 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="13_uxpbx"]
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="16_1etyf"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="19_aogjn"]
-[ext_resource type="Resource" uid="uid://ckfjp8n7k4vum" path="res://resources/dialogues/prologue/boulder.dialogue" id="20_2umdr"]
-[ext_resource type="Resource" uid="uid://fnyq88n24woy" path="res://resources/dialogues/prologue/door.dialogue" id="21_2umdr"]
+[ext_resource type="Resource" uid="uid://ckfjp8n7k4vum" path="res://resources/dialogues/prologue/puzzle_boulder.dialogue" id="20_2umdr"]
+[ext_resource type="Resource" uid="uid://fnyq88n24woy" path="res://resources/dialogues/prologue/puzzle_door.dialogue" id="21_2umdr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5br0r"]
 radius = 23.0868
@@ -146,10 +146,10 @@ unique_name_in_owner = true
 visible = false
 position = Vector2(1677, 460)
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Boulder" type="Node2D" parent="."]
 position = Vector2(1252, 354)
 
-[node name="Boulder" type="Area2D" parent="Node2D"]
+[node name="Boulder" type="Area2D" parent="Boulder"]
 unique_name_in_owner = true
 scale = Vector2(1.0217, 1)
 collision_layer = 0
@@ -158,16 +158,16 @@ script = ExtResource("19_aogjn")
 DialogueResource = ExtResource("20_2umdr")
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Boulder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boulder/Boulder"]
 position = Vector2(0, -0.25)
 shape = SubResource("RectangleShape2D_4ouky")
 one_way_collision_margin = 0.0
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
-[node name="Node2D2" type="Node2D" parent="."]
+[node name="Door" type="Node2D" parent="."]
 position = Vector2(1055, 361)
 
-[node name="DialogueDoor" type="Area2D" parent="Node2D2"]
+[node name="DialogueDoor" type="Area2D" parent="Door"]
 unique_name_in_owner = true
 collision_layer = 0
 collision_mask = 4
@@ -175,9 +175,20 @@ script = ExtResource("19_aogjn")
 DialogueResource = ExtResource("21_2umdr")
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/DialogueDoor"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door/DialogueDoor"]
 position = Vector2(2, -6)
 shape = SubResource("RectangleShape2D_2umdr")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="sfx" type="Node2D" parent="."]
+
+[node name="sfxOpenDoor" type="AudioStreamPlayer2D" parent="sfx"]
+unique_name_in_owner = true
+
+[node name="sfxCloseDoor" type="AudioStreamPlayer2D" parent="sfx"]
+unique_name_in_owner = true
+
+[node name="sfxBackground" type="AudioStreamPlayer2D" parent="sfx"]
+unique_name_in_owner = true
 
 [editable path="Chief/QuestTrigger/Node2D/InteractionUI"]
