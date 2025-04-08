@@ -67,7 +67,7 @@ public partial class QuestManager : Autoload<QuestManager>
         CommandInterpreter.Unregister(this);
 
         var questsIds = quests.Select(q => q.Id).ToList();
-        SaveManager.Data.SetQuests(questsIds);
+        SaveManager.SetQuests(questsIds);
     }
 
     public override void _Process(double delta)

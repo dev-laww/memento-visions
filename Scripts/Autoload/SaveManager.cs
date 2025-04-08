@@ -63,4 +63,7 @@ public partial class SaveManager : Autoload<SaveManager>
     public static void SetEquipped(string item) => Data.SetEquipped(item);
     public static void SetCurrentChapter(string chapter) => Data.SetCurrentChapter(chapter);
     public static void UnlockRecipe(string itemId) => Data.UnlockedRecipes.Add(itemId);
+    public static void SetQuests(List<string> quests) => Data.SetQuests(quests);
+    public static void AddQuest(string quest) => Data.AddQuest(quest);
+    public static void RemoveQuest(string quest) => Data.RemoveQuest(quest);
 }

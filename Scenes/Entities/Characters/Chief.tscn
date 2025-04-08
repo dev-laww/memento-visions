@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="3_h6wn6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbqyk"]
-radius = 13.0
+radius = 8.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h6wn6"]
 atlas = ExtResource("2_uwdmb")
@@ -364,7 +364,6 @@ script = ExtResource("3_h6wn6")
 metadata/_custom_type_script = "uid://dnpva4sn53c1r"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_tbqyk")
 
 [node name="SmoothAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -374,7 +373,6 @@ position = Vector2(0, -17)
 sprite_frames = SubResource("SpriteFrames_ghsbm")
 animation = &"idle"
 autoplay = "idle"
-frame = 1
 script = ExtResource("3_e6tbd")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
