@@ -47,7 +47,6 @@ region_enabled = true
 region_rect = Rect2(1460, 732, 10, 36)
 
 [node name="Particles" type="GPUParticles2D" parent="."]
-unique_name_in_owner = true
 position = Vector2(1, -26)
 emitting = false
 amount = 100
