@@ -7,7 +7,6 @@ using Godot;
 using GodotUtilities;
 using System.CommandLine.IO;
 using Game.UI.Screens;
-using Game.Common.Models;
 
 namespace Game.Entities;
 
@@ -82,7 +81,15 @@ public partial class Player : Entity
 
     public override void OnProcess(double delta)
     {
-        VelocityManager.ApplyMovement();
+        var collision = VelocityManager.MoveAndCollide();
+
+        if (collision is not null && collision.GetCollider() is RigidBody2D body)
+        {
+            var direction = VelocityManager.Velocity.Normalized();
+
+            body.ApplyCentralImpulse(direction * (1000 / body.Mass));
+        }
+
         UpdateNormalBlendPositions();
     }
 

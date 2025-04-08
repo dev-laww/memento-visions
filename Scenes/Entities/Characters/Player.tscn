@@ -1,4 +1,4 @@
-[gd_scene load_steps=503 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=501 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" uid="uid://bbhesrdqhrnnb" path="res://Scripts/Entities/Characters/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_cqdhe"]
@@ -16,14 +16,10 @@
 [ext_resource type="PackedScene" uid="uid://c6kt3qbs62e4i" path="res://Scenes/UI/Overlays/HeadsUpDisplay.tscn" id="14_c8fx8"]
 [ext_resource type="Texture2D" uid="uid://qelvcb3gkmb3" path="res://assets/entities/characters/player/sword_and_dagger.png" id="14_srhpj"]
 [ext_resource type="Texture2D" uid="uid://tflb423580f8" path="res://assets/entities/characters/player/whip.png" id="15_srhpj"]
-[ext_resource type="Script" uid="uid://dkr546xrmggbl" path="res://Scripts/Components/Area/PushArea.cs" id="17_xqgt3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7xh7"]
 radius = 9.0
 height = 28.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_xqgt3"]
-radius = 8.13941
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c8fx8"]
 radius = 5.0
@@ -7799,18 +7795,6 @@ StatsManager = NodePath("../StatsManager")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CapsuleShape2D_n7xh7")
 debug_color = Color(1, 0.3, 0.4, 0.4)
-
-[node name="PushArea" type="Area2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(0, -4)
-collision_layer = 0
-collision_mask = 3
-monitorable = false
-script = ExtResource("17_xqgt3")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea"]
-shape = SubResource("CircleShape2D_xqgt3")
-debug_color = Color(0.289207, 0.595865, 0.574471, 0.42)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
