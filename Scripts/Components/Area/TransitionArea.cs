@@ -20,6 +20,7 @@ public partial class TransitionArea : Area2D
     }
 
     private string targetScene;
+    private bool isEnabled = true;
 
     public override void _Ready()
     {
@@ -29,9 +30,11 @@ public partial class TransitionArea : Area2D
         NotifyPropertyListChanged();
     }
 
+    public void Toggle(bool enabled = true) => isEnabled = enabled;
+
     private void OnBodyEntered(Node body)
     {
-        if (body is not Player) return;
+        if (body is not Player || !isEnabled) return;
 
         GameManager.ChangeScene(targetScene);
     }
@@ -43,6 +46,6 @@ public partial class TransitionArea : Area2D
         if (TargetScene == null)
             warnings.Add("TargetScene is not set.");
 
-        return warnings.ToArray();
+        return [.. warnings];
     }
 }

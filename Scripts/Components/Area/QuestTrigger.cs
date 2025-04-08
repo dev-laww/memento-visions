@@ -178,9 +178,8 @@ public partial class QuestTrigger : Area2D, IInteractable
         }
     }
 
-    public void ShowUI() => InteractionUI?.Show();
-    public void HideUI() => InteractionUI?.Hide();
-
+    public void ShowUI() => InteractionUI?.AnimateShow();
+    public void HideUI() => InteractionUI?.AnimateHide();
 
     public override void _ValidateProperty(Dictionary property)
     {
@@ -268,7 +267,7 @@ public partial class QuestTrigger : Area2D, IInteractable
     {
         if (GetNodeOrNull("CollisionShape2D") == null)
             this.EditorAddChild(new CollisionShape2D
-                { Name = "CollisionShape2D", DebugColor = new Color(0.88f, 0.525f, 0.898f, 0.42f) });
+            { Name = "CollisionShape2D", DebugColor = new Color(0.88f, 0.525f, 0.898f, 0.42f) });
 
         if (!ShouldInteract)
         {
