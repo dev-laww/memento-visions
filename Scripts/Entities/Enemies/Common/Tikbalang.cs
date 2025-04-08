@@ -26,6 +26,8 @@ public partial class Tikbalang : Enemy
     [Node] private Timer moveTimer;
     [Node] private Timer attackTimer;
     [Node] private Timer attackCooldownTimer;
+    [Node] private AudioStreamPlayer2D sfxAttack;
+    [Node] private AudioStreamPlayer2D sfxSpecial;
 
     private AnimationNodeStateMachinePlayback playback;
     private Vector2[] directions = [Vector2.Up, Vector2.Down, Vector2.Left, Vector2.Right];
@@ -181,6 +183,7 @@ public partial class Tikbalang : Enemy
 
     private void EnterCommonAttack()
     {
+        sfxAttack.Play();
         EnterState(COMMON_ATTACK);
     }
 
@@ -213,6 +216,7 @@ public partial class Tikbalang : Enemy
 
     private void EnterSpecialAttack()
     {
+        sfxSpecial.Play();
         EnterState(SPECIAL_ATTACK);
     }
 

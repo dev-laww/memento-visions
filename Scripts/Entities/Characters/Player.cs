@@ -22,6 +22,7 @@ public partial class Player : Entity
     [Node] private AnimationTree animationTree;
     [Node] private Timer comboResetTimer;
     [Node] private ResourcePreloader resourcePreloader;
+    [Node] private AudioStreamPlayer2D sfxDash;
 
     [Node] public VelocityManager VelocityManager;
     [Node] public WeaponManager WeaponManager;
@@ -147,6 +148,7 @@ public partial class Player : Entity
 
     private void EnterDash()
     {
+        sfxDash.Play();
         VelocityManager.Dash(VelocityManager.LastFacedDirection);
 
         hurtBox.Disable();

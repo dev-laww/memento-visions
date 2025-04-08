@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=3 uid="uid://cmpubd6rbsqiu"]
+[gd_scene load_steps=144 format=3 uid="uid://cmpubd6rbsqiu"]
 
 [ext_resource type="Script" uid="uid://bqv2ubu81g3e7" path="res://Scripts/Entities/Enemies/Common/Tikbalang.cs" id="1_4ml10"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_hkjad"]
@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://d2rgjab2cym6d" path="res://assets/entities/enemy/common/tikbalang/spritesheet.png" id="9_mh5vc"]
 [ext_resource type="Resource" uid="uid://dhr2jtmgl0gse" path="res://resources/items/material/engkanto_essence.tres" id="11_msr8t"]
 [ext_resource type="Resource" uid="uid://drj5puv2462td" path="res://resources/items/material/bato_balani.tres" id="12_u32vl"]
+[ext_resource type="AudioStream" uid="uid://be1u2qlp4fqcp" path="res://assets/sfx/enemy/TikbalangAttack2.wav" id="17_0a0x6"]
+[ext_resource type="AudioStream" uid="uid://ccrwhak6p636s" path="res://assets/sfx/enemy/TikbalangSpecial.wav" id="18_8cri1"]
 
 [sub_resource type="Resource" id="Resource_18kv7"]
 script = ExtResource("7_472wo")
@@ -1234,7 +1236,6 @@ graph_offset = Vector2(19, -43)
 collision_mask = 15
 script = ExtResource("1_4ml10")
 EnemyName = "Tikbalang"
-Type = 0
 Id = "enemy:tikbalang"
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
@@ -1309,7 +1310,7 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_472wo")
 animation = &"idle_down"
 autoplay = "idle_down"
-frame = 2
+frame = 1
 script = ExtResource("9_6pqlh")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1330,5 +1331,17 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(0, 1)
 parameters/Move/blend_position = Vector2(0, 1)
 "parameters/Special Attack/blend_position" = Vector2(0, 1)
+
+[node name="sfx" type="Node2D" parent="."]
+
+[node name="sfxAttack" type="AudioStreamPlayer2D" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("17_0a0x6")
+bus = &"SFX"
+
+[node name="sfxSpecial" type="AudioStreamPlayer2D" parent="sfx"]
+unique_name_in_owner = true
+stream = ExtResource("18_8cri1")
+bus = &"SFX"
 
 [editable path="PathFindManager"]

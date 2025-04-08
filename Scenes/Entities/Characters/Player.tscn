@@ -7873,3 +7873,9 @@ script = ExtResource("17_xqgt3")
 position = Vector2(0, -3.5)
 shape = SubResource("CircleShape2D_xqgt3")
 debug_color = Color(0.289207, 0.595865, 0.574471, 0.42)
+
+[node name="sfx" type="Node2D" parent="."]
+
+[node name="sfxDash" type="AudioStreamPlayer2D" parent="sfx"]
+unique_name_in_owner = true
+bus = &"SFX"
