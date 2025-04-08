@@ -13,6 +13,7 @@ public partial class ModeSelect : Overlay
     [Node] private TextureButton closeButton;
     [Node] private Button storyModeButton;
     [Node] private Button frenzyModeButton;
+    [Node] private ColorRect lockedTexture;
 
     public override void _Notification(int what)
     {
@@ -29,6 +30,8 @@ public partial class ModeSelect : Overlay
         storyModeButton.MouseExited += () => OnMouseExited(storyModeButton);
         frenzyModeButton.MouseEntered += () => OnMouseEntered(frenzyModeButton);
         frenzyModeButton.MouseExited += () => OnMouseExited(frenzyModeButton);
+        frenzyModeButton.Disabled = !SaveManager.Data.FrenzyModeUnlocked;
+        lockedTexture.Visible = !SaveManager.Data.FrenzyModeUnlocked;
 
         frenzyModeButton.Pressed += () =>
         {
