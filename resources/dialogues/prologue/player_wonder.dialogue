@@ -1,4 +1,7 @@
 ~ start
-???: [speed=.1]???? [wait=.5][speed=1]I should find someone to talk
+
+Alex: [speed=.1]???? 
+Alex: [wait=.5][speed=1]The Chief seems to be looking for me.
+Alex: I should talk to him now to see what he has to say.
 do animationPlayer.play("out")
 => END
