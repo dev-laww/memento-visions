@@ -6,13 +6,13 @@
 
 [sub_resource type="Resource" id="Resource_bbhv0"]
 script = ExtResource("1_mqae3")
-Id = "enemy:tikbalang"
+Id = "enemy: Tikbalang"
 Amount = 5
 metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 
 [sub_resource type="Resource" id="Resource_mqae3"]
 script = ExtResource("1_mqae3")
-Id = "enemy:aswang"
+Id = "enemy:Aswang"
 Amount = 3
 metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 

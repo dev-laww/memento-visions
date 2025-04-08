@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=2 format=3 uid="uid://bv76l3i6da1kd"]
+
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_23k00"]
+
+[resource]
+script = ExtResource("1_23k00")
+Id = "ffa7a52f-47c3-46e9-8ad9-81067c7e46b8"
+Title = ""
+Ordered = false
+Description = ""
+objectives = null
+Experience = 0
+Items = []
+metadata/_custom_type_script = "uid://dssta8xepjmkg"
