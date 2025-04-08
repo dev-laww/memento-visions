@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://c2qx74ig42sum"]
+[gd_scene load_steps=38 format=4 uid="uid://c2qx74ig42sum"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_1cx0f"]
 [ext_resource type="Script" uid="uid://xi5ph3oued7k" path="res://Scripts/World/Levels/Story/Chapter1/Village.cs" id="1_yyi1k"]
@@ -16,7 +16,11 @@
 [ext_resource type="Resource" uid="uid://dr732yvh2p2me" path="res://resources/dialogues/chapter1/chapter1.5.dialogue" id="13_yyi1k"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="14_2eimf"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="16_r45d3"]
+[ext_resource type="Resource" uid="uid://ba4jrntt5jygn" path="res://resources/dialogues/chapter1/chapter1.7.dialogue" id="18_akscv"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="19_lmktk"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="20_lesfh"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="20_tjaeu"]
+[ext_resource type="Resource" uid="uid://b8egfkscgqbcp" path="res://resources/dialogues/chapter1/chapter1.6.dialogue" id="21_kk6yg"]
 [ext_resource type="Resource" uid="uid://clfbur06xipdm" path="res://resources/loot_tables/10.tres" id="23_0d1sk"]
 [ext_resource type="PackedScene" uid="uid://djjs6g4ap8st1" path="res://Scenes/World/PuzzleComponent/Torch.tscn" id="23_8vc12"]
 [ext_resource type="Resource" uid="uid://bx16wb3x71qgf" path="res://resources/loot_tables/4.tres" id="24_akscv"]
@@ -27,8 +31,20 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_8vc12"]
 radius = 12.0
 
+[sub_resource type="Resource" id="Resource_busxp"]
+script = ExtResource("19_lmktk")
+Type = 2
+Description = "It seems there was a person eavesdropping to the conversation you had with the Mayor. Confront him."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_yyi1k"]
 radius = 16.1245
+
+[sub_resource type="Resource" id="Resource_qydlh"]
+script = ExtResource("19_lmktk")
+Type = 2
+Description = "Look for the Mayor if he's in the vicinity or not."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xh25p"]
 radius = 19.0
@@ -42,14 +58,22 @@ size = Vector2(177.25, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qboe2"]
 size = Vector2(55.25, 21.25)
 
+[sub_resource type="Resource" id="Resource_nry1j"]
+script = ExtResource("19_lmktk")
+Type = 2
+Description = "Head towards the Jeepney"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xh25p"]
 size = Vector2(54, 20)
 
 [node name="Village" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_yyi1k")
 Id = "chapter_1.3"
 
 [node name="Tilemap" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Floor" type="TileMapLayer" parent="Tilemap"]
 texture_filter = 2
@@ -68,6 +92,7 @@ script = ExtResource("3_cgijk")
 metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="Props" type="TileMapLayer" parent="Tilemap"]
+y_sort_enabled = true
 texture_filter = 2
 material = ExtResource("1_1cx0f")
 tile_map_data = PackedByteArray("AAAeAAkAAAAGAAUAAAAeAAoAAAAGAAYAAAAeAAsAAAAGAAcAAAAfAAkAAAAHAAUAAAAfAAoAAAAHAAYAAAAfAAsAAAAHAAcAAAAgAAkAAAAGAAUAAAAgAAoAAAAGAAYAAAAgAAsAAAAGAAcAAAAhAAkAAAAHAAUAAAAhAAoAAAAHAAYAAAAhAAsAAAAHAAcAAAABAP3/AAAKAAUAAAABAP7/AAAKAAYAAAABAP//AAAKAAcAAAABAAAAAAAKAAgAAAACAP3/AAALAAUAAAACAP7/AAALAAYAAAACAP//AAALAAcAAAACAAAAAAALAAgAAAAfAA0AAAAGAAoAAAAiAA8AAAAGAAoAAAAiABIAAAAGAAoAAAAKABUAAAAFAAoAAAAJABUAAAAFAAoAAAAOABUAAAAFAAoAAAAdABkAAAAEAAgAAAAdABoAAAAEAAkAAAAeABkAAAAFAAgAAAAeABoAAAAFAAkAAAAfABkAAAAGAAgAAAAfABoAAAAGAAkAAAASABkAAAAGAAUAAAASABoAAAAGAAYAAAASABsAAAAGAAcAAAATABkAAAAHAAUAAAATABoAAAAHAAYAAAATABsAAAAHAAcAAAAMABkAAAAGAAUAAAAMABoAAAAGAAYAAAAMABsAAAAGAAcAAAANABkAAAAHAAUAAAANABoAAAAHAAYAAAANABsAAAAHAAcAAAAEABgAAAAGAAUAAAAEABkAAAAGAAYAAAAEABoAAAAGAAcAAAAFABgAAAAHAAUAAAAFABkAAAAHAAYAAAAFABoAAAAHAAcAAAACAAYAAAAAAAYAAAACAA8AAAAAAAQAAAAIAAgAAAAAAAYAAAAPAAgAAAAAAAYAAAAIAA4AAAAAAAQAAAAKAAMAAAAAAAQAAAAWAAMAAAAAAAQAAAAXAAYAAAAAAAQAAAAaAAwAAAAAAAQAAAAdABMAAAAAAAQAAAATABQAAAAAAAYAAAAAAAoAAAAAAAYAAAAEAAoAAAAAAAkAAAAGAAoAAAABAAoAAAAaAAcAAAABAAoAAAAgAAcAAAABAAoAAAAeAAcAAAAAAAkAAAAYAAcAAAAAAAkAAAAZABMAAAAAAAkAAAAbABMAAAABAAoAAAD7/woAAAABAAgAAAD7/wsAAAABAAkAAAD8/woAAAACAAgAAAD8/wsAAAACAAkAAAD7/xEAAAABAAgAAAD7/xIAAAABAAkAAAD8/xEAAAACAAgAAAD8/xIAAAACAAkAAAADABIAAAACAAoAAAACABIAAAAAAAYAAAAFABIAAAAAAAYAAAAJABIAAAAAAAYAAAAPABEAAAABAAgAAAAPABIAAAABAAkAAAAQABEAAAACAAgAAAAQABIAAAACAAkAAAA=")
@@ -76,6 +101,7 @@ script = ExtResource("3_cgijk")
 metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="prop2" type="TileMapLayer" parent="Tilemap"]
+y_sort_enabled = true
 texture_filter = 2
 material = ExtResource("1_1cx0f")
 tile_map_data = PackedByteArray("AAAGABIAAQACAAUAAAAHABIAAQADAAUAAAADABIAAQAAAAUAAAA=")
@@ -83,13 +109,67 @@ tile_set = ExtResource("4_cgijk")
 script = ExtResource("3_cgijk")
 metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
+[node name="LeverManager" parent="." instance=ExtResource("6_xh25p")]
+unique_name_in_owner = true
+position = Vector2(555, 291)
+TorchesPath = NodePath("../torch")
+
+[node name="Lever" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
+position = Vector2(58, 6)
+scale = Vector2(0.65625, 0.75)
+Torches = [NodePath("../../torch/Torch"), NodePath("../../torch/Torch2"), NodePath("../../torch/Torch4")]
+
+[node name="Lever2" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
+position = Vector2(-17, 6)
+scale = Vector2(0.6875, 0.65625)
+Torches = [NodePath("../../torch/Torch"), NodePath("../../torch/Torch2"), NodePath("../../torch/Torch4")]
+
+[node name="Lever3" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
+position = Vector2(60, 52)
+scale = Vector2(0.65625, 0.75)
+Torches = [NodePath("../../torch/Torch2"), NodePath("../../torch/Torch3"), NodePath("../../torch/Torch4")]
+
+[node name="Lever4" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
+position = Vector2(-17, 52)
+scale = Vector2(0.71875, 0.6875)
+Torches = [NodePath("../../torch/Torch2"), NodePath("../../torch/Torch3")]
+
 [node name="barrier" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="barrier"]
 polygon = PackedVector2Array(16, 12, 8, 1005, 1440, 997, 1419, 29, 19, -6, 1594, -10, 1541, 1052, -18, 1026, -70, -14, 11, -74)
 
-[node name="Player" parent="." instance=ExtResource("4_imb2w")]
-position = Vector2(83, 120)
+[node name="LightPuzzle" parent="." instance=ExtResource("27_lmktk")]
+unique_name_in_owner = true
+position = Vector2(766, 782)
+
+[node name="Light" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
+position = Vector2(-60, 119)
+
+[node name="Light2" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
+position = Vector2(66, 119)
+
+[node name="Light3" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
+position = Vector2(-62, -9)
+
+[node name="Light4" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
+position = Vector2(66, -6)
+
+[node name="torch" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(680, 298)
+
+[node name="Torch" parent="torch" instance=ExtResource("23_8vc12")]
+position = Vector2(-66, 45)
+
+[node name="Torch2" parent="torch" instance=ExtResource("23_8vc12")]
+position = Vector2(-143, 45)
+
+[node name="Torch3" parent="torch" instance=ExtResource("23_8vc12")]
+position = Vector2(-68, -1)
+
+[node name="Torch4" parent="torch" instance=ExtResource("23_8vc12")]
+position = Vector2(-143, -1)
 
 [node name="StoryTeller" parent="." instance=ExtResource("7_0d1sk")]
 position = Vector2(536, 214)
@@ -121,15 +201,25 @@ collision_mask = 4
 script = ExtResource("6_r45d3")
 Quest = ExtResource("7_tjaeu")
 Mode = 1
-ShouldInteract = false
-Objective = null
-ObjectiveIndex = 0
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("18_akscv")
+Objective = SubResource("Resource_busxp")
+ObjectiveIndex = 1
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rudy/QuestTrigger"]
 position = Vector2(-2.54038, -8.02888)
 shape = SubResource("CircleShape2D_yyi1k")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="Rudy/QuestTrigger"]
+
+[node name="InteractionUI" type="Control" parent="Rudy/QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("20_lesfh")
 
 [node name="Mayor" parent="." instance=ExtResource("16_r45d3")]
 position = Vector2(1229, 516)
@@ -141,8 +231,10 @@ collision_mask = 4
 script = ExtResource("6_r45d3")
 Quest = ExtResource("7_tjaeu")
 Mode = 1
-ShouldInteract = false
-Objective = null
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("21_kk6yg")
+Objective = SubResource("Resource_qydlh")
 ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -150,6 +242,14 @@ metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_xh25p")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="Mayor/QuestTrigger"]
+
+[node name="InteractionUI" type="Control" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("20_lesfh")
 
 [node name="QuestTrigger" type="Area2D" parent="."]
 position = Vector2(106, 179)
@@ -204,54 +304,13 @@ script = ExtResource("6_r45d3")
 Quest = ExtResource("7_tjaeu")
 Mode = 1
 ShouldInteract = false
-Objective = null
-ObjectiveIndex = 0
+Objective = SubResource("Resource_nry1j")
+ObjectiveIndex = 2
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger2"]
 shape = SubResource("RectangleShape2D_xh25p")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
-
-[node name="torch" type="Node2D" parent="."]
-y_sort_enabled = true
-position = Vector2(680, 298)
-
-[node name="Torch" parent="torch" instance=ExtResource("23_8vc12")]
-position = Vector2(-66, 45)
-
-[node name="Torch2" parent="torch" instance=ExtResource("23_8vc12")]
-position = Vector2(-143, 45)
-
-[node name="Torch3" parent="torch" instance=ExtResource("23_8vc12")]
-position = Vector2(-68, -1)
-
-[node name="Torch4" parent="torch" instance=ExtResource("23_8vc12")]
-position = Vector2(-143, -1)
-
-[node name="LeverManager" parent="." instance=ExtResource("6_xh25p")]
-unique_name_in_owner = true
-position = Vector2(555, 291)
-TorchesPath = NodePath("../torch")
-
-[node name="Lever" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
-position = Vector2(58, 6)
-scale = Vector2(0.65625, 0.75)
-Torches = [NodePath("../../torch/Torch"), NodePath("../../torch/Torch2"), NodePath("../../torch/Torch4")]
-
-[node name="Lever2" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
-position = Vector2(-17, 6)
-scale = Vector2(0.6875, 0.65625)
-Torches = [NodePath("../../torch/Torch"), NodePath("../../torch/Torch2"), NodePath("../../torch/Torch3")]
-
-[node name="Lever3" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
-position = Vector2(60, 52)
-scale = Vector2(0.65625, 0.75)
-Torches = [NodePath("../../torch/Torch2"), NodePath("../../torch/Torch3"), NodePath("../../torch/Torch4")]
-
-[node name="Lever4" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
-position = Vector2(-17, 52)
-scale = Vector2(0.71875, 0.6875)
-Torches = [NodePath("../../torch/Torch3"), NodePath("../../torch/Torch2")]
 
 [node name="Chest" parent="." instance=ExtResource("26_0d1sk")]
 unique_name_in_owner = true
@@ -265,24 +324,8 @@ visible = false
 position = Vector2(845, 739)
 Loot = ExtResource("24_akscv")
 
-[node name="LightPuzzle" parent="." instance=ExtResource("27_lmktk")]
-unique_name_in_owner = true
-position = Vector2(766, 782)
-_displaySequenceDelay = null
-_resetDelay = null
-_sequenceLength = null
-
-[node name="Light" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
-position = Vector2(-60, 119)
-
-[node name="Light2" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
-position = Vector2(66, 119)
-
-[node name="Light3" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
-position = Vector2(-62, -9)
-
-[node name="Light4" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
-position = Vector2(66, -6)
+[node name="Player" parent="." instance=ExtResource("4_imb2w")]
+position = Vector2(83, 120)
 
 [node name="sfxBackground" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
