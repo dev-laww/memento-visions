@@ -1,0 +1,21 @@
+~ start
+if CurrentScene.isInteracted == true
+	Witch: Just be wary of what you do from here on out, Alex..
+	do CurrentScene.screenMarker.Toggle(true)
+	=> END
+???: Nyahahaha!
+- Who are you?
+- Hahaha?
+???: Well hello, esteemed guest from afar. Let me introduce myself.
+???: I am Apo Sita Albular, or you may call me the Witch. Am I the one you're seeking, no?
+Alex: I'm not sure, I received some reports from the Chief about what happened here and went to investigate.
+Alex: It seems like you're the most suspicious around here, wearing a robe and all that around the town, care to explain yourself?
+Witch: Kekekekeke!
+Witch: I only helped the townsfolk drive-away those creatures that wreaked havoc here! If it were not for me, they could have suffered much worse! I already driven most of the creatures here so I think you should do your job now, Alex.
+- You passing me the crumbs?
+- How did you know my name?
+Witch: I know who you are inside and outside, Alex. Just be wary of what you do from here on out. 
+Alex: Wait, what do you mean?
+Witch: ...
+set CurrentScene.isInteracted = true
+=> END
