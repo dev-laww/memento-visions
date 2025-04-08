@@ -29,6 +29,9 @@ public partial class Inventory : Overlay
     [Node] private RichTextLabel selectedItemDescription;
     [Node] private Button selectedItemActionButton;
     [Node] private Button selectedItemQuickUseButton;
+    [Node] private AudioStreamPlayer2D sfxClose;
+    [Node] private AudioStreamPlayer2D sfxOpen;
+    [Node] private AudioStreamPlayer2D sfxClick;
 
     private List<Slot> slots;
     private Item.Category currentCategory = Item.Category.Material;
@@ -58,6 +61,7 @@ public partial class Inventory : Overlay
         PlayerInventoryManager.Updated += OnInventoryUpdate;
 
         PopulateSlots(currentCategory);
+        sfxOpen.Play(); 
     }
 
     public override void _ExitTree()
@@ -74,6 +78,7 @@ public partial class Inventory : Overlay
 
     private void SelectSlot(Slot slot)
     {
+       
         var selectedSlot = slots.FirstOrDefault(s => s.Selected);
 
         if (selectedSlot is null)
@@ -83,7 +88,7 @@ public partial class Inventory : Overlay
         }
 
         if (selectedSlot == slot) return;
-
+        sfxClick.Play();
         slot.Selected = true;
         selectedSlot.Selected = false;
         UpdateSelectedItem(slot.Item);
@@ -118,9 +123,9 @@ public partial class Inventory : Overlay
         var category = Enum.Parse<Item.Category>(meta);
 
         if (currentCategory == category) return;
-
+        sfxClick.Play();
         currentCategory = category;
-
+    
         PopulateSlots(category);
     }
 
@@ -157,23 +162,27 @@ public partial class Inventory : Overlay
 
         if (slot.Selected)
         {
+            sfxClick.Play();
             UpdateSelectedItem(slot.Item);
         }
     }
 
     private void OnActionButtonToggle(bool pressed)
     {
+        
         var player = this.GetPlayer();
 
         if (selectedItem is null || selectedItem.ItemCategory != Item.Category.Weapon || player is null) return;
 
         if (pressed)
         {
+            sfxClick.Play();
             player.WeaponManager.Equip(selectedItem);
             selectedItemActionButton.Text = "Unequip";
         }
         else if (selectedItem.Id == player.WeaponManager.Weapon?.Id)
         {
+            sfxClick.Play();
             player.WeaponManager.Unequip();
             selectedItemActionButton.Text = "Equip";
         }
@@ -184,25 +193,34 @@ public partial class Inventory : Overlay
         var player = this.GetPlayer();
 
         if (selectedItem is null || selectedItem.ItemCategory != Item.Category.Consumable || player is null) return;
-
+        sfxClick.Play();
         PlayerInventoryManager.UseItem(selectedItem);
     }
 
     private void OnSelectedItemQuickUseToggle(bool pressed)
     {
+       
         var player = this.GetPlayer();
 
         if (selectedItem is null || selectedItem.ItemCategory != Item.Category.Consumable || player is null) return;
 
         if (pressed)
         {
+            sfxClick.Play();
             selectedItemQuickUseButton.Text = "Unequip";
             PlayerInventoryManager.SetQuickSlotItem(selectedItem);
         }
         else if (selectedItem.Id == PlayerInventoryManager.QuickSlotItem?.Id)
         {
+            sfxClick.Play();
             selectedItemQuickUseButton.Text = "Quick Use";
             PlayerInventoryManager.SetQuickSlotItem(null);
         }
+    }
+
+    public override void Close()
+    {
+        base.Close();
+        sfxClose.Play(); 
     }
 }

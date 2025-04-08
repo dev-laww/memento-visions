@@ -19,6 +19,9 @@ public partial class Quest : Overlay
     [Node] private TextureButton closeButton;
     [Node] private Button questTitle;
     [Node] private VBoxContainer questTitlesContainer;
+    [Node] private AudioStreamPlayer2D sfxClose;
+    [Node] private AudioStreamPlayer2D sfxOpen;
+    [Node] private AudioStreamPlayer2D sfxClick;
 
     private Godot.Collections.Dictionary<Data.Quest, Button> questButtons = [];
     private Data.Quest currentSelectedQuest;
@@ -47,6 +50,8 @@ public partial class Quest : Overlay
         if (questButtons.FirstOrDefault().Value is not { } button) return;
 
         button.ButtonPressed = true;
+
+        sfxOpen.Play(); 
     }
 
     public override void _ExitTree()
@@ -124,10 +129,11 @@ public partial class Quest : Overlay
 
     private void OnButtonPressed(BaseButton button)
     {
+       
         foreach (var (quest, questButton) in questButtons)
         {
             if (questButton != button) continue;
-
+            sfxClick.Play();
             UpdateCurrentSelectedQuest(quest);
             break;
         }
@@ -139,5 +145,11 @@ public partial class Quest : Overlay
         objectives.Text = string.Empty;
         description.Text = string.Empty;
         rewards.Text = string.Empty;
+    }
+
+    public override void Close()
+    {
+        base.Close();
+        sfxClose.Play();
     }
 }
