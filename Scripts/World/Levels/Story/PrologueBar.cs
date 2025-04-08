@@ -1,14 +1,21 @@
 using Godot;
 using Game.Components;
 using GodotUtilities;
+using DialogueManagerRuntime;
+using Game.Entities;
 
 namespace Game.World;
 
 [Scene]
 public partial class PrologueBar : BaseLevel
 {
-    public bool isInteracted = false;
-    [Node] private TransitionArea TransitionArea;
+    [Node] private TransitionArea transitionArea;
+    [Node] private Player player;
+    [Node] private AnimationPlayer animationPlayer;
+    [Node] private ScreenMarker screenMarker;
+    [Node] private ScreenMarker chiefMarker;
+
+    private bool isInteracted;
 
     public override void _Notification(int what)
     {
@@ -19,12 +26,19 @@ public partial class PrologueBar : BaseLevel
 
     public override void _Ready()
     {
-        base._Ready();
-        TransitionArea.Monitoring = false;
+        screenMarker.Toggle(false);
+        chiefMarker.Toggle(false);
+        transitionArea.Toggle(false);
     }
 
-    public void EnableTransitionArea()
+    private static void ShowDialogue()
     {
-        TransitionArea.Monitoring = true;
+        var dialouge = ResourceLoader.Load<Resource>("res://resources/dialogues/prologue/player_wonder.dialogue");
+        DialogueManager.ShowDialogueBalloon(dialouge);
+    }
+
+    private void ShowScreenMarker()
+    {
+        chiefMarker.Toggle(true);
     }
 }

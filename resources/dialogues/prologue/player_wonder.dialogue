@@ -1,0 +1,4 @@
+~ start
+???: [speed=.1]???? [wait=.5][speed=1]I should find someone to talk
+do animationPlayer.play("out")
+=> END

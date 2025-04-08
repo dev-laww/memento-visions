@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://cgfqiwwd6c7yd"
+path="res://.godot/imported/player_wonder.dialogue-0aa86c6d6154fc7f7e6d6dd62395e83c.tres"
+
+[deps]
+
+source_file="res://resources/dialogues/prologue/player_wonder.dialogue"
+dest_files=["res://.godot/imported/player_wonder.dialogue-0aa86c6d6154fc7f7e6d6dd62395e83c.tres"]
+
+[params]
+
+defaults=true

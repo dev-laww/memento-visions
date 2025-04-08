@@ -14,9 +14,16 @@ public partial class ScreenMarker : Node2D
     [Export]
     public bool IsRed
     {
-        get => smoothSprite2D.Texture.ResourcePath == red.ResourcePath;
+        get
+        {
+            if (smoothSprite2D == null) return false;
+
+            return smoothSprite2D.Texture.ResourcePath == red.ResourcePath;
+        }
         set
         {
+            if (smoothSprite2D == null) return;
+
             smoothSprite2D.Texture = value ? red : normal;
             smoothSprite2D.NotifyPropertyListChanged();
         }
@@ -28,6 +35,7 @@ public partial class ScreenMarker : Node2D
     public Vector2 Offset { get; set; } = Vector2.Zero;
 
     private Vector2 originalPosition;
+    private bool isActive = true;
 
     public override void _Notification(int what)
     {
@@ -43,7 +51,7 @@ public partial class ScreenMarker : Node2D
 
     public override void _Process(double delta)
     {
-        if (Engine.IsEditorHint()) return;
+        if (Engine.IsEditorHint() || !isActive) return;
 
         var canvas = GetCanvasTransform();
         var topLeft = -canvas.Origin / canvas.Scale;
@@ -52,6 +60,18 @@ public partial class ScreenMarker : Node2D
         var bounds = new Rect2(topLeft, size);
 
         SetMarkerPosition(bounds);
+    }
+
+    public void Toggle(bool active)
+    {
+        isActive = active;
+        Visible = active;
+
+        if (!active) return;
+
+
+        GlobalPosition = originalPosition;
+        GlobalRotation = 0;
     }
 
     private void SetMarkerPosition(Rect2 bounds)
