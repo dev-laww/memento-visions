@@ -1,4 +1,4 @@
-[gd_scene load_steps=190 format=4 uid="uid://d3dl8qe3i4hs5"]
+[gd_scene load_steps=191 format=4 uid="uid://d3dl8qe3i4hs5"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_edvum"]
 [ext_resource type="Script" uid="uid://cy5yn6ijpgu1n" path="res://Scripts/World/Levels/Story/Chapter1/EverfieldCity.cs" id="1_hf60o"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="11_dclhn"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="11_hn08j"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="12_hf60o"]
+[ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="13_4wwhf"]
 [ext_resource type="Resource" uid="uid://d38r8diakp5jt" path="res://resources/dialogues/chapter1/chief3_npc.dialogue" id="13_8kgvc"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="14_5xymq"]
 [ext_resource type="Resource" uid="uid://btgac1rf6bqox" path="res://resources/dialogues/chapter1/chief6_npc.dialogue" id="14_8kgvc"]
@@ -1054,6 +1055,7 @@ script = ExtResource("3_pu5lx")
 metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="npc" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Chief" parent="npc" instance=ExtResource("4_32qxv")]
 position = Vector2(548, 337)
@@ -1079,6 +1081,7 @@ position = Vector2(0, -32)
 
 [node name="Chief2" parent="npc" instance=ExtResource("4_32qxv")]
 unique_name_in_owner = true
+visible = false
 position = Vector2(-112, 977)
 
 [node name="QuestTrigger" type="Area2D" parent="npc/Chief2"]
@@ -1102,6 +1105,10 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="Node2D" type="Node2D" parent="npc/Chief2/QuestTrigger"]
 
 [node name="InteractionUI" parent="npc/Chief2/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
+
+[node name="kevinMarker" parent="npc/Chief2" instance=ExtResource("13_4wwhf")]
+unique_name_in_owner = true
+position = Vector2(-112, 952)
 
 [node name="Chief3" parent="npc" instance=ExtResource("4_32qxv")]
 material = SubResource("ShaderMaterial_kycha")
@@ -1226,8 +1233,8 @@ z_index = 1000
 color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(-762, -47, -795, 1407, -795, 1407, 153, 1415, 153, 1215, 153, 1215, 1494, 1223, 1506, 158, 1506, 158, 1097, 124, 1068, -9, 1068, -9)
 script = ExtResource("10_grhu3")
-NavigationPolygon = SubResource("NavigationPolygon_hn08j")
 ParseRootNode = NodePath("../Tileset")
+NavigationPolygon = SubResource("NavigationPolygon_hn08j")
 metadata/_custom_type_script = "uid://cfscbenslyojv"
 
 [node name="@NavigationRegion2D@60431" type="NavigationRegion2D" parent="NavigationManager"]
@@ -1531,7 +1538,12 @@ metadata/_custom_type_script = "uid://davlg2u8drdh4"
 position = Vector2(9, -30)
 shape = SubResource("RectangleShape2D_hf60o")
 
+[node name="jeepMarker" parent="TransitionArea" instance=ExtResource("13_4wwhf")]
+unique_name_in_owner = true
+position = Vector2(-361, 1160)
+
 [node name="StoryTeller" type="CharacterBody2D" parent="."]
+y_sort_enabled = true
 position = Vector2(413, 45)
 collision_mask = 15
 script = ExtResource("14_5xymq")
@@ -1558,7 +1570,7 @@ material = ExtResource("1_edvum")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 2
+frame = 1
 script = ExtResource("18_8kgvc")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

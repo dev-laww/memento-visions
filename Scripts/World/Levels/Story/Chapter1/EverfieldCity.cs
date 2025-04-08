@@ -17,6 +17,7 @@ public partial class EverfieldCity : BaseLevel
     [Node] private TorchPuzzleManager TorchSequence;
     [Node] private PressurePlate Plate, Plate2;
     [Node] private Chest Chest,Chest2;
+    [Node] private ScreenMarker kevinMarker,jeepMarker;
     private bool plate1, plate2;
     private Quest quest = QuestRegistry.Get("quest:aswang_hunt");
     private Quest quest1 = QuestRegistry.Get("quest:whispers_in_intramuros");
@@ -32,10 +33,12 @@ public partial class EverfieldCity : BaseLevel
     {
         base._Ready();
         QuestManager.QuestUpdated += OnQuestUpdated;
-        TransitionArea.Monitoring = false;
         TorchSequence.PuzzleSolved += OnPuzzleSolved;
         Plate.Activated += OnPlatePressed;
         Plate2.Activated += OnPlatePressed;
+        TransitionArea.Toggle(false); 
+        jeepMarker.Toggle(false);
+        kevinMarker.Toggle(false);
 
     }
     
@@ -47,7 +50,9 @@ public partial class EverfieldCity : BaseLevel
 
     public void EnableTransitionArea()
     {
-        TransitionArea.Monitoring = true;
+        kevinMarker.Toggle(false);
+        TransitionArea.Toggle(true);
+        jeepMarker.Toggle(true);
     }
     private void OnPlatePressed()
     {
@@ -59,26 +64,10 @@ public partial class EverfieldCity : BaseLevel
 
     private void OnQuestUpdated(Quest updatedQuest)
     {
-        if (updatedQuest != quest)
-        {
-            return;
-        }
-
-        if (updatedQuest.Objectives == null || updatedQuest.Objectives.Count == 0)
-        {
-            GD.PrintErr("Objectives are null or empty!");
-            return;
-        }
-
-        if (updatedQuest.Objectives[0] == null)
-        {
-            GD.PrintErr("First objective is null!");
-            return;
-        }
-
-        if (updatedQuest.Objectives[0].Completed && !Chief2.Visible)
+        if (quest.Objectives[0].Completed && !Chief2.Visible)
         {
             Chief2.Visible = true;
+            kevinMarker.Toggle(true);
         }
     }
 
