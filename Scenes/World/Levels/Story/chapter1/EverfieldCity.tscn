@@ -36,18 +36,18 @@
 [ext_resource type="PackedScene" uid="uid://dtqgojjodmope" path="res://Scenes/World/PuzzleComponent/StreetLight.tscn" id="29_ro4io"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kycha"]
-radius = 14.0
+radius = 25.02
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_84djs"]
-radius = 14.0
+radius = 22.0227
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kycha"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sn7c0"]
-radius = 14.0
+radius = 29.7321
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3h1fx"]
-radius = 13.0
+radius = 24.5153
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yr40k"]
 size = Vector2(69.238, 30.3673)
@@ -1570,7 +1570,6 @@ material = ExtResource("1_edvum")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 1
 script = ExtResource("18_8kgvc")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 

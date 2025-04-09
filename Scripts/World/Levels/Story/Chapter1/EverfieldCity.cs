@@ -68,8 +68,11 @@ public partial class EverfieldCity : BaseLevel
         {
             Chief2.Visible = true;
             kevinMarker.Toggle(true);
+            QuestManager.QuestUpdated -= OnQuestUpdated;
         }
     }
+    
+    
 
     public void CompleteQuest(int index)
     {
