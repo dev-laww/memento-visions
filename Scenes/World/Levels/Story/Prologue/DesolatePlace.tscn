@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://c64wsg4p1yvco"]
+[gd_scene load_steps=42 format=4 uid="uid://dj8wdwrvixxlp"]
 
 [ext_resource type="Script" uid="uid://dudaew5h4f4vy" path="res://Scripts/World/Levels/Story/DesolatePlace.cs" id="1_b4cw0"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_8oxtl"]
@@ -59,7 +59,7 @@ anim_offset_max = 1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2umdr"]
 size = Vector2(93, 14)
 
-[sub_resource type="Resource" id="Resource_tnbyp"]
+[sub_resource type="Resource" id="Resource_1vh2t"]
 script = ExtResource("19_8oxtl")
 Type = 2
 Description = "Investigate the Notebook"
@@ -68,7 +68,7 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 [sub_resource type="CircleShape2D" id="CircleShape2D_vvniv"]
 radius = 26.4764
 
-[sub_resource type="Resource" id="Resource_6f01l"]
+[sub_resource type="Resource" id="Resource_li52e"]
 script = ExtResource("19_8oxtl")
 Type = 2
 Description = "Investigate the Burned wooden chair"
@@ -80,7 +80,7 @@ radius = 17.8045
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_odju6"]
 size = Vector2(20, 11)
 
-[sub_resource type="Resource" id="Resource_rxg1s"]
+[sub_resource type="Resource" id="Resource_jjc84"]
 script = ExtResource("19_8oxtl")
 Type = 2
 Description = "Investigate the Photographs"
@@ -302,7 +302,7 @@ Mode = 1
 ShouldInteract = true
 InteractionLabel = "Investigate"
 DialogueResource = ExtResource("18_b4cw0")
-Objective = SubResource("Resource_tnbyp")
+Objective = SubResource("Resource_1vh2t")
 ObjectiveIndex = 1
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -338,7 +338,7 @@ Mode = 1
 ShouldInteract = true
 InteractionLabel = "Investigate"
 DialogueResource = ExtResource("22_ykjel")
-Objective = SubResource("Resource_6f01l")
+Objective = SubResource("Resource_li52e")
 ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -378,7 +378,7 @@ Mode = 1
 ShouldInteract = true
 InteractionLabel = "Investigate"
 DialogueResource = ExtResource("23_cnuhk")
-Objective = SubResource("Resource_rxg1s")
+Objective = SubResource("Resource_jjc84")
 ObjectiveIndex = 2
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
