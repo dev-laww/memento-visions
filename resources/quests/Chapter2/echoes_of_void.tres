@@ -1,24 +1,24 @@
 [gd_resource type="Resource" script_class="Quest" load_steps=6 format=3 uid="uid://b3pnov4n41331"]
 
-[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_5m50h"]
-[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="1_7n7ry"]
-[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_wb31b"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="1_4c0t1"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="2_rgcns"]
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="3_piv6h"]
 
 [sub_resource type="Resource" id="Resource_arrju"]
-script = ExtResource("1_7n7ry")
-Id = "enemy:Tikbalang"
+script = ExtResource("1_4c0t1")
+Id = "enemy:tikbalang"
 Amount = 2
 metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 
 [sub_resource type="Resource" id="Resource_7n7ry"]
-script = ExtResource("1_wb31b")
+script = ExtResource("2_rgcns")
 Type = 3
 Description = "Kill the 2 tikbalang still left on the scene. "
 Enemies = [SubResource("Resource_arrju")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
-script = ExtResource("1_5m50h")
+script = ExtResource("3_piv6h")
 Id = "quest:echoes_of_void"
 Title = "Echoes of the Void"
 Ordered = false

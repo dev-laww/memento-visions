@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="Quest" load_steps=2 format=3 uid="uid://bw6fossxbjly1"]
 
-[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_p23k3"]
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_0n00g"]
 
 [resource]
-script = ExtResource("1_p23k3")
+script = ExtResource("1_0n00g")
 Id = "quest:the_missing_anchor"
 Title = "The Missing Anchor"
 Ordered = false

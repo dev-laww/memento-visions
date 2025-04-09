@@ -1,30 +1,30 @@
 [gd_resource type="Resource" script_class="Quest" load_steps=7 format=3 uid="uid://bdiho63j18ddw"]
 
-[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_d2qj0"]
-[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="1_qr57t"]
-[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="2_rtrtp"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="1_hvfhi"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="2_iw3t1"]
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="3_c38af"]
 
 [sub_resource type="Resource" id="Resource_inl2v"]
-script = ExtResource("1_qr57t")
+script = ExtResource("1_hvfhi")
 Id = "enemy:tikbalang"
 Amount = 8
 metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 
 [sub_resource type="Resource" id="Resource_f143y"]
-script = ExtResource("1_qr57t")
+script = ExtResource("1_hvfhi")
 Id = "enemy:aswang"
 Amount = 8
 metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 
 [sub_resource type="Resource" id="Resource_qm08l"]
-script = ExtResource("2_rtrtp")
+script = ExtResource("2_iw3t1")
 Type = 3
 Description = "Kill 8 Tikbalangs and 8 Aswangs that seems to be barricading you into going to their lair."
 Enemies = [SubResource("Resource_inl2v"), SubResource("Resource_f143y")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
-script = ExtResource("1_d2qj0")
+script = ExtResource("3_c38af")
 Id = "quest:restoring_balance"
 Title = "Restoring the Balance, Resolving the Past"
 Ordered = false

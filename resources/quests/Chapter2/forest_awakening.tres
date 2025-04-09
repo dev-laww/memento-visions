@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=12 format=3 uid="uid://dh5orsty66kxw"]
+
+[ext_resource type="Resource" uid="uid://dx7hcjqmrqnj1" path="res://resources/items/consumable/puto.tres" id="1_47abo"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_7xl8y"]
+[ext_resource type="Resource" uid="uid://bwwk3vtqo5h7w" path="res://resources/items/material/banana.tres" id="3_x4rvd"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="4_8oqe6"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="5_eskvi"]
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="6_iaovr"]
+
+[sub_resource type="Resource" id="Resource_e4cff"]
+script = ExtResource("2_7xl8y")
+Item = ExtResource("1_47abo")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_07kg5"]
+script = ExtResource("2_7xl8y")
+Item = ExtResource("3_x4rvd")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_47abo"]
+script = ExtResource("4_8oqe6")
+Id = "enemy:aswang"
+Amount = 2
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_bbhv0"]
+script = ExtResource("4_8oqe6")
+Id = "enemy:tikbalang"
+Amount = 5
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_phlfv"]
+script = ExtResource("5_eskvi")
+Type = 3
+Description = "Kill the Tikbalangs and Aswangs that chased the Chief."
+Enemies = [SubResource("Resource_47abo"), SubResource("Resource_bbhv0")]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[resource]
+script = ExtResource("6_iaovr")
+Id = "quest:forest_awakening"
+Title = "The Everdawn Forest's Awakening"
+Ordered = false
+Description = "Just outside of the Everfield City, the Everdawn Forest seems to be different that it should be. The Chief tells you that something is going on further and that he ran back to warn you."
+objectives = [SubResource("Resource_phlfv")]
+Experience = 40
+Items = [SubResource("Resource_e4cff"), SubResource("Resource_07kg5")]
+metadata/_custom_type_script = "uid://dssta8xepjmkg"
