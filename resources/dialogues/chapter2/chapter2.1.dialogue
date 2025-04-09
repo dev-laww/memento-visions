@@ -1,7 +1,7 @@
 ~ start
-if CurrentScene.isInteracted == true
+if CurrentScene.IsWitchInteracted == true
 	Witch: Just be wary of what you do from here on out, Alex..
-	do CurrentScene.screenMarker.Toggle(true)
+	#do CurrentScene.screenMarker.Toggle(true)
 	=> END
 ???: Nyahahaha!
 - Who are you?
@@ -17,5 +17,6 @@ Witch: I only helped the townsfolk drive-away those creatures that wreaked havoc
 Witch: I know who you are inside and outside, Alex. Just be wary of what you do from here on out. 
 Alex: Wait, what do you mean?
 Witch: ...
-set CurrentScene.isInteracted = true
+do CurrentScene.ToggleWitchMarker(false)
+set CurrentScene.IsWitchInteracted = true
 => END
