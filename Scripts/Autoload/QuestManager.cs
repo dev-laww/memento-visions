@@ -118,6 +118,7 @@ public partial class QuestManager : Autoload<QuestManager>
 
         Instance.quests.Add(quest);
         Instance.EmitSignalAdded(quest);
+        SaveManager.AddQuest(quest.Id);
 
         Log.Info($"{quest} added.");
     }
@@ -138,6 +139,7 @@ public partial class QuestManager : Autoload<QuestManager>
 
         Instance.quests.Remove(quest);
         Instance.EmitSignalRemoved(quest);
+        SaveManager.RemoveQuest(quest.Id);
 
         Log.Info($"{quest} removed.");
     }
