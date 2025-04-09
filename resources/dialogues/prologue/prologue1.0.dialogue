@@ -9,7 +9,7 @@ Chief: We have received reports about a certain area that happnes at night. Some
 Chief: No one dares to stay long enough to find out and I need someone who isn’t afraid to uncover it.
 - I'm in.
 Alex: Whispers in the dark, huh? Sounds like a mystery worth solving.”
-do CurrentScene.chiefInteraction.Toggle(false)
+do CurrentScene.chiefMarker.Toggle(false)
 do CurrentScene.transitionArea.Toggle(true)
 set CurrentScene.isInteracted = true
 => END
