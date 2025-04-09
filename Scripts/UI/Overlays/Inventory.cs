@@ -21,7 +21,7 @@ public partial class Inventory : Overlay
     [Node] private ResourcePreloader resourcePreloader;
     [Node] private TextureButton closeButton;
     [Node] private GridContainer slotsContainer;
-    [Node] private Button materialButton;
+    [Node] private TextureButton materialButton;
     [Node] private TextureRect selectedItemIcon;
     [Node] private Label selectedItemName;
     [Node] private Label selectedItemCategory;
@@ -61,7 +61,7 @@ public partial class Inventory : Overlay
         PlayerInventoryManager.Updated += OnInventoryUpdate;
 
         PopulateSlots(currentCategory);
-        sfxOpen.Play(); 
+        sfxOpen.Play();
     }
 
     public override void _ExitTree()
@@ -78,7 +78,6 @@ public partial class Inventory : Overlay
 
     private void SelectSlot(Slot slot)
     {
-       
         var selectedSlot = slots.FirstOrDefault(s => s.Selected);
 
         if (selectedSlot is null)
@@ -111,7 +110,7 @@ public partial class Inventory : Overlay
             Item.Category.Consumable => "Use",
             _ => string.Empty
         };
-        
+
         selectedItemQuickUseButton.Visible = item?.Item.ItemCategory == Item.Category.Consumable;
         selectedItemQuickUseButton.ButtonPressed = item?.Item.Id == PlayerInventoryManager.QuickSlotItem?.Id;
         selectedItemQuickUseButton.Text = selectedItemQuickUseButton.ButtonPressed ? "Unequip" : "Quick Use";
@@ -125,7 +124,7 @@ public partial class Inventory : Overlay
         if (currentCategory == category) return;
         sfxClick.Play();
         currentCategory = category;
-    
+
         PopulateSlots(category);
     }
 
@@ -169,7 +168,6 @@ public partial class Inventory : Overlay
 
     private void OnActionButtonToggle(bool pressed)
     {
-        
         var player = this.GetPlayer();
 
         if (selectedItem is null || selectedItem.ItemCategory != Item.Category.Weapon || player is null) return;
@@ -199,7 +197,6 @@ public partial class Inventory : Overlay
 
     private void OnSelectedItemQuickUseToggle(bool pressed)
     {
-       
         var player = this.GetPlayer();
 
         if (selectedItem is null || selectedItem.ItemCategory != Item.Category.Consumable || player is null) return;
@@ -221,6 +218,6 @@ public partial class Inventory : Overlay
     public override void Close()
     {
         base.Close();
-        sfxClose.Play(); 
+        sfxClose.Play();
     }
 }

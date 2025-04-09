@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b161abm0o6ij2"]
+[gd_scene load_steps=26 format=3 uid="uid://b161abm0o6ij2"]
 
 [ext_resource type="Script" uid="uid://bswjdpne446nm" path="res://Scripts/UI/Overlays/Inventory.cs" id="1_7jd4f"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="1_35u5w"]
@@ -13,21 +13,53 @@
 [ext_resource type="AudioStream" uid="uid://bsey776lyb18t" path="res://assets/sfx/ui/Menu_Open.wav" id="11_grann"]
 [ext_resource type="AudioStream" uid="uid://ccp6uleihx53k" path="res://assets/sfx/ui/Menu_Close.wav" id="12_w7dcp"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7hgj7"]
-texture = ExtResource("2_r77rr")
-texture_margin_left = 4.0
-texture_margin_top = 7.0
-texture_margin_right = 4.0
-texture_margin_bottom = 8.0
-region_rect = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qahny"]
+atlas = ExtResource("2_r77rr")
+region = Rect2(32, 64, 32, 32)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7pn5k"]
-texture = ExtResource("2_r77rr")
-texture_margin_left = 4.0
-texture_margin_top = 4.0
-texture_margin_right = 4.0
-texture_margin_bottom = 10.0
-region_rect = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_grann"]
+atlas = ExtResource("2_r77rr")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7dcp"]
+atlas = ExtResource("2_r77rr")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxdyq"]
+atlas = ExtResource("2_r77rr")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmu5o"]
+atlas = ExtResource("2_r77rr")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0v35"]
+atlas = ExtResource("2_r77rr")
+region = Rect2(128, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxvfv"]
+atlas = ExtResource("2_r77rr")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8j5ir"]
+atlas = ExtResource("2_r77rr")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhlqs"]
+atlas = ExtResource("2_r77rr")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0t70l"]
+atlas = ExtResource("2_r77rr")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xd8vd"]
+atlas = ExtResource("2_r77rr")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glaph"]
+atlas = ExtResource("2_r77rr")
+region = Rect2(160, 96, 32, 32)
 
 [sub_resource type="LabelSettings" id="LabelSettings_cxeph"]
 outline_size = 8
@@ -80,7 +112,7 @@ custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="MaterialButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
+[node name="MaterialButton" type="TextureButton" parent="MarginContainer/VBoxContainer/Main/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -88,18 +120,17 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_default_cursor_shape = 2
 theme = ExtResource("2_quj2b")
-theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_7hgj7")
-theme_override_styles/hover = SubResource("StyleBoxTexture_7pn5k")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_7hgj7")
-theme_override_styles/normal = SubResource("StyleBoxTexture_7pn5k")
 toggle_mode = true
 button_pressed = true
 action_mode = 0
 button_group = ExtResource("1_hubp2")
-icon_alignment = 1
+texture_normal = SubResource("AtlasTexture_qahny")
+texture_pressed = SubResource("AtlasTexture_grann")
+texture_hover = SubResource("AtlasTexture_qahny")
+texture_disabled = SubResource("AtlasTexture_w7dcp")
 metadata/Category = "Material"
 
-[node name="ConsumableButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
+[node name="ConsumableButton" type="TextureButton" parent="MarginContainer/VBoxContainer/Main/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -107,17 +138,16 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_default_cursor_shape = 2
 theme = ExtResource("2_quj2b")
-theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_7hgj7")
-theme_override_styles/hover = SubResource("StyleBoxTexture_7pn5k")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_7hgj7")
-theme_override_styles/normal = SubResource("StyleBoxTexture_7pn5k")
 toggle_mode = true
 action_mode = 0
 button_group = ExtResource("1_hubp2")
-icon_alignment = 1
+texture_normal = SubResource("AtlasTexture_wxdyq")
+texture_pressed = SubResource("AtlasTexture_pmu5o")
+texture_hover = SubResource("AtlasTexture_wxdyq")
+texture_disabled = SubResource("AtlasTexture_j0v35")
 metadata/Category = "Consumable"
 
-[node name="WeaponButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
+[node name="WeaponButton" type="TextureButton" parent="MarginContainer/VBoxContainer/Main/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -125,17 +155,16 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_default_cursor_shape = 2
 theme = ExtResource("2_quj2b")
-theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_7hgj7")
-theme_override_styles/hover = SubResource("StyleBoxTexture_7pn5k")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_7hgj7")
-theme_override_styles/normal = SubResource("StyleBoxTexture_7pn5k")
 toggle_mode = true
 action_mode = 0
 button_group = ExtResource("1_hubp2")
-icon_alignment = 1
+texture_normal = SubResource("AtlasTexture_vxvfv")
+texture_pressed = SubResource("AtlasTexture_8j5ir")
+texture_hover = SubResource("AtlasTexture_vxvfv")
+texture_disabled = SubResource("AtlasTexture_fhlqs")
 metadata/Category = "Weapon"
 
-[node name="QuestButton" type="Button" parent="MarginContainer/VBoxContainer/Main/Buttons"]
+[node name="QuestButton" type="TextureButton" parent="MarginContainer/VBoxContainer/Main/Buttons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -143,14 +172,13 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_default_cursor_shape = 2
 theme = ExtResource("2_quj2b")
-theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_7hgj7")
-theme_override_styles/hover = SubResource("StyleBoxTexture_7pn5k")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_7hgj7")
-theme_override_styles/normal = SubResource("StyleBoxTexture_7pn5k")
 toggle_mode = true
 action_mode = 0
 button_group = ExtResource("1_hubp2")
-icon_alignment = 1
+texture_normal = SubResource("AtlasTexture_0t70l")
+texture_pressed = SubResource("AtlasTexture_xd8vd")
+texture_hover = SubResource("AtlasTexture_0t70l")
+texture_disabled = SubResource("AtlasTexture_glaph")
 metadata/Category = "Quest"
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/Main"]
