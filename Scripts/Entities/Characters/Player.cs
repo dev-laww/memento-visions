@@ -9,6 +9,7 @@ using System.CommandLine.IO;
 using Game.UI.Screens;
 using Game.UI.Common;
 using System.Linq;
+using Game.Common.Models;
 
 namespace Game.Entities;
 
@@ -248,6 +249,9 @@ public partial class Player : Entity
 
             text.Finished += text.QueueFree;
         };
+
+        SaveManager.SetLevel(StatsManager.Level);
+        SaveManager.SetExperience(StatsManager.Experience);
     }
 
     private void OnComboReset()
