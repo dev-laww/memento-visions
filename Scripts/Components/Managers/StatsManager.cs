@@ -345,7 +345,7 @@ public partial class StatsManager : Node
         }
     }
 
-    private static float CalculateRequiredExperience(float lvl) => (float)(lvl * 4 + Math.Pow(lvl, 1.8) + 10);
+    public static float CalculateRequiredExperience(float lvl) => (float)(lvl * 4 + Math.Pow(lvl, 1.8) + 10);
     public static float CalculateExperienceReward(float lvl) => (float)(lvl * 2 + Math.Pow(lvl, 1.2));
 
     public override string[] _GetConfigurationWarnings()

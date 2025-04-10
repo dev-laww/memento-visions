@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using System.Net;
 using Game.Autoload;
 using Game.Common;
 using Game.Components;
@@ -25,6 +27,7 @@ public partial class HeadsUpDisplay : Overlay
     [Node] private Panel quickUseSlot;
     [Node] private TextureRect quickUseIcon;
     [Node] private Label quickUseLabel;
+    [Node] private ProgressBar experienceBar;
 
     private Player player;
 
@@ -50,6 +53,8 @@ public partial class HeadsUpDisplay : Overlay
         GetTree().CreateTimer(0.1f).Timeout += () =>
         {
             healthBar.Initialize(player.StatsManager);
+            experienceBar.Value = player.StatsManager.Experience;
+            experienceBar.MaxValue = StatsManager.CalculateRequiredExperience(player.StatsManager.Level + 1);
         };
 
         healthParticlesBackground.Emitting = false;
@@ -59,6 +64,7 @@ public partial class HeadsUpDisplay : Overlay
         player.StatsManager.StatIncreased += OnStatIncreased;
         player.StatsManager.AttackReceived += OnAttackReceived;
         player.StatsManager.LevelUp += OnLevelUp;
+        player.StatsManager.StatChanged += OnStatChanged;
         PlayerInventoryManager.Updated += OnInventoryUpdated;
         GameEvents.Instance.QuickUseSlotUpdated += UpdateQuickUseSlot;
 
@@ -95,6 +101,17 @@ public partial class HeadsUpDisplay : Overlay
         healTween.TweenProperty(healthGlow, "modulate", Colors.Transparent, 0.25f);
     }
 
+    private void OnStatChanged(float value, StatsType type)
+    {
+        if (type != StatsType.Experience) return;
+
+        var tween = CreateTween();
+
+        tween.TweenProperty(experienceBar, "value", value, 0.25f)
+            .SetTrans(Tween.TransitionType.Cubic)
+            .SetEase(Tween.EaseType.InOut);
+    }
+
     private void OnAttackReceived(Attack attack)
     {
         if (attack.Damage <= player.StatsManager.Defense) return;
@@ -102,9 +119,10 @@ public partial class HeadsUpDisplay : Overlay
         animationPlayer.Play(HIT);
     }
 
-    private void OnLevelUp(float _)
+    private void OnLevelUp(float level)
     {
         healthBar.Initialize(player.StatsManager);
+        experienceBar.MaxValue = StatsManager.CalculateRequiredExperience(level + 1);
     }
 
     private void OnInventoryUpdated(ItemGroup group)

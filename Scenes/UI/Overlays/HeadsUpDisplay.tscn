@@ -1,15 +1,32 @@
-[gd_scene load_steps=21 format=3 uid="uid://c6kt3qbs62e4i"]
+[gd_scene load_steps=24 format=3 uid="uid://c6kt3qbs62e4i"]
 
 [ext_resource type="PackedScene" uid="uid://dp6ardmi6lci5" path="res://Scenes/UI/Common/HealthBar.tscn" id="1_4jtnt"]
 [ext_resource type="Script" uid="uid://xxp0gu26j6fh" path="res://Scripts/UI/Overlays/HeadsUpDisplay.cs" id="1_6jntk"]
 [ext_resource type="Script" uid="uid://32sdfvnmihf2" path="res://Scripts/Components/PassThrough.cs" id="2_ay0d6"]
 [ext_resource type="Texture2D" uid="uid://md5ydpqy2onr" path="res://assets/effects/heal.png" id="4_m4wbm"]
+[ext_resource type="Texture2D" uid="uid://d3han3ldfj03h" path="res://assets/ui/experience_bar.png" id="4_rnii0"]
 [ext_resource type="Texture2D" uid="uid://bhg24ad0ut6dq" path="res://assets/ui/slot.png" id="5_44j1a"]
 [ext_resource type="Shader" uid="uid://bxmmk6qfkcuks" path="res://resources/shaders/vignette.gdshader" id="5_fe11v"]
 [ext_resource type="PackedScene" uid="uid://cn1hxu3k3xbni" path="res://Scenes/UI/Common/CommonMinimap.tscn" id="5_rnii0"]
 [ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/items/temp/Item5.png" id="6_rnii0"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="7_1gu0f"]
 [ext_resource type="LabelSettings" uid="uid://cktp08gmb038p" path="res://resources/misc/normal-text.tres" id="8_nhdt0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rnii0"]
+texture = ExtResource("4_rnii0")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(0, 0, 86, 5)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1gu0f"]
+texture = ExtResource("4_rnii0")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(0, 5, 86, 5)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b5sbs"]
 texture = ExtResource("5_44j1a")
@@ -134,7 +151,17 @@ layout_mode = 2
 size_flags_horizontal = 0
 mouse_filter = 2
 
-[node name="Control" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("5_rnii0")]
+[node name="ExperienceBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(190, 5)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/background = SubResource("StyleBoxTexture_rnii0")
+theme_override_styles/fill = SubResource("StyleBoxTexture_1gu0f")
+value = 50.0
+show_percentage = false
+
+[node name="Minimap" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("5_rnii0")]
 layout_mode = 2
 mouse_filter = 2
 
