@@ -340,7 +340,7 @@ position = Vector2(162, 58)
 visible = false
 
 [node name="Idle" parent="Player/Center" index="0"]
-frame = 3
+frame = 2
 
 [node name="Chief" parent="." instance=ExtResource("10_sx5dq")]
 position = Vector2(678, 489)
@@ -425,6 +425,7 @@ autoplay = "in"
 
 [node name="backgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("18_ete42")
+autoplay = true
 bus = &"Music"
 
 [connection signal="timeout" from="Timer" to="." method="ShowScreenMarker"]

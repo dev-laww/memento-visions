@@ -1571,7 +1571,7 @@ material = ExtResource("1_edvum")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 2
+frame = 1
 script = ExtResource("18_8kgvc")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1655,4 +1655,5 @@ position = Vector2(626, 30)
 [node name="sfxBackground" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("35_ogyjm")
+autoplay = true
 bus = &"Music"
