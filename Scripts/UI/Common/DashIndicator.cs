@@ -26,7 +26,7 @@ public partial class DashIndicator : TextureProgressBar
         valueTween?.KillIfValid();
         valueTween = CreateTween();
 
-        valueTween.TweenProperty(this, "value", 100, Mathf.Max(0f, duration - 1f)).From(0f)
+        valueTween.TweenProperty(this, "value", 100, Mathf.Max(0f, duration)).From(0f)
             .SetEase(Tween.EaseType.InOut)
             .SetTrans(Tween.TransitionType.Cubic);
         valueTween.TweenCallback(Callable.From(OnTweenFinished));
