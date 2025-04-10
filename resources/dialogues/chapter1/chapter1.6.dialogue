@@ -1,8 +1,12 @@
 ~ start
-Alex: Mayor? You're here? Not in the Everfield City Courtyard?!
-Mayor: Alex... How did you know I would be in Everfield City Courtyard?
-Mayor: Oh! I see.
-Mayor: (Kevin might have spilled the beans already. Just as expected.)
+Mang Rudy: Mayor?
+Mayor: Rudy...
+Mang Rudy: What are you doing here?
+Mayor: You should've known better, [wait=.5]Rudy.
+Mang Rudy: Mayor![wait=.5]
+Alex: Mayor!
+Mayor: Alex...? How did you know I would be in Everfield City Courtyard?
+Mayor: [wait=.5]Hmm... (Kevin might have spilled the beans already. Just as expected.)
 Alex: Mayor... what's that you are holding?
 Mayor: Oh this? This... is none of your business.
 Alex: There are all sorts of going on here while you, Mayor, you sure seem to be pretty busy doing something instead of helping the people.
@@ -14,4 +18,5 @@ Mayor: Nothing, I'll take my leave now.
 Mayor: Seems like we'll be meeting up later pretty soon. But first-
 Mayor: Can you handle this?
 #Mayor disappears
+#Aswang appears around Mayor Rudy and you try to protect him
 => END

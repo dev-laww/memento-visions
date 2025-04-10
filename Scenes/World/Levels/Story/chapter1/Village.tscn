@@ -46,8 +46,8 @@ Type = 2
 Description = "Look for the Mayor if he's in the vicinity or not."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xh25p"]
-radius = 19.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_akscv"]
+size = Vector2(140, 42.2307)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1dpy7"]
 size = Vector2(177.25, 20)
@@ -192,7 +192,7 @@ position = Vector2(1, -32)
 [node name="InteractionUI" parent="StoryTeller/DialogueTrigger2/Node2D" instance=ExtResource("14_2eimf")]
 
 [node name="Rudy" parent="." instance=ExtResource("16_r45d3")]
-position = Vector2(1312, 263)
+position = Vector2(1042, 492)
 
 [node name="QuestTrigger" type="Area2D" parent="Rudy"]
 scale = Vector2(0.762353, 1.04765)
@@ -218,7 +218,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="InteractionUI" parent="Rudy/QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
 
 [node name="Mayor" parent="." instance=ExtResource("16_r45d3")]
-position = Vector2(1229, 516)
+position = Vector2(937, 491)
 
 [node name="QuestTrigger" type="Area2D" parent="Mayor"]
 scale = Vector2(1, 0.994537)
@@ -235,8 +235,8 @@ ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mayor/QuestTrigger"]
-position = Vector2(0, -8)
-shape = SubResource("CircleShape2D_xh25p")
+position = Vector2(51, -10.0549)
+shape = SubResource("RectangleShape2D_akscv")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Mayor/QuestTrigger"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=13 format=3 uid="uid://cv1uxwlv2liuj"]
+[gd_resource type="Resource" script_class="Quest" load_steps=16 format=3 uid="uid://cv1uxwlv2liuj"]
 
 [ext_resource type="Resource" uid="uid://ct2y0f318jxyf" path="res://resources/items/consumable/salabat.tres" id="1_eqwj1"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_nry1j"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_8obxu"]
 [ext_resource type="Resource" uid="uid://e5dmknfrsqko" path="res://resources/items/consumable/bibingka.tres" id="3_h5tfb"]
 [ext_resource type="Resource" uid="uid://cocs17ig06umk" path="res://resources/items/material/vampiric_claw.tres" id="4_d3x3p"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="6_ni2ta"]
 
 [sub_resource type="Resource" id="Resource_fo0qo"]
 script = ExtResource("2_8obxu")
@@ -43,13 +44,26 @@ Type = 2
 Description = "Head towards the Jeepney"
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
+[sub_resource type="Resource" id="Resource_2kphj"]
+script = ExtResource("6_ni2ta")
+Id = "enemy:aswang"
+Amount = 6
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_33q2f"]
+script = ExtResource("1_nry1j")
+Type = 3
+Description = "Defeat the Aswangs summoned by the Mayor while protecting Mang Rudy."
+Enemies = [SubResource("Resource_2kphj")]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
 [resource]
 script = ExtResource("1_vt2c2")
 Id = "quest:find_mayor"
 Title = "Mayor's Testimony"
 Ordered = false
 Description = "The Jeep dropped you off to another location instead of the Everfield City Courtyard. While exploring the area, you came across of what you are looking for-a who."
-objectives = [SubResource("Resource_qydlh"), SubResource("Resource_busxp"), SubResource("Resource_nry1j")]
+objectives = [SubResource("Resource_qydlh"), SubResource("Resource_busxp"), SubResource("Resource_nry1j"), SubResource("Resource_33q2f")]
 Experience = 35
 Items = [SubResource("Resource_fo0qo"), SubResource("Resource_4jl32"), SubResource("Resource_3aqh1")]
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

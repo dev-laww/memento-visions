@@ -1,10 +1,8 @@
 ~ start
-???: Hey! Youngster! Yeah you!
-Alex: Uhmmm... yes?
-???: My name is Rudy, you can call me Mang Rudy. I've been around here for more than you would know.
+Mang Rudy: Thank you. My name is Rudy, you can call me Mang Rudy. I've been around here for more than you would know.
 Mang Rudy: You seem to be the person in-charge of taking care of all this mess.
 Alex: That's right, I'm Alex Gutierrez. 
-Alex: Do you know the Mayor? From my perspective, you seem to be eavesdropping from our conversation.
+Alex: Do you know the Mayor? From my perspective, you seem to know the Mayor better than anyone else.
 Mang Rudy: I've known that person all my life, but now? I feel like, I do not know him anymore.
 - Why?
 - Any particular reason?
@@ -27,7 +25,7 @@ Alex: I see. I think I get it now. Thanks.
 Mang Rudy: Wait, you're leaving already?
 Alex: Yes, I need to stop him or else...
 Alex: He will destroy everthing.
-Mang Rudy: Okay... Just, be careful youngster! 
+Mang Rudy: Okay... Just, be careful! 
 Mang Rudy: Just head back to the Jeep, your next stop should be the Courtyard. This is where the Jeeps usually resides for a stop-over.
 Alex: Thanks, you too old man.
 do CurrentScene.setQuestTriggerOn()
