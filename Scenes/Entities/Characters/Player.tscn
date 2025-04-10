@@ -1,4 +1,4 @@
-[gd_scene load_steps=501 format=3 uid="uid://bwreypn7kqmpw"]
+[gd_scene load_steps=502 format=3 uid="uid://bwreypn7kqmpw"]
 
 [ext_resource type="Script" uid="uid://bbhesrdqhrnnb" path="res://Scripts/Entities/Characters/Player.cs" id="1_3hkqn"]
 [ext_resource type="PackedScene" uid="uid://c756ga8nth1ks" path="res://Scenes/Components/Managers/StatsManager.tscn" id="2_cqdhe"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://c6kt3qbs62e4i" path="res://Scenes/UI/Overlays/HeadsUpDisplay.tscn" id="14_c8fx8"]
 [ext_resource type="Texture2D" uid="uid://qelvcb3gkmb3" path="res://assets/entities/characters/player/sword_and_dagger.png" id="14_srhpj"]
 [ext_resource type="Texture2D" uid="uid://tflb423580f8" path="res://assets/entities/characters/player/whip.png" id="15_srhpj"]
+[ext_resource type="PackedScene" uid="uid://83s52vks6mbt" path="res://Scenes/UI/Common/DashIndicator.tscn" id="17_xqgt3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n7xh7"]
 radius = 9.0
@@ -7785,6 +7786,12 @@ CanDashWhileDashing = true
 DashSpeed = 150.0
 metadata/_custom_type_script = "uid://nuxtah4mmhg5"
 
+[node name="sfx" type="Node2D" parent="."]
+
+[node name="sfxDash" type="AudioStreamPlayer2D" parent="sfx"]
+unique_name_in_owner = true
+bus = &"SFX"
+
 [node name="HurtBox" type="Area2D" parent="." node_paths=PackedStringArray("StatsManager")]
 position = Vector2(0, -15)
 collision_layer = 2048
@@ -7859,8 +7866,24 @@ parameters/move/blend_position = Vector2(0, 0)
 parameters/sword_and_dagger/blend_position = Vector2(0, 0)
 parameters/whip/blend_position = Vector2(0, 0)
 
-[node name="sfx" type="Node2D" parent="."]
+[node name="DashContainer" type="HBoxContainer" parent="."]
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = 2.0
+offset_right = 3.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = 0
 
-[node name="sfxDash" type="AudioStreamPlayer2D" parent="sfx"]
+[node name="DashIndicator" parent="DashContainer" instance=ExtResource("17_xqgt3")]
 unique_name_in_owner = true
-bus = &"SFX"
+layout_mode = 2
+mouse_filter = 2

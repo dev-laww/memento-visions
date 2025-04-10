@@ -18,8 +18,6 @@ public partial class HeadsUpDisplay : Overlay
     private const string HIT = "hit";
 
     [Node] private HealthBar healthBar;
-    [Node] private HBoxContainer dashContainer;
-    [Node] private TextureProgressBar dashIndicator;
     [Node] private GpuParticles2D healthParticlesForeground;
     [Node] private GpuParticles2D healthParticlesBackground;
     [Node] private TextureRect healthGlow;
@@ -61,16 +59,8 @@ public partial class HeadsUpDisplay : Overlay
         player.StatsManager.StatIncreased += OnStatIncreased;
         player.StatsManager.AttackReceived += OnAttackReceived;
         player.StatsManager.LevelUp += OnLevelUp;
-        player.VelocityManager.Dashed += OnDash;
         PlayerInventoryManager.Updated += OnInventoryUpdated;
         GameEvents.Instance.QuickUseSlotUpdated += UpdateQuickUseSlot;
-
-        dashIndicator.Value = 100;
-
-        for (var i = 1; i < player.VelocityManager.TimesCanDash; i++)
-        {
-            dashContainer.AddChild(dashIndicator.Duplicate());
-        }
 
         var quickUseItem = PlayerInventoryManager.QuickSlotItem;
         var quickUseGroup = PlayerInventoryManager.GetItem(quickUseItem);
@@ -82,18 +72,6 @@ public partial class HeadsUpDisplay : Overlay
     {
         PlayerInventoryManager.Updated -= OnInventoryUpdated;
         GameEvents.Instance.QuickUseSlotUpdated -= UpdateQuickUseSlot;
-    }
-
-
-    private void OnDash(Vector2 _)
-    {
-        var indicators = dashContainer.GetChildrenOfType<DashIndicator>().Where(x => !x.Running).ToArray();
-
-        if (indicators.Length == 0) return;
-
-        var indicator = indicators.Last();
-
-        indicator.Start(player.VelocityManager.DashCoolDown);
     }
 
     private void OnStatIncreased(float _, StatsType type)

@@ -1,9 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://c6kt3qbs62e4i"]
+[gd_scene load_steps=21 format=3 uid="uid://c6kt3qbs62e4i"]
 
 [ext_resource type="PackedScene" uid="uid://dp6ardmi6lci5" path="res://Scenes/UI/Common/HealthBar.tscn" id="1_4jtnt"]
 [ext_resource type="Script" uid="uid://xxp0gu26j6fh" path="res://Scripts/UI/Overlays/HeadsUpDisplay.cs" id="1_6jntk"]
 [ext_resource type="Script" uid="uid://32sdfvnmihf2" path="res://Scripts/Components/PassThrough.cs" id="2_ay0d6"]
-[ext_resource type="PackedScene" uid="uid://83s52vks6mbt" path="res://Scenes/UI/Common/DashIndicator.tscn" id="3_k4xdi"]
 [ext_resource type="Texture2D" uid="uid://md5ydpqy2onr" path="res://assets/effects/heal.png" id="4_m4wbm"]
 [ext_resource type="Texture2D" uid="uid://bhg24ad0ut6dq" path="res://assets/ui/slot.png" id="5_44j1a"]
 [ext_resource type="Shader" uid="uid://bxmmk6qfkcuks" path="res://resources/shaders/vignette.gdshader" id="5_fe11v"]
@@ -133,18 +132,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(225, 10)
 layout_mode = 2
 size_flags_horizontal = 0
-mouse_filter = 2
-
-[node name="DashContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-mouse_filter = 2
-theme_override_constants/separation = 2
-
-[node name="DashIndicator" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/DashContainer" instance=ExtResource("3_k4xdi")]
-unique_name_in_owner = true
-layout_mode = 2
 mouse_filter = 2
 
 [node name="Control" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("5_rnii0")]

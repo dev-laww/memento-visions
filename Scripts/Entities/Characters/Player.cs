@@ -7,6 +7,8 @@ using Godot;
 using GodotUtilities;
 using System.CommandLine.IO;
 using Game.UI.Screens;
+using Game.UI.Common;
+using System.Linq;
 
 namespace Game.Entities;
 
@@ -22,6 +24,8 @@ public partial class Player : Entity
     [Node] private Timer comboResetTimer;
     [Node] private ResourcePreloader resourcePreloader;
     [Node] private AudioStreamPlayer2D sfxDash;
+    [Node] private HBoxContainer dashContainer;
+    [Node] private DashIndicator dashIndicator;
 
     [Node] public VelocityManager VelocityManager;
     [Node] public WeaponManager WeaponManager;
@@ -66,6 +70,7 @@ public partial class Player : Entity
         comboResetTimer.Timeout += OnComboReset;
         StatsManager.LevelUp += OnLevelUp;
         StatsManager.StatIncreased += OnStatIncreased;
+        VelocityManager.Dashed += OnDash;
 
         StateMachine.AddStates(Normal);
         StateMachine.AddStates(Attack, EnterAttack, ExitAttack);
@@ -77,6 +82,14 @@ public partial class Player : Entity
 
         StatsManager.SetLevel(data?.Level ?? 1);
         StatsManager.SetExperience(data?.Experience ?? 0);
+
+        dashIndicator.Value = 100;
+
+        for (var i = 1; i < VelocityManager.TimesCanDash; i++)
+        {
+            dashContainer.AddChild(dashIndicator.Duplicate());
+        }
+
     }
 
     public override void OnProcess(double delta)
@@ -256,6 +269,17 @@ public partial class Player : Entity
         });
 
         text.Finished += text.QueueFree;
+    }
+
+    private void OnDash(Vector2 _)
+    {
+        var indicators = dashContainer.GetChildrenOfType<DashIndicator>().Where(x => !x.Running).ToArray();
+
+        if (indicators.Length == 0) return;
+
+        var indicator = indicators.Last();
+
+        indicator.Start(VelocityManager.DashCoolDown);
     }
 
     #endregion
