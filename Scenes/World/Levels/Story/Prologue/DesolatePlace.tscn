@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://dj8wdwrvixxlp"]
+[gd_scene load_steps=43 format=4 uid="uid://dj8wdwrvixxlp"]
 
 [ext_resource type="Script" uid="uid://dudaew5h4f4vy" path="res://Scripts/World/Levels/Story/DesolatePlace.cs" id="1_b4cw0"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_8oxtl"]
@@ -24,6 +24,7 @@
 [ext_resource type="Resource" uid="uid://fnyq88n24woy" path="res://resources/dialogues/prologue/puzzle_door.dialogue" id="21_big75"]
 [ext_resource type="Resource" uid="uid://bb54w5sxnh122" path="res://resources/dialogues/prologue/prologue1.2.dialogue" id="22_ykjel"]
 [ext_resource type="Resource" uid="uid://duruvlye3dyyc" path="res://resources/dialogues/prologue/prologue1.4.dialogue" id="23_cnuhk"]
+[ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/sfx/music/chapter1_bgm.ogg" id="25_62ale"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5br0r"]
 radius = 17.0294
@@ -59,7 +60,7 @@ anim_offset_max = 1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2umdr"]
 size = Vector2(93, 14)
 
-[sub_resource type="Resource" id="Resource_1vh2t"]
+[sub_resource type="Resource" id="Resource_tnbyp"]
 script = ExtResource("19_8oxtl")
 Type = 2
 Description = "Investigate the Notebook"
@@ -68,7 +69,7 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 [sub_resource type="CircleShape2D" id="CircleShape2D_vvniv"]
 radius = 26.4764
 
-[sub_resource type="Resource" id="Resource_li52e"]
+[sub_resource type="Resource" id="Resource_6f01l"]
 script = ExtResource("19_8oxtl")
 Type = 2
 Description = "Investigate the Burned wooden chair"
@@ -80,7 +81,7 @@ radius = 17.8045
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_odju6"]
 size = Vector2(20, 11)
 
-[sub_resource type="Resource" id="Resource_jjc84"]
+[sub_resource type="Resource" id="Resource_rxg1s"]
 script = ExtResource("19_8oxtl")
 Type = 2
 Description = "Investigate the Photographs"
@@ -302,7 +303,7 @@ Mode = 1
 ShouldInteract = true
 InteractionLabel = "Investigate"
 DialogueResource = ExtResource("18_b4cw0")
-Objective = SubResource("Resource_1vh2t")
+Objective = SubResource("Resource_tnbyp")
 ObjectiveIndex = 1
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -338,7 +339,7 @@ Mode = 1
 ShouldInteract = true
 InteractionLabel = "Investigate"
 DialogueResource = ExtResource("22_ykjel")
-Objective = SubResource("Resource_li52e")
+Objective = SubResource("Resource_6f01l")
 ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -378,7 +379,7 @@ Mode = 1
 ShouldInteract = true
 InteractionLabel = "Investigate"
 DialogueResource = ExtResource("23_cnuhk")
-Objective = SubResource("Resource_jjc84")
+Objective = SubResource("Resource_rxg1s")
 ObjectiveIndex = 2
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -407,5 +408,11 @@ position = Vector2(1078, 326)
 libraries = {
 &"": SubResource("AnimationLibrary_52t3j")
 }
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("25_62ale")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
 
 [editable path="Player"]

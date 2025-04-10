@@ -1,4 +1,4 @@
-[gd_scene load_steps=191 format=4 uid="uid://d3dl8qe3i4hs5"]
+[gd_scene load_steps=192 format=4 uid="uid://d3dl8qe3i4hs5"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_edvum"]
 [ext_resource type="Script" uid="uid://cy5yn6ijpgu1n" path="res://Scripts/World/Levels/Story/Chapter1/EverfieldCity.cs" id="1_hf60o"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://cwus4c1b4vpr" path="res://Scenes/World/PuzzleComponent/PressurePlate.tscn" id="28_ro4io"]
 [ext_resource type="PackedScene" uid="uid://hl4nthtc26ui" path="res://Scenes/World/PuzzleComponent/Movable.tscn" id="29_55v40"]
 [ext_resource type="PackedScene" uid="uid://dtqgojjodmope" path="res://Scenes/World/PuzzleComponent/StreetLight.tscn" id="29_ro4io"]
+[ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/sfx/music/chapter1_bgm.ogg" id="35_ogyjm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kycha"]
 radius = 25.02
@@ -1570,6 +1571,7 @@ material = ExtResource("1_edvum")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
+frame = 2
 script = ExtResource("18_8kgvc")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1652,3 +1654,5 @@ position = Vector2(626, 30)
 
 [node name="sfxBackground" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("35_ogyjm")
+bus = &"Music"

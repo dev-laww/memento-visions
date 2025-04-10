@@ -157,6 +157,7 @@ public partial class Player : Entity
         UpdateAttackBlendPositions();
 
         WeaponManager.Animate(combo);
+        WeaponManager.PlayAttackSound();
     }
 
     public void ExitAttack()

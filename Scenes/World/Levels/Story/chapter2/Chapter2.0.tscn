@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://du6gsft33r8su"]
+[gd_scene load_steps=70 format=4 uid="uid://du6gsft33r8su"]
 
 [ext_resource type="Script" uid="uid://dana374n4d6mt" path="res://Scripts/World/Levels/Story/Chapter2/SmallVille.cs" id="1_ej8wk"]
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_x2e5n"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="17_trg5q"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="18_x263p"]
 [ext_resource type="Resource" uid="uid://bhvvo64xqww4i" path="res://resources/dialogues/chapter2/chapter2.2.dialogue" id="19_kpj6m"]
+[ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/sfx/music/chapter1_bgm.ogg" id="22_nj1is"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nj1is"]
 
@@ -485,3 +486,9 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 position = Vector2(0, -1)
 polygon = PackedVector2Array(-275, 343, -266, 1310, 1075, 1272, 1075, 255, -309, 321, 1087, 224, 1106, 1303, -335, 1341, -306, 327)
+
+[node name="backgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_nj1is")
+autoplay = true
+bus = &"Music"
+parameters/looping = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=4 uid="uid://v06x46jch2vm"]
+[gd_scene load_steps=130 format=4 uid="uid://v06x46jch2vm"]
 
 [ext_resource type="Script" uid="uid://dcmogr8vudmpc" path="res://Scripts/World/Levels/Story/SchoolOutdoor.cs" id="1_2ho0r"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_r2wrx"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="22_5n0qf"]
 [ext_resource type="Resource" uid="uid://bj8l78qd3fsks" path="res://resources/dialogues/prologue/prologue1.7.dialogue" id="23_5jfbt"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="24_sqsyd"]
+[ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/sfx/music/chapter1_bgm.ogg" id="25_2ho0r"]
 [ext_resource type="Resource" uid="uid://cqqlth0pruv27" path="res://resources/dialogues/prologue/prologue1.5.dialogue" id="26_r2wrx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cymrg"]
@@ -837,60 +838,60 @@ position = Vector2(770, 1648)
 
 [node name="StatsManager" parent="Enemies/Aswang3" index="5"]
 Level = 3.0
-MaxHealth = 288.675
-Defense = 18.5135
-Damage = 44.5885
+MaxHealth = 334.9
+Defense = 24.6847
+Damage = 52.7847
 
 [node name="SmoothAnimatedSprite2D" parent="Enemies/Aswang3" index="12"]
-frame = 2
+frame = 1
 
 [node name="Aswang4" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(185, 1619)
 
 [node name="StatsManager" parent="Enemies/Aswang4" index="5"]
 Level = 3.0
-MaxHealth = 288.675
-Defense = 18.5135
-Damage = 44.5885
+MaxHealth = 334.9
+Defense = 24.6847
+Damage = 52.7847
 
 [node name="SmoothAnimatedSprite2D" parent="Enemies/Aswang4" index="12"]
-frame = 2
+frame = 1
 
 [node name="Aswang5" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(387, 316)
 
 [node name="StatsManager" parent="Enemies/Aswang5" index="5"]
 Level = 2.0
-MaxHealth = 217.446
-Defense = 8.88687
-Damage = 31.4852
+MaxHealth = 239.928
+Defense = 11.8492
+Damage = 35.3136
 
 [node name="SmoothAnimatedSprite2D" parent="Enemies/Aswang5" index="12"]
-frame = 2
+frame = 1
 
 [node name="Aswang6" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(637, 359)
 
 [node name="StatsManager" parent="Enemies/Aswang6" index="5"]
 Level = 2.0
-MaxHealth = 217.446
-Defense = 8.88687
-Damage = 31.4852
+MaxHealth = 239.928
+Defense = 11.8492
+Damage = 35.3136
 
 [node name="SmoothAnimatedSprite2D" parent="Enemies/Aswang6" index="12"]
-frame = 2
+frame = 1
 
 [node name="Aswang8" parent="Enemies" instance=ExtResource("10_xkjgd")]
 position = Vector2(475, 948)
 
 [node name="StatsManager" parent="Enemies/Aswang8" index="5"]
 Level = 2.0
-MaxHealth = 217.446
-Defense = 8.88687
-Damage = 31.4852
+MaxHealth = 239.928
+Defense = 11.8492
+Damage = 35.3136
 
 [node name="SmoothAnimatedSprite2D" parent="Enemies/Aswang8" index="12"]
-frame = 2
+frame = 1
 
 [node name="Player" parent="." instance=ExtResource("11_6kbwn")]
 position = Vector2(117, 60)
@@ -1112,7 +1113,7 @@ material = ExtResource("3_r0s03")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 2
+frame = 1
 script = ExtResource("21_uhybl")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
@@ -1165,6 +1166,10 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="sfxBackground" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("25_2ho0r")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
 
 [editable path="Enemies/Aswang3"]
 [editable path="Enemies/Aswang4"]

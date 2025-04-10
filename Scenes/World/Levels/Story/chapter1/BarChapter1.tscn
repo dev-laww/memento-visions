@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://ciqiplx11424"]
+[gd_scene load_steps=23 format=4 uid="uid://ciqiplx11424"]
 
 [ext_resource type="Script" uid="uid://bmr5usqox5f0h" path="res://Scripts/World/Levels/Story/Bar.cs" id="1_7pkig"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="2_cgm6k"]
@@ -16,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://c82r84uxq7lxc" path="res://resources/dialogues/chapter1/Chapter1.0.dialogue" id="14_7pkig"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_jtnov"]
 [ext_resource type="PackedScene" uid="uid://dgqrvixy2ocww" path="res://Scenes/Entities/Characters/BlackSmith.tscn" id="16_cdpoc"]
+[ext_resource type="AudioStream" uid="uid://b6msi8vaubfy8" path="res://assets/sfx/music/bar_bgm.ogg" id="17_cgm6k"]
 
 [sub_resource type="Environment" id="Environment_71mkv"]
 background_mode = 3
@@ -154,3 +155,5 @@ position = Vector2(271, 258)
 
 [node name="sfxBar" type="AudioStreamPlayer2D" parent="sfx"]
 unique_name_in_owner = true
+stream = ExtResource("17_cgm6k")
+bus = &"Music"

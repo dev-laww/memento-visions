@@ -91,11 +91,14 @@ text = "Quit"
 [node name="sfxClick" type="AudioStreamPlayer2D" parent="sfx"]
 unique_name_in_owner = true
 stream = ExtResource("6_t0flu")
+bus = &"UI"
 
 [node name="sfxOpen" type="AudioStreamPlayer2D" parent="sfx"]
 unique_name_in_owner = true
 stream = ExtResource("7_7w108")
+bus = &"UI"
 
 [node name="sfxClose" type="AudioStreamPlayer2D" parent="sfx"]
 unique_name_in_owner = true
 stream = ExtResource("8_c46qs")
+bus = &"UI"

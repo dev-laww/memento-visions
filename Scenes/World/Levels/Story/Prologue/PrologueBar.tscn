@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://3td8x8h36elv"]
+[gd_scene load_steps=30 format=4 uid="uid://3td8x8h36elv"]
 
 [ext_resource type="Script" uid="uid://bw7smwgpceo61" path="res://Scripts/World/Levels/Story/PrologueBar.cs" id="1_h8tdj"]
 [ext_resource type="Script" uid="uid://d3vvbqw6ln6if" path="res://Scripts/UI/Screens/Cinematic.cs" id="2_ete42"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="15_v1p6k"]
 [ext_resource type="TileSet" uid="uid://grwoctw4gvjl" path="res://resources/tilesets/bar/wall.tres" id="16_huina"]
 [ext_resource type="TileSet" uid="uid://dvd6ajqdt1f52" path="res://resources/tilesets/bar/small-props.tres" id="17_ehnjy"]
+[ext_resource type="AudioStream" uid="uid://b6msi8vaubfy8" path="res://assets/sfx/music/bar_bgm.ogg" id="18_ete42"]
 
 [sub_resource type="Environment" id="Environment_71mkv"]
 background_mode = 3
@@ -338,6 +339,9 @@ position = Vector2(162, 58)
 [node name="HeadsUpDisplay" parent="Player" index="2"]
 visible = false
 
+[node name="Idle" parent="Player/Center" index="0"]
+frame = 3
+
 [node name="Chief" parent="." instance=ExtResource("10_sx5dq")]
 position = Vector2(678, 489)
 
@@ -418,6 +422,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_ylvaq")
 }
 autoplay = "in"
+
+[node name="backgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_ete42")
+bus = &"Music"
 
 [connection signal="timeout" from="Timer" to="." method="ShowScreenMarker"]
 

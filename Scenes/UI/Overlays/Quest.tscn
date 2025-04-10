@@ -178,11 +178,14 @@ x100 xp"
 [node name="sfxClick" type="AudioStreamPlayer2D" parent="sfx"]
 unique_name_in_owner = true
 stream = ExtResource("6_kwblb")
+bus = &"UI"
 
 [node name="sfxOpen" type="AudioStreamPlayer2D" parent="sfx"]
 unique_name_in_owner = true
 stream = ExtResource("7_6mjat")
+bus = &"UI"
 
 [node name="sfxClose" type="AudioStreamPlayer2D" parent="sfx"]
 unique_name_in_owner = true
 stream = ExtResource("8_lh52w")
+bus = &"UI"

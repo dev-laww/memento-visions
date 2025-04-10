@@ -494,11 +494,14 @@ text = "Quick Use
 [node name="sfxClick" type="AudioStreamPlayer2D" parent="sfx"]
 unique_name_in_owner = true
 stream = ExtResource("10_qahny")
+bus = &"UI"
 
 [node name="sfxOpen" type="AudioStreamPlayer2D" parent="sfx"]
 unique_name_in_owner = true
 stream = ExtResource("11_grann")
+bus = &"UI"
 
 [node name="sfxClose" type="AudioStreamPlayer2D" parent="sfx"]
 unique_name_in_owner = true
 stream = ExtResource("12_w7dcp")
+bus = &"UI"

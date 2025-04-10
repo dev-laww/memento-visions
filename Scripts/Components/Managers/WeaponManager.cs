@@ -92,6 +92,11 @@ public partial class WeaponManager : Node
 
         Log.Debug($"Unequipped {Weapon}");
     }
+    
+    public void PlayAttackSound()
+    {
+        WeaponComponent?.PlayAttackSound();
+    }
 
     public void Animate(int combo)
     {

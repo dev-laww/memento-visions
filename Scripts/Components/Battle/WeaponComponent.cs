@@ -76,6 +76,14 @@ public partial class WeaponComponent : Node2D
         animationTree.Set("parameters/animate/blend_position", blendPosition);
     }
 
+    public void PlayAttackSound()
+    {
+        if (attackSfx?.Stream != null)
+        {
+            attackSfx.Play();
+        }
+    }
+
     public override void _Ready()
     {
         var hitBoxes = GetChildren().OfType<HitBox>();
