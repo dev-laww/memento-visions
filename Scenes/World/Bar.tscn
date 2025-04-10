@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://d0qr3o1nxmcpe"]
+[gd_scene load_steps=21 format=4 uid="uid://d0qr3o1nxmcpe"]
 
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="1_28rab"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="1_no76d"]
@@ -16,8 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://defbwilwt3lnr" path="res://Scenes/Entities/Characters/Witch.tscn" id="13_1awp1"]
 [ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="14_4di4u"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_kpm1l"]
-[ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="17_kpm1l"]
-[ext_resource type="Resource" uid="uid://b6asdxt3botpa" path="res://resources/dialogues/prologue/prologue0.0.dialogue" id="18_e5pbf"]
 
 [sub_resource type="Environment" id="Environment_71mkv"]
 background_mode = 3
@@ -34,8 +32,6 @@ agent_radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t4i44"]
 radius = 28.0179
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_xlj0l"]
 
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
@@ -188,16 +184,3 @@ position = Vector2(508, 108)
 
 [node name="Dummy4" parent="." instance=ExtResource("11_cu4de")]
 position = Vector2(739, 447)
-
-[node name="DialogueTrigger" type="Area2D" parent="."]
-position = Vector2(-170, -264)
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("17_kpm1l")
-DialogueResource = ExtResource("18_e5pbf")
-metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueTrigger"]
-position = Vector2(303, 340)
-shape = SubResource("CircleShape2D_xlj0l")
-debug_color = Color(0.88, 0.525, 0.898, 0.42)
