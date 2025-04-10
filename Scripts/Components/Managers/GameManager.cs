@@ -38,10 +38,15 @@ public partial class GameManager : Node
     public override void _Ready()
     {
         instance = this;
-        if (!showStartScreen && OS.IsDebugBuild()) return;
 
-        currentScene.GetChildren().ToList().ForEach(c => c.QueueFree());
-        var startScreen = resourcePreloader.GetResource<PackedScene>("StartScreen").Instantiate();
+        if (!showStartScreen && OS.IsDebugBuild())
+        {
+            var lobby = resourcePreloader.InstanceSceneOrNull<Bar>();
+            currentScene.AddChild(lobby);
+            return;
+        }
+
+        var startScreen = resourcePreloader.InstanceSceneOrNull<Start>();
         currentScene.AddChild(startScreen);
     }
 

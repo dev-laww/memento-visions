@@ -6,11 +6,8 @@
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_jd26h")
-showStartScreen = true
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
-resources = [PackedStringArray("StartScreen"), [ExtResource("2_xr7b5")]]
+resources = [PackedStringArray("Bar", "Start"), [ExtResource("3_kln2b"), ExtResource("2_xr7b5")]]
 
 [node name="CurrentScene" type="Node" parent="."]
-
-[node name="Bar" parent="CurrentScene" instance=ExtResource("3_kln2b")]

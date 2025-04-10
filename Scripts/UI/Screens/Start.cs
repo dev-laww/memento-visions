@@ -7,8 +7,6 @@ namespace Game.UI.Screens;
 [Scene]
 public partial class Start : CanvasLayer
 {
-    [Node] private Button button;
-
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
@@ -16,12 +14,12 @@ public partial class Start : CanvasLayer
         WireNodes();
     }
 
-    public override void _Ready()
+    public override void _Input(InputEvent @event)
     {
-        button.Pressed += () =>
-        {
-            GameManager.ChangeScene("res://Scenes/World/Bar.tscn");
-            button.Disabled = true;
-        };
+        if (@event is InputEventMouseMotion)
+            return;
+
+        GameManager.ChangeScene("res://Scenes/World/Bar.tscn");
+        GetViewport().SetInputAsHandled();
     }
 }
