@@ -1516,7 +1516,6 @@ navigation_polygon = SubResource("NavigationPolygon_lk617")
 navigation_polygon = SubResource("NavigationPolygon_525ri")
 
 [node name="TransitionArea" type="Area2D" parent="."]
-unique_name_in_owner = true
 position = Vector2(-375, 1244)
 collision_layer = 0
 collision_mask = 4
@@ -1591,7 +1590,6 @@ position = Vector2(0, -32)
 [node name="InteractionUI" parent="StoryTeller/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
 [node name="Chest" parent="." instance=ExtResource("27_7ym34")]
-unique_name_in_owner = true
 visible = false
 position = Vector2(57, 452)
 Loot = ExtResource("24_7ym34")
@@ -1620,7 +1618,6 @@ position = Vector2(-113, 59)
 position = Vector2(5, 59)
 
 [node name="TorchSequence" parent="." instance=ExtResource("28_e2cbw")]
-unique_name_in_owner = true
 position = Vector2(74, 421)
 
 [node name="Light" parent="TorchSequence" instance=ExtResource("29_ro4io")]
@@ -1638,8 +1635,7 @@ position = Vector2(-108, 165)
 [node name="Player" parent="." instance=ExtResource("12_hf60o")]
 position = Vector2(626, 30)
 
-[node name="sfxBackground" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("35_ogyjm")
 autoplay = true
 bus = &"Music"

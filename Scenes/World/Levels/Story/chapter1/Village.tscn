@@ -42,7 +42,7 @@ size = Vector2(177.25, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qboe2"]
 size = Vector2(55.25, 21.25)
 
-[sub_resource type="Resource" id="Resource_nry1j"]
+[sub_resource type="Resource" id="Resource_16dhs"]
 script = ExtResource("19_hl2f5")
 Type = 2
 Description = "Head towards the Jeepney"
@@ -299,7 +299,7 @@ border_size = 256.0
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="Resource" id="Resource_qydlh"]
+[sub_resource type="Resource" id="Resource_hl2f5"]
 script = ExtResource("19_hl2f5")
 Type = 2
 Description = "Look for the Mayor if he's in the vicinity or not."
@@ -308,7 +308,7 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 [sub_resource type="CircleShape2D" id="CircleShape2D_akscv"]
 radius = 44.6608
 
-[sub_resource type="Resource" id="Resource_ni2ta"]
+[sub_resource type="Resource" id="Resource_3jm44"]
 script = ExtResource("19_hl2f5")
 Type = 2
 Description = "Talk to Rudy about what happen"
@@ -477,7 +477,7 @@ script = ExtResource("6_r45d3")
 Quest = ExtResource("7_tjaeu")
 Mode = 1
 ShouldInteract = false
-Objective = SubResource("Resource_nry1j")
+Objective = SubResource("Resource_16dhs")
 ObjectiveIndex = 3
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -505,6 +505,7 @@ bus = &"Music"
 parameters/looping = true
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
+visible = false
 z_index = 1000
 color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(739, 493, 723, 729, 510, 736, 516, 988, 1405, 967, 1398, 620, 1283, 554, 1278, 492, 1050, 482)
@@ -694,7 +695,7 @@ Mode = 1
 ShouldInteract = true
 InteractionLabel = "Interact"
 DialogueResource = ExtResource("27_3jm44")
-Objective = SubResource("Resource_qydlh")
+Objective = SubResource("Resource_hl2f5")
 ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -727,7 +728,7 @@ Mode = 1
 ShouldInteract = true
 InteractionLabel = "Interact"
 DialogueResource = ExtResource("30_hl2f5")
-Objective = SubResource("Resource_ni2ta")
+Objective = SubResource("Resource_3jm44")
 ObjectiveIndex = 2
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
