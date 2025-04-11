@@ -5,4 +5,5 @@ Alex: Doesn't seem like it... That mysterious guy-[wait=.5]Kevin,[wait=.5] might
 Alex: The Storyteller should be here, I think.
 Alex: Let's see If I can find him.
 Alex: Maybe I can gather some clues from him about this place.
+do CurrentScene.mayorMarker.Toggle(true)
 => END

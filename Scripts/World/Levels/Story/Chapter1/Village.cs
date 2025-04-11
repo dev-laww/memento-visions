@@ -1,5 +1,8 @@
+using System;
+using Game.Autoload;
 using Godot;
 using Game.Components;
+using Game.Entities;
 using Game.World.Puzzle;
 using GodotUtilities;
 
@@ -14,7 +17,9 @@ public partial class Village : BaseLevel
     [Node] private Chest Chest, Chest2;
     [Node] private LeverManager LeverManager;
     [Node] private TorchPuzzleManager LightPuzzle;
-
+    [Node] private Entity Rudy, Mayor;
+    [Node] private ScreenMarker mayorMarker;
+    [Node] private ResourcePreloader resourcePreloader;
     public override void _Notification(int what)
     {
         if (what == NotificationSceneInstantiated && !Engine.IsEditorHint())
@@ -25,7 +30,9 @@ public partial class Village : BaseLevel
     {
         base._Ready();
         QuestTrigger2.Monitoring = false;
-        TransitionArea.Monitoring = false;
+        TransitionArea.Toggle(false);
+        mayorMarker.Toggle(false);
+        Rudy.Visible = false;
         LeverManager.IsComplete += OnLeverPuzzleComplete;
         LightPuzzle.PuzzleSolved += OnLightPuzzleComplete;
     }
@@ -49,9 +56,38 @@ public partial class Village : BaseLevel
     {
         QuestTrigger2.Monitoring = true;
     }
-
-    public void setTransitionAreaOn()
+    
+    
+    public void StartCutscene()
     {
-        TransitionArea.Monitoring = true;
+        CinematicManager.StartCinematic();
+        MoveCameraTo(Rudy.GlobalPosition, 2f, () => { CinematicManager.EndCinematic(); });
+    }
+    public static void MoveCameraTo(Vector2 position, float duration, Action onComplete = null)
+    {
+        GameCamera.SetTargetPositionOverride(position);
+        var timer = GameCamera.Instance.GetTree().CreateTimer(duration);
+        timer.Timeout += () =>
+        {
+            onComplete?.Invoke();
+        };
+    }
+
+
+    public void Spawn()
+    {
+        for (var i = 0; i < 6; i++)
+        {
+            var aswang = resourcePreloader.InstanceSceneOrNull<Aswang>();
+            aswang.GlobalPosition = Rudy.GlobalPosition + new Vector2(0, 100) * MathUtil.RNG.RandDirection();
+
+            AddChild(aswang);
+            GD.Print(aswang.GlobalPosition);
+        }
+    }
+    public void SetMayorVisible()
+    {
+        Rudy.Visible = true;
+        Mayor.Visible = false;
     }
 }

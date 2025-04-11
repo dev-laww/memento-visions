@@ -29,5 +29,5 @@ Mang Rudy: Okay... Just, be careful!
 Mang Rudy: Just head back to the Jeep, your next stop should be the Courtyard. This is where the Jeeps usually resides for a stop-over.
 Alex: Thanks, you too old man.
 do CurrentScene.setQuestTriggerOn()
-do CurrentScene.setTransitionAreaOn()
+do CurrentScene.TransitionArea.Toggle(true)
 => END

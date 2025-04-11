@@ -1,4 +1,5 @@
 ~ start
+do CurrentScene.mayorMarker.Toggle(false)
 Mang Rudy: Mayor?
 Mayor: Rudy...
 Mang Rudy: What are you doing here?
@@ -18,5 +19,9 @@ Mayor: Nothing, I'll take my leave now.
 Mayor: Seems like we'll be meeting up later pretty soon. But first-
 Mayor: Can you handle this?
 #Mayor disappears
-#Aswang appears around Mayor Rudy and you try to protect him
+
+do CurrentScene.StartCutscene()
+do CurrentScene.SetMayorVisible()
+do CurrentScene.Spawn()
+
 => END
