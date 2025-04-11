@@ -1,12 +1,13 @@
-[gd_scene load_steps=192 format=4 uid="uid://d3dl8qe3i4hs5"]
+[gd_scene load_steps=196 format=4 uid="uid://d3dl8qe3i4hs5"]
 
 [ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_edvum"]
 [ext_resource type="Script" uid="uid://cy5yn6ijpgu1n" path="res://Scripts/World/Levels/Story/Chapter1/EverfieldCity.cs" id="1_hf60o"]
 [ext_resource type="TileSet" uid="uid://wuwsi02f3fft" path="res://resources/tilesets/intramuros.tres" id="2_gy48w"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_hn08j"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_pu5lx"]
-[ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="4_32qxv"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="5_hn08j"]
+[ext_resource type="PackedScene" uid="uid://b2x7rae18bw1f" path="res://Scenes/Entities/Characters/Paquito.tscn" id="6_5n2fm"]
+[ext_resource type="PackedScene" uid="uid://ti3n3gcv4rrd" path="res://Scenes/Entities/Characters/TikyoTiktilaok.tscn" id="6_fghhu"]
 [ext_resource type="Resource" uid="uid://cpgaa23upm6hk" path="res://resources/quests/Chapter1/aswang_hunt.tres" id="6_hf60o"]
 [ext_resource type="Resource" uid="uid://dubpfapg14rna" path="res://resources/quests/Chapter1/testimony.tres" id="8_7adkd"]
 [ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="8_516uf"]
@@ -14,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://dfhk5ud22nohe" path="res://resources/dialogues/chapter1/chapter1.3.dialogue" id="9_kycha"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="10_7adkd"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="10_grhu3"]
+[ext_resource type="PackedScene" uid="uid://hndxrbqjf4gi" path="res://Scenes/Entities/Characters/Manny.tscn" id="10_tjhma"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="11_dclhn"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="11_hn08j"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="12_hf60o"]
@@ -21,12 +23,15 @@
 [ext_resource type="Resource" uid="uid://d38r8diakp5jt" path="res://resources/dialogues/chapter1/chief3_npc.dialogue" id="13_8kgvc"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="14_5xymq"]
 [ext_resource type="Resource" uid="uid://btgac1rf6bqox" path="res://resources/dialogues/chapter1/chief6_npc.dialogue" id="14_8kgvc"]
+[ext_resource type="PackedScene" uid="uid://cfqs4wamur883" path="res://Scenes/Entities/Characters/DodongDaldal.tscn" id="14_roimx"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="15_2ke1t"]
 [ext_resource type="Resource" uid="uid://bvch8blxsmpmn" path="res://resources/dialogues/chapter1/chapter1.2.dialogue" id="15_8kgvc"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="16_up7eu"]
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/characters/npc/storyteller.png" id="17_kycha"]
 [ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="18_8kgvc"]
+[ext_resource type="PackedScene" uid="uid://b08ofhkn8vp36" path="res://Scenes/Entities/Characters/Kevin.tscn" id="18_bhrir"]
 [ext_resource type="Resource" uid="uid://ctatcaqd2g4ox" path="res://resources/dialogues/chapter1/chapter1.1.dialogue" id="20_2ke1t"]
+[ext_resource type="PackedScene" uid="uid://brd2wy8vh2ts2" path="res://Scenes/Entities/Characters/Tisoy.tscn" id="22_cmjjt"]
 [ext_resource type="Resource" uid="uid://cudjo0ldkq0qo" path="res://resources/loot_tables/3.tres" id="24_3h1fx"]
 [ext_resource type="Resource" uid="uid://nl6c5ox51mv8" path="res://resources/loot_tables/8.tres" id="24_7ym34"]
 [ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="27_7ym34"]
@@ -36,22 +41,20 @@
 [ext_resource type="PackedScene" uid="uid://dtqgojjodmope" path="res://Scenes/World/PuzzleComponent/StreetLight.tscn" id="29_ro4io"]
 [ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/sfx/music/chapter1_bgm.ogg" id="35_ogyjm"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kycha"]
-radius = 25.02
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_84djs"]
-radius = 22.0227
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kycha"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_sn7c0"]
-radius = 29.7321
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_3h1fx"]
 radius = 24.5153
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yr40k"]
-size = Vector2(69.238, 30.3673)
+size = Vector2(46.4916, 30.3673)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kycha"]
+radius = 25.02
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sn7c0"]
+radius = 29.7321
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_84djs"]
+radius = 22.0227
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_hn08j"]
 
@@ -1058,87 +1061,11 @@ metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 [node name="npc" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Chief" parent="npc" instance=ExtResource("4_32qxv")]
-position = Vector2(548, 337)
+[node name="TikyoTiktilaok" parent="npc" instance=ExtResource("6_fghhu")]
+position = Vector2(518, 262)
 
-[node name="DialogueTrigger" type="Area2D" parent="npc/Chief"]
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("11_dclhn")
-DialogueResource = ExtResource("8_aqpjb")
-ShouldInteract = true
-InteractionLabel = "Dodong Daldal"
-metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief/DialogueTrigger"]
-position = Vector2(0, -13)
-shape = SubResource("CircleShape2D_kycha")
-debug_color = Color(0.88, 0.525, 0.898, 0.42)
-
-[node name="Node2D" type="Node2D" parent="npc/Chief/DialogueTrigger"]
-position = Vector2(0, -32)
-
-[node name="InteractionUI" parent="npc/Chief/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
-
-[node name="Chief2" parent="npc" instance=ExtResource("4_32qxv")]
-unique_name_in_owner = true
-visible = false
-position = Vector2(-112, 977)
-
-[node name="QuestTrigger" type="Area2D" parent="npc/Chief2"]
-z_index = 1
-position = Vector2(-1, -2)
-collision_layer = 16
-collision_mask = 4
-script = ExtResource("5_hn08j")
-Quest = ExtResource("8_7adkd")
-Mode = 0
-ShouldInteract = true
-InteractionLabel = "Interact"
-DialogueResource = ExtResource("9_kycha")
-metadata/_custom_type_script = "uid://cd87fvbcydnp5"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief2/QuestTrigger"]
-position = Vector2(1, -12)
-shape = SubResource("CircleShape2D_84djs")
-debug_color = Color(0.88, 0.525, 0.898, 0.42)
-
-[node name="Node2D" type="Node2D" parent="npc/Chief2/QuestTrigger"]
-
-[node name="InteractionUI" parent="npc/Chief2/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
-
-[node name="kevinMarker" parent="npc/Chief2" instance=ExtResource("13_4wwhf")]
-unique_name_in_owner = true
-position = Vector2(-112, 952)
-
-[node name="Chief3" parent="npc" instance=ExtResource("4_32qxv")]
-material = SubResource("ShaderMaterial_kycha")
-position = Vector2(907, 259)
-
-[node name="DialogueTrigger" type="Area2D" parent="npc/Chief3"]
-z_index = 1
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("11_dclhn")
-DialogueResource = ExtResource("13_8kgvc")
-ShouldInteract = true
-InteractionLabel = "Paquito Weyt"
-metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief3/DialogueTrigger"]
-position = Vector2(0, -12)
-shape = SubResource("CircleShape2D_sn7c0")
-debug_color = Color(0.88, 0.525, 0.898, 0.42)
-
-[node name="Node2D" type="Node2D" parent="npc/Chief3/DialogueTrigger"]
-position = Vector2(0, -33)
-
-[node name="InteractionUI" parent="npc/Chief3/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
-
-[node name="Chief6" parent="npc" instance=ExtResource("4_32qxv")]
-position = Vector2(516, 282)
-
-[node name="DialogueTrigger" type="Area2D" parent="npc/Chief6"]
+[node name="DialogueTrigger" type="Area2D" parent="npc/TikyoTiktilaok"]
+position = Vector2(0, 7)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("11_dclhn")
@@ -1147,23 +1074,22 @@ ShouldInteract = true
 InteractionLabel = "Tikyo Tiktilaok"
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief6/DialogueTrigger"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc/TikyoTiktilaok/DialogueTrigger"]
 position = Vector2(0, -13)
 shape = SubResource("CircleShape2D_3h1fx")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
-[node name="Node2D" type="Node2D" parent="npc/Chief6/DialogueTrigger"]
+[node name="Node2D" type="Node2D" parent="npc/TikyoTiktilaok/DialogueTrigger"]
 z_index = 1
 position = Vector2(0, -32)
 
-[node name="InteractionUI" parent="npc/Chief6/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
+[node name="InteractionUI" parent="npc/TikyoTiktilaok/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
-[node name="Chief5" parent="npc" instance=ExtResource("4_32qxv")]
-unique_name_in_owner = true
-position = Vector2(173, 169)
+[node name="Manny" parent="npc" instance=ExtResource("10_tjhma")]
+position = Vector2(165, 193)
 
-[node name="QuestTrigger" type="Area2D" parent="npc/Chief5"]
-position = Vector2(-23, -41)
+[node name="QuestTrigger" type="Area2D" parent="npc/Manny"]
+position = Vector2(11, -34)
 scale = Vector2(1.14304, 1.01698)
 collision_layer = 16
 collision_mask = 4
@@ -1175,17 +1101,94 @@ InteractionLabel = "Interact"
 DialogueResource = ExtResource("15_8kgvc")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Chief5/QuestTrigger"]
-position = Vector2(3, 26)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Manny/QuestTrigger"]
+position = Vector2(0.874859, 25.5659)
 shape = SubResource("RectangleShape2D_yr40k")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
-[node name="Node2D" type="Node2D" parent="npc/Chief5/QuestTrigger"]
+[node name="Node2D" type="Node2D" parent="npc/Manny/QuestTrigger"]
 
-[node name="InteractionUI" parent="npc/Chief5/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
+[node name="InteractionUI" parent="npc/Manny/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
-[node name="Chief4" parent="npc" instance=ExtResource("4_32qxv")]
-position = Vector2(130, 169)
+[node name="Dodong Daldal" parent="npc" instance=ExtResource("14_roimx")]
+position = Vector2(559, 340)
+
+[node name="DialogueTrigger" type="Area2D" parent="npc/Dodong Daldal"]
+position = Vector2(0, 3)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("11_dclhn")
+DialogueResource = ExtResource("8_aqpjb")
+ShouldInteract = true
+InteractionLabel = "Dodong Daldal"
+metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Dodong Daldal/DialogueTrigger"]
+position = Vector2(0, -13)
+shape = SubResource("CircleShape2D_kycha")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="npc/Dodong Daldal/DialogueTrigger"]
+position = Vector2(0, -32)
+
+[node name="InteractionUI" parent="npc/Dodong Daldal/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
+
+[node name="Paquito" parent="npc" instance=ExtResource("6_5n2fm")]
+position = Vector2(907, 259)
+
+[node name="DialogueTrigger" type="Area2D" parent="npc/Paquito"]
+z_index = 1
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("11_dclhn")
+DialogueResource = ExtResource("13_8kgvc")
+ShouldInteract = true
+InteractionLabel = "Paquito Weyt"
+metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Paquito/DialogueTrigger"]
+position = Vector2(0, -12)
+shape = SubResource("CircleShape2D_sn7c0")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="npc/Paquito/DialogueTrigger"]
+position = Vector2(0, -33)
+
+[node name="InteractionUI" parent="npc/Paquito/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
+metadata/_edit_use_anchors_ = true
+
+[node name="Kevin" parent="npc" instance=ExtResource("18_bhrir")]
+visible = false
+position = Vector2(-112, 971)
+
+[node name="QuestTrigger" type="Area2D" parent="npc/Kevin"]
+z_index = 1
+position = Vector2(-1, 7)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("5_hn08j")
+Quest = ExtResource("8_7adkd")
+Mode = 0
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("9_kycha")
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Kevin/QuestTrigger"]
+position = Vector2(1, -12)
+shape = SubResource("CircleShape2D_84djs")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="npc/Kevin/QuestTrigger"]
+
+[node name="InteractionUI" parent="npc/Kevin/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
+
+[node name="kevinMarker" parent="npc/Kevin" instance=ExtResource("13_4wwhf")]
+unique_name_in_owner = true
+position = Vector2(-112, 952)
+
+[node name="Tisoy" parent="npc" instance=ExtResource("22_cmjjt")]
+position = Vector2(190, 192)
 
 [node name="collision" type="StaticBody2D" parent="."]
 visible = false
@@ -1202,12 +1205,9 @@ EnemyName = ""
 
 [node name="StatsManager" parent="Enemy/Aswang" index="5"]
 Level = 4.0
-MaxHealth = 221.126
-Defense = 9.56287
-Damage = 33.0
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang" index="12"]
-frame = 2
+MaxHealth = 363.377
+Defense = 28.6886
+Damage = 59.0
 
 [node name="Aswang2" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(87, 58)
@@ -1215,12 +1215,9 @@ EnemyName = ""
 
 [node name="StatsManager" parent="Enemy/Aswang2" index="5"]
 Level = 3.0
-MaxHealth = 196.225
-Defense = 6.17117
-Damage = 28.1962
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang2" index="12"]
-frame = 2
+MaxHealth = 288.674
+Defense = 18.5135
+Damage = 44.5885
 
 [node name="Aswang3" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(123, 197)
@@ -1228,12 +1225,9 @@ EnemyName = ""
 
 [node name="StatsManager" parent="Enemy/Aswang3" index="5"]
 Level = 3.0
-MaxHealth = 196.225
-Defense = 6.17117
-Damage = 28.1962
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang3" index="12"]
-frame = 2
+MaxHealth = 288.674
+Defense = 18.5135
+Damage = 44.5885
 
 [node name="Aswang4" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(49, -155)
@@ -1241,19 +1235,13 @@ EnemyName = ""
 
 [node name="StatsManager" parent="Enemy/Aswang4" index="5"]
 Level = 4.0
-MaxHealth = 221.126
-Defense = 9.56287
-Damage = 33.0
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang4" index="12"]
-frame = 2
+MaxHealth = 363.377
+Defense = 28.6886
+Damage = 59.0
 
 [node name="Aswang5" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(136, 368)
 EnemyName = ""
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang5" index="12"]
-frame = 2
 
 [node name="Aswang6" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-184, 591)
@@ -1261,12 +1249,9 @@ EnemyName = ""
 
 [node name="StatsManager" parent="Enemy/Aswang6" index="5"]
 Level = 5.0
-MaxHealth = 247.119
-Defense = 13.1033
-Damage = 38.1803
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang6" index="12"]
-frame = 2
+MaxHealth = 441.358
+Defense = 39.3098
+Damage = 74.541
 
 [node name="Aswang7" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-156, 70)
@@ -1274,12 +1259,9 @@ EnemyName = ""
 
 [node name="StatsManager" parent="Enemy/Aswang7" index="5"]
 Level = 4.0
-MaxHealth = 221.126
-Defense = 9.56287
-Damage = 33.0
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang7" index="12"]
-frame = 2
+MaxHealth = 363.377
+Defense = 28.6886
+Damage = 59.0
 
 [node name="Aswang8" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-34, 484)
@@ -1287,12 +1269,9 @@ EnemyName = ""
 
 [node name="StatsManager" parent="Enemy/Aswang8" index="5"]
 Level = 5.0
-MaxHealth = 247.119
-Defense = 13.1033
-Damage = 38.1803
-
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang8" index="12"]
-frame = 2
+MaxHealth = 441.358
+Defense = 39.3098
+Damage = 74.541
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -1637,7 +1616,7 @@ material = ExtResource("1_edvum")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 2
+frame = 3
 script = ExtResource("18_8kgvc")
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
