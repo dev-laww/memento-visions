@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=4 format=3 uid="uid://0suhta3uejmr"]
+
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_vyky8"]
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="2_07o3l"]
+
+[sub_resource type="Resource" id="Resource_ccy1y"]
+script = ExtResource("1_vyky8")
+Type = 2
+Description = "Head to the Haunted School – The real horror begins."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[resource]
+script = ExtResource("2_07o3l")
+Id = "quest:bar_interaction"
+Title = "First Steps into Darkness"
+Ordered = true
+Description = "In a dimly lit bar, Alex meets the Chief to discuss a chilling case—rumors of a vengeful spirit linked to recent disappearances. Before stepping into the unknown, he must gather all the details."
+objectives = [SubResource("Resource_ccy1y")]
+Experience = 0
+Items = []
+metadata/_custom_type_script = "uid://dssta8xepjmkg"

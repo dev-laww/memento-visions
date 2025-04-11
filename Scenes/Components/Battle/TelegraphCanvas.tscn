@@ -1,13 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://76j0yx8aju5n"]
 
-[ext_resource type="Shader" uid="uid://fiv8a0n8id6d" path="res://resources/shaders/outline-canvas-group.gdshader" id="1_blmlj"]
+[ext_resource type="Shader" uid="uid://fiv8a0n8id6d" path="res://resources/shaders/outline_canvas_group.gdshader" id="1_blmlj"]
 [ext_resource type="Script" uid="uid://c4y8sscy5c2gn" path="res://Scripts/Components/Battle/TelegraphCanvas.cs" id="2_mwa6n"]
 [ext_resource type="PackedScene" uid="uid://d03vu328ak281" path="res://Scenes/Components/Battle/Telegraph/CircleTelegraph.tscn" id="4_cxcob"]
 [ext_resource type="PackedScene" uid="uid://47o6g554nf78" path="res://Scenes/Components/Battle/Telegraph/LineTelegraph.tscn" id="4_spf8n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a67uh"]
 shader = ExtResource("1_blmlj")
-shader_parameter/color = Color(2656.31, 0.851361, 0.851361, 1)
+shader_parameter/color = Color(2656.31, 0.726555, 0.726555, 1)
 shader_parameter/width = 0.5
 shader_parameter/pattern = 1
 shader_parameter/inside = false

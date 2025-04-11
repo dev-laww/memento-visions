@@ -41,7 +41,7 @@ public partial class GameManager : Node
 
         if (!showStartScreen && OS.IsDebugBuild())
         {
-            var lobby = resourcePreloader.InstanceSceneOrNull<Bar>();
+            var lobby = resourcePreloader.InstanceSceneOrNull<Lobby>();
             currentScene.AddChild(lobby);
             return;
         }

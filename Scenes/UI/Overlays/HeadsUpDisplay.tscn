@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cn1hxu3k3xbni" path="res://Scenes/UI/Common/CommonMinimap.tscn" id="5_rnii0"]
 [ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/items/temp/Item5.png" id="6_rnii0"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="7_1gu0f"]
-[ext_resource type="LabelSettings" uid="uid://cktp08gmb038p" path="res://resources/misc/normal-text.tres" id="8_nhdt0"]
+[ext_resource type="LabelSettings" uid="uid://cktp08gmb038p" path="res://resources/misc/normal_text.tres" id="8_nhdt0"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rnii0"]
 texture = ExtResource("4_rnii0")
@@ -156,6 +156,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(190, 5)
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxTexture_rnii0")
 theme_override_styles/fill = SubResource("StyleBoxTexture_1gu0f")
 value = 50.0

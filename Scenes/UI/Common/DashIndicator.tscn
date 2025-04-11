@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://83s52vks6mbt"]
 
-[ext_resource type="Texture2D" uid="uid://b325capwlkm17" path="res://assets/ui/dash-indicator.png" id="1_hr6lt"]
+[ext_resource type="Texture2D" uid="uid://b325capwlkm17" path="res://assets/ui/dash_indicator.png" id="1_hr6lt"]
 [ext_resource type="Script" uid="uid://d0nyqqqb3hbtf" path="res://Scripts/UI/Common/DashIndicator.cs" id="2_7k448"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m4wbm"]

@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=81 format=3 uid="uid://bxvuq1ymdiaus"]
 
 [ext_resource type="Texture2D" uid="uid://cna3ssn4ob7y2" path="res://assets/tilesets/forest.png" id="1_ukeaq"]
-[ext_resource type="Texture2D" uid="uid://bqnj61h8qkn1h" path="res://assets/tilesets/autotile-forest.png" id="2_7bdcu"]
+[ext_resource type="Texture2D" uid="uid://bqnj61h8qkn1h" path="res://assets/tilesets/autotile_forest.png" id="2_7bdcu"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1tusk"]
 polygon = PackedVector2Array(-48, -48, 48, -48, 48, 48, -48, 48)

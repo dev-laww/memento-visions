@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bd0vkg5260wvf"]
 
 [ext_resource type="Script" uid="uid://k1crowxwdok8" path="res://Scripts/World/Levels/Dungeon/Dungeon.cs" id="1_22fmi"]
-[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_b7ns4"]
+[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth_filtering.tres" id="2_b7ns4"]
 [ext_resource type="TileSet" uid="uid://cioppguad37wr" path="res://resources/tilesets/canopy.tres" id="3_5w4wh"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_xrxef"]
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://b36y2bljh3l2m"
+path="res://.godot/imported/torn_pages.dialogue-cddaa52ddb155471eff16cb832ad0c09.tres"
+
+[deps]
+
+source_file="res://resources/dialogues/chapter_2/torn_pages.dialogue"
+dest_files=["res://.godot/imported/torn_pages.dialogue-cddaa52ddb155471eff16cb832ad0c09.tres"]
+
+[params]
+
+defaults=true

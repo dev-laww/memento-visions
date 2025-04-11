@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://6rk1l15nvvdr"]
 
 [ext_resource type="Script" uid="uid://db8nhu4bnaoex" path="res://Scripts/World/Puzzle/Managers/TorchPuzzleManager.cs" id="1_sreku"]
-[ext_resource type="Texture2D" uid="uid://b60ntgcxlvvm6" path="res://assets/world/SignPost.png" id="2_sreku"]
+[ext_resource type="Texture2D" uid="uid://b60ntgcxlvvm6" path="res://assets/world/sign.png" id="2_sreku"]
 [ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="3_6fxp3"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="4_xddo1"]
 

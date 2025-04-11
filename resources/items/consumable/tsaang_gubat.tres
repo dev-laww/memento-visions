@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://du6n3qtjkmo27"]
 
-[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_gs888"]
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/items/items.png" id="1_gs888"]
 [ext_resource type="Script" uid="uid://dw04lp5hq0xq0" path="res://Scripts/Data/Item/Consumable/TsaangGubat.cs" id="2_gs888"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_twy13"]

@@ -8,17 +8,13 @@ script = ExtResource("1_j4et8")
 sequenceOrder = null
 
 [node name="Button" parent="." instance=ExtResource("1_csbnx")]
-unique_name_in_owner = true
 position = Vector2(176, 48)
 
 [node name="Button2" parent="." instance=ExtResource("1_csbnx")]
-unique_name_in_owner = true
 position = Vector2(224, 48)
 
 [node name="Button3" parent="." instance=ExtResource("1_csbnx")]
-unique_name_in_owner = true
 position = Vector2(272, 48)
 
 [node name="Button4" parent="." instance=ExtResource("1_csbnx")]
-unique_name_in_owner = true
 position = Vector2(320, 48)

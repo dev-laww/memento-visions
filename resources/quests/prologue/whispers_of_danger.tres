@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=4 format=3 uid="uid://e2y2wkqn0qy8"]
+
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_58rps"]
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="2_wh8fs"]
+
+[sub_resource type="Resource" id="Resource_gfvnu"]
+script = ExtResource("1_58rps")
+Type = 2
+Description = "Speak to Chief to gather intel on eerie sightings and local fears of an Aswang."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[resource]
+script = ExtResource("2_wh8fs")
+Id = "quest:whispers_of_danger"
+Title = "Whispers of Danger"
+Ordered = false
+Description = "Strange events have unsettled the village—whispers of an Aswang lurking in the shadows. The Chief is gathering information, and the locals are terrified. Before panic spreads, you must act. Speak to the Chief and decide your next move."
+objectives = [SubResource("Resource_gfvnu")]
+Experience = 0
+Items = []
+metadata/_custom_type_script = "uid://dssta8xepjmkg"

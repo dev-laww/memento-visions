@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://dx7hcjqmrqnj1"]
 
-[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_gk8bu"]
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/items/items.png" id="1_gk8bu"]
 [ext_resource type="Script" uid="uid://mx6ainol0igm" path="res://Scripts/Data/Item/Consumable/Puto.cs" id="2_gk8bu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dur1c"]

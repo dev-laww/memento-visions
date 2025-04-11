@@ -1,25 +1,24 @@
 [gd_scene load_steps=4 format=3 uid="uid://cwus4c1b4vpr"]
 
 [ext_resource type="Script" uid="uid://bl5c8jlaa4mej" path="res://Scripts/World/Puzzle/Components/PressurePlate.cs" id="1_pytcr"]
-[ext_resource type="Texture2D" uid="uid://h5riygun8flq" path="res://assets/world/PressurePlate.png" id="1_sf8rs"]
+[ext_resource type="Texture2D" uid="uid://h5riygun8flq" path="res://assets/world/pressure_plate.png" id="1_sf8rs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pytcr"]
-size = Vector2(12, 12)
+size = Vector2(18, 20)
 
 [node name="PressurePlate" type="Node2D"]
 script = ExtResource("1_pytcr")
 
-[node name="area" type="Area2D" parent="."]
+[node name="Area" type="Area2D" parent="."]
 unique_name_in_owner = true
 collision_layer = 512
 collision_mask = 518
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="area"]
-position = Vector2(0, -3)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_pytcr")
 
-[node name="sprite" type="Sprite2D" parent="."]
-unique_name_in_owner = true
+[node name="Sprite" type="Sprite2D" parent="."]
 z_index = -1
 texture = ExtResource("1_sf8rs")
 region_enabled = true

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://cynqml7na5ksi"]
 
-[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_lpk1o"]
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/items/items.png" id="1_lpk1o"]
 [ext_resource type="Script" uid="uid://b6w7vrmyurg51" path="res://Scripts/Data/Item/Consumable/BreezePotion.cs" id="2_lpk1o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wn5ri"]

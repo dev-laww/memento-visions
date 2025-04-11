@@ -74,7 +74,7 @@ _data = {
 
 [node name="CenterText" type="CanvasLayer"]
 script = ExtResource("1_mee0x")
-Text = null
+Text = ":DDD"
 
 [node name="PassThrough" type="Container" parent="."]
 mouse_filter = 2

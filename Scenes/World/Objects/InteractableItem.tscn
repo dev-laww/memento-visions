@@ -16,7 +16,7 @@ collision_layer = 16
 collision_mask = 4
 script = ExtResource("1_wvyqs")
 InteractionLabel = "Pickup"
-metadata/_custom_type_script = ExtResource("1_wvyqs")
+metadata/_custom_type_script = "uid://cll1v71th1oms"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
 shape = SubResource("CircleShape2D_wvyqs")

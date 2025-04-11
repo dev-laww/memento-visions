@@ -1,13 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://svqrge4l63b4"]
+[gd_scene load_steps=16 format=3 uid="uid://svqrge4l63b4"]
 
 [ext_resource type="Texture2D" uid="uid://bhg24ad0ut6dq" path="res://assets/ui/slot.png" id="1_dwah6"]
 [ext_resource type="Script" uid="uid://0vf4miewd40t" path="res://Scripts/UI/Common/Slot.cs" id="1_qhish"]
-[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_eu5ef"]
 [ext_resource type="Texture2D" uid="uid://drys52s61n2w" path="res://assets/ui/selector.png" id="3_o2xtx"]
 [ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/items/temp/Item5.png" id="3_xgpvm"]
-[ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="4_8s03u"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="4_luf03"]
-[ext_resource type="LabelSettings" uid="uid://cktp08gmb038p" path="res://resources/misc/normal-text.tres" id="5_7i6yw"]
+[ext_resource type="LabelSettings" uid="uid://cktp08gmb038p" path="res://resources/misc/normal_text.tres" id="5_7i6yw"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b5sbs"]
 texture = ExtResource("1_dwah6")
@@ -106,8 +104,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y5wc8"]
 _data = {
-"RESET": SubResource("Animation_wfa5p"),
-"select": SubResource("Animation_3mhtl")
+&"RESET": SubResource("Animation_wfa5p"),
+&"select": SubResource("Animation_3mhtl")
 }
 
 [node name="Slot" type="Panel"]
@@ -150,18 +148,15 @@ text = "999+"
 label_settings = ExtResource("5_7i6yw")
 horizontal_alignment = 2
 
-[node name="SmoothAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
-texture_filter = 2
-material = ExtResource("2_eu5ef")
 position = Vector2(16, 16)
 sprite_frames = SubResource("SpriteFrames_jrtgn")
 animation = &"select"
 autoplay = "select"
-script = ExtResource("4_8s03u")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../SmoothAnimatedSprite2D")
+root_node = NodePath("../AnimatedSprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_y5wc8")
+&"": SubResource("AnimationLibrary_y5wc8")
 }

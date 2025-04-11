@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://b161abm0o6ij2"]
 
 [ext_resource type="Script" uid="uid://bswjdpne446nm" path="res://Scripts/UI/Overlays/Inventory.cs" id="1_7jd4f"]
-[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="1_35u5w"]
+[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine_patch.png" id="1_35u5w"]
 [ext_resource type="ButtonGroup" uid="uid://0v7aexkru1o0" path="res://resources/ui/inventory-button-group.tres" id="1_hubp2"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_quj2b"]
 [ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="2_r77rr"]
@@ -9,9 +9,9 @@
 [ext_resource type="Material" uid="uid://bkm4tri52hhdr" path="res://resources/shaders/blur.tres" id="3_jakka"]
 [ext_resource type="PackedScene" uid="uid://svqrge4l63b4" path="res://Scenes/UI/Common/Slot.tscn" id="5_17bmp"]
 [ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/items/temp/Item5.png" id="7_e5fdf"]
-[ext_resource type="AudioStream" uid="uid://cwqgqd7a1xdjg" path="res://assets/sfx/ui/click.mp3" id="10_qahny"]
-[ext_resource type="AudioStream" uid="uid://bsey776lyb18t" path="res://assets/sfx/ui/Menu_Open.wav" id="11_grann"]
-[ext_resource type="AudioStream" uid="uid://ccp6uleihx53k" path="res://assets/sfx/ui/Menu_Close.wav" id="12_w7dcp"]
+[ext_resource type="AudioStream" uid="uid://cwqgqd7a1xdjg" path="res://assets/audio/ui/click.mp3" id="10_qahny"]
+[ext_resource type="AudioStream" uid="uid://bsey776lyb18t" path="res://assets/audio/ui/menu_open.wav" id="11_grann"]
+[ext_resource type="AudioStream" uid="uid://ccp6uleihx53k" path="res://assets/audio/ui/menu_close.wav" id="12_w7dcp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qahny"]
 atlas = ExtResource("2_r77rr")

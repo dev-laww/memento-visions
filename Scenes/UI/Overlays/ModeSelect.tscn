@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="1_6t02b"]
 [ext_resource type="Script" uid="uid://dmv8sparxyw4k" path="res://Scripts/UI/Overlays/ModeSelect.cs" id="1_bao6r"]
 [ext_resource type="PackedScene" uid="uid://cb8psn10ig05k" path="res://Scenes/UI/Common/CloseButton.tscn" id="1_v4p0c"]
-[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="2_2wb6e"]
+[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine_patch.png" id="2_2wb6e"]
 [ext_resource type="Material" uid="uid://bkm4tri52hhdr" path="res://resources/shaders/blur.tres" id="2_rq77x"]
 [ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="4_fray8"]
 [ext_resource type="Texture2D" uid="uid://c3uq6b0urr2n1" path="res://assets/ui/story.png" id="6_k01b4"]

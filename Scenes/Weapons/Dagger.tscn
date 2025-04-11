@@ -1,9 +1,7 @@
-[gd_scene load_steps=187 format=3 uid="uid://ndiysulc1a43"]
+[gd_scene load_steps=185 format=3 uid="uid://ndiysulc1a43"]
 
 [ext_resource type="Script" uid="uid://dqgmaq0t8abpt" path="res://Scripts/Components/Battle/WeaponComponent.cs" id="1_atv6s"]
-[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_nwftv"]
 [ext_resource type="Texture2D" uid="uid://cur8qhju5wiwe" path="res://assets/weapons/dagger/spritesheet.png" id="2_qqse4"]
-[ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="3_8ek50"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2d2m1"]
 atlas = ExtResource("2_qqse4")
@@ -631,6 +629,33 @@ animations = [{
 "name": &"west_3",
 "speed": 8.0
 }]
+
+[sub_resource type="Animation" id="Animation_hmekl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Assets/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"south_1"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Assets:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_qqse4"]
 length = 0.375
@@ -1569,33 +1594,6 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_hmekl"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Assets/AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"south_1"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Assets:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hmekl"]
 _data = {
 &"RESET": SubResource("Animation_hmekl"),
@@ -2000,11 +1998,8 @@ visible = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Assets"]
 unique_name_in_owner = true
-texture_filter = 2
-material = ExtResource("2_nwftv")
 sprite_frames = SubResource("SpriteFrames_fduxl")
 animation = &"south_1"
-script = ExtResource("3_8ek50")
 
 [node name="AttackSfx" type="AudioStreamPlayer2D" parent="Assets"]
 unique_name_in_owner = true

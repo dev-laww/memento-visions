@@ -9,7 +9,7 @@ namespace Game.Entities;
 public partial class Dummy : Enemy
 {
     [Node] private AnimationPlayer animationPlayer;
-    [Node] private AnimatedSprite2D smoothAnimatedSprite2d;
+    [Node] private AnimatedSprite2D animatedSprite2d;
     [Node] private HealthNumberManager healthNumberManager;
 
     public override void _Notification(int what)
@@ -32,7 +32,7 @@ public partial class Dummy : Enemy
         var sourcePosition = attack.Source.GlobalPosition;
 
         var directionToSource = (sourcePosition - GlobalPosition).Normalized();
-        smoothAnimatedSprite2d.FlipH = directionToSource.X > 0;
+        animatedSprite2d.FlipH = directionToSource.X > 0;
 
         animationPlayer.Stop();
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://ce8t2napfsiwi"]
 
 [ext_resource type="Script" uid="uid://i16nus4kwdxl" path="res://Scripts/UI/Dialogue/Balloon.cs" id="1_exrlr"]
-[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="2_l1cmb"]
+[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine_patch.png" id="2_l1cmb"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_rrnqr"]
 [ext_resource type="Script" uid="uid://g32um0mltv5d" path="res://addons/dialogue_manager/dialogue_label.gd" id="4_exrlr"]
 [ext_resource type="Script" uid="uid://bya5v7wgp08bo" path="res://Scripts/UI/Dialogue/ResponseMenu.cs" id="5_exrlr"]

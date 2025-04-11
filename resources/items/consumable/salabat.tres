@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://ct2y0f318jxyf"]
 
-[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_uvlj0"]
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/items/items.png" id="1_uvlj0"]
 [ext_resource type="Script" uid="uid://cmg3f73o1lech" path="res://Scripts/Data/Item/Consumable/Salabat.cs" id="2_mcwtw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7m7ed"]

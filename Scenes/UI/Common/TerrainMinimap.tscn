@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bt48b3xfgmv3h"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Common/TerrainMinimap.cs" id="1_te0w0"]
+[ext_resource type="Script" uid="uid://bv6ykkdsac46o" path="res://Scripts/UI/Common/TerrainMinimap.cs" id="1_te0w0"]
 
 [node name="TerrainMinimap" type="SubViewportContainer"]
 custom_minimum_size = Vector2(100, 100)

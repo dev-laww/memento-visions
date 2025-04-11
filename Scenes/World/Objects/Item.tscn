@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8v00fl5calo2"]
+[gd_scene load_steps=4 format=3 uid="uid://c8v00fl5calo2"]
 
 [ext_resource type="Script" uid="uid://ccr0h3s4e5kj2" path="res://Scripts/World/Objects/Item.cs" id="1_ik4pt"]
-[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="2_x7403"]
 [ext_resource type="Texture2D" uid="uid://g1s1srd24m2s" path="res://assets/items/unknown.png" id="3_basrn"]
-[ext_resource type="Script" uid="uid://58jqrupdcss0" path="res://Scripts/Components/SmoothSprite2D.cs" id="4_a3ke1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_064ac"]
 radius = 12.0
@@ -20,10 +18,6 @@ shape = SubResource("CircleShape2D_064ac")
 debug_color = Color(0.385754, 0.598849, 0.696619, 0.42)
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture_filter = 2
-material = ExtResource("2_x7403")
 texture = ExtResource("3_basrn")
-script = ExtResource("4_a3ke1")
-metadata/_custom_type_script = ExtResource("4_a3ke1")
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

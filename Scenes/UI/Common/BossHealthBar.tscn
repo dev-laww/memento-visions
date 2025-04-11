@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://f4xjestlhvif"]
 
 [ext_resource type="Script" uid="uid://o0d4nfdnop02" path="res://Scripts/UI/Common/BossHealthBar.cs" id="1_o40cd"]
-[ext_resource type="LabelSettings" uid="uid://cktp08gmb038p" path="res://resources/misc/normal-text.tres" id="1_vqmns"]
+[ext_resource type="LabelSettings" uid="uid://cktp08gmb038p" path="res://resources/misc/normal_text.tres" id="1_vqmns"]
 [ext_resource type="PackedScene" uid="uid://dp6ardmi6lci5" path="res://Scenes/UI/Common/HealthBar.tscn" id="1_werh8"]
 
 [node name="BossHealthBar" type="VBoxContainer"]

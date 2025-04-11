@@ -1,95 +1,12 @@
-[gd_scene load_steps=21 format=3 uid="uid://brd2wy8vh2ts2"]
+[gd_scene load_steps=19 format=3 uid="uid://brd2wy8vh2ts2"]
 
 [ext_resource type="Script" uid="uid://c00y25k3divsu" path="res://Scripts/Entities/Characters/Chief.cs" id="1_uxvsb"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_b8lyq"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="3_prekv"]
-[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="4_638ix"]
 [ext_resource type="Texture2D" uid="uid://dth02qnrsmphy" path="res://assets/entities/characters/npc/tisoy.png" id="5_l6cv2"]
-[ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="6_fey5e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbqyk"]
 radius = 8.0
-
-[sub_resource type="Animation" id="Animation_uwdmb"]
-
-[sub_resource type="Animation" id="Animation_e6tbd"]
-length = 2.0
-
-[sub_resource type="Animation" id="Animation_hq7kd"]
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SmoothAnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SmoothAnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["default"]
-}
-
-[sub_resource type="Animation" id="Animation_tbqyk"]
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SmoothAnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SmoothAnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": ["idle"]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_h6wn6"]
-_data = {
-&"default": SubResource("Animation_hq7kd"),
-&"idle": SubResource("Animation_tbqyk"),
-&"scratching": SubResource("Animation_uwdmb"),
-&"work": SubResource("Animation_e6tbd")
-}
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tbqyk"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tbqyk"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bmtwh"]
-states/idle/node = SubResource("AnimationNodeAnimation_tbqyk")
-states/idle/position = Vector2(324, 100)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_tbqyk")]
-graph_offset = Vector2(-16, -28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pv3ud"]
 atlas = ExtResource("5_l6cv2")
@@ -127,6 +44,87 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_hq7kd"]
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["default"]
+}
+
+[sub_resource type="Animation" id="Animation_tbqyk"]
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["idle"]
+}
+
+[sub_resource type="Animation" id="Animation_uwdmb"]
+
+[sub_resource type="Animation" id="Animation_e6tbd"]
+length = 2.0
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h6wn6"]
+_data = {
+&"default": SubResource("Animation_hq7kd"),
+&"idle": SubResource("Animation_tbqyk"),
+&"scratching": SubResource("Animation_uwdmb"),
+&"work": SubResource("Animation_e6tbd")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tbqyk"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tbqyk"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bmtwh"]
+states/idle/node = SubResource("AnimationNodeAnimation_tbqyk")
+states/idle/position = Vector2(324, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_tbqyk")]
+graph_offset = Vector2(-16, -28)
+
 [node name="Tisoy" type="CharacterBody2D"]
 collision_mask = 15
 script = ExtResource("1_uxvsb")
@@ -147,6 +145,13 @@ metadata/_custom_type_script = "uid://dnpva4sn53c1r"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_tbqyk")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
+sprite_frames = SubResource("SpriteFrames_7kili")
+animation = &"idle"
+autoplay = "idle"
+frame = 3
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_h6wn6")
@@ -155,14 +160,3 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_bmtwh")
 anim_player = NodePath("../AnimationPlayer")
-
-[node name="SmoothAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 2
-material = ExtResource("4_638ix")
-position = Vector2(0, -10)
-sprite_frames = SubResource("SpriteFrames_7kili")
-animation = &"idle"
-autoplay = "idle"
-frame = 1
-script = ExtResource("6_fey5e")
-metadata/_custom_type_script = "uid://onowuhrhhpuc"

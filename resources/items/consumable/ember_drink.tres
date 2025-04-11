@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://b12rhrgldk4xp"]
 
-[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_8uhf3"]
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/items/items.png" id="1_8uhf3"]
 [ext_resource type="Script" uid="uid://bxemc2mc622yd" path="res://Scripts/Data/Item/Consumable/EmberDrink.cs" id="2_8uhf3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q07dv"]

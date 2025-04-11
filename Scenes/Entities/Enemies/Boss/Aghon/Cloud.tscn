@@ -1,15 +1,13 @@
-[gd_scene load_steps=41 format=3 uid="uid://dmn3rg1q3a1r1"]
+[gd_scene load_steps=39 format=3 uid="uid://dmn3rg1q3a1r1"]
 
-[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_chyat"]
 [ext_resource type="Script" uid="uid://d2o7fih5kpq6u" path="res://Scripts/Entities/Enemies/Boss/Aghon/Cloud.cs" id="1_l3sl2"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_5or4g"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_676tf"]
-[ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="2_l3sl2"]
 [ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Managers/VelocityManager.cs" id="3_8kcqy"]
 [ext_resource type="PackedScene" uid="uid://cup5c3p5fcfyu" path="res://Scenes/Components/Managers/PathFindManager.tscn" id="4_676tf"]
 [ext_resource type="Texture2D" uid="uid://c182yponsx216" path="res://assets/entities/enemy/boss/aghon/cloud.png" id="6_8kcqy"]
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="7_orcgk"]
-[ext_resource type="AudioStream" uid="uid://tun085q036cg" path="res://assets/sfx/enemy/AghonCloud.wav" id="10_jusm0"]
+[ext_resource type="AudioStream" uid="uid://tun085q036cg" path="res://assets/audio/enemy/aghon_cloud.wav" id="10_jusm0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kcqy"]
 atlas = ExtResource("6_8kcqy")
@@ -123,7 +121,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SmoothAnimatedSprite2D:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -135,7 +133,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SmoothAnimatedSprite2D:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -150,7 +148,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SmoothAnimatedSprite2D:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -162,7 +160,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SmoothAnimatedSprite2D:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -177,7 +175,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SmoothAnimatedSprite2D:frame")
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -189,7 +187,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SmoothAnimatedSprite2D:animation")
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -282,14 +280,11 @@ DebugEnabled = true
 avoidance_enabled = false
 debug_enabled = true
 
-[node name="SmoothAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 2
-material = ExtResource("1_chyat")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(14, -32)
 sprite_frames = SubResource("SpriteFrames_chyat")
 animation = &"idle"
-script = ExtResource("2_l3sl2")
-metadata/_custom_type_script = "uid://onowuhrhhpuc"
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_5or4g")

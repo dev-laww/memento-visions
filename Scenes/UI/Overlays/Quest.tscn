@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://d11g3gbjm7cot" path="res://Scripts/UI/Overlays/Quest.cs" id="1_18xdc"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_y52qg"]
 [ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="3_ii4hv"]
-[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="4_gsxto"]
+[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine_patch.png" id="4_gsxto"]
 [ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="5_488ye"]
-[ext_resource type="AudioStream" uid="uid://cwqgqd7a1xdjg" path="res://assets/sfx/ui/click.mp3" id="6_kwblb"]
-[ext_resource type="AudioStream" uid="uid://bsey776lyb18t" path="res://assets/sfx/ui/Menu_Open.wav" id="7_6mjat"]
-[ext_resource type="AudioStream" uid="uid://ccp6uleihx53k" path="res://assets/sfx/ui/Menu_Close.wav" id="8_lh52w"]
+[ext_resource type="AudioStream" uid="uid://cwqgqd7a1xdjg" path="res://assets/audio/ui/click.mp3" id="6_kwblb"]
+[ext_resource type="AudioStream" uid="uid://bsey776lyb18t" path="res://assets/audio/ui/menu_open.wav" id="7_6mjat"]
+[ext_resource type="AudioStream" uid="uid://ccp6uleihx53k" path="res://assets/audio/ui/menu_close.wav" id="8_lh52w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f2tvt"]
 atlas = ExtResource("3_ii4hv")

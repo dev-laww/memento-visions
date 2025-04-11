@@ -1,43 +1,25 @@
-[gd_scene load_steps=4 format=4 uid="uid://dv57xjomkwqjd"]
+[gd_scene load_steps=2 format=4 uid="uid://dv57xjomkwqjd"]
 
-[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="1_s4ahm"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_jcyuh"]
-[ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_j62rl"]
 
 [node name="TopCenter" type="Node2D"]
 y_sort_enabled = true
 
 [node name="Floor" type="TileMapLayer" parent="."]
 z_index = -2
-texture_filter = 2
-material = ExtResource("1_s4ahm")
 tile_map_data = PackedByteArray("AAABAAEAAQAMAAoAAAACAAEAAQAMAAsAAAADAAIAAQANAAoAAAAEAAMAAQAMAAoAAAAAAAEAAQAMAAkAAAAAAAIAAQANAAkAAAAAAAMAAQANAAoAAAAAAAQAAQANAAkAAAABAAAAAQAMAAsAAAABAAMAAQANAAkAAAABAAQAAQANAAkAAAABAAUAAQAMAAoAAAACAAAAAQAMAAkAAAACAAIAAQAMAAoAAAACAAQAAQANAAkAAAACAAUAAQAMAAsAAAADAAAAAQAMAAkAAAADAAEAAQAMAAsAAAADAAMAAQANAAoAAAADAAQAAQANAAoAAAADAAUAAQANAAkAAAAEAAEAAQANAAkAAAAEAAIAAQAMAAsAAAAEAAQAAQANAAoAAAAEAAUAAQAMAAsAAAAFAAAAAQANAAoAAAAFAAEAAQAMAAsAAAAFAAIAAQAMAAkAAAAFAAMAAQANAAkAAAAFAAQAAQANAAoAAAAFAAUAAQAMAAoAAAAAAAUAAQANAAkAAAABAAIAAQAMAAkAAAAEAAAAAQAMAAoAAAACAAMAAQAMAAoAAAAAAAAAAQANAAkAAAA=")
 tile_set = ExtResource("2_jcyuh")
-script = ExtResource("3_j62rl")
-metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="MiddleGround" type="TileMapLayer" parent="."]
 z_index = -1
-texture_filter = 2
-material = ExtResource("1_s4ahm")
 tile_set = ExtResource("2_jcyuh")
-script = ExtResource("3_j62rl")
-metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="Elevation" type="TileMapLayer" parent="."]
 y_sort_enabled = true
-texture_filter = 2
-material = ExtResource("1_s4ahm")
 tile_map_data = PackedByteArray("AAABAAMAAQAMAA8AAAAAAAQAAQAMAAwAAAACAAMAAQAMAAwAAAAFAAIAAQANAA8AAAADAAIAAQAMAA8AAAAEAAIAAQAMAAwAAAA=")
 tile_set = ExtResource("2_jcyuh")
-script = ExtResource("3_j62rl")
-metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="Props" type="TileMapLayer" parent="."]
 y_sort_enabled = true
-texture_filter = 2
-material = ExtResource("1_s4ahm")
 tile_map_data = PackedByteArray("AAAEAAAAAQAfABAAAAA=")
 tile_set = ExtResource("2_jcyuh")
-script = ExtResource("3_j62rl")
-metadata/_custom_type_script = "uid://bc2jlb4w58y24"

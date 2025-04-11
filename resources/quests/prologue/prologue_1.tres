@@ -1,0 +1,62 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=15 format=3 uid="uid://c8sti11mk0wm1"]
+
+[ext_resource type="Resource" uid="uid://efbp6aphwl23" path="res://resources/items/material/aswang_elixir.tres" id="1_b6lpj"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_1y6ia"]
+[ext_resource type="Resource" uid="uid://c6j15ogomrwqo" path="res://resources/items/material/curse_blood.tres" id="3_w55t8"]
+[ext_resource type="Resource" uid="uid://cocs17ig06umk" path="res://resources/items/material/vampiric_claw.tres" id="4_u8eaw"]
+[ext_resource type="Resource" uid="uid://dpda8p54wl0y7" path="res://resources/items/weapon/sword.tres" id="5_1y6ia"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="5_tst43"]
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="6_2v0rh"]
+
+[sub_resource type="Resource" id="Resource_xjouu"]
+script = ExtResource("2_1y6ia")
+Item = ExtResource("1_b6lpj")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_mtno4"]
+script = ExtResource("2_1y6ia")
+Item = ExtResource("3_w55t8")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_wctve"]
+script = ExtResource("2_1y6ia")
+Item = ExtResource("4_u8eaw")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_w55t8"]
+script = ExtResource("2_1y6ia")
+Item = ExtResource("5_1y6ia")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_6f01l"]
+script = ExtResource("5_tst43")
+Type = 2
+Description = "Investigate the Burned wooden chair"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="Resource" id="Resource_tnbyp"]
+script = ExtResource("5_tst43")
+Type = 2
+Description = "Investigate the Notebook"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="Resource" id="Resource_rxg1s"]
+script = ExtResource("5_tst43")
+Type = 2
+Description = "Investigate the Photographs"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[resource]
+script = ExtResource("6_2v0rh")
+Id = "quest:prologue_1"
+Title = "Find Clues"
+Ordered = false
+Description = "Upon the request of the Chief, you went to the said place to unravel what mystery it hids."
+objectives = [SubResource("Resource_6f01l"), SubResource("Resource_tnbyp"), SubResource("Resource_rxg1s")]
+Experience = 50
+Items = [SubResource("Resource_xjouu"), SubResource("Resource_mtno4"), SubResource("Resource_wctve"), SubResource("Resource_w55t8")]
+metadata/_custom_type_script = "uid://dssta8xepjmkg"

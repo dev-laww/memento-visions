@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=4 format=3 uid="uid://e5dmknfrsqko"]
 
-[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/inventory/items.png" id="1_ggcua"]
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/items/items.png" id="1_ggcua"]
 [ext_resource type="Script" uid="uid://bhrxggd42q8aa" path="res://Scripts/Data/Item/Consumable/Bibingka.cs" id="2_ggcua"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hsjmi"]

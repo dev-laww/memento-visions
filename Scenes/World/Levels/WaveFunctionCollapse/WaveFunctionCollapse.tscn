@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://camheuk12kcrd" path="res://Scenes/World/Levels/WaveFunctionCollapse/bullshit.tres" id="2_k8riw"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="3_c377g"]
 [ext_resource type="PackedScene" uid="uid://oqrdh5fl72an" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/2.tscn" id="4_0bpo3"]
-[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth-filtering.tres" id="5_c377g"]
+[ext_resource type="Material" uid="uid://00klyclfoq2s" path="res://resources/shaders/smooth_filtering.tres" id="5_c377g"]
 [ext_resource type="PackedScene" uid="uid://25j6vsidrovm" path="res://Scenes/World/Levels/WaveFunctionCollapse/Entries/4.tscn" id="6_8j88n"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="6_oj6ub"]
 [ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="7_0bpo3"]

@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://dr22ipcltmhfv" path="res://Scripts/UI/Overlays/Menu.cs" id="1_7puxv"]
 [ext_resource type="PackedScene" uid="uid://cb8psn10ig05k" path="res://Scenes/UI/Common/CloseButton.tscn" id="1_lerko"]
 [ext_resource type="Material" uid="uid://bkm4tri52hhdr" path="res://resources/shaders/blur.tres" id="2_7dkn7"]
-[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine-patch.png" id="3_3p34d"]
+[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine_patch.png" id="3_3p34d"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="4_mqt5h"]
-[ext_resource type="AudioStream" uid="uid://cwqgqd7a1xdjg" path="res://assets/sfx/ui/click.mp3" id="6_t0flu"]
-[ext_resource type="AudioStream" uid="uid://bsey776lyb18t" path="res://assets/sfx/ui/Menu_Open.wav" id="7_7w108"]
-[ext_resource type="AudioStream" uid="uid://ccp6uleihx53k" path="res://assets/sfx/ui/Menu_Close.wav" id="8_c46qs"]
+[ext_resource type="AudioStream" uid="uid://cwqgqd7a1xdjg" path="res://assets/audio/ui/click.mp3" id="6_t0flu"]
+[ext_resource type="AudioStream" uid="uid://bsey776lyb18t" path="res://assets/audio/ui/menu_open.wav" id="7_7w108"]
+[ext_resource type="AudioStream" uid="uid://ccp6uleihx53k" path="res://assets/audio/ui/menu_close.wav" id="8_c46qs"]
 
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_7puxv")

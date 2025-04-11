@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bt4ok8sg4whcf" path="res://Scripts/Components/Managers/GameManager.cs" id="1_jd26h"]
 [ext_resource type="PackedScene" uid="uid://npt6wv2s1hvr" path="res://Scenes/UI/Screens/Start.tscn" id="2_xr7b5"]
-[ext_resource type="PackedScene" uid="uid://d0qr3o1nxmcpe" path="res://Scenes/World/Bar.tscn" id="3_kln2b"]
+[ext_resource type="PackedScene" uid="uid://d0qr3o1nxmcpe" path="res://Scenes/World/Lobby.tscn" id="3_kln2b"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_jd26h")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
-resources = [PackedStringArray("Bar", "Start"), [ExtResource("3_kln2b"), ExtResource("2_xr7b5")]]
+resources = [PackedStringArray("Lobby", "Start"), [ExtResource("3_kln2b"), ExtResource("2_xr7b5")]]
 
 [node name="CurrentScene" type="Node" parent="."]
