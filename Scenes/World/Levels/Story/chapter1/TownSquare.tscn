@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=4 uid="uid://jdy1vpq1yng4"]
+[gd_scene load_steps=127 format=4 uid="uid://jdy1vpq1yng4"]
 
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="1_5yg8b"]
 [ext_resource type="Script" uid="uid://bww7pdfaugnj3" path="res://Scripts/World/Levels/Story/Chapter1/TownSquare.cs" id="1_k56vb"]
@@ -9,11 +9,13 @@
 [ext_resource type="AudioStream" uid="uid://b2bdexb2ameh7" path="res://assets/audio/music/boss_bgm.ogg" id="6_j760s"]
 [ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/audio/music/chapter_1_bgm.ogg" id="7_8tuqj"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="7_m44gr"]
+[ext_resource type="Resource" uid="uid://bmfojvkeiy1pi" path="res://resources/quests/chapter_1/boss_quest.tres" id="11_l26tj"]
+[ext_resource type="Resource" uid="uid://1lif4uqpp2ca" path="res://resources/dialogues/chapter_1/1.8.dialogue" id="12_f1toi"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="13_j760s"]
-[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="13_l26tj"]
-[ext_resource type="Resource" uid="uid://dubpfapg14rna" path="res://resources/quests/chapter_1/testimony.tres" id="13_matur"]
+[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="13_tqrau"]
 [ext_resource type="PackedScene" uid="uid://c6ddutu3xqvkn" path="res://Scenes/Entities/Enemies/Boss/Aghon/Aghon.tscn" id="13_uqojl"]
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="14_kvccx"]
+[ext_resource type="Texture2D" uid="uid://bbaj1lmrgykxu" path="res://assets/effects/poof.png" id="15_nkwx0"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_i1ehx"]
 
@@ -427,12 +429,6 @@ border_size = 256.0
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="Resource" id="Resource_a27w3"]
-script = ExtResource("13_l26tj")
-Type = 2
-Description = "Confront the mayor"
-metadata/_custom_type_script = "uid://dpkqc20rlrftv"
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_8tuqj"]
 radius = 29.1548
 
@@ -479,6 +475,107 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_v4bk2"]
 gradient = SubResource("Gradient_khwcc")
 fill_to = Vector2(0.0458716, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58lyr"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_l26tj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.976096, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j7p5r"]
+curve = SubResource("Curve_l26tj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f1toi"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+gravity = Vector3(0, -20, 0)
+scale_min = 0.7
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_j7p5r")
+anim_speed_max = 1.0
+anim_offset_max = 1.0
+
+[sub_resource type="Animation" id="Animation_52t3j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StoryTeller:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StoryTeller/PoofParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_al03n"]
+resource_name = "show_story_teller"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StoryTeller:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StoryTeller/PoofParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StoryTeller")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.49),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Work"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_52t3j"]
+_data = {
+&"RESET": SubResource("Animation_52t3j"),
+&"show_story_teller": SubResource("Animation_al03n")
+}
 
 [node name="TownSquare" type="Node2D"]
 script = ExtResource("1_k56vb")
@@ -827,22 +924,25 @@ position = Vector2(437, 259)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("7_m44gr")
-Quest = ExtResource("13_matur")
-Mode = 1
-ShouldInteract = false
-Objective = SubResource("Resource_a27w3")
-ObjectiveIndex = 0
+Quest = ExtResource("11_l26tj")
+Mode = 0
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("12_f1toi")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mayor/QuestTrigger"]
 shape = SubResource("CircleShape2D_8tuqj")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
+[node name="Node2D" type="Node2D" parent="Mayor/QuestTrigger"]
+
+[node name="InteractionUI" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("13_tqrau")]
+
 [node name="Player" parent="." instance=ExtResource("13_j760s")]
 position = Vector2(162, 17)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_uqojl")
 }
@@ -857,5 +957,23 @@ offset_bottom = 439.0
 texture = SubResource("GradientTexture2D_v4bk2")
 
 [node name="StoryTeller" parent="." instance=ExtResource("14_kvccx")]
+visible = false
 z_index = 1
 position = Vector2(643, 461)
+
+[node name="PoofParticles" type="GPUParticles2D" parent="StoryTeller"]
+material = SubResource("CanvasItemMaterial_58lyr")
+position = Vector2(0, -13)
+emitting = false
+amount = 20
+texture = ExtResource("15_nkwx0")
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.9
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_f1toi")
+
+[node name="StoryTellerAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_52t3j")
+}

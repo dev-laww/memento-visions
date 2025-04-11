@@ -18,6 +18,7 @@ public partial class EverfieldCity : BaseLevel
     [Node] private PressurePlate plate, plate2;
     [Node] private Chest chest,chest2;
     [Node] private ScreenMarker kevinMarker,jeepMarker;
+    [Node] private Node2D enemy;
     private Quest quest = QuestRegistry.Get("quest:aswang_hunt");
     private Quest quest1 = QuestRegistry.Get("quest:whispers_in_intramuros");
 
@@ -93,5 +94,10 @@ public partial class EverfieldCity : BaseLevel
         }
 
         quest1.CompleteObjective(index);
+    }
+    public override void _ExitTree()
+    {
+        GD.Print("Exiting tree");
+        enemy.QueueFree();
     }
 }
