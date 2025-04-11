@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=4 uid="uid://v06x46jch2vm"]
+[gd_scene load_steps=131 format=4 uid="uid://v06x46jch2vm"]
 
 [ext_resource type="Script" uid="uid://dcmogr8vudmpc" path="res://Scripts/World/Levels/Story/SchoolOutdoor.cs" id="1_xhmq0"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_ol0cl"]
@@ -10,17 +10,15 @@
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="8_yo2bk"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="9_0rbke"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="10_miy4r"]
-[ext_resource type="Resource" uid="uid://bb0a0gl7qcddj" path="res://resources/quests/Prologue/night_of_shadows.tres" id="11_4mgj7"]
-[ext_resource type="Resource" uid="uid://yh060giw306t" path="res://resources/dialogues/prologue/1.6.dialogue" id="12_n7j3j"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="13_q1tv5"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="14_58kt4"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="14_xhmq0"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="15_1ay2m"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="16_rrn8q"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="17_icqnh"]
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/characters/npc/story_teller.png" id="18_dt0ca"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="20_tqaex"]
 [ext_resource type="Resource" uid="uid://bj8l78qd3fsks" path="res://resources/dialogues/prologue/1.7.dialogue" id="21_afnmx"]
+[ext_resource type="Texture2D" uid="uid://bbaj1lmrgykxu" path="res://assets/effects/poof.png" id="21_n7j3j"]
 [ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/audio/music/chapter_1_bgm.ogg" id="23_585h4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cymrg"]
@@ -775,6 +773,107 @@ graph_offset = Vector2(-23, -24)
 [sub_resource type="CircleShape2D" id="CircleShape2D_4k184"]
 radius = 17.0294
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n7j3j"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_xhmq0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.976096, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j7p5r"]
+curve = SubResource("Curve_xhmq0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ol0cl"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+gravity = Vector3(0, -20, 0)
+scale_min = 0.7
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_j7p5r")
+anim_speed_max = 1.0
+anim_offset_max = 1.0
+
+[sub_resource type="Animation" id="Animation_52t3j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StoryTeller:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StoryTeller/PoofParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_al03n"]
+resource_name = "show_story_teller"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StoryTeller:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StoryTeller/PoofParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StoryTeller")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.49),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Work"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_52t3j"]
+_data = {
+&"RESET": SubResource("Animation_52t3j"),
+&"show_story_teller": SubResource("Animation_al03n")
+}
+
 [node name="SchoolOutdoor" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_xhmq0")
@@ -814,62 +913,17 @@ Loot = ExtResource("5_mp34k")
 [node name="Aswang3" parent="Enemies" instance=ExtResource("6_rys71")]
 position = Vector2(770, 1648)
 
-[node name="StatsManager" parent="Enemies/Aswang3" index="5"]
-Level = 3.0
-MaxHealth = 612.25
-Defense = 61.7119
-Damage = 101.962
-
-[node name="AnimatedSprite2D" parent="Enemies/Aswang3" index="12"]
-frame = 2
-
 [node name="Aswang4" parent="Enemies" instance=ExtResource("6_rys71")]
 position = Vector2(185, 1619)
-
-[node name="StatsManager" parent="Enemies/Aswang4" index="5"]
-Level = 3.0
-MaxHealth = 612.25
-Defense = 61.7119
-Damage = 101.962
-
-[node name="AnimatedSprite2D" parent="Enemies/Aswang4" index="12"]
-frame = 2
 
 [node name="Aswang5" parent="Enemies" instance=ExtResource("6_rys71")]
 position = Vector2(387, 316)
 
-[node name="StatsManager" parent="Enemies/Aswang5" index="5"]
-Level = 2.0
-MaxHealth = 374.82
-Defense = 29.623
-Damage = 58.284
-
-[node name="AnimatedSprite2D" parent="Enemies/Aswang5" index="12"]
-frame = 2
-
 [node name="Aswang6" parent="Enemies" instance=ExtResource("6_rys71")]
 position = Vector2(637, 359)
 
-[node name="StatsManager" parent="Enemies/Aswang6" index="5"]
-Level = 2.0
-MaxHealth = 374.82
-Defense = 29.623
-Damage = 58.284
-
-[node name="AnimatedSprite2D" parent="Enemies/Aswang6" index="12"]
-frame = 2
-
 [node name="Aswang8" parent="Enemies" instance=ExtResource("6_rys71")]
 position = Vector2(475, 948)
-
-[node name="StatsManager" parent="Enemies/Aswang8" index="5"]
-Level = 2.0
-MaxHealth = 374.82
-Defense = 29.623
-Damage = 58.284
-
-[node name="AnimatedSprite2D" parent="Enemies/Aswang8" index="12"]
-frame = 2
 
 [node name="Player" parent="." instance=ExtResource("7_ggetb")]
 position = Vector2(117, 60)
@@ -893,11 +947,9 @@ position = Vector2(6, -15)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("10_miy4r")
-Quest = ExtResource("11_4mgj7")
+Quest = null
 Mode = 0
-ShouldInteract = true
-InteractionLabel = "Interact"
-DialogueResource = ExtResource("12_n7j3j")
+ShouldInteract = false
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/QuestTrigger"]
@@ -907,11 +959,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
 
-[node name="InteractionUI" type="Control" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("13_q1tv5")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("14_xhmq0")
+[node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("13_q1tv5")]
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -1069,6 +1117,7 @@ navigation_polygon = SubResource("NavigationPolygon_d2rhh")
 
 [node name="StoryTeller" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
+visible = false
 position = Vector2(527, 1640)
 collision_mask = 15
 script = ExtResource("15_1ay2m")
@@ -1127,6 +1176,18 @@ offset_top = -32.0
 offset_right = -1.0
 offset_bottom = -32.0
 
+[node name="PoofParticles" type="GPUParticles2D" parent="StoryTeller"]
+material = SubResource("CanvasItemMaterial_n7j3j")
+position = Vector2(0, -13)
+emitting = false
+amount = 20
+texture = ExtResource("21_n7j3j")
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.9
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_ol0cl")
+
 [node name="sfxBackground" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("23_585h4")
@@ -1134,9 +1195,9 @@ autoplay = true
 bus = &"Music"
 parameters/looping = true
 
-[editable path="Enemies/Aswang3"]
-[editable path="Enemies/Aswang4"]
-[editable path="Enemies/Aswang5"]
-[editable path="Enemies/Aswang6"]
-[editable path="Enemies/Aswang8"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_52t3j")
+}
+
 [editable path="StoryTeller/DialogueTrigger/Node2D/InteractionUI"]
