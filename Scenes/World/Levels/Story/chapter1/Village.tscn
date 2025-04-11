@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=4 uid="uid://c2qx74ig42sum"]
+[gd_scene load_steps=95 format=4 uid="uid://c2qx74ig42sum"]
 
 [ext_resource type="Script" uid="uid://xi5ph3oued7k" path="res://Scripts/World/Levels/Story/Chapter1/Village.cs" id="1_yyi1k"]
 [ext_resource type="TileSet" uid="uid://wuwsi02f3fft" path="res://resources/tilesets/intramuros.tres" id="2_imb2w"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://cljpwqykcd03o" path="res://resources/dialogues/chapter_1/1.4.dialogue" id="8_qboe2"]
 [ext_resource type="Resource" uid="uid://dr732yvh2p2me" path="res://resources/dialogues/chapter_1/1.5.dialogue" id="13_yyi1k"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="14_2eimf"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="19_lesfh"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="20_tjaeu"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="21_lmktk"]
 [ext_resource type="Resource" uid="uid://clfbur06xipdm" path="res://resources/loot_tables/10.tres" id="23_0d1sk"]
@@ -21,11 +22,13 @@
 [ext_resource type="Resource" uid="uid://bx16wb3x71qgf" path="res://resources/loot_tables/4.tres" id="24_akscv"]
 [ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="26_0d1sk"]
 [ext_resource type="AudioStream" uid="uid://deewooh6kgx36" path="res://assets/audio/music/village_bgm.ogg" id="27_akscv"]
+[ext_resource type="Resource" uid="uid://b8egfkscgqbcp" path="res://resources/dialogues/chapter_1/1.6.dialogue" id="27_lesfh"]
 [ext_resource type="PackedScene" uid="uid://6rk1l15nvvdr" path="res://Scenes/World/PuzzleComponent/TorchPuzzleManager.tscn" id="27_lmktk"]
 [ext_resource type="PackedScene" uid="uid://dtqgojjodmope" path="res://Scenes/World/PuzzleComponent/StreetLight.tscn" id="28_lesfh"]
 [ext_resource type="PackedScene" uid="uid://vsehi4t73af5" path="res://Scenes/Entities/Characters/Mayor.tscn" id="29_qjdf3"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="30_kk6yg"]
 [ext_resource type="PackedScene" uid="uid://plrv66khta1y" path="res://Scenes/Entities/Characters/Rudy.tscn" id="30_qjdf3"]
+[ext_resource type="Resource" uid="uid://ba4jrntt5jygn" path="res://resources/dialogues/chapter_1/1.7.dialogue" id="30_u8kkp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8vc12"]
 radius = 33.2415
@@ -38,6 +41,12 @@ size = Vector2(177.25, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qboe2"]
 size = Vector2(55.25, 21.25)
+
+[sub_resource type="Resource" id="Resource_qydlh"]
+script = ExtResource("19_lesfh")
+Type = 2
+Description = "Look for the Mayor if he's in the vicinity or not."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xh25p"]
 size = Vector2(54, 20)
@@ -326,7 +335,6 @@ tile_map_data = PackedByteArray("AAAGABIAAQACAAUAAAAHABIAAQADAAUAAAADABIAAQAAAAU
 tile_set = ExtResource("4_cgijk")
 
 [node name="LeverManager" parent="." instance=ExtResource("6_xh25p")]
-unique_name_in_owner = true
 position = Vector2(555, 291)
 TorchesPath = NodePath("../torch")
 
@@ -356,7 +364,6 @@ Torches = [NodePath("../../torch/Torch2"), NodePath("../../torch/Torch3")]
 polygon = PackedVector2Array(16, 12, 8, 1005, 1440, 997, 1419, 29, 19, -6, 1594, -10, 1541, 1052, -18, 1026, -70, -14, 11, -74)
 
 [node name="LightPuzzle" parent="." instance=ExtResource("27_lmktk")]
-unique_name_in_owner = true
 position = Vector2(766, 782)
 
 [node name="Light" parent="LightPuzzle" instance=ExtResource("28_lesfh")]
@@ -414,7 +421,9 @@ collision_mask = 4
 script = ExtResource("6_r45d3")
 Quest = ExtResource("7_tjaeu")
 Mode = 0
-ShouldInteract = false
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("8_qboe2")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
@@ -422,8 +431,11 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_1dpy7")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
+[node name="Node2D" type="Node2D" parent="QuestTrigger"]
+
+[node name="InteractionUI" parent="QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
+
 [node name="DialogueTrigger" type="Area2D" parent="."]
-unique_name_in_owner = true
 position = Vector2(106, 179)
 collision_layer = 0
 collision_mask = 4
@@ -437,7 +449,6 @@ shape = SubResource("RectangleShape2D_tjaeu")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="TransitionArea" type="Area2D" parent="."]
-unique_name_in_owner = true
 visible = false
 position = Vector2(95, 53)
 collision_layer = 0
@@ -451,7 +462,6 @@ position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_qboe2")
 
 [node name="QuestTrigger2" type="Area2D" parent="."]
-unique_name_in_owner = true
 visible = false
 position = Vector2(95, 53)
 collision_layer = 16
@@ -460,7 +470,7 @@ script = ExtResource("6_r45d3")
 Quest = ExtResource("7_tjaeu")
 Mode = 1
 ShouldInteract = false
-Objective = null
+Objective = SubResource("Resource_qydlh")
 ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -469,13 +479,11 @@ shape = SubResource("RectangleShape2D_xh25p")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Chest" parent="." instance=ExtResource("26_0d1sk")]
-unique_name_in_owner = true
 visible = false
 position = Vector2(576, 324)
 Loot = ExtResource("23_0d1sk")
 
 [node name="Chest2" parent="." instance=ExtResource("26_0d1sk")]
-unique_name_in_owner = true
 visible = false
 position = Vector2(845, 739)
 Loot = ExtResource("24_akscv")
@@ -483,8 +491,7 @@ Loot = ExtResource("24_akscv")
 [node name="Player" parent="." instance=ExtResource("4_imb2w")]
 position = Vector2(83, 120)
 
-[node name="sfxBackground" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("27_akscv")
 autoplay = true
 bus = &"Music"
@@ -677,8 +684,10 @@ collision_mask = 4
 script = ExtResource("6_r45d3")
 Quest = ExtResource("7_tjaeu")
 Mode = 1
-ShouldInteract = false
-Objective = null
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("27_lesfh")
+Objective = SubResource("Resource_qydlh")
 ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -707,8 +716,10 @@ collision_mask = 4
 script = ExtResource("6_r45d3")
 Quest = ExtResource("7_tjaeu")
 Mode = 1
-ShouldInteract = false
-Objective = null
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("30_u8kkp")
+Objective = SubResource("Resource_qydlh")
 ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 

@@ -1,10 +1,5 @@
 ~ start
 do CurrentScene.mayorMarker.Toggle(false)
-Mang Rudy: Mayor?
-Mayor: Rudy...
-Mang Rudy: What are you doing here?
-Mayor: You should've known better, [wait=.5]Rudy.
-Mang Rudy: Mayor![wait=.5]
 Alex: Mayor!
 Mayor: Alex...? How did you know I would be in Everfield City Courtyard?
 Mayor: [wait=.5]Hmm... (Kevin might have spilled the beans already. Just as expected.)

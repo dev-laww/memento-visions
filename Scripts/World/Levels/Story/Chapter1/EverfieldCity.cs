@@ -12,13 +12,12 @@ namespace Game.World;
 [Scene]
 public partial class EverfieldCity : BaseLevel
 {
-    [Node] private Entity Chief2;
-    [Node] private TransitionArea TransitionArea;
-    [Node] private TorchPuzzleManager TorchSequence;
-    [Node] private PressurePlate Plate, Plate2;
-    [Node] private Chest Chest,Chest2;
+    [Node] private Entity kevin;
+    [Node] private TransitionArea transitionArea;
+    [Node] private TorchPuzzleManager torchSequence;
+    [Node] private PressurePlate plate, plate2;
+    [Node] private Chest chest,chest2;
     [Node] private ScreenMarker kevinMarker,jeepMarker;
-    private bool plate1, plate2;
     private Quest quest = QuestRegistry.Get("quest:aswang_hunt");
     private Quest quest1 = QuestRegistry.Get("quest:whispers_in_intramuros");
 
@@ -33,10 +32,10 @@ public partial class EverfieldCity : BaseLevel
     {
         base._Ready();
         QuestManager.QuestUpdated += OnQuestUpdated;
-        TorchSequence.PuzzleSolved += OnPuzzleSolved;
-        Plate.Activated += OnPlatePressed;
-        Plate2.Activated += OnPlatePressed;
-        TransitionArea.Toggle(false); 
+        torchSequence.PuzzleSolved += OnPuzzleSolved;
+        plate.Activated += OnPlatePressed;
+        plate2.Activated += OnPlatePressed;
+        transitionArea.Toggle(false); 
         jeepMarker.Toggle(false);
         kevinMarker.Toggle(false);
 
@@ -44,29 +43,29 @@ public partial class EverfieldCity : BaseLevel
     
     private void OnPuzzleSolved()
     {
-      Chest.Visible = true; 
+      chest.Visible = true; 
       
     }
 
     public void EnableTransitionArea()
     {
         kevinMarker.Toggle(false);
-        TransitionArea.Toggle(true);
+        transitionArea.Toggle(true);
         jeepMarker.Toggle(true);
     }
     private void OnPlatePressed()
     {
-        if (Plate.isActive && Plate2.isActive)
+        if (plate.isActive && plate2.isActive)
         {
-            Chest2.Visible = true; 
+            chest2.Visible = true; 
         }
     }
 
     private void OnQuestUpdated(Quest updatedQuest)
     {
-        if (quest.Objectives[0].Completed && !Chief2.Visible)
+        if (quest.Objectives[0].Completed && !kevin.Visible)
         {
-            Chief2.Visible = true;
+            kevin.Visible = true;
             kevinMarker.Toggle(true);
             QuestManager.QuestUpdated -= OnQuestUpdated;
         }
