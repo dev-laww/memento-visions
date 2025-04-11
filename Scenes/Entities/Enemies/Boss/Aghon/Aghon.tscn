@@ -1,4 +1,4 @@
-[gd_scene load_steps=196 format=3 uid="uid://c6ddutu3xqvkn"]
+[gd_scene load_steps=203 format=3 uid="uid://c6ddutu3xqvkn"]
 
 [ext_resource type="Script" uid="uid://0pdu2f5btf1o" path="res://Scripts/Entities/Enemies/Boss/Aghon/Aghon.cs" id="1_bsq0j"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_hbkja"]
@@ -13,10 +13,38 @@
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="7_a1nrq"]
 [ext_resource type="Texture2D" uid="uid://fauryybyao36" path="res://assets/entities/enemy/boss/aghon/phase_1.png" id="8_lpr6g"]
 [ext_resource type="Texture2D" uid="uid://fhanrxb1ato3" path="res://assets/entities/enemy/boss/aghon/transformation.png" id="9_lpr6g"]
+[ext_resource type="Resource" uid="uid://4xxavg0do20k" path="res://resources/items/material/static_conductor.tres" id="10_nbnbd"]
+[ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="11_iebin"]
+[ext_resource type="Resource" uid="uid://dmbnoq0p8nta0" path="res://resources/items/material/thunder_essence.tres" id="12_7wnkp"]
 [ext_resource type="Texture2D" uid="uid://c5tgsxsqei37t" path="res://assets/entities/enemy/boss/aghon/phase_2.png" id="12_lt36k"]
+[ext_resource type="Resource" uid="uid://iw7urxt8gbm0" path="res://resources/items/material/spectral_ash.tres" id="13_da5wk"]
 [ext_resource type="AudioStream" uid="uid://tun085q036cg" path="res://assets/audio/enemy/aghon_cloud.wav" id="17_pkc2u"]
 [ext_resource type="AudioStream" uid="uid://dtdt8li5hv11f" path="res://assets/audio/enemy/aghon_punch.wav" id="18_nbnbd"]
 [ext_resource type="AudioStream" uid="uid://b8mh6t4gf6s45" path="res://assets/audio/enemy/aghon_rod.wav" id="19_iebin"]
+
+[sub_resource type="Resource" id="Resource_itx33"]
+script = ExtResource("11_iebin")
+Item = ExtResource("10_nbnbd")
+Min = 1
+Max = 3
+Weight = 2
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_bb1f4"]
+script = ExtResource("11_iebin")
+Item = ExtResource("12_7wnkp")
+Min = 1
+Max = 1
+Weight = 1
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_w3llm"]
+script = ExtResource("11_iebin")
+Item = ExtResource("13_da5wk")
+Min = 1
+Max = 3
+Weight = 2
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lt36k"]
 size = Vector2(28, 44)
@@ -1812,7 +1840,7 @@ StatsManager = NodePath("../StatsManager")
 metadata/_custom_type_script = "uid://nuxtah4mmhg5"
 
 [node name="DropManager" parent="." instance=ExtResource("5_lpr6g")]
-Drops = []
+Drops = [SubResource("Resource_itx33"), SubResource("Resource_bb1f4"), SubResource("Resource_w3llm")]
 
 [node name="PathFindManager" parent="." node_paths=PackedStringArray("VelocityManager") instance=ExtResource("6_a1nrq")]
 VelocityManager = NodePath("../VelocityManager")
@@ -1839,6 +1867,7 @@ position = Vector2(0, -23)
 sprite_frames = SubResource("SpriteFrames_lpr6g")
 animation = &"south"
 autoplay = "south"
+frame = 1
 
 [node name="SecondPhase" type="AnimatedSprite2D" parent="Animations"]
 visible = false
