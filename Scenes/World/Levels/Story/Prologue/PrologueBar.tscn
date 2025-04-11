@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://3td8x8h36elv"]
+[gd_scene load_steps=28 format=4 uid="uid://3td8x8h36elv"]
 
 [ext_resource type="Script" uid="uid://bw7smwgpceo61" path="res://Scripts/World/Levels/Story/PrologueBar.cs" id="1_h8tdj"]
 [ext_resource type="Script" uid="uid://d3vvbqw6ln6if" path="res://Scripts/UI/Screens/Cinematic.cs" id="2_ete42"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="4_18ej6"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="5_s5dkd"]
 [ext_resource type="Resource" uid="uid://0suhta3uejmr" path="res://resources/quests/Prologue/bar_interaction.tres" id="6_uf73d"]
-[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="7_2131k"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="8_8anoo"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="9_djlbh"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="10_sx5dq"]
@@ -33,12 +32,6 @@ border_size = 1000.0
 agent_radius = 8.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hn57r"]
-
-[sub_resource type="Resource" id="Resource_ccy1y"]
-script = ExtResource("7_2131k")
-Type = 2
-Description = "Head to the Haunted School – The real horror begins."
-metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lx1uq"]
 
@@ -309,7 +302,7 @@ position = Vector2(132, 51)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("4_18ej6")
-TargetScene = "uid://dj8wdwrvixxlp"
+TargetScene = "uid://c64wsg4p1yvco"
 metadata/_custom_type_script = "uid://davlg2u8drdh4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
@@ -322,7 +315,6 @@ script = ExtResource("5_s5dkd")
 Quest = ExtResource("6_uf73d")
 Mode = 1
 ShouldInteract = false
-Objective = SubResource("Resource_ccy1y")
 ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -338,9 +330,6 @@ position = Vector2(162, 58)
 
 [node name="HeadsUpDisplay" parent="Player" index="2"]
 visible = false
-
-[node name="Idle" parent="Player/Center" index="0"]
-frame = 2
 
 [node name="Chief" parent="." instance=ExtResource("10_sx5dq")]
 position = Vector2(678, 489)

@@ -15,7 +15,7 @@ public class Save
 
     [JsonProperty("current_chapter", DefaultValueHandling = DefaultValueHandling.Populate),
      DefaultValue("prologue_0.1")]
-    public string CurrentChapter { get; private set; }
+    public string CurrentChapter { get; private set; } = "prologue_0.1";
 
     [JsonProperty("quests")] private List<string> quests = [];
 

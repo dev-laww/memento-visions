@@ -37,8 +37,11 @@ public partial class PrologueBar : BaseLevel
         DialogueManager.ShowDialogueBalloon(dialouge);
     }
 
-    private void ShowScreenMarker()
+    private void FinishDialogue()
     {
-        chiefMarker.Toggle(true);
+        chiefMarker.Toggle(false);
+        transitionArea.Toggle(true);
+        isInteracted = true;
+        GetTree().CreateTimer(10f).Timeout += () => screenMarker.Toggle(true);
     }
 }
