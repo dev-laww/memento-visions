@@ -2,6 +2,7 @@ using System;
 using Game.Autoload;
 using Godot;
 using Game.Components;
+using Game.Data;
 using Game.Entities;
 using Game.World.Puzzle;
 using GodotUtilities;
@@ -20,6 +21,8 @@ public partial class Village : BaseLevel
     [Node] private Entity rudy, mayor;
     [Node] private ScreenMarker mayorMarker;
     [Node] private ResourcePreloader resourcePreloader;
+    [Node] private QuestTrigger rudyQuestTrigger;
+    private Quest quest = QuestRegistry.Get("quest:find_mayor");
     public override void _Notification(int what)
     {
         if (what == NotificationSceneInstantiated && !Engine.IsEditorHint())
@@ -33,8 +36,18 @@ public partial class Village : BaseLevel
         transitionArea.Toggle(false);
         mayorMarker.Toggle(false);
         rudy.Visible = false;
+        rudyQuestTrigger.Monitoring = false;
         leverManager.IsComplete += OnLeverPuzzleComplete;
         lightPuzzle.PuzzleSolved += OnLightPuzzleComplete;
+        QuestManager.QuestUpdated += OnQuestUpdated;
+    }
+    
+    private void OnQuestUpdated(Quest quest)
+    {
+        if (this.quest.Objectives[1].Completed)
+        {
+            rudyQuestTrigger.Monitoring = true;
+        }
     }
 
     private void OnLeverPuzzleComplete()
