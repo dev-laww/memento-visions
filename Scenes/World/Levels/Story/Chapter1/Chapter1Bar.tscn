@@ -128,8 +128,7 @@ position = Vector2(271, 258)
 
 [node name="sfx" type="Node2D" parent="."]
 
-[node name="sfxBar" type="AudioStreamPlayer2D" parent="sfx"]
-unique_name_in_owner = true
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="sfx"]
 stream = ExtResource("17_cgm6k")
 autoplay = true
 bus = &"Music"

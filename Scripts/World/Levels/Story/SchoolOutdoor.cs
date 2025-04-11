@@ -15,6 +15,7 @@ public partial class SchoolOutdoor : BaseLevel
     public int ObjectiveInteracted = 0;
     [Node] TransitionArea transitionArea;
     [Node] AnimationPlayer animationPlayer;
+    [Node] private Node2D enemies;
     private Quest quest = QuestRegistry.Get("quest:night_of_shadows");
 
 
@@ -48,5 +49,11 @@ public partial class SchoolOutdoor : BaseLevel
     {
         var dialogue = ResourceLoader.Load<Resource>("res://resources/dialogues/prologue/1.5.dialogue");
         DialogueManager.ShowDialogueBalloon(dialogue);
+    }
+
+    public override void _ExitTree()
+    {
+        GD.Print("Exiting tree");
+        enemies.QueueFree();
     }
 }

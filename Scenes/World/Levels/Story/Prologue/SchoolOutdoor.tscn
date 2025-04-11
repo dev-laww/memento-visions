@@ -1,4 +1,4 @@
-[gd_scene load_steps=131 format=4 uid="uid://v06x46jch2vm"]
+[gd_scene load_steps=133 format=4 uid="uid://v06x46jch2vm"]
 
 [ext_resource type="Script" uid="uid://dcmogr8vudmpc" path="res://Scripts/World/Levels/Story/SchoolOutdoor.cs" id="1_xhmq0"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_ol0cl"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="8_yo2bk"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="9_0rbke"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="10_miy4r"]
+[ext_resource type="Resource" uid="uid://bb0a0gl7qcddj" path="res://resources/quests/Prologue/night_of_shadows.tres" id="11_n7j3j"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="13_8cdkb"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="13_q1tv5"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="14_58kt4"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="15_1ay2m"]
@@ -947,7 +949,7 @@ position = Vector2(6, -15)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("10_miy4r")
-Quest = null
+Quest = ExtResource("11_n7j3j")
 Mode = 0
 ShouldInteract = false
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
@@ -959,7 +961,11 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
 
-[node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("13_q1tv5")]
+[node name="InteractionUI" type="Control" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("13_q1tv5")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("13_8cdkb")
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -1116,7 +1122,6 @@ navigation_polygon = SubResource("NavigationPolygon_enbay")
 navigation_polygon = SubResource("NavigationPolygon_d2rhh")
 
 [node name="StoryTeller" type="CharacterBody2D" parent="."]
-unique_name_in_owner = true
 visible = false
 position = Vector2(527, 1640)
 collision_mask = 15
@@ -1143,7 +1148,7 @@ texture_filter = 2
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 2
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StoryTeller"]
 libraries = {
@@ -1188,8 +1193,7 @@ explosiveness = 0.9
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_ol0cl")
 
-[node name="sfxBackground" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("23_585h4")
 autoplay = true
 bus = &"Music"
