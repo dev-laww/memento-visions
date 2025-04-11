@@ -14,8 +14,8 @@
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="10_grhu3"]
 [ext_resource type="PackedScene" uid="uid://hndxrbqjf4gi" path="res://Scenes/Entities/Characters/Manny.tscn" id="10_tjhma"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="11_dclhn"]
+[ext_resource type="Resource" uid="uid://bvch8blxsmpmn" path="res://resources/dialogues/chapter_1/1.2.dialogue" id="11_g5ix3"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="11_hn08j"]
-[ext_resource type="Resource" uid="uid://bvch8blxsmpmn" path="res://resources/dialogues/chapter_1/1.2.dialogue" id="11_pc0uh"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="12_hf60o"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="13_4wwhf"]
 [ext_resource type="Resource" uid="uid://d38r8diakp5jt" path="res://resources/dialogues/chapter_1/npc_1.dialogue" id="13_8kgvc"]
@@ -26,7 +26,7 @@
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="16_up7eu"]
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/characters/npc/story_teller.png" id="17_kycha"]
 [ext_resource type="PackedScene" uid="uid://b08ofhkn8vp36" path="res://Scenes/Entities/Characters/Kevin.tscn" id="18_bhrir"]
-[ext_resource type="Resource" uid="uid://dfhk5ud22nohe" path="res://resources/dialogues/chapter_1/1.3.dialogue" id="19_pje1s"]
+[ext_resource type="Resource" uid="uid://dfhk5ud22nohe" path="res://resources/dialogues/chapter_1/1.3.dialogue" id="19_hsept"]
 [ext_resource type="Resource" uid="uid://ctatcaqd2g4ox" path="res://resources/dialogues/chapter_1/1.1.dialogue" id="20_2ke1t"]
 [ext_resource type="PackedScene" uid="uid://brd2wy8vh2ts2" path="res://Scenes/Entities/Characters/Tisoy.tscn" id="22_cmjjt"]
 [ext_resource type="Resource" uid="uid://cudjo0ldkq0qo" path="res://resources/loot_tables/3.tres" id="24_3h1fx"]
@@ -1083,7 +1083,7 @@ Quest = ExtResource("6_hf60o")
 Mode = 0
 ShouldInteract = true
 InteractionLabel = "Interact"
-DialogueResource = ExtResource("11_pc0uh")
+DialogueResource = ExtResource("11_g5ix3")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Manny/QuestTrigger"]
@@ -1143,6 +1143,7 @@ position = Vector2(0, -33)
 metadata/_edit_use_anchors_ = true
 
 [node name="Kevin" parent="npc" instance=ExtResource("18_bhrir")]
+unique_name_in_owner = true
 visible = false
 position = Vector2(-112, 971)
 
@@ -1156,7 +1157,7 @@ Quest = ExtResource("8_7adkd")
 Mode = 0
 ShouldInteract = true
 InteractionLabel = "Interact"
-DialogueResource = ExtResource("19_pje1s")
+DialogueResource = ExtResource("19_hsept")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npc/Kevin/QuestTrigger"]
@@ -1168,7 +1169,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="InteractionUI" parent="npc/Kevin/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
-[node name="KevinMarker" parent="npc/Kevin" instance=ExtResource("13_4wwhf")]
+[node name="kevinMarker" parent="npc/Kevin" instance=ExtResource("13_4wwhf")]
 unique_name_in_owner = true
 position = Vector2(-112, 952)
 
@@ -1185,102 +1186,36 @@ polygon = PackedVector2Array(-774, -97, -806, 1437, 175, 1433, 179, 1242, 1539, 
 position = Vector2(266, 615)
 
 [node name="Aswang" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(-275, 485)
+position = Vector2(-473, 316)
 EnemyName = ""
-
-[node name="StatsManager" parent="Enemy/Aswang" index="5"]
-Level = 4.0
-MaxHealth = 213.377
-Defense = 57.3773
-Damage = 39.0
-
-[node name="AnimatedSprite2D" parent="Enemy/Aswang" index="12"]
-frame = 3
 
 [node name="Aswang2" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(87, 58)
+position = Vector2(63, 167)
 EnemyName = ""
-
-[node name="StatsManager" parent="Enemy/Aswang2" index="5"]
-Level = 3.0
-MaxHealth = 138.674
-Defense = 37.0271
-Damage = 24.5885
-
-[node name="AnimatedSprite2D" parent="Enemy/Aswang2" index="12"]
-frame = 3
 
 [node name="Aswang3" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(123, 197)
+position = Vector2(378, 139)
 EnemyName = ""
-
-[node name="StatsManager" parent="Enemy/Aswang3" index="5"]
-Level = 3.0
-MaxHealth = 138.674
-Defense = 37.0271
-Damage = 24.5885
-
-[node name="AnimatedSprite2D" parent="Enemy/Aswang3" index="12"]
-frame = 3
 
 [node name="Aswang4" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(49, -155)
+position = Vector2(78, -81)
 EnemyName = ""
-
-[node name="StatsManager" parent="Enemy/Aswang4" index="5"]
-Level = 4.0
-MaxHealth = 213.377
-Defense = 57.3773
-Damage = 39.0
-
-[node name="AnimatedSprite2D" parent="Enemy/Aswang4" index="12"]
-frame = 3
 
 [node name="Aswang5" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(136, 368)
+position = Vector2(120, 458)
 EnemyName = ""
-
-[node name="AnimatedSprite2D" parent="Enemy/Aswang5" index="12"]
-frame = 3
 
 [node name="Aswang6" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(-184, 591)
+position = Vector2(-480, 584)
 EnemyName = ""
-
-[node name="StatsManager" parent="Enemy/Aswang6" index="5"]
-Level = 5.0
-MaxHealth = 291.358
-Defense = 78.6197
-Damage = 54.541
-
-[node name="AnimatedSprite2D" parent="Enemy/Aswang6" index="12"]
-frame = 3
 
 [node name="Aswang7" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(-156, 70)
+position = Vector2(-266, 114)
 EnemyName = ""
-
-[node name="StatsManager" parent="Enemy/Aswang7" index="5"]
-Level = 4.0
-MaxHealth = 213.377
-Defense = 57.3773
-Damage = 39.0
-
-[node name="AnimatedSprite2D" parent="Enemy/Aswang7" index="12"]
-frame = 3
 
 [node name="Aswang8" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(-34, 484)
+position = Vector2(-225, 499)
 EnemyName = ""
-
-[node name="StatsManager" parent="Enemy/Aswang8" index="5"]
-Level = 5.0
-MaxHealth = 291.358
-Defense = 78.6197
-Damage = 54.541
-
-[node name="AnimatedSprite2D" parent="Enemy/Aswang8" index="12"]
-frame = 3
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -1581,6 +1516,7 @@ navigation_polygon = SubResource("NavigationPolygon_lk617")
 navigation_polygon = SubResource("NavigationPolygon_525ri")
 
 [node name="TransitionArea" type="Area2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(-375, 1244)
 collision_layer = 0
 collision_mask = 4
@@ -1592,7 +1528,7 @@ metadata/_custom_type_script = "uid://davlg2u8drdh4"
 position = Vector2(9, -30)
 shape = SubResource("RectangleShape2D_hf60o")
 
-[node name="JeepMarker" parent="TransitionArea" instance=ExtResource("13_4wwhf")]
+[node name="jeepMarker" parent="TransitionArea" instance=ExtResource("13_4wwhf")]
 unique_name_in_owner = true
 position = Vector2(-361, 1160)
 
@@ -1623,8 +1559,7 @@ texture_filter = 2
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 3
-metadata/_custom_type_script = "uid://onowuhrhhpuc"
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StoryTeller"]
 libraries = {
@@ -1656,6 +1591,7 @@ position = Vector2(0, -32)
 [node name="InteractionUI" parent="StoryTeller/DialogueTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
 [node name="Chest" parent="." instance=ExtResource("27_7ym34")]
+unique_name_in_owner = true
 visible = false
 position = Vector2(57, 452)
 Loot = ExtResource("24_7ym34")
@@ -1684,6 +1620,7 @@ position = Vector2(-113, 59)
 position = Vector2(5, 59)
 
 [node name="TorchSequence" parent="." instance=ExtResource("28_e2cbw")]
+unique_name_in_owner = true
 position = Vector2(74, 421)
 
 [node name="Light" parent="TorchSequence" instance=ExtResource("29_ro4io")]
@@ -1701,16 +1638,8 @@ position = Vector2(-108, 165)
 [node name="Player" parent="." instance=ExtResource("12_hf60o")]
 position = Vector2(626, 30)
 
-[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+[node name="sfxBackground" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("35_ogyjm")
 autoplay = true
 bus = &"Music"
-
-[editable path="Enemy/Aswang"]
-[editable path="Enemy/Aswang2"]
-[editable path="Enemy/Aswang3"]
-[editable path="Enemy/Aswang4"]
-[editable path="Enemy/Aswang5"]
-[editable path="Enemy/Aswang6"]
-[editable path="Enemy/Aswang7"]
-[editable path="Enemy/Aswang8"]
