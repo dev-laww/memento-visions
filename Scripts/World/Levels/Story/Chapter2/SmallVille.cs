@@ -26,6 +26,7 @@ public partial class SmallVille : Node2D
         base._Ready();
         torchSequence.PuzzleSolved += OnPuzzleSolved;
         witchMarker.Toggle(false);
+        ShowDialogue();
     }
     
     private void OnPuzzleSolved()

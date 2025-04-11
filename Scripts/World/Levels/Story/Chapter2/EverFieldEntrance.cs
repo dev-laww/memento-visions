@@ -4,6 +4,7 @@ using Game.Autoload;
 using Game.Components;
 using Game.Data;
 using GodotUtilities;
+using DialogueManagerRuntime;
 
 namespace Game.World.Levels.Chapter2;
 [Scene]
@@ -25,6 +26,7 @@ public partial class EverFieldEntrance : Node2D
         transitionArea.Toggle(false);
         
         QuestManager.QuestCompleted += OnCompleted; ;
+        ShowDialogue();
     }
     
    private void OnCompleted(Quest quest)
@@ -33,6 +35,11 @@ public partial class EverFieldEntrance : Node2D
            transitionArea.Toggle(true);
        
    }
-   
-    
+    private static void ShowDialogue()
+    {
+        var dialogue = ResourceLoader.Load<Resource>("res://resources/dialogues/chapter_2/2.3.dialogue");
+        DialogueManager.ShowDialogueBalloon(dialogue);
+    }
+
+
 }

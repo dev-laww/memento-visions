@@ -2,6 +2,8 @@ using Godot;
 using Game.Components;
 using Game.Entities;
 using GodotUtilities;
+using DialogueManagerRuntime;
+using Game.Autoload;
 
 namespace Game.World;
 
@@ -33,5 +35,14 @@ public partial class SchoolOutdoor : BaseLevel
         ((StoryTeller)StoryTeller).Work();
         StoryTeller.Visible = true;
         isStoryTellerVisible = true;
+    }
+    public override void _Ready()
+    {
+        ShowDialogue();
+    }
+    private static void ShowDialogue()
+    {
+        var dialogue = ResourceLoader.Load<Resource>("res://resources/dialogues/prologue/1.5.dialogue");
+        DialogueManager.ShowDialogueBalloon(dialogue);
     }
 }
