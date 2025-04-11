@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=4 uid="uid://v06x46jch2vm"]
+[gd_scene load_steps=128 format=4 uid="uid://v06x46jch2vm"]
 
 [ext_resource type="Script" uid="uid://dcmogr8vudmpc" path="res://Scripts/World/Levels/Story/SchoolOutdoor.cs" id="1_xhmq0"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_ol0cl"]
@@ -10,14 +10,15 @@
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="8_yo2bk"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="9_0rbke"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="10_miy4r"]
-[ext_resource type="Resource" uid="uid://bb0a0gl7qcddj" path="res://resources/quests/prologue/night_of_shadows.tres" id="11_4mgj7"]
+[ext_resource type="Resource" uid="uid://bb0a0gl7qcddj" path="res://resources/quests/Prologue/night_of_shadows.tres" id="11_4mgj7"]
+[ext_resource type="Resource" uid="uid://yh060giw306t" path="res://resources/dialogues/prologue/1.6.dialogue" id="12_xhmq0"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="13_q1tv5"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="14_58kt4"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="14_ol0cl"]
 [ext_resource type="Script" uid="uid://byquo3o3ye0no" path="res://Scripts/Entities/Characters/StoryTeller.cs" id="15_1ay2m"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="16_rrn8q"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="17_icqnh"]
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/characters/npc/story_teller.png" id="18_dt0ca"]
-[ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="19_gvl3m"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="20_tqaex"]
 [ext_resource type="Resource" uid="uid://bj8l78qd3fsks" path="res://resources/dialogues/prologue/1.7.dialogue" id="21_afnmx"]
 [ext_resource type="Resource" uid="uid://cqqlth0pruv27" path="res://resources/dialogues/prologue/1.5.dialogue" id="22_k87u7"]
@@ -819,65 +820,60 @@ position = Vector2(770, 1648)
 
 [node name="StatsManager" parent="Enemies/Aswang3" index="5"]
 Level = 3.0
-MaxHealth = 381.125
-Defense = 30.8559
-Damage = 60.9809
+MaxHealth = 427.35
+Defense = 37.0271
+Damage = 69.177
 
-[node name="SmoothAnimatedSprite2D" parent="Enemies/Aswang3" index="12"]
-material = null
-frame = 2
+[node name="AnimatedSprite2D" parent="Enemies/Aswang3" index="12"]
+frame = 0
 
 [node name="Aswang4" parent="Enemies" instance=ExtResource("6_rys71")]
 position = Vector2(185, 1619)
 
 [node name="StatsManager" parent="Enemies/Aswang4" index="5"]
 Level = 3.0
-MaxHealth = 381.125
-Defense = 30.8559
-Damage = 60.9809
+MaxHealth = 427.35
+Defense = 37.0271
+Damage = 69.177
 
-[node name="SmoothAnimatedSprite2D" parent="Enemies/Aswang4" index="12"]
-material = null
-frame = 2
+[node name="AnimatedSprite2D" parent="Enemies/Aswang4" index="12"]
+frame = 0
 
 [node name="Aswang5" parent="Enemies" instance=ExtResource("6_rys71")]
 position = Vector2(387, 316)
 
 [node name="StatsManager" parent="Enemies/Aswang5" index="5"]
 Level = 2.0
-MaxHealth = 262.41
-Defense = 14.8115
-Damage = 39.142
+MaxHealth = 284.892
+Defense = 17.7738
+Damage = 42.9704
 
-[node name="SmoothAnimatedSprite2D" parent="Enemies/Aswang5" index="12"]
-material = null
-frame = 2
+[node name="AnimatedSprite2D" parent="Enemies/Aswang5" index="12"]
+frame = 0
 
 [node name="Aswang6" parent="Enemies" instance=ExtResource("6_rys71")]
 position = Vector2(637, 359)
 
 [node name="StatsManager" parent="Enemies/Aswang6" index="5"]
 Level = 2.0
-MaxHealth = 262.41
-Defense = 14.8115
-Damage = 39.142
+MaxHealth = 284.892
+Defense = 17.7738
+Damage = 42.9704
 
-[node name="SmoothAnimatedSprite2D" parent="Enemies/Aswang6" index="12"]
-material = null
-frame = 2
+[node name="AnimatedSprite2D" parent="Enemies/Aswang6" index="12"]
+frame = 0
 
 [node name="Aswang8" parent="Enemies" instance=ExtResource("6_rys71")]
 position = Vector2(475, 948)
 
 [node name="StatsManager" parent="Enemies/Aswang8" index="5"]
 Level = 2.0
-MaxHealth = 262.41
-Defense = 14.8115
-Damage = 39.142
+MaxHealth = 284.892
+Defense = 17.7738
+Damage = 42.9704
 
-[node name="SmoothAnimatedSprite2D" parent="Enemies/Aswang8" index="12"]
-material = null
-frame = 2
+[node name="AnimatedSprite2D" parent="Enemies/Aswang8" index="12"]
+frame = 0
 
 [node name="Player" parent="." instance=ExtResource("7_ggetb")]
 position = Vector2(117, 60)
@@ -903,7 +899,9 @@ collision_mask = 4
 script = ExtResource("10_miy4r")
 Quest = ExtResource("11_4mgj7")
 Mode = 0
-ShouldInteract = false
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("12_xhmq0")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/QuestTrigger"]
@@ -913,7 +911,11 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
 
-[node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("13_q1tv5")]
+[node name="InteractionUI" type="Control" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("13_q1tv5")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("14_ol0cl")
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -1096,9 +1098,6 @@ texture_filter = 2
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 2
-script = ExtResource("19_gvl3m")
-metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StoryTeller"]
 libraries = {
@@ -1140,7 +1139,7 @@ DialogueResource = ExtResource("22_k87u7")
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialoguePrologue"]
-position = Vector2(144, 96)
+position = Vector2(211, 96)
 shape = SubResource("RectangleShape2D_ytljl")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
