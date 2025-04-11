@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=4 uid="uid://jdy1vpq1yng4"]
+[gd_scene load_steps=123 format=4 uid="uid://jdy1vpq1yng4"]
 
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="1_5yg8b"]
 [ext_resource type="Script" uid="uid://bww7pdfaugnj3" path="res://Scripts/World/Levels/Story/Chapter1/TownSquare.cs" id="1_k56vb"]
@@ -11,9 +11,13 @@
 [ext_resource type="AudioStream" uid="uid://b2bdexb2ameh7" path="res://assets/sfx/music/boss_bgm.ogg" id="6_j760s"]
 [ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/sfx/music/chapter1_bgm.ogg" id="7_8tuqj"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="7_m44gr"]
-[ext_resource type="Resource" uid="uid://bmfojvkeiy1pi" path="res://resources/quests/Chapter1/boss_quest.tres" id="9_uqojl"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="13_j760s"]
+[ext_resource type="Resource" uid="uid://dubpfapg14rna" path="res://resources/quests/Chapter1/testimony.tres" id="13_matur"]
 [ext_resource type="PackedScene" uid="uid://c6ddutu3xqvkn" path="res://Scenes/Entities/Enemies/Boss/Aghon/Aghon.tscn" id="13_uqojl"]
+[ext_resource type="Resource" uid="uid://1lif4uqpp2ca" path="res://resources/dialogues/chapter1/chapter1.8.dialogue" id="14_khwcc"]
+[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_v4bk2"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="16_76id6"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="16_matur"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_i1ehx"]
 
@@ -503,6 +507,12 @@ border_size = 256.0
 parsed_geometry_type = 1
 border_size = 256.0
 
+[sub_resource type="Resource" id="Resource_a27w3"]
+script = ExtResource("16_76id6")
+Type = 2
+Description = "Confront the mayor"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_8tuqj"]
 radius = 29.1548
 
@@ -858,15 +868,13 @@ navigation_polygon = SubResource("NavigationPolygon_okm4p")
 [node name="@NavigationRegion2D@59430" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_bgshn")
 
-[node name="sfx" type="Node2D" parent="."]
-
-[node name="bossBgm" type="AudioStreamPlayer2D" parent="sfx"]
+[node name="bossBgm" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("6_j760s")
 bus = &"Music"
 parameters/looping = true
 
-[node name="chapter1Bgm" type="AudioStreamPlayer2D" parent="sfx"]
+[node name="chapter1Bgm" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("7_8tuqj")
 autoplay = true
@@ -907,14 +915,26 @@ position = Vector2(437, 259)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("7_m44gr")
-Quest = ExtResource("9_uqojl")
-Mode = 0
-ShouldInteract = false
+Quest = ExtResource("13_matur")
+Mode = 1
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("14_khwcc")
+Objective = SubResource("Resource_a27w3")
+ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mayor/QuestTrigger"]
 shape = SubResource("CircleShape2D_8tuqj")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="Mayor/QuestTrigger"]
+
+[node name="InteractionUI" type="Control" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("15_v4bk2")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("16_matur")
 
 [node name="Player" parent="." instance=ExtResource("13_j760s")]
 position = Vector2(162, 17)
