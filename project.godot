@@ -19,7 +19,9 @@ ResourceScriptDirectories=["res://"]
 config/name="Memento Visions"
 run/main_scene="res://Scenes/Main.tscn"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="uid://b55ishkiha10s"
+config/icon="uid://j8tfbv36va6r"
 
 [audio]
 
