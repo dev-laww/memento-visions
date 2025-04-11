@@ -1,5 +1,6 @@
 using DialogueManagerRuntime;
 using Game.Autoload;
+using Game.Components;
 using Game.Data;
 using Game.Entities;
 using Godot;
@@ -16,6 +17,8 @@ public partial class TownSquare : BaseLevel
     [Node] private AudioStreamPlayer2D bossBgm;
     [Node] private AudioStreamPlayer2D chapter1Bgm;
     [Node] private StoryTeller storyTeller;
+    [Node] private ScreenMarker screenMarker;
+    [Node] private TransitionArea transitionArea;
     private Quest quest = QuestRegistry.Get("quest:boss_quest");
 
     public override void _Notification(int what)
@@ -29,12 +32,15 @@ public partial class TownSquare : BaseLevel
     public override void _Ready()
     {
         QuestManager.QuestUpdated += OnQuestUpdated;
+        screenMarker.Toggle(false);
+        transitionArea.Toggle(false);
     }
     
     private void OnQuestUpdated(Quest quest)
     {
         if (this.quest.Objectives[0].Completed)
         {
+            QuestManager.QuestUpdated -= OnQuestUpdated;
             storyTellerAnimationPlayer.Play("show_story_teller");
             var dialogue = ResourceLoader.Load<Resource>("res://resources/dialogues/chapter_1/1.9.dialogue");
             DialogueManager.ShowDialogueBalloon(dialogue);

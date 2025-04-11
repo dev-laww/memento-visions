@@ -15,7 +15,7 @@ public partial class Spear : Node2D
     private const int ELECTRIC_SHOCKS_COUNT = 5;
 
     [Node] private AnimationTree animationTree;
-    [Node] private AnimatedSprite2D smoothAnimatedSprite2D;
+    [Node] private AnimatedSprite2D animatedSprite2D;
     [Node] private AudioStreamPlayer2D sfxCloud;
     [Node] private AudioStreamPlayer2D sfxSpear;
 
@@ -38,7 +38,7 @@ public partial class Spear : Node2D
         var direction = (aghon.GlobalPosition - playerPosition).Normalized();
 
         GlobalPosition = playerPosition;
-        smoothAnimatedSprite2D.FlipH = direction.X > 0;
+        animatedSprite2D.FlipH = direction.X > 0;
 
         var telegraph = new TelegraphFactory.CircleTelegraphBuilder(canvas, playerPosition)
             .SetRadius(SPEAR_RADIUS)
