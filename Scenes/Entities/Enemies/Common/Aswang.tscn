@@ -1208,6 +1208,7 @@ position = Vector2(0, -26)
 sprite_frames = SubResource("SpriteFrames_5bdsy")
 animation = &"move_down"
 autoplay = "move_down"
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

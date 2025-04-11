@@ -8,7 +8,7 @@ using GodotUtilities;
 namespace Game.World;
 
 [Tool]
-[Scene, Icon("res://assets/icons/item-component.svg")]
+[Scene, Icon("res://assets/icons/item_component.svg")]
 public partial class InteractableItem : Node2D
 {
     [Export]

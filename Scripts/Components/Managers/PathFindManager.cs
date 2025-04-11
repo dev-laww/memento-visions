@@ -7,7 +7,7 @@ using GodotUtilities;
 namespace Game;
 
 [Scene]
-[Tool, Icon("res://assets/icons/pathfind-manager.svg")]
+[Tool, Icon("res://assets/icons/pathfind_manager.svg")]
 public partial class PathFindManager : Node2D
 {
     [Export]

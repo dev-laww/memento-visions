@@ -9,7 +9,7 @@ using Godot;
 
 namespace Game.Autoload;
 
-[Icon("res://assets/icons/quest-manager.svg")]
+[Icon("res://assets/icons/quest_manager.svg")]
 public partial class QuestManager : Autoload<QuestManager>
 {
     [Signal] public delegate void AddedEventHandler(Quest quest);

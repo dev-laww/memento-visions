@@ -8,7 +8,7 @@ using Item = Game.Data.Item;
 
 namespace Game.Components;
 
-[GlobalClass, Icon("res://assets/icons/inventory-manager.svg")]
+[GlobalClass, Icon("res://assets/icons/inventory_manager.svg")]
 public partial class InventoryManager : Node
 {
     [Signal] public delegate void UpdatedEventHandler(ItemGroup item);

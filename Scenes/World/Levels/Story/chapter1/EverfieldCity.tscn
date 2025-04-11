@@ -1,4 +1,4 @@
-[gd_scene load_steps=192 format=4 uid="uid://d3dl8qe3i4hs5"]
+[gd_scene load_steps=191 format=4 uid="uid://d3dl8qe3i4hs5"]
 
 [ext_resource type="Script" uid="uid://cy5yn6ijpgu1n" path="res://Scripts/World/Levels/Story/Chapter1/EverfieldCity.cs" id="1_hf60o"]
 [ext_resource type="TileSet" uid="uid://wuwsi02f3fft" path="res://resources/tilesets/intramuros.tres" id="2_gy48w"]
@@ -24,7 +24,6 @@
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="15_2ke1t"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="16_up7eu"]
 [ext_resource type="Texture2D" uid="uid://dm8absnc0tcfu" path="res://assets/entities/characters/npc/story_teller.png" id="17_kycha"]
-[ext_resource type="Script" uid="uid://onowuhrhhpuc" path="res://Scripts/Components/SmoothAnimatedSprite2D.cs" id="18_8kgvc"]
 [ext_resource type="PackedScene" uid="uid://b08ofhkn8vp36" path="res://Scenes/Entities/Characters/Kevin.tscn" id="18_bhrir"]
 [ext_resource type="Resource" uid="uid://ctatcaqd2g4ox" path="res://resources/dialogues/chapter_1/1.1.dialogue" id="20_2ke1t"]
 [ext_resource type="PackedScene" uid="uid://brd2wy8vh2ts2" path="res://Scenes/Entities/Characters/Tisoy.tscn" id="22_cmjjt"]
@@ -1184,106 +1183,98 @@ position = Vector2(-275, 485)
 EnemyName = ""
 
 [node name="StatsManager" parent="Enemy/Aswang" index="5"]
-Level = 4.0
 MaxHealth = 434.503
-Defense = 38.2515
 Damage = 72.0
+Level = 4.0
+Defense = 38.2515
 
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang" index="12"]
-material = null
-frame = 1
+[node name="AnimatedSprite2D" parent="Enemy/Aswang" index="12"]
+frame = 2
 
 [node name="Aswang2" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(87, 58)
 EnemyName = ""
 
 [node name="StatsManager" parent="Enemy/Aswang2" index="5"]
-Level = 3.0
 MaxHealth = 334.899
-Defense = 24.6847
 Damage = 52.7847
+Level = 3.0
+Defense = 24.6847
 
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang2" index="12"]
-material = null
-frame = 1
+[node name="AnimatedSprite2D" parent="Enemy/Aswang2" index="12"]
+frame = 2
 
 [node name="Aswang3" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(123, 197)
 EnemyName = ""
 
 [node name="StatsManager" parent="Enemy/Aswang3" index="5"]
-Level = 3.0
 MaxHealth = 334.899
-Defense = 24.6847
 Damage = 52.7847
+Level = 3.0
+Defense = 24.6847
 
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang3" index="12"]
-material = null
-frame = 1
+[node name="AnimatedSprite2D" parent="Enemy/Aswang3" index="12"]
+frame = 2
 
 [node name="Aswang4" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(49, -155)
 EnemyName = ""
 
 [node name="StatsManager" parent="Enemy/Aswang4" index="5"]
-Level = 4.0
 MaxHealth = 434.503
-Defense = 38.2515
 Damage = 72.0
+Level = 4.0
+Defense = 38.2515
 
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang4" index="12"]
-material = null
-frame = 1
+[node name="AnimatedSprite2D" parent="Enemy/Aswang4" index="12"]
+frame = 2
 
 [node name="Aswang5" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(136, 368)
 EnemyName = ""
 
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang5" index="12"]
-material = null
-frame = 1
+[node name="AnimatedSprite2D" parent="Enemy/Aswang5" index="12"]
+frame = 2
 
 [node name="Aswang6" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-184, 591)
 EnemyName = ""
 
 [node name="StatsManager" parent="Enemy/Aswang6" index="5"]
-Level = 5.0
 MaxHealth = 538.477
-Defense = 52.4131
 Damage = 92.7213
+Level = 5.0
+Defense = 52.4131
 
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang6" index="12"]
-material = null
-frame = 1
+[node name="AnimatedSprite2D" parent="Enemy/Aswang6" index="12"]
+frame = 2
 
 [node name="Aswang7" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-156, 70)
 EnemyName = ""
 
 [node name="StatsManager" parent="Enemy/Aswang7" index="5"]
-Level = 4.0
 MaxHealth = 434.503
-Defense = 38.2515
 Damage = 72.0
+Level = 4.0
+Defense = 38.2515
 
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang7" index="12"]
-material = null
-frame = 1
+[node name="AnimatedSprite2D" parent="Enemy/Aswang7" index="12"]
+frame = 2
 
 [node name="Aswang8" parent="Enemy" instance=ExtResource("8_516uf")]
 position = Vector2(-34, 484)
 EnemyName = ""
 
 [node name="StatsManager" parent="Enemy/Aswang8" index="5"]
-Level = 5.0
 MaxHealth = 538.477
-Defense = 52.4131
 Damage = 92.7213
+Level = 5.0
+Defense = 52.4131
 
-[node name="SmoothAnimatedSprite2D" parent="Enemy/Aswang8" index="12"]
-material = null
-frame = 1
+[node name="AnimatedSprite2D" parent="Enemy/Aswang8" index="12"]
+frame = 2
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -1291,8 +1282,8 @@ z_index = 1000
 color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(-762, -47, -795, 1407, -795, 1407, 153, 1415, 153, 1215, 153, 1215, 1494, 1223, 1506, 158, 1506, 158, 1097, 124, 1068, -9, 1068, -9)
 script = ExtResource("10_grhu3")
-ParseRootNode = NodePath("../Tileset")
 NavigationPolygon = SubResource("NavigationPolygon_hn08j")
+ParseRootNode = NodePath("../Tileset")
 metadata/_custom_type_script = "uid://cfscbenslyojv"
 
 [node name="@NavigationRegion2D@60431" type="NavigationRegion2D" parent="NavigationManager"]
@@ -1627,8 +1618,7 @@ texture_filter = 2
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 1
-script = ExtResource("18_8kgvc")
+frame = 2
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StoryTeller"]

@@ -10,7 +10,7 @@ using GodotUtilities;
 namespace Game.World;
 
 [Tool]
-[Scene, Icon("res://assets/icons/item-component.svg")]
+[Scene, Icon("res://assets/icons/item_component.svg")]
 public partial class ItemQuestTrigger : QuestTrigger
 {
     [Node] private Sprite2D Sprite;

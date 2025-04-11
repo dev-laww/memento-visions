@@ -8,7 +8,7 @@ using Godot.Collections;
 namespace Game.Data;
 
 [Tool]
-[GlobalClass, Icon("res://assets/icons/quest-step.svg")]
+[GlobalClass, Icon("res://assets/icons/quest_step.svg")]
 public partial class QuestObjective : Resource
 {
     public enum ObjectiveType

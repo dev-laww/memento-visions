@@ -9,7 +9,7 @@ namespace Game.Components;
 
 
 [Tool]
-[GlobalClass, Icon("res://assets/icons/velocity-manager.svg")]
+[GlobalClass, Icon("res://assets/icons/velocity_manager.svg")]
 public partial class VelocityManager : Node
 {
     [Export]

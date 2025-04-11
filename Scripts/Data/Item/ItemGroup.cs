@@ -3,7 +3,7 @@ using Godot;
 namespace Game.Data;
 
 [Tool]
-[GlobalClass, Icon("res://assets/icons/item-group.svg")]
+[GlobalClass, Icon("res://assets/icons/item_group.svg")]
 public partial class ItemGroup : Resource
 {
     [Export]

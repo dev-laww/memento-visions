@@ -10,7 +10,7 @@ namespace Game.Components;
 // TODO: implement sound effects, collision shape animations, attack pattern animations
 [Tool]
 [Scene]
-[GlobalClass, Icon("res://assets/icons/weapon-component.svg")]
+[GlobalClass, Icon("res://assets/icons/weapon_component.svg")]
 public partial class WeaponComponent : Node2D
 {
     [Export]
@@ -54,7 +54,7 @@ public partial class WeaponComponent : Node2D
 
     public event Action AnimationFinished;
 
-    [Node] private SmoothAnimatedSprite2D animatedSprite2d;
+    [Node] private AnimatedSprite2D animatedSprite2d;
     [Node] private AnimationTree animationTree;
     [Node] private AudioStreamPlayer2D attackSfx;
     [Node] private AudioStreamPlayer2D hitSfx;
@@ -122,7 +122,7 @@ public partial class WeaponComponent : Node2D
         if (GetNodeOrNull("Assets") != null) return;
 
         var assets = new Node2D { Name = "Assets" };
-        var sprite = new SmoothAnimatedSprite2D { Name = "AnimatedSprite2D" };
+        var sprite = new AnimatedSprite2D { Name = "AnimatedSprite2D" };
         var player = new AnimationPlayer { Name = "AnimationPlayer" };
         var atkSfx = new AudioStreamPlayer2D { Name = "AttackSfx" };
         var htSfx = new AudioStreamPlayer2D { Name = "HitSfx" };

@@ -20,7 +20,7 @@ public enum StatsType
 }
 
 [Tool]
-[GlobalClass, Icon("res://assets/icons/stats-manager.svg")]
+[GlobalClass, Icon("res://assets/icons/stats_manager.svg")]
 public partial class StatsManager : Node
 {
     [Signal] public delegate void StatChangedEventHandler(float value, StatsType stat);

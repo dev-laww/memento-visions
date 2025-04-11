@@ -7,7 +7,7 @@ using Game.Entities;
 namespace Game.Components;
 
 [Tool]
-[GlobalClass, Icon("res://assets/icons/health-number-manager.svg")]
+[GlobalClass, Icon("res://assets/icons/health_number_manager.svg")]
 public partial class HealthNumberManager : Node
 {
     [Export]

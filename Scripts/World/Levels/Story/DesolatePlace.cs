@@ -12,7 +12,7 @@ namespace Game.World;
 public partial class DesolatePlace : BaseLevel
 {
     [Node] private TransitionArea transitionArea;
-    [Node] private SmoothTileMapLayer secretDoor;
+    [Node] private TileMapLayer secretDoor;
     [Node] private PressurePlate pressurePlate;
     [Node] private DialogueTrigger door;
     [Node] private AnimationPlayer animationPlayer;

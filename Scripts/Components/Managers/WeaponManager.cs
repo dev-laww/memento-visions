@@ -10,7 +10,7 @@ using Game.Utils;
 
 namespace Game.Components;
 
-[GlobalClass, Icon("res://assets/icons/weapon-manager.svg")]
+[GlobalClass, Icon("res://assets/icons/weapon_manager.svg")]
 public partial class WeaponManager : Node
 {
     public WeaponComponent WeaponComponent { get; private set; }

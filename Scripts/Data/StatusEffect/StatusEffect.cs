@@ -6,7 +6,7 @@ using GodotUtilities;
 
 namespace Game.Data;
 
-[GlobalClass, Icon("res://assets/icons/status-effect.svg")]
+[GlobalClass, Icon("res://assets/icons/status_effect.svg")]
 public partial class StatusEffect : Resource
 {
     public class Info

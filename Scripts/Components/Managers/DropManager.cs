@@ -12,7 +12,7 @@ namespace Game.Components;
 
 [Tool]
 [Scene]
-[Icon("res://assets/icons/drop-manager.svg")]
+[Icon("res://assets/icons/drop_manager.svg")]
 public partial class DropManager : Node
 {
     private const int MAX_ATTEMPTS = 100;
