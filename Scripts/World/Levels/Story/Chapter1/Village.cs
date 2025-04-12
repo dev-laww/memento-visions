@@ -103,4 +103,12 @@ public partial class Village : BaseLevel
         rudy.Visible = true;
         mayor.Visible = false;
     }
+    public override void _ExitTree()
+    {
+        QuestManager.QuestUpdated -= OnQuestUpdated;
+        leverManager.IsComplete -= OnLeverPuzzleComplete;
+        lightPuzzle.PuzzleSolved -= OnLightPuzzleComplete;
+
+        base._ExitTree();
+    }
 }

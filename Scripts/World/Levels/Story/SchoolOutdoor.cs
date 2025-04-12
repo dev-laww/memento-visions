@@ -55,5 +55,6 @@ public partial class SchoolOutdoor : BaseLevel
     {
         GD.Print("Exiting tree");
         enemies.QueueFree();
+        QuestManager.QuestUpdated -= OnQuestUpdated;
     }
 }

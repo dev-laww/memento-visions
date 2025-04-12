@@ -99,5 +99,10 @@ public partial class EverfieldCity : BaseLevel
     {
         GD.Print("Exiting tree");
         enemy.QueueFree();
+        plate.Activated -= OnPlatePressed;
+        plate2.Activated -= OnPlatePressed;
+        torchSequence.PuzzleSolved -= OnPuzzleSolved;
+        QuestManager.QuestUpdated -= OnQuestUpdated;
+        base._ExitTree();
     }
 }
