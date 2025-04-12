@@ -420,20 +420,28 @@ metadata/_custom_type_script = "uid://bmd2fkvnipiu7"
 [sub_resource type="Resource" id="Resource_1v8c7"]
 resource_local_to_scene = true
 script = ExtResource("4_fp327")
+Min = 0.092
+Max = 0.136
+Noise = SubResource("FastNoiseLite_a8soy")
 enemyScene = ExtResource("18_5hc24")
 spawnChance = 0.3
 Weight = 1
-Min = 0.092
-Max = 0.136
+noise = SubResource("FastNoiseLite_a8soy")
+min = 0.092
+max = 0.136
 
 [sub_resource type="Resource" id="Resource_o37we"]
 resource_local_to_scene = true
 script = ExtResource("4_fp327")
+Min = 0.353
+Max = 1.0
+Noise = SubResource("FastNoiseLite_a8soy")
 enemyScene = ExtResource("19_t5swe")
 spawnChance = 0.3
 Weight = 1
-Min = 0.353
-Max = 1.0
+noise = SubResource("FastNoiseLite_a8soy")
+min = 0.353
+max = 1.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vo0dt"]
 frequency = 0.0038
@@ -1882,15 +1890,15 @@ metadata/_custom_type_script = "uid://c22irbkohg4bs"
 
 [node name="TilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map_layers", "generator")]
 script = ExtResource("8_bmslw")
-tile_map_layers = [NodePath(""), NodePath(""), NodePath("")]
+tile_map_layers = [NodePath("../Map/MiddleGround"), NodePath("../Map/ForeGround"), NodePath("../Map/Props")]
 generator = NodePath("../NoiseGenerator")
 metadata/_custom_type_script = "uid://ckihk86jbv70p"
 
 [node name="Spawner" type="Node" parent="." node_paths=PackedStringArray("spawnRoot")]
 script = ExtResource("3_mmryb")
-spawnRoot = NodePath("../Entities")
 Noise = SubResource("FastNoiseLite_a8soy")
-SpawnEntries = Array[ExtResource("4_fp327")]([SubResource("Resource_1v8c7"), SubResource("Resource_o37we")])
+SpawnEntries = [SubResource("Resource_1v8c7"), SubResource("Resource_o37we")]
+spawnRoot = NodePath("../Entities")
 metadata/_custom_type_script = "uid://bhqbwv1yagshy"
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
@@ -1918,9 +1926,9 @@ z_index = 1000
 color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(0, 0, 2016, 0, 2016, 2016, 0, 2016)
 script = ExtResource("1_unvsc")
-ParseRootNode = NodePath("../Map")
 NavigationPolygon = SubResource("NavigationPolygon_3lbxs")
 useEdgeConnections = false
+ParseRootNode = NodePath("../Map")
 metadata/_custom_type_script = "uid://cfscbenslyojv"
 
 [node name="@NavigationRegion2D@30181" type="NavigationRegion2D" parent="NavigationManager"]
