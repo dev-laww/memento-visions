@@ -1,5 +1,5 @@
 ~ start
-#do CurrentScene.SetDialogueTriigerOff()
+do CurrentScene.SetDialogueTriigerOff()
 Alex: Wait, am I in the right place?
 Alex: Doesn't seem like it... That mysterious guy-[wait=.5]Kevin,[wait=.5] might've tricked me here.
 Alex: The Storyteller should be here, I think.

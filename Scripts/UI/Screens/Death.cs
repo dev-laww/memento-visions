@@ -8,7 +8,7 @@ namespace Game.UI.Screens;
 [Scene]
 public partial class Death : CanvasLayer
 {
-    private const string LOBBY = "res://Scenes/World/Bar.tscn";
+    private const string LOBBY = "res://Scenes/World/Lobby.tscn";
 
     [Node] private ColorRect colorRect;
     [Node] private Button respawnButton;
