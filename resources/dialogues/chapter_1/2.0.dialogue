@@ -1,12 +1,12 @@
 ~ start
-if isChiefInteracted == false
+if CurrentScene.isChiefInteracted == false
 	Chief: Congratulations on defeating the Mayor. The sightings of Aswang have drastically decreased since then. Your efforts have made a real difference to the town's safety. 
 	Alex: That was a tough fight. I didn’t expect him to be the one behind all the Aswang incidents… him of all people.
 	Alex: Thank goodness it’s all over now.
 	Chief: Now, I’d like to introduce you to some new allies who will assist you on your journey — the Witch Apo Sita, the Panday Juan, and the Storyteller Marcelo. You can always interact with them when you're in the Lobby.
 	set CurrentScene.isChiefInteracted = true
 while true
-	if isChiefInteracted == true
+	if CurrentScene.isChiefInteracted == true
 		Chief: Chief: So, what would you like to know more about?
 	- Ask about the Witch
 		do CurrentScene.WitchCutscene()
