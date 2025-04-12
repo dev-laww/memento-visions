@@ -23,6 +23,7 @@ public partial class Village : BaseLevel
     [Node] private ResourcePreloader resourcePreloader;
     [Node] private QuestTrigger rudyQuestTrigger;
     private Quest quest = QuestRegistry.Get("quest:find_mayor");
+
     public override void _Notification(int what)
     {
         if (what == NotificationSceneInstantiated && !Engine.IsEditorHint())
@@ -41,7 +42,7 @@ public partial class Village : BaseLevel
         lightPuzzle.PuzzleSolved += OnLightPuzzleComplete;
         QuestManager.QuestUpdated += OnQuestUpdated;
     }
-    
+
     private void OnQuestUpdated(Quest quest)
     {
         if (this.quest.Objectives[1].Completed)
@@ -69,21 +70,19 @@ public partial class Village : BaseLevel
     {
         questTrigger2.Monitoring = true;
     }
-    
-    
+
+
     public void StartCutscene()
     {
         CinematicManager.StartCinematic();
         MoveCameraTo(rudy.GlobalPosition, 2f, () => { CinematicManager.EndCinematic(); });
     }
+
     public static void MoveCameraTo(Vector2 position, float duration, Action onComplete = null)
     {
         GameCamera.SetTargetPositionOverride(position);
         var timer = GameCamera.Instance.GetTree().CreateTimer(duration);
-        timer.Timeout += () =>
-        {
-            onComplete?.Invoke();
-        };
+        timer.Timeout += () => { onComplete?.Invoke(); };
     }
 
 
@@ -98,6 +97,7 @@ public partial class Village : BaseLevel
             GD.Print(aswang.GlobalPosition);
         }
     }
+
     public void SetMayorVisible()
     {
         rudy.Visible = true;
