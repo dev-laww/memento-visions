@@ -13,7 +13,7 @@ script = ExtResource("2_lpk1o")
 Id = "item:breeze_potion"
 Icon = SubResource("AtlasTexture_wn5ri")
 Name = "Breeze Potion"
-ItemCategory = 1
+ItemCategory = 0
 Description = "A light, ethereal potion infused with the blessing of Aghon. It carries the essence of a gentle breeze, refreshing the body and calming the soul.
 
 Usage: 

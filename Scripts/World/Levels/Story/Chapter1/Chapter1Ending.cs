@@ -39,6 +39,10 @@ public partial class Chapter1Ending : BaseLevel
         storyTellerInteraction.Interacted += OnStoryTellerInteracted;
         blackSmithInteraction.Interacted += OnBlackSmithInteracted;
         witchInteraction.Interacted += OnWitchInteracted;
+        UnlockRecipe("id:taho");
+        UnlockRecipe("item:salabat");
+        UnlockRecipe("item:puto");
+        UnlockRecipe("item:bibingka");
     }
 
     private void OnStoryTellerInteracted()
@@ -135,6 +139,11 @@ public partial class Chapter1Ending : BaseLevel
     public void WitchCutscene()
     {
         StartCutscene(witch.GlobalPosition);
+    }
+
+    public void UnlockRecipe(string itemId)
+    {
+        SaveManager.UnlockRecipe(itemId);
     }
 
     public override void _ExitTree()
