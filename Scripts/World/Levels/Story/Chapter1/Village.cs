@@ -2,6 +2,7 @@ using System;
 using Game.Autoload;
 using Godot;
 using Game.Components;
+using Game.Data;
 using Game.Entities;
 using Game.World.Puzzle;
 using GodotUtilities;
@@ -11,15 +12,18 @@ namespace Game.World;
 [Scene]
 public partial class Village : BaseLevel
 {
-    [Node] private TransitionArea TransitionArea;
-    [Node] private DialogueTrigger DialogueTrigger;
-    [Node] private QuestTrigger QuestTrigger2;
-    [Node] private Chest Chest, Chest2;
-    [Node] private LeverManager LeverManager;
-    [Node] private TorchPuzzleManager LightPuzzle;
-    [Node] private Entity Rudy, Mayor;
+    [Node] private TransitionArea transitionArea;
+    [Node] private DialogueTrigger dialogueTrigger;
+    [Node] private QuestTrigger questTrigger2;
+    [Node] private Chest chest, chest2;
+    [Node] private LeverManager leverManager;
+    [Node] private TorchPuzzleManager lightPuzzle;
+    [Node] private Entity rudy, mayor;
     [Node] private ScreenMarker mayorMarker;
     [Node] private ResourcePreloader resourcePreloader;
+    [Node] private QuestTrigger rudyQuestTrigger;
+    private Quest quest = QuestRegistry.Get("quest:find_mayor");
+
     public override void _Notification(int what)
     {
         if (what == NotificationSceneInstantiated && !Engine.IsEditorHint())
@@ -29,48 +33,56 @@ public partial class Village : BaseLevel
     public override void _Ready()
     {
         base._Ready();
-        QuestTrigger2.Monitoring = false;
-        TransitionArea.Toggle(false);
+        questTrigger2.Monitoring = false;
+        transitionArea.Toggle(false);
         mayorMarker.Toggle(false);
-        Rudy.Visible = false;
-        LeverManager.IsComplete += OnLeverPuzzleComplete;
-        LightPuzzle.PuzzleSolved += OnLightPuzzleComplete;
+        rudy.Visible = false;
+        rudyQuestTrigger.Monitoring = false;
+        leverManager.IsComplete += OnLeverPuzzleComplete;
+        lightPuzzle.PuzzleSolved += OnLightPuzzleComplete;
+        QuestManager.QuestUpdated += OnQuestUpdated;
+    }
+
+    private void OnQuestUpdated(Quest quest)
+    {
+        if (this.quest.Objectives[1].Completed)
+        {
+            rudyQuestTrigger.Monitoring = true;
+        }
     }
 
     private void OnLeverPuzzleComplete()
     {
-        Chest.Visible = true;
+        chest.Visible = true;
     }
 
     private void OnLightPuzzleComplete()
     {
-        Chest2.Visible = true;
+        chest2.Visible = true;
     }
 
     public void SetDialogueTriigerOff()
     {
-        DialogueTrigger.Monitoring = false;
+        dialogueTrigger.Monitoring = false;
     }
 
     public void setQuestTriggerOn()
     {
-        QuestTrigger2.Monitoring = true;
+        questTrigger2.Monitoring = true;
     }
-    
-    
+
+
     public void StartCutscene()
     {
         CinematicManager.StartCinematic();
-        MoveCameraTo(Rudy.GlobalPosition, 2f, () => { CinematicManager.EndCinematic(); });
+        MoveCameraTo(rudy.GlobalPosition, 2f, () => { CinematicManager.EndCinematic(); });
     }
+
     public static void MoveCameraTo(Vector2 position, float duration, Action onComplete = null)
     {
         GameCamera.SetTargetPositionOverride(position);
         var timer = GameCamera.Instance.GetTree().CreateTimer(duration);
-        timer.Timeout += () =>
-        {
-            onComplete?.Invoke();
-        };
+        timer.Timeout += () => { onComplete?.Invoke(); };
     }
 
 
@@ -79,15 +91,16 @@ public partial class Village : BaseLevel
         for (var i = 0; i < 6; i++)
         {
             var aswang = resourcePreloader.InstanceSceneOrNull<Aswang>();
-            aswang.GlobalPosition = Rudy.GlobalPosition + new Vector2(0, 100) * MathUtil.RNG.RandDirection();
+            aswang.GlobalPosition = rudy.GlobalPosition + new Vector2(0, 100) * MathUtil.RNG.RandDirection();
 
             AddChild(aswang);
             GD.Print(aswang.GlobalPosition);
         }
     }
+
     public void SetMayorVisible()
     {
-        Rudy.Visible = true;
-        Mayor.Visible = false;
+        rudy.Visible = true;
+        mayor.Visible = false;
     }
 }

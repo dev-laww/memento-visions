@@ -2,6 +2,7 @@ using Godot;
 using System;
 using Game.World.Puzzle;
 using GodotUtilities;
+using DialogueManagerRuntime;
 
 namespace Game.World.Levels.Chapter2;
 
@@ -25,6 +26,7 @@ public partial class SmallVille : Node2D
         base._Ready();
         torchSequence.PuzzleSolved += OnPuzzleSolved;
         witchMarker.Toggle(false);
+        ShowDialogue();
     }
     
     private void OnPuzzleSolved()
@@ -36,4 +38,10 @@ public partial class SmallVille : Node2D
     {
         witchMarker.Toggle(isActive);
     }
+    private static void ShowDialogue()
+    {
+        var dialogue = ResourceLoader.Load<Resource>("res://resources/dialogues/chapter_2/2.0.dialogue");
+        DialogueManager.ShowDialogueBalloon(dialogue);
+    }
 }
+

@@ -19,7 +19,7 @@ public partial class Start : CanvasLayer
         if (@event is InputEventMouseMotion)
             return;
 
-        GameManager.ChangeScene("res://Scenes/World/Bar.tscn");
+        GameManager.ChangeScene("res://Scenes/World/Lobby.tscn");
         GetViewport().SetInputAsHandled();
     }
 }

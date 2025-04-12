@@ -1,22 +1,22 @@
 ~ start
 do CurrentScene.mayorMarker.Toggle(false)
-Mang Rudy: Mayor?
-Mayor: Rudy...
-Mang Rudy: What are you doing here?
-Mayor: You should've known better, [wait=.5]Rudy.
-Mang Rudy: Mayor![wait=.5]
 Alex: Mayor!
 Mayor: Alex...? How did you know I would be in Everfield City Courtyard?
+Alex: Wait...[wait=.5] How did you know who I am, Mayor?
 Mayor: [wait=.5]Hmm... (Kevin might have spilled the beans already. Just as expected.)
-Alex: Mayor... what's that you are holding?
+Mayor: I know who you are Alex, along with your grievous past, and mistake. A said protector they say HAHAHAHA!
+- What are you talking about?
+- What cha yappin' boi?
+Mayor: You will soon know Alex, what I am talking about.
+Alex: Mayor, what is that thing you are holding?
 Mayor: Oh this? This... is none of your business.
 Alex: There are all sorts of going on here while you, Mayor, you sure seem to be pretty busy doing something instead of helping the people.
 Alex: Kinda sus for me Mayor.
 Mayor: Help them? I am helping them. 
-Mayor: It's just a different type of help though. *smirks*
-Alex: Wait wha-? What do you mean by that?
-Mayor: Nothing, I'll take my leave now.
-Mayor: Seems like we'll be meeting up later pretty soon. But first-
+Mayor: It's just a different type of help though.
+Alex: How do you help them by wounding them up?!
+Mayor: Nevermind then. Besides, a vermin like you wouldn't understand either. [wait=.5]I'll take my leave now.
+Mayor: Don't worry Alex, we'll be meeting up later pretty soon. But first-
 Mayor: Can you handle this?
 #Mayor disappears
 

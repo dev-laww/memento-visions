@@ -29,6 +29,7 @@ public partial class Concoct : Overlay
     [Node] private TextureButton decreaseButton;
     [Node] private Button craftButton;
     [Node] private HBoxContainer quantityControl;
+    [Node] private AudioStreamPlayer2D sFXClick;
 
     [Signal] public delegate void ItemCraftedEventHandler();
 
@@ -88,7 +89,7 @@ public partial class Concoct : Overlay
     private void SelectSlot(Slot slot)
     {
         var selectedSlot = slots.FirstOrDefault(s => s.Selected);
-
+        sFXClick.Play();
         if (selectedSlot is null)
         {
             slot.Selected = true;
@@ -129,8 +130,8 @@ public partial class Concoct : Overlay
 
     private void OnIncreaseButtonPress()
     {
+        sFXClick.Play();
         if (selectedRecipe is null) return;
-
         quantity++;
         quantityInput.Text = $"{(selectedRecipe?.Result.Quantity ?? 0) * quantity}";
         UpdateButtonState();
@@ -138,8 +139,9 @@ public partial class Concoct : Overlay
 
     private void OnDecreaseButtonPress()
     {
+        sFXClick.Play();
         if (selectedRecipe is null) return;
-
+        
         if (quantity <= 0) return;
 
         quantity--;

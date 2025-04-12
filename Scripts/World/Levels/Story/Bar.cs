@@ -10,7 +10,7 @@ public partial class Bar : BaseLevel
 {
     private Quest quest = QuestRegistry.Get("quest:night_of_shadows");
 
-    [Node] private TransitionArea TransitionArea;
+    [Node] private TransitionArea transitionArea;
 
     public override void _Notification(int what)
     {
@@ -22,12 +22,12 @@ public partial class Bar : BaseLevel
     public override void _Ready()
     {
         base._Ready();
-        TransitionArea.Monitoring = false;
+        transitionArea.Toggle(false);
     }
 
     public void EnableTransitionArea()
     {
-        TransitionArea.Monitoring = true;
+        transitionArea.Toggle(true);
     }
 
 

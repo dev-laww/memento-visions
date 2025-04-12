@@ -2,36 +2,58 @@ using Godot;
 using Game.Components;
 using Game.Entities;
 using GodotUtilities;
+using DialogueManagerRuntime;
+using Game.Autoload;
+using Game.Data;
 
 namespace Game.World;
 
 [Scene]
 public partial class SchoolOutdoor : BaseLevel
 {
-    [Node] private Entity StoryTeller;
+    [Node] private Entity storyTeller;
     public int ObjectiveInteracted = 0;
-    public bool isStoryTellerVisible = true;
-    [Node] TransitionArea TransitionArea;
-    [Node] private DialogueTrigger DialoguePrologue;
+    [Node] TransitionArea transitionArea;
+    [Node] AnimationPlayer animationPlayer;
+    [Node] private Node2D enemies;
+    private Quest quest = QuestRegistry.Get("quest:night_of_shadows");
 
 
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
-
         WireNodes();
     }
-
-    public void setDialoguePrologueOff()
+    public override void _Ready()
     {
-        DialoguePrologue.Monitoring = false;
+        ShowDialogue();
+        transitionArea.Toggle(false);
+        QuestManager.QuestUpdated += OnQuestUpdated;
+    }
+    
+    private void OnQuestUpdated(Quest quest)
+    {
+
+       
+            if (this.quest.Objectives[0].Completed)
+            {
+                animationPlayer.Play("show_story_teller");
+                transitionArea.Toggle(true);
+                QuestManager.QuestUpdated -= OnQuestUpdated;
+            }
+            
+        
+    }
+    
+    private static void ShowDialogue()
+    {
+        var dialogue = ResourceLoader.Load<Resource>("res://resources/dialogues/prologue/1.5.dialogue");
+        DialogueManager.ShowDialogueBalloon(dialogue);
     }
 
-
-    public void setStoryTellerVisible()
+    public override void _ExitTree()
     {
-        ((StoryTeller)StoryTeller).Work();
-        StoryTeller.Visible = true;
-        isStoryTellerVisible = true;
+        GD.Print("Exiting tree");
+        enemies.QueueFree();
     }
 }

@@ -33,8 +33,8 @@ public partial class PrologueBar : BaseLevel
 
     private static void ShowDialogue()
     {
-        var dialouge = ResourceLoader.Load<Resource>("res://resources/dialogues/prologue/player_wonder.dialogue");
-        DialogueManager.ShowDialogueBalloon(dialouge);
+        var dialogue = ResourceLoader.Load<Resource>("res://resources/dialogues/prologue/player_wonder.dialogue");
+        DialogueManager.ShowDialogueBalloon(dialogue);
     }
 
     private void FinishDialogue()

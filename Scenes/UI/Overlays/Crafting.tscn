@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dd1jerr3yxfmm"]
+[gd_scene load_steps=27 format=3 uid="uid://dd1jerr3yxfmm"]
 
 [ext_resource type="PackedScene" uid="uid://svqrge4l63b4" path="res://Scenes/UI/Common/Slot.tscn" id="1_i0y0q"]
 [ext_resource type="Script" uid="uid://5dxhed46evr" path="res://Scripts/UI/Overlays/Crafting.cs" id="1_xer77"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cb8psn10ig05k" path="res://Scenes/UI/Common/CloseButton.tscn" id="3_pjuxn"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine_patch.png" id="5_li2ry"]
 [ext_resource type="Texture2D" uid="uid://do13qbc0j6yrd" path="res://assets/items/temp/Item5.png" id="6_w3jy4"]
+[ext_resource type="AudioStream" uid="uid://cwqgqd7a1xdjg" path="res://assets/audio/ui/click.mp3" id="9_utju8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rusr7"]
 outline_size = 8
@@ -626,3 +627,7 @@ text = "Okay"
 libraries = {
 &"": SubResource("AnimationLibrary_7r2pd")
 }
+
+[node name="SFXClick" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_utju8")
+bus = &"UI"

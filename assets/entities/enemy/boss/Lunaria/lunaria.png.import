@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1k2klldtm3ix"
-path="res://.godot/imported/lever.png-79bd3e9da93e6aeda76b5ef7c31fbb0c.ctex"
+uid="uid://cny0tot07a045"
+path="res://.godot/imported/lunaria.png-96b3888cb9a2d8f73cb8b1711fa14716.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/world/lever.png"
-dest_files=["res://.godot/imported/lever.png-79bd3e9da93e6aeda76b5ef7c31fbb0c.ctex"]
+source_file="res://assets/entities/enemy/boss/Lunaria/lunaria.png"
+dest_files=["res://.godot/imported/lunaria.png-96b3888cb9a2d8f73cb8b1711fa14716.ctex"]
 
 [params]
 

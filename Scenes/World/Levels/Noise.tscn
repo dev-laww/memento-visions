@@ -1,4 +1,4 @@
-[gd_scene load_steps=399 format=4 uid="uid://cccs11d7xwh47"]
+[gd_scene load_steps=400 format=4 uid="uid://cccs11d7xwh47"]
 
 [ext_resource type="Script" uid="uid://c22irbkohg4bs" path="res://addons/gaea/generators/2D/noise_generator/noise_generator.gd" id="1_0m5yt"]
 [ext_resource type="PackedScene" uid="uid://2586jb7lbuyn" path="res://Scenes/UI/Common/Fog.tscn" id="1_lbxhc"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="18_5hc24"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="19_t5swe"]
 [ext_resource type="PackedScene" uid="uid://ngodgqc4w3i2" path="res://Scenes/UI/Screens/Victory.tscn" id="23_ply2r"]
+[ext_resource type="AudioStream" uid="uid://b2bdexb2ameh7" path="res://assets/audio/music/boss_bgm.ogg" id="28_xs3a0"]
 
 [sub_resource type="Resource" id="Resource_me1kn"]
 resource_name = "Elevation and Water Smoothing"
@@ -1882,7 +1883,7 @@ metadata/_custom_type_script = "uid://c22irbkohg4bs"
 
 [node name="TilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map_layers", "generator")]
 script = ExtResource("8_bmslw")
-tile_map_layers = [NodePath(""), NodePath(""), NodePath("")]
+tile_map_layers = [NodePath("../Map/MiddleGround"), NodePath("../Map/ForeGround"), NodePath("../Map/Props")]
 generator = NodePath("../NoiseGenerator")
 metadata/_custom_type_script = "uid://ckihk86jbv70p"
 
@@ -2943,3 +2944,8 @@ position = Vector2(-2, -22)
 
 [node name="Player" parent="Entities" instance=ExtResource("2_k6nme")]
 position = Vector2(1080, 1272)
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("28_xs3a0")
+autoplay = true
+bus = &"Music"

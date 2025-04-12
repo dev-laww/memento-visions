@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://ciqiplx11424"]
+[gd_scene load_steps=21 format=4 uid="uid://ciqiplx11424"]
 
 [ext_resource type="Script" uid="uid://bmr5usqox5f0h" path="res://Scripts/World/Levels/Story/Bar.cs" id="1_7pkig"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="2_cgm6k"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="9_ow3fv"]
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="10_xl1pr"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="11_72xov"]
+[ext_resource type="Resource" uid="uid://c82r84uxq7lxc" path="res://resources/dialogues/chapter_1/1.0.dialogue" id="12_khm8l"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="12_shkw5"]
 [ext_resource type="Resource" uid="uid://dpkjhbld0pfm4" path="res://resources/quests/chapter_1/whispers_in_intramuros_1.tres" id="13_53sbg"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_jtnov"]
@@ -84,7 +85,6 @@ tile_map_data = PackedByteArray("AAAIAB0AAQAGABAAAAAIAB4AAQAGABEAAAAJAB0AAQAHABA
 tile_set = ExtResource("7_nq5iw")
 
 [node name="TransitionArea" type="Area2D" parent="."]
-unique_name_in_owner = true
 position = Vector2(132, 43)
 collision_layer = 0
 collision_mask = 4
@@ -99,7 +99,6 @@ shape = SubResource("RectangleShape2D_hhvhg")
 position = Vector2(136, 126)
 
 [node name="StoryTeller" parent="." instance=ExtResource("10_xl1pr")]
-unique_name_in_owner = true
 position = Vector2(245, 93)
 
 [node name="Chief" parent="." instance=ExtResource("11_72xov")]
@@ -111,7 +110,9 @@ collision_mask = 4
 script = ExtResource("12_shkw5")
 Quest = ExtResource("13_53sbg")
 Mode = 0
-ShouldInteract = false
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("12_khm8l")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/QuestTrigger"]
@@ -119,7 +120,6 @@ shape = SubResource("CircleShape2D_j24d5")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
-position = Vector2(0, -32)
 
 [node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("15_jtnov")]
 
@@ -128,8 +128,7 @@ position = Vector2(271, 258)
 
 [node name="sfx" type="Node2D" parent="."]
 
-[node name="sfxBar" type="AudioStreamPlayer2D" parent="sfx"]
-unique_name_in_owner = true
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="sfx"]
 stream = ExtResource("17_cgm6k")
 autoplay = true
 bus = &"Music"

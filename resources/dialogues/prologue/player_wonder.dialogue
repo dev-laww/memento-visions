@@ -1,8 +1,8 @@
 ~ start
 
 Alex: [speed=.1]???? 
-Alex: [wait=.5][speed=1]The Chief seems to be looking for me.
-Alex: I should talk to him now to see what he has to say.
+Alex: [wait=.5][speed=1]The Chief said to meet him here.
+Alex: He might've something important if not urgent to tell me to meet him at this secluded place.
 do CurrentScene.animationPlayer.play("out")
 do CurrentScene.chiefMarker.Toggle(true)
 => END

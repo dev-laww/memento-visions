@@ -14,6 +14,7 @@ public partial class ModeSelect : Overlay
     [Node] private Button storyModeButton;
     [Node] private Button frenzyModeButton;
     [Node] private ColorRect lockedTexture;
+    [Node] private AudioStreamPlayer2D sFXClick;
 
     public override void _Notification(int what)
     {
@@ -35,12 +36,14 @@ public partial class ModeSelect : Overlay
 
         frenzyModeButton.Pressed += () =>
         {
+            sFXClick.Play();
             Close();
             GameManager.ChangeScene("res://Scenes/World/Levels/Noise.tscn");
         };
 
         storyModeButton.Pressed += () =>
         {
+            sFXClick.Play();
             Close();
             var currentChapter = SaveManager.Data.CurrentChapter;
             var scene = LevelRegistry.Get(currentChapter);
