@@ -1,3 +1,4 @@
+using System;
 using DialogueManagerRuntime;
 using Game.Autoload;
 using Game.Components;
@@ -41,9 +42,7 @@ public partial class TownSquare : BaseLevel
         if (this.quest.Objectives[0].Completed)
         {
             QuestManager.QuestUpdated -= OnQuestUpdated;
-            storyTellerAnimationPlayer.Play("show_story_teller");
-            var dialogue = ResourceLoader.Load<Resource>("res://resources/dialogues/chapter_1/1.9.dialogue");
-            DialogueManager.ShowDialogueBalloon(dialogue);
+            StartStoryTellerCutscene();
         }
     }
 
@@ -52,7 +51,7 @@ public partial class TownSquare : BaseLevel
     {
         animationPlayer.Play("Fade");
         chapter1Bgm.StreamPaused = true;
-        bossBgm.StreamPaused = false;
+        bossBgm.Play();
 
     }
 
@@ -65,8 +64,26 @@ public partial class TownSquare : BaseLevel
 
         AddChild(aghon);
     }
+
+    public void StartStoryTellerCutscene()
+    {
+        storyTellerAnimationPlayer.Play("show_story_teller");
+        CinematicManager.StartCinematic();
+        MoveCameraTo(storyTeller.GlobalPosition, 2f, () =>
+        {
+            var dialogue = ResourceLoader.Load<Resource>("res://resources/dialogues/chapter_1/1.9.dialogue");
+            DialogueManager.DialogueEnded += _ => CinematicManager.EndCinematic() ;
+            DialogueManager.ShowDialogueBalloon(dialogue);
+        });
+    }
     
-    
-    
-    
+    public static void MoveCameraTo(Vector2 position, float duration, Action onComplete = null)
+    {
+        GameCamera.SetTargetPositionOverride(position);
+        var timer = GameCamera.Instance.GetTree().CreateTimer(duration);
+        timer.Timeout += () =>
+        {
+            onComplete?.Invoke();
+        };
+    }
 }
