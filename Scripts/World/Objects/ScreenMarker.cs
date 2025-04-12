@@ -7,7 +7,7 @@ namespace Game;
 [Scene]
 public partial class ScreenMarker : Node2D
 {
-    private readonly Texture2D red = ResourceLoader.Load<Texture2D>("res://assets/world/arrow-red.png");
+    private readonly Texture2D red = ResourceLoader.Load<Texture2D>("res://assets/world/arrow_red.png");
     private readonly Texture2D normal = ResourceLoader.Load<Texture2D>("res://assets/world/arrow.png");
 
     [Export] public bool HideWhenInBounds = true;
