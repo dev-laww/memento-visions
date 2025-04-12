@@ -63,6 +63,11 @@ public partial class TownSquare : BaseLevel
 
         AddChild(aghon);
     }
+    
+    public void CompleteQuest()
+    {
+        quest.Objectives[0].Complete();
+    }
 
     public void StartStoryTellerCutscene()
     {

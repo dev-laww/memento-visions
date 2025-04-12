@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://decexk5dlixp2"]
+[gd_scene load_steps=32 format=4 uid="uid://decexk5dlixp2"]
 
 [ext_resource type="Script" uid="uid://vtvxgoln0ppg" path="res://Scripts/World/Levels/Story/Chapter1/Chapter1Ending.cs" id="1_pxhlq"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_pxhlq"]
@@ -18,6 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemies/Common/Dummy.tscn" id="13_urmif"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="14_ot12s"]
 [ext_resource type="AudioStream" uid="uid://b6msi8vaubfy8" path="res://assets/audio/music/bar_bgm.ogg" id="18_yy1g4"]
+[ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="19_cvwvb"]
+[ext_resource type="Resource" uid="uid://dubpfapg14rna" path="res://resources/quests/chapter_1/testimony.tres" id="20_d1aoc"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="21_128oy"]
 
 [sub_resource type="Environment" id="Environment_71mkv"]
 background_mode = 3
@@ -45,6 +48,15 @@ radius = 18.0
 radius = 26.6833
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rej5g"]
+
+[sub_resource type="Resource" id="Resource_mjyv7"]
+script = ExtResource("21_128oy")
+Type = 2
+Description = "Head to the Jeep and Rest at the Bar"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_urmif"]
+size = Vector2(15, 15)
 
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
@@ -217,6 +229,23 @@ shape = SubResource("RectangleShape2D_rej5g")
 stream = ExtResource("18_yy1g4")
 autoplay = true
 bus = &"Music"
+
+[node name="QuestTrigger" type="Area2D" parent="."]
+position = Vector2(53, 95)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("19_cvwvb")
+Quest = ExtResource("20_d1aoc")
+Mode = 1
+ShouldInteract = false
+Objective = SubResource("Resource_mjyv7")
+ObjectiveIndex = 2
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
+position = Vector2(80, -17)
+shape = SubResource("RectangleShape2D_urmif")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [editable path="BlackSmith/BlackSmithInteraction/Node2D/InteractionUI"]
 [editable path="Witch/WitchInteraction/Node2D/InteractionUI"]
