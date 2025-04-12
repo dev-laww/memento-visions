@@ -18,7 +18,7 @@ public partial class Chapter1Ending : BaseLevel
     [Node] private Interaction blackSmithInteraction;
     [Node] private Interaction witchInteraction;
     [Node] private TransitionArea transitionArea;
-    
+
     [Node] private BlackSmith blackSmith;
 
     [Node] private Witch witch;
@@ -108,34 +108,34 @@ public partial class Chapter1Ending : BaseLevel
         };
     }
 
-public void StartCutscene(Vector2 targetPosition)
-{
-    CinematicManager.StartCinematic();
-    MoveCameraTo(targetPosition, 2f, () =>
+    public void StartCutscene(Vector2 targetPosition)
     {
-        DialogueManager.DialogueEnded += _ => CinematicManager.EndCinematic();
-    });
-}
+        CinematicManager.StartCinematic();
+        MoveCameraTo(targetPosition, 2.5f,
+            () => {  CinematicManager.EndCinematic(); });
+    }
 
-public static void MoveCameraTo(Vector2 position, float duration, Action onComplete = null)
-{
-    GameCamera.SetTargetPositionOverride(position);
-    var timer = GameCamera.Instance.GetTree().CreateTimer(duration);
-    timer.Timeout += () => { onComplete?.Invoke(); };
-}
+    public static void MoveCameraTo(Vector2 position, float duration, Action onComplete = null)
+    {
+        GameCamera.SetTargetPositionOverride(position);
+        var timer = GameCamera.Instance.GetTree().CreateTimer(duration);
+        timer.Timeout += () => { onComplete?.Invoke(); };
+    }
 
-public void StoryTellerCutscene()
-{
-    StartCutscene(storyTeller.GlobalPosition);
-}
-public void BlackSmithCutscene()
-{
-    StartCutscene(blackSmith.GlobalPosition);
-}
-public void WitchCutscene()
-{
-    StartCutscene(witch.GlobalPosition);
-}
+    public void StoryTellerCutscene()
+    {
+        StartCutscene(storyTeller.GlobalPosition);
+    }
+
+    public void BlackSmithCutscene()
+    {
+        StartCutscene(blackSmith.GlobalPosition);
+    }
+
+    public void WitchCutscene()
+    {
+        StartCutscene(witch.GlobalPosition);
+    }
 
     public override void _ExitTree()
     {
@@ -144,5 +144,4 @@ public void WitchCutscene()
         blackSmithInteraction.Interacted -= OnBlackSmithInteracted;
         witchInteraction.Interacted -= OnWitchInteracted;
     }
-
 }
