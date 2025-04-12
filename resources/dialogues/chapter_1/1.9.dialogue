@@ -1,12 +1,10 @@
 ~ start
+Storyteller: Our protagonist stood victorious, having vanquished the Mayor—known in his true form as Aghon—a force like a thunderstorm, fierce and unrelenting, who sowed terror into the hearts of all who opposed him.
 
-Alex: He was...[wait=.5] difficult to fend off. I didn't know he was that strong, tough, and swift.
-Alex: He really has the strength to back up his words.
-[wait=1]
-Storyteller: A disaster towards the Everfield City has been prevented. Or has it?
-Storyteller: Upon defeating the Mayor, Alex feels uneasy. It seems like he did something that could shake up something.
-Storyteller: But... he brushes it off, thinking it's just goosebumps because of what the Mayor did.
-Storyteller: The Mayor is then taken to the police station for questioning and was soon sentenced to life in prison, preventing the Mayor for further causing chaos to the townsfolk.
+Storyteller: A catastrophe looming over Everfield City has been averted… or so it seems.
+Storyteller: In the aftermath of the Mayor’s fall, Alex stands victorious—yet unease creeps into his soul. It’s as if his actions stirred something far greater.
+Storyteller: He shakes it off, convincing himself it’s nothing more than lingering fear from Aghon’s terrifying transformation.
+Storyteller: The Mayor, now stripped of his menace, is dragged to the police station for interrogation. Shortly after, he is sentenced to life imprisonment—his reign of chaos brought to an end.
 do CurrentScene.screenMarker.Toggle(true)
 do CurrentScene.transitionArea.Toggle(true)
 => END

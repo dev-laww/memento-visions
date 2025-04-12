@@ -1,9 +1,9 @@
 ~ start
 #do CurrentScene.SetDialogueTriigerOff()
 Alex: Wait, am I in the right place?
-Alex: Doesn't seem like it... That mysterious guy-[wait=.5]Kevin,[wait=.5] might've tricked me here.
-Alex: The Storyteller should be here, I think.
-Alex: Let's see If I can find him.
-Alex: Maybe I can gather some clues from him about this place.
+Alex: Doesn't seem like it... That mysterious guy-[wait=.5]Kevin,[wait=.5] might've tricked me unto going in here.
+Alex: Hmmm... Let's see.[wait=.5] If what the mysterious guy-Kevin said is true about the Mayor, then I should find him first.
+Alex: But now I'm on this place with no way of knowing where is this.
+Alex: I'll try to explore a little bit, see where this heads out.
 do CurrentScene.mayorMarker.Toggle(true)
 => END
