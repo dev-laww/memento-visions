@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=4 uid="uid://u1iww5n58onj"]
+[gd_scene load_steps=105 format=4 uid="uid://u1iww5n58onj"]
 
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_exmlw"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="4_spppi"]
@@ -6,10 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="5_wltyk"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="6_nm76b"]
 [ext_resource type="PackedScene" uid="uid://defbwilwt3lnr" path="res://Scenes/Entities/Characters/Witch.tscn" id="8_xx57f"]
+[ext_resource type="Resource" uid="uid://br5ym1oydq16n" path="res://resources/dialogues/chapter_2/w2.dialogue" id="9_bwtdm"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="9_exmlw"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="10_7sf3k"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="10_bwtdm"]
 [ext_resource type="Resource" uid="uid://bdiho63j18ddw" path="res://resources/quests/chapter_2/restoring_balance.tres" id="10_spppi"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="12_1v35a"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="13_rjjwp"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="13_spppi"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_750n8"]
@@ -406,6 +408,28 @@ radius = 13.0384
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tc47e"]
 size = Vector2(54, 178)
 
+[sub_resource type="Resource" id="Resource_inl2v"]
+script = ExtResource("12_1v35a")
+Id = "enemy:tikbalang"
+Amount = 8
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_f143y"]
+script = ExtResource("12_1v35a")
+Id = "enemy:aswang"
+Amount = 8
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_qm08l"]
+script = ExtResource("13_rjjwp")
+Type = 3
+Description = "Kill 8 Tikbalangs and 8 Aswangs that seems to be barricading you into going to their lair."
+Enemies = [SubResource("Resource_inl2v"), SubResource("Resource_f143y")]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esctv"]
+size = Vector2(34, 178)
+
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
 
@@ -757,7 +781,7 @@ Quest = ExtResource("10_spppi")
 Mode = 0
 ShouldInteract = true
 InteractionLabel = "Interact"
-DialogueResource = null
+DialogueResource = ExtResource("9_bwtdm")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Witch/QuestTrigger"]
@@ -767,11 +791,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Witch/QuestTrigger"]
 
-[node name="InteractionUI" type="Control" parent="Witch/QuestTrigger/Node2D" instance=ExtResource("10_7sf3k")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("10_bwtdm")
+[node name="InteractionUI" parent="Witch/QuestTrigger/Node2D" instance=ExtResource("10_7sf3k")]
 
 [node name="TransitionArea" type="Area2D" parent="."]
 position = Vector2(1220, 778)
@@ -783,3 +803,19 @@ metadata/_custom_type_script = "uid://davlg2u8drdh4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
 shape = SubResource("RectangleShape2D_tc47e")
+
+[node name="QuestTrigger" type="Area2D" parent="."]
+position = Vector2(1153, 779)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("9_exmlw")
+Quest = ExtResource("10_spppi")
+Mode = 1
+ShouldInteract = false
+Objective = SubResource("Resource_qm08l")
+ObjectiveIndex = 0
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
+shape = SubResource("RectangleShape2D_esctv")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)

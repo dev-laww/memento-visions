@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 script = ExtResource("1_rhibe")
 Type = 1
 Description = "Equip the crafted weapon. You are now ready to pulverize your enemies!"
-Items = null
+Items = []
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]

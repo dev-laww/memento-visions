@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=4 uid="uid://criyou87dacyh"]
+[gd_scene load_steps=78 format=4 uid="uid://criyou87dacyh"]
 
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_565dr"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="4_ot0yb"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://bw6fossxbjly1" path="res://resources/quests/chapter_2/the_missing_anchor.tres" id="10_wlw4r"]
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="13_o8kv0"]
 [ext_resource type="Resource" uid="uid://cx3y2g4y3fymi" path="res://resources/dialogues/chapter_2/2.7.dialogue" id="14_dry5l"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="14_p7vax"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_c37h7"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nfvny"]
@@ -294,6 +295,15 @@ size = Vector2(20, 78)
 size = Vector2(20, 78)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0mh2c"]
+
+[sub_resource type="Resource" id="Resource_6dk5v"]
+script = ExtResource("14_p7vax")
+Type = 2
+Description = "Talk to the Storyteller in the midst of the forest."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t7x0d"]
+size = Vector2(20, 96)
 
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
@@ -595,3 +605,19 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="Node2D" type="Node2D" parent="StoryTeller/DialogueTrigger"]
 
 [node name="InteractionUI" parent="StoryTeller/DialogueTrigger/Node2D" instance=ExtResource("15_c37h7")]
+
+[node name="QuestTrigger2" type="Area2D" parent="."]
+position = Vector2(790, 1015)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("8_vhqjr")
+Quest = ExtResource("10_wlw4r")
+Mode = 1
+ShouldInteract = false
+Objective = SubResource("Resource_6dk5v")
+ObjectiveIndex = 2
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger2"]
+shape = SubResource("RectangleShape2D_t7x0d")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)

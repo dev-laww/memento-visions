@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://du6gsft33r8su"]
+[gd_scene load_steps=71 format=4 uid="uid://du6gsft33r8su"]
 
 [ext_resource type="Script" uid="uid://dana374n4d6mt" path="res://Scripts/World/Levels/Story/Chapter2/SmallVille.cs" id="1_ej8wk"]
 [ext_resource type="TileSet" uid="uid://wuwsi02f3fft" path="res://resources/tilesets/intramuros.tres" id="2_wh3ic"]
@@ -16,10 +16,10 @@
 [ext_resource type="Resource" uid="uid://c6xlurnbhc5sx" path="res://resources/dialogues/chapter_2/2.1.dialogue" id="14_ouy5p"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="15_ej8wk"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_xoyfs"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="16_0qquf"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="17_trg5q"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="18_x263p"]
-[ext_resource type="Resource" uid="uid://bhvvo64xqww4i" path="res://resources/dialogues/chapter_2/2.2.dialogue" id="19_kpj6m"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="20_ouy5p"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="21_0qquf"]
 [ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/audio/music/chapter_1_bgm.ogg" id="22_nj1is"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nj1is"]
@@ -224,8 +224,21 @@ radius = 14.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8uqde"]
 size = Vector2(42, 30)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_76d0m"]
-size = Vector2(130, 92)
+[sub_resource type="Resource" id="Resource_arrju"]
+script = ExtResource("20_ouy5p")
+Id = "enemy:tikbalang"
+Amount = 2
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_7n7ry"]
+script = ExtResource("21_0qquf")
+Type = 3
+Description = "Kill the 2 tikbalang still left on the scene. "
+Enemies = [SubResource("Resource_arrju")]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wuq0w"]
+size = Vector2(118, 52)
 
 [node name="SmallVille" type="Node2D"]
 y_sort_enabled = true
@@ -437,11 +450,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Witch/QuestTrigger"]
 
-[node name="InteractionUI" type="Control" parent="Witch/QuestTrigger/Node2D" instance=ExtResource("15_xoyfs")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("16_0qquf")
+[node name="InteractionUI" parent="Witch/QuestTrigger/Node2D" instance=ExtResource("15_xoyfs")]
 
 [node name="witchMarker" parent="Witch" instance=ExtResource("15_ej8wk")]
 unique_name_in_owner = true
@@ -465,18 +474,6 @@ metadata/_custom_type_script = "uid://davlg2u8drdh4"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
 shape = SubResource("RectangleShape2D_8uqde")
 
-[node name="DialogueTrigger2" type="Area2D" parent="."]
-position = Vector2(-179, 602)
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("7_sigrk")
-DialogueResource = ExtResource("19_kpj6m")
-metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueTrigger2"]
-shape = SubResource("RectangleShape2D_76d0m")
-debug_color = Color(0.88, 0.525, 0.898, 0.42)
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
@@ -488,3 +485,19 @@ stream = ExtResource("22_nj1is")
 autoplay = true
 bus = &"Music"
 parameters/looping = true
+
+[node name="QuestTrigger" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("10_7fqr5")
+Quest = ExtResource("11_kyjmd")
+Mode = 1
+ShouldInteract = false
+Objective = SubResource("Resource_7n7ry")
+ObjectiveIndex = 0
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
+position = Vector2(-174, 594)
+shape = SubResource("RectangleShape2D_wuq0w")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)

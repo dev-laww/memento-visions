@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=4 uid="uid://cntfldylta63f"]
+[gd_scene load_steps=60 format=4 uid="uid://cntfldylta63f"]
 
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_boo03"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="4_tie44"]
@@ -8,9 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bmxiu0n4a4dua" path="res://Scenes/World/PuzzleComponent/LeverManager.tscn" id="8_uoc8a"]
 [ext_resource type="PackedScene" uid="uid://by64k6fa2d33l" path="res://Scenes/World/PuzzleComponent/Lever.tscn" id="9_ag358"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="10_ta5sv"]
-[ext_resource type="Resource" uid="uid://bv76l3i6da1kd" path="res://resources/quests/chapter_2/quest2.4.tres" id="11_vqqma"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="12_uh6ln"]
 [ext_resource type="Resource" uid="uid://di1iubieyn4aj" path="res://resources/dialogues/chapter_2/2.8.dialogue" id="13_evwfh"]
+[ext_resource type="PackedScene" uid="uid://c11a0icy1ftwe" path="res://Scenes/Entities/Enemies/Boss/Lunaria/Lunaria.tscn" id="13_kpyl4"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="14_vqqma"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nwd2x"]
@@ -236,6 +236,9 @@ size = Vector2(70, 246)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uh6ln"]
 size = Vector2(110, 30)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_52sxu"]
+size = Vector2(168, 20)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -282,6 +285,9 @@ position = Vector2(391, 448)
 
 [node name="Tikbalang7" parent="Enemy" instance=ExtResource("4_tie44")]
 position = Vector2(555, 704)
+
+[node name="Lunaria" parent="Enemy" instance=ExtResource("13_kpyl4")]
+position = Vector2(217, 444)
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -466,7 +472,7 @@ position = Vector2(-268, 792)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("10_ta5sv")
-Quest = ExtResource("11_vqqma")
+Quest = null
 Mode = 0
 ShouldInteract = false
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
@@ -496,3 +502,17 @@ metadata/_custom_type_script = "uid://davlg2u8drdh4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
 shape = SubResource("RectangleShape2D_uh6ln")
+
+[node name="QuestTrigger2" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("10_ta5sv")
+Quest = null
+Mode = 0
+ShouldInteract = false
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger2"]
+position = Vector2(-56, 43)
+shape = SubResource("RectangleShape2D_52sxu")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)

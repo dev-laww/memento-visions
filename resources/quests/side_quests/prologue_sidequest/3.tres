@@ -7,7 +7,7 @@
 script = ExtResource("1_qa6jr")
 Type = 1
 Description = "Craft a Salabat and drink it."
-Items = null
+Items = []
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]

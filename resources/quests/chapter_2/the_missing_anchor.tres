@@ -1,6 +1,40 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=2 format=3 uid="uid://bw6fossxbjly1"]
+[gd_resource type="Resource" script_class="Quest" load_steps=9 format=3 uid="uid://bw6fossxbjly1"]
 
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_0n00g"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="1_tkdir"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="2_2bx7x"]
+
+[sub_resource type="Resource" id="Resource_43hcv"]
+script = ExtResource("1_tkdir")
+Id = "enemy:tikbalang"
+Amount = 5
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_qeaye"]
+script = ExtResource("2_2bx7x")
+Type = 3
+Description = "Kill 5 Tikbalangs"
+Enemies = [SubResource("Resource_43hcv")]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="Resource" id="Resource_tkdir"]
+script = ExtResource("1_tkdir")
+Id = "enemy:aswang"
+Amount = 5
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_2bx7x"]
+script = ExtResource("2_2bx7x")
+Type = 3
+Description = "Kill 5 Aswangs"
+Enemies = [SubResource("Resource_tkdir")]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="Resource" id="Resource_6dk5v"]
+script = ExtResource("2_2bx7x")
+Type = 2
+Description = "Talk to the Storyteller in the midst of the forest."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
 script = ExtResource("1_0n00g")
@@ -8,7 +42,7 @@ Id = "quest:the_missing_anchor"
 Title = "The Missing Anchor"
 Ordered = false
 Description = "As Alex venture forth, he encountered more and more mythical creatures that enveloped the forest. Upon "
-objectives = []
+objectives = [SubResource("Resource_qeaye"), SubResource("Resource_2bx7x"), SubResource("Resource_6dk5v")]
 Experience = 0
 Items = []
 metadata/_custom_type_script = "uid://dssta8xepjmkg"
