@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=6 format=3 uid="uid://b3pnov4n41331"]
+[gd_resource type="Resource" script_class="Quest" load_steps=7 format=3 uid="uid://b3pnov4n41331"]
 
 [ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="1_4c0t1"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="2_rgcns"]
@@ -17,13 +17,19 @@ Description = "Kill the 2 tikbalang still left on the scene. "
 Enemies = [SubResource("Resource_arrju")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
+[sub_resource type="Resource" id="Resource_bysam"]
+script = ExtResource("2_rgcns")
+Type = 2
+Description = "Head to the place where the place is runned by Tikbalangs based on what the Chief said."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
 [resource]
 script = ExtResource("3_piv6h")
 Id = "quest:echoes_of_void"
 Title = "Echoes of the Void"
 Ordered = false
-Description = "Stalls are overturned, vendors muttering prayers as they attempt to gather their scattered wares. A mysterious woman in robe appears and helps them clean the messes left by the mysterious creature that wreaked havoc. "
-objectives = [SubResource("Resource_7n7ry")]
+Description = "Stalls are said overturned, vendors muttering prayers as they attempt to gather their scattered wares. A mysterious woman in robe-suddenly appeared based on the reports-helps them clean the messes left by the mysterious creature that wreaked havoc. "
+objectives = [SubResource("Resource_7n7ry"), SubResource("Resource_bysam")]
 Experience = 0
 Items = []
 metadata/_custom_type_script = "uid://dssta8xepjmkg"
