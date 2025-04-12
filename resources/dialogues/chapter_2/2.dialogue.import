@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_14"
+type="Resource"
+uid="uid://cmmnt4rclypcb"
+path="res://.godot/imported/2.dialogue-1a140510d245fb9308f5a0104fe070a9.tres"
+
+[deps]
+
+source_file="res://resources/dialogues/chapter_2/2.dialogue"
+dest_files=["res://.godot/imported/2.dialogue-1a140510d245fb9308f5a0104fe070a9.tres"]
+
+[params]
+
+defaults=true
