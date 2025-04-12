@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=4 uid="uid://du6gsft33r8su"]
+[gd_scene load_steps=69 format=4 uid="uid://du6gsft33r8su"]
 
 [ext_resource type="Script" uid="uid://dana374n4d6mt" path="res://Scripts/World/Levels/Story/Chapter2/SmallVille.cs" id="1_ej8wk"]
 [ext_resource type="TileSet" uid="uid://wuwsi02f3fft" path="res://resources/tilesets/intramuros.tres" id="2_wh3ic"]
@@ -13,8 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://defbwilwt3lnr" path="res://Scenes/Entities/Characters/Witch.tscn" id="9_6u2fg"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="10_7fqr5"]
 [ext_resource type="Resource" uid="uid://b3pnov4n41331" path="res://resources/quests/chapter_2/echoes_of_void.tres" id="11_kyjmd"]
+[ext_resource type="Resource" uid="uid://c6xlurnbhc5sx" path="res://resources/dialogues/chapter_2/2.1.dialogue" id="14_ouy5p"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="15_ej8wk"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_xoyfs"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="16_0qquf"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="17_trg5q"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="18_x263p"]
 [ext_resource type="Resource" uid="uid://bhvvo64xqww4i" path="res://resources/dialogues/chapter_2/2.2.dialogue" id="19_kpj6m"]
@@ -424,7 +426,9 @@ collision_mask = 4
 script = ExtResource("10_7fqr5")
 Quest = ExtResource("11_kyjmd")
 Mode = 0
-ShouldInteract = false
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("14_ouy5p")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Witch/QuestTrigger"]
@@ -433,11 +437,16 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Witch/QuestTrigger"]
 
-[node name="InteractionUI" parent="Witch/QuestTrigger/Node2D" instance=ExtResource("15_xoyfs")]
+[node name="InteractionUI" type="Control" parent="Witch/QuestTrigger/Node2D" instance=ExtResource("15_xoyfs")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("16_0qquf")
 
 [node name="witchMarker" parent="Witch" instance=ExtResource("15_ej8wk")]
 unique_name_in_owner = true
 position = Vector2(578, 434)
+IsRed = false
 
 [node name="Tikbalang" parent="." instance=ExtResource("17_trg5q")]
 position = Vector2(-146, 749)
