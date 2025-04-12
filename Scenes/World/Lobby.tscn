@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://d0qr3o1nxmcpe"]
+[gd_scene load_steps=22 format=4 uid="uid://d0qr3o1nxmcpe"]
 
 [ext_resource type="Script" uid="uid://cmcrwyat2bufp" path="res://Scripts/World/Lobby.cs" id="1_o8or8"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_n4pur"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dgqrvixy2ocww" path="res://Scenes/Entities/Characters/BlackSmith.tscn" id="13_gm316"]
 [ext_resource type="PackedScene" uid="uid://defbwilwt3lnr" path="res://Scenes/Entities/Characters/Witch.tscn" id="14_pq0dj"]
 [ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemies/Common/Dummy.tscn" id="15_dtmc3"]
+[ext_resource type="AudioStream" uid="uid://b6msi8vaubfy8" path="res://assets/audio/music/bar_bgm.ogg" id="15_o8or8"]
 
 [sub_resource type="Environment" id="Environment_71mkv"]
 background_mode = 3
@@ -53,11 +54,11 @@ z_index = 1000
 color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(768, 528, 480, 528, 480, 480, 192, 480, 192, 384, 48, 384, 48, 240, 0, 240, 0, 0, 288, 0, 288, 192, 336, 192, 336, 144, 480, 144, 480, 48, 720, 48, 720, 288, 672, 288, 672, 384, 768, 384)
 script = ExtResource("3_w7jpl")
+ParseRootNode = NodePath("../Art")
 NavigationPolygon = SubResource("NavigationPolygon_71mkv")
 agentRadius = 8.0
 chunkSize = 1000
 cellSize = 1000.0
-ParseRootNode = NodePath("../Art")
 metadata/_custom_type_script = "uid://cfscbenslyojv"
 
 [node name="@NavigationRegion2D@41983" type="NavigationRegion2D" parent="NavigationManager"]
@@ -176,6 +177,11 @@ position = Vector2(508, 108)
 
 [node name="Dummy4" parent="." instance=ExtResource("15_dtmc3")]
 position = Vector2(739, 447)
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_o8or8")
+autoplay = true
+bus = &"Music"
 
 [editable path="StoryTeller/StoryTellerInteraction/Node2D/InteractionUI"]
 [editable path="BlackSmith/BlackSmithInteraction/Node2D/InteractionUI"]

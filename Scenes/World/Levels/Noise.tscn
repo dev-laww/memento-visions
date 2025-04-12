@@ -1,4 +1,4 @@
-[gd_scene load_steps=399 format=4 uid="uid://cccs11d7xwh47"]
+[gd_scene load_steps=400 format=4 uid="uid://cccs11d7xwh47"]
 
 [ext_resource type="Script" uid="uid://c22irbkohg4bs" path="res://addons/gaea/generators/2D/noise_generator/noise_generator.gd" id="1_0m5yt"]
 [ext_resource type="PackedScene" uid="uid://2586jb7lbuyn" path="res://Scenes/UI/Common/Fog.tscn" id="1_lbxhc"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="18_5hc24"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="19_t5swe"]
 [ext_resource type="PackedScene" uid="uid://ngodgqc4w3i2" path="res://Scenes/UI/Screens/Victory.tscn" id="23_ply2r"]
+[ext_resource type="AudioStream" uid="uid://b2bdexb2ameh7" path="res://assets/audio/music/boss_bgm.ogg" id="28_xs3a0"]
 
 [sub_resource type="Resource" id="Resource_me1kn"]
 resource_name = "Elevation and Water Smoothing"
@@ -420,28 +421,20 @@ metadata/_custom_type_script = "uid://bmd2fkvnipiu7"
 [sub_resource type="Resource" id="Resource_1v8c7"]
 resource_local_to_scene = true
 script = ExtResource("4_fp327")
-Min = 0.092
-Max = 0.136
-Noise = SubResource("FastNoiseLite_a8soy")
 enemyScene = ExtResource("18_5hc24")
 spawnChance = 0.3
 Weight = 1
-noise = SubResource("FastNoiseLite_a8soy")
-min = 0.092
-max = 0.136
+Min = 0.092
+Max = 0.136
 
 [sub_resource type="Resource" id="Resource_o37we"]
 resource_local_to_scene = true
 script = ExtResource("4_fp327")
-Min = 0.353
-Max = 1.0
-Noise = SubResource("FastNoiseLite_a8soy")
 enemyScene = ExtResource("19_t5swe")
 spawnChance = 0.3
 Weight = 1
-noise = SubResource("FastNoiseLite_a8soy")
-min = 0.353
-max = 1.0
+Min = 0.353
+Max = 1.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vo0dt"]
 frequency = 0.0038
@@ -1896,9 +1889,9 @@ metadata/_custom_type_script = "uid://ckihk86jbv70p"
 
 [node name="Spawner" type="Node" parent="." node_paths=PackedStringArray("spawnRoot")]
 script = ExtResource("3_mmryb")
-Noise = SubResource("FastNoiseLite_a8soy")
-SpawnEntries = [SubResource("Resource_1v8c7"), SubResource("Resource_o37we")]
 spawnRoot = NodePath("../Entities")
+Noise = SubResource("FastNoiseLite_a8soy")
+SpawnEntries = Array[ExtResource("4_fp327")]([SubResource("Resource_1v8c7"), SubResource("Resource_o37we")])
 metadata/_custom_type_script = "uid://bhqbwv1yagshy"
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
@@ -1926,9 +1919,9 @@ z_index = 1000
 color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(0, 0, 2016, 0, 2016, 2016, 0, 2016)
 script = ExtResource("1_unvsc")
+ParseRootNode = NodePath("../Map")
 NavigationPolygon = SubResource("NavigationPolygon_3lbxs")
 useEdgeConnections = false
-ParseRootNode = NodePath("../Map")
 metadata/_custom_type_script = "uid://cfscbenslyojv"
 
 [node name="@NavigationRegion2D@30181" type="NavigationRegion2D" parent="NavigationManager"]
@@ -2951,3 +2944,8 @@ position = Vector2(-2, -22)
 
 [node name="Player" parent="Entities" instance=ExtResource("2_k6nme")]
 position = Vector2(1080, 1272)
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("28_xs3a0")
+autoplay = true
+bus = &"Music"
