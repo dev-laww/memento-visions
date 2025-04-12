@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bg32n0pmt15qc"]
+[gd_scene load_steps=14 format=3 uid="uid://bg32n0pmt15qc"]
 
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="1_6t02b"]
 [ext_resource type="Script" uid="uid://dmv8sparxyw4k" path="res://Scripts/UI/Overlays/ModeSelect.cs" id="1_bao6r"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c3uq6b0urr2n1" path="res://assets/ui/story.png" id="6_k01b4"]
 [ext_resource type="Texture2D" uid="uid://csk3g0jlmxo2v" path="res://assets/ui/frenzy.png" id="7_wr343"]
 [ext_resource type="Texture2D" uid="uid://cqbv5nhiqt3ec" path="res://assets/icons/lock.png" id="9_5l56j"]
+[ext_resource type="AudioStream" uid="uid://cwqgqd7a1xdjg" path="res://assets/audio/ui/click.mp3" id="10_1tf8u"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fray8"]
 
@@ -243,3 +244,7 @@ scale = Vector2(2, 2)
 pivot_offset = Vector2(20, 20)
 mouse_filter = 2
 texture = ExtResource("9_5l56j")
+
+[node name="SFXClick" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_1tf8u")
+bus = &"UI"

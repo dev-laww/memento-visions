@@ -29,6 +29,7 @@ public partial class Crafting : Overlay
     [Node] private TextureButton decreaseButton;
     [Node] private Button craftButton;
     [Node] private HBoxContainer quantityControl;
+    [Node] private AudioStreamPlayer2D sFXClick;
 
     [Signal] public delegate void ItemCraftedEventHandler();
 
@@ -88,6 +89,7 @@ public partial class Crafting : Overlay
     private void SelectSlot(Slot slot)
     {
         var selectedSlot = slots.FirstOrDefault(s => s.Selected);
+        sFXClick.Play();
 
         if (selectedSlot is null)
         {
@@ -129,6 +131,7 @@ public partial class Crafting : Overlay
 
     private void OnIncreaseButtonPress()
     {
+        sFXClick.Play();
         if (selectedRecipe is null) return;
 
         quantity++;
@@ -138,6 +141,7 @@ public partial class Crafting : Overlay
 
     private void OnDecreaseButtonPress()
     {
+        sFXClick.Play();
         if (selectedRecipe is null) return;
 
         if (quantity <= 0) return;
@@ -149,6 +153,7 @@ public partial class Crafting : Overlay
 
     private void OnCraftButtonPress()
     {
+        sFXClick.Play();
         if (selectedRecipe is null) return;
 
         Create(quantity);
