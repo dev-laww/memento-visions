@@ -1,13 +1,12 @@
 ~ start
-[wait=1][speed=.4]The bar is dimly lit, the air thick with smoke and stories long forgotten. \nA quiet stillness hangs in the room, broken only by the low hum of neon and the distant clink of glass. 
-[speed=.4]At the entrance stands a man—jacket worn, eyes sharp, expression's unreadable.
-[speed=.4]Alejandro Gutierrez-a name known to few, but soon to be remembered by many. There’s an unfathomable emotion in his chest, one that stirs when the visions return.
-[speed=.4]Tonight, something calls to him. 
-[speed=.4]A whisper in the dark. 
-[speed=.4]A familiar voice. 
-[speed=.4]A choice.
+[wait=1]The bar is dimly lit, the air thick with smoke and stories long forgotten. \nA quiet stillness hangs in the room, broken only by the low hum of neon and the distant clink of glass. 
+At the entrance stands a man—jacket worn, eyes sharp and, expression's unreadable.
+Alejandro Gutierrez-a name known to few, but soon to be remembered by many-just returned from his first venture to the mind-bending mythos.
+Tonight, something calls to him. 
+A whisper in the dark. 
+A familiar voice. 
+A choice.
 
-[speed=.7]Will you dive into the story—unraveling the myths that have plagued the shadows of the Philippines? 
+[speed=.7]Will you dive again unto the story—unraveling the myths that have plagued the shadows of the Philippines? 
 [speed=.7]Or surrender to the frenzy—where time bends, and nightmares never sleep, farming through waves of creatures to grow stronger for what’s to come?
-[wait=2]Press W, A, S, D to move your character.
 => END
