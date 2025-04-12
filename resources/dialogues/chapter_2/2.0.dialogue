@@ -1,6 +1,6 @@
 ~ start
-Alex: [speed=.1]Hmph... [speed=1]Why does the Chief always give incomplete information? Do I seem like a maid to him? It's such a hassle.
-Alex: I should only be called in for real emergency.
-Alex: Well, never mind that. I should head North for now.
+Alex: [speed=.1]Hmph... [speed=1]I should've asked the Chief for more information about this case
+Alex: Now where to start...
+Alex: I'll try heading North for now.
 do CurrentScene.ToggleWitchMarker(true)
 => END

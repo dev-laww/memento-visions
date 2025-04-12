@@ -1,6 +1,6 @@
 ~ start
 if CurrentScene.isChiefInteracted == false
-	Chief: Congratulations on defeating the Mayor. The sightings of Aswang have drastically decreased since then. Your efforts have made a real difference to the town's safety. 
+	Chief: Thank you for defeating the root of this chaos, Alex. The sightings of Aswang have drastically decreased since then. Your efforts have made a real difference to the town's safety. 
 	Alex: That was a tough fight. I didn’t expect him to be the one behind all the Aswang incidents… him of all people.
 	Alex: Thank goodness it’s all over now.
 	Chief: Now, I’d like to introduce you to some new allies who will assist you on your journey — the Witch Apo Sita, the Panday Juan, and the Storyteller Marcelo. You can always interact with them when you're in the Lobby.
@@ -24,7 +24,14 @@ while true
 		
 		
 	- Continue the Mission
-		Chief: The next mission is not available yet. Please check back later.
+		Chief: Head to the town Alex. There have been reports of people getting attacked by humanoid creatures with a horse head.
+		- Horse heads?
+		- Tikbalang maybe?
+		Alex: Are you sure Chief on what you are talking about?
+		Chief: It's kind of unbelievable since I heard about those humanoid creatures with horse heads only in books, and are living in deep forests-playing tricks on anyone who passes their territory.
+		Alex: Since we both know about it, it's a good think you called for me this time.
+		Chief: I know Alex. Be careful out there.
+		- Thanks, Chief!
 		do CurrentScene.transitionArea.Toggle(true)
 	- Exit
 		=> END
