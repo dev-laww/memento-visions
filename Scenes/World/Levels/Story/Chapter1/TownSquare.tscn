@@ -1,18 +1,24 @@
-[gd_scene load_steps=117 format=4 uid="uid://jdy1vpq1yng4"]
+[gd_scene load_steps=133 format=4 uid="uid://jdy1vpq1yng4"]
 
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="1_5yg8b"]
 [ext_resource type="Script" uid="uid://bww7pdfaugnj3" path="res://Scripts/World/Levels/Story/Chapter1/TownSquare.cs" id="1_k56vb"]
 [ext_resource type="TileSet" uid="uid://wuwsi02f3fft" path="res://resources/tilesets/intramuros.tres" id="2_16p58"]
 [ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="3_uqojl"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="5_6brkl"]
-[ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="6_16p58"]
 [ext_resource type="AudioStream" uid="uid://b2bdexb2ameh7" path="res://assets/audio/music/boss_bgm.ogg" id="6_j760s"]
 [ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/audio/music/chapter_1_bgm.ogg" id="7_8tuqj"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="7_m44gr"]
+[ext_resource type="PackedScene" uid="uid://vsehi4t73af5" path="res://Scenes/Entities/Characters/Mayor.tscn" id="9_l26tj"]
+[ext_resource type="Resource" uid="uid://1lif4uqpp2ca" path="res://resources/dialogues/chapter_1/1.8.dialogue" id="12_f1toi"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="13_j760s"]
 [ext_resource type="Resource" uid="uid://dubpfapg14rna" path="res://resources/quests/chapter_1/testimony.tres" id="13_matur"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="13_tqrau"]
 [ext_resource type="PackedScene" uid="uid://c6ddutu3xqvkn" path="res://Scenes/Entities/Enemies/Boss/Aghon/Aghon.tscn" id="13_uqojl"]
+[ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="14_nkwx0"]
+[ext_resource type="Texture2D" uid="uid://bbaj1lmrgykxu" path="res://assets/effects/poof.png" id="15_58lyr"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_v4bk2"]
+[ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="18_f1toi"]
+[ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="19_tqrau"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_i1ehx"]
 
@@ -502,6 +508,12 @@ border_size = 256.0
 parsed_geometry_type = 1
 border_size = 256.0
 
+[sub_resource type="Resource" id="Resource_n7jaw"]
+script = ExtResource("13_tqrau")
+Type = 2
+Description = "Head to the Jeep and Rest at the Bar"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_8tuqj"]
 radius = 29.1548
 
@@ -548,6 +560,113 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_v4bk2"]
 gradient = SubResource("Gradient_khwcc")
 fill_to = Vector2(0.0458716, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_l26tj"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_f1toi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.976096, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j7p5r"]
+curve = SubResource("Curve_f1toi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tqrau"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+gravity = Vector3(0, -20, 0)
+scale_min = 0.7
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_j7p5r")
+anim_speed_max = 1.0
+anim_offset_max = 1.0
+
+[sub_resource type="Animation" id="Animation_52t3j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StoryTeller:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StoryTeller/PoofParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_al03n"]
+resource_name = "show_story_teller"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StoryTeller:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StoryTeller/PoofParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StoryTeller")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.49),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Work"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_52t3j"]
+_data = {
+&"RESET": SubResource("Animation_52t3j"),
+&"show_story_teller": SubResource("Animation_al03n")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqrau"]
+size = Vector2(144, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5id5a"]
+size = Vector2(141, 74)
 
 [node name="TownSquare" type="Node2D"]
 script = ExtResource("1_k56vb")
@@ -857,12 +976,12 @@ navigation_polygon = SubResource("NavigationPolygon_okm4p")
 [node name="@NavigationRegion2D@59430" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_bgshn")
 
-[node name="bossBgm" type="AudioStreamPlayer2D" parent="."]
+[node name="BossBgm" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_j760s")
 bus = &"Music"
 parameters/looping = true
 
-[node name="chapter1Bgm" type="AudioStreamPlayer2D" parent="."]
+[node name="Chapter1Bgm" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_8tuqj")
 autoplay = true
 bus = &"Music"
@@ -888,7 +1007,7 @@ position = Vector2(419, 29)
 scale = Vector2(0.732906, 0.778375)
 polygon = PackedVector2Array(-1352.15, 1351.53, -1397.18, 626.947, -1424.47, -218.404, -985.12, -570.419, -806.379, -596.113, -244.233, -489.481, -953.738, -492.05, -1152.94, -268.508, -1293.48, 534.446, -1238.9, 1197.37, 568.968, 1172.96, 577.155, 1296.29, 710.869, 1289.87, 1401.27, 1292.44, 1394.45, 1205.07, 1401.27, 127.188, 1798.32, 147.744, 1807.87, -499.759, -686.309, -488.196, -207.394, -497.189, 1892.47, -548.578, 1840.62, 1536.53)
 
-[node name="Mayor" parent="." instance=ExtResource("6_16p58")]
+[node name="Mayor" parent="." instance=ExtResource("9_l26tj")]
 position = Vector2(437, 259)
 
 [node name="QuestTrigger" type="Area2D" parent="Mayor"]
@@ -897,9 +1016,11 @@ collision_mask = 4
 script = ExtResource("7_m44gr")
 Quest = ExtResource("13_matur")
 Mode = 1
-ShouldInteract = false
-Objective = null
-ObjectiveIndex = 0
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("12_f1toi")
+Objective = SubResource("Resource_n7jaw")
+ObjectiveIndex = 2
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mayor/QuestTrigger"]
@@ -911,10 +1032,9 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="InteractionUI" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("15_v4bk2")]
 
 [node name="Player" parent="." instance=ExtResource("13_j760s")]
-position = Vector2(162, 17)
+position = Vector2(197, 91)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_uqojl")
 }
@@ -927,3 +1047,56 @@ offset_top = -73.0
 offset_right = 772.0
 offset_bottom = 439.0
 texture = SubResource("GradientTexture2D_v4bk2")
+
+[node name="StoryTeller" parent="." instance=ExtResource("14_nkwx0")]
+visible = false
+z_index = 1
+position = Vector2(653, 458)
+
+[node name="PoofParticles" type="GPUParticles2D" parent="StoryTeller"]
+material = SubResource("CanvasItemMaterial_l26tj")
+position = Vector2(0, -13)
+emitting = false
+amount = 20
+texture = ExtResource("15_58lyr")
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.9
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_tqrau")
+
+[node name="StoryTellerAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_52t3j")
+}
+
+[node name="ScreenMarker" parent="." instance=ExtResource("18_f1toi")]
+position = Vector2(111, -46)
+IsRed = false
+
+[node name="QuestTrigger" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("7_m44gr")
+Quest = ExtResource("13_matur")
+Mode = 1
+ShouldInteract = false
+Objective = SubResource("Resource_n7jaw")
+ObjectiveIndex = 2
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
+position = Vector2(78, 0)
+shape = SubResource("RectangleShape2D_tqrau")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="TransitionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("19_tqrau")
+TargetScene = "uid://decexk5dlixp2"
+metadata/_custom_type_script = "uid://davlg2u8drdh4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
+position = Vector2(79.5, 1)
+shape = SubResource("RectangleShape2D_5id5a")

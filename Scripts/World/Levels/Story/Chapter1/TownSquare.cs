@@ -20,7 +20,7 @@ public partial class TownSquare : BaseLevel
     [Node] private StoryTeller storyTeller;
     [Node] private ScreenMarker screenMarker;
     [Node] private TransitionArea transitionArea;
-    private Quest quest = QuestRegistry.Get("quest:boss_quest");
+    private Quest quest = QuestRegistry.Get("quest:testimony");
 
     public override void _Notification(int what)
     {
@@ -39,7 +39,7 @@ public partial class TownSquare : BaseLevel
 
     private void OnQuestUpdated(Quest quest)
     {
-        if (this.quest.Objectives[0].Completed)
+        if (this.quest.Objectives[1].Completed)
         {
             QuestManager.QuestUpdated -= OnQuestUpdated;
             StartStoryTellerCutscene();

@@ -48,7 +48,7 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 [sub_resource type="Resource" id="Resource_n7jaw"]
 script = ExtResource("1_wjjxm")
 Type = 2
-Description = "Extract information in the mayor."
+Description = "Head to the Jeep and Rest at the Bar"
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
