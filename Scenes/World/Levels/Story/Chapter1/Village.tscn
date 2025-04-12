@@ -358,7 +358,7 @@ Torches = [NodePath("../../torch/Torch"), NodePath("../../torch/Torch2"), NodePa
 [node name="Lever2" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
 position = Vector2(-17, 6)
 scale = Vector2(0.6875, 0.65625)
-Torches = [NodePath("../../torch/Torch"), NodePath("../../torch/Torch2"), NodePath("../../torch/Torch4")]
+Torches = [NodePath("../../torch/Torch"), NodePath("../../torch/Torch2"), NodePath("../../torch/Torch3")]
 
 [node name="Lever3" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("7_yyi1k")]
 position = Vector2(60, 52)
