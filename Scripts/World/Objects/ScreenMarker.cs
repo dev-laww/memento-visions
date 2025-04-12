@@ -11,6 +11,7 @@ public partial class ScreenMarker : Node2D
     private readonly Texture2D normal = ResourceLoader.Load<Texture2D>("res://assets/world/arrow.png");
 
     [Export] public bool HideWhenInBounds = true;
+
     [Export]
     public bool IsRed
     {
@@ -92,4 +93,3 @@ public partial class ScreenMarker : Node2D
         GlobalRotation = Mathf.LerpAngle(GlobalRotation, targetAngle, (float)GetProcessDeltaTime() * 5f);
     }
 }
-
