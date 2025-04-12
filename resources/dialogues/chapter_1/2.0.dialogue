@@ -1,0 +1,31 @@
+~ start
+if isChiefInteracted == false
+	Chief: Congratulations on defeating the Mayor. The sightings of Aswang have drastically decreased since then. Your efforts have made a real difference to the town's safety. 
+	Alex: That was a tough fight. I didn’t expect him to be the one behind all the Aswang incidents… him of all people.
+	Alex: Thank goodness it’s all over now.
+	Chief: Now, I’d like to introduce you to some new allies who will assist you on your journey — the Witch Apo Sita, the Panday Juan, and the Storyteller Marcelo. You can always interact with them when you're in the Lobby.
+	set CurrentScene.isChiefInteracted = true
+
+if isChiefInteracted == true
+	Chief: Chief: So, what would you like to know more about?
+- Ask about the Witch
+	do CurrentScene.WitchCutscene()
+	Chief: You can now concoct potions and other consumables to boost your stats. Apo Sita will guide you.
+	=> END
+	
+- Ask about the Panday
+	do CurrentScene.BlackSmithCutscene()
+	Chief: You can now craft powerful weapons to help defeat your enemies. Panday Juan is a true master.
+	=> END
+	
+- Ask about the Storyteller
+	do CurrentScene.StoryTellerCutscene()
+	Chief: You can now choose between Story Mode and — now that you’ve unlocked it — Frenzy Mode, where you can farm materials and level up faster. Marcelo will explain everything.
+	=> END
+	
+- Continue the Mission
+	Chief: The next mission is not available yet. Please check back later.
+	do CurrentScene.transitionArea.Toggle(true)
+	=> END
+	
+=> END

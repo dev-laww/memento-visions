@@ -1,6 +1,6 @@
-[gd_scene load_steps=19 format=4 uid="uid://dvkxu6w4s0yeb"]
+[gd_scene load_steps=26 format=4 uid="uid://decexk5dlixp2"]
 
-[ext_resource type="Script" uid="uid://cmcrwyat2bufp" path="res://Scripts/World/Lobby.cs" id="1_2w8wj"]
+[ext_resource type="Script" uid="uid://vtvxgoln0ppg" path="res://Scripts/World/Levels/Story/Chapter1/Chapter1Ending.cs" id="1_pxhlq"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_pxhlq"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="3_ot12s"]
 [ext_resource type="TileSet" uid="uid://c1mmutvocnp5g" path="res://resources/tilesets/bar/props.tres" id="4_rej5g"]
@@ -9,10 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="7_a28ga"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="8_cjqe6"]
 [ext_resource type="PackedScene" uid="uid://dgqrvixy2ocww" path="res://Scenes/Entities/Characters/BlackSmith.tscn" id="9_cvwvb"]
+[ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="9_gdau4"]
 [ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="10_d1aoc"]
+[ext_resource type="Resource" uid="uid://bif0c3hdbeq0" path="res://resources/dialogues/chapter_1/2.0.dialogue" id="10_yy1g4"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="11_128oy"]
 [ext_resource type="PackedScene" uid="uid://defbwilwt3lnr" path="res://Scenes/Entities/Characters/Witch.tscn" id="12_mjyv7"]
+[ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="13_rej5g"]
 [ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemies/Common/Dummy.tscn" id="13_urmif"]
+[ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="14_ot12s"]
 
 [sub_resource type="Environment" id="Environment_71mkv"]
 background_mode = 3
@@ -27,15 +31,24 @@ parsed_geometry_type = 1
 border_size = 1000.0
 agent_radius = 8.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_a28ga"]
+radius = 27.8568
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_4di4u"]
 radius = 18.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e5pbf"]
 radius = 18.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yy1g4"]
+radius = 26.6833
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rej5g"]
+
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_2w8wj")
+script = ExtResource("1_pxhlq")
+Id = "chapter_1.5"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_71mkv")
@@ -92,6 +105,24 @@ position = Vector2(133, 79)
 [node name="Chief" parent="." instance=ExtResource("8_cjqe6")]
 position = Vector2(35, 150)
 
+[node name="DialogueTrigger" type="Area2D" parent="Chief"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("9_gdau4")
+DialogueResource = ExtResource("10_yy1g4")
+ShouldInteract = true
+InteractionLabel = "Chief"
+metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/DialogueTrigger"]
+shape = SubResource("CircleShape2D_a28ga")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="Chief/DialogueTrigger"]
+position = Vector2(2, -34)
+
+[node name="InteractionUI" parent="Chief/DialogueTrigger/Node2D" instance=ExtResource("11_128oy")]
+
 [node name="BlackSmith" parent="." instance=ExtResource("9_cvwvb")]
 position = Vector2(252, 337)
 
@@ -138,6 +169,26 @@ text = "Concoct"
 shape = SubResource("CircleShape2D_e5pbf")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
+[node name="StoryTeller" parent="." instance=ExtResource("13_rej5g")]
+position = Vector2(507, 357)
+
+[node name="StoryTellerInteraction" type="Area2D" parent="StoryTeller"]
+unique_name_in_owner = true
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("10_d1aoc")
+InteractionLabel = "Start"
+metadata/_custom_type_script = "uid://cll1v71th1oms"
+
+[node name="Node2D" type="Node2D" parent="StoryTeller/StoryTellerInteraction"]
+position = Vector2(-2, -36)
+
+[node name="InteractionUI" parent="StoryTeller/StoryTellerInteraction/Node2D" instance=ExtResource("11_128oy")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoryTeller/StoryTellerInteraction"]
+shape = SubResource("CircleShape2D_yy1g4")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
 [node name="Dummy" parent="." instance=ExtResource("13_urmif")]
 position = Vector2(27, 223)
 
@@ -149,6 +200,17 @@ position = Vector2(508, 108)
 
 [node name="Dummy4" parent="." instance=ExtResource("13_urmif")]
 position = Vector2(739, 447)
+
+[node name="TransitionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("14_ot12s")
+TargetScene = "uid://du6gsft33r8su"
+metadata/_custom_type_script = "uid://davlg2u8drdh4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
+position = Vector2(132, 51)
+shape = SubResource("RectangleShape2D_rej5g")
 
 [editable path="BlackSmith/BlackSmithInteraction/Node2D/InteractionUI"]
 [editable path="Witch/WitchInteraction/Node2D/InteractionUI"]

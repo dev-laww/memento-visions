@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using Game.Autoload;
 using Game.Components;
@@ -5,7 +6,9 @@ using Game.Entities;
 using GodotUtilities;
 using Game.UI.Overlays;
 using Game.Utils.Extensions;
+
 namespace Game.World;
+
 using DialogueManagerRuntime;
 
 [Scene]
@@ -14,10 +17,15 @@ public partial class Chapter1Ending : BaseLevel
     [Node] private Interaction storyTellerInteraction;
     [Node] private Interaction blackSmithInteraction;
     [Node] private Interaction witchInteraction;
-
+    [Node] private TransitionArea transitionArea;
+    
     [Node] private BlackSmith blackSmith;
+
     [Node] private Witch witch;
+
     [Node] private StoryTeller storyTeller;
+    public bool isChiefInteracted = false;
+
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
@@ -27,11 +35,10 @@ public partial class Chapter1Ending : BaseLevel
 
     public override void _Ready()
     {
+        transitionArea.Toggle(false);
         storyTellerInteraction.Interacted += OnStoryTellerInteracted;
         blackSmithInteraction.Interacted += OnBlackSmithInteracted;
         witchInteraction.Interacted += OnWitchInteracted;
-
-        ShowDialogue();
     }
 
     private void OnStoryTellerInteracted()
@@ -101,10 +108,41 @@ public partial class Chapter1Ending : BaseLevel
         };
     }
 
-    private static void ShowDialogue()
+public void StartCutscene(Vector2 targetPosition)
+{
+    CinematicManager.StartCinematic();
+    MoveCameraTo(targetPosition, 2f, () =>
     {
-        var dialogue = ResourceLoader.Load<Resource>("res://resources/dialogues/prologue/0.0.dialogue");
-        DialogueManager.ShowDialogueBalloon(dialogue);
-    }
+        DialogueManager.DialogueEnded += _ => CinematicManager.EndCinematic();
+    });
 }
 
+public static void MoveCameraTo(Vector2 position, float duration, Action onComplete = null)
+{
+    GameCamera.SetTargetPositionOverride(position);
+    var timer = GameCamera.Instance.GetTree().CreateTimer(duration);
+    timer.Timeout += () => { onComplete?.Invoke(); };
+}
+
+public void StoryTellerCutscene()
+{
+    StartCutscene(storyTeller.GlobalPosition);
+}
+public void BlackSmithCutscene()
+{
+    StartCutscene(blackSmith.GlobalPosition);
+}
+public void WitchCutscene()
+{
+    StartCutscene(witch.GlobalPosition);
+}
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        storyTellerInteraction.Interacted -= OnStoryTellerInteracted;
+        blackSmithInteraction.Interacted -= OnBlackSmithInteracted;
+        witchInteraction.Interacted -= OnWitchInteracted;
+    }
+
+}
