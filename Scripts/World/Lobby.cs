@@ -30,6 +30,9 @@ public partial class Lobby : Node2D
         storyTellerInteraction.Interacted += OnStoryTellerInteracted;
         blackSmithInteraction.Interacted += OnBlackSmithInteracted;
         witchInteraction.Interacted += OnWitchInteracted;
+
+        if (!SaveManager.Data.NpcsEncountered.Contains(blackSmith.Id)) blackSmith.QueueFree();
+        if (!SaveManager.Data.NpcsEncountered.Contains(witch.Id)) witch.QueueFree();
     }
 
     private void OnStoryTellerInteracted()

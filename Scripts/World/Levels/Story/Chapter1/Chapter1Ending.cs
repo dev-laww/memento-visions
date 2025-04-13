@@ -39,10 +39,7 @@ public partial class Chapter1Ending : BaseLevel
         storyTellerInteraction.Interacted += OnStoryTellerInteracted;
         blackSmithInteraction.Interacted += OnBlackSmithInteracted;
         witchInteraction.Interacted += OnWitchInteracted;
-        UnlockRecipe("id:taho");
-        UnlockRecipe("item:salabat");
-        UnlockRecipe("item:puto");
-        UnlockRecipe("item:bibingka");
+        UnlockRecipes();
     }
 
     private void OnStoryTellerInteracted()
@@ -115,8 +112,7 @@ public partial class Chapter1Ending : BaseLevel
     public void StartCutscene(Vector2 targetPosition)
     {
         CinematicManager.StartCinematic();
-        MoveCameraTo(targetPosition, 2.5f,
-            () => {  CinematicManager.EndCinematic(); });
+        MoveCameraTo(targetPosition, 2.5f, CinematicManager.EndCinematic);
     }
 
     public static void MoveCameraTo(Vector2 position, float duration, Action onComplete = null)
@@ -141,9 +137,12 @@ public partial class Chapter1Ending : BaseLevel
         StartCutscene(witch.GlobalPosition);
     }
 
-    public void UnlockRecipe(string itemId)
+    public static void UnlockRecipes()
     {
-        SaveManager.UnlockRecipe(itemId);
+        SaveManager.UnlockRecipe("id:taho");
+        SaveManager.UnlockRecipe("item:salabat");
+        SaveManager.UnlockRecipe("item:puto");
+        SaveManager.UnlockRecipe("item:bibingka");
     }
 
     public override void _ExitTree()

@@ -12,6 +12,7 @@ public class Save
     [JsonProperty("quick_slot")] public string QuickSlotItem { get; private set; } = string.Empty;
     [JsonProperty("frenzy_mode_unlocked")] public bool FrenzyModeUnlocked { get; private set; }
     [JsonProperty("unlocked_recipes")] public List<string> UnlockedRecipes { get; private set; } = [];
+    [JsonProperty("npcs_encountered")] public List<string> NpcsEncountered { get; private set; } = [];
 
     [JsonProperty("current_chapter", DefaultValueHandling = DefaultValueHandling.Populate),
      DefaultValue("prologue_0.1")]
@@ -52,5 +53,22 @@ public class Save
     public void UnlockFrenzyMode()
     {
         FrenzyModeUnlocked = true;
+    }
+
+    public void UnlockRecipe(string recipe)
+    {
+        if (UnlockedRecipes.Contains(recipe)) return;
+        UnlockedRecipes.Add(recipe);
+    }
+
+    public void SetNpcsEncountered(List<string> npcs)
+    {
+        NpcsEncountered = npcs;
+    }
+
+    public void AddNpcsEncountered(string npc)
+    {
+        if (NpcsEncountered.Contains(npc)) return;
+        NpcsEncountered.Add(npc);
     }
 }
