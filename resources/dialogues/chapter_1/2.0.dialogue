@@ -2,7 +2,12 @@
 if CurrentScene.isChiefInteracted == false
 	Chief: Thank you for defeating the root of this chaos, Alex. The sightings of Aswang have drastically decreased since then. Your efforts have made a real difference to the town's safety. 
 	Alex: That was a tough fight. I didn’t expect him to be the one behind all the Aswang incidents… him of all people.
-	Alex: Thank goodness it’s all over now.
+	Alex: Thank goodness it’s all over now. But Chief... the Mayor knows who I am.
+	Chief: Everyone knows who you are Alex! The town city's protector of course!
+	- Not that Chief.
+	- Something boils in me.
+	Alex: Something in me is telling me that I should talk to him, but he might try to talk his way out if I do so. Probably best to leave it behind.
+	Chief: That's something I do not know about, Alex. For me and us, you are our aid.
 	Chief: Now, I’d like to introduce you to some new allies who will assist you on your journey — the Witch Apo Sita, the Panday Juan, and the Storyteller Marcelo. You can always interact with them when you're in the Lobby.
 	set CurrentScene.isChiefInteracted = true
 while true
