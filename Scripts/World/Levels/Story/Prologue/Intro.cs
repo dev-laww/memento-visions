@@ -53,7 +53,7 @@ public partial class Intro : CanvasLayer
     {
         DialogueManager.Mutated -= OnMutated;
         SaveManager.SetIntroShown(true);
-        GameManager.ChangeScene("res://Scenes/World/Levels/Prologue/Bar.tscn");
+        GameManager.ChangeScene("res://Scenes/World/Levels/Story/Prologue/PrologueBar.tscn");
     }
 
     public override void _UnhandledInput(InputEvent @event) => GetViewport().SetInputAsHandled();
