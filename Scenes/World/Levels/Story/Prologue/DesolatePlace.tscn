@@ -202,16 +202,17 @@ script = ExtResource("12_a81b1")
 Quest = ExtResource("13_p8xju")
 Mode = 0
 ShouldInteract = true
-InteractionLabel = "Interact"
+InteractionLabel = "Talk To Chief"
 DialogueResource = ExtResource("7_j7p5r")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/QuestTrigger"]
 position = Vector2(-2, 7)
 shape = SubResource("CircleShape2D_5br0r")
-debug_color = Color(0.427269, 0.718892, 0.882021, 0.42)
+debug_color = Color(0.878431, 0.52549, 0.898039, 0.419608)
 
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
+position = Vector2(-2, -28)
 
 [node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("18_j7p5r")]
 
@@ -274,7 +275,7 @@ script = ExtResource("12_a81b1")
 Quest = ExtResource("13_p8xju")
 Mode = 1
 ShouldInteract = true
-InteractionLabel = "Interact"
+InteractionLabel = "Investigate"
 DialogueResource = ExtResource("16_ykjel")
 Objective = SubResource("Resource_tnbyp")
 ObjectiveIndex = 1
@@ -285,11 +286,11 @@ shape = SubResource("CircleShape2D_vvniv")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Diary/DiaryTrigger"]
+position = Vector2(0, -14)
 
 [node name="InteractionUI" parent="Diary/DiaryTrigger/Node2D" instance=ExtResource("18_j7p5r")]
 
 [node name="SmoothSprite2D" type="Sprite2D" parent="Diary"]
-texture_filter = 2
 scale = Vector2(1.875, 1.875)
 texture = ExtResource("18_cnuhk")
 region_enabled = true
@@ -306,7 +307,7 @@ script = ExtResource("12_a81b1")
 Quest = ExtResource("13_p8xju")
 Mode = 1
 ShouldInteract = true
-InteractionLabel = "Interact"
+InteractionLabel = "Investigate"
 DialogueResource = ExtResource("20_cnuhk")
 Objective = SubResource("Resource_6f01l")
 ObjectiveIndex = 0
@@ -317,15 +318,16 @@ shape = SubResource("CircleShape2D_hwwpg")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="BurntChair/ChairTrigger"]
+position = Vector2(1, -26)
 
 [node name="InteractionUI" parent="BurntChair/ChairTrigger/Node2D" instance=ExtResource("18_j7p5r")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BurntChair"]
-position = Vector2(-1, 6.5)
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_odju6")
 
-[node name="SmoothSprite2D" type="Sprite2D" parent="BurntChair"]
-texture_filter = 2
+[node name="Sprite2D" type="Sprite2D" parent="BurntChair"]
+position = Vector2(1, -7)
 texture = ExtResource("18_cnuhk")
 region_enabled = true
 region_rect = Rect2(536, 264, 32, 24)
@@ -342,7 +344,7 @@ script = ExtResource("12_a81b1")
 Quest = ExtResource("13_p8xju")
 Mode = 1
 ShouldInteract = true
-InteractionLabel = "Interact"
+InteractionLabel = "Investigate"
 DialogueResource = ExtResource("21_62ale")
 Objective = SubResource("Resource_rxg1s")
 ObjectiveIndex = 2
@@ -353,11 +355,11 @@ shape = SubResource("CircleShape2D_5f4dp")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Photographs/PhotographTrigger"]
+position = Vector2(0, -22)
 
 [node name="InteractionUI" parent="Photographs/PhotographTrigger/Node2D" instance=ExtResource("18_j7p5r")]
 
-[node name="SmoothSprite2D" type="Sprite2D" parent="Photographs"]
-texture_filter = 2
+[node name="Sprite2D" type="Sprite2D" parent="Photographs"]
 texture = ExtResource("18_cnuhk")
 region_enabled = true
 region_rect = Rect2(536, 440, 32, 32)
