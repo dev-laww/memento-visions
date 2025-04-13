@@ -68,4 +68,5 @@ public partial class SaveManager : Autoload<SaveManager>
     public static void AddQuest(string quest) => Data.AddQuest(quest);
     public static void RemoveQuest(string quest) => Data.RemoveQuest(quest);
     public static void UnlockFrenzyMode() => Data.UnlockFrenzyMode();
+    public static void SetIntroShown(bool shown) => Data.SetIntroShown(shown);
 }

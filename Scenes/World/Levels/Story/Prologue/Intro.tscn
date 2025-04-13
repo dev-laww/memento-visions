@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://cw0m5atxd61g0"]
+
+[ext_resource type="Script" uid="uid://ckwodpl06jowt" path="res://Scripts/World/Levels/Story/Prologue/Intro.cs" id="1_plnd6"]
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_1a4op"]
+[ext_resource type="Script" uid="uid://g32um0mltv5d" path="res://addons/dialogue_manager/dialogue_label.gd" id="3_1a4op"]
+
+[node name="Intro" type="CanvasLayer"]
+script = ExtResource("1_plnd6")
+
+[node name="MutationCooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="Balloon" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_1a4op")
+
+[node name="ColorRect" type="ColorRect" parent="Balloon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Balloon"]
+layout_mode = 2
+offset_left = 40.0
+offset_right = 600.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_1a4op")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DialogueLabel" type="RichTextLabel" parent="Balloon/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_1a4op")
+skip_pause_at_abbreviations = PackedStringArray("Mr", "Mrs", "Ms", "Dr", "etc", "eg", "ex")
+metadata/_custom_type_script = "uid://g32um0mltv5d"
+
+[connection signal="timeout" from="MutationCooldown" to="." method="OnMutationCooldownTimeout"]
+[connection signal="gui_input" from="Balloon" to="." method="OnGuiInput"]

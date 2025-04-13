@@ -1,4 +1,6 @@
+using DialogueManagerRuntime;
 using Game.Autoload;
+using Game.Common.Extensions;
 using Game.Components;
 using Game.Entities;
 using Game.UI.Overlays;
@@ -11,6 +13,7 @@ namespace Game;
 [Scene]
 public partial class Lobby : Node2D
 {
+    [Node] private ResourcePreloader resourcePreloader;
     [Node] private Interaction storyTellerInteraction;
     [Node] private Interaction blackSmithInteraction;
     [Node] private Interaction witchInteraction;
@@ -30,6 +33,13 @@ public partial class Lobby : Node2D
         storyTellerInteraction.Interacted += OnStoryTellerInteracted;
         blackSmithInteraction.Interacted += OnBlackSmithInteracted;
         witchInteraction.Interacted += OnWitchInteracted;
+
+        if (!SaveManager.Data.IntroShown)
+        {
+            var scene = resourcePreloader.GetResource<PackedScene>("Intro");
+            var dialog = resourcePreloader.GetResource("intro");
+            DialogueManager.ShowDialogueBalloonScene(scene, dialog);
+        }
 
         if (!SaveManager.Data.NpcsEncountered.Contains(blackSmith.Id)) blackSmith.QueueFree();
         if (!SaveManager.Data.NpcsEncountered.Contains(witch.Id)) witch.QueueFree();

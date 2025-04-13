@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://g32um0mltv5d" path="res://addons/dialogue_manager/dialogue_label.gd" id="4_exrlr"]
 [ext_resource type="Script" uid="uid://bya5v7wgp08bo" path="res://Scripts/UI/Dialogue/ResponseMenu.cs" id="5_exrlr"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exrlr"]
 bg_color = Color(0, 0, 0, 1)
 border_width_left = 3
 border_width_top = 3
@@ -18,7 +18,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ri4m3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wv6ww"]
 bg_color = Color(0.121569, 0.121569, 0.121569, 1)
 border_width_left = 3
 border_width_top = 3
@@ -30,7 +30,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0njw"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6q5b4"]
 bg_color = Color(0, 0, 0, 1)
 border_width_left = 3
 border_width_top = 3
@@ -42,7 +42,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uy0d5"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hkv8g"]
 bg_color = Color(0, 0, 0, 1)
 border_width_left = 3
 border_width_top = 3
@@ -55,15 +55,15 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="Theme" id="Theme_qq3yp"]
 default_font_size = 10
-Button/styles/disabled = SubResource("StyleBoxFlat_spyqn")
-Button/styles/focus = SubResource("StyleBoxFlat_ri4m3")
-Button/styles/hover = SubResource("StyleBoxFlat_e0njw")
-Button/styles/normal = SubResource("StyleBoxFlat_e0njw")
+Button/styles/disabled = SubResource("StyleBoxFlat_exrlr")
+Button/styles/focus = SubResource("StyleBoxFlat_wv6ww")
+Button/styles/hover = SubResource("StyleBoxFlat_6q5b4")
+Button/styles/normal = SubResource("StyleBoxFlat_6q5b4")
 MarginContainer/constants/margin_bottom = 15
 MarginContainer/constants/margin_left = 30
 MarginContainer/constants/margin_right = 30
 MarginContainer/constants/margin_top = 15
-Panel/styles/panel = SubResource("StyleBoxFlat_uy0d5")
+Panel/styles/panel = SubResource("StyleBoxFlat_hkv8g")
 
 [node name="Balloon" type="CanvasLayer"]
 layer = 100

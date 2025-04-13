@@ -13,6 +13,7 @@ public class Save
     [JsonProperty("frenzy_mode_unlocked")] public bool FrenzyModeUnlocked { get; private set; }
     [JsonProperty("unlocked_recipes")] public List<string> UnlockedRecipes { get; private set; } = [];
     [JsonProperty("npcs_encountered")] public List<string> NpcsEncountered { get; private set; } = [];
+    [JsonProperty("game_intro_shown")] public bool IntroShown { get; private set; }
 
     [JsonProperty("current_chapter", DefaultValueHandling = DefaultValueHandling.Populate),
      DefaultValue("prologue_0.1")]
@@ -70,5 +71,10 @@ public class Save
     {
         if (NpcsEncountered.Contains(npc)) return;
         NpcsEncountered.Add(npc);
+    }
+
+    public void SetIntroShown(bool shown)
+    {
+        IntroShown = shown;
     }
 }
