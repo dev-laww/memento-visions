@@ -1,63 +1,65 @@
 <Project Sdk="Godot.NET.Sdk/4.4.0">
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <EnableDynamicLoading>true</EnableDynamicLoading>
-    <RootNamespace>Game</RootNamespace>
-    <!-- <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <EnableDynamicLoading>true</EnableDynamicLoading>
+        <RootNamespace>Game</RootNamespace>
+        <!-- <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
         <CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath> -->
-  </PropertyGroup>
-  <ItemGroup>
-    <Content Remove="script_templates\**;**\*.uid" />
-    <Compile Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**;Game.Common\**" />
-    <EmbeddedResource Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**;**\*.uid;Game.Common\**" />
-    <None Remove="script_templates\**;**\*.uid" />
-    <Compile Update="gdunit4_testadapter\**;addons\**;**\*.uid">
-      <Visible>false</Visible>
-    </Compile>
-    <Compile Update="Scripts\**\*.cs">
-      <Namespace>Game</Namespace>
-    </Compile>
-    <Compile Update="Game.SourceGenerators\**;Game.Common\**">
-      <Visible>false</Visible>
-    </Compile>
-    <Compile Update="Scripts\World\Puzzle\Components\Button.cs">
-      <Namespace>Game</Namespace>
-    </Compile>
-    <Compile Update="Scripts\World\Puzzle\Components\StreetLight.cs">
-      <Namespace>Game</Namespace>
-    </Compile>
-    <Compile Update="Scripts\World\Puzzle\Components\Torch.cs">
-      <Namespace>Game</Namespace>
-    </Compile>
-    <Compile Update="Scripts\World\Puzzle\Components\PressurePlate.cs">
-      <Namespace>Game</Namespace>
-    </Compile>
-    <Compile Update="Scripts\World\Puzzle\Components\MovableObject.cs">
-      <Namespace>Game</Namespace>
-    </Compile>
-    <Compile Update="Scripts\World\Puzzle\Components\Lever.cs">
-      <Namespace>Game</Namespace>
-    </Compile>
-    <Compile Update="Scripts\World\Puzzle\Components\ButtonSequence.cs">
-      <Namespace>Game</Namespace>
-    </Compile>
-    <Compile Update="Scripts\World\Puzzle\Managers\TorchPuzzleManager.cs">
-      <Namespace>Game</Namespace>
-    </Compile>
-    <Compile Update="Scripts\World\Puzzle\Managers\LeverManager.cs">
-      <Namespace>Game</Namespace>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Delaunator" Version="1.0.10" />
-    <PackageReference Include="Firebelley.GodotUtilities" Version="5.0.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
-    <PackageReference Include="gdUnit4.api" Version="4.4.0-rc6" />
-    <PackageReference Include="gdUnit4.test.adapter" Version="2.1.0-rc2" />
-    <PackageReference Include="OptimizedPriorityQueue" Version="5.1.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Game.Common\Game.Common.csproj" />
-    <ProjectReference Include="Game.SourceGenerators\Game.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-  </ItemGroup>
+    </PropertyGroup>
+    <ItemGroup>
+        <Content Remove="script_templates\**;**\*.uid" />
+        <Compile Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**;Game.Common\**" />
+        <EmbeddedResource
+            Remove="script_templates\**;Scenes\**;Game.SourceGenerators\**;**\*.uid;Game.Common\**" />
+        <None Remove="script_templates\**;**\*.uid" />
+        <Compile Update="gdunit4_testadapter\**;addons\**;**\*.uid">
+            <Visible>false</Visible>
+        </Compile>
+        <Compile Update="Scripts\**\*.cs">
+            <Namespace>Game</Namespace>
+        </Compile>
+        <Compile Update="Game.SourceGenerators\**;Game.Common\**">
+            <Visible>false</Visible>
+        </Compile>
+        <Compile Update="Scripts\World\Puzzle\Components\Button.cs">
+            <Namespace>Game</Namespace>
+        </Compile>
+        <Compile Update="Scripts\World\Puzzle\Components\StreetLight.cs">
+            <Namespace>Game</Namespace>
+        </Compile>
+        <Compile Update="Scripts\World\Puzzle\Components\Torch.cs">
+            <Namespace>Game</Namespace>
+        </Compile>
+        <Compile Update="Scripts\World\Puzzle\Components\PressurePlate.cs">
+            <Namespace>Game</Namespace>
+        </Compile>
+        <Compile Update="Scripts\World\Puzzle\Components\MovableObject.cs">
+            <Namespace>Game</Namespace>
+        </Compile>
+        <Compile Update="Scripts\World\Puzzle\Components\Lever.cs">
+            <Namespace>Game</Namespace>
+        </Compile>
+        <Compile Update="Scripts\World\Puzzle\Components\ButtonSequence.cs">
+            <Namespace>Game</Namespace>
+        </Compile>
+        <Compile Update="Scripts\World\Puzzle\Managers\TorchPuzzleManager.cs">
+            <Namespace>Game</Namespace>
+        </Compile>
+        <Compile Update="Scripts\World\Puzzle\Managers\LeverManager.cs">
+            <Namespace>Game</Namespace>
+        </Compile>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Delaunator" Version="1.0.10" />
+        <PackageReference Include="Firebelley.GodotUtilities" Version="5.0.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+        <PackageReference Include="gdUnit4.api" Version="4.3.*" />
+        <PackageReference Include="gdUnit4.test.adapter" Version="2.*" />
+        <PackageReference Include="OptimizedPriorityQueue" Version="5.1.0" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="Game.Common\Game.Common.csproj" />
+        <ProjectReference Include="Game.SourceGenerators\Game.SourceGenerators.csproj"
+            OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    </ItemGroup>
 </Project>

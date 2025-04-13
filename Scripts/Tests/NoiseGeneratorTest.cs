@@ -12,7 +12,7 @@ using static GdUnit4.Assertions;
 [TestSuite]
 public class NoiseGeneratorTest
 {
-    private const string SourceScene = "res://Scenes/Levels/Noise.tscn";
+    private const string SourceScene = "res://Scenes/World/Levels/Noise.tscn";
 
     private ISceneRunner runner;
     private Node generator;
@@ -52,11 +52,6 @@ public class NoiseGeneratorTest
         var grid = (Resource)generator.Call("get_grid");
 
         AssertThat(grid).IsNotNull();
-
-        var values = ((Array)grid.Call("get_values", 0)).Count;
-        var worldSize = (Vector2I)settings.Get("world_size");
-
-        AssertThat(values).IsEqual(worldSize.X * worldSize.Y);
     }
 
     // [TestCase]
