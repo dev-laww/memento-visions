@@ -1,8 +1,30 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=7 format=3 uid="uid://bdiho63j18ddw"]
+[gd_resource type="Resource" script_class="Quest" load_steps=14 format=3 uid="uid://bdiho63j18ddw"]
 
+[ext_resource type="Resource" uid="uid://cynqml7na5ksi" path="res://resources/items/consumable/breeze_potion.tres" id="1_djknd"]
 [ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="1_hvfhi"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_4t25t"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="2_iw3t1"]
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="3_c38af"]
+[ext_resource type="Resource" uid="uid://ct2y0f318jxyf" path="res://resources/items/consumable/salabat.tres" id="3_pkfk2"]
+[ext_resource type="Resource" uid="uid://bkgu01oom7qam" path="res://resources/items/material/panyawan.tres" id="4_p2ky2"]
+
+[sub_resource type="Resource" id="Resource_ygumt"]
+script = ExtResource("2_4t25t")
+Item = ExtResource("1_djknd")
+Quantity = 2
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_nswdt"]
+script = ExtResource("2_4t25t")
+Item = ExtResource("3_pkfk2")
+Quantity = 5
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_8krrn"]
+script = ExtResource("2_4t25t")
+Item = ExtResource("4_p2ky2")
+Quantity = 5
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 
 [sub_resource type="Resource" id="Resource_inl2v"]
 script = ExtResource("1_hvfhi")
@@ -30,6 +52,6 @@ Title = "Restoring the Balance, Resolving the Past"
 Ordered = true
 Description = "Eager to change what he had already been done, Alex ensures to himself that he will do everything he can to restore the pact that was made years ago."
 objectives = [SubResource("Resource_qm08l")]
-Experience = 0
-Items = []
+Experience = 40
+Items = [SubResource("Resource_ygumt"), SubResource("Resource_nswdt"), SubResource("Resource_8krrn")]
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

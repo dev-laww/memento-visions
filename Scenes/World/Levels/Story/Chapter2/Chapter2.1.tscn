@@ -1,6 +1,7 @@
-[gd_scene load_steps=71 format=4 uid="uid://du6gsft33r8su"]
+[gd_scene load_steps=72 format=4 uid="uid://du6gsft33r8su"]
 
 [ext_resource type="Script" uid="uid://dana374n4d6mt" path="res://Scripts/World/Levels/Story/Chapter2/SmallVille.cs" id="1_swhdr"]
+[ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_j142m"]
 [ext_resource type="TileSet" uid="uid://wuwsi02f3fft" path="res://resources/tilesets/intramuros.tres" id="2_qrlfj"]
 [ext_resource type="PackedScene" uid="uid://6rk1l15nvvdr" path="res://Scenes/World/PuzzleComponent/TorchPuzzleManager.tscn" id="4_j142m"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="4_wyqtt"]
@@ -245,6 +246,8 @@ y_sort_enabled = true
 script = ExtResource("1_swhdr")
 Id = "chapter_2.1"
 
+[node name="TelegraphCanvas" parent="." instance=ExtResource("2_j142m")]
+
 [node name="Tilemap" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -393,23 +396,22 @@ navigation_polygon = SubResource("NavigationPolygon_qanfx")
 [node name="@NavigationRegion2D@26316" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_t6dgq")
 
-[node name="torchSequence" parent="." instance=ExtResource("4_j142m")]
-unique_name_in_owner = true
+[node name="TorchSequence" parent="." instance=ExtResource("4_j142m")]
 position = Vector2(119, 573)
 
-[node name="Light" parent="torchSequence" instance=ExtResource("5_q6x1h")]
+[node name="Light" parent="TorchSequence" instance=ExtResource("5_q6x1h")]
 position = Vector2(-168, 23)
 
-[node name="Light2" parent="torchSequence" instance=ExtResource("5_q6x1h")]
+[node name="Light2" parent="TorchSequence" instance=ExtResource("5_q6x1h")]
 position = Vector2(-74, 119)
 
-[node name="Light3" parent="torchSequence" instance=ExtResource("5_q6x1h")]
+[node name="Light3" parent="TorchSequence" instance=ExtResource("5_q6x1h")]
 position = Vector2(-169, 120)
 
-[node name="Light4" parent="torchSequence" instance=ExtResource("5_q6x1h")]
+[node name="Light4" parent="TorchSequence" instance=ExtResource("5_q6x1h")]
 position = Vector2(-71, 24)
 
-[node name="chest" parent="torchSequence" instance=ExtResource("6_eu077")]
+[node name="Chest" parent="TorchSequence" instance=ExtResource("6_eu077")]
 unique_name_in_owner = true
 visible = false
 position = Vector2(73, 130)
@@ -462,10 +464,10 @@ IsRed = false
 [node name="Enemy" type="Node2D" parent="."]
 
 [node name="Tikbalang" parent="Enemy" instance=ExtResource("4_wyqtt")]
-position = Vector2(-146, 749)
+position = Vector2(-111, 681)
 
 [node name="Tikbalang2" parent="Enemy" instance=ExtResource("4_wyqtt")]
-position = Vector2(62, 564)
+position = Vector2(127, 680)
 
 [node name="TransitionArea" type="Area2D" parent="."]
 position = Vector2(-191, 585)
@@ -505,3 +507,6 @@ metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 position = Vector2(-174, 594)
 shape = SubResource("RectangleShape2D_wuq0w")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="TikbalangPosition" type="Marker2D" parent="."]
+position = Vector2(28, 675)

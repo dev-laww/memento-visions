@@ -3,6 +3,8 @@ using System;
 using Game.World.Puzzle;
 using GodotUtilities;
 using DialogueManagerRuntime;
+using Game.Autoload;
+using Game.UI.Screens;
 
 namespace Game.World.Levels.Chapter2;
 
@@ -13,6 +15,7 @@ public partial class SmallVille : BaseLevel
     [Node] private TorchPuzzleManager torchSequence;
     [Node] private Chest chest;
     [Node] private Node2D enemy;
+    [Node] private Marker2D tikbalangPosition;
     public bool IsWitchInteracted = false;
 
     public override void _Notification(int what)
@@ -45,6 +48,17 @@ public partial class SmallVille : BaseLevel
         DialogueManager.ShowDialogueBalloon(dialogue);
     }
 
+    public void StartCinematic()
+    {
+        CinematicManager.StartCinematic();
+        GameCamera.SetTargetPositionOverride(tikbalangPosition.GlobalPosition);
+        var timer = GameCamera.Instance.GetTree().CreateTimer(2.5f);
+        timer.Timeout += () =>
+        {
+            GameCamera.SetTargetPositionOverride(Vector2.Zero);
+            CinematicManager.EndCinematic();
+        };
+    }
     public override void _ExitTree()
     {
         base._ExitTree();
@@ -52,5 +66,6 @@ public partial class SmallVille : BaseLevel
         enemy.QueueFree();
         
     }
+    
 }
 

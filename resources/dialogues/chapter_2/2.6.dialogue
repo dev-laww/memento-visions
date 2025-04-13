@@ -1,3 +1,4 @@
 ~ start
 Alex: More of them?! What is going on?!
+do CurrentScene.StartCinematic()
 => END

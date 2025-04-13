@@ -1,7 +1,8 @@
-[gd_scene load_steps=79 format=4 uid="uid://criyou87dacyh"]
+[gd_scene load_steps=81 format=4 uid="uid://criyou87dacyh"]
 
 [ext_resource type="Script" uid="uid://c4ksan4dtstup" path="res://Scripts/World/Levels/Story/Chapter2/CentralForest.cs" id="1_esctv"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_exmlw"]
+[ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_wb4xo"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="4_spppi"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="5_tc47e"]
 [ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="5_wltyk"]
@@ -15,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://cx3y2g4y3fymi" path="res://resources/dialogues/chapter_2/2.7.dialogue" id="13_e7pso"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="13_rjjwp"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="13_spppi"]
+[ext_resource type="Texture2D" uid="uid://ckj3v8yrowvxb" path="res://assets/tilesets/school.png" id="16_n4v06"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nfvny"]
 
@@ -310,6 +312,8 @@ size = Vector2(20, 96)
 y_sort_enabled = true
 script = ExtResource("1_esctv")
 Id = "chapter_2.3"
+
+[node name="TelegraphCanvas" parent="." instance=ExtResource("2_wb4xo")]
 
 [node name="Tilemap" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -624,3 +628,10 @@ metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger2"]
 shape = SubResource("RectangleShape2D_t7x0d")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(370, 480)
+texture = ExtResource("16_n4v06")
+region_enabled = true
+region_rect = Rect2(528, 440, 48, 32)

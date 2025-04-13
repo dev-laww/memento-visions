@@ -1,7 +1,8 @@
-[gd_scene load_steps=106 format=4 uid="uid://u1iww5n58onj"]
+[gd_scene load_steps=107 format=4 uid="uid://u1iww5n58onj"]
 
 [ext_resource type="Script" uid="uid://dai76mk8k3dog" path="res://Scripts/World/Levels/Story/Chapter2/EastForest.cs" id="1_gjg47"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_boo03"]
+[ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_gwavo"]
 [ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="4_gwavo"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="4_tie44"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="5_q1vu3"]
@@ -435,6 +436,8 @@ size = Vector2(34, 178)
 y_sort_enabled = true
 script = ExtResource("1_gjg47")
 Id = "chapter_2.4"
+
+[node name="TelegraphCanvas" parent="." instance=ExtResource("2_gwavo")]
 
 [node name="Tilemap" type="Node2D" parent="."]
 y_sort_enabled = true

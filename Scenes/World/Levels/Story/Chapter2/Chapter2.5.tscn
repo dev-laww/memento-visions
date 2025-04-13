@@ -1,7 +1,8 @@
-[gd_scene load_steps=61 format=4 uid="uid://cntfldylta63f"]
+[gd_scene load_steps=62 format=4 uid="uid://cntfldylta63f"]
 
 [ext_resource type="Script" uid="uid://b0xjawf252s4w" path="res://Scripts/World/Levels/Story/Chapter2/BossLevel.cs" id="1_xp4xo"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_n6dna"]
+[ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_og40e"]
 [ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="3_og40e"]
 [ext_resource type="PackedScene" uid="uid://c11a0icy1ftwe" path="res://Scenes/Entities/Enemies/Boss/Lunaria/Lunaria.tscn" id="4_qnqsf"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="5_h7amt"]
@@ -244,6 +245,11 @@ size = Vector2(168, 20)
 script = ExtResource("1_xp4xo")
 Id = "chapter_2.5"
 
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("Lunaria"), [ExtResource("4_qnqsf")]]
+
+[node name="TelegraphCanvas" parent="." instance=ExtResource("2_og40e")]
+
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Floor" type="TileMapLayer" parent="Node2D"]
@@ -278,19 +284,16 @@ position = Vector2(528, 151)
 position = Vector2(-76, 432)
 
 [node name="Tikbalang4" parent="Enemy" instance=ExtResource("3_og40e")]
-position = Vector2(767, 379)
+position = Vector2(732, 403)
 
 [node name="Tikbalang5" parent="Enemy" instance=ExtResource("3_og40e")]
-position = Vector2(110, 583)
+position = Vector2(112, 502)
 
 [node name="Tikbalang6" parent="Enemy" instance=ExtResource("3_og40e")]
-position = Vector2(391, 448)
+position = Vector2(434, 443)
 
 [node name="Tikbalang7" parent="Enemy" instance=ExtResource("3_og40e")]
-position = Vector2(555, 704)
-
-[node name="Lunaria" parent="Enemy" instance=ExtResource("4_qnqsf")]
-position = Vector2(217, 444)
+position = Vector2(591, 604)
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
@@ -519,3 +522,12 @@ metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 position = Vector2(-56, 43)
 shape = SubResource("RectangleShape2D_52sxu")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="CinematicPosition1" type="Marker2D" parent="."]
+position = Vector2(578, 426)
+
+[node name="CinematicPosition2" type="Marker2D" parent="."]
+position = Vector2(66, 364)
+
+[node name="LunariaSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(222, 427)

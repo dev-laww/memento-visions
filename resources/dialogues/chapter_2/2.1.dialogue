@@ -18,4 +18,5 @@ Alex: Wait, what do you mean?
 Witch: ...
 do CurrentScene.ToggleWitchMarker(false)
 set CurrentScene.IsWitchInteracted = true
+do CurrentScene.StartCinematic()
 => END
