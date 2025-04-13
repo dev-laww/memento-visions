@@ -41,12 +41,16 @@ public partial class Lobby : Node2D
     {
         var craftingOverlay = (Crafting)OverlayManager.ShowOverlay(OverlayManager.CRAFTING);
 
+        if (!IsInstanceValid(craftingOverlay)) return;
+
         craftingOverlay.ItemCrafted += OnCraft;
     }
 
     private void OnWitchInteracted()
     {
         var concoctOverlay = (Concoct)OverlayManager.ShowOverlay(OverlayManager.CONCOCT);
+
+        if (!IsInstanceValid(concoctOverlay)) return;
 
         concoctOverlay.ItemCrafted += OnConcoct;
     }
