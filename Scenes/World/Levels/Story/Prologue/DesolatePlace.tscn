@@ -1,6 +1,6 @@
 [gd_scene load_steps=40 format=4 uid="uid://c64wsg4p1yvco"]
 
-[ext_resource type="Script" uid="uid://dudaew5h4f4vy" path="res://Scripts/World/Levels/Story/DesolatePlace.cs" id="1_b4cw0"]
+[ext_resource type="Script" uid="uid://dudaew5h4f4vy" path="res://Scripts/World/Levels/Story/Prologue/DesolatePlace.cs" id="1_b4cw0"]
 [ext_resource type="TileSet" uid="uid://c1mmutvocnp5g" path="res://resources/tilesets/bar/props.tres" id="3_ykjel"]
 [ext_resource type="TileSet" uid="uid://i2hb45su1nbs" path="res://resources/tilesets/school.tres" id="5_62ale"]
 [ext_resource type="PackedScene" uid="uid://cwus4c1b4vpr" path="res://Scenes/World/PuzzleComponent/PressurePlate.tscn" id="6_ksjwv"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="11_eafln"]
 [ext_resource type="Texture2D" uid="uid://bbaj1lmrgykxu" path="res://assets/effects/poof.png" id="12_52t3j"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="12_a81b1"]
-[ext_resource type="Resource" uid="uid://c8sti11mk0wm1" path="res://resources/quests/Prologue/prologue_1.tres" id="13_p8xju"]
+[ext_resource type="Resource" uid="uid://c8sti11mk0wm1" path="res://resources/quests/prologue/prologue_1.tres" id="13_p8xju"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="14_5br0r"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="16_4xaeb"]
 [ext_resource type="Resource" uid="uid://b5weudbvgwctj" path="res://resources/dialogues/prologue/1.3.dialogue" id="16_ykjel"]

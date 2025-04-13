@@ -1,11 +1,11 @@
 [gd_scene load_steps=28 format=4 uid="uid://3td8x8h36elv"]
 
-[ext_resource type="Script" uid="uid://bw7smwgpceo61" path="res://Scripts/World/Levels/Story/PrologueBar.cs" id="1_h8tdj"]
+[ext_resource type="Script" uid="uid://bw7smwgpceo61" path="res://Scripts/World/Levels/Story/Prologue/PrologueBar.cs" id="1_h8tdj"]
 [ext_resource type="Script" uid="uid://d3vvbqw6ln6if" path="res://Scripts/UI/Screens/Cinematic.cs" id="2_ete42"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="3_n1lv5"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="4_18ej6"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="5_s5dkd"]
-[ext_resource type="Resource" uid="uid://0suhta3uejmr" path="res://resources/quests/Prologue/bar_interaction.tres" id="6_uf73d"]
+[ext_resource type="Resource" uid="uid://0suhta3uejmr" path="res://resources/quests/prologue/bar_interaction.tres" id="6_uf73d"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="7_lx1uq"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="8_8anoo"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="9_djlbh"]

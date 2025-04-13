@@ -1,6 +1,6 @@
 [gd_scene load_steps=134 format=4 uid="uid://v06x46jch2vm"]
 
-[ext_resource type="Script" uid="uid://dcmogr8vudmpc" path="res://Scripts/World/Levels/Story/SchoolOutdoor.cs" id="1_xhmq0"]
+[ext_resource type="Script" uid="uid://dcmogr8vudmpc" path="res://Scripts/World/Levels/Story/Prologue/SchoolOutdoor.cs" id="1_xhmq0"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_ol0cl"]
 [ext_resource type="TileSet" uid="uid://i2hb45su1nbs" path="res://resources/tilesets/school.tres" id="3_4k184"]
 [ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="4_2yt4s"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="8_yo2bk"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="9_0rbke"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="10_miy4r"]
-[ext_resource type="Resource" uid="uid://bb0a0gl7qcddj" path="res://resources/quests/Prologue/night_of_shadows.tres" id="11_n7j3j"]
+[ext_resource type="Resource" uid="uid://bb0a0gl7qcddj" path="res://resources/quests/prologue/night_of_shadows.tres" id="11_n7j3j"]
 [ext_resource type="Resource" uid="uid://yh060giw306t" path="res://resources/dialogues/prologue/1.6.dialogue" id="12_xhmq0"]
 [ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="13_8cdkb"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="13_q1tv5"]
