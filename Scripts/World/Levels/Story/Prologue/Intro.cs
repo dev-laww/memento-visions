@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using DialogueManagerRuntime;
 using Game.Autoload;
+using Game.Components;
 using Game.Utils.Extensions;
 using Godot;
 using Godot.Collections;
@@ -52,6 +53,7 @@ public partial class Intro : CanvasLayer
     {
         DialogueManager.Mutated -= OnMutated;
         SaveManager.SetIntroShown(true);
+        GameManager.ChangeScene("res://Scenes/World/Levels/Prologue/Bar.tscn");
     }
 
     public override void _UnhandledInput(InputEvent @event) => GetViewport().SetInputAsHandled();
