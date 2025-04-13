@@ -9,13 +9,13 @@
 [ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/audio/music/chapter_1_bgm.ogg" id="7_8tuqj"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="7_m44gr"]
 [ext_resource type="PackedScene" uid="uid://vsehi4t73af5" path="res://Scenes/Entities/Characters/Mayor.tscn" id="9_l26tj"]
-[ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="10_tqrau"]
-[ext_resource type="Resource" uid="uid://1lif4uqpp2ca" path="res://resources/dialogues/chapter_1/1.8.dialogue" id="12_f1toi"]
+[ext_resource type="Resource" uid="uid://1lif4uqpp2ca" path="res://resources/dialogues/chapter_1/1.8.dialogue" id="12_5id5a"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="12_l26tj"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="13_j760s"]
 [ext_resource type="Resource" uid="uid://dubpfapg14rna" path="res://resources/quests/chapter_1/testimony.tres" id="13_matur"]
-[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="13_tqrau"]
 [ext_resource type="PackedScene" uid="uid://c6ddutu3xqvkn" path="res://Scenes/Entities/Enemies/Boss/Aghon/Aghon.tscn" id="13_uqojl"]
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="14_nkwx0"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="14_tqrau"]
 [ext_resource type="Texture2D" uid="uid://bbaj1lmrgykxu" path="res://assets/effects/poof.png" id="15_58lyr"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_v4bk2"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="18_f1toi"]
@@ -658,7 +658,7 @@ _data = {
 }
 
 [sub_resource type="Resource" id="Resource_n7jaw"]
-script = ExtResource("13_tqrau")
+script = ExtResource("12_l26tj")
 Type = 2
 Description = "Head to the Jeep and Rest at the Bar"
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
@@ -1013,23 +1013,31 @@ polygon = PackedVector2Array(-1352.15, 1351.53, -1397.18, 626.947, -1424.47, -21
 [node name="Mayor" parent="." instance=ExtResource("9_l26tj")]
 position = Vector2(437, 259)
 
-[node name="DialogueTrigger" type="Area2D" parent="Mayor"]
-collision_layer = 0
+[node name="QuestTrigger" type="Area2D" parent="Mayor"]
+collision_layer = 16
 collision_mask = 4
-script = ExtResource("10_tqrau")
-DialogueResource = ExtResource("12_f1toi")
+script = ExtResource("7_m44gr")
+Quest = ExtResource("13_matur")
+Mode = 1
 ShouldInteract = true
-InteractionLabel = "Mayor "
-metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
+InteractionLabel = "Mayor"
+DialogueResource = ExtResource("12_5id5a")
+Objective = null
+ObjectiveIndex = 0
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mayor/DialogueTrigger"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mayor/QuestTrigger"]
 shape = SubResource("CircleShape2D_5id5a")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
-[node name="Node2D" type="Node2D" parent="Mayor/DialogueTrigger"]
-position = Vector2(0, -27)
+[node name="Node2D" type="Node2D" parent="Mayor/QuestTrigger"]
+position = Vector2(0, -29)
 
-[node name="InteractionUI" parent="Mayor/DialogueTrigger/Node2D" instance=ExtResource("15_v4bk2")]
+[node name="InteractionUI" type="Control" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("15_v4bk2")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("14_tqrau")
 
 [node name="Player" parent="." instance=ExtResource("13_j760s")]
 position = Vector2(197, 91)
@@ -1094,7 +1102,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("19_tqrau")
-TargetScene = "uid://decexk5dlixp2"
+TargetScene = "uid://ccvymajtrtimw"
 metadata/_custom_type_script = "uid://davlg2u8drdh4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]

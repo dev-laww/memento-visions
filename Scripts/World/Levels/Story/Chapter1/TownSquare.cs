@@ -20,7 +20,6 @@ public partial class TownSquare : BaseLevel
     [Node] private StoryTeller storyTeller;
     [Node] private ScreenMarker screenMarker;
     [Node] private TransitionArea transitionArea;
-    private Quest quest = QuestRegistry.Get("quest:testimony");
 
     public override void _Notification(int what)
     {
@@ -39,13 +38,11 @@ public partial class TownSquare : BaseLevel
 
     private void OnQuestUpdated(Quest quest)
     {
-        if (this.quest.Objectives[1].Completed)
-        {
-            QuestManager.QuestUpdated -= OnQuestUpdated;
-            StartStoryTellerCutscene();
-        }
-    }
+        if (quest.Id != "quest:testimony" || !quest.Objectives[1].Completed) return;
 
+        QuestManager.QuestUpdated -= OnQuestUpdated;
+        StartStoryTellerCutscene();
+    }
 
     public void PlayFadeAnimation()
     {
@@ -54,7 +51,7 @@ public partial class TownSquare : BaseLevel
         bossBgm.Play();
     }
 
-    public void Spawn()
+    private void Spawn()
     {
         mayor.Visible = false;
         var aghon = resourcePreloader.InstanceSceneOrNull<Aghon>();
@@ -63,13 +60,8 @@ public partial class TownSquare : BaseLevel
 
         AddChild(aghon);
     }
-    
-    public void CompleteQuest()
-    {
-        quest.Objectives[0].Complete();
-    }
 
-    public void StartStoryTellerCutscene()
+    private void StartStoryTellerCutscene()
     {
         storyTellerAnimationPlayer.Play("show_story_teller");
         CinematicManager.StartCinematic();
@@ -81,7 +73,7 @@ public partial class TownSquare : BaseLevel
         });
     }
 
-    public static void MoveCameraTo(Vector2 position, float duration, Action onComplete = null)
+    private static void MoveCameraTo(Vector2 position, float duration, Action onComplete = null)
     {
         GameCamera.SetTargetPositionOverride(position);
         var timer = GameCamera.Instance.GetTree().CreateTimer(duration);

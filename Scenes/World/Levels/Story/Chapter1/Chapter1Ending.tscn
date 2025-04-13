@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://decexk5dlixp2"]
+[gd_scene load_steps=27 format=4 uid="uid://ccvymajtrtimw"]
 
 [ext_resource type="Script" uid="uid://vtvxgoln0ppg" path="res://Scripts/World/Levels/Story/Chapter1/Chapter1Ending.cs" id="1_pxhlq"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_pxhlq"]

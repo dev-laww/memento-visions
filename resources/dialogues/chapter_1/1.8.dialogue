@@ -17,7 +17,6 @@ Mayor Santos: As the Mayor, it is my duty to protect them... and this is how I d
 Mayor Santos: Stop me as you please.
 Mayor Santos: With my unwavering resolve, no one shall ever undermine me and my ideals.
 Alex: That's where you're wrong Mayor.
-do CurrentScene.CompleteQuest()
 do CurrentScene. PlayFadeAnimation()
 do CurrentScene.Spawn()
 => END
