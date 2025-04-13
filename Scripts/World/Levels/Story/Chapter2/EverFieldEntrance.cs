@@ -8,9 +8,10 @@ using DialogueManagerRuntime;
 
 namespace Game.World.Levels.Chapter2;
 [Scene]
-public partial class EverFieldEntrance : Node2D
+public partial class EverFieldEntrance : BaseLevel
 {
     [Node] private TransitionArea transitionArea;
+    [Node] private Node2D enemy;
     
     private Quest quest = QuestRegistry.Get("quest:forest_awakening");
     
@@ -39,6 +40,12 @@ public partial class EverFieldEntrance : Node2D
     {
         var dialogue = ResourceLoader.Load<Resource>("res://resources/dialogues/chapter_2/2.3.dialogue");
         DialogueManager.ShowDialogueBalloon(dialogue);
+    }
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        QuestManager.QuestCompleted -= OnCompleted;
+        enemy.QueueFree();
     }
 
 

@@ -7,11 +7,12 @@ using DialogueManagerRuntime;
 namespace Game.World.Levels.Chapter2;
 
 [Scene]
-public partial class SmallVille : Node2D
+public partial class SmallVille : BaseLevel
 {
     [Node] private ScreenMarker witchMarker;
     [Node] private TorchPuzzleManager torchSequence;
     [Node] private Chest chest;
+    [Node] private Node2D enemy;
     public bool IsWitchInteracted = false;
 
     public override void _Notification(int what)
@@ -42,6 +43,14 @@ public partial class SmallVille : Node2D
     {
         var dialogue = ResourceLoader.Load<Resource>("res://resources/dialogues/chapter_2/2.0.dialogue");
         DialogueManager.ShowDialogueBalloon(dialogue);
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        torchSequence.PuzzleSolved -= OnPuzzleSolved;
+        enemy.QueueFree();
+        
     }
 }
 

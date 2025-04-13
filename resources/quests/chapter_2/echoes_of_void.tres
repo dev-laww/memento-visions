@@ -1,8 +1,23 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=7 format=3 uid="uid://b3pnov4n41331"]
+[gd_resource type="Resource" script_class="Quest" load_steps=12 format=3 uid="uid://b3pnov4n41331"]
 
+[ext_resource type="Resource" uid="uid://mn5m2agnoav1" path="res://resources/items/material/rice_flour.tres" id="1_2htjo"]
 [ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="1_4c0t1"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_df16u"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="2_rgcns"]
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="3_piv6h"]
+[ext_resource type="Resource" uid="uid://d2p1kxc6pvocq" path="res://resources/items/material/egg.tres" id="3_t0squ"]
+
+[sub_resource type="Resource" id="Resource_tpi3m"]
+script = ExtResource("2_df16u")
+Item = ExtResource("1_2htjo")
+Quantity = 8
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_s4app"]
+script = ExtResource("2_df16u")
+Item = ExtResource("3_t0squ")
+Quantity = 8
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 
 [sub_resource type="Resource" id="Resource_arrju"]
 script = ExtResource("1_4c0t1")
@@ -30,6 +45,6 @@ Title = "Echoes of the Void"
 Ordered = false
 Description = "Stalls are said overturned, vendors muttering prayers as they attempt to gather their scattered wares. A mysterious woman in robe-suddenly appeared based on the reports-helps them clean the messes left by the mysterious creature that wreaked havoc. "
 objectives = [SubResource("Resource_7n7ry"), SubResource("Resource_bysam")]
-Experience = 0
-Items = []
+Experience = 35
+Items = [SubResource("Resource_tpi3m"), SubResource("Resource_s4app")]
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

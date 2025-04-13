@@ -1,7 +1,6 @@
 ~ start
 if CurrentScene.IsWitchInteracted == true
 	Witch: Just be wary of what you do from here on out, Alex..
-	#do CurrentScene.screenMarker.Toggle(true)
 	=> END
 ???: Nyahahaha!
 - Who are you?
