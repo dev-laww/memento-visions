@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://by64k6fa2d33l"]
 
-[ext_resource type="Texture2D" uid="uid://cou7nx8okf0pf" path="res://assets/world/lever.png" id="1_hk57l"]
+[ext_resource type="Texture2D" uid="uid://c1k2klldtm3ix" path="res://assets/world/lever.png" id="1_hk57l"]
 [ext_resource type="Script" uid="uid://be8saakukph0o" path="res://Scripts/World/Puzzle/Components/Lever.cs" id="2_e4wm1"]
 [ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="3_u2b42"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="4_yq8qy"]

@@ -1,38 +1,25 @@
-[gd_scene load_steps=3 format=4 uid="uid://divndc6cnpxfk"]
+[gd_scene load_steps=2 format=4 uid="uid://divndc6cnpxfk"]
 
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_ftxa6"]
-[ext_resource type="Script" uid="uid://bc2jlb4w58y24" path="res://Scripts/Components/SmoothTileMapLayer.cs" id="3_x18fe"]
 
 [node name="WaterBottomLeft2" type="Node2D"]
 y_sort_enabled = true
 
 [node name="Floor" type="TileMapLayer" parent="."]
 z_index = -2
-texture_filter = 2
 tile_map_data = PackedByteArray("AAABAAEAAQAMAAoAAAACAAEAAQAMAAsAAAADAAIAAQANAAoAAAAEAAMAAQAMAAoAAAAAAAEAAQAMAAkAAAAAAAIAAQANAAkAAAAAAAMAAQANAAoAAAAAAAQAAQANAAkAAAABAAAAAQAMAAsAAAABAAMAAQANAAkAAAABAAQAAQANAAkAAAABAAUAAQAMAAoAAAACAAAAAQAMAAkAAAACAAIAAQAMAAoAAAACAAQAAQANAAkAAAACAAUAAQAMAAsAAAADAAAAAQAMAAkAAAADAAEAAQAMAAsAAAADAAMAAQANAAoAAAADAAQAAQANAAoAAAADAAUAAQANAAkAAAAEAAEAAQANAAkAAAAEAAIAAQAMAAsAAAAEAAQAAQANAAoAAAAEAAUAAQAMAAsAAAAFAAAAAQANAAoAAAAFAAEAAQAMAAsAAAAFAAIAAQAMAAkAAAAFAAMAAQANAAkAAAAFAAQAAQANAAoAAAAFAAUAAQAMAAoAAAAAAAUAAQANAAkAAAABAAIAAQAMAAkAAAAEAAAAAQAMAAoAAAACAAMAAQAMAAoAAAAAAAAAAQANAAkAAAA=")
 tile_set = ExtResource("2_ftxa6")
-script = ExtResource("3_x18fe")
-metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="MiddleGround" type="TileMapLayer" parent="."]
 z_index = -1
-texture_filter = 2
 tile_map_data = PackedByteArray("AAACAAAAAQAYAAsAAAACAAEAAQAZAA0AAAADAAAAAQAaAAoAAAADAAEAAQAZAAwAAAADAAMAAQAZAA0AAAAEAAAAAQAaAAoAAAAEAAEAAQAaAAoAAAAEAAIAAQAaAAwAAAAEAAMAAQAaAA0AAAAFAAEAAQAaAAoAAAAFAAIAAQAaAAwAAAAFAAMAAQAaAA0AAAAFAAAAAQAaAAoAAAADAAIAAQAYAAsAAAA=")
 tile_set = ExtResource("2_ftxa6")
-script = ExtResource("3_x18fe")
-metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="Elevation" type="TileMapLayer" parent="."]
 y_sort_enabled = true
-texture_filter = 2
 tile_set = ExtResource("2_ftxa6")
-script = ExtResource("3_x18fe")
-metadata/_custom_type_script = "uid://bc2jlb4w58y24"
 
 [node name="Props" type="TileMapLayer" parent="."]
 y_sort_enabled = true
-texture_filter = 2
 tile_map_data = PackedByteArray("AAABAAEAAQAdABAAAAAEAAQAAQAfAA8AAAA=")
 tile_set = ExtResource("2_ftxa6")
-script = ExtResource("3_x18fe")
-metadata/_custom_type_script = "uid://bc2jlb4w58y24"
