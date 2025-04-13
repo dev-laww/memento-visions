@@ -40,6 +40,7 @@ public partial class Chapter1Ending : BaseLevel
         blackSmithInteraction.Interacted += OnBlackSmithInteracted;
         witchInteraction.Interacted += OnWitchInteracted;
         UnlockRecipes();
+        UnlockNPC();
     }
 
     private void OnStoryTellerInteracted()
@@ -143,6 +144,13 @@ public partial class Chapter1Ending : BaseLevel
         SaveManager.UnlockRecipe("item:salabat");
         SaveManager.UnlockRecipe("item:puto");
         SaveManager.UnlockRecipe("item:bibingka");
+    }
+
+    //temporary function for demo
+    public static void UnlockNPC()
+    {
+        SaveManager.AddNpcsEncountered("npc:witch");
+        SaveManager.AddNpcsEncountered("npc:blacksmith");
     }
 
     public override void _ExitTree()
