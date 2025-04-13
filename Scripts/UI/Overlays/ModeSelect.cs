@@ -1,3 +1,4 @@
+using System;
 using Game.Autoload;
 using Game.Common;
 using Game.Components;
@@ -45,16 +46,13 @@ public partial class ModeSelect : Overlay
         {
             sFXClick.Play();
             Close();
-            var currentChapter = SaveManager.Data.CurrentChapter;
-            var scene = LevelRegistry.Get(currentChapter);
 
-            if (scene == null)
-            {
-                Log.Error($"No scene found for chapter {currentChapter}");
-                return;
-            }
+            var currentChapterBase64 = SaveManager.Data.CurrentChapter;
+            var currentChapter = string.IsNullOrEmpty(currentChapterBase64)
+                ? "res://Scenes/World/Levels/Story/Prologue/Prologue.tscn"
+                : System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(currentChapterBase64));
 
-            GameManager.ChangeScene(scene);
+            GameManager.ChangeScene(currentChapter);
         };
     }
 

@@ -16,8 +16,8 @@ public class Save
     [JsonProperty("game_intro_shown")] public bool IntroShown { get; private set; }
 
     [JsonProperty("current_chapter", DefaultValueHandling = DefaultValueHandling.Populate),
-     DefaultValue("prologue_0.1")]
-    public string CurrentChapter { get; private set; } = "prologue_0.1";
+     DefaultValue("cmVzOi8vU2NlbmVzL1dvcmxkL0xldmVscy9TdG9yeS9Qcm9sb2d1ZS9Qcm9sb2d1ZUJhci50c2Nu")]
+    public string CurrentChapter { get; private set; } = "cmVzOi8vU2NlbmVzL1dvcmxkL0xldmVscy9TdG9yeS9Qcm9sb2d1ZS9Qcm9sb2d1ZUJhci50c2Nu";
 
     [JsonProperty("quests")] private List<string> quests = [];
 
