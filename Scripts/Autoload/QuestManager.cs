@@ -102,7 +102,7 @@ public partial class QuestManager : Autoload<QuestManager>
         }
     }
 
-    public static bool IsActive(Quest quest) => Instance.quests.Contains(quest);
+    public static bool IsActive(Quest quest) => Instance.quests.Select(q => q.Id).Contains(quest.Id);
 
     public static void Add(Quest quest)
     {
