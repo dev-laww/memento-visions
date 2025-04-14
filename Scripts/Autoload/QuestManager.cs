@@ -111,10 +111,7 @@ public partial class QuestManager : Autoload<QuestManager>
         PlayerInventoryManager.Pickup += quest.OnItemPickup;
         PlayerInventoryManager.Remove += quest.OnItemRemoved;
 
-        GameEvents.ConnectToSignal(
-            GameEvents.SignalName.EntityDied,
-            CallableUtils.FromMethod(quest.OnEnemyDied)
-        );
+        GameEvents.EntityDied += quest.OnEnemyDied;
 
         Instance.quests.Add(quest);
         Instance.EmitSignalAdded(quest);
@@ -132,10 +129,7 @@ public partial class QuestManager : Autoload<QuestManager>
         PlayerInventoryManager.Pickup -= quest.OnItemPickup;
         PlayerInventoryManager.Remove -= quest.OnItemRemoved;
 
-        GameEvents.DisconnectFromSignal(
-            GameEvents.SignalName.EntityDied,
-            CallableUtils.FromMethod(quest.OnEnemyDied)
-        );
+        GameEvents.EntityDied -= quest.OnEnemyDied;
 
         Instance.quests.Remove(quest);
         Instance.EmitSignalRemoved(quest);
