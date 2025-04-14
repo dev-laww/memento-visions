@@ -1,0 +1,218 @@
+[gd_scene load_steps=12 format=3 uid="uid://kelec5yhsixm"]
+
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="1_e6124"]
+[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine_patch.png" id="2_34qga"]
+[ext_resource type="PackedScene" uid="uid://cb8psn10ig05k" path="res://Scenes/UI/Common/CloseButton.tscn" id="2_lmnxg"]
+[ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="4_4tmaj"]
+[ext_resource type="Texture2D" uid="uid://c4x1susg0bgdd" path="res://assets/entities/characters/player/idle.png" id="5_s4uat"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s4uat"]
+font = ExtResource("4_4tmaj")
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4uat"]
+atlas = ExtResource("5_s4uat")
+region = Rect2(0, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5ckb"]
+atlas = ExtResource("5_s4uat")
+region = Rect2(144, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b22pd"]
+atlas = ExtResource("5_s4uat")
+region = Rect2(288, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qt1we"]
+atlas = ExtResource("5_s4uat")
+region = Rect2(432, 0, 144, 144)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4tmaj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4uat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5ckb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b22pd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qt1we")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="CharacterDetails" type="CanvasLayer"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_e6124")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="CloseButton" parent="MarginContainer/VBoxContainer/Header" instance=ExtResource("2_lmnxg")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(300, 250)
+layout_mode = 2
+texture = ExtResource("2_34qga")
+patch_margin_left = 3
+patch_margin_top = 5
+patch_margin_right = 3
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Player Stats"
+label_settings = SubResource("LabelSettings_s4uat")
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Control"]
+position = Vector2(71, 88)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_4tmaj")
+autoplay = "default"
+frame_progress = 0.634697
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_top = 75
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Level" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Level"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Level"
+
+[node name="Level" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Level"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "99999"
+
+[node name="Experience" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Experience"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Experience"
+
+[node name="Experience" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Experience"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0 / 99999"
+
+[node name="MaxHealth" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/MaxHealth"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Max Health"
+
+[node name="Health" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/MaxHealth"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "99999"
+
+[node name="Damage" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Damage"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Damage"
+
+[node name="Damage" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Damage"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "99999"
+
+[node name="Speed" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Speed"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Speed"
+
+[node name="Speed" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Speed"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "99999"
+
+[node name="Defense" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Defense"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Defense"
+
+[node name="Defense" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/Defense"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "99999"
