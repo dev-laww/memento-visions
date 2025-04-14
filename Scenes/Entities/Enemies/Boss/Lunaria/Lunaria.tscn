@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://c11a0icy1ftwe"]
+[gd_scene load_steps=108 format=3 uid="uid://c11a0icy1ftwe"]
 
 [ext_resource type="Script" uid="uid://u55fkdi23tqb" path="res://Scripts/Entities/Enemies/Boss/Lunaria/Lunaria.cs" id="1_6q18i"]
 [ext_resource type="PackedScene" uid="uid://dmn3rg1q3a1r1" path="res://Scenes/Entities/Enemies/Boss/Aghon/Cloud.tscn" id="2_6q18i"]
@@ -10,11 +10,39 @@
 [ext_resource type="Script" uid="uid://nuxtah4mmhg5" path="res://Scripts/Components/Managers/VelocityManager.cs" id="8_17aub"]
 [ext_resource type="PackedScene" uid="uid://t7im5teuo2bt" path="res://Scenes/Components/Managers/DropManager.tscn" id="9_1advq"]
 [ext_resource type="PackedScene" uid="uid://cup5c3p5fcfyu" path="res://Scenes/Components/Managers/PathFindManager.tscn" id="10_epm18"]
+[ext_resource type="Resource" uid="uid://dhr2jtmgl0gse" path="res://resources/items/material/engkanto_essence.tres" id="10_l2wy2"]
+[ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="11_1pfq2"]
 [ext_resource type="Script" uid="uid://bjcp1au37t5ln" path="res://Scripts/Components/Area/HurtBox.cs" id="11_dqf0r"]
+[ext_resource type="Resource" uid="uid://dx25tu288c73x" path="res://resources/items/material/lunar_petal.tres" id="12_ayylu"]
 [ext_resource type="Texture2D" uid="uid://cny0tot07a045" path="res://assets/entities/enemy/boss/Lunaria/lunaria.png" id="13_6q18i"]
+[ext_resource type="Resource" uid="uid://dxrl1uamwfs14" path="res://resources/items/material/moon_shard.tres" id="13_68gba"]
 [ext_resource type="AudioStream" uid="uid://tun085q036cg" path="res://assets/audio/enemy/aghon_cloud.wav" id="14_q7emo"]
 [ext_resource type="AudioStream" uid="uid://dtdt8li5hv11f" path="res://assets/audio/enemy/aghon_punch.wav" id="15_0dxvs"]
 [ext_resource type="AudioStream" uid="uid://b8mh6t4gf6s45" path="res://assets/audio/enemy/aghon_rod.wav" id="16_t1q3f"]
+
+[sub_resource type="Resource" id="Resource_17aub"]
+script = ExtResource("11_1pfq2")
+Item = ExtResource("10_l2wy2")
+Min = 1
+Max = 2
+Weight = 3
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_1advq"]
+script = ExtResource("11_1pfq2")
+Item = ExtResource("12_ayylu")
+Min = 1
+Max = 3
+Weight = 3
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_epm18"]
+script = ExtResource("11_1pfq2")
+Item = ExtResource("13_68gba")
+Min = 1
+Max = 3
+Weight = 3
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lt36k"]
 size = Vector2(28, 44)
@@ -763,7 +791,7 @@ StatsManager = NodePath("../StatsManager")
 metadata/_custom_type_script = "uid://nuxtah4mmhg5"
 
 [node name="DropManager" parent="." instance=ExtResource("9_1advq")]
-Drops = []
+Drops = [SubResource("Resource_17aub"), SubResource("Resource_1advq"), SubResource("Resource_epm18")]
 
 [node name="PathFindManager" parent="." node_paths=PackedStringArray("VelocityManager") instance=ExtResource("10_epm18")]
 VelocityManager = NodePath("../VelocityManager")

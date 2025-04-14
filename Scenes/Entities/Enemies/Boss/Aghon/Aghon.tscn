@@ -1867,7 +1867,6 @@ position = Vector2(0, -23)
 sprite_frames = SubResource("SpriteFrames_lpr6g")
 animation = &"south"
 autoplay = "south"
-frame = 1
 
 [node name="SecondPhase" type="AnimatedSprite2D" parent="Animations"]
 visible = false

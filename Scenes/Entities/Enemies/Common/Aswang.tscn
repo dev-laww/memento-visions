@@ -19,17 +19,17 @@
 [sub_resource type="Resource" id="Resource_0pshh"]
 script = ExtResource("8_cvnaw")
 Item = ExtResource("9_ixksh")
-Min = 3
-Max = 5
+Min = 1
+Max = 2
 Weight = 3
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="Resource" id="Resource_6fh3g"]
 script = ExtResource("8_cvnaw")
 Item = ExtResource("7_5tyvj")
-Min = 3
-Max = 5
-Weight = 3
+Min = 1
+Max = 2
+Weight = 2
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvtll"]

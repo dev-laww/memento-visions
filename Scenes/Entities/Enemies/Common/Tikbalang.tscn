@@ -20,16 +20,16 @@
 [sub_resource type="Resource" id="Resource_18kv7"]
 script = ExtResource("7_472wo")
 Item = ExtResource("6_8cri1")
-Min = 3
-Max = 5
+Min = 1
+Max = 2
 Weight = 3
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="Resource" id="Resource_v47yl"]
 script = ExtResource("7_472wo")
 Item = ExtResource("8_fyoqx")
-Min = 3
-Max = 5
+Min = 1
+Max = 2
 Weight = 3
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
@@ -37,7 +37,7 @@ metadata/_custom_type_script = "uid://4ubxomqok4pv"
 script = ExtResource("7_472wo")
 Item = ExtResource("11_msr8t")
 Min = 1
-Max = 3
+Max = 2
 Weight = 2
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
@@ -45,8 +45,8 @@ metadata/_custom_type_script = "uid://4ubxomqok4pv"
 script = ExtResource("7_472wo")
 Item = ExtResource("12_u32vl")
 Min = 1
-Max = 3
-Weight = 2
+Max = 1
+Weight = 1
 metadata/_custom_type_script = "uid://4ubxomqok4pv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6pqlh"]
@@ -1306,7 +1306,6 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_472wo")
 animation = &"idle_down"
 autoplay = "idle_down"
-frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

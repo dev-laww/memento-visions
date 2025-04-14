@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://bksbdib3xb5jm"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/items/items.png" id="1_vepkg"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_n4vw0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3s8am"]
+atlas = ExtResource("1_vepkg")
+region = Rect2(96, 48, 16, 16)
+
+[resource]
+resource_name = "Wicked Extract"
+script = ExtResource("2_n4vw0")
+Id = "item:wicked_extract"
+Icon = SubResource("AtlasTexture_3s8am")
+Name = "Wicked Extract"
+ItemCategory = 0
+Description = "A thick, blood-red liquid that glimmers with a haunting sheen. Its texture is syrupy, slow to move, as if it holds a sinister pulse within. The air around it grows cold, carrying a sharp, metallic scent, like fresh blood mixed with decay.
+
+Usage:
+Restores 25% of HP when consumed."
+metadata/_custom_type_script = "uid://b772648mucsjw"
