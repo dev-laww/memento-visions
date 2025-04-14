@@ -108,10 +108,26 @@ public partial class Noise : Node2D
         //     GameManager.CurrentScene.AddChild(victoryScreen);
         // };
 
-        GameEvents.EntityDied += info =>
-        {
-            if (info.Victim is not Enemy enemy || EnemyManager.EnemyCount > 0 || !bossSpawned) return;
+        // GameEvents.EntityDied += info =>
+        // {
+        //     if (info.Victim is not Enemy enemy || EnemyManager.EnemyCount > 0 || !bossSpawned) return;
+        //
+        //     var victoryScreen = resourcePreloader.InstanceSceneOrNull<Victory>();
+        //
+        //     if (victoryScreen is null)
+        //     {
+        //         Log.Error("Failed to load victory screen");
+        //         return;
+        //     }
+        //
+        //     GameManager.CurrentScene.AddChild(victoryScreen);
+        // };
+    }
 
+    public override void _Process(double delta)
+    {
+        if (bossSpawned && EnemyManager.EnemyCount == 0)
+        {
             var victoryScreen = resourcePreloader.InstanceSceneOrNull<Victory>();
 
             if (victoryScreen is null)
@@ -121,7 +137,8 @@ public partial class Noise : Node2D
             }
 
             GameManager.CurrentScene.AddChild(victoryScreen);
-        };
+            bossSpawned = false;
+        }
     }
 
     private async void OnGenerationFinished()
