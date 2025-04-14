@@ -1082,7 +1082,7 @@ script = ExtResource("5_hn08j")
 Quest = ExtResource("6_hf60o")
 Mode = 0
 ShouldInteract = true
-InteractionLabel = "Interact"
+InteractionLabel = "Talk to Manny & Tisoy"
 DialogueResource = ExtResource("11_hsept")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -1144,7 +1144,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Kevin" parent="npc" instance=ExtResource("18_bhrir")]
 unique_name_in_owner = true
-visible = false
 position = Vector2(-112, 971)
 
 [node name="QuestTrigger" type="Area2D" parent="npc/Kevin"]
@@ -1156,7 +1155,7 @@ script = ExtResource("5_hn08j")
 Quest = ExtResource("8_7adkd")
 Mode = 0
 ShouldInteract = true
-InteractionLabel = "Interact"
+InteractionLabel = "Talk to Kevin"
 DialogueResource = ExtResource("19_d412w")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -1166,6 +1165,7 @@ shape = SubResource("CircleShape2D_84djs")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="npc/Kevin/QuestTrigger"]
+position = Vector2(1, -36)
 
 [node name="InteractionUI" parent="npc/Kevin/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
@@ -1187,35 +1187,35 @@ polygon = PackedVector2Array(-774, -97, -806, 1437, 175, 1433, 179, 1242, 1539, 
 position = Vector2(266, 615)
 
 [node name="Aswang" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(-275, 485)
+position = Vector2(-459, 389)
 EnemyName = ""
 
 [node name="Aswang2" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(87, 58)
+position = Vector2(-515, 35)
 EnemyName = ""
 
 [node name="Aswang3" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(123, 197)
+position = Vector2(115, 268)
 EnemyName = ""
 
 [node name="Aswang4" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(49, -155)
+position = Vector2(-58, 126)
 EnemyName = ""
 
 [node name="Aswang5" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(136, 368)
+position = Vector2(228, 429)
 EnemyName = ""
 
 [node name="Aswang6" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(-184, 591)
+position = Vector2(-316, 523)
 EnemyName = ""
 
 [node name="Aswang7" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(-156, 70)
+position = Vector2(-324, 137)
 EnemyName = ""
 
 [node name="Aswang8" parent="Enemy" instance=ExtResource("8_516uf")]
-position = Vector2(-34, 484)
+position = Vector2(-52, 448)
 EnemyName = ""
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
@@ -1561,7 +1561,7 @@ texture_filter = 2
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 3
+frame = 1
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StoryTeller"]
@@ -1580,7 +1580,7 @@ collision_mask = 4
 script = ExtResource("11_dclhn")
 DialogueResource = ExtResource("20_2ke1t")
 ShouldInteract = true
-InteractionLabel = "StoryTeller"
+InteractionLabel = "Talk to StoryTeller"
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StoryTeller/DialogueTrigger"]
