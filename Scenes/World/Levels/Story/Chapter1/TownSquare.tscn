@@ -15,7 +15,6 @@
 [ext_resource type="Resource" uid="uid://dubpfapg14rna" path="res://resources/quests/chapter_1/testimony.tres" id="13_matur"]
 [ext_resource type="PackedScene" uid="uid://c6ddutu3xqvkn" path="res://Scenes/Entities/Enemies/Boss/Aghon/Aghon.tscn" id="13_uqojl"]
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="14_nkwx0"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="14_tqrau"]
 [ext_resource type="Texture2D" uid="uid://bbaj1lmrgykxu" path="res://assets/effects/poof.png" id="15_58lyr"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_v4bk2"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="18_f1toi"]
@@ -508,6 +507,12 @@ border_size = 256.0
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_bgshn"]
 parsed_geometry_type = 1
 border_size = 256.0
+
+[sub_resource type="Resource" id="Resource_a27w3"]
+script = ExtResource("12_l26tj")
+Type = 2
+Description = "Confront the mayor"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5id5a"]
 radius = 19.2354
@@ -1020,9 +1025,9 @@ script = ExtResource("7_m44gr")
 Quest = ExtResource("13_matur")
 Mode = 1
 ShouldInteract = true
-InteractionLabel = "Mayor"
+InteractionLabel = "Talk to Mayor"
 DialogueResource = ExtResource("12_5id5a")
-Objective = null
+Objective = SubResource("Resource_a27w3")
 ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -1033,11 +1038,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="Node2D" type="Node2D" parent="Mayor/QuestTrigger"]
 position = Vector2(0, -29)
 
-[node name="InteractionUI" type="Control" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("15_v4bk2")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("14_tqrau")
+[node name="InteractionUI" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("15_v4bk2")]
 
 [node name="Player" parent="." instance=ExtResource("13_j760s")]
 position = Vector2(197, 91)

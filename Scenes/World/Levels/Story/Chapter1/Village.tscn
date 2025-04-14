@@ -415,6 +415,7 @@ collision_mask = 4
 script = ExtResource("6_my81a")
 DialogueResource = ExtResource("13_yyi1k")
 ShouldInteract = true
+InteractionLabel = "Talk to Storyteller"
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StoryTeller/DialogueTrigger2"]
@@ -691,7 +692,7 @@ script = ExtResource("6_r45d3")
 Quest = ExtResource("7_tjaeu")
 Mode = 1
 ShouldInteract = true
-InteractionLabel = "Interact"
+InteractionLabel = "Talk to Mayor"
 DialogueResource = ExtResource("26_hl2f5")
 Objective = SubResource("Resource_qydlh")
 ObjectiveIndex = 0
@@ -725,7 +726,7 @@ script = ExtResource("6_r45d3")
 Quest = ExtResource("7_tjaeu")
 Mode = 1
 ShouldInteract = true
-InteractionLabel = "Interact"
+InteractionLabel = "Talk to Rudy"
 DialogueResource = ExtResource("30_bem7u")
 Objective = SubResource("Resource_ni2ta")
 ObjectiveIndex = 2
