@@ -16,6 +16,7 @@ public partial class OverlayManager : Autoload<OverlayManager>
     public const string QUEST = "Quest";
     public const string MODE_SELECT = "ModeSelect";
     public const string CONCOCT = "Concoct";
+    public const string CHARACTER_DETAILS = "CharacterDetails";
 
     [Node] private ResourcePreloader resourcePreloader;
 
@@ -79,5 +80,6 @@ public partial class OverlayManager : Autoload<OverlayManager>
         else if (@event.IsActionPressed("menu")) ShowOverlay(MENU);
         else if (@event.IsActionPressed("open_active_quest")) ShowOverlay(QUEST);
         else if (@event.IsActionPressed("open_dev_console")) ShowOverlay(DEVELOPER_CONSOLE);
+        else if (@event.IsActionPressed("open_character_details")) ShowOverlay(CHARACTER_DETAILS);
     }
 }

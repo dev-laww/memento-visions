@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://kelec5yhsixm"]
+[gd_scene load_steps=14 format=3 uid="uid://kelec5yhsixm"]
 
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="1_e6124"]
+[ext_resource type="Script" uid="uid://cihlv52uy2s5i" path="res://Scripts/UI/Overlays/CharacterDetails.cs" id="1_y5ckb"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine_patch.png" id="2_34qga"]
 [ext_resource type="PackedScene" uid="uid://cb8psn10ig05k" path="res://Scenes/UI/Common/CloseButton.tscn" id="2_lmnxg"]
 [ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="4_4tmaj"]
 [ext_resource type="Texture2D" uid="uid://c4x1susg0bgdd" path="res://assets/entities/characters/player/idle.png" id="5_s4uat"]
+[ext_resource type="Material" uid="uid://bkm4tri52hhdr" path="res://resources/shaders/blur.tres" id="7_b22pd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s4uat"]
 font = ExtResource("4_4tmaj")
@@ -48,6 +50,16 @@ animations = [{
 }]
 
 [node name="CharacterDetails" type="CanvasLayer"]
+script = ExtResource("1_y5ckb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource("7_b22pd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00141, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -169,7 +181,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Max Health"
 
-[node name="Health" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/MaxHealth"]
+[node name="MaxHealth" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer/VBoxContainer/MaxHealth"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
