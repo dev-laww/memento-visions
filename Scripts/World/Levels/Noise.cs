@@ -93,9 +93,24 @@ public partial class Noise : Node2D
             enemy.AddChild(marker);
         });
 
-        EnemyManager.EnemyCountChanged += count =>
+        // EnemyManager.EnemyCountChanged += count =>
+        // {
+        //     if (count > 0 || !bossSpawned) return;
+
+        //     var victoryScreen = resourcePreloader.InstanceSceneOrNull<Victory>();
+
+        //     if (victoryScreen is null)
+        //     {
+        //         Log.Error("Failed to load victory screen");
+        //         return;
+        //     }
+
+        //     GameManager.CurrentScene.AddChild(victoryScreen);
+        // };
+
+        GameEvents.EntityDied += info =>
         {
-            if (count > 0 || !bossSpawned) return;
+            if (info.Victim is not Enemy enemy || EnemyManager.EnemyCount > 0 || !bossSpawned) return;
 
             var victoryScreen = resourcePreloader.InstanceSceneOrNull<Victory>();
 
