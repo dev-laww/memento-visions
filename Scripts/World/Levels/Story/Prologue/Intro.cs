@@ -18,6 +18,8 @@ public partial class Intro : CanvasLayer
     [Node] private Control balloon;
     [Node] private RichTextLabel dialogueLabel;
     [Node] private Timer mutationCooldown = new();
+    [Node] private ResourcePreloader resourcePreloader = new();
+    [Node] private AudioStreamPlayer2D audioPlayer;
 
     private Resource resource;
     private Array<Variant> temporaryGameStates = [];
@@ -71,7 +73,6 @@ public partial class Intro : CanvasLayer
         {
             var visibleRatio = dialogueLabel.VisibleRatio;
             DialogueLine = await Next(DialogueLine.Id);
-
         }
     }
 
@@ -90,6 +91,23 @@ public partial class Intro : CanvasLayer
         DialogueLine = await DialogueManager.GetNextDialogueLine(resource, nextId, temporaryGameStates);
         return DialogueLine;
     }
+
+    public void PlayAudio(string resourceName)
+    {
+        audioPlayer.Stop();
+        // Retrieve the audio resource from the ResourcePreloader
+        var audioStream = resourcePreloader.GetResource(resourceName) as AudioStream;
+        if (audioStream == null)
+        {
+            GD.PrintErr($"Audio resource '{resourceName}' not found in ResourcePreloader.");
+            return;
+        }
+
+        // Assign the audio stream to the AudioStreamPlayer and play it
+        audioPlayer.Stream = audioStream;
+        audioPlayer.Play();
+    }
+
 
     #region Helpers
 
@@ -143,7 +161,9 @@ public partial class Intro : CanvasLayer
     {
         if ((bool)dialogueLabel.Get("is_typing"))
         {
-            var mouseWasClicked = @event is InputEventMouseButton && (@event as InputEventMouseButton).ButtonIndex == MouseButton.Left && @event.IsPressed();
+            var mouseWasClicked = @event is InputEventMouseButton &&
+                                  (@event as InputEventMouseButton).ButtonIndex == MouseButton.Left &&
+                                  @event.IsPressed();
             var skipButtonWasPressed = @event.IsActionPressed(SkipAction);
 
             if (!mouseWasClicked && !skipButtonWasPressed) return;
@@ -156,7 +176,8 @@ public partial class Intro : CanvasLayer
 
         GetViewport().SetInputAsHandled();
 
-        if (@event is InputEventMouseButton && @event.IsPressed() && (@event as InputEventMouseButton).ButtonIndex == MouseButton.Left)
+        if (@event is InputEventMouseButton && @event.IsPressed() &&
+            (@event as InputEventMouseButton).ButtonIndex == MouseButton.Left)
         {
             await Next(dialogueLine.NextId);
         }

@@ -1,8 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://cw0m5atxd61g0"]
+[gd_scene load_steps=39 format=3 uid="uid://cw0m5atxd61g0"]
 
 [ext_resource type="Script" uid="uid://ckwodpl06jowt" path="res://Scripts/World/Levels/Story/Prologue/Intro.cs" id="1_plnd6"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_1a4op"]
 [ext_resource type="Script" uid="uid://g32um0mltv5d" path="res://addons/dialogue_manager/dialogue_label.gd" id="3_1a4op"]
+[ext_resource type="AudioStream" uid="uid://cvd0dspiwbgrk" path="res://assets/audio/intro/12.ogg" id="4_1vl5y"]
+[ext_resource type="AudioStream" uid="uid://c3m4kovlf4qmw" path="res://assets/audio/intro/30.ogg" id="4_dh0i3"]
+[ext_resource type="AudioStream" uid="uid://cunmcylypegfr" path="res://assets/audio/intro/10.ogg" id="4_sahvv"]
+[ext_resource type="AudioStream" uid="uid://deeq0gegg41au" path="res://assets/audio/intro/18.ogg" id="5_l8rgj"]
+[ext_resource type="AudioStream" uid="uid://du8y3ulxlrbbj" path="res://assets/audio/intro/11.ogg" id="5_oxo7l"]
+[ext_resource type="AudioStream" uid="uid://ct1xdkjy7pbbd" path="res://assets/audio/intro/31.ogg" id="5_yqj8h"]
+[ext_resource type="AudioStream" uid="uid://dgb3lhppffvnq" path="res://assets/audio/intro/19.ogg" id="6_m7dwq"]
+[ext_resource type="AudioStream" uid="uid://eu18t0okhy3y" path="res://assets/audio/intro/32.ogg" id="6_v4y22"]
+[ext_resource type="AudioStream" uid="uid://b5g88tppy3nv4" path="res://assets/audio/intro/2.ogg" id="7_ntyda"]
+[ext_resource type="AudioStream" uid="uid://c8usmijubcbwq" path="res://assets/audio/intro/13.ogg" id="7_q1xfx"]
+[ext_resource type="AudioStream" uid="uid://cwd6wnsr6brc5" path="res://assets/audio/intro/33.ogg" id="7_tacrn"]
+[ext_resource type="AudioStream" uid="uid://day7uv1orujrk" path="res://assets/audio/intro/34.ogg" id="8_d0m36"]
+[ext_resource type="AudioStream" uid="uid://d06h2ail2kk3k" path="res://assets/audio/intro/14.ogg" id="8_essih"]
+[ext_resource type="AudioStream" uid="uid://bc3qjugj3kwa1" path="res://assets/audio/intro/21.ogg" id="8_llwhb"]
+[ext_resource type="AudioStream" uid="uid://bqmuafd2upqnt" path="res://assets/audio/intro/22.ogg" id="9_e6ly4"]
+[ext_resource type="AudioStream" uid="uid://b51ofsqdri34x" path="res://assets/audio/intro/15.ogg" id="9_i1c2b"]
+[ext_resource type="AudioStream" uid="uid://bq3nfa86sr3ik" path="res://assets/audio/intro/35.ogg" id="9_oj55e"]
+[ext_resource type="AudioStream" uid="uid://c8kt1ep4dvixq" path="res://assets/audio/intro/16.ogg" id="10_1odg7"]
+[ext_resource type="AudioStream" uid="uid://du0qo3hje6bgc" path="res://assets/audio/intro/23.ogg" id="10_3hhgv"]
+[ext_resource type="AudioStream" uid="uid://blsv3g7o8qy7" path="res://assets/audio/intro/36.ogg" id="10_6a0u4"]
+[ext_resource type="AudioStream" uid="uid://cq6nqatxfk7sc" path="res://assets/audio/intro/17.ogg" id="11_3iv3j"]
+[ext_resource type="AudioStream" uid="uid://b6e7d08tmtbo3" path="res://assets/audio/intro/24.ogg" id="11_htyc6"]
+[ext_resource type="AudioStream" uid="uid://bfxdp3h41ymhk" path="res://assets/audio/intro/25.ogg" id="12_sahvv"]
+[ext_resource type="AudioStream" uid="uid://cmauphi650mb" path="res://assets/audio/intro/26.ogg" id="13_oxo7l"]
+[ext_resource type="AudioStream" uid="uid://usbq3yg5r7h2" path="res://assets/audio/intro/27.ogg" id="14_q1xfx"]
+[ext_resource type="AudioStream" uid="uid://dsknrtqcqruk" path="res://assets/audio/intro/20.ogg" id="15_bqh0m"]
+[ext_resource type="AudioStream" uid="uid://3i0btwfxojxh" path="res://assets/audio/intro/28.ogg" id="15_essih"]
+[ext_resource type="AudioStream" uid="uid://842xeqnrs7jg" path="res://assets/audio/intro/29.ogg" id="16_i1c2b"]
+[ext_resource type="AudioStream" uid="uid://digrf2mpuwwtc" path="res://assets/audio/intro/3.ogg" id="17_1odg7"]
+[ext_resource type="AudioStream" uid="uid://dk462mkc0bt4o" path="res://assets/audio/intro/4.ogg" id="25_3iv3j"]
+[ext_resource type="AudioStream" uid="uid://ck8f74vq1lcfk" path="res://assets/audio/intro/5.ogg" id="26_bqh0m"]
+[ext_resource type="AudioStream" uid="uid://2fr8c0m3intm" path="res://assets/audio/intro/6.ogg" id="27_4uh07"]
+[ext_resource type="AudioStream" uid="uid://j08lad4wakbv" path="res://assets/audio/intro/7.ogg" id="28_dok4w"]
+[ext_resource type="AudioStream" uid="uid://cr6h4emag7ri6" path="res://assets/audio/intro/8.ogg" id="29_mocd0"]
+[ext_resource type="AudioStream" uid="uid://beequq03w5arr" path="res://assets/audio/intro/9.ogg" id="30_s1i1s"]
 
 [node name="Intro" type="CanvasLayer"]
 script = ExtResource("1_plnd6")
@@ -51,6 +86,14 @@ vertical_alignment = 1
 script = ExtResource("3_1a4op")
 skip_pause_at_abbreviations = PackedStringArray("Mr", "Mrs", "Ms", "Dr", "etc", "eg", "ex")
 metadata/_custom_type_script = "uid://g32um0mltv5d"
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "2", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "3", "30", "31", "32", "33", "34", "35", "36", "4", "5", "6", "7", "8", "9"), [ExtResource("4_sahvv"), ExtResource("5_oxo7l"), ExtResource("4_1vl5y"), ExtResource("7_q1xfx"), ExtResource("8_essih"), ExtResource("9_i1c2b"), ExtResource("10_1odg7"), ExtResource("11_3iv3j"), ExtResource("5_l8rgj"), ExtResource("6_m7dwq"), ExtResource("7_ntyda"), ExtResource("15_bqh0m"), ExtResource("8_llwhb"), ExtResource("9_e6ly4"), ExtResource("10_3hhgv"), ExtResource("11_htyc6"), ExtResource("12_sahvv"), ExtResource("13_oxo7l"), ExtResource("14_q1xfx"), ExtResource("15_essih"), ExtResource("16_i1c2b"), ExtResource("17_1odg7"), ExtResource("4_dh0i3"), ExtResource("5_yqj8h"), ExtResource("6_v4y22"), ExtResource("7_tacrn"), ExtResource("8_d0m36"), ExtResource("9_oj55e"), ExtResource("10_6a0u4"), ExtResource("25_3iv3j"), ExtResource("26_bqh0m"), ExtResource("27_4uh07"), ExtResource("28_dok4w"), ExtResource("29_mocd0"), ExtResource("30_s1i1s")]]
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+volume_db = 4.952
+attenuation = 0.0
 
 [connection signal="timeout" from="MutationCooldown" to="." method="OnMutationCooldownTimeout"]
 [connection signal="gui_input" from="Balloon" to="." method="OnGuiInput"]
