@@ -23,6 +23,11 @@ public partial class Quest : Resource
     public List<QuestObjective> Objectives => [.. objectives];
     public QuestObjective CurrentObjective => objectives[currentStep];
     private int currentStep;
+    public Common.Models.Quest Model => new()
+    {
+        Id = Id,
+        Completed = Completed
+    };
 
     public void Update()
     {

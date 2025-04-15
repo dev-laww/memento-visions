@@ -38,7 +38,8 @@ public partial class QuestManager : Autoload<QuestManager>
 
     private readonly List<Quest> quests = [];
 
-    public static IReadOnlyList<Quest> Quests => Instance.quests;
+    public static IReadOnlyList<Quest> ActiveQuests => [.. Instance.quests.Where(q => !q.Completed)];
+    public static IReadOnlyList<Quest> CompletedQuests => [.. Instance.quests.Where(q => q.Completed)];
 
     public override void _EnterTree()
     {
@@ -46,17 +47,31 @@ public partial class QuestManager : Autoload<QuestManager>
 
         CommandInterpreter.Register(this);
 
-        foreach (var questId in SaveManager.Data.GetQuests())
-        {
-            var quest = QuestRegistry.Get(questId);
+        var quests = SaveManager.Data.GetQuests();
 
-            if (quest is null)
+        if (quests is null || quests.Count == 0) return;
+
+        foreach (var quest in quests)
+        {
+            var resource = QuestRegistry.Get(quest.Id);
+
+            if (resource is null)
             {
-                Log.Error($"Quest {questId} not found.");
+                Log.Error($"Quest {quest} not found.");
                 continue;
             }
 
-            Add(quest);
+            if (quest.Completed)
+            {
+                resource.Complete();
+
+                foreach (var objective in resource.Objectives)
+                {
+                    objective.Complete();
+                }
+            }
+
+            Add(resource);
         }
     }
 
@@ -66,22 +81,24 @@ public partial class QuestManager : Autoload<QuestManager>
 
         CommandInterpreter.Unregister(this);
 
-        var questsIds = quests.Select(q => q.Id).ToList();
-        SaveManager.SetQuests(questsIds);
+        var questModels = quests.Select(q => q.Model).ToList();
+        SaveManager.SetQuests(questModels);
     }
 
     public override void _Process(double delta)
     {
-        var completedQuests = new List<Quest>();
+        // var completedQuests = new List<Quest>();
 
         foreach (var quest in quests)
         {
+            if (quest.Completed) continue;
+
             quest.Update();
 
             if (quest.Completed)
             {
                 EmitSignalCompleted(quest);
-                completedQuests.Add(quest);
+                // completedQuests.Add(quest);
                 Log.Debug($"{quest} completed.");
 
                 this.GetPlayer()?.StatsManager.IncreaseExperience(quest.Experience);
@@ -96,10 +113,10 @@ public partial class QuestManager : Autoload<QuestManager>
             }
         }
 
-        foreach (var quest in completedQuests)
-        {
-            Remove(quest.Id);
-        }
+        // foreach (var quest in completedQuests)
+        // {
+        //     Remove(quest.Id);
+        // }
     }
 
     public static bool IsActive(Quest quest) => Instance.quests.Select(q => q.Id).Contains(quest.Id);
@@ -115,7 +132,7 @@ public partial class QuestManager : Autoload<QuestManager>
 
         Instance.quests.Add(quest);
         Instance.EmitSignalAdded(quest);
-        SaveManager.AddQuest(quest.Id);
+        SaveManager.AddQuest(quest.Model);
 
         Log.Info($"{quest} added.");
     }
@@ -133,7 +150,6 @@ public partial class QuestManager : Autoload<QuestManager>
 
         Instance.quests.Remove(quest);
         Instance.EmitSignalRemoved(quest);
-        SaveManager.RemoveQuest(quest.Id);
 
         Log.Info($"{quest} removed.");
     }

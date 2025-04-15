@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Game.Autoload;
+using Game.Common;
 using Game.Common.Extensions;
 using Game.Data;
 using Godot;
@@ -18,6 +18,7 @@ public partial class Quest : Overlay
     [Node] private RichTextLabel rewards;
     [Node] private TextureButton closeButton;
     [Node] private Button questTitle;
+    [Node] private Button activeQuestsButton;
     [Node] private VBoxContainer questTitlesContainer;
     [Node] private AudioStreamPlayer2D sfxClose;
     [Node] private AudioStreamPlayer2D sfxOpen;
@@ -25,6 +26,7 @@ public partial class Quest : Overlay
 
     private Godot.Collections.Dictionary<Data.Quest, Button> questButtons = [];
     private Data.Quest currentSelectedQuest;
+    private string currentCategory = "active";
 
     public override void _Notification(int what)
     {
@@ -35,30 +37,23 @@ public partial class Quest : Overlay
 
     public override void _Ready()
     {
+        sfxOpen.Play();
+
         closeButton.Pressed += Close;
         questTitle.Visible = false;
+        questTitle.ButtonGroup.Pressed += OnTitleButtonPressed;
 
-        QuestManager.QuestAdded += OnQuestAdded;
-        QuestManager.QuestCompleted += OnQuestCompleted;
-        QuestManager.QuestUpdated += OnQuestUpdated;
+        activeQuestsButton.ButtonGroup.Pressed += OnCategoryPressed;
 
-        questTitle.ButtonGroup.Pressed += OnButtonPressed;
+        QuestManager.QuestAdded += _ => UpdateCategory();
+        QuestManager.QuestCompleted += _ => UpdateCategory();
 
-        QuestManager.Quests.ToList().ForEach(OnQuestAdded);
         Reset();
+        UpdateCategory();
 
         if (questButtons.FirstOrDefault().Value is not { } button) return;
 
         button.ButtonPressed = true;
-
-        sfxOpen.Play(); 
-    }
-
-    public override void _ExitTree()
-    {
-        QuestManager.QuestAdded -= OnQuestAdded;
-        QuestManager.QuestCompleted -= OnQuestCompleted;
-        QuestManager.QuestUpdated -= OnQuestUpdated;
     }
 
     private void UpdateCurrentSelectedQuest(Data.Quest quest)
@@ -80,14 +75,17 @@ public partial class Quest : Overlay
         foreach (var objective in quest.Objectives)
         {
             var color = objective.Completed ? "green" : "white";
-            sb.AppendLine($"- [color={color}]{objective.Description}[/color]");
+            sb.AppendLine($"[color={color}]- {objective.Description}[/color]");
 
             if (objective.Enemies is not null && objective.Enemies.Length > 0)
                 foreach (var killRequirement in objective.Enemies)
                 {
                     var enemy = EnemyRegistry.GetAsEnemy(killRequirement.Id);
+                    var enemyName = enemy?.Name ?? killRequirement.Id;
+                    var quantity = objective.Completed ? killRequirement.Amount : killRequirement.Quantity;
+
                     sb.AppendLine(
-                        $"  - {enemy.EnemyName} [color={color}]x{killRequirement.Quantity}/{killRequirement.Amount}[/color]"
+                        $"[color={color}]  - {enemyName} x{quantity}/{killRequirement.Amount}[/color]"
                     );
                 }
 
@@ -96,8 +94,10 @@ public partial class Quest : Overlay
             foreach (var itemRequirement in objective.Items)
             {
                 var itemName = itemRequirement.Item.Name;
+                var quantity = objective.Completed ? itemRequirement.Amount : itemRequirement.Quantity;
+
                 sb.AppendLine(
-                    $"  - {itemName} [color={color}]x{itemRequirement.Quantity}/{itemRequirement.Amount} [/color]"
+                    $"[color={color}]  - {itemName} x{quantity}/{itemRequirement.Amount} [/color]"
                 );
             }
         }
@@ -105,31 +105,8 @@ public partial class Quest : Overlay
         objectives.Text = sb.ToString();
     }
 
-    private void OnQuestAdded(Data.Quest quest)
+    private void OnTitleButtonPressed(BaseButton button)
     {
-        var button = questTitle.Duplicate<Button>();
-        questButtons[quest] = button;
-        button.Text = quest.Title;
-        button.Visible = true;
-        questTitlesContainer.AddChild(button);
-    }
-
-    private void OnQuestUpdated(Data.Quest quest)
-    {
-        if (!questButtons.ContainsKey(quest) || currentSelectedQuest != quest) return;
-        UpdateCurrentSelectedQuest(quest);
-    }
-
-    private void OnQuestCompleted(Data.Quest quest)
-    {
-        if (!questButtons.Remove(quest, out var button)) return;
-
-        button.QueueFree();
-    }
-
-    private void OnButtonPressed(BaseButton button)
-    {
-       
         foreach (var (quest, questButton) in questButtons)
         {
             if (questButton != button) continue;
@@ -137,6 +114,60 @@ public partial class Quest : Overlay
             UpdateCurrentSelectedQuest(quest);
             break;
         }
+    }
+
+    private void OnCategoryPressed(BaseButton button)
+    {
+        var meta = button.GetMeta("category").AsString();
+
+        if (string.IsNullOrEmpty(meta))
+        {
+            Log.Error("No category found for button.");
+            return;
+        }
+
+        if (currentCategory == meta) return;
+
+        currentCategory = meta;
+        UpdateCategory();
+    }
+
+    private void UpdateCategory()
+    {
+        questButtons.Clear();
+
+        foreach (var child in questTitlesContainer.GetChildren())
+        {
+            if (child == questTitle) continue;
+
+            child.QueueFree();
+        }
+
+        var quests = currentCategory switch
+        {
+            "active" => QuestManager.ActiveQuests,
+            "completed" => QuestManager.CompletedQuests,
+            _ => []
+        };
+
+        foreach (var quest in quests)
+        {
+            var button = questTitle.Duplicate<Button>();
+            questButtons[quest] = button;
+            button.Text = quest.Title;
+            button.Visible = true;
+            questTitlesContainer.AddChild(button);
+        }
+
+        if (questButtons.Count == 0)
+        {
+            Reset();
+            return;
+        }
+
+        if (questButtons.FirstOrDefault().Value is not { } firstTitleButton) return;
+
+        firstTitleButton.ButtonPressed = true;
     }
 
     private void Reset()
