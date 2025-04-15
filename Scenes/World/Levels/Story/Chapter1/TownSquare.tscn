@@ -1044,6 +1044,10 @@ position = Vector2(0, -29)
 
 [node name="InteractionUI" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("15_v4bk2")]
 
+[node name="ScreenMarker" parent="Mayor" instance=ExtResource("18_f1toi")]
+position = Vector2(437, 238)
+IsRed = false
+
 [node name="Player" parent="." instance=ExtResource("13_j760s")]
 position = Vector2(197, 91)
 
@@ -1083,10 +1087,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_52t3j")
 }
 
-[node name="ScreenMarker" parent="." instance=ExtResource("18_f1toi")]
-position = Vector2(111, -46)
-IsRed = false
-
 [node name="QuestTrigger" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 4
@@ -1113,3 +1113,7 @@ metadata/_custom_type_script = "uid://davlg2u8drdh4"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
 position = Vector2(79.5, 1)
 shape = SubResource("RectangleShape2D_5id5a")
+
+[node name="ScreenMarker" parent="TransitionArea" instance=ExtResource("18_f1toi")]
+position = Vector2(102, -39)
+IsRed = false

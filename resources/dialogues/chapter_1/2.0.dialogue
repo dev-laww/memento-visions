@@ -39,6 +39,7 @@ while true
 		- Thanks, Chief!
 		do CurrentScene.transitionArea.Toggle(true)
 	- Exit
+		do CurrentScene.screenMarker.Toggle(false)
 		=> END
 		
 	

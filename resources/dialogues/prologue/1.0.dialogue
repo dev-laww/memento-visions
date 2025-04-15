@@ -10,4 +10,6 @@ Chief: No one dares to stay long enough to find out and I need someone who isnâ€
 - I'm in.
 Alex: Whispers in the dark, huh? Sounds like a mystery worth solving.â€
 do CurrentScene.FinishDialogue()
+
+
 => END

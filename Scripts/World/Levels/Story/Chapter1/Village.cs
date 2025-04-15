@@ -20,6 +20,8 @@ public partial class Village : BaseLevel
     [Node] private TorchPuzzleManager lightPuzzle;
     [Node] private Entity rudy, mayor;
     [Node] private ScreenMarker mayorMarker;
+    [Node] private ScreenMarker rudyMarker;
+    [Node] private ScreenMarker screenMarker;
     [Node] private ResourcePreloader resourcePreloader;
     [Node] private QuestTrigger rudyQuestTrigger;
     private Quest quest = QuestRegistry.Get("quest:find_mayor");
@@ -36,6 +38,8 @@ public partial class Village : BaseLevel
         questTrigger2.Monitoring = false;
         transitionArea.Toggle(false);
         mayorMarker.Toggle(false);
+        rudyMarker.Toggle(false);
+        screenMarker.Toggle(false);
         rudy.Visible = false;
         rudyQuestTrigger.Monitoring = false;
         leverManager.IsComplete += OnLeverPuzzleComplete;
@@ -61,7 +65,7 @@ public partial class Village : BaseLevel
         chest2.Visible = true;
     }
 
-    public void SetDialogueTriigerOff()
+    public void SetDialogueTriggerOff()
     {
         dialogueTrigger.Monitoring = false;
     }

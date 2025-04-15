@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://ciqiplx11424"]
+[gd_scene load_steps=22 format=4 uid="uid://ciqiplx11424"]
 
 [ext_resource type="Script" uid="uid://bmr5usqox5f0h" path="res://Scripts/World/Levels/Story/Prologue/Bar.cs" id="1_7pkig"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="2_cgm6k"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="12_shkw5"]
 [ext_resource type="Resource" uid="uid://dpkjhbld0pfm4" path="res://resources/quests/chapter_1/whispers_in_intramuros_1.tres" id="13_53sbg"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_jtnov"]
+[ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="16_16y44"]
 [ext_resource type="PackedScene" uid="uid://dgqrvixy2ocww" path="res://Scenes/Entities/Characters/BlackSmith.tscn" id="16_cdpoc"]
 [ext_resource type="AudioStream" uid="uid://b6msi8vaubfy8" path="res://assets/audio/music/bar_bgm.ogg" id="17_cgm6k"]
 
@@ -111,7 +112,7 @@ script = ExtResource("12_shkw5")
 Quest = ExtResource("13_53sbg")
 Mode = 0
 ShouldInteract = true
-InteractionLabel = "Interact"
+InteractionLabel = "Talk to Chief"
 DialogueResource = ExtResource("12_khm8l")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -134,3 +135,8 @@ volume_db = 7.924
 autoplay = true
 attenuation = 0.0
 bus = &"Music"
+
+[node name="ScreenMarker" parent="." instance=ExtResource("16_16y44")]
+position = Vector2(132, 34)
+HideWhenInBounds = false
+IsRed = false

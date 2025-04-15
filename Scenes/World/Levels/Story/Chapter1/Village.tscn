@@ -456,7 +456,6 @@ shape = SubResource("RectangleShape2D_tjaeu")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="TransitionArea" type="Area2D" parent="."]
-visible = false
 position = Vector2(95, 53)
 collision_layer = 0
 collision_mask = 4
@@ -713,6 +712,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 unique_name_in_owner = true
 z_index = 2
 position = Vector2(931, 473)
+HideWhenInBounds = false
 IsRed = false
 
 [node name="Rudy" parent="." instance=ExtResource("30_qjdf3")]
@@ -742,3 +742,13 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="Node2D" type="Node2D" parent="Rudy/RudyQuestTrigger"]
 
 [node name="InteractionUI" parent="Rudy/RudyQuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
+
+[node name="ScreenMarker" parent="Rudy" instance=ExtResource("21_lmktk")]
+position = Vector2(1022, 752)
+HideWhenInBounds = false
+IsRed = false
+
+[node name="ScreenMarker" parent="." instance=ExtResource("21_lmktk")]
+position = Vector2(96, 42)
+HideWhenInBounds = false
+IsRed = false

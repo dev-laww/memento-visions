@@ -1,4 +1,4 @@
-[gd_scene load_steps=193 format=4 uid="uid://d3dl8qe3i4hs5"]
+[gd_scene load_steps=194 format=4 uid="uid://d3dl8qe3i4hs5"]
 
 [ext_resource type="Script" uid="uid://cy5yn6ijpgu1n" path="res://Scripts/World/Levels/Story/Chapter1/EverfieldCity.cs" id="1_hf60o"]
 [ext_resource type="TileSet" uid="uid://wuwsi02f3fft" path="res://resources/tilesets/intramuros.tres" id="2_gy48w"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="11_dclhn"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="11_hn08j"]
 [ext_resource type="Resource" uid="uid://bvch8blxsmpmn" path="res://resources/dialogues/chapter_1/1.2.dialogue" id="11_hsept"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="12_g5ix3"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="12_hf60o"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="13_4wwhf"]
 [ext_resource type="Resource" uid="uid://d38r8diakp5jt" path="res://resources/dialogues/chapter_1/npc_1.dialogue" id="13_8kgvc"]
@@ -1082,7 +1083,7 @@ script = ExtResource("5_hn08j")
 Quest = ExtResource("6_hf60o")
 Mode = 0
 ShouldInteract = true
-InteractionLabel = "Talk to Manny & Tisoy"
+InteractionLabel = "Manny & Tisoy"
 DialogueResource = ExtResource("11_hsept")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -1093,7 +1094,15 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="npc/Manny/QuestTrigger"]
 
-[node name="InteractionUI" parent="npc/Manny/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
+[node name="InteractionUI" type="Control" parent="npc/Manny/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("12_g5ix3")
+
+[node name="ScreenMarker" parent="npc/Manny" instance=ExtResource("13_4wwhf")]
+position = Vector2(179, 172)
+IsRed = false
 
 [node name="Dodong Daldal" parent="npc" instance=ExtResource("14_roimx")]
 position = Vector2(559, 340)
@@ -1144,7 +1153,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Kevin" parent="npc" instance=ExtResource("18_bhrir")]
 unique_name_in_owner = true
-visible = false
 position = Vector2(-112, 971)
 
 [node name="QuestTrigger" type="Area2D" parent="npc/Kevin"]
@@ -1156,7 +1164,7 @@ script = ExtResource("5_hn08j")
 Quest = ExtResource("8_7adkd")
 Mode = 0
 ShouldInteract = true
-InteractionLabel = "Talk to Kevin"
+InteractionLabel = "Kevin"
 DialogueResource = ExtResource("19_d412w")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -1166,9 +1174,12 @@ shape = SubResource("CircleShape2D_84djs")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="npc/Kevin/QuestTrigger"]
-position = Vector2(1, -36)
 
-[node name="InteractionUI" parent="npc/Kevin/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
+[node name="InteractionUI" type="Control" parent="npc/Kevin/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("12_g5ix3")
 
 [node name="kevinMarker" parent="npc/Kevin" instance=ExtResource("13_4wwhf")]
 unique_name_in_owner = true
@@ -1562,7 +1573,7 @@ texture_filter = 2
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 2
+frame = 1
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StoryTeller"]

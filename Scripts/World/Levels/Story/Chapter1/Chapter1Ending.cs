@@ -18,6 +18,7 @@ public partial class Chapter1Ending : BaseLevel
     [Node] private Interaction blackSmithInteraction;
     [Node] private Interaction witchInteraction;
     [Node] private TransitionArea transitionArea;
+    [Node] private ScreenMarker screenMarker;
 
     [Node] private BlackSmith blackSmith;
 
@@ -36,6 +37,7 @@ public partial class Chapter1Ending : BaseLevel
     public override void _Ready()
     {
         transitionArea.Toggle(false);
+        screenMarker.Toggle(true);
         storyTellerInteraction.Interacted += OnStoryTellerInteracted;
         blackSmithInteraction.Interacted += OnBlackSmithInteracted;
         witchInteraction.Interacted += OnWitchInteracted;
@@ -60,6 +62,11 @@ public partial class Chapter1Ending : BaseLevel
         var concoctOverlay = (Concoct)OverlayManager.ShowOverlay(OverlayManager.CONCOCT);
 
         concoctOverlay.ItemCrafted += OnConcoct;
+    }
+
+    private void OnChiefInteracted()
+    {
+        screenMarker.Toggle(false);
     }
 
     private void OnConcoct()

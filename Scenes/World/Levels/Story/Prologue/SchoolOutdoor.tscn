@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=4 uid="uid://v06x46jch2vm"]
+[gd_scene load_steps=134 format=4 uid="uid://v06x46jch2vm"]
 
 [ext_resource type="Script" uid="uid://dcmogr8vudmpc" path="res://Scripts/World/Levels/Story/Prologue/SchoolOutdoor.cs" id="1_xhmq0"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_ol0cl"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="20_tqaex"]
 [ext_resource type="Resource" uid="uid://bj8l78qd3fsks" path="res://resources/dialogues/prologue/1.7.dialogue" id="21_afnmx"]
 [ext_resource type="Texture2D" uid="uid://bbaj1lmrgykxu" path="res://assets/effects/poof.png" id="21_n7j3j"]
+[ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="22_xhmq0"]
 [ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/audio/music/chapter_1_bgm.ogg" id="23_585h4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cymrg"]
@@ -941,6 +942,10 @@ metadata/_custom_type_script = "uid://davlg2u8drdh4"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
 shape = SubResource("RectangleShape2D_cymrg")
 
+[node name="ScreenMarker" parent="TransitionArea" instance=ExtResource("22_xhmq0")]
+position = Vector2(504, 1756)
+IsRed = false
+
 [node name="Chief" parent="." instance=ExtResource("9_0rbke")]
 position = Vector2(327, 64)
 
@@ -1146,7 +1151,7 @@ texture_filter = 2
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 3
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StoryTeller"]
 libraries = {
@@ -1190,6 +1195,10 @@ one_shot = true
 explosiveness = 0.9
 interpolate = false
 process_material = SubResource("ParticleProcessMaterial_ol0cl")
+
+[node name="ScreenMarker" parent="StoryTeller" instance=ExtResource("22_xhmq0")]
+position = Vector2(527, 1607)
+IsRed = false
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("23_585h4")

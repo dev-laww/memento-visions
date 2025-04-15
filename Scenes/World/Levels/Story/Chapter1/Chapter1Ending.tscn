@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://decexk5dlixp2"]
+[gd_scene load_steps=28 format=4 uid="uid://decexk5dlixp2"]
 
 [ext_resource type="Script" uid="uid://vtvxgoln0ppg" path="res://Scripts/World/Levels/Story/Chapter1/Chapter1Ending.cs" id="1_pxhlq"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_pxhlq"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://cll1v71th1oms" path="res://Scripts/Components/Area/Interaction.cs" id="10_d1aoc"]
 [ext_resource type="Resource" uid="uid://bif0c3hdbeq0" path="res://resources/dialogues/chapter_1/2.0.dialogue" id="10_yy1g4"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="11_128oy"]
+[ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="12_a28ga"]
 [ext_resource type="PackedScene" uid="uid://defbwilwt3lnr" path="res://Scenes/Entities/Characters/Witch.tscn" id="12_mjyv7"]
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="13_rej5g"]
 [ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemies/Common/Dummy.tscn" id="13_urmif"]
@@ -219,6 +220,11 @@ volume_db = 7.003
 autoplay = true
 attenuation = 0.0
 bus = &"Music"
+
+[node name="ScreenMarker" parent="." instance=ExtResource("12_a28ga")]
+position = Vector2(35, 115)
+HideWhenInBounds = false
+IsRed = false
 
 [editable path="BlackSmith/BlackSmithInteraction/Node2D/InteractionUI"]
 [editable path="Witch/WitchInteraction/Node2D/InteractionUI"]

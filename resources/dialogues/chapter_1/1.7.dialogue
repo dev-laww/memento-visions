@@ -31,4 +31,5 @@ Mang Rudy: Just head back to the Jeep, your next stop should be the Courtyard. T
 Alex: Thanks, you too old man.
 do CurrentScene.setQuestTriggerOn()
 do CurrentScene.transitionArea.Toggle(true)
+do CurrentScene.screenMarker.Toggle(true)
 => END
