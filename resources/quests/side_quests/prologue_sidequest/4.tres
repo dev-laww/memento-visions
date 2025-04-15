@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=5 format=3 uid="uid://ci256auh4e86g"]
+[gd_resource type="Resource" script_class="Quest" load_steps=11 format=3 uid="uid://ci256auh4e86g"]
 
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_t5eqx"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="2_e0wgx"]
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="2_wb4er"]
 
 [sub_resource type="Resource" id="Resource_7c80s"]
@@ -9,11 +10,43 @@ Type = 2
 Description = "Talk to the Storyteller to teleport you to the Frenzy Mode."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
+[sub_resource type="Resource" id="Resource_00e48"]
+script = ExtResource("2_e0wgx")
+Id = "enemy:aswang"
+Amount = 8
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
 [sub_resource type="Resource" id="Resource_gvegr"]
 script = ExtResource("1_t5eqx")
 Type = 3
-Description = "Kill 15 Aswangs to hone your skills and abilities in dodging and attacking!"
-Enemies = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+Description = "Kill 8 Aswangs to hone your skills and abilities in dodging and attacking!"
+Enemies = [SubResource("Resource_00e48")]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="Resource" id="Resource_e0wgx"]
+script = ExtResource("2_e0wgx")
+Id = "enemy:tikbalang"
+Amount = 8
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_8ukul"]
+script = ExtResource("1_t5eqx")
+Type = 3
+Description = "Kill 8 Tikbalangs that are helping the Aswangs to get their revenge on you!"
+Enemies = [SubResource("Resource_e0wgx")]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="Resource" id="Resource_rscwp"]
+script = ExtResource("2_e0wgx")
+Id = "enemy:aghon"
+Amount = 1
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_ujrng"]
+script = ExtResource("1_t5eqx")
+Type = 3
+Description = "Kill Aghon, who the Aswangs and Tikbalangs bows their head to."
+Enemies = [SubResource("Resource_rscwp")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
@@ -22,7 +55,7 @@ Id = "sidequest:sidequest4"
 Title = "Aswang's Rampage!"
 Ordered = true
 Description = "After fending off the Aswang's on your first visit, the Aswang's swore a revenge on you. Head down to the battlefield and give them a taste of what you're capable of!"
-objectives = [SubResource("Resource_7c80s"), SubResource("Resource_gvegr")]
+objectives = [SubResource("Resource_7c80s"), SubResource("Resource_gvegr"), SubResource("Resource_8ukul"), SubResource("Resource_ujrng")]
 Experience = 0
 Items = []
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

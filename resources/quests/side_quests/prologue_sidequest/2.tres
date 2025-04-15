@@ -1,7 +1,12 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=5 format=3 uid="uid://cg7fa3tmcnat7"]
+[gd_resource type="Resource" script_class="Quest" load_steps=16 format=3 uid="uid://cg7fa3tmcnat7"]
 
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_6nx3g"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_sd77v"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="2_phakg"]
+[ext_resource type="Resource" uid="uid://efbp6aphwl23" path="res://resources/items/material/aswang_elixir.tres" id="3_aoe7o"]
+[ext_resource type="Script" uid="uid://btqj20rwc4vb" path="res://Scripts/Data/Quest/ItemRequirement.cs" id="4_geiy5"]
+[ext_resource type="Resource" uid="uid://doqpta8ruoou0" path="res://resources/items/material/hoof_powder.tres" id="5_seb20"]
+[ext_resource type="Resource" uid="uid://cocs17ig06umk" path="res://resources/items/material/vampiric_claw.tres" id="6_f07kn"]
 
 [sub_resource type="Resource" id="Resource_1yyt2"]
 script = ExtResource("1_sd77v")
@@ -9,11 +14,48 @@ Type = 2
 Description = "Talk to the Storyteller to head down to the Frenzy Mode."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
+[sub_resource type="Resource" id="Resource_hk2ia"]
+script = ExtResource("2_phakg")
+Id = "enemy:aswang"
+Amount = 3
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_phakg"]
+script = ExtResource("2_phakg")
+Id = "enemy:tikbalang"
+Amount = 5
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
 [sub_resource type="Resource" id="Resource_7yxn7"]
 script = ExtResource("1_sd77v")
 Type = 3
 Description = "The Aswangs are terrorizing the forest. Slay them all to gain experience and their materials!"
-Enemies = [null, null, null, null, null]
+Enemies = [SubResource("Resource_hk2ia"), SubResource("Resource_phakg")]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="Resource" id="Resource_6mvfn"]
+script = ExtResource("4_geiy5")
+Item = ExtResource("3_aoe7o")
+Amount = 3
+metadata/_custom_type_script = "uid://btqj20rwc4vb"
+
+[sub_resource type="Resource" id="Resource_qqtn5"]
+script = ExtResource("4_geiy5")
+Item = ExtResource("5_seb20")
+Amount = 3
+metadata/_custom_type_script = "uid://btqj20rwc4vb"
+
+[sub_resource type="Resource" id="Resource_odmkn"]
+script = ExtResource("4_geiy5")
+Item = ExtResource("6_f07kn")
+Amount = 3
+metadata/_custom_type_script = "uid://btqj20rwc4vb"
+
+[sub_resource type="Resource" id="Resource_2virh"]
+script = ExtResource("1_sd77v")
+Type = 0
+Description = "Upon defeating the mythical creatures, gather their materials!"
+Items = [SubResource("Resource_6mvfn"), SubResource("Resource_qqtn5"), SubResource("Resource_odmkn")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
@@ -21,8 +63,8 @@ script = ExtResource("1_6nx3g")
 Id = "sidequest:sidequest2"
 Title = "Obtain Materials from the Aswangs"
 Ordered = true
-Description = "Gather materials to be used for crafting. The crafted item can be then used for yourself as a buff or debuff, your choice. This quest will hone your skills to the utmost level, bringing your A-game for the Chapter 1."
-objectives = [SubResource("Resource_1yyt2"), SubResource("Resource_7yxn7")]
+Description = "The Aswangs are still running rampant! Defeat them in Frenzy Mode and gather their dropped materials that can be used for later!"
+objectives = [SubResource("Resource_1yyt2"), SubResource("Resource_7yxn7"), SubResource("Resource_2virh")]
 Experience = 0
 Items = []
 metadata/_custom_type_script = "uid://dssta8xepjmkg"
