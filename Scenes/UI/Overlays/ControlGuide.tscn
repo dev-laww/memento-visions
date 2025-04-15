@@ -1,0 +1,224 @@
+[gd_scene load_steps=15 format=3 uid="uid://bhxcbargfd66p"]
+
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="1_au4k2"]
+[ext_resource type="Script" uid="uid://dxvcwyohyy0sx" path="res://Scripts/UI/Overlays/ControlGuide.cs" id="1_pev6y"]
+[ext_resource type="PackedScene" uid="uid://cb8psn10ig05k" path="res://Scenes/UI/Common/CloseButton.tscn" id="2_pev6y"]
+[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine_patch.png" id="3_f55ee"]
+[ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="4_3jsr5"]
+[ext_resource type="Texture2D" uid="uid://ugf0mcjsg84s" path="res://assets/icons/W.png" id="5_t5wui"]
+[ext_resource type="Texture2D" uid="uid://bvghnnad3u4ml" path="res://assets/icons/C.png" id="6_vkjoj"]
+[ext_resource type="Texture2D" uid="uid://djylh5c4qgdyh" path="res://assets/icons/A.png" id="7_8prry"]
+[ext_resource type="Texture2D" uid="uid://y500fa1a6k8f" path="res://assets/icons/G.png" id="8_e4wlv"]
+[ext_resource type="Texture2D" uid="uid://dprolqrqjko0y" path="res://assets/icons/S.png" id="9_hoc78"]
+[ext_resource type="Texture2D" uid="uid://b4i8qsv3q7mxe" path="res://assets/icons/Jt.png" id="10_f3rii"]
+[ext_resource type="Texture2D" uid="uid://u8lhdrximm0f" path="res://assets/icons/D.png" id="11_86dvi"]
+[ext_resource type="Texture2D" uid="uid://dyxsacj8kktd1" path="res://assets/icons/f.png" id="12_g4acp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_brr5y"]
+font = ExtResource("4_3jsr5")
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_pev6y")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_au4k2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="CloseButton" parent="MarginContainer/VBoxContainer/Header" instance=ExtResource("2_pev6y")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(300, 250)
+layout_mode = 2
+texture = ExtResource("3_f55ee")
+patch_margin_left = 3
+patch_margin_top = 5
+patch_margin_right = 3
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Control's Guide"
+label_settings = SubResource("LabelSettings_brr5y")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label"]
+layout_mode = 2
+offset_left = -1.0
+offset_right = 280.0
+offset_bottom = 230.0
+pivot_offset = Vector2(69, 115)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_top = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="label" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/label"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Movement:"
+
+[node name="label" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/label"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/label/label"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Menus:                       "
+
+[node name="W" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/W"]
+layout_mode = 2
+texture = ExtResource("5_t5wui")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/W"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Move Upward"
+
+[node name="C" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/W"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/W/C"]
+layout_mode = 2
+texture = ExtResource("6_vkjoj")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/W/C"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Display Character Status"
+
+[node name="A" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/A"]
+layout_mode = 2
+texture = ExtResource("7_8prry")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/A"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Move to the Left"
+
+[node name="G" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/A"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/A/G"]
+layout_mode = 2
+texture = ExtResource("8_e4wlv")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/A/G"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Display Control' Guide   "
+
+[node name="S" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/S"]
+layout_mode = 2
+texture = ExtResource("9_hoc78")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/S"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Move DownWard"
+
+[node name="J" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/S"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/S/J"]
+layout_mode = 2
+texture = ExtResource("10_f3rii")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/S/J"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Display Quest Section   "
+
+[node name="D" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/D"]
+layout_mode = 2
+texture = ExtResource("11_86dvi")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/D"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Move to the Right"
+
+[node name="label2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/label2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Interactions:"
+
+[node name="F" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/F"]
+layout_mode = 2
+texture = ExtResource("12_g4acp")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/F"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Interact               "
