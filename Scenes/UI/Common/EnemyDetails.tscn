@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=3 uid="uid://dh6ebuty1s8u3"]
+
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="1_kwswe"]
+[ext_resource type="Texture2D" uid="uid://daric1l1mtljq" path="res://assets/entities/enemy/common/aswang/spritesheet.png" id="1_n7a6l"]
+[ext_resource type="Script" uid="uid://bhcniltmtpdkn" path="res://Scripts/UI/Common/EnemyDetails.cs" id="2_daitg"]
+[ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="2_kwswe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rm4mq"]
+atlas = ExtResource("1_n7a6l")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytpu8"]
+atlas = ExtResource("1_n7a6l")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xtusl"]
+atlas = ExtResource("1_n7a6l")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdfa5"]
+atlas = ExtResource("1_n7a6l")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_plu3k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rm4mq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytpu8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xtusl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rdfa5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_js254"]
+font = ExtResource("2_kwswe")
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="EnemyDetails" type="VBoxContainer"]
+custom_minimum_size = Vector2(256, 292)
+theme = ExtResource("1_kwswe")
+script = ExtResource("2_daitg")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Sprite" type="AnimatedSprite2D" parent="CenterContainer/Control"]
+unique_name_in_owner = true
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_plu3k")
+autoplay = "default"
+frame_progress = 0.0136491
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 2
+text = "Enemy Name"
+label_settings = SubResource("LabelSettings_js254")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Enemy description
+
+Stats:
+
+Max Health
+Damage
+Speed
+Defense
+
+"

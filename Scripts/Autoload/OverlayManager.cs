@@ -17,6 +17,7 @@ public partial class OverlayManager : Autoload<OverlayManager>
     public const string MODE_SELECT = "ModeSelect";
     public const string CONCOCT = "Concoct";
     public const string CHARACTER_DETAILS = "CharacterDetails";
+    public const string ENEMY_GLOSSARY = "EnemyGlossary";
 
     [Node] private ResourcePreloader resourcePreloader;
 

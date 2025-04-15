@@ -1,0 +1,116 @@
+[gd_scene load_steps=15 format=3 uid="uid://j7lj0ixlmkuk"]
+
+[ext_resource type="Script" uid="uid://djux7txxx4q74" path="res://Scripts/UI/Overlays/EnemyGlossary.cs" id="1_js254"]
+[ext_resource type="Material" uid="uid://bkm4tri52hhdr" path="res://resources/shaders/blur.tres" id="1_lsyqu"]
+[ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_ksgp3"]
+[ext_resource type="PackedScene" uid="uid://cb8psn10ig05k" path="res://Scenes/UI/Common/CloseButton.tscn" id="3_07d7i"]
+[ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="4_ksgp3"]
+[ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine_patch.png" id="5_07d7i"]
+[ext_resource type="PackedScene" uid="uid://dh6ebuty1s8u3" path="res://Scenes/UI/Common/EnemyDetails.tscn" id="6_xy6j5"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ksgp3"]
+load_path = "res://.godot/imported/button.png-473760ec7449fb30c95f607492aecb17.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xy6j5"]
+atlas = SubResource("CompressedTexture2D_ksgp3")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksgp3"]
+atlas = ExtResource("4_ksgp3")
+region = Rect2(64, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07d7i"]
+atlas = SubResource("CompressedTexture2D_ksgp3")
+region = Rect2(128, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_js254"]
+atlas = SubResource("CompressedTexture2D_ksgp3")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mjwg"]
+atlas = ExtResource("4_ksgp3")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otbje"]
+atlas = SubResource("CompressedTexture2D_ksgp3")
+region = Rect2(160, 128, 32, 32)
+
+[node name="EnemyGlossary" type="CanvasLayer"]
+script = ExtResource("1_js254")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("EnemyDetails"), [ExtResource("6_xy6j5")]]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource("1_lsyqu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00141, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ksgp3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="CloseButton" parent="MarginContainer/VBoxContainer/Header" instance=ExtResource("3_07d7i")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="PreviousButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_xy6j5")
+texture_pressed = SubResource("AtlasTexture_ksgp3")
+texture_disabled = SubResource("AtlasTexture_07d7i")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("5_07d7i")
+patch_margin_left = 3
+patch_margin_top = 5
+patch_margin_right = 3
+patch_margin_bottom = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EnemyDetailsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/NinePatchRect/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CenterContainer2" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="NextButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_js254")
+texture_pressed = SubResource("AtlasTexture_4mjwg")
+texture_disabled = SubResource("AtlasTexture_otbje")

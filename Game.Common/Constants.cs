@@ -11,4 +11,5 @@ public static class Constants
     public const string STATUS_EFFECTS_PATH = "res://resources/status_effects";
     public const string LOOT_TABLES_PATH = "res://resources/loot_tables";
     public const string LEVELS_PATH = "res://Scenes/World/Levels/Story";
+    public const string ENTITY_DETAILS_PATH = "res://resources/entity_details";
 }

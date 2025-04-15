@@ -48,7 +48,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/VBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(200, 100)
+custom_minimum_size = Vector2(200, 125)
 layout_mode = 2
 texture = ExtResource("3_3p34d")
 patch_margin_left = 3
@@ -78,6 +78,13 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme = ExtResource("4_mqt5h")
 text = "Resume"
+
+[node name="ViewEnemyGlossaryButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme = ExtResource("4_mqt5h")
+text = "View Enemy Glossary"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
