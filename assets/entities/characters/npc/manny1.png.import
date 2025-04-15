@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dytn7dba5p2p4"
-path="res://.godot/imported/mayor.png-627dee01c1369f261decb89d693e71b9.ctex"
+uid="uid://dkpqk3c67l254"
+path="res://.godot/imported/manny1.png-753d9ad5c2e1c7a40ab5744f2f270955.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entities/characters/npc/mayor.png"
-dest_files=["res://.godot/imported/mayor.png-627dee01c1369f261decb89d693e71b9.ctex"]
+source_file="res://assets/entities/characters/npc/manny1.png"
+dest_files=["res://.godot/imported/manny1.png-753d9ad5c2e1c7a40ab5744f2f270955.ctex"]
 
 [params]
 

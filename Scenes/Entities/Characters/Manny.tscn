@@ -1,43 +1,43 @@
-[gd_scene load_steps=19 format=3 uid="uid://hndxrbqjf4gi"]
+[gd_scene load_steps=16 format=3 uid="uid://hndxrbqjf4gi"]
 
 [ext_resource type="Script" uid="uid://c00y25k3divsu" path="res://Scripts/Entities/Characters/Chief.cs" id="1_xs3q4"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_g0rxe"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="3_b466o"]
-[ext_resource type="Texture2D" uid="uid://doqtjllqpofb3" path="res://assets/entities/characters/npc/manny.png" id="5_qmj6m"]
+[ext_resource type="Texture2D" uid="uid://dkpqk3c67l254" path="res://assets/entities/characters/npc/manny1.png" id="4_4r4mu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbqyk"]
 radius = 8.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jckfh"]
-atlas = ExtResource("5_qmj6m")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_facrw"]
+atlas = ExtResource("4_4r4mu")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1i2vd"]
-atlas = ExtResource("5_qmj6m")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs3q4"]
+atlas = ExtResource("4_4r4mu")
+region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gfews"]
-atlas = ExtResource("5_qmj6m")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0rxe"]
+atlas = ExtResource("4_4r4mu")
+region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_givhk"]
-atlas = ExtResource("5_qmj6m")
-region = Rect2(96, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_b466o"]
+atlas = ExtResource("4_4r4mu")
+region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t8poj"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jckfh")
+"texture": SubResource("AtlasTexture_facrw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1i2vd")
+"texture": SubResource("AtlasTexture_xs3q4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gfews")
+"texture": SubResource("AtlasTexture_g0rxe")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_givhk")
+"texture": SubResource("AtlasTexture_b466o")
 }],
 "loop": false,
 "name": &"idle",
@@ -72,9 +72,13 @@ tracks/1/keys = {
 "values": ["default"]
 }
 
+[sub_resource type="Animation" id="Animation_uwdmb"]
+
+[sub_resource type="Animation" id="Animation_e6tbd"]
+length = 2.0
+
 [sub_resource type="Animation" id="Animation_tbqyk"]
 length = 0.8
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -100,11 +104,6 @@ tracks/1/keys = {
 "values": ["idle"]
 }
 
-[sub_resource type="Animation" id="Animation_uwdmb"]
-
-[sub_resource type="Animation" id="Animation_e6tbd"]
-length = 2.0
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h6wn6"]
 _data = {
 &"default": SubResource("Animation_hq7kd"),
@@ -112,18 +111,6 @@ _data = {
 &"scratching": SubResource("Animation_uwdmb"),
 &"work": SubResource("Animation_e6tbd")
 }
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tbqyk"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tbqyk"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bmtwh"]
-states/idle/node = SubResource("AnimationNodeAnimation_tbqyk")
-states/idle/position = Vector2(324, 100)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_tbqyk")]
-graph_offset = Vector2(-16, -28)
 
 [node name="Manny" type="CharacterBody2D"]
 collision_mask = 15
@@ -150,12 +137,9 @@ position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_t8poj")
 animation = &"idle"
 autoplay = "idle"
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_h6wn6")
 }
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_bmtwh")
-anim_player = NodePath("../AnimationPlayer")

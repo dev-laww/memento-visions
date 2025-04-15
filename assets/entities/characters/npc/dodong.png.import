@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dth02qnrsmphy"
-path="res://.godot/imported/tisoy.png-fe5d099b27c1e6942724cd3d0a40c175.ctex"
+uid="uid://po8v2v4udkse"
+path="res://.godot/imported/dodong.png-2efb2b329707f3d3a62411e80c53adb0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entities/characters/npc/tisoy.png"
-dest_files=["res://.godot/imported/tisoy.png-fe5d099b27c1e6942724cd3d0a40c175.ctex"]
+source_file="res://assets/entities/characters/npc/dodong.png"
+dest_files=["res://.godot/imported/dodong.png-2efb2b329707f3d3a62411e80c53adb0.ctex"]
 
 [params]
 

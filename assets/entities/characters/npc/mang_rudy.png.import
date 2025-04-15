@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmdisg83d6gik"
-path="res://.godot/imported/paquito.png-0150e8fa878002d02c211bcfb0bef9f3.ctex"
+uid="uid://baathuawfsax1"
+path="res://.godot/imported/mang_rudy.png-1fda087ac06ffd03c6259a1043cb3551.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entities/characters/npc/paquito.png"
-dest_files=["res://.godot/imported/paquito.png-0150e8fa878002d02c211bcfb0bef9f3.ctex"]
+source_file="res://assets/entities/characters/npc/mang_rudy.png"
+dest_files=["res://.godot/imported/mang_rudy.png-1fda087ac06ffd03c6259a1043cb3551.ctex"]
 
 [params]
 

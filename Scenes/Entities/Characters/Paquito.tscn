@@ -1,32 +1,35 @@
-[gd_scene load_steps=18 format=3 uid="uid://b2x7rae18bw1f"]
+[gd_scene load_steps=15 format=3 uid="uid://b2x7rae18bw1f"]
 
 [ext_resource type="Script" uid="uid://c00y25k3divsu" path="res://Scripts/Entities/Characters/Chief.cs" id="1_mv3e3"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_m3qq0"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="3_4v6v2"]
-[ext_resource type="Texture2D" uid="uid://dmdisg83d6gik" path="res://assets/entities/characters/npc/paquito.png" id="5_bf5xx"]
+[ext_resource type="Texture2D" uid="uid://cgwnpgwuej0m5" path="res://assets/entities/characters/npc/paquito_weyt.png" id="4_jf8aa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbqyk"]
 radius = 8.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4y54"]
+atlas = ExtResource("4_jf8aa")
+region = Rect2(0, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_mv3e3"]
-atlas = ExtResource("5_bf5xx")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("4_jf8aa")
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m3qq0"]
-atlas = ExtResource("5_bf5xx")
-region = Rect2(32, 0, 32, 32)
+atlas = ExtResource("4_jf8aa")
+region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4v6v2"]
-atlas = ExtResource("5_bf5xx")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_faerq"]
-atlas = ExtResource("5_bf5xx")
-region = Rect2(96, 0, 32, 32)
+atlas = ExtResource("4_jf8aa")
+region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bf5xx"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4y54")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mv3e3")
 }, {
@@ -35,17 +38,19 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4v6v2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_faerq")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_uwdmb"]
+
+[sub_resource type="Animation" id="Animation_e6tbd"]
+length = 2.0
+
 [sub_resource type="Animation" id="Animation_tbqyk"]
-length = 0.6
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -54,7 +59,7 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.566667),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -72,29 +77,12 @@ tracks/1/keys = {
 "values": ["idle"]
 }
 
-[sub_resource type="Animation" id="Animation_uwdmb"]
-
-[sub_resource type="Animation" id="Animation_e6tbd"]
-length = 2.0
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h6wn6"]
 _data = {
 &"idle": SubResource("Animation_tbqyk"),
 &"scratching": SubResource("Animation_uwdmb"),
 &"work": SubResource("Animation_e6tbd")
 }
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tbqyk"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tbqyk"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bmtwh"]
-states/idle/node = SubResource("AnimationNodeAnimation_tbqyk")
-states/idle/position = Vector2(324, 100)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_tbqyk")]
-graph_offset = Vector2(-16, -28)
 
 [node name="Paquito" type="CharacterBody2D"]
 collision_mask = 15
@@ -127,7 +115,3 @@ frame = 2
 libraries = {
 &"": SubResource("AnimationLibrary_h6wn6")
 }
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_bmtwh")
-anim_player = NodePath("../AnimationPlayer")

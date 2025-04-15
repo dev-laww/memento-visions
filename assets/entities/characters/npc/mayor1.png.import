@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cplhqn6sw8cvv"
-path="res://.godot/imported/rudy.png-5ad011fb2c682add7b5a9e79d6c5bd33.ctex"
+uid="uid://cfkyb2lq6nbe2"
+path="res://.godot/imported/mayor1.png-f78819b986679de85ad39bff01ac00d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entities/characters/npc/rudy.png"
-dest_files=["res://.godot/imported/rudy.png-5ad011fb2c682add7b5a9e79d6c5bd33.ctex"]
+source_file="res://assets/entities/characters/npc/mayor1.png"
+dest_files=["res://.godot/imported/mayor1.png-f78819b986679de85ad39bff01ac00d1.ctex"]
 
 [params]
 

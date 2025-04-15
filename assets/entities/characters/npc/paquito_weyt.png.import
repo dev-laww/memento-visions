@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bypv8vkrsw8e8"
-path="res://.godot/imported/kevin.png-9b0a591a23289a1caef6f78f53a5b24e.ctex"
+uid="uid://cgwnpgwuej0m5"
+path="res://.godot/imported/paquito_weyt.png-d6790192aa0109d9da37751c1c2e236a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entities/characters/npc/kevin.png"
-dest_files=["res://.godot/imported/kevin.png-9b0a591a23289a1caef6f78f53a5b24e.ctex"]
+source_file="res://assets/entities/characters/npc/paquito_weyt.png"
+dest_files=["res://.godot/imported/paquito_weyt.png-d6790192aa0109d9da37751c1c2e236a.ctex"]
 
 [params]
 

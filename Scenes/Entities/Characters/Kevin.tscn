@@ -1,32 +1,35 @@
-[gd_scene load_steps=19 format=3 uid="uid://b08ofhkn8vp36"]
+[gd_scene load_steps=16 format=3 uid="uid://b08ofhkn8vp36"]
 
 [ext_resource type="Script" uid="uid://c00y25k3divsu" path="res://Scripts/Entities/Characters/Chief.cs" id="1_pijbx"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_enjny"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="3_igpsy"]
-[ext_resource type="Texture2D" uid="uid://bypv8vkrsw8e8" path="res://assets/entities/characters/npc/kevin.png" id="5_6l6h7"]
+[ext_resource type="Texture2D" uid="uid://bcq8rrmws0bt2" path="res://assets/entities/characters/npc/kevint.png" id="4_n2ujc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tbqyk"]
 radius = 8.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg5j"]
+atlas = ExtResource("4_n2ujc")
+region = Rect2(0, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_pijbx"]
-atlas = ExtResource("5_6l6h7")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("4_n2ujc")
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_enjny"]
-atlas = ExtResource("5_6l6h7")
-region = Rect2(32, 0, 32, 32)
+atlas = ExtResource("4_n2ujc")
+region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_igpsy"]
-atlas = ExtResource("5_6l6h7")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jxper"]
-atlas = ExtResource("5_6l6h7")
-region = Rect2(96, 0, 32, 32)
+atlas = ExtResource("4_n2ujc")
+region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6l6h7"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg5j")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pijbx")
 }, {
@@ -35,9 +38,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_igpsy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jxper")
 }],
 "loop": true,
 "name": &"idle",
@@ -72,6 +72,11 @@ tracks/1/keys = {
 "values": ["default"]
 }
 
+[sub_resource type="Animation" id="Animation_uwdmb"]
+
+[sub_resource type="Animation" id="Animation_e6tbd"]
+length = 2.0
+
 [sub_resource type="Animation" id="Animation_tbqyk"]
 length = 0.8
 loop_mode = 1
@@ -100,11 +105,6 @@ tracks/1/keys = {
 "values": ["idle"]
 }
 
-[sub_resource type="Animation" id="Animation_uwdmb"]
-
-[sub_resource type="Animation" id="Animation_e6tbd"]
-length = 2.0
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h6wn6"]
 _data = {
 &"default": SubResource("Animation_hq7kd"),
@@ -112,18 +112,6 @@ _data = {
 &"scratching": SubResource("Animation_uwdmb"),
 &"work": SubResource("Animation_e6tbd")
 }
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tbqyk"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tbqyk"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bmtwh"]
-states/idle/node = SubResource("AnimationNodeAnimation_tbqyk")
-states/idle/position = Vector2(324, 100)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_tbqyk")]
-graph_offset = Vector2(-16, -28)
 
 [node name="Kevin" type="CharacterBody2D"]
 collision_mask = 15
@@ -150,13 +138,8 @@ position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_6l6h7")
 animation = &"idle"
 autoplay = "idle"
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_h6wn6")
 }
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_bmtwh")
-anim_player = NodePath("../AnimationPlayer")
