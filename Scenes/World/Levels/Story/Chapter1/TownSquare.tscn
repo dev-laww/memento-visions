@@ -985,12 +985,16 @@ navigation_polygon = SubResource("NavigationPolygon_bgshn")
 
 [node name="BossBgm" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_j760s")
+volume_db = 11.886
+attenuation = 0.0
 bus = &"Music"
 parameters/looping = true
 
 [node name="Chapter1Bgm" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_8tuqj")
+volume_db = 7.924
 autoplay = true
+attenuation = 0.0
 bus = &"Music"
 parameters/looping = true
 

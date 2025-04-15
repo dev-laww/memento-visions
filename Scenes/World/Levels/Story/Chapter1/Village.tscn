@@ -500,7 +500,9 @@ position = Vector2(83, 120)
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("27_akscv")
+volume_db = 10.895
 autoplay = true
+attenuation = 0.0
 bus = &"Music"
 parameters/looping = true
 
