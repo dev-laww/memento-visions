@@ -64,9 +64,8 @@ public partial class SaveManager : Autoload<SaveManager>
     public static void SetCurrentChapter(string chapter) => Data.SetCurrentChapter(chapter);
     public static void UnlockRecipe(string itemId) => Data.UnlockRecipe(itemId);
     public static void AddNpcsEncountered(string npcId) => Data.AddNpcsEncountered(npcId);
-    public static void SetQuests(List<string> quests) => Data.SetQuests(quests);
-    public static void AddQuest(string quest) => Data.AddQuest(quest);
-    public static void RemoveQuest(string quest) => Data.RemoveQuest(quest);
+    public static void SetQuests(List<Quest> quests) => Data.SetQuests(quests);
+    public static void AddQuest(Quest quest) => Data.AddQuest(quest);
     public static void UnlockFrenzyMode() => Data.UnlockFrenzyMode();
     public static void SetIntroShown(bool shown) => Data.SetIntroShown(shown);
 }

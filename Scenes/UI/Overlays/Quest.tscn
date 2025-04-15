@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://cuymxmsjlw48y"]
+[gd_scene load_steps=17 format=3 uid="uid://cuymxmsjlw48y"]
 
 [ext_resource type="Script" uid="uid://d11g3gbjm7cot" path="res://Scripts/UI/Overlays/Quest.cs" id="1_18xdc"]
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="2_y52qg"]
 [ext_resource type="Texture2D" uid="uid://bdl211kxne1dg" path="res://assets/ui/button.png" id="3_ii4hv"]
+[ext_resource type="ButtonGroup" uid="uid://tmac6jwvpm1e" path="res://resources/misc/quest_button.tres" id="4_6mjat"]
 [ext_resource type="Texture2D" uid="uid://b8kxjlkscihn4" path="res://assets/ui/nine_patch.png" id="4_gsxto"]
 [ext_resource type="FontFile" uid="uid://cp1q06caoc6la" path="res://assets/font/04b03.woff2" id="5_488ye"]
 [ext_resource type="AudioStream" uid="uid://cwqgqd7a1xdjg" path="res://assets/audio/ui/click.mp3" id="6_kwblb"]
@@ -81,7 +82,9 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_right = 10
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_bottom = 0
 
 [node name="QuestTitlesContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/MarginContainer"]
 unique_name_in_owner = true
@@ -98,16 +101,44 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_18xdc")
 text = "Quest Title"
 
-[node name="QuestInfo" type="NinePatchRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ActiveQuestsButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(115, 24)
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("4_6mjat")
+text = "Active Quests	"
+metadata/category = "active"
+
+[node name="CompletedQuestsButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(115, 24)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("4_6mjat")
+text = "Completed Quests"
+metadata/category = "completed"
+
+[node name="QuestInfo" type="NinePatchRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource("4_gsxto")
 patch_margin_left = 3
 patch_margin_top = 5
 patch_margin_right = 3
 patch_margin_bottom = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/QuestInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/QuestInfo"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -119,21 +150,21 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/QuestInfo/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/QuestInfo/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/QuestInfo/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/QuestInfo/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Quest Title"
 label_settings = SubResource("LabelSettings_18xdc")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/QuestInfo/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/QuestInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Description" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/QuestInfo/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/QuestInfo/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
@@ -146,7 +177,7 @@ theme_override_font_sizes/bold_font_size = 8
 bbcode_enabled = true
 text = "Quest Description"
 
-[node name="Objectives" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/QuestInfo/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Objectives" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/QuestInfo/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
@@ -159,7 +190,7 @@ theme_override_font_sizes/bold_font_size = 8
 bbcode_enabled = true
 text = "Quest Objectives"
 
-[node name="Rewards" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/QuestInfo/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Rewards" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/QuestInfo/MarginContainer/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2

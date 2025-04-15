@@ -1,13 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://bsmme5xlgs3wi"]
+[gd_scene load_steps=13 format=3 uid="uid://bsmme5xlgs3wi"]
 
 [ext_resource type="Script" uid="uid://bd4th0nixbur3" path="res://Scripts/Autoload/OverlayManager.cs" id="1_qmxs7"]
 [ext_resource type="PackedScene" uid="uid://lb5hy70yttxc" path="res://Scenes/UI/Overlays/Concoct.tscn" id="2_4pl1h"]
 [ext_resource type="PackedScene" uid="uid://dd1jerr3yxfmm" path="res://Scenes/UI/Overlays/Crafting.tscn" id="2_kg6mn"]
 [ext_resource type="PackedScene" uid="uid://kelec5yhsixm" path="res://Scenes/UI/Overlays/CharacterDetails.tscn" id="2_snhm1"]
 [ext_resource type="PackedScene" uid="uid://dmijoehq6y18t" path="res://Scenes/UI/Overlays/DeveloperConsole.tscn" id="3_rcr8j"]
+[ext_resource type="PackedScene" uid="uid://bhxcbargfd66p" path="res://Scenes/UI/Overlays/ControlGuide.tscn" id="4_4coeh"]
 [ext_resource type="PackedScene" uid="uid://c6kt3qbs62e4i" path="res://Scenes/UI/Overlays/HeadsUpDisplay.tscn" id="4_4pl1h"]
 [ext_resource type="PackedScene" uid="uid://b161abm0o6ij2" path="res://Scenes/UI/Overlays/Inventory.tscn" id="5_snhm1"]
 [ext_resource type="PackedScene" uid="uid://cptktl4hefaup" path="res://Scenes/UI/Overlays/Menu.tscn" id="6_4coeh"]
+[ext_resource type="PackedScene" uid="uid://j7lj0ixlmkuk" path="res://Scenes/UI/Overlays/EnemyGlossary.tscn" id="6_j8p2r"]
 [ext_resource type="PackedScene" uid="uid://cuymxmsjlw48y" path="res://Scenes/UI/Overlays/Quest.tscn" id="7_j8p2r"]
 [ext_resource type="PackedScene" uid="uid://bg32n0pmt15qc" path="res://Scenes/UI/Overlays/ModeSelect.tscn" id="7_rcr8j"]
 
@@ -15,4 +17,4 @@
 script = ExtResource("1_qmxs7")
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
-resources = [PackedStringArray("CharacterDetails", "Concoct", "Crafting", "DeveloperConsole", "HeadsUpDisplay", "Inventory", "Menu", "ModeSelect", "Quest"), [ExtResource("2_snhm1"), ExtResource("2_4pl1h"), ExtResource("2_kg6mn"), ExtResource("3_rcr8j"), ExtResource("4_4pl1h"), ExtResource("5_snhm1"), ExtResource("6_4coeh"), ExtResource("7_rcr8j"), ExtResource("7_j8p2r")]]
+resources = [PackedStringArray("CharacterDetails", "Concoct", "ControlGuide", "Crafting", "DeveloperConsole", "EnemyGlossary", "HeadsUpDisplay", "Inventory", "Menu", "ModeSelect", "Quest"), [ExtResource("2_snhm1"), ExtResource("2_4pl1h"), ExtResource("4_4coeh"), ExtResource("2_kg6mn"), ExtResource("3_rcr8j"), ExtResource("6_j8p2r"), ExtResource("4_4pl1h"), ExtResource("5_snhm1"), ExtResource("6_4coeh"), ExtResource("7_rcr8j"), ExtResource("7_j8p2r")]]

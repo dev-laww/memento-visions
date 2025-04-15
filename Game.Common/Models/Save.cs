@@ -19,7 +19,7 @@ public class Save
      DefaultValue("cmVzOi8vU2NlbmVzL1dvcmxkL0xldmVscy9TdG9yeS9Qcm9sb2d1ZS9Qcm9sb2d1ZUJhci50c2Nu")]
     public string CurrentChapter { get; private set; } = "cmVzOi8vU2NlbmVzL1dvcmxkL0xldmVscy9TdG9yeS9Qcm9sb2d1ZS9Qcm9sb2d1ZUJhci50c2Nu";
 
-    [JsonProperty("quests")] private List<string> quests = [];
+    [JsonProperty("quests")] private List<Quest> quests = [];
 
     public void SetItems(List<Item> items) => Items = items;
     public void SetLevel(float level) => Level = level;
@@ -27,21 +27,15 @@ public class Save
     public void SetQuickSlotItem(string item) => QuickSlotItem = item;
     public void SetEquipped(string item) => Equipped = item;
 
-    public IReadOnlyList<string> GetQuests() => quests;
+    public IReadOnlyList<Quest> GetQuests() => quests;
 
-    public void AddQuest(string quest)
+    public void AddQuest(Quest quest)
     {
-        if (quests.Contains(quest)) return;
+        if (quests.Any(q => q.Id == quest.Id)) return;
         quests.Add(quest);
     }
 
-    public void RemoveQuest(string quest)
-    {
-        if (!quests.Contains(quest)) return;
-        quests.Remove(quest);
-    }
-
-    public void SetQuests(List<string> quests)
+    public void SetQuests(List<Quest> quests)
     {
         this.quests = quests;
     }

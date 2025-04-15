@@ -130,5 +130,7 @@ position = Vector2(271, 258)
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="sfx"]
 stream = ExtResource("17_cgm6k")
+volume_db = 7.924
 autoplay = true
+attenuation = 0.0
 bus = &"Music"
