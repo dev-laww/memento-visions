@@ -18,7 +18,7 @@ public partial class TownSquare : BaseLevel
     [Node] private AudioStreamPlayer2D bossBgm;
     [Node] private AudioStreamPlayer2D chapter1Bgm;
     [Node] private StoryTeller storyTeller;
-    [Node] private ScreenMarker screenMarker;
+    [Node] private ScreenMarker screenMarker, mayorMarker;
     [Node] private TransitionArea transitionArea;
 
     public override void _Notification(int what)
@@ -33,6 +33,7 @@ public partial class TownSquare : BaseLevel
     {
         QuestManager.QuestUpdated += OnQuestUpdated;
         screenMarker.Toggle(false);
+        mayorMarker.Toggle(true);
         transitionArea.Toggle(false);
     }
 
@@ -46,6 +47,7 @@ public partial class TownSquare : BaseLevel
 
     public void PlayFadeAnimation()
     {
+        mayorMarker.Toggle(false);
         animationPlayer.Play("Fade");
         chapter1Bgm.StreamPaused = true;
         bossBgm.Play();
