@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 [sub_resource type="Resource" id="Resource_1jmwf"]
 script = ExtResource("1_ka0b6")
 Type = 2
-Description = "Speak with locals, gather testimonies, and investigate strange signs linked to the mayor’s campaign."
+Description = "Speak with locals, gather testimonies, and investigate the eerie place as to what happened in it."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]

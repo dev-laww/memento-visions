@@ -46,7 +46,7 @@ size = Vector2(55.25, 21.25)
 [sub_resource type="Resource" id="Resource_nry1j"]
 script = ExtResource("18_0u337")
 Type = 2
-Description = "Head towards the Jeepney"
+Description = "Upon learning about the Mayor, you head back to where the Jeep dropped you off, hoping to find the Mayor on your next stop."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xh25p"]
@@ -303,7 +303,7 @@ border_size = 256.0
 [sub_resource type="Resource" id="Resource_qydlh"]
 script = ExtResource("18_0u337")
 Type = 2
-Description = "Look for the Mayor if he's in the vicinity or not."
+Description = "Try to look for people who you can ask about your whereabouts."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_akscv"]
@@ -312,7 +312,7 @@ radius = 44.6608
 [sub_resource type="Resource" id="Resource_ni2ta"]
 script = ExtResource("18_0u337")
 Type = 2
-Description = "Talk to Rudy about what happen"
+Description = "Talk to person who you just saved-you might gather some useful information!"
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u8kkp"]

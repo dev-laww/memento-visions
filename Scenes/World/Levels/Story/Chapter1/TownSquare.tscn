@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=4 uid="uid://jdy1vpq1yng4"]
+[gd_scene load_steps=133 format=4 uid="uid://jdy1vpq1yng4"]
 
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="1_5yg8b"]
 [ext_resource type="Script" uid="uid://bww7pdfaugnj3" path="res://Scripts/World/Levels/Story/Chapter1/TownSquare.cs" id="1_k56vb"]
@@ -508,12 +508,6 @@ border_size = 256.0
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="Resource" id="Resource_a27w3"]
-script = ExtResource("12_l26tj")
-Type = 2
-Description = "Confront the mayor"
-metadata/_custom_type_script = "uid://dpkqc20rlrftv"
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_5id5a"]
 radius = 19.2354
 
@@ -665,7 +659,7 @@ _data = {
 [sub_resource type="Resource" id="Resource_n7jaw"]
 script = ExtResource("12_l26tj")
 Type = 2
-Description = "Head to the Jeep and Rest at the Bar"
+Description = "Upon defeating the Mayor, head to the Jeep again to rest at the bar. Being freed from the terror towards the mayor, you can now ask the driver where you want to be dropped."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tqrau"]
@@ -1027,12 +1021,10 @@ collision_layer = 16
 collision_mask = 4
 script = ExtResource("7_m44gr")
 Quest = ExtResource("13_matur")
-Mode = 1
+Mode = 0
 ShouldInteract = true
-InteractionLabel = "Talk to Mayor"
+InteractionLabel = "Interact"
 DialogueResource = ExtResource("12_5id5a")
-Objective = SubResource("Resource_a27w3")
-ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mayor/QuestTrigger"]
@@ -1096,7 +1088,7 @@ Quest = ExtResource("13_matur")
 Mode = 1
 ShouldInteract = false
 Objective = SubResource("Resource_n7jaw")
-ObjectiveIndex = 2
+ObjectiveIndex = 1
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
@@ -1108,7 +1100,7 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("19_tqrau")
-TargetScene = "uid://ccvymajtrtimw"
+TargetScene = "uid://decexk5dlixp2"
 metadata/_custom_type_script = "uid://davlg2u8drdh4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]

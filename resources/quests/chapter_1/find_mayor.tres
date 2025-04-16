@@ -29,7 +29,7 @@ metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 [sub_resource type="Resource" id="Resource_qydlh"]
 script = ExtResource("1_nry1j")
 Type = 2
-Description = "Look for the Mayor if he's in the vicinity or not."
+Description = "Try to look for people who you can ask about your whereabouts."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="Resource" id="Resource_7afhn"]
@@ -41,20 +41,20 @@ metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 [sub_resource type="Resource" id="Resource_33q2f"]
 script = ExtResource("1_nry1j")
 Type = 3
-Description = "Defeat the Aswangs summoned by the Mayor and Save Mang Rudy."
+Description = "Defeat the Aswangs summoned by the Mayor and save the person being attacked by the Aswangs."
 Enemies = [SubResource("Resource_7afhn")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="Resource" id="Resource_ni2ta"]
 script = ExtResource("1_nry1j")
 Type = 2
-Description = "Talk to Rudy about what happen"
+Description = "Talk to person who you just saved-you might gather some useful information!"
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="Resource" id="Resource_nry1j"]
 script = ExtResource("1_nry1j")
 Type = 2
-Description = "Head towards the Jeepney"
+Description = "Head towards the Jeepney."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]

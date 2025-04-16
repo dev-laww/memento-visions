@@ -35,14 +35,14 @@ metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 [sub_resource type="Resource" id="Resource_riumb"]
 script = ExtResource("2_symma")
 Type = 3
-Description = "Defeat 5 Aswang and question survivors for clues."
+Description = "Upon gathering information, defeat atleast 5 Aswangs that are terrorizing the locals."
 Enemies = [SubResource("Resource_hi571")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="Resource" id="Resource_kcivv"]
 script = ExtResource("2_symma")
 Type = 2
-Description = "Approach the mysterious person that appear behind the Aswangs and question it for answers."
+Description = "A mysterious person suddenly appeared! Interrogate him about the Aswangs and their purpose for doing so!"
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]

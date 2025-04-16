@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=15 format=3 uid="uid://dubpfapg14rna"]
+[gd_resource type="Resource" script_class="Quest" load_steps=16 format=3 uid="uid://dubpfapg14rna"]
 
 [ext_resource type="Resource" uid="uid://benoaphq2f8wm" path="res://resources/items/consumable/banana_cue.tres" id="1_qda8y"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_wjjxm"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://efbp6aphwl23" path="res://resources/items/material/aswang_elixir.tres" id="3_mpdef"]
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="3_xit71"]
 [ext_resource type="Resource" uid="uid://c6j15ogomrwqo" path="res://resources/items/material/curse_blood.tres" id="4_s4vud"]
+[ext_resource type="Resource" uid="uid://oirogv5yy6ia" path="res://resources/items/quest/amulet.tres" id="5_jomtr"]
 
 [sub_resource type="Resource" id="Resource_ygkk7"]
 script = ExtResource("2_tw4x6")
@@ -26,13 +27,13 @@ Item = ExtResource("4_s4vud")
 Quantity = 3
 metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 
-[sub_resource type="Resource" id="Resource_a27w3"]
-script = ExtResource("1_wjjxm")
-Type = 2
-Description = "Confront the mayor"
-metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+[sub_resource type="Resource" id="Resource_upmtw"]
+script = ExtResource("2_tw4x6")
+Item = ExtResource("5_jomtr")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 
-[sub_resource type="Resource" id="Resource_j1jvf"]
+[sub_resource type="Resource" id="Resource_jomtr"]
 script = ExtResource("2_7j58d")
 Id = "enemy:aghon"
 Amount = 1
@@ -41,8 +42,8 @@ metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 [sub_resource type="Resource" id="Resource_y1bnb"]
 script = ExtResource("1_wjjxm")
 Type = 3
-Description = "Fight Mayor for the Amulets"
-Enemies = [SubResource("Resource_j1jvf")]
+Description = "You found out about what the Mayor did to the townsfolk. Defeat him to end his reign and shatter his twisted control over the Aswang!"
+Enemies = [SubResource("Resource_jomtr")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="Resource" id="Resource_n7jaw"]
@@ -57,7 +58,7 @@ Id = "quest:testimony"
 Title = "The Aswang’s Testimony"
 Ordered = false
 Description = "Mayor Santos has been using the Aswang to instill fear and silence opposition. After confronting him, you must fight off the creatures, track down a surviving Aswang, and extract the truth about the mayor’s dark pact."
-objectives = [SubResource("Resource_a27w3"), SubResource("Resource_y1bnb"), SubResource("Resource_n7jaw")]
+objectives = [SubResource("Resource_y1bnb"), SubResource("Resource_n7jaw")]
 Experience = 50
-Items = [SubResource("Resource_ygkk7"), SubResource("Resource_ti87e"), SubResource("Resource_qkgiq")]
+Items = [SubResource("Resource_ygkk7"), SubResource("Resource_ti87e"), SubResource("Resource_qkgiq"), SubResource("Resource_upmtw")]
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

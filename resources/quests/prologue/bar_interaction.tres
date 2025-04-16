@@ -16,6 +16,6 @@ Title = "First Steps into Darkness"
 Ordered = true
 Description = "In a dimly lit bar, Alex meets the Chief to discuss a chilling case—rumors of a vengeful spirit linked to recent disappearances. Before stepping into the unknown, he must gather all the details."
 objectives = [SubResource("Resource_ccy1y")]
-Experience = 10
+Experience = 0
 Items = []
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

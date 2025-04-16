@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://oirogv5yy6ia"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/items/items.png" id="1_trsto"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_62nn1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ns6rc"]
+atlas = ExtResource("1_trsto")
+region = Rect2(112, 48, 16, 16)
+
+[resource]
+resource_name = "Dark Amulet"
+script = ExtResource("2_62nn1")
+Id = "item:amulet"
+Icon = SubResource("AtlasTexture_ns6rc")
+Name = "Dark Amulet"
+ItemCategory = 2
+Description = "A cursed relic pulsing with malevolent energy. The deep violet gem at its core radiates an eerie glow, surrounded by gloden fangs symbolizing its power over the night. "
+metadata/_custom_type_script = "uid://b772648mucsjw"
