@@ -62,6 +62,10 @@ size = Vector2(93, 14)
 script = ExtResource("14_5br0r")
 Type = 2
 Description = "Investigate the Notebook"
+Items = []
+Enemies = []
+Completed = false
+type = 2
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vvniv"]
@@ -71,6 +75,10 @@ radius = 26.4764
 script = ExtResource("14_5br0r")
 Type = 2
 Description = "Investigate the Burned wooden chair"
+Items = []
+Enemies = []
+Completed = false
+type = 2
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hwwpg"]
@@ -83,6 +91,10 @@ size = Vector2(20, 11)
 script = ExtResource("14_5br0r")
 Type = 2
 Description = "Investigate the Photographs"
+Items = []
+Enemies = []
+Completed = false
+type = 2
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5f4dp"]
@@ -217,9 +229,11 @@ position = Vector2(-2, -28)
 
 [node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("18_j7p5r")]
 
-[node name="ScreenMarker" parent="Chief" instance=ExtResource("9_ykjel")]
+[node name="ChiefMarker" parent="Chief" instance=ExtResource("9_ykjel")]
+unique_name_in_owner = true
 position = Vector2(204, 131)
 IsRed = false
+HideWhenInBounds = false
 
 [node name="Player" parent="." instance=ExtResource("16_4xaeb")]
 position = Vector2(52, 117)
@@ -241,9 +255,11 @@ metadata/_custom_type_script = "uid://davlg2u8drdh4"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
 shape = SubResource("RectangleShape2D_d7mfr")
 
-[node name="ScreenMarker" parent="TransitionArea" instance=ExtResource("9_ykjel")]
+[node name="TransitionMarker" parent="TransitionArea" instance=ExtResource("9_ykjel")]
+unique_name_in_owner = true
 position = Vector2(1607, 693)
-IsRed = false
+IsRed = true
+HideWhenInBounds = false
 
 [node name="StoryTeller" parent="." instance=ExtResource("18_fov0j")]
 visible = false
@@ -308,9 +324,11 @@ texture = ExtResource("18_cnuhk")
 region_enabled = true
 region_rect = Rect2(448, 360, 8, 8)
 
-[node name="ScreenMarker" parent="Diary" instance=ExtResource("9_ykjel")]
+[node name="DiaryMarker" parent="Diary" instance=ExtResource("9_ykjel")]
+unique_name_in_owner = true
 position = Vector2(1413, 286)
 IsRed = false
+HideWhenInBounds = false
 
 [node name="BurntChair" type="StaticBody2D" parent="."]
 position = Vector2(1161, 44)
@@ -348,9 +366,11 @@ texture = ExtResource("18_cnuhk")
 region_enabled = true
 region_rect = Rect2(536, 264, 32, 24)
 
-[node name="ScreenMarker" parent="BurntChair" instance=ExtResource("9_ykjel")]
+[node name="ChairMarker" parent="BurntChair" instance=ExtResource("9_ykjel")]
+unique_name_in_owner = true
 position = Vector2(1164, 28)
 IsRed = false
+HideWhenInBounds = false
 
 [node name="Photographs" type="Node2D" parent="."]
 z_index = -1
@@ -384,9 +404,11 @@ texture = ExtResource("18_cnuhk")
 region_enabled = true
 region_rect = Rect2(536, 440, 32, 32)
 
-[node name="ScreenMarker" parent="Photographs" instance=ExtResource("9_ykjel")]
+[node name="PhotoMarker" parent="Photographs" instance=ExtResource("9_ykjel")]
+unique_name_in_owner = true
 position = Vector2(1607, 495)
 IsRed = false
+HideWhenInBounds = false
 
 [node name="Movable" parent="." instance=ExtResource("10_obfor")]
 position = Vector2(1078, 326)

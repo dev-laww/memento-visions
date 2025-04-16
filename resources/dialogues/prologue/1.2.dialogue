@@ -2,4 +2,5 @@
 set CurrentScene.objectivesInteracted += 1
 A scorched chair and dismantled components—likely repurposed for a campfire. The people who were here might have used these to get warmth or light... or rather, to keep something away from getting near them.
 do CurrentScene.chairTrigger.queue_free()
+do CurrentScene.chairMarker.Toggle(false)
 => END

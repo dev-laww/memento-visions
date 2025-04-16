@@ -17,4 +17,6 @@ Story Teller: Alex Gutierrez, that is your duty to find out what really happened
 Story Teller: “As our protagonist goes on its conquest, what could possibly happen as he delves into it?
 - I should head out to find out.
 do CurrentScene.transitionArea.Toggle(true)
+do CurrentScene.photoMarker.Toggle(false)
+do CurrentScene.transitionMaker.Toggle(True)
 => END

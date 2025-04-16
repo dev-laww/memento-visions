@@ -20,6 +20,7 @@ public partial class DesolatePlace : BaseLevel
     [Node] private QuestTrigger photographTrigger;
     [Node] private QuestTrigger chairTrigger;
     [Node] private QuestTrigger diaryTrigger;
+    [Node] private ScreenMarker chiefMarker,photoMarker,chairMarker,diaryMarker,transitionMarker;
 
     private bool isInteracted;
     private bool isDoorTipShown;
@@ -37,6 +38,8 @@ public partial class DesolatePlace : BaseLevel
         transitionArea.Toggle(false);
         pressurePlate.Activated += DisableDoor;
         pressurePlate.Deactivated += EnableDoor;
+        ToggleMarkers(false);
+
     }
 
     private void DisableDoor()
@@ -72,5 +75,13 @@ public partial class DesolatePlace : BaseLevel
             CinematicManager.EndCinematic();
             isDoorTipShown = true;
         };
+    }
+
+    public void ToggleMarkers(bool toggle)
+    {
+        chiefMarker.Toggle(!toggle);
+        photoMarker.Toggle(toggle);
+        chairMarker.Toggle(toggle);
+        diaryMarker.Toggle(toggle);
     }
 }
