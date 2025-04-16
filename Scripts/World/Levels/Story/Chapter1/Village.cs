@@ -52,6 +52,7 @@ public partial class Village : BaseLevel
         if (this.quest.Objectives[1].Completed)
         {
             rudyQuestTrigger.Monitoring = true;
+            rudyMarker.Toggle(true);
         }
     }
 

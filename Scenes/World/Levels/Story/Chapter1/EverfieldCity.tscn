@@ -10,13 +10,13 @@
 [ext_resource type="Resource" uid="uid://dubpfapg14rna" path="res://resources/quests/chapter_1/testimony.tres" id="8_7adkd"]
 [ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="8_516uf"]
 [ext_resource type="Resource" uid="uid://cd607lyv1rtkf" path="res://resources/dialogues/chapter_1/npc_3.dialogue" id="8_aqpjb"]
+[ext_resource type="Script" uid="uid://c72nfriad6ej4" path="res://Scripts/Entities/Characters/NPC.cs" id="9_hsept"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="10_7adkd"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="10_grhu3"]
 [ext_resource type="PackedScene" uid="uid://hndxrbqjf4gi" path="res://Scenes/Entities/Characters/Manny.tscn" id="10_tjhma"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="11_dclhn"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="11_hn08j"]
 [ext_resource type="Resource" uid="uid://bvch8blxsmpmn" path="res://resources/dialogues/chapter_1/1.2.dialogue" id="11_hsept"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="12_g5ix3"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="12_hf60o"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="13_4wwhf"]
 [ext_resource type="Resource" uid="uid://d38r8diakp5jt" path="res://resources/dialogues/chapter_1/npc_1.dialogue" id="13_8kgvc"]
@@ -1073,6 +1073,7 @@ position = Vector2(0, -32)
 
 [node name="Manny" parent="npc" instance=ExtResource("10_tjhma")]
 position = Vector2(165, 193)
+script = ExtResource("9_hsept")
 
 [node name="QuestTrigger" type="Area2D" parent="npc/Manny"]
 position = Vector2(11, -34)
@@ -1094,18 +1095,15 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="npc/Manny/QuestTrigger"]
 
-[node name="InteractionUI" type="Control" parent="npc/Manny/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("12_g5ix3")
+[node name="InteractionUI" parent="npc/Manny/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
-[node name="ScreenMarker" parent="npc/Manny" instance=ExtResource("13_4wwhf")]
+[node name="MannyMarker" parent="npc/Manny" instance=ExtResource("13_4wwhf")]
 position = Vector2(179, 172)
 IsRed = false
 
 [node name="Dodong Daldal" parent="npc" instance=ExtResource("14_roimx")]
 position = Vector2(559, 340)
+script = ExtResource("9_hsept")
 
 [node name="DialogueTrigger" type="Area2D" parent="npc/Dodong Daldal"]
 position = Vector2(0, 3)
@@ -1129,6 +1127,7 @@ position = Vector2(0, -32)
 
 [node name="Paquito" parent="npc" instance=ExtResource("6_5n2fm")]
 position = Vector2(907, 259)
+script = ExtResource("9_hsept")
 
 [node name="DialogueTrigger" type="Area2D" parent="npc/Paquito"]
 z_index = 1
@@ -1154,6 +1153,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Kevin" parent="npc" instance=ExtResource("18_bhrir")]
 unique_name_in_owner = true
 position = Vector2(-112, 971)
+script = ExtResource("9_hsept")
 
 [node name="QuestTrigger" type="Area2D" parent="npc/Kevin"]
 z_index = 1
@@ -1175,19 +1175,17 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="npc/Kevin/QuestTrigger"]
 
-[node name="InteractionUI" type="Control" parent="npc/Kevin/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("12_g5ix3")
+[node name="InteractionUI" parent="npc/Kevin/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
 [node name="kevinMarker" parent="npc/Kevin" instance=ExtResource("13_4wwhf")]
 unique_name_in_owner = true
 position = Vector2(-112, 952)
-IsRed = false
+HideWhenInBounds = false
+IsRed = true
 
 [node name="Tisoy" parent="npc" instance=ExtResource("22_cmjjt")]
 position = Vector2(190, 192)
+script = ExtResource("9_hsept")
 
 [node name="collision" type="StaticBody2D" parent="."]
 visible = false
@@ -1544,7 +1542,8 @@ shape = SubResource("RectangleShape2D_hf60o")
 [node name="JeepMarker" parent="TransitionArea" instance=ExtResource("13_4wwhf")]
 unique_name_in_owner = true
 position = Vector2(-361, 1160)
-IsRed = false
+HideWhenInBounds = false
+IsRed = true
 
 [node name="StoryTeller" type="CharacterBody2D" parent="."]
 y_sort_enabled = true
@@ -1573,7 +1572,7 @@ texture_filter = 2
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 1
+frame = 2
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StoryTeller"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=4 uid="uid://c2qx74ig42sum"]
+[gd_scene load_steps=98 format=4 uid="uid://c2qx74ig42sum"]
 
 [ext_resource type="Script" uid="uid://xi5ph3oued7k" path="res://Scripts/World/Levels/Story/Chapter1/Village.cs" id="1_yyi1k"]
 [ext_resource type="TileSet" uid="uid://wuwsi02f3fft" path="res://resources/tilesets/intramuros.tres" id="2_imb2w"]
@@ -25,6 +25,7 @@
 [ext_resource type="AudioStream" uid="uid://deewooh6kgx36" path="res://assets/audio/music/village_bgm.ogg" id="27_akscv"]
 [ext_resource type="PackedScene" uid="uid://6rk1l15nvvdr" path="res://Scenes/World/PuzzleComponent/TorchPuzzleManager.tscn" id="27_lmktk"]
 [ext_resource type="PackedScene" uid="uid://dtqgojjodmope" path="res://Scenes/World/PuzzleComponent/StreetLight.tscn" id="28_lesfh"]
+[ext_resource type="Script" uid="uid://c72nfriad6ej4" path="res://Scripts/Entities/Characters/NPC.cs" id="29_hl2f5"]
 [ext_resource type="PackedScene" uid="uid://vsehi4t73af5" path="res://Scenes/Entities/Characters/Mayor.tscn" id="29_qjdf3"]
 [ext_resource type="Resource" uid="uid://ba4jrntt5jygn" path="res://resources/dialogues/chapter_1/1.7.dialogue" id="30_bem7u"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="30_kk6yg"]
@@ -717,6 +718,7 @@ IsRed = false
 
 [node name="Rudy" parent="." instance=ExtResource("30_qjdf3")]
 position = Vector2(1022, 771)
+script = ExtResource("29_hl2f5")
 
 [node name="RudyQuestTrigger" type="Area2D" parent="Rudy"]
 unique_name_in_owner = true
@@ -743,10 +745,10 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="InteractionUI" parent="Rudy/RudyQuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
 
-[node name="ScreenMarker" parent="Rudy" instance=ExtResource("21_lmktk")]
+[node name="RudyMarker" parent="Rudy" instance=ExtResource("21_lmktk")]
 position = Vector2(1022, 752)
 HideWhenInBounds = false
-IsRed = false
+IsRed = true
 
 [node name="ScreenMarker" parent="." instance=ExtResource("21_lmktk")]
 position = Vector2(96, 42)

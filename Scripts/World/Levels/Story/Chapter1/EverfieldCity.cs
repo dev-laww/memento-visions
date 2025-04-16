@@ -17,7 +17,7 @@ public partial class EverfieldCity : BaseLevel
     [Node] private TorchPuzzleManager torchSequence;
     [Node] private PressurePlate plate, plate2;
     [Node] private Chest chest,chest2;
-    [Node] private ScreenMarker kevinMarker,jeepMarker;
+    [Node] private ScreenMarker kevinMarker,jeepMarker,mannyMarker;
     [Node] private Node2D enemy;
     private Quest quest = QuestRegistry.Get("quest:aswang_hunt");
     private Quest quest1 = QuestRegistry.Get("quest:whispers_in_intramuros");

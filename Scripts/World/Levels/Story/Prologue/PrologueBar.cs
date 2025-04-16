@@ -3,6 +3,7 @@ using Game.Components;
 using GodotUtilities;
 using DialogueManagerRuntime;
 using Game.Entities;
+using Game.Utils;
 
 namespace Game.World;
 
@@ -43,5 +44,15 @@ public partial class PrologueBar : BaseLevel
         transitionArea.Toggle(true);
         isInteracted = true;
         GetTree().CreateTimer(10f).Timeout += () => screenMarker.Toggle(true);
+    }
+
+    private void ShowInstructions()
+    {
+        var text = new OverlayFactory.CenterTextBuilder(GetTree())
+            .SetText("Press [G] to Show Control Guide")
+            .SetDuration(2f) 
+            .Build();
+        
+        
     }
 }

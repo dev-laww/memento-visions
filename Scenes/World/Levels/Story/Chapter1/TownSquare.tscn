@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=4 uid="uid://jdy1vpq1yng4"]
+[gd_scene load_steps=135 format=4 uid="uid://jdy1vpq1yng4"]
 
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="1_5yg8b"]
 [ext_resource type="Script" uid="uid://bww7pdfaugnj3" path="res://Scripts/World/Levels/Story/Chapter1/TownSquare.cs" id="1_k56vb"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/audio/music/chapter_1_bgm.ogg" id="7_8tuqj"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="7_m44gr"]
 [ext_resource type="PackedScene" uid="uid://vsehi4t73af5" path="res://Scenes/Entities/Characters/Mayor.tscn" id="9_l26tj"]
+[ext_resource type="Script" uid="uid://c72nfriad6ej4" path="res://Scripts/Entities/Characters/NPC.cs" id="10_5id5a"]
 [ext_resource type="Resource" uid="uid://1lif4uqpp2ca" path="res://resources/dialogues/chapter_1/1.8.dialogue" id="12_5id5a"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="12_l26tj"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="13_j760s"]
@@ -1021,6 +1022,7 @@ polygon = PackedVector2Array(-1352.15, 1351.53, -1397.18, 626.947, -1424.47, -21
 
 [node name="Mayor" parent="." instance=ExtResource("9_l26tj")]
 position = Vector2(437, 259)
+script = ExtResource("10_5id5a")
 
 [node name="QuestTrigger" type="Area2D" parent="Mayor"]
 collision_layer = 16

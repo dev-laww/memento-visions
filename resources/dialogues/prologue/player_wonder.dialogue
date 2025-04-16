@@ -5,4 +5,5 @@ Alex: [wait=.5][speed=1]The Chief said to meet him here.
 Alex: He might've something important if not urgent to tell me to meet him at this secluded place.
 do CurrentScene.animationPlayer.play("out")
 do CurrentScene.chiefMarker.Toggle(true)
+do CurrentScene.ShowInstructions()
 => END
