@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://3td8x8h36elv"]
+[gd_scene load_steps=28 format=4 uid="uid://3td8x8h36elv"]
 
 [ext_resource type="Script" uid="uid://bw7smwgpceo61" path="res://Scripts/World/Levels/Story/Prologue/PrologueBar.cs" id="1_h8tdj"]
 [ext_resource type="Script" uid="uid://d3vvbqw6ln6if" path="res://Scripts/UI/Screens/Cinematic.cs" id="2_ete42"]
@@ -9,7 +9,9 @@
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="7_0qhrs"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="8_8anoo"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="9_djlbh"]
+[ext_resource type="Resource" uid="uid://dk2nxvecyh5h3" path="res://resources/dialogues/prologue/1.0.dialogue" id="10_lx1uq"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="10_sx5dq"]
+[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="11_h8tdj"]
 [ext_resource type="TileSet" uid="uid://c1mmutvocnp5g" path="res://resources/tilesets/bar/props.tres" id="14_45a8x"]
 [ext_resource type="TileSet" uid="uid://grwoctw4gvjl" path="res://resources/tilesets/bar/wall.tres" id="16_huina"]
 [ext_resource type="TileSet" uid="uid://dvd6ajqdt1f52" path="res://resources/tilesets/bar/small-props.tres" id="17_ehnjy"]
@@ -335,6 +337,9 @@ position = Vector2(162, 58)
 [node name="HeadsUpDisplay" parent="Player" index="2"]
 visible = false
 
+[node name="Idle" parent="Player/Center" index="0"]
+frame = 3
+
 [node name="Chief" parent="." instance=ExtResource("10_sx5dq")]
 position = Vector2(678, 489)
 
@@ -349,12 +354,18 @@ collision_mask = 4
 script = ExtResource("5_s5dkd")
 Quest = ExtResource("6_uf73d")
 Mode = 0
-ShouldInteract = false
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("10_lx1uq")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/QuestTrigger"]
 shape = SubResource("CircleShape2D_coaxs")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
+
+[node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("11_h8tdj")]
 
 [node name="Art" type="Node2D" parent="."]
 y_sort_enabled = true

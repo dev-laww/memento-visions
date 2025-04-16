@@ -185,6 +185,11 @@ public partial class Intro : CanvasLayer
         {
             await Next(dialogueLine.NextId);
         }
+        else if (@event.IsActionPressed("menu") )
+        {
+            QueueFree();
+            _ExitTree();
+        }
     }
 
     private async void OnResponseSelected(DialogueResponse response) => await Next(response.NextId);
