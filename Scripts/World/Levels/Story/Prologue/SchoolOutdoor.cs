@@ -16,6 +16,7 @@ public partial class SchoolOutdoor : BaseLevel
     [Node] TransitionArea transitionArea;
     [Node] AnimationPlayer animationPlayer;
     [Node] private Node2D enemies;
+    [Node] private ScreenMarker transitionMarker;
     private Quest quest = QuestRegistry.Get("quest:night_of_shadows");
 
 
@@ -29,6 +30,7 @@ public partial class SchoolOutdoor : BaseLevel
         ShowDialogue();
         transitionArea.Toggle(false);
         QuestManager.QuestUpdated += OnQuestUpdated;
+        transitionMarker.Toggle(false);
     }
     
     private void OnQuestUpdated(Quest quest)
@@ -39,6 +41,7 @@ public partial class SchoolOutdoor : BaseLevel
             {
                 animationPlayer.Play("show_story_teller");
                 transitionArea.Toggle(true);
+                transitionMarker.Toggle(true);
                 QuestManager.QuestUpdated -= OnQuestUpdated;
             }
             
