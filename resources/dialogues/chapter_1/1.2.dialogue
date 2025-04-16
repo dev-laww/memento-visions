@@ -1,6 +1,6 @@
 ~ start
 do CurrentScene.CompleteObjectiveAtIndex(0)
-do CurrentScene.MannyMarker(false)
+do CurrentScene.mannyMarker.Toggle(false)
 Alex: May I talk to you? 
 Alex: I need to know what’s the situation here. 
 Alex: The Chief told me that something is going on here but I need to know the full picture in order for me to do something.
