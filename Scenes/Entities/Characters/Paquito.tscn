@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://b2x7rae18bw1f"]
 
-[ext_resource type="Script" uid="uid://c00y25k3divsu" path="res://Scripts/Entities/Characters/Chief.cs" id="1_mv3e3"]
+[ext_resource type="Script" uid="uid://c72nfriad6ej4" path="res://Scripts/Entities/Characters/NPC.cs" id="1_jf8aa"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_m3qq0"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="3_4v6v2"]
 [ext_resource type="Texture2D" uid="uid://cgwnpgwuej0m5" path="res://assets/entities/characters/npc/paquito_weyt.png" id="4_jf8aa"]
@@ -46,7 +46,7 @@ animations = [{
 
 [node name="Paquito" type="CharacterBody2D"]
 collision_mask = 15
-script = ExtResource("1_mv3e3")
+script = ExtResource("1_jf8aa")
 Id = "npc:paquito"
 isNpc = true
 

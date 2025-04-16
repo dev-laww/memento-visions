@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://brd2wy8vh2ts2"]
 
-[ext_resource type="Script" uid="uid://c00y25k3divsu" path="res://Scripts/Entities/Characters/Chief.cs" id="1_uxvsb"]
+[ext_resource type="Script" uid="uid://c72nfriad6ej4" path="res://Scripts/Entities/Characters/NPC.cs" id="1_823qi"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_b8lyq"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="3_prekv"]
 [ext_resource type="Texture2D" uid="uid://buvgbv7obo5gi" path="res://assets/entities/characters/npc/slimdude.png" id="4_823qi"]
@@ -46,7 +46,7 @@ animations = [{
 
 [node name="Tisoy" type="CharacterBody2D"]
 collision_mask = 15
-script = ExtResource("1_uxvsb")
+script = ExtResource("1_823qi")
 Id = "npc:tisoy"
 isNpc = true
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://plrv66khta1y"]
 
-[ext_resource type="Script" uid="uid://c00y25k3divsu" path="res://Scripts/Entities/Characters/Chief.cs" id="1_732ce"]
+[ext_resource type="Script" uid="uid://c72nfriad6ej4" path="res://Scripts/Entities/Characters/NPC.cs" id="1_scxyi"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="2_yx4wq"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="3_dyw1k"]
 [ext_resource type="Texture2D" uid="uid://baathuawfsax1" path="res://assets/entities/characters/npc/mang_rudy.png" id="4_scxyi"]
@@ -46,7 +46,7 @@ animations = [{
 
 [node name="Rudy" type="CharacterBody2D"]
 collision_mask = 15
-script = ExtResource("1_732ce")
+script = ExtResource("1_scxyi")
 Id = "npc:rudy"
 isNpc = true
 
