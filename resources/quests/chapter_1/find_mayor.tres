@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=14 format=3 uid="uid://cv1uxwlv2liuj"]
+[gd_resource type="Resource" script_class="Quest" load_steps=16 format=3 uid="uid://cv1uxwlv2liuj"]
 
 [ext_resource type="Resource" uid="uid://ct2y0f318jxyf" path="res://resources/items/consumable/salabat.tres" id="1_eqwj1"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_nry1j"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_8obxu"]
 [ext_resource type="Resource" uid="uid://e5dmknfrsqko" path="res://resources/items/consumable/bibingka.tres" id="3_h5tfb"]
 [ext_resource type="Resource" uid="uid://cocs17ig06umk" path="res://resources/items/material/vampiric_claw.tres" id="4_d3x3p"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="6_6cd3h"]
 
 [sub_resource type="Resource" id="Resource_fo0qo"]
 script = ExtResource("2_8obxu")
@@ -31,11 +32,17 @@ Type = 2
 Description = "Look for the Mayor if he's in the vicinity or not."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
+[sub_resource type="Resource" id="Resource_7afhn"]
+script = ExtResource("6_6cd3h")
+Id = "enemy:aswang"
+Amount = 5
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
 [sub_resource type="Resource" id="Resource_33q2f"]
 script = ExtResource("1_nry1j")
 Type = 3
 Description = "Defeat the Aswangs summoned by the Mayor and Save Mang Rudy."
-Enemies = []
+Enemies = [SubResource("Resource_7afhn")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="Resource" id="Resource_ni2ta"]
