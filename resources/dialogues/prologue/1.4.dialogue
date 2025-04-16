@@ -18,5 +18,5 @@ Story Teller: “As our protagonist goes on its conquest, what could possibly ha
 - I should head out to find out.
 do CurrentScene.transitionArea.Toggle(true)
 do CurrentScene.photoMarker.Toggle(false)
-do CurrentScene.transitionMaker.Toggle(True)
+do CurrentScene.transitionMaker.Toggle(true)
 => END

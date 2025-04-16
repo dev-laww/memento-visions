@@ -39,6 +39,7 @@ public partial class DesolatePlace : BaseLevel
         pressurePlate.Activated += DisableDoor;
         pressurePlate.Deactivated += EnableDoor;
         ToggleMarkers(false);
+        transitionMarker.Toggle(false);
 
     }
 
