@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=16 format=3 uid="uid://dubpfapg14rna"]
+[gd_resource type="Resource" script_class="Quest" load_steps=18 format=3 uid="uid://dubpfapg14rna"]
 
 [ext_resource type="Resource" uid="uid://benoaphq2f8wm" path="res://resources/items/consumable/banana_cue.tres" id="1_qda8y"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_wjjxm"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="3_xit71"]
 [ext_resource type="Resource" uid="uid://c6j15ogomrwqo" path="res://resources/items/material/curse_blood.tres" id="4_s4vud"]
 [ext_resource type="Resource" uid="uid://oirogv5yy6ia" path="res://resources/items/quest/amulet.tres" id="5_jomtr"]
+[ext_resource type="Resource" uid="uid://bpyi4m4nxvt7e" path="res://resources/items/quest/codex2.tres" id="6_upmtw"]
 
 [sub_resource type="Resource" id="Resource_ygkk7"]
 script = ExtResource("2_tw4x6")
@@ -33,6 +34,12 @@ Item = ExtResource("5_jomtr")
 Quantity = 1
 metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 
+[sub_resource type="Resource" id="Resource_rp2kb"]
+script = ExtResource("2_tw4x6")
+Item = ExtResource("6_upmtw")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
 [sub_resource type="Resource" id="Resource_jomtr"]
 script = ExtResource("2_7j58d")
 Id = "enemy:aghon"
@@ -49,7 +56,7 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 [sub_resource type="Resource" id="Resource_n7jaw"]
 script = ExtResource("1_wjjxm")
 Type = 2
-Description = "Head to the Jeep and Rest at the Bar"
+Description = "Upon defeating the Mayor, head to the Jeep again to rest at the bar. Being freed from the terror towards the mayor, you can now ask the driver where you want to be dropped."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
@@ -60,5 +67,5 @@ Ordered = false
 Description = "Mayor Santos has been using the Aswang to instill fear and silence opposition. After confronting him, you must fight off the creatures, track down a surviving Aswang, and extract the truth about the mayor’s dark pact."
 objectives = [SubResource("Resource_y1bnb"), SubResource("Resource_n7jaw")]
 Experience = 50
-Items = [SubResource("Resource_ygkk7"), SubResource("Resource_ti87e"), SubResource("Resource_qkgiq"), SubResource("Resource_upmtw")]
+Items = [SubResource("Resource_ygkk7"), SubResource("Resource_ti87e"), SubResource("Resource_qkgiq"), SubResource("Resource_upmtw"), SubResource("Resource_rp2kb")]
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

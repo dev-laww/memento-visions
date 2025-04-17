@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://km1a6cg38qhu"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/items/items.png" id="1_h6tfa"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_r1nfe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ufej"]
+atlas = ExtResource("1_h6tfa")
+region = Rect2(128, 48, 16, 16)
+
+[resource]
+resource_name = "Heartroot Emerald"
+script = ExtResource("2_r1nfe")
+Id = "item:emerald"
+Icon = SubResource("AtlasTexture_2ufej")
+Name = "Heartroot Emerald"
+ItemCategory = 2
+Description = "A mystical gem pulsing with life, said to be the crystallized core of Lunaria's sorrow and rage. Tree roots cling to its surface, feeding on the lingering magic that once connected the creature to the forest's lifeblood. A relic of both beauty and pain."
+metadata/_custom_type_script = "uid://b772648mucsjw"

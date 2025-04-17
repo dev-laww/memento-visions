@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://cntfldylta63f"]
+[gd_scene load_steps=67 format=4 uid="uid://cntfldylta63f"]
 
 [ext_resource type="Script" uid="uid://b0xjawf252s4w" path="res://Scripts/World/Levels/Story/Chapter2/BossLevel.cs" id="1_xp4xo"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_n6dna"]
@@ -13,7 +13,10 @@
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="10_7167l"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="11_0uxnx"]
 [ext_resource type="Resource" uid="uid://di1iubieyn4aj" path="res://resources/dialogues/chapter_2/2.8.dialogue" id="12_le2me"]
+[ext_resource type="Resource" uid="uid://bv76l3i6da1kd" path="res://resources/quests/chapter_2/engkanto_wrath.tres" id="12_og40e"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="13_o1qlk"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="16_h7amt"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="17_pom2c"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nwd2x"]
 
@@ -237,6 +240,19 @@ size = Vector2(70, 246)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uh6ln"]
 size = Vector2(110, 30)
+
+[sub_resource type="Resource" id="Resource_gs5h5"]
+script = ExtResource("16_h7amt")
+Id = "enemy:tikbalang"
+Amount = 5
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_35mkj"]
+script = ExtResource("17_pom2c")
+Type = 3
+Description = "Kill 5 Tikbalangs surrounding the Engkanto"
+Enemies = [SubResource("Resource_gs5h5")]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_52sxu"]
 size = Vector2(168, 20)
@@ -478,7 +494,7 @@ position = Vector2(-268, 792)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("10_7167l")
-Quest = null
+Quest = ExtResource("12_og40e")
 Mode = 0
 ShouldInteract = false
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
@@ -513,9 +529,11 @@ shape = SubResource("RectangleShape2D_uh6ln")
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("10_7167l")
-Quest = null
-Mode = 0
+Quest = ExtResource("12_og40e")
+Mode = 1
 ShouldInteract = false
+Objective = SubResource("Resource_35mkj")
+ObjectiveIndex = 1
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger2"]

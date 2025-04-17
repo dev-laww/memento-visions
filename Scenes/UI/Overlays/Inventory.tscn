@@ -441,6 +441,7 @@ theme = ExtResource("2_quj2b")
 theme_override_font_sizes/font_size = 24
 text = "Item Name"
 label_settings = SubResource("LabelSettings_cxeph")
+autowrap_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Main/NinePatchRect/MarginContainer/HBoxContainer/Details/MarginContainer/VBoxContainer/VBoxContainer/SelectedItemDetails/VBoxContainer"]
 layout_mode = 2

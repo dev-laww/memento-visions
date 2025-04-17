@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dpxlu34w1c8y2"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/items/items.png" id="1_bfm5y"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_h5jb6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7bx1"]
+atlas = ExtResource("1_bfm5y")
+region = Rect2(16, 80, 16, 16)
+
+[resource]
+resource_name = "Codex: Disrupted Balance"
+script = ExtResource("2_h5jb6")
+Id = "item:codex3"
+Icon = SubResource("AtlasTexture_h7bx1")
+Name = "Codex: Disrupted Balance"
+ItemCategory = 2
+Description = "Alejandro investigates supernatural disturbances caused by the loss of the mayor's authority, which breaks an ancient pact keeping the balance between humans and creatures like engkantos, aswangs, and tikbalangs. In the Everdawn Forest, Alejandro confronts and defeats the engkanto, restoring balance through his actions rather than a new pact."
+metadata/_custom_type_script = "uid://b772648mucsjw"

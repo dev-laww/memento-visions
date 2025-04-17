@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://bpyi4m4nxvt7e"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/items/items.png" id="1_es2f6"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_x1kiw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0t48v"]
+atlas = ExtResource("1_es2f6")
+region = Rect2(0, 80, 16, 16)
+
+[resource]
+resource_name = "Codex: Mayor's Reign"
+script = ExtResource("2_x1kiw")
+Id = "item:codex2"
+Icon = SubResource("AtlasTexture_0t48v")
+Name = "Codex: Mayor's Reign"
+ItemCategory = 2
+Description = "Alejandro investigates disappearances in Everfield City, uncovering a dark connection to Mayor Santos, who is using aswangs to instill fear and maintain power. After learning that the mayor controls the creatures with a cursed amulet, Alejandro confronts him in a final showdown. By getting the amulet, he frees the aswangs, defeats the mayor, and brings an end to his reign of terror, though the scars on the community remain."
+metadata/_custom_type_script = "uid://b772648mucsjw"

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://b707i5ynhcp26"]
+
+[ext_resource type="Texture2D" uid="uid://buxiyb1we2i3u" path="res://assets/items/items.png" id="1_48c8b"]
+[ext_resource type="Script" uid="uid://b772648mucsjw" path="res://Scripts/Data/Item/Item.cs" id="2_yrtue"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcybb"]
+atlas = ExtResource("1_48c8b")
+region = Rect2(32, 80, 16, 16)
+
+[resource]
+resource_name = "Codex: Spirit's Call"
+script = ExtResource("2_yrtue")
+Id = "item:codex1"
+Icon = SubResource("AtlasTexture_vcybb")
+Name = "Codex: Spirit's Call"
+ItemCategory = 2
+Description = "Alex Gutierrez investigates a mysterious area feared by locals. He finds signs of bullying—a girl's diary and a photo of tormenting students—suggesting something dark happened. A misunderstood spirit once offered kindness, but the children fled in fear and vanished. As Alex digs deeper, he encounters Aswangs and realizes the horrifying truth: the missing children were killed by these creatures. Though shaken, Alex can't help but feel intrigued by the mystery."
+metadata/_custom_type_script = "uid://b772648mucsjw"
