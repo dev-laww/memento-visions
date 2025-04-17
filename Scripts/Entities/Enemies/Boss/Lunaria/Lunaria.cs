@@ -17,7 +17,6 @@ public partial class Lunaria : Enemy
     private const string COMMON_ATTACK = "common_attack";
     private const string SPECIAL_ATTACK_1 = "special_attack_1";
     private const string SPECIAL_ATTACK_2 = "special_attack_2";
-    private const int MAX_SPAWNED_CLOUDS = 3;
     private const float DISTANCE_TO_PLAYER = 16f;
 
     [Node] private AnimationTree animationTree;
@@ -26,18 +25,16 @@ public partial class Lunaria : Enemy
     [Node] private Timer commonAttackTimer;
     [Node] private Timer specialAttackTimer1;
     [Node] private Timer specialAttackTimer2;
-    [Node] private Timer blinkTimer;
     [Node] private ResourcePreloader resourcePreloader;
 
     private AnimationNodeStateMachinePlayback playback;
     private int spawnedClouds;
+    private Timer moonFlareTimer;
 
     public override void _Notification(int what)
     {
         if (what == NotificationSceneInstantiated)
-        {
             WireNodes();
-        }
     }
 
     public override void OnReady()
@@ -57,8 +54,6 @@ public partial class Lunaria : Enemy
         velocityManager.ApplyMovement();
         UpdateBlendPositions();
     }
-
-    #region States
 
     private void Normal()
     {
@@ -118,9 +113,7 @@ public partial class Lunaria : Enemy
 
     private void EnterCommonAttack()
     {
-        if (playback == null) return;
-
-        playback.Travel(COMMON_ATTACK);
+        playback?.Travel(COMMON_ATTACK);
 
         if (StatsManager == null) return;
 
@@ -144,6 +137,7 @@ public partial class Lunaria : Enemy
     private async void MoonFlare()
     {
         await ToSignal(animationTree, "animation_finished");
+        moonFlareTimer.Stop();
         specialAttackTimer1.Call(START_RANDOM);
         StateMachine.ChangeState(Normal);
     }
@@ -151,6 +145,31 @@ public partial class Lunaria : Enemy
     private void EnterMoonFlare()
     {
         playback.Travel(SPECIAL_ATTACK_1);
+
+        if (moonFlareTimer == null)
+        {
+            moonFlareTimer = new Timer
+            {
+                WaitTime = 0.5f,
+                Autostart = false,
+                OneShot = false
+            };
+            AddChild(moonFlareTimer);
+            moonFlareTimer.Timeout += ApplyMoonFlareDamage;
+        }
+
+        moonFlareTimer.Start();
+    }
+
+    private void ApplyMoonFlareDamage()
+    {
+        new DamageFactory.HitBoxBuilder(GlobalPosition)
+            .AddStatusEffectToPool(new StatusEffect.Info { Id = "slow", IsGuaranteed = true })
+            .SetDamage(StatsManager.Damage * 0.2f)
+            .SetDamageType(Attack.Type.Magical)
+            .SetShape(new CapsuleShape2D { Radius = 60 })
+            .SetOwner(this)
+            .Build();
     }
 
     private async void SpawnVineTrap()
@@ -167,14 +186,8 @@ public partial class Lunaria : Enemy
         GetTree().Root.AddChild(vines);
     }
 
-    #endregion
-
-    #region Utility
-
     private void UpdateBlendPositions()
     {
         animationTree.Set("parameters/move/blend_position", velocityManager.LastFacedDirection);
     }
-
-    #endregion
 }
