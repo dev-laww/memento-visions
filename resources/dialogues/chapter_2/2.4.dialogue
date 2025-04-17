@@ -11,6 +11,4 @@ Chief: You take care of this Alex, you're the only one I could count on in here!
 Alex: Per usual, Chief.
 do CurrentScene.chiefMarker.Toggle(false)
 
-do CurrentScene.screenMarker.Toggle(true)
-
 => END

@@ -13,9 +13,9 @@
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="10_wb4xo"]
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="12_0lbbt"]
 [ext_resource type="Resource" uid="uid://cx3y2g4y3fymi" path="res://resources/dialogues/chapter_2/2.7.dialogue" id="13_e7pso"]
-[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="13_rjjwp"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="13_spppi"]
 [ext_resource type="Texture2D" uid="uid://ckj3v8yrowvxb" path="res://assets/tilesets/school.png" id="16_n4v06"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="16_y42ld"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="18_y42ld"]
 [ext_resource type="Resource" uid="uid://b36y2bljh3l2m" path="res://resources/dialogues/chapter_2/torn_pages.dialogue" id="19_0lbbt"]
 
@@ -357,10 +357,11 @@ size = Vector2(20, 78)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0mh2c"]
 
-[sub_resource type="Resource" id="Resource_6dk5v"]
-script = ExtResource("13_rjjwp")
-Type = 2
-Description = "Talk to the Storyteller in the midst of the forest."
+[sub_resource type="Resource" id="Resource_qeaye"]
+script = ExtResource("16_y42ld")
+Type = 3
+Description = "Kill 5 Tikbalangs"
+Enemies = []
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t7x0d"]
@@ -722,8 +723,8 @@ script = ExtResource("9_exmlw")
 Quest = ExtResource("9_n4v06")
 Mode = 1
 ShouldInteract = false
-Objective = SubResource("Resource_6dk5v")
-ObjectiveIndex = 2
+Objective = SubResource("Resource_qeaye")
+ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger2"]

@@ -2,4 +2,5 @@
 Witch: Can you still keep up Alex? Nyahahahahah!
 - Is this a never-ending fight?
 Witch: Steel yourself Alex, there's more to come! Kekekekeke!
+do CurrentScene.screenMarker.Toggle(false)
 => END
