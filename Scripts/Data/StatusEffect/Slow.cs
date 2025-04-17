@@ -11,7 +11,8 @@ public partial class Slow : StatusEffect
     public override void Apply()
     {
         TargetStatsManager?.ApplySpeedModifier(Id, -SlowAmount);
-        FloatingTextManager.SpawnFloatingText("Slowed", Target.GlobalPosition);
+        var text = FloatingTextManager.SpawnFloatingText("Slowed", Target.GlobalPosition);
+        text.Finished += text.QueueFree;
     }
 
     public override void Remove()
