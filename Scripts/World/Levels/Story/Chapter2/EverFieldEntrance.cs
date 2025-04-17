@@ -11,6 +11,7 @@ namespace Game.World.Levels.Chapter2;
 public partial class EverFieldEntrance : BaseLevel
 {
     [Node] private TransitionArea transitionArea;
+    [Node] private ScreenMarker screenMarker, chiefMarker;
     [Node] private Node2D enemy;
     
     private Quest quest = QuestRegistry.Get("quest:forest_awakening");
@@ -25,17 +26,24 @@ public partial class EverFieldEntrance : BaseLevel
     {
         base._Ready();
         transitionArea.Toggle(false);
-        
-        QuestManager.QuestCompleted += OnCompleted; ;
+        chiefMarker.Toggle(true);
+        screenMarker.Toggle(false);
+        QuestManager.QuestCompleted += OnQuestUpdated;
         ShowDialogue();
+
     }
-    
-   private void OnCompleted(Quest quest)
-   {
-     GD.Print("triggers");
-           transitionArea.Toggle(true);
-       
-   }
+
+    private void OnQuestUpdated(Quest quest)
+    {
+        if (quest.Id != "quest:forest_awakening" || !quest.Objectives[0].Completed) return;
+
+        QuestManager.QuestUpdated -= OnQuestUpdated;
+        screenMarker.Toggle(true);
+        transitionArea.Toggle(true);
+
+        GD.Print("triggers");
+    }
+   
     private static void ShowDialogue()
     {
         var dialogue = ResourceLoader.Load<Resource>("res://resources/dialogues/chapter_2/2.3.dialogue");
@@ -44,7 +52,7 @@ public partial class EverFieldEntrance : BaseLevel
     public override void _ExitTree()
     {
         base._ExitTree();
-        QuestManager.QuestCompleted -= OnCompleted;
+        QuestManager.QuestCompleted -= OnQuestUpdated;
         enemy.QueueFree();
     }
 

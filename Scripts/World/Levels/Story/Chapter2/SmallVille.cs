@@ -5,6 +5,7 @@ using GodotUtilities;
 using DialogueManagerRuntime;
 using Game.Autoload;
 using Game.UI.Screens;
+using Game.Data;
 
 namespace Game.World.Levels.Chapter2;
 
@@ -16,7 +17,9 @@ public partial class SmallVille : BaseLevel
     [Node] private Chest chest;
     [Node] private Node2D enemy;
     [Node] private Marker2D tikbalangPosition;
+    [Node] private ScreenMarker screenMarker;
     public bool IsWitchInteracted = false;
+    private Quest quest = QuestRegistry.Get("quest:echoes_of_void");
 
     public override void _Notification(int what)
     {
@@ -30,7 +33,10 @@ public partial class SmallVille : BaseLevel
         base._Ready();
         torchSequence.PuzzleSolved += OnPuzzleSolved;
         witchMarker.Toggle(false);
+        screenMarker.Toggle(false);
         ShowDialogue();
+
+        QuestManager.QuestUpdated += OnQuestUpdated;
     }
     
     private void OnPuzzleSolved()
@@ -59,6 +65,15 @@ public partial class SmallVille : BaseLevel
             CinematicManager.EndCinematic();
         };
     }
+
+    private void OnQuestUpdated(Quest quest)
+    {
+        if (quest.Id != "quest:echoes_of_void" || !quest.Objectives[0].Completed) return;
+
+        QuestManager.QuestUpdated -= OnQuestUpdated;
+        screenMarker.Toggle(true);
+    }
+
     public override void _ExitTree()
     {
         base._ExitTree();

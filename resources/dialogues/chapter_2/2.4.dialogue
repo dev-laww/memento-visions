@@ -9,4 +9,8 @@ Chief: No one is controlling them Alex but rather, they are united by a being!
 Chief: I don't know! The Aswangs spotted me so I had to ran back and gladly met you here!
 Chief: You take care of this Alex, you're the only one I could count on in here!
 Alex: Per usual, Chief.
+do CurrentScene.chiefMarker.Toggle(false)
+
+do CurrentScene.screenMarker.Toggle(true)
+
 => END

@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=4 uid="uid://criyou87dacyh"]
+[gd_scene load_steps=82 format=4 uid="uid://criyou87dacyh"]
 
 [ext_resource type="Script" uid="uid://c4ksan4dtstup" path="res://Scripts/World/Levels/Story/Chapter2/CentralForest.cs" id="1_esctv"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_exmlw"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="13_rjjwp"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="13_spppi"]
 [ext_resource type="Texture2D" uid="uid://ckj3v8yrowvxb" path="res://assets/tilesets/school.png" id="16_n4v06"]
+[ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="18_y42ld"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nfvny"]
 
@@ -568,6 +569,11 @@ metadata/_custom_type_script = "uid://davlg2u8drdh4"
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_60ff3")
 
+[node name="ScreenMarker" parent="TransitionArea" instance=ExtResource("18_y42ld")]
+position = Vector2(843, 1006)
+rotation = -1.57254
+IsRed = false
+
 [node name="QuestTrigger" type="Area2D" parent="."]
 position = Vector2(-24, 675)
 collision_layer = 16
@@ -635,3 +641,7 @@ position = Vector2(370, 480)
 texture = ExtResource("16_n4v06")
 region_enabled = true
 region_rect = Rect2(528, 440, 48, 32)
+
+[node name="ScreenMarker" parent="Sprite2D" instance=ExtResource("18_y42ld")]
+position = Vector2(369, 479)
+IsRed = false

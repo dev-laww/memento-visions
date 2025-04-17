@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=4 uid="uid://du6gsft33r8su"]
+[gd_scene load_steps=69 format=4 uid="uid://du6gsft33r8su"]
 
 [ext_resource type="Script" uid="uid://dana374n4d6mt" path="res://Scripts/World/Levels/Story/Chapter2/SmallVille.cs" id="1_swhdr"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_j142m"]
@@ -18,199 +18,180 @@
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="14_ktsv1"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="15_ofpmp"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="16_vbaa4"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="18_bhwji"]
 [ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/audio/music/chapter_1_bgm.ogg" id="19_hh2j8"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nj1is"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_jtbs6"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_bhwji"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_h14cu"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_qplpt"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_sigrk"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_swhdr"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_8o71o"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_qrlfj"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_6u2fg"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_j142m"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_7fqr5"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_q6x1h"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_pbxto"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_eu077"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_hgfg3"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_aly1c"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_hn6od"]
-vertices = PackedVector2Array(-235.7, 394.6, -237.7, 426.7, -239.7, 350.2, 0, 354.7, -148.3, 394.6, 0, 512, -146, 431.7, -146, 512)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(0, 2, 3, 4), PackedInt32Array(4, 3, 5, 6), PackedInt32Array(6, 5, 7)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_k15ad"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_shtid"]
-vertices = PackedVector2Array(0, 512, 0, 354.7, 256, 359.6, 211.3, 446.6, 203.8, 454, 256, 442.6, 239.3, 442.6, 199.1, 468.1, 199.1, 512)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(2, 5, 6), PackedInt32Array(7, 8, 0), PackedInt32Array(2, 6, 3), PackedInt32Array(0, 4, 7)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_papkd"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_xoyfs"]
-vertices = PackedVector2Array(372.1, 361.8, 373, 458.1, 366.8, 442.6, 256, 359.6, 335.3, 442.6, 307.3, 446.6, 270.8, 442.6, 295.1, 468.1, 295.1, 512, 280.9, 512, 280.9, 467.8, 256, 442.6, 299.8, 454)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 0, 2, 4), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(6, 11, 3), PackedInt32Array(6, 5, 12, 10), PackedInt32Array(10, 12, 7)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_7mlp4"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_u5kfp"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_qx0xp"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_trg5q"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_5ce7n"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_x263p"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_vbaa4"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_kpj6m"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_hh2j8"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_mrapx"]
-vertices = PackedVector2Array(-146, 512, 0, 512, 0, 614, -58, 614, -146, 580, -58, 730, 0, 730, 0, 768, -228.6, 768, -233.4, 587, -191.2, 580)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(3, 5, 8, 9, 10, 4)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6lhmv"]
+vertices = PackedVector2Array(-19, 590, 0, 590.4, 0, 614, -58, 614, -217.3, 593.8, -222.7, 760.9, -58, 730, -18.1, 759, 0, 730, 0, 758.9)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 4, 3, 6), PackedInt32Array(7, 5, 6, 8), PackedInt32Array(7, 8, 9)])
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_1sh14"]
-vertices = PackedVector2Array(199.1, 541.3, 215.6, 566, 188.9, 566, 147.1, 524.9, 147.1, 579.1, 188.9, 723.1, 199.1, 512, 0, 512, 89.4, 524.9, 58, 614, 0, 614, 89.4, 579.1, 256, 723.1, 256, 768, 195.1, 764.9, 195.1, 768, 137.4, 764.9, 58, 730, 137.4, 768, 0, 768, 0, 730)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2, 5), PackedInt32Array(6, 0, 3), PackedInt32Array(7, 6, 3, 8), PackedInt32Array(9, 10, 7, 8, 11), PackedInt32Array(5, 12, 13, 14), PackedInt32Array(13, 15, 14), PackedInt32Array(5, 14, 16, 17, 9, 11, 4), PackedInt32Array(16, 18, 19, 20, 17)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_vce8i"]
+vertices = PackedVector2Array(0, 614, 0, 590.4, 176.1, 593.8, 58, 614, 178.8, 758, 58, 730, 0, 758.9, 0, 730)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(5, 4, 6, 7)])
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_tn3xo"]
-vertices = PackedVector2Array(375.8, 768, 256, 768, 256, 723.1, 375.4, 723.1, 311.6, 566, 261, 566, 271.8, 558.9, 295.1, 541.3, 280.9, 540.6, 295.1, 512, 280.9, 512, 367.8, 558.9, 373.8, 546.8, 374, 566, 357, 566)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6), PackedInt32Array(7, 4, 6, 8), PackedInt32Array(9, 7, 8, 10), PackedInt32Array(11, 12, 13), PackedInt32Array(11, 13, 14)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_qvyms"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_lg6d4"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_dhpy4"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_gcwt2"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_3kb3c"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_su4ra"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_m7cpq"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_ow20u"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_mvmdr"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_mbl4f"]
-vertices = PackedVector2Array(-100.9, 959.7, 0, 1024, -221.8, 1024, -139.1, 959.7, 0, 768, -100.9, 850, -108.4, 812.9, -108.4, 922.6, -131.6, 922.6, -228.6, 768, -139.1, 850, -131.6, 812.9)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 5, 6), PackedInt32Array(5, 1, 0, 7), PackedInt32Array(8, 3, 2, 9, 10), PackedInt32Array(9, 4, 6, 11), PackedInt32Array(10, 5, 7, 8), PackedInt32Array(10, 9, 11)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ppeob"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_mvue0"]
-vertices = PackedVector2Array(256, 768, 256, 950, 137.4, 950, 195.1, 819.1, 137.4, 1024, 0, 1024, 0, 768, 137.4, 768, 137.4, 819.1, 195.1, 768)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(6, 7, 8), PackedInt32Array(2, 6, 8), PackedInt32Array(2, 8, 3), PackedInt32Array(0, 3, 9)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_l52u3"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_yvfn4"]
-vertices = PackedVector2Array(375.8, 768, 378.2, 1024, 342.6, 1024, 342.6, 950, 256, 768, 256, 950)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_dch3i"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_43rjp"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_8e5u7"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_3nsuh"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_hi4v4"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_qi70v"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_3uda5"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_3ri18"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_xc1ka"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_tywe6"]
-vertices = PackedVector2Array(-54.6, 1046, -54.6, 1201.2, -107.8, 1199.9, -108.4, 1196.9, 0, 1024, 0, 1046, -221.8, 1024, -131.6, 1196.9, -217.2, 1197.2, -132.1, 1199.3)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 0, 6), PackedInt32Array(6, 0, 3, 7), PackedInt32Array(8, 6, 7, 9)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6hyed"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_jmfs4"]
-vertices = PackedVector2Array(256, 1208.7, 150.6, 1206.2, 150.6, 1162, 256, 1162, 137.4, 1046, 0, 1046, 0, 1024, 137.4, 1024)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_q5nn6"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_628si"]
-vertices = PackedVector2Array(256, 1208.7, 256, 1162, 329.4, 1162, 329.4, 1210, 379.9, 1211.7, 379.9, 1210, 378.4, 1046, 342.6, 1046, 342.6, 1024, 378.2, 1024)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3), PackedInt32Array(4, 3, 5), PackedInt32Array(6, 7, 8, 9)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_tbbj6"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_0ywhe"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_k6pui"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_bwd1f"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_qod14"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_vrjb0"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_i7b1c"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_716t4"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_iv6qk"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_87fgt"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_wrpe6"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_oymix"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_bw7mi"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_nqfh5"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_j03cs"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_stp8w"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_o5dj5"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_qanfx"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6qpmh"]
 parsed_geometry_type = 1
 border_size = 256.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_t6dgq"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ek6me"]
 parsed_geometry_type = 1
 border_size = 256.0
 
@@ -219,10 +200,17 @@ border_size = 256.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8uqde"]
 size = Vector2(42, 30)
 
-[sub_resource type="Resource" id="Resource_bysam"]
+[sub_resource type="Resource" id="Resource_arrju"]
+script = ExtResource("18_bhwji")
+Id = "enemy:tikbalang"
+Amount = 2
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_7n7ry"]
 script = ExtResource("15_ofpmp")
-Type = 2
-Description = "Board the Jeep and head to the place where it is said to be runned by Tikbalangs based on what the Chief said."
+Type = 3
+Description = "Kill the 2 tikbalang still left on the scene. "
+Enemies = [SubResource("Resource_arrju")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wuq0w"]
@@ -250,138 +238,140 @@ tile_set = ExtResource("2_qrlfj")
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
 visible = false
 z_index = 1000
+position = Vector2(1.54505, 0)
+scale = Vector2(1.16114, 1)
 color = Color(1, 1, 1, 0)
-polygon = PackedVector2Array(-250, 340, 382, 352, 390, 1222, -227, 1207)
+polygon = PackedVector2Array(-227, 584, -19, 580, 186, 584, 189, 768, -18, 769, -233, 771)
 script = ExtResource("6_q65kr")
 ParseRootNode = NodePath("../Tilemap")
 NavigationPolygon = SubResource("NavigationPolygon_nj1is")
 metadata/_custom_type_script = "uid://cfscbenslyojv"
 
-[node name="@NavigationRegion2D@26275" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_jtbs6")
+[node name="@NavigationRegion2D@30596" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_bhwji")
 
-[node name="@NavigationRegion2D@26276" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_h14cu")
+[node name="@NavigationRegion2D@30597" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_qplpt")
 
-[node name="@NavigationRegion2D@26277" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_sigrk")
+[node name="@NavigationRegion2D@30598" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_swhdr")
 
-[node name="@NavigationRegion2D@26278" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_8o71o")
+[node name="@NavigationRegion2D@30599" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_qrlfj")
 
-[node name="@NavigationRegion2D@26279" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_6u2fg")
+[node name="@NavigationRegion2D@30600" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_j142m")
 
-[node name="@NavigationRegion2D@26280" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_7fqr5")
+[node name="@NavigationRegion2D@30601" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_q6x1h")
 
-[node name="@NavigationRegion2D@26281" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_pbxto")
+[node name="@NavigationRegion2D@30602" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_eu077")
 
-[node name="@NavigationRegion2D@26282" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_hgfg3")
+[node name="@NavigationRegion2D@30603" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_aly1c")
 
-[node name="@NavigationRegion2D@26283" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_hn6od")
+[node name="@NavigationRegion2D@30604" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_k15ad")
 
-[node name="@NavigationRegion2D@26284" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_shtid")
+[node name="@NavigationRegion2D@30605" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_papkd")
 
-[node name="@NavigationRegion2D@26285" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_xoyfs")
+[node name="@NavigationRegion2D@30606" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_7mlp4")
 
-[node name="@NavigationRegion2D@26286" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_u5kfp")
+[node name="@NavigationRegion2D@30607" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_qx0xp")
 
-[node name="@NavigationRegion2D@26287" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_trg5q")
+[node name="@NavigationRegion2D@30608" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_5ce7n")
 
-[node name="@NavigationRegion2D@26288" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_x263p")
+[node name="@NavigationRegion2D@30609" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_vbaa4")
 
-[node name="@NavigationRegion2D@26289" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_kpj6m")
+[node name="@NavigationRegion2D@30610" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_hh2j8")
 
-[node name="@NavigationRegion2D@26290" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_mrapx")
+[node name="@NavigationRegion2D@30611" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_6lhmv")
 
-[node name="@NavigationRegion2D@26291" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_1sh14")
+[node name="@NavigationRegion2D@30612" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_vce8i")
 
-[node name="@NavigationRegion2D@26292" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_tn3xo")
+[node name="@NavigationRegion2D@30613" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_qvyms")
 
-[node name="@NavigationRegion2D@26293" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_lg6d4")
+[node name="@NavigationRegion2D@30614" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_dhpy4")
 
-[node name="@NavigationRegion2D@26294" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_gcwt2")
+[node name="@NavigationRegion2D@30615" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_3kb3c")
 
-[node name="@NavigationRegion2D@26295" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_su4ra")
+[node name="@NavigationRegion2D@30616" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_m7cpq")
 
-[node name="@NavigationRegion2D@26296" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_ow20u")
+[node name="@NavigationRegion2D@30617" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_mvmdr")
 
-[node name="@NavigationRegion2D@26297" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_mbl4f")
+[node name="@NavigationRegion2D@30618" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_ppeob")
 
-[node name="@NavigationRegion2D@26298" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_mvue0")
+[node name="@NavigationRegion2D@30619" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_l52u3")
 
-[node name="@NavigationRegion2D@26299" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_yvfn4")
+[node name="@NavigationRegion2D@30620" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_dch3i")
 
-[node name="@NavigationRegion2D@26300" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_43rjp")
+[node name="@NavigationRegion2D@30621" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_8e5u7")
 
-[node name="@NavigationRegion2D@26301" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_3nsuh")
+[node name="@NavigationRegion2D@30622" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_hi4v4")
 
-[node name="@NavigationRegion2D@26302" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_qi70v")
+[node name="@NavigationRegion2D@30623" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_3uda5")
 
-[node name="@NavigationRegion2D@26303" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_3ri18")
+[node name="@NavigationRegion2D@30624" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_xc1ka")
 
-[node name="@NavigationRegion2D@26304" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_tywe6")
+[node name="@NavigationRegion2D@30625" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_6hyed")
 
-[node name="@NavigationRegion2D@26305" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_jmfs4")
+[node name="@NavigationRegion2D@30626" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_q5nn6")
 
-[node name="@NavigationRegion2D@26306" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_628si")
+[node name="@NavigationRegion2D@30627" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_tbbj6")
 
-[node name="@NavigationRegion2D@26307" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_0ywhe")
+[node name="@NavigationRegion2D@30628" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_k6pui")
 
-[node name="@NavigationRegion2D@26308" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_bwd1f")
+[node name="@NavigationRegion2D@30629" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_qod14")
 
-[node name="@NavigationRegion2D@26309" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_vrjb0")
+[node name="@NavigationRegion2D@30630" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_i7b1c")
 
-[node name="@NavigationRegion2D@26310" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_716t4")
+[node name="@NavigationRegion2D@30631" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_iv6qk")
 
-[node name="@NavigationRegion2D@26311" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_87fgt")
+[node name="@NavigationRegion2D@30632" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_wrpe6")
 
-[node name="@NavigationRegion2D@26312" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_oymix")
+[node name="@NavigationRegion2D@30633" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_bw7mi")
 
-[node name="@NavigationRegion2D@26313" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_nqfh5")
+[node name="@NavigationRegion2D@30634" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_j03cs")
 
-[node name="@NavigationRegion2D@26314" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_stp8w")
+[node name="@NavigationRegion2D@30635" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_o5dj5")
 
-[node name="@NavigationRegion2D@26315" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_qanfx")
+[node name="@NavigationRegion2D@30636" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_6qpmh")
 
-[node name="@NavigationRegion2D@26316" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_t6dgq")
+[node name="@NavigationRegion2D@30637" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_ek6me")
 
 [node name="TorchSequence" parent="." instance=ExtResource("4_j142m")]
 position = Vector2(119, 573)
@@ -419,7 +409,7 @@ script = ExtResource("7_gw6o1")
 Quest = ExtResource("13_qx0xp")
 Mode = 0
 ShouldInteract = true
-InteractionLabel = "Interact"
+InteractionLabel = "Talk to the Witch"
 DialogueResource = ExtResource("14_5ce7n")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -428,21 +418,23 @@ shape = SubResource("CircleShape2D_bj64g")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Witch/QuestTrigger"]
+position = Vector2(1, -35)
 
 [node name="InteractionUI" parent="Witch/QuestTrigger/Node2D" instance=ExtResource("12_ktsv1")]
 
-[node name="witchMarker" parent="Witch" instance=ExtResource("16_vbaa4")]
+[node name="WitchMarker" parent="Witch" instance=ExtResource("16_vbaa4")]
 unique_name_in_owner = true
 position = Vector2(578, 434)
+HideWhenInBounds = false
 IsRed = false
 
 [node name="Enemy" type="Node2D" parent="."]
 
 [node name="Tikbalang" parent="Enemy" instance=ExtResource("4_wyqtt")]
-position = Vector2(-111, 681)
+position = Vector2(-76, 702)
 
 [node name="Tikbalang2" parent="Enemy" instance=ExtResource("4_wyqtt")]
-position = Vector2(127, 680)
+position = Vector2(80, 679)
 
 [node name="TransitionArea" type="Area2D" parent="."]
 position = Vector2(-191, 585)
@@ -474,8 +466,8 @@ script = ExtResource("7_gw6o1")
 Quest = ExtResource("13_qx0xp")
 Mode = 1
 ShouldInteract = false
-Objective = SubResource("Resource_bysam")
-ObjectiveIndex = 1
+Objective = SubResource("Resource_7n7ry")
+ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
@@ -484,4 +476,9 @@ shape = SubResource("RectangleShape2D_wuq0w")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="TikbalangPosition" type="Marker2D" parent="."]
-position = Vector2(28, 675)
+position = Vector2(4, 680)
+
+[node name="ScreenMarker" parent="." instance=ExtResource("16_vbaa4")]
+position = Vector2(-191, 556)
+HideWhenInBounds = false
+IsRed = false

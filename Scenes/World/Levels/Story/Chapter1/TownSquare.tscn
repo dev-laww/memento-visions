@@ -9,14 +9,13 @@
 [ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/audio/music/chapter_1_bgm.ogg" id="7_8tuqj"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="7_m44gr"]
 [ext_resource type="PackedScene" uid="uid://vsehi4t73af5" path="res://Scenes/Entities/Characters/Mayor.tscn" id="9_l26tj"]
-[ext_resource type="Resource" uid="uid://1lif4uqpp2ca" path="res://resources/dialogues/chapter_1/1.8.dialogue" id="12_5id5a"]
-[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="12_l26tj"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="13_j760s"]
 [ext_resource type="Resource" uid="uid://dubpfapg14rna" path="res://resources/quests/chapter_1/testimony.tres" id="13_matur"]
 [ext_resource type="PackedScene" uid="uid://c6ddutu3xqvkn" path="res://Scenes/Entities/Enemies/Boss/Aghon/Aghon.tscn" id="13_uqojl"]
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="14_nkwx0"]
 [ext_resource type="Texture2D" uid="uid://bbaj1lmrgykxu" path="res://assets/effects/poof.png" id="15_58lyr"]
-[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_v4bk2"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="16_f1toi"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="17_tqrau"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="18_f1toi"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="19_tqrau"]
 
@@ -656,10 +655,17 @@ _data = {
 &"show_story_teller": SubResource("Animation_al03n")
 }
 
-[sub_resource type="Resource" id="Resource_n7jaw"]
-script = ExtResource("12_l26tj")
-Type = 2
-Description = "Upon defeating the Mayor, head to the Jeep again to rest at the bar. Being freed from the terror towards the mayor, you can now ask the driver where you want to be dropped."
+[sub_resource type="Resource" id="Resource_jomtr"]
+script = ExtResource("16_f1toi")
+Id = "enemy:aghon"
+Amount = 1
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_y1bnb"]
+script = ExtResource("17_tqrau")
+Type = 3
+Description = "You found out about what the Mayor did to the townsfolk. Defeat him to end his reign and shatter his twisted control over the Aswang!"
+Enemies = [SubResource("Resource_jomtr")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tqrau"]
@@ -1022,19 +1028,12 @@ collision_mask = 4
 script = ExtResource("7_m44gr")
 Quest = ExtResource("13_matur")
 Mode = 0
-ShouldInteract = true
-InteractionLabel = "Interact"
-DialogueResource = ExtResource("12_5id5a")
+ShouldInteract = false
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mayor/QuestTrigger"]
 shape = SubResource("CircleShape2D_5id5a")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
-
-[node name="Node2D" type="Node2D" parent="Mayor/QuestTrigger"]
-position = Vector2(0, -29)
-
-[node name="InteractionUI" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("15_v4bk2")]
 
 [node name="mayorMarker" parent="Mayor" instance=ExtResource("18_f1toi")]
 unique_name_in_owner = true
@@ -1087,8 +1086,8 @@ script = ExtResource("7_m44gr")
 Quest = ExtResource("13_matur")
 Mode = 1
 ShouldInteract = false
-Objective = SubResource("Resource_n7jaw")
-ObjectiveIndex = 1
+Objective = SubResource("Resource_y1bnb")
+ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
