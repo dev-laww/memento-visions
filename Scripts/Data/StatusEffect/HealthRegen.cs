@@ -28,7 +28,7 @@ public partial class HealthRegen : StatusEffect
     {
         if (TargetStatsManager != null)
         {
-            TargetStatsManager.Heal(HealthRegenPerTick * StackCount);
+            TargetStatsManager.Heal(HealthRegenPerTick);
         }
     }
 

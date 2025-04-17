@@ -34,9 +34,10 @@ public partial class Lunaria : Enemy
 
     public override void _Notification(int what)
     {
-        if (what != NotificationSceneInstantiated) return;
-
-        WireNodes();
+        if (what == NotificationSceneInstantiated)
+        {
+            WireNodes();
+        }
     }
 
     public override void OnReady()
@@ -57,7 +58,6 @@ public partial class Lunaria : Enemy
         UpdateBlendPositions();
     }
 
-
     #region States
 
     private void Normal()
@@ -66,28 +66,18 @@ public partial class Lunaria : Enemy
         pathFindManager.SetTargetPosition(playerPosition);
 
         if (GlobalPosition.DistanceSquaredTo(playerPosition) > DISTANCE_TO_PLAYER * DISTANCE_TO_PLAYER)
-        {
             pathFindManager.Follow();
-        }
         else
-        {
             velocityManager.Decelerate();
-        }
 
         if (commonAttackTimer.IsStopped())
-        {
             StateMachine.ChangeState(TravelToPlayer);
-        }
 
         if (specialAttackTimer1.IsStopped())
-        {
             StateMachine.ChangeState(MoonFlare);
-        }
 
         if (specialAttackTimer2.IsStopped())
-        {
             StateMachine.ChangeState(SpawnVineTrap);
-        }
     }
 
     private void EnterNormal()
@@ -125,26 +115,25 @@ public partial class Lunaria : Enemy
         await ToSignal(animationTree, "animation_finished");
         StateMachine.ChangeState(Normal);
     }
+
     private void EnterCommonAttack()
     {
-        
-        playback.Travel(COMMON_ATTACK);
-        float regenPercent = 0.05f;
-        float regenAmount = StatsManager.MaxHealth * regenPercent;
-        int ticks = 5; 
-        float tickDelay = 0.5f; 
-        
-        RegenerateOverTime(regenAmount, ticks, tickDelay);
-    }
-    private async void RegenerateOverTime(float totalAmount, int steps, float interval)
-    {
-        float amountPerTick = totalAmount / steps;
+        if (playback == null) return;
 
-        for (int i = 0; i < steps; i++)
+        playback.Travel(COMMON_ATTACK);
+
+        if (StatsManager == null) return;
+
+        var healthRegen = new HealthRegen
         {
-            StatsManager.Heal(amountPerTick);
-            await ToSignal(GetTree().CreateTimer(interval), "timeout");
-        }
+            Id = "lunaria_heal",
+            StatusEffectName = "Lunar Healing",
+            Duration = 3.0f,
+            HealthRegenPerTick = 0.08f * StatsManager.MaxHealth,
+            TickInterval = 1f,
+        };
+
+        StatsManager.AddStatusEffect(healthRegen);
     }
 
     private void ExitCommonAttack()
@@ -164,18 +153,18 @@ public partial class Lunaria : Enemy
         playback.Travel(SPECIAL_ATTACK_1);
     }
 
-
     private async void SpawnVineTrap()
     {
         await ToSignal(animationTree, "animation_finished");
-
-        StateMachine.ChangeState(Normal);
         specialAttackTimer2.Call(START_RANDOM);
+        StateMachine.ChangeState(Normal);
     }
 
     private void EnterSpawnVinesTrap()
     {
         playback.Travel(SPECIAL_ATTACK_2);
+        var vines = resourcePreloader.InstanceSceneOrNull<Vines>();
+        GetTree().Root.AddChild(vines);
     }
 
     #endregion

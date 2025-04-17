@@ -1,9 +1,7 @@
-[gd_scene load_steps=108 format=3 uid="uid://c11a0icy1ftwe"]
+[gd_scene load_steps=103 format=3 uid="uid://c11a0icy1ftwe"]
 
 [ext_resource type="Script" uid="uid://u55fkdi23tqb" path="res://Scripts/Entities/Enemies/Boss/Lunaria/Lunaria.cs" id="1_6q18i"]
-[ext_resource type="PackedScene" uid="uid://dmn3rg1q3a1r1" path="res://Scenes/Entities/Enemies/Boss/Aghon/Cloud.tscn" id="2_6q18i"]
-[ext_resource type="PackedScene" uid="uid://bmrebc2f4wgm0" path="res://Scenes/Entities/Enemies/Boss/Aghon/ShockWave.tscn" id="3_vn6im"]
-[ext_resource type="PackedScene" uid="uid://cqnxlvlmyqede" path="res://Scenes/Entities/Enemies/Boss/Aghon/Spear.tscn" id="4_l2wy2"]
+[ext_resource type="PackedScene" uid="uid://dbetkgdhvs051" path="res://Scenes/Entities/Enemies/Boss/Lunaria/Vines.tscn" id="2_njo4t"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="5_1pfq2"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="6_ayylu"]
 [ext_resource type="Script" uid="uid://cpwyjck8klk35" path="res://Scripts/Components/Managers/HealthNumberManager.cs" id="7_68gba"]
@@ -16,9 +14,6 @@
 [ext_resource type="Resource" uid="uid://dx25tu288c73x" path="res://resources/items/material/lunar_petal.tres" id="12_ayylu"]
 [ext_resource type="Texture2D" uid="uid://cny0tot07a045" path="res://assets/entities/enemy/boss/Lunaria/lunaria.png" id="13_6q18i"]
 [ext_resource type="Resource" uid="uid://dxrl1uamwfs14" path="res://resources/items/material/moon_shard.tres" id="13_68gba"]
-[ext_resource type="AudioStream" uid="uid://tun085q036cg" path="res://assets/audio/enemy/aghon_cloud.wav" id="14_q7emo"]
-[ext_resource type="AudioStream" uid="uid://dtdt8li5hv11f" path="res://assets/audio/enemy/aghon_punch.wav" id="15_0dxvs"]
-[ext_resource type="AudioStream" uid="uid://b8mh6t4gf6s45" path="res://assets/audio/enemy/aghon_rod.wav" id="16_t1q3f"]
 
 [sub_resource type="Resource" id="Resource_17aub"]
 script = ExtResource("11_1pfq2")
@@ -579,6 +574,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_1pfq2"]
 length = 0.8
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -606,6 +602,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_ayylu"]
 length = 0.8
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -633,6 +630,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_68gba"]
 length = 0.8
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -689,7 +687,7 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_l2wy2")
 blend_point_2/pos = Vector2(-1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_1pfq2")
 blend_point_3/pos = Vector2(1, 0)
-blend_mode = 2
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_68gba"]
 animation = &"common_attack"
@@ -732,7 +730,7 @@ states/special_attack_1/position = Vector2(563, 111)
 states/special_attack_2/node = SubResource("AnimationNodeAnimation_1advq")
 states/special_attack_2/position = Vector2(500, 200)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_epm18"), "Move", "special_attack_1", SubResource("AnimationNodeStateMachineTransition_dqf0r"), "Move", "special_attack_2", SubResource("AnimationNodeStateMachineTransition_2ihs1"), "common_attack", "Move", SubResource("AnimationNodeStateMachineTransition_63r2h"), "special_attack_1", "Move", SubResource("AnimationNodeStateMachineTransition_q7emo"), "special_attack_2", "Move", SubResource("AnimationNodeStateMachineTransition_0dxvs"), "Move", "common_attack", SubResource("AnimationNodeStateMachineTransition_t1q3f")]
-graph_offset = Vector2(63, -51)
+graph_offset = Vector2(60, 7)
 
 [node name="Lunaria" type="CharacterBody2D"]
 collision_mask = 15
@@ -742,7 +740,7 @@ Type = 1
 Id = "enemy:lunaria"
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
-resources = [PackedStringArray("Cloud", "ShockWave", "Spear"), [ExtResource("2_6q18i"), ExtResource("3_vn6im"), ExtResource("4_l2wy2")]]
+resources = [PackedStringArray("Vines"), [ExtResource("2_njo4t")]]
 
 [node name="BlinkTimer" type="Timer" parent="."]
 wait_time = 0.7
@@ -768,8 +766,8 @@ metadata/_custom_type_script = "uid://clh46y8w17vem"
 one_shot = true
 autostart = true
 script = ExtResource("5_1pfq2")
-min_wait_time = 3.0
-max_wait_time = 7.0
+min_wait_time = 2.0
+max_wait_time = 4.0
 metadata/_custom_type_script = "uid://clh46y8w17vem"
 
 [node name="StatsManager" type="Node" parent="."]
@@ -817,7 +815,7 @@ shape = SubResource("CircleShape2D_a1nrq")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Animations"]
 sprite_frames = SubResource("SpriteFrames_pjsr3")
 animation = &"walk_south"
-frame = 3
+autoplay = "walk_south"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -828,25 +826,6 @@ autoplay = "walk_south"
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_j8msc")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Move/blend_position = Vector2(0.00115871, -0.915493)
+parameters/Move/blend_position = Vector2(-0.0846395, -0.325103)
 
 [node name="sfx" type="Node2D" parent="."]
-
-[node name="sfxCloud" type="AudioStreamPlayer2D" parent="sfx"]
-unique_name_in_owner = true
-stream = ExtResource("14_q7emo")
-bus = &"SFX"
-
-[node name="sfxPunch" type="AudioStreamPlayer2D" parent="sfx"]
-unique_name_in_owner = true
-stream = ExtResource("15_0dxvs")
-bus = &"SFX"
-
-[node name="sfxSpear" type="AudioStreamPlayer2D" parent="sfx"]
-unique_name_in_owner = true
-stream = ExtResource("16_t1q3f")
-bus = &"SFX"
-
-[node name="sfxLightning" type="AudioStreamPlayer2D" parent="sfx"]
-unique_name_in_owner = true
-bus = &"SFX"
