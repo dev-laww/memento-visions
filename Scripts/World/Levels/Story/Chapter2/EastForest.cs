@@ -3,6 +3,7 @@ using System;
 using GodotUtilities;
 using Game.Data;
 using Game.Autoload;
+using Game.Components;
 
 namespace Game.World;
 
@@ -11,6 +12,7 @@ public partial class EastForest : BaseLevel
 {
     [Node] private Node2D enemy;
     [Node] private ScreenMarker screenMarker, witchMarker;
+    [Node] private TransitionArea transitionArea;
 
 
     private Quest quest = QuestRegistry.Get("quest:restoring_balance");
@@ -27,16 +29,24 @@ public partial class EastForest : BaseLevel
         base._Ready();
         screenMarker.Toggle(false);
         witchMarker.Toggle(true);
+        transitionArea.Toggle(false);
 
         QuestManager.QuestCompleted += OnQuestUpdated;
     }
-    private void OnQuestUpdated(Quest quest)
+    private void OnQuestUpdated(Quest tits)
     {
 
-        if (quest.Id != "quest:restoring_balance" || !quest.Objectives[1].Completed) return;
+        if (quest.Id != "quest:restoring_balance" || !quest.Objectives[0].Completed) return;
         QuestManager.QuestUpdated -= OnQuestUpdated;
+        transitionArea.Toggle(true);
         screenMarker.Toggle(true);
 
+    }
+
+    public void EnableTransitionArea()
+    {
+        transitionArea.Toggle(true);
+        
     }
     public override void _ExitTree()
     {
