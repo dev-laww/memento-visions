@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=4 uid="uid://criyou87dacyh"]
+[gd_scene load_steps=107 format=4 uid="uid://criyou87dacyh"]
 
 [ext_resource type="Script" uid="uid://c4ksan4dtstup" path="res://Scripts/World/Levels/Story/Chapter2/CentralForest.cs" id="1_esctv"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_exmlw"]
@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://cx3y2g4y3fymi" path="res://resources/dialogues/chapter_2/2.7.dialogue" id="13_e7pso"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="13_spppi"]
 [ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="16_0lbbt"]
+[ext_resource type="Texture2D" uid="uid://bbaj1lmrgykxu" path="res://assets/effects/poof.png" id="16_e7pso"]
 [ext_resource type="Texture2D" uid="uid://ckj3v8yrowvxb" path="res://assets/tilesets/school.png" id="16_n4v06"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="16_y42ld"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="18_y42ld"]
@@ -358,6 +359,31 @@ size = Vector2(20, 78)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0mh2c"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_busxo"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_juwhd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.976096, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j7p5r"]
+curve = SubResource("Curve_juwhd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y6dlf"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+gravity = Vector3(0, -20, 0)
+scale_min = 0.7
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_j7p5r")
+anim_speed_max = 1.0
+anim_offset_max = 1.0
+
 [sub_resource type="Resource" id="Resource_e7pso"]
 script = ExtResource("16_0lbbt")
 Id = "enemy:tikbalang"
@@ -373,6 +399,82 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t7x0d"]
 size = Vector2(20, 96)
+
+[sub_resource type="Animation" id="Animation_52t3j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StoryTeller:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StoryTeller/PoofParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_al03n"]
+resource_name = "show_story_teller"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StoryTeller:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StoryTeller/PoofParticles:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StoryTeller")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.49),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Work"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_52t3j"]
+_data = {
+&"RESET": SubResource("Animation_52t3j"),
+&"show_story_teller": SubResource("Animation_al03n")
+}
 
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
@@ -703,6 +805,7 @@ shape = SubResource("RectangleShape2D_wlw4r")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="StoryTeller" parent="." instance=ExtResource("12_0lbbt")]
+visible = false
 position = Vector2(285, 488)
 
 [node name="DialogueTrigger" type="Area2D" parent="StoryTeller"]
@@ -721,6 +824,18 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 [node name="Node2D" type="Node2D" parent="StoryTeller/DialogueTrigger"]
 
 [node name="InteractionUI" parent="StoryTeller/DialogueTrigger/Node2D" instance=ExtResource("10_7sf3k")]
+
+[node name="PoofParticles" type="GPUParticles2D" parent="StoryTeller"]
+material = SubResource("CanvasItemMaterial_busxo")
+position = Vector2(0, -13)
+emitting = false
+amount = 20
+texture = ExtResource("16_e7pso")
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.9
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_y6dlf")
 
 [node name="QuestTrigger2" type="Area2D" parent="."]
 position = Vector2(790, 1015)
@@ -767,4 +882,10 @@ z_index = 1
 [node name="PageMarker" parent="Sprite2D/PageDialogue" instance=ExtResource("18_y42ld")]
 unique_name_in_owner = true
 position = Vector2(369, 479)
+HideWhenInBounds = false
 IsRed = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_52t3j")
+}

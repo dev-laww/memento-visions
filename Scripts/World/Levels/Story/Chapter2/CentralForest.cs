@@ -14,7 +14,7 @@ public partial class CentralForest : BaseLevel
     [Node] private Node2D enemy;
     [Node] private StoryTeller storyTeller;
     [Node] private ScreenMarker screenMarker, pageMarker;
-    [Node] private DialogueTrigger pageDialogue;
+    [Node] private AnimationPlayer animationPlayer;
 
     private Quest quest = QuestRegistry.Get("quest:the_missing_anchor");
 
@@ -24,29 +24,26 @@ public partial class CentralForest : BaseLevel
 
         WireNodes();
     }
-    
+
     public override void _Ready()
     {
         base._Ready();
         screenMarker.Toggle(false);
         pageMarker.Toggle(false);
-        pageDialogue.Toggle(false);
         ShowDialogue();
-
-        QuestManager.QuestCompleted += OnQuestUpdated;
+        QuestManager.QuestUpdated += OnQuestUpdated;
     }
 
     private void OnQuestUpdated(Quest quest)
     {
-        if (quest.Id != "quest:the_missing_anchor" || !quest.Objectives[0].Completed) return;
-        pageMarker.Toggle(true);
+        if (quest.Id == "quest:the_missing_anchor" && quest.Objectives[0].Completed)
+        {
+            pageMarker.Toggle(true);
+            GD.Print("triggers");
+            QuestManager.QuestUpdated -= OnQuestUpdated;
+        }
 
-        GD.Print("triggers");
 
-        if (quest.Id != "quest:the_missing_anchor" || !quest.Objectives[2].Completed) return;
-
-        QuestManager.QuestUpdated -= OnQuestUpdated;
-        screenMarker.Toggle(true);
     }
 
     public void StartCinematic()
@@ -66,6 +63,7 @@ public partial class CentralForest : BaseLevel
         var dialogue = ResourceLoader.Load<Resource>("res://resources/dialogues/chapter_2/2.6.dialogue");
         DialogueManager.ShowDialogueBalloon(dialogue);
     }
+
     public override void _ExitTree()
     {
         base._ExitTree();

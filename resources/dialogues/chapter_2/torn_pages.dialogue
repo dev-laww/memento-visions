@@ -7,5 +7,5 @@ Alex: "... Mayor's duty is more than governance....an Anchor.....bridge between 
 Alex: Mayor plays a crucial role unto this chaos? But I already sent him away! Wait... I'm missing something...
 Alex: Recounting what happened before, I fought Mayor because he was using the Aswangs for his own gains. After I sent him away, the Aswangs and Tikbalangs have joined forces, wreaking more havoc.
 Alex: This pattern...seems connected. Did the Mayor really played a role in here? Or... am I? Did I forgot something? Or did I make a mistake in sending him away? 
-do CurrentScene.screenMarker.Toggle(true)
+do CurrentScene.animationPlayer.play("show_story_teller")
 => END

@@ -9,6 +9,5 @@ Alex: (Realizing his own mistake, he muttered...)
 Alex: Then I need to fix what I've broken... before it's too late.
 Storyteller: Good. Head East from here, you will see what you have to do from there.
 Alex: Got it.
-do CurrentScene.pageMarker.Toggle(true)
-do CurrentScene.pageDialogue.Toggle(true)
+do CurrentScene.screenMarker.Toggle(true)
 => END
