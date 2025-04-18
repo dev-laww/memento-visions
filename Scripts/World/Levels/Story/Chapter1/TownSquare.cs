@@ -39,7 +39,7 @@ public partial class TownSquare : BaseLevel
 
     private void OnQuestUpdated(Quest quest)
     {
-        if (quest.Id != "quest:testimony" || !quest.Objectives[1].Completed) return;
+        if (quest.Id != "quest:testimony" || !quest.Objectives[0].Completed) return;
 
         QuestManager.QuestUpdated -= OnQuestUpdated;
         StartStoryTellerCutscene();
