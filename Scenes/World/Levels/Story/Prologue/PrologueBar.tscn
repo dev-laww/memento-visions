@@ -1,12 +1,17 @@
-[gd_scene load_steps=23 format=4 uid="uid://3td8x8h36elv"]
+[gd_scene load_steps=29 format=4 uid="uid://3td8x8h36elv"]
 
 [ext_resource type="Script" uid="uid://bw7smwgpceo61" path="res://Scripts/World/Levels/Story/Prologue/PrologueBar.cs" id="1_h8tdj"]
 [ext_resource type="Script" uid="uid://d3vvbqw6ln6if" path="res://Scripts/UI/Screens/Cinematic.cs" id="2_ete42"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="3_n1lv5"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="4_18ej6"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="5_s5dkd"]
+[ext_resource type="Resource" uid="uid://0suhta3uejmr" path="res://resources/quests/Prologue/bar_interaction.tres" id="6_lx1uq"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="7_ete42"]
+[ext_resource type="Resource" uid="uid://dk2nxvecyh5h3" path="res://resources/dialogues/prologue/1.0.dialogue" id="7_h8tdj"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="8_8anoo"]
+[ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="8_ete42"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="9_djlbh"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="9_n1lv5"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="10_sx5dq"]
 [ext_resource type="TileSet" uid="uid://c1mmutvocnp5g" path="res://resources/tilesets/bar/props.tres" id="14_45a8x"]
 [ext_resource type="TileSet" uid="uid://grwoctw4gvjl" path="res://resources/tilesets/bar/wall.tres" id="16_huina"]
@@ -27,6 +32,12 @@ border_size = 1000.0
 agent_radius = 8.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hn57r"]
+
+[sub_resource type="Resource" id="Resource_ccy1y"]
+script = ExtResource("7_ete42")
+Type = 2
+Description = "Head to the Haunted School – The real horror begins."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lx1uq"]
 
@@ -306,9 +317,11 @@ shape = SubResource("RectangleShape2D_hn57r")
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("5_s5dkd")
-Quest = null
-Mode = 0
+Quest = ExtResource("6_lx1uq")
+Mode = 1
 ShouldInteract = false
+Objective = SubResource("Resource_ccy1y")
+ObjectiveIndex = 0
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea/QuestTrigger"]
@@ -322,12 +335,6 @@ IsRed = false
 [node name="Player" parent="." instance=ExtResource("9_djlbh")]
 position = Vector2(162, 58)
 
-[node name="HeadsUpDisplay" parent="Player" index="2"]
-visible = false
-
-[node name="Idle" parent="Player/Center" index="0"]
-frame = 0
-
 [node name="Chief" parent="." instance=ExtResource("10_sx5dq")]
 position = Vector2(678, 489)
 
@@ -340,14 +347,24 @@ IsRed = false
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("5_s5dkd")
-Quest = null
+Quest = ExtResource("6_lx1uq")
 Mode = 0
-ShouldInteract = false
+ShouldInteract = true
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("7_h8tdj")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chief/QuestTrigger"]
 shape = SubResource("CircleShape2D_coaxs")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
+
+[node name="InteractionUI" type="Control" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("8_ete42")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("9_n1lv5")
 
 [node name="Art" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -390,5 +407,3 @@ attenuation = 0.0
 bus = &"Music"
 
 [connection signal="timeout" from="Timer" to="." method="ShowScreenMarker"]
-
-[editable path="Player"]
