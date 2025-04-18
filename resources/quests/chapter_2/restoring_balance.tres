@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=14 format=3 uid="uid://bdiho63j18ddw"]
+[gd_resource type="Resource" script_class="Quest" load_steps=15 format=3 uid="uid://bdiho63j18ddw"]
 
 [ext_resource type="Resource" uid="uid://cynqml7na5ksi" path="res://resources/items/consumable/breeze_potion.tres" id="1_djknd"]
 [ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="1_hvfhi"]
@@ -45,13 +45,20 @@ Description = "Kill 8 Tikbalangs and 8 Aswangs that seems to be barricading you 
 Enemies = [SubResource("Resource_inl2v"), SubResource("Resource_f143y")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
+[sub_resource type="Resource" id="Resource_djknd"]
+script = ExtResource("2_iw3t1")
+Type = 2
+Description = "Follow the trail
+"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
 [resource]
 script = ExtResource("3_c38af")
 Id = "quest:restoring_balance"
 Title = "Restoring the Balance, Resolving the Past"
 Ordered = true
 Description = "Eager to change what he had already been done, Alex ensures to himself that he will do everything he can to restore the pact that was made years ago."
-objectives = [SubResource("Resource_qm08l")]
+objectives = [SubResource("Resource_qm08l"), SubResource("Resource_djknd")]
 Experience = 40
 Items = [SubResource("Resource_ygumt"), SubResource("Resource_nswdt"), SubResource("Resource_8krrn")]
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

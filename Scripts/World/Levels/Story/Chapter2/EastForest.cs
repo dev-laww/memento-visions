@@ -13,10 +13,6 @@ public partial class EastForest : BaseLevel
     [Node] private Node2D enemy;
     [Node] private ScreenMarker screenMarker, witchMarker;
     [Node] private TransitionArea transitionArea;
-
-
-    private Quest quest = QuestRegistry.Get("quest:restoring_balance");
-
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
@@ -31,26 +27,23 @@ public partial class EastForest : BaseLevel
         witchMarker.Toggle(true);
         transitionArea.Toggle(false);
 
-        QuestManager.QuestCompleted += OnQuestUpdated;
+        QuestManager.QuestUpdated += OnQuestUpdated;
     }
-    private void OnQuestUpdated(Quest tits)
+    private void OnQuestUpdated(Quest quest)
     {
 
         if (quest.Id != "quest:restoring_balance" || !quest.Objectives[0].Completed) return;
-        QuestManager.QuestUpdated -= OnQuestUpdated;
         transitionArea.Toggle(true);
         screenMarker.Toggle(true);
+        GD.Print("completed");
+        QuestManager.QuestUpdated -= OnQuestUpdated;
 
     }
-
-    public void EnableTransitionArea()
-    {
-        transitionArea.Toggle(true);
-        
-    }
+    
     public override void _ExitTree()
     {
         base._ExitTree();
         enemy.QueueFree();
+        QuestManager.QuestUpdated -= OnQuestUpdated;
     }
 }
