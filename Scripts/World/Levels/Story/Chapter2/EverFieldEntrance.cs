@@ -28,7 +28,7 @@ public partial class EverFieldEntrance : BaseLevel
         transitionArea.Toggle(false);
         chiefMarker.Toggle(true);
         screenMarker.Toggle(false);
-        QuestManager.QuestCompleted += OnQuestUpdated;
+        QuestManager.QuestUpdated += OnQuestUpdated;
         ShowDialogue();
 
     }
@@ -52,7 +52,7 @@ public partial class EverFieldEntrance : BaseLevel
     public override void _ExitTree()
     {
         base._ExitTree();
-        QuestManager.QuestCompleted -= OnQuestUpdated;
+        QuestManager.QuestUpdated -= OnQuestUpdated;
         enemy.QueueFree();
     }
 

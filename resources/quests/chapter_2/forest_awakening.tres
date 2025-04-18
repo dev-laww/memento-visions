@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=12 format=3 uid="uid://dh5orsty66kxw"]
+[gd_resource type="Resource" script_class="Quest" load_steps=13 format=3 uid="uid://dh5orsty66kxw"]
 
 [ext_resource type="Resource" uid="uid://dx7hcjqmrqnj1" path="res://resources/items/consumable/puto.tres" id="1_47abo"]
 [ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_7xl8y"]
@@ -38,13 +38,19 @@ Description = "Kill the Tikbalangs and Aswangs that chased the Chief."
 Enemies = [SubResource("Resource_47abo"), SubResource("Resource_bbhv0")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
+[sub_resource type="Resource" id="Resource_5fqpa"]
+script = ExtResource("5_eskvi")
+Type = 2
+Description = "Follow the Trail"
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
 [resource]
 script = ExtResource("6_iaovr")
 Id = "quest:forest_awakening"
 Title = "The Everdawn Forest's Awakening"
 Ordered = false
 Description = "Just outside of the Everfield City, the Everdawn Forest seems to be different that it should be. The Chief tells you that something is going on further and that he ran back to warn you."
-objectives = [SubResource("Resource_phlfv")]
+objectives = [SubResource("Resource_phlfv"), SubResource("Resource_5fqpa")]
 Experience = 40
 Items = [SubResource("Resource_e4cff"), SubResource("Resource_07kg5")]
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

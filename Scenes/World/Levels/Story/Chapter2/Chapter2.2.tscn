@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=4 uid="uid://d0njwb8s1yg5h"]
+[gd_scene load_steps=77 format=4 uid="uid://d0njwb8s1yg5h"]
 
 [ext_resource type="Script" uid="uid://bowgi2e1v2qws" path="res://Scripts/World/Levels/Story/Chapter2/EverFieldEntrance.cs" id="1_suwuo"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_565dr"]
@@ -13,7 +13,6 @@
 [ext_resource type="Resource" uid="uid://dh5orsty66kxw" path="res://resources/quests/chapter_2/forest_awakening.tres" id="10_2u5h6"]
 [ext_resource type="Resource" uid="uid://b8xephrl31kc2" path="res://resources/dialogues/chapter_2/2.4.dialogue" id="11_cxmce"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_c37h7"]
-[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="15_rmolw"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="16_cxmce"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="16_rmolw"]
 
@@ -281,23 +280,10 @@ radius = 16.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eghu3"]
 size = Vector2(108, 20)
 
-[sub_resource type="Resource" id="Resource_47abo"]
-script = ExtResource("15_rmolw")
-Id = "enemy:aswang"
-Amount = 2
-metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
-
-[sub_resource type="Resource" id="Resource_bbhv0"]
-script = ExtResource("15_rmolw")
-Id = "enemy:tikbalang"
-Amount = 5
-metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
-
-[sub_resource type="Resource" id="Resource_phlfv"]
+[sub_resource type="Resource" id="Resource_5fqpa"]
 script = ExtResource("16_cxmce")
-Type = 3
-Description = "Kill the Tikbalangs and Aswangs that chased the Chief."
-Enemies = [SubResource("Resource_47abo"), SubResource("Resource_bbhv0")]
+Type = 2
+Description = "Follow the Trail"
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gltdj"]
@@ -599,12 +585,12 @@ script = ExtResource("8_vhqjr")
 Quest = ExtResource("10_2u5h6")
 Mode = 1
 ShouldInteract = false
-Objective = SubResource("Resource_phlfv")
-ObjectiveIndex = 0
+Objective = SubResource("Resource_5fqpa")
+ObjectiveIndex = 1
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
-position = Vector2(59, 192)
+position = Vector2(59, 175)
 shape = SubResource("RectangleShape2D_gltdj")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
