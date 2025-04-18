@@ -33,6 +33,19 @@ Item = ExtResource("5_kf030")
 Quantity = 1
 metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 
+[sub_resource type="Resource" id="Resource_gs5h5"]
+script = ExtResource("5_o7pfj")
+Id = "enemy:tikbalang"
+Amount = 5
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_35mkj"]
+script = ExtResource("6_cghvh")
+Type = 3
+Description = "Kill 5 Tikbalangs surrounding the Engkanto"
+Enemies = [SubResource("Resource_gs5h5")]
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
 [sub_resource type="Resource" id="Resource_kl1kn"]
 script = ExtResource("5_o7pfj")
 Id = "enemy:lunaria"
@@ -47,26 +60,13 @@ Description = "Defeat the Engkanto commanding the Tikbalangs and Aswangs.
 Enemies = [SubResource("Resource_kl1kn")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
-[sub_resource type="Resource" id="Resource_gs5h5"]
-script = ExtResource("5_o7pfj")
-Id = "enemy:tikbalang"
-Amount = 5
-metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
-
-[sub_resource type="Resource" id="Resource_35mkj"]
-script = ExtResource("6_cghvh")
-Type = 3
-Description = "Kill 5 Tikbalangs surrounding the Engkanto"
-Enemies = [SubResource("Resource_gs5h5")]
-metadata/_custom_type_script = "uid://dpkqc20rlrftv"
-
 [resource]
 script = ExtResource("7_xhro0")
 Id = "quest:engkanto_wrath"
 Title = "Engkanto's Wrath"
 Ordered = true
 Description = "The Engkanto, enraged by what Alex has been doing to its underling-has decided to show up in order to confront Alex and to show if Alex is really capable of protecting something."
-objectives = [SubResource("Resource_uligf"), SubResource("Resource_35mkj")]
+objectives = [SubResource("Resource_35mkj"), SubResource("Resource_uligf")]
 Experience = 40
 Items = [SubResource("Resource_d1v4l"), SubResource("Resource_02o2c"), SubResource("Resource_7wxhg"), SubResource("Resource_e5uek")]
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

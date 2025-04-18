@@ -596,5 +596,6 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="ScreenMarker" parent="." instance=ExtResource("16_rmolw")]
 position = Vector2(59, 154)
+rotation = 3.14159
 HideWhenInBounds = false
 IsRed = false
