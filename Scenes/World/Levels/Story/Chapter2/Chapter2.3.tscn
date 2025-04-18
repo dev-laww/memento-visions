@@ -675,7 +675,7 @@ metadata/_custom_type_script = "uid://davlg2u8drdh4"
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_60ff3")
 
-[node name="PageMarker" parent="TransitionArea" instance=ExtResource("18_y42ld")]
+[node name="ScreenMarker" parent="TransitionArea" instance=ExtResource("18_y42ld")]
 unique_name_in_owner = true
 position = Vector2(843, 1006)
 rotation = -1.57254
@@ -738,7 +738,8 @@ texture = ExtResource("16_n4v06")
 region_enabled = true
 region_rect = Rect2(528, 440, 48, 32)
 
-[node name="DialogueTrigger" type="Area2D" parent="Sprite2D"]
+[node name="PageDialogue" type="Area2D" parent="Sprite2D"]
+unique_name_in_owner = true
 position = Vector2(0, -3)
 collision_layer = 0
 collision_mask = 4
@@ -747,16 +748,16 @@ DialogueResource = ExtResource("19_0lbbt")
 ShouldInteract = true
 metadata/_custom_type_script = "uid://b2qoa6rbhqcq1"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/DialogueTrigger"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/PageDialogue"]
 shape = SubResource("CircleShape2D_0mh2c")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
-[node name="Node2D" type="Node2D" parent="Sprite2D/DialogueTrigger"]
+[node name="Node2D" type="Node2D" parent="Sprite2D/PageDialogue"]
 
-[node name="InteractionUI" parent="Sprite2D/DialogueTrigger/Node2D" instance=ExtResource("10_7sf3k")]
+[node name="InteractionUI" parent="Sprite2D/PageDialogue/Node2D" instance=ExtResource("10_7sf3k")]
 z_index = 1
 
-[node name="ScreenMarker" parent="Sprite2D/DialogueTrigger" instance=ExtResource("18_y42ld")]
+[node name="PageMarker" parent="Sprite2D/PageDialogue" instance=ExtResource("18_y42ld")]
 unique_name_in_owner = true
 position = Vector2(369, 479)
 IsRed = false

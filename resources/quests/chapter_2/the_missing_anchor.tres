@@ -19,7 +19,7 @@ Item = ExtResource("3_3o6uf")
 Quantity = 5
 metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 
-[sub_resource type="Resource" id="Resource_43hcv"]
+[sub_resource type="Resource" id="Resource_e7pso"]
 script = ExtResource("1_tkdir")
 Id = "enemy:tikbalang"
 Amount = 5
@@ -29,19 +29,19 @@ metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 script = ExtResource("2_2bx7x")
 Type = 3
 Description = "Kill 5 Tikbalangs"
-Enemies = [SubResource("Resource_43hcv")]
+Enemies = [SubResource("Resource_e7pso")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="Resource" id="Resource_tkdir"]
 script = ExtResource("1_tkdir")
 Id = "enemy:aswang"
-Amount = 5
+Amount = 3
 metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 
 [sub_resource type="Resource" id="Resource_2bx7x"]
 script = ExtResource("2_2bx7x")
 Type = 3
-Description = "Kill 5 Aswangs"
+Description = "Kill 3 Aswangs"
 Enemies = [SubResource("Resource_tkdir")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 

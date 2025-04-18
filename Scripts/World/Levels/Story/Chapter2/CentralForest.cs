@@ -5,6 +5,7 @@ using Game.Entities;
 using GodotUtilities;
 using Game.Data;
 using DialogueManagerRuntime;
+using Game.Components;
 
 namespace Game.World;
 [Scene]
@@ -13,6 +14,7 @@ public partial class CentralForest : BaseLevel
     [Node] private Node2D enemy;
     [Node] private StoryTeller storyTeller;
     [Node] private ScreenMarker screenMarker, pageMarker;
+    [Node] private DialogueTrigger pageDialogue;
 
     private Quest quest = QuestRegistry.Get("quest:the_missing_anchor");
 
@@ -28,6 +30,7 @@ public partial class CentralForest : BaseLevel
         base._Ready();
         screenMarker.Toggle(false);
         pageMarker.Toggle(false);
+        pageDialogue.Toggle(false);
         ShowDialogue();
 
         QuestManager.QuestCompleted += OnQuestUpdated;
