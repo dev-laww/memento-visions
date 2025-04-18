@@ -48,7 +48,7 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 [sub_resource type="Resource" id="Resource_6dk5v"]
 script = ExtResource("2_2bx7x")
 Type = 2
-Description = "Talk to the Storyteller in the midst of the forest."
+Description = "Investigate the torn pages found in the midst of the forest."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]

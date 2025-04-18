@@ -1,6 +1,6 @@
 ~ start
 do CurrentScene.pageMarker.Toggle(false)
-Torn pages that seemed to be dropped in here. It entails...
+Alex: Torn pages that seemed to be dropped in here. It entails...
 Alex: "... Mayor's duty is more than governance....an Anchor.....bridge between two worlds"
 - Mayor?
 - Is this for real?
@@ -8,4 +8,15 @@ Alex: Mayor plays a crucial role unto this chaos? But I already sent him away! W
 Alex: Recounting what happened before, I fought Mayor because he was using the Aswangs for his own gains. After I sent him away, the Aswangs and Tikbalangs have joined forces, wreaking more havoc.
 Alex: This pattern...seems connected. Did the Mayor really played a role in here? Or... am I? Did I forgot something? Or did I make a mistake in sending him away? 
 do CurrentScene.animationPlayer.play("show_story_teller")
+Storyteller: [speed=.5]Alex... [speed=1]You are told to be wary of your actions as they have consequences...
+Storyteller: [speed=.5]These... are the consequences...brought by your actions,.
+Storyteller: You should have delved deeper towards the facts. See, more of it.
+Alex: The creatures of our myths are running unchecked. If what you said is true, then removing the Mayor didn't just shift power-it severed a connection.
+Alex: The balance is broken.
+Storyteller: That is due to the pact they made... an ancient one. Without the Mayor's lineage to uphold it, they... no longer have a master.
+Alex: (Realizing his own mistake, he muttered...)
+Alex: Then I need to fix what I've broken... before it's too late.
+Storyteller: Good. Head East from here, you will see what you have to do from there.
+Alex: Got it.
+do CurrentScene.screenMarker.Toggle(true)
 => END
