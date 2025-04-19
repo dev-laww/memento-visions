@@ -53,6 +53,7 @@ public partial class Village : BaseLevel
         {
             rudyQuestTrigger.Monitoring = true;
             rudyMarker.Toggle(true);
+            QuestManager.QuestUpdated -= OnQuestUpdated;
         }
     }
 
