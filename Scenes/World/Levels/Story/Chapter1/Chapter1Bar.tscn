@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://ciqiplx11424"]
+[gd_scene load_steps=20 format=4 uid="uid://ciqiplx11424"]
 
 [ext_resource type="Script" uid="uid://bmr5usqox5f0h" path="res://Scripts/World/Levels/Story/Prologue/Bar.cs" id="1_7pkig"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="2_cgm6k"]
@@ -7,14 +7,12 @@
 [ext_resource type="TileSet" uid="uid://dvd6ajqdt1f52" path="res://resources/tilesets/bar/small-props.tres" id="7_nq5iw"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="8_v64bo"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="9_ow3fv"]
-[ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="10_xl1pr"]
 [ext_resource type="PackedScene" uid="uid://baa8os18yrmkj" path="res://Scenes/Entities/Characters/Chief.tscn" id="11_72xov"]
 [ext_resource type="Resource" uid="uid://c82r84uxq7lxc" path="res://resources/dialogues/chapter_1/1.0.dialogue" id="12_khm8l"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="12_shkw5"]
 [ext_resource type="Resource" uid="uid://dpkjhbld0pfm4" path="res://resources/quests/chapter_1/whispers_in_intramuros_1.tres" id="13_53sbg"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_jtnov"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="16_16y44"]
-[ext_resource type="PackedScene" uid="uid://dgqrvixy2ocww" path="res://Scenes/Entities/Characters/BlackSmith.tscn" id="16_cdpoc"]
 [ext_resource type="AudioStream" uid="uid://b6msi8vaubfy8" path="res://assets/audio/music/bar_bgm.ogg" id="17_cgm6k"]
 
 [sub_resource type="Environment" id="Environment_71mkv"]
@@ -99,9 +97,6 @@ shape = SubResource("RectangleShape2D_hhvhg")
 [node name="Player" parent="." instance=ExtResource("9_ow3fv")]
 position = Vector2(136, 126)
 
-[node name="StoryTeller" parent="." instance=ExtResource("10_xl1pr")]
-position = Vector2(245, 93)
-
 [node name="Chief" parent="." instance=ExtResource("11_72xov")]
 position = Vector2(36, 171)
 
@@ -121,11 +116,9 @@ shape = SubResource("CircleShape2D_j24d5")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
+position = Vector2(0, -33)
 
 [node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("15_jtnov")]
-
-[node name="BlackSmith" parent="." instance=ExtResource("16_cdpoc")]
-position = Vector2(271, 258)
 
 [node name="sfx" type="Node2D" parent="."]
 

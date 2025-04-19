@@ -1149,7 +1149,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Kevin" parent="npc" instance=ExtResource("18_bhrir")]
 unique_name_in_owner = true
-visible = false
 position = Vector2(-112, 971)
 
 [node name="QuestTrigger" type="Area2D" parent="npc/Kevin"]
@@ -1171,12 +1170,13 @@ shape = SubResource("CircleShape2D_84djs")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="npc/Kevin/QuestTrigger"]
+position = Vector2(1, -36)
 
 [node name="InteractionUI" parent="npc/Kevin/QuestTrigger/Node2D" instance=ExtResource("10_7adkd")]
 
 [node name="kevinMarker" parent="npc/Kevin" instance=ExtResource("13_4wwhf")]
 unique_name_in_owner = true
-position = Vector2(-112, 952)
+position = Vector2(-112, 941)
 HideWhenInBounds = false
 IsRed = true
 
@@ -1568,7 +1568,6 @@ texture_filter = 2
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
-frame = 2
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StoryTeller"]

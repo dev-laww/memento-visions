@@ -778,6 +778,8 @@ shape = SubResource("CircleShape2D_7sf3k")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Witch/QuestTrigger"]
+z_index = 1
+position = Vector2(0, -34)
 
 [node name="InteractionUI" parent="Witch/QuestTrigger/Node2D" instance=ExtResource("11_75cao")]
 
