@@ -410,7 +410,7 @@ shape = SubResource("CircleShape2D_8vc12")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="StoryTeller/DialogueTrigger2"]
-position = Vector2(1, -32)
+position = Vector2(0, -33)
 
 [node name="InteractionUI" parent="StoryTeller/DialogueTrigger2/Node2D" instance=ExtResource("14_2eimf")]
 
@@ -694,13 +694,14 @@ shape = SubResource("CircleShape2D_akscv")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Mayor/QuestTrigger"]
+position = Vector2(0, -28.1538)
 
 [node name="InteractionUI" parent="Mayor/QuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
 
 [node name="MayorMarker" parent="Mayor" instance=ExtResource("21_lmktk")]
 unique_name_in_owner = true
 z_index = 2
-position = Vector2(931, 473)
+position = Vector2(931, 459)
 HideWhenInBounds = false
 IsRed = false
 
@@ -729,12 +730,13 @@ shape = SubResource("CircleShape2D_u8kkp")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Rudy/RudyQuestTrigger"]
+position = Vector2(-1.31173, -33.4081)
 
 [node name="InteractionUI" parent="Rudy/RudyQuestTrigger/Node2D" instance=ExtResource("14_2eimf")]
 
 [node name="RudyMarker" parent="Rudy" instance=ExtResource("21_lmktk")]
 unique_name_in_owner = true
-position = Vector2(1022, 752)
+position = Vector2(1022, 738)
 HideWhenInBounds = false
 IsRed = true
 

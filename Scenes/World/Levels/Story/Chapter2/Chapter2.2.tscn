@@ -547,7 +547,7 @@ script = ExtResource("8_vhqjr")
 Quest = ExtResource("10_2u5h6")
 Mode = 0
 ShouldInteract = true
-InteractionLabel = "Interact"
+InteractionLabel = "Talk to the Chief"
 DialogueResource = ExtResource("11_cxmce")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
@@ -556,12 +556,13 @@ shape = SubResource("CircleShape2D_7wp0m")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Chief/QuestTrigger"]
+position = Vector2(0, -32)
 
 [node name="InteractionUI" parent="Chief/QuestTrigger/Node2D" instance=ExtResource("15_c37h7")]
 
 [node name="ChiefMarker" parent="Chief" instance=ExtResource("16_rmolw")]
 unique_name_in_owner = true
-position = Vector2(265, 1155)
+position = Vector2(265, 1151)
 HideWhenInBounds = false
 IsRed = false
 
