@@ -663,10 +663,10 @@ Description = "Upon defeating the Mayor, head to the Jeep again to rest at the b
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tqrau"]
-size = Vector2(144, 80)
+size = Vector2(144, 84)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5id5a"]
-size = Vector2(141, 74)
+size = Vector2(141, 82)
 
 [node name="TownSquare" type="Node2D"]
 y_sort_enabled = true

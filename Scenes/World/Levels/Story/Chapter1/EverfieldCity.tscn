@@ -1568,6 +1568,7 @@ texture_filter = 2
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_x0uqg")
 animation = &"idle"
+frame = 1
 metadata/_custom_type_script = "uid://onowuhrhhpuc"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StoryTeller"]
@@ -1626,6 +1627,7 @@ position = Vector2(-113, 59)
 
 [node name="Movable" parent="Puzzle 2" instance=ExtResource("29_55v40")]
 position = Vector2(5, 59)
+mass = 10.0
 
 [node name="TorchSequence" parent="." instance=ExtResource("28_e2cbw")]
 position = Vector2(74, 421)
