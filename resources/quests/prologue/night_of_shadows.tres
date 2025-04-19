@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=16 format=3 uid="uid://bb0a0gl7qcddj"]
+[gd_resource type="Resource" script_class="Quest" load_steps=14 format=3 uid="uid://bb0a0gl7qcddj"]
 
-[ext_resource type="Resource" uid="uid://dpda8p54wl0y7" path="res://resources/items/weapon/sword.tres" id="1_ffegs"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="2_6c0y8"]
 [ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_rcovv"]
 [ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="3_ffegs"]
@@ -8,12 +7,6 @@
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="3_r2ecs"]
 [ext_resource type="Resource" uid="uid://c6j15ogomrwqo" path="res://resources/items/material/curse_blood.tres" id="4_fujhk"]
 [ext_resource type="Resource" uid="uid://b707i5ynhcp26" path="res://resources/items/quest/codex1.tres" id="5_j0pu7"]
-
-[sub_resource type="Resource" id="Resource_xuage"]
-script = ExtResource("2_rcovv")
-Item = ExtResource("1_ffegs")
-Quantity = 0
-metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 
 [sub_resource type="Resource" id="Resource_spcbi"]
 script = ExtResource("2_rcovv")
@@ -42,7 +35,7 @@ metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 [sub_resource type="Resource" id="Resource_5vn2r"]
 script = ExtResource("2_6c0y8")
 Type = 3
-Description = "kill 3 aswang
+Description = "kill 5 Aswangs that are in the area, preying on everything they see.
 "
 Enemies = [SubResource("Resource_rcovv")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
@@ -50,7 +43,7 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 [sub_resource type="Resource" id="Resource_2jiku"]
 script = ExtResource("2_6c0y8")
 Type = 2
-Description = "Speak to Chief to gather intel on eerie sightings and local fears of an Aswang."
+Description = "Upon defeating the Aswangs, head to the Bar to speak with the Chief. He seems he has something to say."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
@@ -61,5 +54,5 @@ Ordered = false
 Description = "You spotted scattered Aswang saround the school surroundings. Track and eliminate them"
 objectives = [SubResource("Resource_5vn2r"), SubResource("Resource_2jiku")]
 Experience = 20
-Items = [SubResource("Resource_xuage"), SubResource("Resource_spcbi"), SubResource("Resource_ywq33"), SubResource("Resource_ovneq")]
+Items = [SubResource("Resource_spcbi"), SubResource("Resource_ywq33"), SubResource("Resource_ovneq")]
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

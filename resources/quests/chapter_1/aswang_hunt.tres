@@ -42,7 +42,7 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 [sub_resource type="Resource" id="Resource_kcivv"]
 script = ExtResource("2_symma")
 Type = 2
-Description = "A mysterious person suddenly appeared! Interrogate him about the Aswangs and their purpose for doing so!"
+Description = "Upon investigation, an unknown person seems to be behind of all of this. Locate him and interrogate him about the Aswangs and their purpose for doing so."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
