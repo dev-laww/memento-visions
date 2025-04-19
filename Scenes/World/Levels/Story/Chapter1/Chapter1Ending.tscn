@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://decexk5dlixp2"]
+[gd_scene load_steps=34 format=4 uid="uid://decexk5dlixp2"]
 
 [ext_resource type="Script" uid="uid://vtvxgoln0ppg" path="res://Scripts/World/Levels/Story/Chapter1/Chapter1Ending.cs" id="1_pxhlq"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_pxhlq"]
@@ -19,6 +19,11 @@
 [ext_resource type="PackedScene" uid="uid://c7u7njt632rfb" path="res://Scenes/Entities/Enemies/Common/Dummy.tscn" id="13_urmif"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="14_ot12s"]
 [ext_resource type="AudioStream" uid="uid://b6msi8vaubfy8" path="res://assets/audio/music/bar_bgm.ogg" id="18_yy1g4"]
+[ext_resource type="PackedScene" uid="uid://cubeoadh5861n" path="res://Scenes/Entities/Characters/Lucas.tscn" id="20_cjqe6"]
+[ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="21_128oy"]
+[ext_resource type="Resource" uid="uid://bfd8bvsg3sljk" path="res://resources/quests/side_quests/prologue_sidequest/1.tres" id="22_mjyv7"]
+[ext_resource type="Resource" uid="uid://dtjmxt35rabxi" path="res://resources/dialogues/sidequest/sidequest1.0.dialogue" id="23_mjyv7"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="23_urmif"]
 
 [sub_resource type="Environment" id="Environment_71mkv"]
 background_mode = 3
@@ -46,6 +51,9 @@ radius = 18.0
 radius = 26.6833
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rej5g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xg4fr"]
+radius = 20.0
 
 [node name="Bar" type="Node2D"]
 y_sort_enabled = true
@@ -225,6 +233,34 @@ bus = &"Music"
 position = Vector2(35, 115)
 HideWhenInBounds = false
 IsRed = false
+
+[node name="Lucas" parent="." instance=ExtResource("20_cjqe6")]
+position = Vector2(169, 208)
+
+[node name="QuestTrigger" type="Area2D" parent="Lucas"]
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("21_128oy")
+Quest = ExtResource("22_mjyv7")
+Mode = 0
+ShouldInteract = true
+InteractionLabel = "Talk to Lucas"
+DialogueResource = ExtResource("23_mjyv7")
+metadata/_custom_type_script = "uid://cd87fvbcydnp5"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lucas/QuestTrigger"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_xg4fr")
+debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="Node2D" type="Node2D" parent="Lucas/QuestTrigger"]
+position = Vector2(0, -32)
+
+[node name="InteractionUI" type="Control" parent="Lucas/QuestTrigger/Node2D" instance=ExtResource("11_128oy")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("23_urmif")
 
 [editable path="BlackSmith/BlackSmithInteraction/Node2D/InteractionUI"]
 [editable path="Witch/WitchInteraction/Node2D/InteractionUI"]

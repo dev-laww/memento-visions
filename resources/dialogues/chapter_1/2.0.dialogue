@@ -29,15 +29,18 @@ while true
 		
 		
 	- Continue the Mission
-		Chief: Head to the town Alex. There have been reports of people getting attacked by humanoid creatures with a horse head.
-		- Horse heads?
-		- Tikbalang maybe?
-		Alex: Are you sure Chief on what you are talking about?
-		Chief: It's kind of unbelievable since I heard about those humanoid creatures with horse heads only in books, and are living in deep forests-playing tricks on anyone who passes their territory.
-		Alex: Since we both know about it, it's a good think you called for me this time.
-		Chief: I know Alex. Be careful out there.
-		- Thanks, Chief!
-		do CurrentScene.transitionArea.Toggle(true)
+		Chief: The next task is still being investigated, I'll let you know when we need your help Alex. For now, Lucas seems to be looking for you worriedly, I think?
+		- Lucas? As in George Lucas?
+		- Creator of Star Wars & Indiana Jones series?!
+		Alex: The famous George Lucas is here Chief?!
+		Chief: What are you talking about? No!
+		do CurrentScene.LucasCutscene()
+		Chief: He is an assistant to the Story Teller, helping him write novels and such. 
+		Alex: Hmp... I'll talk to him but don't expect too much. That guy seems to be rather... unique.
+		Chief: I know Alex, but, he's not a bad kid.
+		- Aight, I'll talk to him.
+		=> END
+		
 	- Exit
 		do CurrentScene.screenMarker.Toggle(false)
 		=> END

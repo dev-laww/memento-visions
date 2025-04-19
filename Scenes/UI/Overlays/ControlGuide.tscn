@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bhxcbargfd66p"]
+[gd_scene load_steps=18 format=3 uid="uid://bhxcbargfd66p"]
 
 [ext_resource type="Theme" uid="uid://cxgbxsavclkj7" path="res://resources/ui/theme.tres" id="1_au4k2"]
 [ext_resource type="Script" uid="uid://dxvcwyohyy0sx" path="res://Scripts/UI/Overlays/ControlGuide.cs" id="1_pev6y"]
@@ -13,6 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://b4i8qsv3q7mxe" path="res://assets/icons/Jt.png" id="10_f3rii"]
 [ext_resource type="Texture2D" uid="uid://u8lhdrximm0f" path="res://assets/icons/D.png" id="11_86dvi"]
 [ext_resource type="Texture2D" uid="uid://dyxsacj8kktd1" path="res://assets/icons/f.png" id="12_g4acp"]
+[ext_resource type="Texture2D" uid="uid://bkwmqd5kofgbr" path="res://assets/icons/lshift.png" id="13_f55ee"]
+[ext_resource type="Texture2D" uid="uid://ce78fukegb8yb" path="res://assets/icons/mouse.png" id="14_t5wui"]
+[ext_resource type="Texture2D" uid="uid://ppv8t35rb4up" path="res://assets/icons/Z.png" id="16_vkjoj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_brr5y"]
 font = ExtResource("4_3jsr5")
@@ -202,6 +205,30 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Move to the Right"
 
+[node name="LShift" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/LShift"]
+layout_mode = 2
+texture = ExtResource("13_f55ee")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/LShift"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Press to Dash"
+
+[node name="LShift2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/LShift2"]
+layout_mode = 2
+texture = ExtResource("14_t5wui")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/LShift2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Press to Attack"
+
 [node name="label2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -222,3 +249,16 @@ texture = ExtResource("12_g4acp")
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Interact               "
+
+[node name="F" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/F"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/F/F"]
+layout_mode = 2
+texture = ExtResource("16_vkjoj")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer/NinePatchRect/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label/ScrollContainer/MarginContainer/VBoxContainer/F/F"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Quick Use Consumable   "
