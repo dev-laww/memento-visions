@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=7 format=3 uid="uid://bfd8bvsg3sljk"]
+[gd_resource type="Resource" script_class="Quest" load_steps=8 format=3 uid="uid://bfd8bvsg3sljk"]
 
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_rhibe"]
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_ufogi"]
@@ -7,28 +7,34 @@
 [sub_resource type="Resource" id="Resource_x2cbe"]
 script = ExtResource("1_rhibe")
 Type = 2
-Description = "Head to the Storyteller and select \"Frenzy Mode\" to gain access to challenge your unbending-will."
+Description = "Head to the Storyteller and select \"Frenzy Mode\" to gain access to find out what is happening in the Frenzy Mode."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="Resource" id="Resource_7q21l"]
 script = ExtResource("2_occak")
 Id = "enemy:aswang"
-Amount = 3
+Amount = 8
+metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
+
+[sub_resource type="Resource" id="Resource_occak"]
+script = ExtResource("2_occak")
+Id = "enemy:tikbalang"
+Amount = 5
 metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 
 [sub_resource type="Resource" id="Resource_0nflr"]
 script = ExtResource("1_rhibe")
 Type = 3
-Description = "Kill Aswang creatures that are in the vicinity to complete the quest!"
-Enemies = [SubResource("Resource_7q21l")]
+Description = "Upon arrival, you found out that this mode is where the weak shouldn\"t stay. Vanquish  atleast 8 Tikbalangs and 5 Aswang that are in the vicinity to complete the quest!"
+Enemies = [SubResource("Resource_7q21l"), SubResource("Resource_occak")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
 script = ExtResource("1_ufogi")
 Id = "sidequest:1"
-Title = "Gather Materials from the Aswang"
+Title = "Frenzy's Wake"
 Ordered = true
-Description = "You completed the prologue and rewarded with materials you would need to strengthen yourself. What if you run out of it? Now you thought you don't have any source of materials."
+Description = "You completed the prologue and rewarded with materials you would need to strengthen yourself. Now, the Story Teller is looking for you with nervousness."
 objectives = [SubResource("Resource_x2cbe"), SubResource("Resource_0nflr")]
 Experience = 0
 Items = []

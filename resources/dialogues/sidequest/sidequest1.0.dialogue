@@ -1,0 +1,38 @@
+~ start
+#conditional if quest 1, 2, and 3 not yet completed,
+#parang magloloop lang siya sa convo na to =>
+Lucas: Bruh 💀 you haven’t done the last task yet.
+Lucas: Come back when you actually finish it 😤 We don’t skip steps out here.
+#end hashtag
+
+#conditional if quest 2 is completed =>
+#give quest 2
+Lucas: Sooo Alex, sounds like you kinda figured out what’s goin’ on 👀
+Alex: The creatures out there are running rampant. It feels like they hold a grudge against me.
+Lucas: Nah, they don’t hate you, fam 😭 they’re just putting you through a vibe check — tryna see if you can actually handle ‘em or if some other entity’s gonna take the throne 💀
+Alex: I see...
+Lucas: Here, take this. Consider it your official “how to not get wrecked by mythicals” starter pack 🔥
+Lucas: You’re gonna need to slay a few of ‘em. Not outta hate — just to show you’ve got main character energy.
+Alex: Understood. I’ll do what needs to be done.
+Lucas: That’s what I like to hear 😤 go off, Alex. Make those creatures respect the drip.
+
+#conditional if quest 3 is completed =>
+#give quest 3
+Lucas: YO you’re back?! 😳 Okay okay—final stretch vibes, Alex!! You ready to lock in or what??
+- Bring it on!
+- Give it!
+Lucas: Aiiight bet 🔥 no boss fights yet — just whip up some of those spicy potions first 🧪💅
+Lucas: Gotta make sure you don’t get clapped later 😤
+
+#conditional if quest 4 is completed =>
+#give quest 4
+Lucas: Ayy you’re locked in now 🔥 ready to risk it all huh? Go on, head back to Frenzy Mode — it’s final boss o’clock 😈
+Lucas: Buuut like… no pressure 👀 you can always dip and slide back in later if you need to regroup 😌
+
+#conditional if all quest is done =>
+Lucas: Yo Alex, real talk… when’s the last time you slept? You lookin’ like you just got dragged through five boss fights back to back 💀
+Alex: I’m fine. You don’t need to worry about me.
+Lucas: Nahh fr, you need a nap, a snack, and maybe a therapist 😭
+Alex: I’ll rest when this is over.
+Lucas: Bro’s living in a cutscene 😩 iconic.
+=> END

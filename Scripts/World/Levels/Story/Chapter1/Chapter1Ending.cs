@@ -17,6 +17,7 @@ public partial class Chapter1Ending : BaseLevel
     [Node] private Interaction storyTellerInteraction;
     [Node] private Interaction blackSmithInteraction;
     [Node] private Interaction witchInteraction;
+    [Node] private NPC lucas;
     [Node] private TransitionArea transitionArea;
     [Node] private ScreenMarker screenMarker;
 
@@ -145,6 +146,10 @@ public partial class Chapter1Ending : BaseLevel
         StartCutscene(witch.GlobalPosition);
     }
 
+    public void LucasCutscene()
+    {
+        StartCutscene(lucas.GlobalPosition);
+    }
     public static void UnlockRecipes()
     {
         SaveManager.UnlockRecipe("id:taho");

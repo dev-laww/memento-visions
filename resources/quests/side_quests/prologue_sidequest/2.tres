@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=16 format=3 uid="uid://cg7fa3tmcnat7"]
+[gd_resource type="Resource" script_class="Quest" load_steps=18 format=3 uid="uid://cg7fa3tmcnat7"]
 
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_6nx3g"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_sd77v"]
@@ -7,17 +7,18 @@
 [ext_resource type="Script" uid="uid://btqj20rwc4vb" path="res://Scripts/Data/Quest/ItemRequirement.cs" id="4_geiy5"]
 [ext_resource type="Resource" uid="uid://doqpta8ruoou0" path="res://resources/items/material/hoof_powder.tres" id="5_seb20"]
 [ext_resource type="Resource" uid="uid://cocs17ig06umk" path="res://resources/items/material/vampiric_claw.tres" id="6_f07kn"]
+[ext_resource type="Resource" uid="uid://dhr2jtmgl0gse" path="res://resources/items/material/engkanto_essence.tres" id="7_geiy5"]
 
 [sub_resource type="Resource" id="Resource_1yyt2"]
 script = ExtResource("1_sd77v")
 Type = 2
-Description = "Talk to the Storyteller to head down to the Frenzy Mode."
+Description = "Talk to the Storyteller to head down to the Frenzy Mode again."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="Resource" id="Resource_hk2ia"]
 script = ExtResource("2_phakg")
 Id = "enemy:aswang"
-Amount = 3
+Amount = 4
 metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 
 [sub_resource type="Resource" id="Resource_phakg"]
@@ -29,7 +30,7 @@ metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 [sub_resource type="Resource" id="Resource_7yxn7"]
 script = ExtResource("1_sd77v")
 Type = 3
-Description = "The Aswangs are terrorizing the forest. Slay them all to gain experience and their materials!"
+Description = "The mythical creatures are still running rampant, showing no signs of giving up. Defeat them!"
 Enemies = [SubResource("Resource_hk2ia"), SubResource("Resource_phakg")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
@@ -51,19 +52,25 @@ Item = ExtResource("6_f07kn")
 Amount = 3
 metadata/_custom_type_script = "uid://btqj20rwc4vb"
 
+[sub_resource type="Resource" id="Resource_seb20"]
+script = ExtResource("4_geiy5")
+Item = ExtResource("7_geiy5")
+Amount = 3
+metadata/_custom_type_script = "uid://btqj20rwc4vb"
+
 [sub_resource type="Resource" id="Resource_2virh"]
 script = ExtResource("1_sd77v")
 Type = 0
-Description = "Upon defeating the mythical creatures, gather their materials!"
-Items = [SubResource("Resource_6mvfn"), SubResource("Resource_qqtn5"), SubResource("Resource_odmkn")]
+Description = "Upon defeating the mythical creatures, gather their materials."
+Items = [SubResource("Resource_6mvfn"), SubResource("Resource_qqtn5"), SubResource("Resource_odmkn"), SubResource("Resource_seb20")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
 script = ExtResource("1_6nx3g")
 Id = "sidequest:sidequest2"
-Title = "Obtain Materials from the Aswangs"
+Title = "Trial of Frenzy"
 Ordered = true
-Description = "The Aswangs are still running rampant! Defeat them in Frenzy Mode and gather their dropped materials that can be used for later!"
+Description = "Now that you found out what is happening in the Frenzy Mode, Lucas tells you that upon defeating the Mayor, the mythical creatures challenge you if you're worthy of reigning over them or not."
 objectives = [SubResource("Resource_1yyt2"), SubResource("Resource_7yxn7"), SubResource("Resource_2virh")]
 Experience = 0
 Items = []

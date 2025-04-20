@@ -20,16 +20,16 @@ metadata/_custom_type_script = "uid://btqj20rwc4vb"
 [sub_resource type="Resource" id="Resource_dgpxf"]
 script = ExtResource("1_qa6jr")
 Type = 1
-Description = "Concoct a Salabat and use it to replenish your health bar! Be ready and prepared for the fight!"
+Description = "Concoct a Salabat and use it to replenish your health bar."
 Items = [SubResource("Resource_p8tmn")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
 script = ExtResource("1_pfqpb")
 Id = "sidequest:sidequest3"
-Title = "Make Use of those Materials!"
+Title = "Brew of Survival"
 Ordered = true
-Description = "Upon gathering the materials, try to craft some Salabat and use it. It's a warm herbal drink known for its restorative properties that will restore 15% of your HP when consumed, allowing you to keep fighting mythical creatures on your conquest!"
+Description = "Now that you've defeated plenty of them, talk to the Witch to concoct some consumables. After concocting some consumables, use it to regenerate your health."
 objectives = [SubResource("Resource_df8t6"), SubResource("Resource_dgpxf")]
 Experience = 0
 Items = []
