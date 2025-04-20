@@ -1,3 +1,4 @@
+using System.Linq;
 using DialogueManagerRuntime;
 using Game.Autoload;
 using Game.Common.Extensions;
@@ -7,6 +8,8 @@ using Game.UI.Overlays;
 using Game.Utils.Extensions;
 using Godot;
 using GodotUtilities;
+using Game.Data;
+using Quest = Game.Data.Quest;
 
 namespace Game;
 
@@ -21,6 +24,12 @@ public partial class Lobby : Node2D
     [Node] private BlackSmith blackSmith;
     [Node] private Witch witch;
 
+    private Quest quest2 = QuestRegistry.Get("sidequest:sidequest2");
+    private Quest quest3 = QuestRegistry.Get("sidequest:sidequest3");
+    private Quest quest4 = QuestRegistry.Get("sidequest:sidequest4");
+    private int questFlag = 2;
+    private bool isQuestActive = false;
+
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
@@ -33,6 +42,7 @@ public partial class Lobby : Node2D
         storyTellerInteraction.Interacted += OnStoryTellerInteracted;
         blackSmithInteraction.Interacted += OnBlackSmithInteracted;
         witchInteraction.Interacted += OnWitchInteracted;
+        UpdateQuest();
 
         if (!SaveManager.Data.IntroShown)
         {
@@ -43,6 +53,8 @@ public partial class Lobby : Node2D
 
         if (!SaveManager.Data.NpcsEncountered.Contains(blackSmith.Id)) blackSmith.QueueFree();
         if (!SaveManager.Data.NpcsEncountered.Contains(witch.Id)) witch.QueueFree();
+
+        GD.Print(questFlag);
     }
 
     private void OnStoryTellerInteracted()
@@ -114,5 +126,45 @@ public partial class Lobby : Node2D
 
             GetTree().CreateTimer(1.3f).Timeout += OnBlackSmithInteracted;
         };
+    }
+
+private void UpdateQuest()
+{
+    var quests = new[] { quest2, quest3, quest4 };
+    isQuestActive = false;
+
+    foreach (var quest in quests)
+    {
+        GD.Print(quest.Id);
+
+        if (QuestManager.ActiveQuests.Any(q => q.Id == quest.Id))
+        {
+            isQuestActive = true;
+            return;
+        }
+        if (QuestManager.CompletedQuests.Any(q => q.Id == quest.Id))
+        {
+            questFlag++;
+            isQuestActive = false;
+        }
+    }
+}
+
+    private void GiveQuest2()
+    {
+        QuestManager.Add(quest2);
+        isQuestActive = true;
+    }
+
+    private void GiveQuest3()
+    {
+        QuestManager.Add(quest3);
+        isQuestActive = true;
+    }
+
+    private void GiveQuest4()
+    {
+        QuestManager.Add(quest4);
+        isQuestActive = true;
     }
 }
