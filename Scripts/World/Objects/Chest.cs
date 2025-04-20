@@ -22,6 +22,7 @@ public partial class Chest : Node2D
             if (loot.IsConnected("property_list_changed", Callable.From(SetDrops))) return;
 
             loot.Connect("property_list_changed", Callable.From(SetDrops));
+            SetDrops();
         }
     }
 
@@ -72,12 +73,30 @@ public partial class Chest : Node2D
         QueueFree();
     }
 
-    private void SetDrops() => dropManager.Drops = loot?.Drops;
+    private void SetDrops()
+    {
+        if (loot == null || loot.Drops == null || loot.Drops.Length == 0)
+        {
+            GD.Print("LootTable is empty or null.");
+            dropManager.Drops = null;
+            return;
+        }
+
+        dropManager.Drops = loot.Drops;
+        GD.Print($"LootTable set with {loot.Drops.Length} drops.");
+    }
 
     public void SetDrops(LootTable lootTable)
     {
-        if (lootTable == null) return;
+        if (lootTable == null || lootTable.Drops == null || lootTable.Drops.Length == 0)
+        {
+            GD.Print("Provided LootTable is empty or null.");
+            dropManager.Drops = null;
+            return;
+        }
 
+        loot = lootTable;
         dropManager.Drops = lootTable.Drops;
+        GD.Print($"LootTable manually set with {lootTable.Drops.Length} drops.");
     }
 }
