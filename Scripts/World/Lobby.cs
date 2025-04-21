@@ -23,6 +23,7 @@ public partial class Lobby : Node2D
 
     [Node] private BlackSmith blackSmith;
     [Node] private Witch witch;
+    [Node] private NPC lucas;
 
     private Quest quest2 = QuestRegistry.Get("sidequest:sidequest2");
     private Quest quest3 = QuestRegistry.Get("sidequest:sidequest3");
@@ -53,6 +54,7 @@ public partial class Lobby : Node2D
 
         if (!SaveManager.Data.NpcsEncountered.Contains(blackSmith.Id)) blackSmith.QueueFree();
         if (!SaveManager.Data.NpcsEncountered.Contains(witch.Id)) witch.QueueFree();
+        if (!SaveManager.Data.NpcsEncountered.Contains(lucas.Id)) lucas.QueueFree();
 
         GD.Print(questFlag);
     }
