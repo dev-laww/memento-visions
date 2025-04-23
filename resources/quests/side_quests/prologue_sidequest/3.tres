@@ -1,9 +1,23 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=7 format=3 uid="uid://dp8u3xd7hq1io"]
+[gd_resource type="Resource" script_class="Quest" load_steps=11 format=3 uid="uid://dp8u3xd7hq1io"]
 
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_pfqpb"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_qa6jr"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_6ypks"]
 [ext_resource type="Resource" uid="uid://ct2y0f318jxyf" path="res://resources/items/consumable/salabat.tres" id="2_a7bxh"]
 [ext_resource type="Script" uid="uid://btqj20rwc4vb" path="res://Scripts/Data/Quest/ItemRequirement.cs" id="3_6ypks"]
+[ext_resource type="Resource" uid="uid://cynqml7na5ksi" path="res://resources/items/consumable/breeze_potion.tres" id="3_p8tmn"]
+
+[sub_resource type="Resource" id="Resource_n18wq"]
+script = ExtResource("2_6ypks")
+Item = ExtResource("2_a7bxh")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_cqcey"]
+script = ExtResource("2_6ypks")
+Item = ExtResource("3_p8tmn")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 
 [sub_resource type="Resource" id="Resource_p8tmn"]
 script = ExtResource("3_6ypks")
@@ -25,6 +39,6 @@ Title = "Brew of Survival"
 Ordered = true
 Description = "Now that you've defeated plenty of them, talk to the Witch to concoct some consumables. After concocting some consumables, use it to regenerate your health."
 objectives = [SubResource("Resource_dgpxf")]
-Experience = 0
-Items = []
+Experience = 20
+Items = [SubResource("Resource_n18wq"), SubResource("Resource_cqcey")]
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

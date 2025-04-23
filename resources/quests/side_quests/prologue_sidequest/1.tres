@@ -1,8 +1,30 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=7 format=3 uid="uid://bfd8bvsg3sljk"]
+[gd_resource type="Resource" script_class="Quest" load_steps=14 format=3 uid="uid://bfd8bvsg3sljk"]
 
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_rhibe"]
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_ufogi"]
+[ext_resource type="Resource" uid="uid://s6xynv7btqjd" path="res://resources/items/weapon/whip.tres" id="1_xfj3g"]
 [ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="2_occak"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_un5ih"]
+[ext_resource type="Resource" uid="uid://7cbhpfgtsp6y" path="res://resources/items/consumable/taho.tres" id="3_p1aj5"]
+[ext_resource type="Resource" uid="uid://bmn7ssfnkxruq" path="res://resources/items/consumable/buko_juice.tres" id="4_ofgu7"]
+
+[sub_resource type="Resource" id="Resource_p1aj5"]
+script = ExtResource("2_un5ih")
+Item = ExtResource("1_xfj3g")
+Quantity = 1
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_ofgu7"]
+script = ExtResource("2_un5ih")
+Item = ExtResource("3_p1aj5")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_nrlh1"]
+script = ExtResource("2_un5ih")
+Item = ExtResource("4_ofgu7")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 
 [sub_resource type="Resource" id="Resource_7q21l"]
 script = ExtResource("2_occak")
@@ -30,6 +52,6 @@ Title = "Frenzy's Wake"
 Ordered = true
 Description = "You completed the prologue and rewarded with materials you would need to strengthen yourself. Now, the Story Teller is looking for you with nervousness."
 objectives = [SubResource("Resource_0nflr")]
-Experience = 0
-Items = []
+Experience = 20
+Items = [SubResource("Resource_p1aj5"), SubResource("Resource_ofgu7"), SubResource("Resource_nrlh1")]
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

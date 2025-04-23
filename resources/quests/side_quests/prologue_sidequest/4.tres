@@ -1,8 +1,37 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=11 format=3 uid="uid://ci256auh4e86g"]
+[gd_resource type="Resource" script_class="Quest" load_steps=20 format=3 uid="uid://ci256auh4e86g"]
 
+[ext_resource type="Resource" uid="uid://dmbnoq0p8nta0" path="res://resources/items/material/thunder_essence.tres" id="1_3gsav"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_t5eqx"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_20o2j"]
 [ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="2_e0wgx"]
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="2_wb4er"]
+[ext_resource type="Resource" uid="uid://dhr2jtmgl0gse" path="res://resources/items/material/engkanto_essence.tres" id="3_m2rvq"]
+[ext_resource type="Resource" uid="uid://dx25tu288c73x" path="res://resources/items/material/lunar_petal.tres" id="4_3ogn6"]
+[ext_resource type="Resource" uid="uid://mn5m2agnoav1" path="res://resources/items/material/rice_flour.tres" id="5_xcyis"]
+
+[sub_resource type="Resource" id="Resource_s7xn2"]
+script = ExtResource("2_20o2j")
+Item = ExtResource("1_3gsav")
+Quantity = 2
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_vy14i"]
+script = ExtResource("2_20o2j")
+Item = ExtResource("3_m2rvq")
+Quantity = 2
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_gblwv"]
+script = ExtResource("2_20o2j")
+Item = ExtResource("4_3ogn6")
+Quantity = 2
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_y63r8"]
+script = ExtResource("2_20o2j")
+Item = ExtResource("5_xcyis")
+Quantity = 4
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 
 [sub_resource type="Resource" id="Resource_00e48"]
 script = ExtResource("2_e0wgx")
@@ -56,6 +85,6 @@ Title = "The Final Descent"
 Ordered = true
 Description = "After learning how to concoct consumables, you are now prepared to take on whatever danger ahead of you. Head to the Frenzy Mode again to have a final showdown with the Boss!"
 objectives = [SubResource("Resource_gvegr"), SubResource("Resource_8ukul"), SubResource("Resource_ujrng")]
-Experience = 0
-Items = []
+Experience = 100
+Items = [SubResource("Resource_s7xn2"), SubResource("Resource_vy14i"), SubResource("Resource_gblwv"), SubResource("Resource_y63r8")]
 metadata/_custom_type_script = "uid://dssta8xepjmkg"

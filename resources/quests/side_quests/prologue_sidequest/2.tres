@@ -1,13 +1,35 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=17 format=3 uid="uid://cg7fa3tmcnat7"]
+[gd_resource type="Resource" script_class="Quest" load_steps=24 format=3 uid="uid://cg7fa3tmcnat7"]
 
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="1_6nx3g"]
+[ext_resource type="Resource" uid="uid://du6n3qtjkmo27" path="res://resources/items/consumable/tsaang_gubat.tres" id="1_qqtn5"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_sd77v"]
+[ext_resource type="Script" uid="uid://bgc5i8wwxqow4" path="res://Scripts/Data/Item/ItemGroup.cs" id="2_odmkn"]
 [ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="2_phakg"]
+[ext_resource type="Resource" uid="uid://drj5puv2462td" path="res://resources/items/material/bato_balani.tres" id="3_2virh"]
 [ext_resource type="Resource" uid="uid://efbp6aphwl23" path="res://resources/items/material/aswang_elixir.tres" id="3_aoe7o"]
 [ext_resource type="Script" uid="uid://btqj20rwc4vb" path="res://Scripts/Data/Quest/ItemRequirement.cs" id="4_geiy5"]
+[ext_resource type="Resource" uid="uid://d2p1kxc6pvocq" path="res://resources/items/material/egg.tres" id="4_nu4mb"]
 [ext_resource type="Resource" uid="uid://doqpta8ruoou0" path="res://resources/items/material/hoof_powder.tres" id="5_seb20"]
 [ext_resource type="Resource" uid="uid://cocs17ig06umk" path="res://resources/items/material/vampiric_claw.tres" id="6_f07kn"]
 [ext_resource type="Resource" uid="uid://dhr2jtmgl0gse" path="res://resources/items/material/engkanto_essence.tres" id="7_geiy5"]
+
+[sub_resource type="Resource" id="Resource_xa87q"]
+script = ExtResource("2_odmkn")
+Item = ExtResource("1_qqtn5")
+Quantity = 3
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_gpaol"]
+script = ExtResource("2_odmkn")
+Item = ExtResource("3_2virh")
+Quantity = 5
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
+
+[sub_resource type="Resource" id="Resource_gn7b4"]
+script = ExtResource("2_odmkn")
+Item = ExtResource("4_nu4mb")
+Quantity = 5
+metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 
 [sub_resource type="Resource" id="Resource_hk2ia"]
 script = ExtResource("2_phakg")
@@ -66,6 +88,6 @@ Title = "Trial of Frenzy"
 Ordered = true
 Description = "Now that you found out what is happening in the Frenzy Mode, Lucas tells you that upon defeating the Mayor, the mythical creatures challenge you if you're worthy of reigning over them or not."
 objectives = [SubResource("Resource_7yxn7"), SubResource("Resource_2virh")]
-Experience = 0
-Items = []
+Experience = 25
+Items = [SubResource("Resource_xa87q"), SubResource("Resource_gpaol"), SubResource("Resource_gn7b4")]
 metadata/_custom_type_script = "uid://dssta8xepjmkg"
