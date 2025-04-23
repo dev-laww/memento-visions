@@ -14,5 +14,6 @@ public partial class EntityDetail : Resource
     [Export] public SpriteFrames Frames;
     [Export] public string Name;
     [Export] public EntityType Type;
+    [Export] public string Id;
     [Export(PropertyHint.MultilineText)] public string Description;
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Game.Autoload;
 using Game.Data;
 using Game.UI.Common;
 using Godot;
@@ -29,15 +30,18 @@ public partial class EnemyGlossary : Overlay
 
     public override void _Ready()
     {
-        var details = EntityDetailRegistry.Get(EntityDetail.EntityType.Enemy).ToList();
+        var unlockedIds = SaveManager.Data.GetEnemyDetails();
+        var details = EntityDetailRegistry
+            .Get(EntityDetail.EntityType.Enemy)
+            .Where(d => unlockedIds.Contains(d.Id))
+            .ToList();
 
         var pageSize = 2;
-        totalPages = details.Count / pageSize + (details.Count % pageSize == 0 ? 0 : 1);
+        totalPages = (details.Count + pageSize - 1) / pageSize;
 
         for (var i = 0; i < totalPages; i++)
         {
-            var pageDetails = details.Skip(i * pageSize).Take(pageSize).ToList();
-            enemyDetails[i] = [.. pageDetails];
+            enemyDetails[i] = details.Skip(i * pageSize).Take(pageSize).ToList();
         }
 
         UpdateEnemyDetails();
@@ -85,4 +89,3 @@ public partial class EnemyGlossary : Overlay
         nextButton.Disabled = currentPage == totalPages;
     }
 }
-

@@ -14,6 +14,7 @@ public class Save
     [JsonProperty("unlocked_recipes")] public List<string> UnlockedRecipes { get; private set; } = [];
     [JsonProperty("npcs_encountered")] public List<string> NpcsEncountered { get; private set; } = [];
     [JsonProperty("game_intro_shown")] public bool IntroShown { get; private set; }
+    [JsonProperty("enemy_details")] public List<string> EnemyDetails { get; private set; } = [];
 
     [JsonProperty("current_chapter", DefaultValueHandling = DefaultValueHandling.Populate),
      DefaultValue("cmVzOi8vU2NlbmVzL1dvcmxkL0xldmVscy9TdG9yeS9Qcm9sb2d1ZS9Qcm9sb2d1ZUJhci50c2Nu")]
@@ -28,6 +29,7 @@ public class Save
     public void SetEquipped(string item) => Equipped = item;
 
     public IReadOnlyList<Quest> GetQuests() => quests;
+    public IReadOnlyList<string> GetEnemyDetails() => EnemyDetails;
 
     public void AddQuest(Quest quest)
     {
@@ -70,5 +72,11 @@ public class Save
     public void SetIntroShown(bool shown)
     {
         IntroShown = shown;
+    }
+
+    public void AddEnemyDetails(string enemyId)
+    {
+        if (EnemyDetails.Contains(enemyId)) return;
+        EnemyDetails.Add(enemyId);
     }
 }
