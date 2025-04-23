@@ -1,14 +1,8 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=12 format=3 uid="uid://ci256auh4e86g"]
+[gd_resource type="Resource" script_class="Quest" load_steps=11 format=3 uid="uid://ci256auh4e86g"]
 
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_t5eqx"]
 [ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="2_e0wgx"]
 [ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="2_wb4er"]
-
-[sub_resource type="Resource" id="Resource_7c80s"]
-script = ExtResource("1_t5eqx")
-Type = 2
-Description = "Talk to the Storyteller to teleport you to the Frenzy Mode."
-metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="Resource" id="Resource_00e48"]
 script = ExtResource("2_e0wgx")
@@ -61,7 +55,7 @@ Id = "sidequest:sidequest4"
 Title = "The Final Descent"
 Ordered = true
 Description = "After learning how to concoct consumables, you are now prepared to take on whatever danger ahead of you. Head to the Frenzy Mode again to have a final showdown with the Boss!"
-objectives = [SubResource("Resource_7c80s"), SubResource("Resource_gvegr"), SubResource("Resource_8ukul"), SubResource("Resource_ujrng")]
+objectives = [SubResource("Resource_gvegr"), SubResource("Resource_8ukul"), SubResource("Resource_ujrng")]
 Experience = 0
 Items = []
 metadata/_custom_type_script = "uid://dssta8xepjmkg"
