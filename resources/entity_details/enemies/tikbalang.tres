@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="EntityDetail" load_steps=8 format=3 uid="uid://bb8uqlh2wvyf3"]
+
+[ext_resource type="Texture2D" uid="uid://d2rgjab2cym6d" path="res://assets/entities/enemy/common/tikbalang/spritesheet.png" id="1_37ulf"]
+[ext_resource type="Script" uid="uid://cu8bxfkvbhol" path="res://Scripts/Data/Entity/EntityDetail.cs" id="2_amwq2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w62vr"]
+atlas = ExtResource("1_37ulf")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3cr2"]
+atlas = ExtResource("1_37ulf")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7krj"]
+atlas = ExtResource("1_37ulf")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bpg0n"]
+atlas = ExtResource("1_37ulf")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ar8os"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w62vr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3cr2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7krj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bpg0n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[resource]
+script = ExtResource("2_amwq2")
+Frames = SubResource("SpriteFrames_ar8os")
+Name = "Tikbalang"
+Type = 1
+Id = "enemy:tikbalang"
+Description = "A tall, humanoid creature with the head and hooves of a horse. Its body is lean and muscular, with unnaturally long limbs and knees higher than its head when sitting. Eyes glow red or yellow, and its mane is often matted or wild. It moves quickly and silently despite its size and is known for its intimidating presence and unsettling grin."
+metadata/_custom_type_script = "uid://cu8bxfkvbhol"

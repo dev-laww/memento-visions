@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EntityDetail" load_steps=2 format=3 uid="uid://mkjlufk0pl8"]
+
+[ext_resource type="Script" uid="uid://cu8bxfkvbhol" path="res://Scripts/Data/Entity/EntityDetail.cs" id="1_u16fy"]
+
+[resource]
+script = ExtResource("1_u16fy")
+Name = "Santelmo"
+Type = 1
+Id = "enemy:santelmo"
+Description = "Appears as a floating ball of flame that flickers with a ghostly, blue-orange glow. It hovers silently in the darkness, often spotted near swamps, rivers, or remote paths at night. Though it appears small and harmless, the Santelmo pulses with unstable energy, crackling with heat and sparks. It dances erratically through the air, luring the curious or the lost deeper into danger. When threatened or enraged, it can erupt in a burst of flame, searing everything nearby before vanishing in a blink. A fiery omen, the Santelmo is a spirit of untamed light—beautiful, mysterious, and deadly."
+metadata/_custom_type_script = "uid://cu8bxfkvbhol"
