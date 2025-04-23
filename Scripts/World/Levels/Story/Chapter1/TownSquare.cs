@@ -55,7 +55,7 @@ public partial class TownSquare : BaseLevel
 
     private void Spawn()
     {
-        mayor.Visible = false;
+        mayor.QueueFree();
         var aghon = resourcePreloader.InstanceSceneOrNull<Aghon>();
         aghon.GlobalPosition = mayor.GlobalPosition;
         aghon.Death += _ => SaveManager.UnlockFrenzyMode();

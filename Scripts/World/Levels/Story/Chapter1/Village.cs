@@ -107,7 +107,7 @@ public partial class Village : BaseLevel
     public void SetMayorVisible()
     {
         rudy.Visible = true;
-        mayor.Visible = false;
+        mayor.QueueFree();
     }
     public override void _ExitTree()
     {
