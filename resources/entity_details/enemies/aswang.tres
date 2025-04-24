@@ -44,5 +44,6 @@ script = ExtResource("1_khxrj")
 Frames = SubResource("SpriteFrames_khxrj")
 Name = "Aswang"
 Type = 1
-Description = "Aswang description"
+Id = "enemy:aswang"
+Description = "A hunched, demonic figure with twisted limbs and jagged edges across its armor-like skin. Sharp horns curve from its head, and shadowy wings drape behind like a tattered cloak. It stalks its prey with low stance and twitchy, insect-like movements, ready to lunge. The mythical creature radiates a predatory presence, as if it's always on the verge of attacking."
 metadata/_custom_type_script = "uid://cu8bxfkvbhol"

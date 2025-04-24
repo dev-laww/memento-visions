@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EntityDetail" load_steps=2 format=3 uid="uid://q7032p07d777"]
+
+[ext_resource type="Script" uid="uid://cu8bxfkvbhol" path="res://Scripts/Data/Entity/EntityDetail.cs" id="1_k4ijr"]
+
+[resource]
+script = ExtResource("1_k4ijr")
+Name = "Kapre"
+Type = 1
+Id = "enemy:kapre"
+Description = "The Kapre is a towering, dark-skinned giant with glowing eyes and a thick, muscular build, often seen perched silently atop ancient trees. Cloaked in smoke and mystery, it is always surrounded by the scent of burning tobacco from the massive cigar it constantly smokes. Despite its intimidating appearance, the Kapre is more of a watcher than a hunter, observing humans from afar with slow, deliberate movements. It can cause confusion and disorientation in travelers, especially those who disrespect nature. When provoked, the Kapre uses its immense strength to hurl trees or crush intruders underfoot."
+metadata/_custom_type_script = "uid://cu8bxfkvbhol"

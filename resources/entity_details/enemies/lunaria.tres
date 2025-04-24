@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="EntityDetail" load_steps=8 format=3 uid="uid://djawnqs2rj32s"]
+
+[ext_resource type="Texture2D" uid="uid://cny0tot07a045" path="res://assets/entities/enemy/boss/Lunaria/lunaria.png" id="1_10v2a"]
+[ext_resource type="Script" uid="uid://cu8bxfkvbhol" path="res://Scripts/Data/Entity/EntityDetail.cs" id="2_5rfi4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7adb"]
+atlas = ExtResource("1_10v2a")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpy5p"]
+atlas = ExtResource("1_10v2a")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b57an"]
+atlas = ExtResource("1_10v2a")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wy1s"]
+atlas = ExtResource("1_10v2a")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ub1d0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7adb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpy5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b57an")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wy1s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[resource]
+script = ExtResource("2_5rfi4")
+Frames = SubResource("SpriteFrames_ub1d0")
+Name = "Lunaria"
+Type = 1
+Id = "enemy:lunaria"
+Description = "Named after the moonflower, Lunaria is a ghostly, plant-infused entity that draws power from the earth and moonlight. Its body appears wilted yet alive, with pale green tones and glowing red eyes that hint at something unnatural. Lunaria can regenerate itself over time, its wounds slowly closing as if nourished by unseen roots. It summons thorned sprouts from the ground to entangle or pierce its enemies, creating zones of danger. At its peak, it fires a concentrated beam of energy from its core, searing anything in its path with lunar wrath. Lunaria is not just a monster—it’s a cursed bloom that thrives in decay and battles with patience and poison."
+metadata/_custom_type_script = "uid://cu8bxfkvbhol"

@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="EntityDetail" load_steps=8 format=3 uid="uid://coln1l7fb3osl"]
+
+[ext_resource type="Texture2D" uid="uid://fauryybyao36" path="res://assets/entities/enemy/boss/aghon/phase_1.png" id="1_bsq7q"]
+[ext_resource type="Script" uid="uid://cu8bxfkvbhol" path="res://Scripts/Data/Entity/EntityDetail.cs" id="2_denk6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk4p2"]
+atlas = ExtResource("1_bsq7q")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0llbn"]
+atlas = ExtResource("1_bsq7q")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tq4v"]
+atlas = ExtResource("1_bsq7q")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jj1yf"]
+atlas = ExtResource("1_bsq7q")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s0qy7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kk4p2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0llbn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tq4v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jj1yf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[resource]
+script = ExtResource("2_denk6")
+Frames = SubResource("SpriteFrames_s0qy7")
+Name = "Aghon"
+Type = 1
+Id = "enemy:aghon"
+Description = "A hulking, electrified figure born from the Mayor's transformation, radiating unstable energy. Its body crackles with lightning, and every movement surges with raw power. Each punch detonates on impact, releasing explosive bursts of electricity. Enemies caught in its strikes are electrocuted. Aghon, a walking storm-violent, relentless, and impossible to ignore."
+metadata/_custom_type_script = "uid://cu8bxfkvbhol"
