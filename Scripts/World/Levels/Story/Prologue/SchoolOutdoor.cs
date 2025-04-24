@@ -31,6 +31,7 @@ public partial class SchoolOutdoor : BaseLevel
         transitionArea.Toggle(false);
         QuestManager.QuestUpdated += OnQuestUpdated;
         transitionMarker.Toggle(false);
+        SaveManager.AddEnemyDetails("enemy:aswang");
     }
     
     private void OnQuestUpdated(Quest quest)

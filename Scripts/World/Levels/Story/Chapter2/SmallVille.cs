@@ -4,8 +4,10 @@ using Game.World.Puzzle;
 using GodotUtilities;
 using DialogueManagerRuntime;
 using Game.Autoload;
+using Game.Common.Models;
 using Game.UI.Screens;
 using Game.Data;
+using Quest = Game.Data.Quest;
 
 namespace Game.World.Levels.Chapter2;
 
@@ -56,6 +58,7 @@ public partial class SmallVille : BaseLevel
 
     public void StartCinematic()
     {
+        SaveManager.AddEnemyDetails("enemy:tikbalang");
         CinematicManager.StartCinematic();
         GameCamera.SetTargetPositionOverride(tikbalangPosition.GlobalPosition);
         var timer = GameCamera.Instance.GetTree().CreateTimer(2.5f);

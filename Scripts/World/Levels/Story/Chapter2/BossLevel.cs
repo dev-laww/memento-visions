@@ -60,6 +60,7 @@ public partial class BossLevel : BaseLevel
 
     public void SpawnLunaria()
     {
+        SaveManager.AddEnemyDetails("enemy:lunaria");
         var lunaria = resourcePreloader.InstanceSceneOrNull<Lunaria>();
         lunaria.GlobalPosition = lunariaSpawnPoint.GlobalPosition;
         enemy.AddChild(lunaria);
