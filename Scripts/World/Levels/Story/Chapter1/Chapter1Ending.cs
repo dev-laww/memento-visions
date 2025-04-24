@@ -166,6 +166,7 @@ public partial class Chapter1Ending : BaseLevel
         SaveManager.UnlockRecipe("item:salabat");
         SaveManager.UnlockRecipe("item:puto");
         SaveManager.UnlockRecipe("item:bibingka");
+        SaveManager.UnlockRecipe("item:breeze_potion");
         SaveManager.UnlockRecipe("weapon:sword");
     }
 
