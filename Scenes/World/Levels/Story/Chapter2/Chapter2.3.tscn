@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=4 uid="uid://criyou87dacyh"]
+[gd_scene load_steps=107 format=4 uid="uid://criyou87dacyh"]
 
 [ext_resource type="Script" uid="uid://c4ksan4dtstup" path="res://Scripts/World/Levels/Story/Chapter2/CentralForest.cs" id="1_esctv"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_exmlw"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="16_y42ld"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="18_y42ld"]
 [ext_resource type="Resource" uid="uid://b36y2bljh3l2m" path="res://resources/dialogues/chapter_2/torn_pages.dialogue" id="19_0lbbt"]
+[ext_resource type="AudioStream" uid="uid://cq5ifkvvn6f00" path="res://assets/audio/music/forest.ogg" id="20_e7pso"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nfvny"]
 
@@ -876,3 +877,9 @@ IsRed = false
 libraries = {
 &"": SubResource("AnimationLibrary_52t3j")
 }
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_e7pso")
+autoplay = true
+attenuation = 0.0
+parameters/looping = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=4 uid="uid://d0njwb8s1yg5h"]
+[gd_scene load_steps=78 format=4 uid="uid://d0njwb8s1yg5h"]
 
 [ext_resource type="Script" uid="uid://bowgi2e1v2qws" path="res://Scripts/World/Levels/Story/Chapter2/EverFieldEntrance.cs" id="1_suwuo"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_565dr"]
@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://dh5orsty66kxw" path="res://resources/quests/chapter_2/forest_awakening.tres" id="10_2u5h6"]
 [ext_resource type="Resource" uid="uid://b8xephrl31kc2" path="res://resources/dialogues/chapter_2/2.4.dialogue" id="11_cxmce"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="15_c37h7"]
+[ext_resource type="AudioStream" uid="uid://cq5ifkvvn6f00" path="res://assets/audio/music/forest.ogg" id="16_2u5h6"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="16_cxmce"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="16_rmolw"]
 
@@ -600,3 +601,9 @@ position = Vector2(59, 154)
 rotation = 3.14159
 HideWhenInBounds = false
 IsRed = false
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_2u5h6")
+autoplay = true
+attenuation = 0.0
+parameters/looping = true

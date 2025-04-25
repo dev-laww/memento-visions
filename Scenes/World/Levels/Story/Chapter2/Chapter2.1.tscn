@@ -456,6 +456,7 @@ polygon = PackedVector2Array(-275, 343, -266, 1310, 1075, 1272, 1075, 255, -309,
 [node name="backgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("19_hh2j8")
 autoplay = true
+attenuation = 0.0
 bus = &"Music"
 parameters/looping = true
 

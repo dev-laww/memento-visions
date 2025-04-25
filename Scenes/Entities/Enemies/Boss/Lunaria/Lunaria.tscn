@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://c11a0icy1ftwe"]
+[gd_scene load_steps=106 format=3 uid="uid://c11a0icy1ftwe"]
 
 [ext_resource type="Script" uid="uid://u55fkdi23tqb" path="res://Scripts/Entities/Enemies/Boss/Lunaria/Lunaria.cs" id="1_6q18i"]
 [ext_resource type="PackedScene" uid="uid://dbetkgdhvs051" path="res://Scenes/Entities/Enemies/Boss/Lunaria/Vines.tscn" id="2_njo4t"]
@@ -14,6 +14,9 @@
 [ext_resource type="Resource" uid="uid://dx25tu288c73x" path="res://resources/items/material/lunar_petal.tres" id="12_ayylu"]
 [ext_resource type="Texture2D" uid="uid://cny0tot07a045" path="res://assets/entities/enemy/boss/Lunaria/lunaria.png" id="13_6q18i"]
 [ext_resource type="Resource" uid="uid://dxrl1uamwfs14" path="res://resources/items/material/moon_shard.tres" id="13_68gba"]
+[ext_resource type="AudioStream" uid="uid://dpc3dt7rh6bwi" path="res://assets/audio/enemy/lunaria_heal.ogg" id="15_6q18i"]
+[ext_resource type="AudioStream" uid="uid://dd7b37xh38lbd" path="res://assets/audio/enemy/lunaria_skill2.1.ogg" id="16_vn6im"]
+[ext_resource type="AudioStream" uid="uid://cg18luw7jivy4" path="res://assets/audio/enemy/vineSummon.ogg" id="17_l2wy2"]
 
 [sub_resource type="Resource" id="Resource_17aub"]
 script = ExtResource("11_1pfq2")
@@ -828,4 +831,20 @@ tree_root = SubResource("AnimationNodeStateMachine_j8msc")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Move/blend_position = Vector2(-0.0846395, -0.325103)
 
-[node name="sfx" type="Node2D" parent="."]
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="Heal" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("15_6q18i")
+pitch_scale = 2.25
+bus = &"SFX"
+
+[node name="Scream" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("16_vn6im")
+volume_db = 11.886
+pitch_scale = 1.65
+bus = &"SFX"
+
+[node name="Spawn" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("17_l2wy2")
+volume_db = 6.988
+pitch_scale = 1.65

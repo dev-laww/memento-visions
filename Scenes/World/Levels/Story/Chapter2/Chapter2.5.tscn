@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=4 uid="uid://cntfldylta63f"]
+[gd_scene load_steps=69 format=4 uid="uid://cntfldylta63f"]
 
 [ext_resource type="Script" uid="uid://b0xjawf252s4w" path="res://Scripts/World/Levels/Story/Chapter2/BossLevel.cs" id="1_xp4xo"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_n6dna"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="16_h7amt"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="17_pom2c"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="18_pom2c"]
+[ext_resource type="AudioStream" uid="uid://cq5ifkvvn6f00" path="res://assets/audio/music/forest.ogg" id="19_ywus7"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nwd2x"]
 
@@ -549,3 +550,9 @@ position = Vector2(222, 427)
 position = Vector2(-53, -44)
 rotation = 3.14159
 IsRed = false
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_ywus7")
+autoplay = true
+attenuation = 0.0
+parameters/looping = true

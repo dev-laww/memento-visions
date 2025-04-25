@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=4 uid="uid://u1iww5n58onj"]
+[gd_scene load_steps=106 format=4 uid="uid://u1iww5n58onj"]
 
 [ext_resource type="Script" uid="uid://dai76mk8k3dog" path="res://Scripts/World/Levels/Story/Chapter2/EastForest.cs" id="1_gjg47"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_boo03"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="13_5hi8n"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="14_vimnp"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="14_vqqma"]
+[ext_resource type="AudioStream" uid="uid://cq5ifkvvn6f00" path="res://assets/audio/music/forest.ogg" id="16_5hi8n"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_750n8"]
 
@@ -822,3 +823,9 @@ metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger"]
 shape = SubResource("RectangleShape2D_esctv")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_5hi8n")
+autoplay = true
+attenuation = 0.0
+parameters/looping = true
