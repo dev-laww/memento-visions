@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://du6gsft33r8su"]
+[gd_scene load_steps=70 format=4 uid="uid://du6gsft33r8su"]
 
 [ext_resource type="Script" uid="uid://dana374n4d6mt" path="res://Scripts/World/Levels/Story/Chapter2/SmallVille.cs" id="1_swhdr"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_j142m"]
@@ -14,18 +14,15 @@
 [ext_resource type="PackedScene" uid="uid://defbwilwt3lnr" path="res://Scenes/Entities/Characters/Witch.tscn" id="11_7mlp4"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="12_ktsv1"]
 [ext_resource type="Resource" uid="uid://b3pnov4n41331" path="res://resources/quests/chapter_2/echoes_of_void.tres" id="13_qx0xp"]
-[ext_resource type="Resource" uid="uid://c6xlurnbhc5sx" path="res://resources/dialogues/chapter_2/2.1.dialogue" id="14_5ce7n"]
+[ext_resource type="Resource" uid="uid://c6xlurnbhc5sx" path="res://resources/dialogues/chapter_2/2.1.dialogue" id="13_swhdr"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="14_ktsv1"]
-[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="15_ofpmp"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="14_qplpt"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="16_vbaa4"]
-[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="18_bhwji"]
+[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="17_tmx34"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="18_bhwji"]
 [ext_resource type="AudioStream" uid="uid://cnm5fmp58mrej" path="res://assets/audio/music/chapter_1_bgm.ogg" id="19_hh2j8"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nj1is"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_bhwji"]
-parsed_geometry_type = 1
-border_size = 256.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_qplpt"]
 parsed_geometry_type = 1
@@ -84,18 +81,18 @@ parsed_geometry_type = 1
 border_size = 256.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_6lhmv"]
-vertices = PackedVector2Array(-19, 590, 0, 590.4, 0, 614, -58, 614, -217.3, 593.8, -222.7, 760.9, -58, 730, -18.1, 759, 0, 730, 0, 758.9)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 4, 3, 6), PackedInt32Array(7, 5, 6, 8), PackedInt32Array(7, 8, 9)])
 parsed_geometry_type = 1
 border_size = 256.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_vce8i"]
-vertices = PackedVector2Array(0, 614, 0, 590.4, 176.1, 593.8, 58, 614, 178.8, 758, 58, 730, 0, 758.9, 0, 730)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 2, 4, 5), PackedInt32Array(5, 4, 6, 7)])
+vertices = PackedVector2Array(-188.8, 762.7, -206.1, 732.2, -206.8, 656.4, -201.3, 656.4, -58, 730, -18.2, 763.5, -18.8, 590, 0, 590.4, 0, 614, -58, 614, -197.7, 601.7, 0, 730, 0, 763)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 10), PackedInt32Array(3, 10, 9, 4), PackedInt32Array(5, 4, 11, 12)])
 parsed_geometry_type = 1
 border_size = 256.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_qvyms"]
+vertices = PackedVector2Array(178.8, 758.3, 0, 763, 0, 730, 58, 730, 176.1, 593.8, 58, 614, 0, 590.4, 0, 614)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(6, 4, 5, 7)])
 parsed_geometry_type = 1
 border_size = 256.0
 
@@ -195,19 +192,23 @@ border_size = 256.0
 parsed_geometry_type = 1
 border_size = 256.0
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_q88fl"]
+parsed_geometry_type = 1
+border_size = 256.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_bj64g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8uqde"]
 size = Vector2(42, 30)
 
 [sub_resource type="Resource" id="Resource_arrju"]
-script = ExtResource("18_bhwji")
+script = ExtResource("17_tmx34")
 Id = "enemy:tikbalang"
 Amount = 2
 metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 
 [sub_resource type="Resource" id="Resource_7n7ry"]
-script = ExtResource("15_ofpmp")
+script = ExtResource("18_bhwji")
 Type = 3
 Description = "Kill the 2 tikbalang still left on the scene. "
 Enemies = [SubResource("Resource_arrju")]
@@ -236,142 +237,141 @@ tile_map_data = PackedByteArray("AAANAAIAAAASAAkAAAANAAMAAAASAAoAAAANAAQAAAASAAs
 tile_set = ExtResource("2_qrlfj")
 
 [node name="NavigationManager" type="Polygon2D" parent="." node_paths=PackedStringArray("ParseRootNode")]
-visible = false
 z_index = 1000
-position = Vector2(1.54505, 0)
-scale = Vector2(1.16114, 1)
+position = Vector2(-7.84147, -152.539)
+scale = Vector2(1.12085, 1.2199)
 color = Color(1, 1, 1, 0)
-polygon = PackedVector2Array(-227, 584, -19, 580, 186, 584, 189, 768, -18, 769, -233, 771)
+polygon = PackedVector2Array(-207.126, 592.296, -19, 580, 186, 584, 189, 768, -17.985, 773.459, -194.636, 772.639, -216.048, 734.931, -216.94, 646.399, -210.695, 646.399)
 script = ExtResource("6_q65kr")
 ParseRootNode = NodePath("../Tilemap")
 NavigationPolygon = SubResource("NavigationPolygon_nj1is")
 metadata/_custom_type_script = "uid://cfscbenslyojv"
 
-[node name="@NavigationRegion2D@30596" type="NavigationRegion2D" parent="NavigationManager"]
-navigation_polygon = SubResource("NavigationPolygon_bhwji")
-
-[node name="@NavigationRegion2D@30597" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34901" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_qplpt")
 
-[node name="@NavigationRegion2D@30598" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34902" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_swhdr")
 
-[node name="@NavigationRegion2D@30599" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34903" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_qrlfj")
 
-[node name="@NavigationRegion2D@30600" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34904" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_j142m")
 
-[node name="@NavigationRegion2D@30601" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34905" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_q6x1h")
 
-[node name="@NavigationRegion2D@30602" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34906" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_eu077")
 
-[node name="@NavigationRegion2D@30603" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34907" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_aly1c")
 
-[node name="@NavigationRegion2D@30604" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34908" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_k15ad")
 
-[node name="@NavigationRegion2D@30605" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34909" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_papkd")
 
-[node name="@NavigationRegion2D@30606" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34910" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_7mlp4")
 
-[node name="@NavigationRegion2D@30607" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34911" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_qx0xp")
 
-[node name="@NavigationRegion2D@30608" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34912" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_5ce7n")
 
-[node name="@NavigationRegion2D@30609" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34913" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_vbaa4")
 
-[node name="@NavigationRegion2D@30610" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34914" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_hh2j8")
 
-[node name="@NavigationRegion2D@30611" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34915" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_6lhmv")
 
-[node name="@NavigationRegion2D@30612" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34916" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_vce8i")
 
-[node name="@NavigationRegion2D@30613" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34917" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_qvyms")
 
-[node name="@NavigationRegion2D@30614" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34918" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_dhpy4")
 
-[node name="@NavigationRegion2D@30615" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34919" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_3kb3c")
 
-[node name="@NavigationRegion2D@30616" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34920" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_m7cpq")
 
-[node name="@NavigationRegion2D@30617" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34921" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_mvmdr")
 
-[node name="@NavigationRegion2D@30618" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34922" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_ppeob")
 
-[node name="@NavigationRegion2D@30619" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34923" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_l52u3")
 
-[node name="@NavigationRegion2D@30620" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34924" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_dch3i")
 
-[node name="@NavigationRegion2D@30621" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34925" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_8e5u7")
 
-[node name="@NavigationRegion2D@30622" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34926" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_hi4v4")
 
-[node name="@NavigationRegion2D@30623" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34927" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_3uda5")
 
-[node name="@NavigationRegion2D@30624" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34928" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_xc1ka")
 
-[node name="@NavigationRegion2D@30625" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34929" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_6hyed")
 
-[node name="@NavigationRegion2D@30626" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34930" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_q5nn6")
 
-[node name="@NavigationRegion2D@30627" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34931" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_tbbj6")
 
-[node name="@NavigationRegion2D@30628" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34932" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_k6pui")
 
-[node name="@NavigationRegion2D@30629" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34933" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_qod14")
 
-[node name="@NavigationRegion2D@30630" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34934" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_i7b1c")
 
-[node name="@NavigationRegion2D@30631" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34935" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_iv6qk")
 
-[node name="@NavigationRegion2D@30632" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34936" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_wrpe6")
 
-[node name="@NavigationRegion2D@30633" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34937" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_bw7mi")
 
-[node name="@NavigationRegion2D@30634" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34938" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_j03cs")
 
-[node name="@NavigationRegion2D@30635" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34939" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_o5dj5")
 
-[node name="@NavigationRegion2D@30636" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34940" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_6qpmh")
 
-[node name="@NavigationRegion2D@30637" type="NavigationRegion2D" parent="NavigationManager"]
+[node name="@NavigationRegion2D@34941" type="NavigationRegion2D" parent="NavigationManager"]
 navigation_polygon = SubResource("NavigationPolygon_ek6me")
+
+[node name="@NavigationRegion2D@34942" type="NavigationRegion2D" parent="NavigationManager"]
+navigation_polygon = SubResource("NavigationPolygon_q88fl")
 
 [node name="TorchSequence" parent="." instance=ExtResource("4_j142m")]
 position = Vector2(119, 573)
@@ -391,7 +391,7 @@ position = Vector2(-71, 24)
 [node name="Chest" parent="TorchSequence" instance=ExtResource("6_eu077")]
 unique_name_in_owner = true
 visible = false
-position = Vector2(73, 130)
+position = Vector2(-118, 17)
 Loot = ExtResource("7_aly1c")
 
 [node name="Player" parent="." instance=ExtResource("5_7wp0m")]
@@ -409,8 +409,8 @@ script = ExtResource("7_gw6o1")
 Quest = ExtResource("13_qx0xp")
 Mode = 0
 ShouldInteract = true
-InteractionLabel = "Talk to the Witch"
-DialogueResource = ExtResource("14_5ce7n")
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("13_swhdr")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Witch/QuestTrigger"]
@@ -418,9 +418,12 @@ shape = SubResource("CircleShape2D_bj64g")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Witch/QuestTrigger"]
-position = Vector2(1, -35)
 
-[node name="InteractionUI" parent="Witch/QuestTrigger/Node2D" instance=ExtResource("12_ktsv1")]
+[node name="InteractionUI" type="Control" parent="Witch/QuestTrigger/Node2D" instance=ExtResource("12_ktsv1")]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("14_qplpt")
 
 [node name="WitchMarker" parent="Witch" instance=ExtResource("16_vbaa4")]
 unique_name_in_owner = true
@@ -436,7 +439,8 @@ position = Vector2(-76, 702)
 [node name="Tikbalang2" parent="Enemy" instance=ExtResource("4_wyqtt")]
 position = Vector2(80, 679)
 
-[node name="TransitionArea" type="Area2D" parent="."]
+[node name="Jeeptransition" type="Area2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(-191, 585)
 collision_layer = 0
 collision_mask = 4
@@ -444,7 +448,7 @@ script = ExtResource("14_ktsv1")
 TargetScene = "uid://d0njwb8s1yg5h"
 metadata/_custom_type_script = "uid://davlg2u8drdh4"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TransitionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Jeeptransition"]
 shape = SubResource("RectangleShape2D_8uqde")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

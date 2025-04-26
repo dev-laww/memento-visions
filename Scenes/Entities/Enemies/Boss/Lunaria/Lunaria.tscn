@@ -820,7 +820,7 @@ shape = SubResource("CircleShape2D_a1nrq")
 sprite_frames = SubResource("SpriteFrames_pjsr3")
 animation = &"walk_south"
 autoplay = "walk_south"
-frame = 3
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -838,18 +838,19 @@ parameters/Move/blend_position = Vector2(-0.0846395, -0.325103)
 [node name="Heal" type="AudioStreamPlayer2D" parent="SFX"]
 unique_name_in_owner = true
 stream = ExtResource("15_6q18i")
+volume_db = -20.0
 pitch_scale = 2.25
 bus = &"SFX"
 
 [node name="Scream" type="AudioStreamPlayer2D" parent="SFX"]
 unique_name_in_owner = true
 stream = ExtResource("16_vn6im")
-volume_db = 11.886
+volume_db = -20.0
 pitch_scale = 1.65
 bus = &"SFX"
 
 [node name="Spawn" type="AudioStreamPlayer2D" parent="SFX"]
 unique_name_in_owner = true
 stream = ExtResource("17_l2wy2")
-volume_db = 6.988
+volume_db = -20.0
 pitch_scale = 1.65
