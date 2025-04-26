@@ -1,7 +1,8 @@
-[gd_scene load_steps=106 format=3 uid="uid://c11a0icy1ftwe"]
+[gd_scene load_steps=107 format=3 uid="uid://c11a0icy1ftwe"]
 
 [ext_resource type="Script" uid="uid://u55fkdi23tqb" path="res://Scripts/Entities/Enemies/Boss/Lunaria/Lunaria.cs" id="1_6q18i"]
 [ext_resource type="PackedScene" uid="uid://dbetkgdhvs051" path="res://Scenes/Entities/Enemies/Boss/Lunaria/Vines.tscn" id="2_njo4t"]
+[ext_resource type="PackedScene" uid="uid://cmpubd6rbsqiu" path="res://Scenes/Entities/Enemies/Common/Tikbalang.tscn" id="2_vn6im"]
 [ext_resource type="Script" uid="uid://clh46y8w17vem" path="res://addons/node_library/scripts/random_timer.gd" id="5_1pfq2"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="6_ayylu"]
 [ext_resource type="Script" uid="uid://cpwyjck8klk35" path="res://Scripts/Components/Managers/HealthNumberManager.cs" id="7_68gba"]
@@ -743,7 +744,7 @@ Type = 1
 Id = "enemy:lunaria"
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
-resources = [PackedStringArray("Vines"), [ExtResource("2_njo4t")]]
+resources = [PackedStringArray("Tikbalang", "Vines"), [ExtResource("2_vn6im"), ExtResource("2_njo4t")]]
 
 [node name="BlinkTimer" type="Timer" parent="."]
 wait_time = 0.7
@@ -761,7 +762,7 @@ metadata/_custom_type_script = "uid://clh46y8w17vem"
 one_shot = true
 autostart = true
 script = ExtResource("5_1pfq2")
-min_wait_time = 4.0
+min_wait_time = 3.0
 max_wait_time = 5.0
 metadata/_custom_type_script = "uid://clh46y8w17vem"
 
@@ -819,6 +820,7 @@ shape = SubResource("CircleShape2D_a1nrq")
 sprite_frames = SubResource("SpriteFrames_pjsr3")
 animation = &"walk_south"
 autoplay = "walk_south"
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -834,17 +836,20 @@ parameters/Move/blend_position = Vector2(-0.0846395, -0.325103)
 [node name="SFX" type="Node2D" parent="."]
 
 [node name="Heal" type="AudioStreamPlayer2D" parent="SFX"]
+unique_name_in_owner = true
 stream = ExtResource("15_6q18i")
 pitch_scale = 2.25
 bus = &"SFX"
 
 [node name="Scream" type="AudioStreamPlayer2D" parent="SFX"]
+unique_name_in_owner = true
 stream = ExtResource("16_vn6im")
 volume_db = 11.886
 pitch_scale = 1.65
 bus = &"SFX"
 
 [node name="Spawn" type="AudioStreamPlayer2D" parent="SFX"]
+unique_name_in_owner = true
 stream = ExtResource("17_l2wy2")
 volume_db = 6.988
 pitch_scale = 1.65

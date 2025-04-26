@@ -14,7 +14,9 @@ public partial class Vines : Node2D
 {
     [Node] private AnimatedSprite2D animatedSprite2D;
     [Node] private AnimationPlayer animationPlayer;
-
+    [Node] private AudioStreamPlayer2D vineHit;
+    [Node] private AudioStreamPlayer2D spawn;
+    
     private int spawnCount = 0;
     private const int MaxSpawns = 3;
     private Vector2 playerPosition;
@@ -49,7 +51,7 @@ public partial class Vines : Node2D
             QueueFree();
             return;
         }
-
+        spawn.Play();
         playerPosition = this.GetPlayer()?.GlobalPosition ?? GlobalPosition;
         var offset = spawnOffsets[spawnCount];
         var telegraphOrigin = playerPosition + offset;
@@ -73,6 +75,7 @@ public partial class Vines : Node2D
 
     private void OnTelegraphFinished(bool isRight)
     {
+        vineHit.Play();
         if (lunaria == null) return;
 
         animationPlayer.AnimationFinished -= OnAnimationFinished;

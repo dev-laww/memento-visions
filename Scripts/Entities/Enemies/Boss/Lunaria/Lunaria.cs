@@ -26,6 +26,9 @@ public partial class Lunaria : Enemy
     [Node] private Timer specialAttackTimer1;
     [Node] private Timer specialAttackTimer2;
     [Node] private ResourcePreloader resourcePreloader;
+    [Node] private AudioStreamPlayer2D heal;
+    [Node] private AudioStreamPlayer2D scream;
+    [Node] private AudioStreamPlayer2D spawn;
 
     private AnimationNodeStateMachinePlayback playback;
     private int spawnedClouds;
@@ -113,6 +116,7 @@ public partial class Lunaria : Enemy
 
     private void EnterCommonAttack()
     {
+        heal.Play();
         playback?.Travel(COMMON_ATTACK);
 
         if (StatsManager == null) return;
@@ -144,6 +148,8 @@ public partial class Lunaria : Enemy
 
     private void EnterMoonFlare()
     {
+        scream.Play();
+
         playback.Travel(SPECIAL_ATTACK_1);
 
         if (moonFlareTimer == null)
@@ -159,13 +165,16 @@ public partial class Lunaria : Enemy
         }
 
         moonFlareTimer.Start();
+        var tikbalang = resourcePreloader.InstanceSceneOrNull<Tikbalang>();
+        tikbalang.GlobalPosition = GlobalPosition + new Vector2(0, 50) * MathUtil.RNG.RandDirection();
+        GetTree().Root.AddChild(tikbalang);
     }
 
     private void ApplyMoonFlareDamage()
     {
         new DamageFactory.HitBoxBuilder(GlobalPosition)
             .AddStatusEffectToPool(new StatusEffect.Info { Id = "slow", IsGuaranteed = true })
-            .SetDamage(StatsManager.Damage * 0.2f)
+            .SetDamage(StatsManager.Damage * 0.3f)
             .SetDamageType(Attack.Type.Magical)
             .SetShape(new CapsuleShape2D { Radius = 60 })
             .SetOwner(this)
@@ -181,6 +190,7 @@ public partial class Lunaria : Enemy
 
     private void EnterSpawnVinesTrap()
     {
+        spawn.Play();
         playback.Travel(SPECIAL_ATTACK_2);
         var vines = resourcePreloader.InstanceSceneOrNull<Vines>();
         GetTree().Root.AddChild(vines);

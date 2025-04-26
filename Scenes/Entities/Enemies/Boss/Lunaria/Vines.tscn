@@ -1,9 +1,10 @@
-[gd_scene load_steps=40 format=3 uid="uid://dbetkgdhvs051"]
+[gd_scene load_steps=41 format=3 uid="uid://dbetkgdhvs051"]
 
 [ext_resource type="Texture2D" uid="uid://b8go1ddal1ifo" path="res://assets/entities/enemy/boss/Lunaria/vine_left.png" id="1_c3j34"]
 [ext_resource type="Script" uid="uid://bu3gom3isa2ap" path="res://Scripts/Entities/Enemies/Boss/Lunaria/Vines.cs" id="1_tb2mi"]
 [ext_resource type="Texture2D" uid="uid://fd886nyi0xnj" path="res://assets/entities/enemy/boss/Lunaria/vines_right.png" id="2_tb2mi"]
 [ext_resource type="AudioStream" uid="uid://085b5wogc6ks" path="res://assets/audio/enemy/vinehit.ogg" id="4_juib2"]
+[ext_resource type="AudioStream" uid="uid://cg18luw7jivy4" path="res://assets/audio/enemy/vineSummon.ogg" id="5_c1qxy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tb2mi"]
 atlas = ExtResource("1_c3j34")
@@ -363,5 +364,12 @@ libraries = {
 [node name="SFX" type="Node2D" parent="."]
 
 [node name="VineHit" type="AudioStreamPlayer2D" parent="SFX"]
+unique_name_in_owner = true
 stream = ExtResource("4_juib2")
 volume_db = 12.876
+
+[node name="Spawn" type="AudioStreamPlayer2D" parent="SFX"]
+unique_name_in_owner = true
+stream = ExtResource("5_c1qxy")
+volume_db = 6.988
+pitch_scale = 1.65
