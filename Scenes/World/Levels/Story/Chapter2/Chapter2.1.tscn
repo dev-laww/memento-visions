@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=4 uid="uid://du6gsft33r8su"]
+[gd_scene load_steps=69 format=4 uid="uid://du6gsft33r8su"]
 
 [ext_resource type="Script" uid="uid://dana374n4d6mt" path="res://Scripts/World/Levels/Story/Chapter2/SmallVille.cs" id="1_swhdr"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_j142m"]
@@ -16,7 +16,6 @@
 [ext_resource type="Resource" uid="uid://b3pnov4n41331" path="res://resources/quests/chapter_2/echoes_of_void.tres" id="13_qx0xp"]
 [ext_resource type="Resource" uid="uid://c6xlurnbhc5sx" path="res://resources/dialogues/chapter_2/2.1.dialogue" id="13_swhdr"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="14_ktsv1"]
-[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="14_qplpt"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="16_vbaa4"]
 [ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="17_tmx34"]
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="18_bhwji"]
@@ -419,17 +418,16 @@ debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Witch/QuestTrigger"]
 
-[node name="InteractionUI" type="Control" parent="Witch/QuestTrigger/Node2D" instance=ExtResource("12_ktsv1")]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(0.5, 0.5)
-script = ExtResource("14_qplpt")
-
 [node name="WitchMarker" parent="Witch" instance=ExtResource("16_vbaa4")]
 unique_name_in_owner = true
 position = Vector2(578, 434)
 HideWhenInBounds = false
 IsRed = false
+
+[node name="InteractionUI" parent="Witch" instance=ExtResource("12_ktsv1")]
+z_index = 1
+offset_top = -35.0
+offset_bottom = -35.0
 
 [node name="Enemy" type="Node2D" parent="."]
 
