@@ -33,6 +33,7 @@ public partial class Chapter1Ending : BaseLevel
     private Quest quest2 = QuestRegistry.Get("sidequest:sidequest2");
     private Quest quest3 = QuestRegistry.Get("sidequest:sidequest3");
     private Quest quest4 = QuestRegistry.Get("sidequest:sidequest4");
+    private Quest mainQuest = QuestRegistry.Get("mainquest:mainquest"); //lagay mo dito id nung mainquest
     private int questFlag = 2;
     private bool isQuestActive = false;
 
@@ -53,7 +54,6 @@ public partial class Chapter1Ending : BaseLevel
         UnlockRecipes();
         UnlockNPC();
         UpdateQuest();
-
     }
 
     private void OnStoryTellerInteracted()
@@ -160,6 +160,7 @@ public partial class Chapter1Ending : BaseLevel
     {
         StartCutscene(lucas.GlobalPosition);
     }
+
     public static void UnlockRecipes()
     {
         SaveManager.UnlockRecipe("id:taho");
@@ -185,20 +186,24 @@ public partial class Chapter1Ending : BaseLevel
         blackSmithInteraction.Interacted -= OnBlackSmithInteracted;
         witchInteraction.Interacted -= OnWitchInteracted;
     }
+
     private void UpdateQuest()
     {
         var quests = new[] { quest2, quest3, quest4 };
         isQuestActive = false;
+        if (questFlag == 3)
+        {
+            QuestManager.Add(mainQuest);
+        }
 
         foreach (var quest in quests)
         {
-            GD.Print(quest.Id);
-
             if (QuestManager.ActiveQuests.Any(q => q.Id == quest.Id))
             {
                 isQuestActive = true;
                 return;
             }
+
             if (QuestManager.CompletedQuests.Any(q => q.Id == quest.Id))
             {
                 questFlag++;
