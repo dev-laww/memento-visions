@@ -1,72 +1,16 @@
 ~ start
+do PlayAudio("1") 
+They say evil is taught. That cruelty comes from pain. But what if someone was born cruel? 
 do PlayAudio("2") 
-They say evil is taught. That cruelty comes from pain. But what if someone was born cruel? What if someone wasn’t shaped by tragedy—but was tragedy itself?
+What if someone wasn’t shaped by tragedy—but was tragedy itself?
 do PlayAudio("3") 
-Alejandro Gutierrez was born during a storm so violent it split the heavens—lightning struck seven times in the same place. His mother died screaming. No one ever spoke of the father. He came into the world not crying, but silent, eyes wide, like he already knew too much.
-do PlayAudio("4") 
-He was raised in an orphanage that “mysteriously” burned down when he was eight. The fire started in his room. There were no matches. No electrical faults. No survivors—except him. Authorities blamed faulty wiring. No one asked why the boy didn’t flinch as he watched the flames take everything.
-do PlayAudio("5") 
-As he grew, strange things happened around him. Teachers quit. Classmates went missing. Every family that adopted him ended in disaster—car crashes, drownings, disappearances. People called him cursed.
-do PlayAudio("6") 
-But Alejandro?
-do PlayAudio("7") 
-He didn’t cry.
-do PlayAudio("8") 
-He didn’t run.
-do PlayAudio("9") 
-He just watched.
-do PlayAudio("10") 
-Because deep down, he liked it.
-do PlayAudio("11") 
-He didn’t understand why… not yet. But he felt it—a pull, a whisper, like something ancient lived beneath his skin. Something that enjoyed pain. That smiled at chaos. That wanted the world to bleed just to see what color it would turn.
-do PlayAudio("12") 
-By the time he was a teenager, he stopped pretending. He stopped trying to be “normal.” No fake smiles. No apologies. When he was angry, people got hurt. When he was sad, things broke. And when he laughed... people prayed.
-do PlayAudio("13") 
-He wandered from place to place—never staying long. Sometimes he worked. Sometimes he just vanished into the woods or alleyways. Sometimes people would find him in the middle of nowhere, standing still, staring at something no one else could see. When asked what he was doing, he’d say, “Listening.”
-do PlayAudio("14") 
-Because the thing inside him?
-do PlayAudio("15") 
-It was waking up.
-do PlayAudio("16") 
-And one day, it did.
-do PlayAudio("17") 
-Not with thunder. Not with wings or flames. Just… blood. A small town. A massacre. People torn apart with no pattern, no reason. They blamed a cult. They were wrong.
-do PlayAudio("18") 
-It was him.
-do PlayAudio("19") 
-It was chaos.
-do PlayAudio("20") 
-That day, Alejandro realized the truth: he wasn’t just broken. He wasn’t just cruel.
-do PlayAudio("21") 
-He was a god, trapped in flesh.
-do PlayAudio("22") 
-Not a god of love. Not of mercy.
-do PlayAudio("23") 
-A god of endings.
-do PlayAudio("24") 
-A god of ruin.
-do PlayAudio("25") 
-But time, fate, or perhaps betrayal took it all away.
-do PlayAudio("26") 
-After the Calamity, Alejandro Gutierrez woke in a world that no longer resembled the one he had once known. The sky was cracked, the land was broken, and the veil between worlds had been torn open, unleashing things that should never have seen the light of day. He awoke in the middle of this chaos, with no memory of who he was, how he had arrived, or why the world had come undone.
-do PlayAudio("27") 
-There were only fragments—shadows of instinct that guided his actions, unexplainable talents that set him apart from the rest. He could sense things others couldn’t. The unnatural. The supernatural. He could feel the presence of creatures that didn’t belong to this world, could hear whispers in the air that others couldn’t. Yet, none of it made sense. None of it had any meaning to him. His past was a blank slate, wiped clean by the destruction of everything he knew.
-do PlayAudio("28") 
-Alejandro found himself drifting, aimless. He had no home, no place in this broken world. But there was one thing he did have—a talent for solving the unexplainable. His instincts, sharp and precise, led him to places others wouldn’t dare go. He had an uncanny ability to navigate the strange and the supernatural, to face down the creatures that crept through the cracks in reality.
-do PlayAudio("29") 
-It was the paranormal task force that eventually took him in. They didn’t ask too many questions, and he didn’t give them answers. All they saw was a man who was oddly effective, a quiet investigator with strange talents, a man who seemed to walk between worlds without ever truly being part of either. To them, he was just another asset in a war against the unknown.
-do PlayAudio("30") 
-The chief—the quiet, inscrutable leader of the task force—saw Alejandro as nothing more than a tool. A useful tool, perhaps, but a tool nonetheless. Alejandro’s job was simple: hunt the things that others couldn’t even comprehend. Monsters that hid in the shadows. Entities that slipped between dimensions. Creatures that had been dormant for centuries, now awake and wreaking havoc on a world that was no longer sure of itself.
-do PlayAudio("31") 
-But even as Alejandro faced down the impossible, there was something unsettling about him. There was a coldness, an intensity in the way he worked. He didn’t seem to fear the things he fought. In fact, sometimes it was as if he understood them—knew exactly how they would react, what they were capable of. And when the battle was over, when the creatures were vanquished, there was always a sense of emptiness in his eyes, a distance, as though he was staring into a void that only he could see.
-do PlayAudio("32") 
 Alejandro Gutierrez is not just a man.
-do PlayAudio("33") 
+do PlayAudio("4") 
 He is a storm in human form.
-do PlayAudio("34") 
+do PlayAudio("5") 
 A forgotten god with unfinished business.
-do PlayAudio("35") 
+do PlayAudio("6") 
 And when the time comes…
-do PlayAudio("36") 
+do PlayAudio("7") 
 The world will remember his name.
 => END

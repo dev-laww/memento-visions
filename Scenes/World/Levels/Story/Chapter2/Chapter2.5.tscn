@@ -468,22 +468,27 @@ scale = Vector2(1.39545, 1.33063)
 
 [node name="LeverManager" parent="." instance=ExtResource("8_jtpjy")]
 position = Vector2(497, 367)
+TorchesPath = NodePath("../Node2D2")
 
-[node name="Lever2" parent="LeverManager" instance=ExtResource("9_owl2l")]
+[node name="Lever2" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("9_owl2l")]
 position = Vector2(-253, 20)
 scale = Vector2(0.875, 0.812499)
+Torches = [NodePath("../../Node2D2/Torch"), NodePath("../../Node2D2/Torch4")]
 
-[node name="Lever3" parent="LeverManager" instance=ExtResource("9_owl2l")]
+[node name="Lever3" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("9_owl2l")]
 position = Vector2(360, -124)
 scale = Vector2(0.875, 0.812499)
+Torches = [NodePath("../../Node2D2/Torch2"), NodePath("../../Node2D2/Torch3")]
 
-[node name="Lever4" parent="LeverManager" instance=ExtResource("9_owl2l")]
+[node name="Lever4" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("9_owl2l")]
 position = Vector2(-253, 153)
 scale = Vector2(0.875, 0.812499)
+Torches = [NodePath("../../Node2D2/Torch"), NodePath("../../Node2D2/Torch3")]
 
-[node name="Lever5" parent="LeverManager" instance=ExtResource("9_owl2l")]
+[node name="Lever5" parent="LeverManager" node_paths=PackedStringArray("Torches") instance=ExtResource("9_owl2l")]
 position = Vector2(-205, -128)
 scale = Vector2(0.875, 0.812499)
+Torches = [NodePath("../../Node2D2/Torch3"), NodePath("../../Node2D2/Torch4")]
 
 [node name="QuestTrigger" type="Area2D" parent="."]
 position = Vector2(37, 783)
