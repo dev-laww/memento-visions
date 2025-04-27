@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://cntfldylta63f"]
+[gd_scene load_steps=79 format=4 uid="uid://cntfldylta63f"]
 
 [ext_resource type="Script" uid="uid://b0xjawf252s4w" path="res://Scripts/World/Levels/Story/Chapter2/BossLevel.cs" id="1_xp4xo"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_n6dna"]
@@ -19,6 +19,12 @@
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="17_pom2c"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="18_pom2c"]
 [ext_resource type="AudioStream" uid="uid://cq5ifkvvn6f00" path="res://assets/audio/music/forest.ogg" id="19_ywus7"]
+[ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="20_o1qlk"]
+[ext_resource type="Resource" uid="uid://s6xynv7btqjd" path="res://resources/items/weapon/whip.tres" id="21_1bgw5"]
+[ext_resource type="Script" uid="uid://4ubxomqok4pv" path="res://Scripts/Data/Item/ItemDrop.cs" id="22_kua1h"]
+[ext_resource type="Resource" uid="uid://ct2y0f318jxyf" path="res://resources/items/consumable/salabat.tres" id="23_kgu1t"]
+[ext_resource type="Resource" uid="uid://7cbhpfgtsp6y" path="res://resources/items/consumable/taho.tres" id="24_yus5g"]
+[ext_resource type="Script" uid="uid://2133v7vmi65q" path="res://Scripts/Data/Loot/LootTable.cs" id="25_bsx0n"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nwd2x"]
 
@@ -253,6 +259,35 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_52sxu"]
 size = Vector2(168, 20)
+
+[sub_resource type="Resource" id="Resource_o5cit"]
+script = ExtResource("22_kua1h")
+Item = ExtResource("21_1bgw5")
+Min = 1
+Max = 1
+Weight = 10
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_vpnuk"]
+script = ExtResource("22_kua1h")
+Item = ExtResource("23_kgu1t")
+Min = 5
+Max = 10
+Weight = 10
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_6hn40"]
+script = ExtResource("22_kua1h")
+Item = ExtResource("24_yus5g")
+Min = 5
+Max = 10
+Weight = 10
+metadata/_custom_type_script = "uid://4ubxomqok4pv"
+
+[sub_resource type="Resource" id="Resource_6t748"]
+script = ExtResource("25_bsx0n")
+Drops = [SubResource("Resource_o5cit"), SubResource("Resource_vpnuk"), SubResource("Resource_6hn40")]
+metadata/_custom_type_script = "uid://2133v7vmi65q"
 
 [node name="BossLevel" type="Node2D"]
 script = ExtResource("1_xp4xo")
@@ -561,3 +596,7 @@ stream = ExtResource("19_ywus7")
 autoplay = true
 attenuation = 0.0
 parameters/looping = true
+
+[node name="Chest" parent="." instance=ExtResource("20_o1qlk")]
+position = Vector2(256, 452)
+Loot = SubResource("Resource_6t748")

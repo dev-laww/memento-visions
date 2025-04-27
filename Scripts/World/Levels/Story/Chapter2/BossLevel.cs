@@ -3,6 +3,7 @@ using System;
 using Game.Autoload;
 using Game.Data;
 using Game.Entities;
+using Game.World.Puzzle;
 using GodotUtilities;
 
 namespace Game.World;
@@ -14,6 +15,8 @@ public partial class BossLevel : BaseLevel
     [Node] private ResourcePreloader resourcePreloader;
     [Node] private Marker2D cinematicPosition1, lunariaSpawnPoint;
     [Node] private ScreenMarker screenMarker;
+    [Node] private LeverManager leverManager;
+    [Node] private Chest chest;
 
     public override void _Notification(int what)
     {
@@ -24,9 +27,11 @@ public partial class BossLevel : BaseLevel
 
     public override void _Ready()
     {
+        chest.Visible = false;
         base._Ready();
         screenMarker.Toggle(false);
         QuestManager.QuestUpdated += OnQuestUpdated;
+        leverManager.IsComplete += () => chest.Visible = true;
         StartCutscene();
     }
 
