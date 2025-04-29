@@ -43,7 +43,8 @@ public partial class Lobby : Node2D
         storyTellerInteraction.Interacted += OnStoryTellerInteracted;
         blackSmithInteraction.Interacted += OnBlackSmithInteracted;
         witchInteraction.Interacted += OnWitchInteracted;
-        UpdateQuest();
+        QuestManager.QuestCompleted += UpdateQuest;
+        UpdateQuest(quest2);
 
         if (!SaveManager.Data.IntroShown)
         {
@@ -130,27 +131,27 @@ public partial class Lobby : Node2D
         };
     }
 
-private void UpdateQuest()
-{
-    var quests = new[] { quest2, quest3, quest4 };
-    isQuestActive = false;
-
-    foreach (var quest in quests)
+    private void UpdateQuest(Quest quest5)
     {
-        GD.Print(quest.Id);
+        questFlag = 2;
+        var quests = new[] { quest2, quest3, quest4 };
+        isQuestActive = false;
 
-        if (QuestManager.ActiveQuests.Any(q => q.Id == quest.Id))
+        foreach (var quest in quests)
         {
-            isQuestActive = true;
-            return;
-        }
-        if (QuestManager.CompletedQuests.Any(q => q.Id == quest.Id))
-        {
-            questFlag++;
-            isQuestActive = false;
+            if (QuestManager.ActiveQuests.Any(q => q.Id == quest.Id))
+            {
+                isQuestActive = true;
+                return;
+            }
+
+            if (QuestManager.CompletedQuests.Any(q => q.Id == quest.Id))
+            {
+                questFlag++;
+                isQuestActive = false;
+            }
         }
     }
-}
 
     private void GiveQuest2()
     {
@@ -168,5 +169,14 @@ private void UpdateQuest()
     {
         QuestManager.Add(quest4);
         isQuestActive = true;
+    }
+
+    public override void _ExitTree()
+    {
+        
+        storyTellerInteraction.Interacted -= OnStoryTellerInteracted;
+        blackSmithInteraction.Interacted -= OnBlackSmithInteracted;
+        witchInteraction.Interacted -= OnWitchInteracted;
+        QuestManager.QuestCompleted -= UpdateQuest;
     }
 }

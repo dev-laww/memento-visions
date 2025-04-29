@@ -186,6 +186,7 @@ public partial class Chapter1Ending : BaseLevel
         storyTellerInteraction.Interacted -= OnStoryTellerInteracted;
         blackSmithInteraction.Interacted -= OnBlackSmithInteracted;
         witchInteraction.Interacted -= OnWitchInteracted;
+        QuestManager.QuestCompleted -= UpdateQuest;
     }
 
     private void UpdateQuest(Quest quest5)
