@@ -51,9 +51,10 @@ public partial class Chapter1Ending : BaseLevel
         storyTellerInteraction.Interacted += OnStoryTellerInteracted;
         blackSmithInteraction.Interacted += OnBlackSmithInteracted;
         witchInteraction.Interacted += OnWitchInteracted;
+        QuestManager.QuestCompleted += UpdateQuest;
         UnlockRecipes();
         UnlockNPC();
-        UpdateQuest();
+        UpdateQuest(quest2);
     }
 
     private void OnStoryTellerInteracted()
@@ -187,14 +188,11 @@ public partial class Chapter1Ending : BaseLevel
         witchInteraction.Interacted -= OnWitchInteracted;
     }
 
-    private void UpdateQuest()
+    private void UpdateQuest(Quest quest5)
     {
+        questFlag = 2;
         var quests = new[] { quest2, quest3, quest4 };
         isQuestActive = false;
-        if (questFlag == 3)
-        {
-            QuestManager.Add(mainQuest);
-        }
 
         foreach (var quest in quests)
         {
@@ -209,6 +207,11 @@ public partial class Chapter1Ending : BaseLevel
                 questFlag++;
                 isQuestActive = false;
             }
+        }
+
+        if (questFlag == 3)
+        {
+            QuestManager.Add(mainQuest);
         }
     }
 

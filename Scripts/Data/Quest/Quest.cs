@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Autoload;
 using Game.Entities;
 using Godot;
 
@@ -48,7 +49,11 @@ public partial class Quest : Resource
 
         if (!completed) return;
 
-        Complete();
+        if (!Completed)
+        {
+            Complete();
+            QuestManager.Instance.EmitSignal(nameof(QuestManager.Completed), this);
+        }
     }
 
     public void CompleteObjective(int index)
