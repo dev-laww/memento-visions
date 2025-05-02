@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=5 format=3 uid="uid://cboyk84juwbts"]
+
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="1_e403e"]
+[ext_resource type="Script" uid="uid://dssta8xepjmkg" path="res://Scripts/Data/Quest/Quest.cs" id="2_7j0f4"]
+
+[sub_resource type="Resource" id="Resource_snapy"]
+script = ExtResource("1_e403e")
+Type = 2
+Description = "Head to the place where the Chief speaks of."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[sub_resource type="Resource" id="Resource_2wceu"]
+script = ExtResource("1_e403e")
+Type = 2
+Description = "Talk to the mysterious person clothe on a different attire."
+metadata/_custom_type_script = "uid://dpkqc20rlrftv"
+
+[resource]
+script = ExtResource("2_7j0f4")
+Id = "quest:roots_of_the_unseen"
+Title = "Roots of the Unseen"
+Ordered = false
+Description = "Strange occurrences plague the forest—trees shifting overnight, eerie howls echoing at dusk, and sightings of Aswangs and Tikbalangs growing bolder. As fear spreads through nearby villages, whispers speak of an unseen force pulling the strings, a hidden power deep within the woods, long forgotten and now awakening."
+objectives = [SubResource("Resource_snapy"), SubResource("Resource_2wceu")]
+Experience = 0
+Items = []
+metadata/_custom_type_script = "uid://dssta8xepjmkg"
