@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=4 uid="uid://c2qx74ig42sum"]
+[gd_scene load_steps=96 format=4 uid="uid://c2qx74ig42sum"]
 
 [ext_resource type="Script" uid="uid://xi5ph3oued7k" path="res://Scripts/World/Levels/Story/Chapter1/Village.cs" id="1_yyi1k"]
 [ext_resource type="TileSet" uid="uid://wuwsi02f3fft" path="res://resources/tilesets/intramuros.tres" id="2_imb2w"]
@@ -17,9 +17,7 @@
 [ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="18_0u337"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="20_tjaeu"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="21_lmktk"]
-[ext_resource type="Resource" uid="uid://clfbur06xipdm" path="res://resources/loot_tables/10.tres" id="23_0d1sk"]
 [ext_resource type="PackedScene" uid="uid://djjs6g4ap8st1" path="res://Scenes/World/PuzzleComponent/Torch.tscn" id="23_8vc12"]
-[ext_resource type="Resource" uid="uid://bx16wb3x71qgf" path="res://resources/loot_tables/4.tres" id="24_akscv"]
 [ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="26_0d1sk"]
 [ext_resource type="Resource" uid="uid://b8egfkscgqbcp" path="res://resources/dialogues/chapter_1/1.6.dialogue" id="26_hl2f5"]
 [ext_resource type="AudioStream" uid="uid://deewooh6kgx36" path="res://assets/audio/music/village_bgm.ogg" id="27_akscv"]
@@ -310,7 +308,7 @@ script = ExtResource("1_yyi1k")
 Id = "chapter_1.3"
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
-resources = [PackedStringArray("Aswang"), [ExtResource("2_lesfh")]]
+resources = [PackedStringArray("Aswang", "Chest"), [ExtResource("2_lesfh"), ExtResource("26_0d1sk")]]
 
 [node name="Tilemap" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -470,16 +468,6 @@ metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger2"]
 shape = SubResource("RectangleShape2D_xh25p")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
-
-[node name="Chest" parent="." instance=ExtResource("26_0d1sk")]
-visible = false
-position = Vector2(576, 324)
-Loot = ExtResource("23_0d1sk")
-
-[node name="Chest2" parent="." instance=ExtResource("26_0d1sk")]
-visible = false
-position = Vector2(845, 739)
-Loot = ExtResource("24_akscv")
 
 [node name="Player" parent="." instance=ExtResource("4_imb2w")]
 position = Vector2(83, 120)
@@ -746,3 +734,9 @@ HideWhenInBounds = false
 IsRed = false
 
 [node name="TelegraphCanvas" parent="." instance=ExtResource("30_hl2f5")]
+
+[node name="ChestMarker" type="Marker2D" parent="."]
+position = Vector2(576, 323)
+
+[node name="ChestMarker2" type="Marker2D" parent="."]
+position = Vector2(767, 807)

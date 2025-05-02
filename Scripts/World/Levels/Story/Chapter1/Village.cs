@@ -15,7 +15,7 @@ public partial class Village : BaseLevel
     [Node] private TransitionArea transitionArea;
     [Node] private DialogueTrigger dialogueTrigger;
     [Node] private QuestTrigger questTrigger2;
-    [Node] private Chest chest, chest2;
+    [Node] private Marker2D chestMarker, chestMarker2;
     [Node] private LeverManager leverManager;
     [Node] private TorchPuzzleManager lightPuzzle;
     [Node] private Entity rudy, mayor;
@@ -59,12 +59,18 @@ public partial class Village : BaseLevel
 
     private void OnLeverPuzzleComplete()
     {
-        chest.Visible = true;
+        var chest = resourcePreloader.InstanceSceneOrNull<Chest>();
+        chest.GlobalPosition = chestMarker.GlobalPosition;
+        chest.SetDrops(LootTableRegistry.Get("4.tres"));
+        AddChild(chest);
     }
 
     private void OnLightPuzzleComplete()
     {
-        chest2.Visible = true;
+        var chest2 = resourcePreloader.InstanceSceneOrNull<Chest>();
+        chest2.GlobalPosition = chestMarker2.GlobalPosition;
+        chest2.SetDrops(LootTableRegistry.Get("7.tres"));
+        AddChild(chest2);
     }
 
     public void SetDialogueTriggerOff()
