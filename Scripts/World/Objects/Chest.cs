@@ -11,7 +11,7 @@ namespace Game.World;
 public partial class Chest : Node2D
 {
     [Export]
-    private LootTable Loot
+    public LootTable Loot
     {
         get => loot;
         set

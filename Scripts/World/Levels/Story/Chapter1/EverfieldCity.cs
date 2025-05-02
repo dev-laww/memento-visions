@@ -16,12 +16,12 @@ public partial class EverfieldCity : BaseLevel
     [Node] private TransitionArea transitionArea;
     [Node] private TorchPuzzleManager torchSequence;
     [Node] private PressurePlate plate, plate2;
-    [Node] private Chest chest,chest2;
+    [Node] private Marker2D chestMarker, chestMarker2;
+    [Node] private ResourcePreloader resourcePreloader;
     [Node] private ScreenMarker kevinMarker,jeepMarker,mannyMarker;
     [Node] private Node2D enemy;
     private Quest quest = QuestRegistry.Get("quest:aswang_hunt");
     private Quest quest1 = QuestRegistry.Get("quest:whispers_in_intramuros");
-
     public override void _Notification(int what)
     {
         if (what != NotificationSceneInstantiated) return;
@@ -44,8 +44,10 @@ public partial class EverfieldCity : BaseLevel
     
     private void OnPuzzleSolved()
     {
-      chest.Visible = true; 
-      
+        var chest = resourcePreloader.InstanceSceneOrNull<Chest>();
+        chest.GlobalPosition = chestMarker.GlobalPosition;
+        chest.SetDrops(LootTableRegistry.Get("9.tres"));
+        AddChild(chest);
     }
 
     public void EnableTransitionArea()
@@ -56,9 +58,13 @@ public partial class EverfieldCity : BaseLevel
     }
     private void OnPlatePressed()
     {
+
         if (plate.isActive && plate2.isActive)
         {
-            chest2.Visible = true; 
+            var chest2 = resourcePreloader.InstanceSceneOrNull<Chest>();
+            chest2.GlobalPosition = chestMarker2.GlobalPosition;
+            chest2.SetDrops(LootTableRegistry.Get("9.tres"));
+            AddChild(chest2);
         }
     }
 
