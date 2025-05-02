@@ -16,7 +16,7 @@ public partial class BossLevel : BaseLevel
     [Node] private Marker2D cinematicPosition1, lunariaSpawnPoint;
     [Node] private ScreenMarker screenMarker;
     [Node] private LeverManager leverManager;
-    [Node] private Chest chest;
+    [Node] private Marker2D chestMarker;
 
     public override void _Notification(int what)
     {
@@ -27,11 +27,10 @@ public partial class BossLevel : BaseLevel
 
     public override void _Ready()
     {
-        chest.Visible = false;
         base._Ready();
         screenMarker.Toggle(false);
         QuestManager.QuestUpdated += OnQuestUpdated;
-        leverManager.IsComplete += () => chest.Visible = true;
+        leverManager.IsComplete += OnPuzzleComplete;
         StartCutscene();
     }
 
@@ -62,6 +61,16 @@ public partial class BossLevel : BaseLevel
         var timer = GameCamera.Instance.GetTree().CreateTimer(duration);
         timer.Timeout += () => { onComplete?.Invoke(); };
     }
+
+    private void OnPuzzleComplete()
+    {
+        GD.Print("Puzzle complete.....");
+        var chest = resourcePreloader.InstanceSceneOrNull<Chest>();
+        chest.GlobalPosition = chestMarker.GlobalPosition;
+        chest.SetDrops(LootTableRegistry.Get("8.tres"));
+        AddChild(chest);
+    }
+    
 
     public void SpawnLunaria()
     {

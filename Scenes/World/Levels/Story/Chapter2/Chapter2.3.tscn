@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=4 uid="uid://criyou87dacyh"]
+[gd_scene load_steps=109 format=4 uid="uid://criyou87dacyh"]
 
 [ext_resource type="Script" uid="uid://c4ksan4dtstup" path="res://Scripts/World/Levels/Story/Chapter2/CentralForest.cs" id="1_esctv"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_exmlw"]
@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="18_y42ld"]
 [ext_resource type="Resource" uid="uid://b36y2bljh3l2m" path="res://resources/dialogues/chapter_2/torn_pages.dialogue" id="19_0lbbt"]
 [ext_resource type="AudioStream" uid="uid://cq5ifkvvn6f00" path="res://assets/audio/music/forest.ogg" id="20_e7pso"]
+[ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="21_juwhd"]
+[ext_resource type="Resource" uid="uid://cv4y46hd6ftmw" path="res://resources/loot_tables/7.tres" id="22_y6dlf"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_nfvny"]
 
@@ -883,3 +885,7 @@ stream = ExtResource("20_e7pso")
 autoplay = true
 attenuation = 0.0
 parameters/looping = true
+
+[node name="Chest" parent="." instance=ExtResource("21_juwhd")]
+position = Vector2(287, 1291)
+Loot = ExtResource("22_y6dlf")
