@@ -16,10 +16,10 @@ public partial class SmallVille : BaseLevel
 {
     [Node] private ScreenMarker witchMarker;
     [Node] private TorchPuzzleManager torchSequence;
-    [Node] private Chest chest;
     [Node] private Node2D enemy;
-    [Node] private Marker2D tikbalangPosition;
+    [Node] private Marker2D tikbalangPosition , chestMarker;
     [Node] private ScreenMarker screenMarker;
+    [Node] private ResourcePreloader resourcePreloader;
     public bool IsWitchInteracted = false;
     private Quest quest = QuestRegistry.Get("quest:echoes_of_void");
 
@@ -43,7 +43,10 @@ public partial class SmallVille : BaseLevel
     
     private void OnPuzzleSolved()
     {
-        chest.Visible = true;
+        var chest = resourcePreloader.InstanceSceneOrNull<Chest>();
+        chest.GlobalPosition = chestMarker.GlobalPosition;
+        chest.SetDrops(LootTableRegistry.Get("3.tres"));
+        AddChild(chest);
     }
     
     public void ToggleWitchMarker(bool isActive)

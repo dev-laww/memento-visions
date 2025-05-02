@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://du6gsft33r8su"]
+[gd_scene load_steps=68 format=4 uid="uid://du6gsft33r8su"]
 
 [ext_resource type="Script" uid="uid://dana374n4d6mt" path="res://Scripts/World/Levels/Story/Chapter2/SmallVille.cs" id="1_swhdr"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_j142m"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dtqgojjodmope" path="res://Scenes/World/PuzzleComponent/StreetLight.tscn" id="5_q6x1h"]
 [ext_resource type="PackedScene" uid="uid://bbs4ush0amfqx" path="res://Scenes/World/Objects/Chest.tscn" id="6_eu077"]
 [ext_resource type="Script" uid="uid://cfscbenslyojv" path="res://Scripts/Components/Managers/NavigationManager.cs" id="6_q65kr"]
-[ext_resource type="Resource" uid="uid://clfbur06xipdm" path="res://resources/loot_tables/10.tres" id="7_aly1c"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="7_gw6o1"]
 [ext_resource type="PackedScene" uid="uid://defbwilwt3lnr" path="res://Scenes/Entities/Characters/Witch.tscn" id="11_7mlp4"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="12_ktsv1"]
@@ -221,6 +220,9 @@ y_sort_enabled = true
 script = ExtResource("1_swhdr")
 Id = "chapter_2.1"
 
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [PackedStringArray("Chest"), [ExtResource("6_eu077")]]
+
 [node name="TelegraphCanvas" parent="." instance=ExtResource("2_j142m")]
 
 [node name="Tilemap" type="Node2D" parent="."]
@@ -387,11 +389,8 @@ position = Vector2(-169, 120)
 [node name="Light4" parent="TorchSequence" instance=ExtResource("5_q6x1h")]
 position = Vector2(-71, 24)
 
-[node name="Chest" parent="TorchSequence" instance=ExtResource("6_eu077")]
+[node name="ChestMarker" type="Marker2D" parent="TorchSequence"]
 unique_name_in_owner = true
-visible = false
-position = Vector2(-118, 17)
-Loot = ExtResource("7_aly1c")
 
 [node name="Player" parent="." instance=ExtResource("5_7wp0m")]
 position = Vector2(568, 813)
