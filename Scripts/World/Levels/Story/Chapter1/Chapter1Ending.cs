@@ -33,7 +33,7 @@ public partial class Chapter1Ending : BaseLevel
     private Quest quest2 = QuestRegistry.Get("sidequest:sidequest2");
     private Quest quest3 = QuestRegistry.Get("sidequest:sidequest3");
     private Quest quest4 = QuestRegistry.Get("sidequest:sidequest4");
-    private Quest mainQuest = QuestRegistry.Get("mainquest:mainquest"); //lagay mo dito id nung mainquest
+    private Quest mainQuest = QuestRegistry.Get("quest:roots_of_the_unseen"); //lagay mo dito id nung mainquest
     private int questFlag = 2;
     private bool isQuestActive = false;
 
