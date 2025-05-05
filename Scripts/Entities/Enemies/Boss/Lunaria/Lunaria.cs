@@ -126,7 +126,7 @@ public partial class Lunaria : Enemy
             Id = "lunaria_heal",
             StatusEffectName = "Lunar Healing",
             Duration = 3.0f,
-            HealthRegenPerTick = 0.08f * StatsManager.MaxHealth,
+            HealthRegenPerTick = 0.15f * StatsManager.MaxHealth,
             TickInterval = 1f,
         };
 
@@ -168,6 +168,15 @@ public partial class Lunaria : Enemy
         var tikbalang = resourcePreloader.InstanceSceneOrNull<Tikbalang>();
         tikbalang.GlobalPosition = GlobalPosition + new Vector2(0, 50) * MathUtil.RNG.RandDirection();
         GetTree().Root.AddChild(tikbalang);
+        var healthRegen = new HealthRegen
+        {
+            Id = "lunaria_heal",
+            StatusEffectName = "Lunar Healing",
+            Duration = 3.0f,
+            HealthRegenPerTick = 0.1f * StatsManager.MaxHealth,
+            TickInterval = 1f,
+        };
+        StatsManager.AddStatusEffect(healthRegen);
     }
 
     private void ApplyMoonFlareDamage()

@@ -755,7 +755,7 @@ one_shot = true
 autostart = true
 script = ExtResource("5_1pfq2")
 min_wait_time = 3.0
-max_wait_time = 7.0
+max_wait_time = 5.0
 metadata/_custom_type_script = "uid://clh46y8w17vem"
 
 [node name="SpecialAttackTimer1" type="Timer" parent="."]
@@ -776,9 +776,9 @@ metadata/_custom_type_script = "uid://clh46y8w17vem"
 
 [node name="StatsManager" type="Node" parent="."]
 script = ExtResource("6_ayylu")
-MaxHealth = 750.0
+MaxHealth = 1000.0
 Speed = 110.0
-Defense = 20.0
+Defense = 40.0
 Damage = 20.0
 metadata/_custom_type_script = "uid://dnpva4sn53c1r"
 
