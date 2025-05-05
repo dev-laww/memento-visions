@@ -28,6 +28,7 @@ public partial class Tikbalang : Enemy
     [Node] private Timer attackCooldownTimer;
     [Node] private AudioStreamPlayer2D sfxAttack;
     [Node] private AudioStreamPlayer2D sfxSpecial;
+    [Node] private GpuParticles2D poofParticles;
 
     private AnimationNodeStateMachinePlayback playback;
     private Vector2[] directions = [Vector2.Up, Vector2.Down, Vector2.Left, Vector2.Right];
@@ -55,6 +56,8 @@ public partial class Tikbalang : Enemy
         StateMachine.SetInitialState(Normal);
         animationTree.AnimationFinished += OnAnimationFinished;
         initialPosition = GlobalPosition;
+        poofParticles.Emitting = true;
+        
     }
 
     public override void OnProcess(double delta)

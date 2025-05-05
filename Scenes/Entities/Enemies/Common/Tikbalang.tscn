@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=3 uid="uid://cmpubd6rbsqiu"]
+[gd_scene load_steps=147 format=3 uid="uid://cmpubd6rbsqiu"]
 
 [ext_resource type="Script" uid="uid://bqv2ubu81g3e7" path="res://Scripts/Entities/Enemies/Common/Tikbalang.cs" id="1_4ml10"]
 [ext_resource type="Script" uid="uid://dnpva4sn53c1r" path="res://Scripts/Components/Managers/StatsManager.cs" id="2_hkjad"]
@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://dhr2jtmgl0gse" path="res://resources/items/material/engkanto_essence.tres" id="11_msr8t"]
 [ext_resource type="Resource" uid="uid://drj5puv2462td" path="res://resources/items/material/bato_balani.tres" id="12_u32vl"]
 [ext_resource type="AudioStream" uid="uid://be1u2qlp4fqcp" path="res://assets/audio/enemy/tikbalang_attack_2.wav" id="17_0a0x6"]
+[ext_resource type="Texture2D" uid="uid://bbaj1lmrgykxu" path="res://assets/effects/poof.png" id="17_pruhg"]
 [ext_resource type="AudioStream" uid="uid://ccrwhak6p636s" path="res://assets/audio/enemy/tikbalang_special.wav" id="18_8cri1"]
 
 [sub_resource type="Resource" id="Resource_18kv7"]
@@ -1230,6 +1231,31 @@ states/Move/position = Vector2(355, 141)
 transitions = ["Move", "Idle", SubResource("AnimationNodeStateMachineTransition_6pqlh"), "Idle", "Move", SubResource("AnimationNodeStateMachineTransition_mh5vc"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_fg8r8"), "Idle", "Special Attack", SubResource("AnimationNodeStateMachineTransition_cojb7"), "Idle", "Common Attack", SubResource("AnimationNodeStateMachineTransition_wabo6"), "Move", "Special Attack", SubResource("AnimationNodeStateMachineTransition_rfooc"), "Move", "Common Attack", SubResource("AnimationNodeStateMachineTransition_ts2lp"), "Special Attack", "Move", SubResource("AnimationNodeStateMachineTransition_pruhg"), "Special Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_0a0x6"), "Common Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_8cri1"), "Common Attack", "Move", SubResource("AnimationNodeStateMachineTransition_472wo")]
 graph_offset = Vector2(19, -43)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0a0x6"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_8cri1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.976096, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j7p5r"]
+curve = SubResource("Curve_8cri1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_472wo"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+gravity = Vector3(0, -20, 0)
+scale_min = 0.7
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_j7p5r")
+anim_speed_max = 1.0
+anim_offset_max = 1.0
+
 [node name="Tikbalang" type="CharacterBody2D"]
 collision_mask = 15
 script = ExtResource("1_4ml10")
@@ -1336,5 +1362,17 @@ bus = &"SFX"
 unique_name_in_owner = true
 stream = ExtResource("18_8cri1")
 bus = &"SFX"
+
+[node name="PoofParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_0a0x6")
+position = Vector2(0, -13)
+emitting = false
+amount = 20
+texture = ExtResource("17_pruhg")
+lifetime = 0.75
+one_shot = true
+explosiveness = 0.9
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_472wo")
 
 [editable path="PathFindManager"]
