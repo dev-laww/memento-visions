@@ -5,6 +5,7 @@ using GodotUtilities;
 using DialogueManagerRuntime;
 using Game.Autoload;
 using Game.Data;
+using Game.Utils;
 
 namespace Game.World;
 
@@ -54,6 +55,16 @@ public partial class SchoolOutdoor : BaseLevel
         var dialogue = ResourceLoader.Load<Resource>("res://resources/dialogues/prologue/1.5.dialogue");
         DialogueManager.ShowDialogueBalloon(dialogue);
     }
+    private void ShowInstructions()
+    {
+        var text = new OverlayFactory.CenterTextBuilder(GetTree())
+            .SetText("Press [B] to Open Inventory")
+            .SetDuration(2f) 
+            .Build();
+        
+        
+    }
+    
 
     public override void _ExitTree()
     {
