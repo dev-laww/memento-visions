@@ -42,7 +42,7 @@ metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 [sub_resource type="Resource" id="Resource_35mkj"]
 script = ExtResource("6_cghvh")
 Type = 3
-Description = "Kill 5 Tikbalangs surrounding the Engkanto"
+Description = "Kill 5 Tikbalangs surrounding the Engkanto."
 Enemies = [SubResource("Resource_gs5h5")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 

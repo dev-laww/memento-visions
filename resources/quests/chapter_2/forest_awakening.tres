@@ -41,7 +41,7 @@ metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 [sub_resource type="Resource" id="Resource_5fqpa"]
 script = ExtResource("5_eskvi")
 Type = 2
-Description = "Follow the Trail"
+Description = "Follow the Trail."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]

@@ -49,7 +49,7 @@ metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 [sub_resource type="Resource" id="Resource_y1bnb"]
 script = ExtResource("1_wjjxm")
 Type = 3
-Description = "You found out about what the Mayor did to the townsfolk. Defeat him to end his reign and shatter his twisted control over the Aswang!"
+Description = "You found out about what the Mayor did to the townsfolk. Defeat him to end his reign and shatter his twisted control over the Aswangs!"
 Enemies = [SubResource("Resource_jomtr")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 

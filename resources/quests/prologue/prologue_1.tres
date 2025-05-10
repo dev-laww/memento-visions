@@ -35,19 +35,19 @@ metadata/_custom_type_script = "uid://bgc5i8wwxqow4"
 [sub_resource type="Resource" id="Resource_6f01l"]
 script = ExtResource("5_tst43")
 Type = 2
-Description = "Investigate the Burned wooden chair"
+Description = "Investigate the Burned wooden chair."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="Resource" id="Resource_tnbyp"]
 script = ExtResource("5_tst43")
 Type = 2
-Description = "Investigate the Notebook"
+Description = "Investigate the Notebook."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="Resource" id="Resource_rxg1s"]
 script = ExtResource("5_tst43")
 Type = 2
-Description = "Investigate the Photographs"
+Description = "Investigate the Photographs."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [resource]
