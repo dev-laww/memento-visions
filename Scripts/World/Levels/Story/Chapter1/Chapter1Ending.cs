@@ -210,7 +210,7 @@ public partial class Chapter1Ending : BaseLevel
             }
         }
 
-        if (questFlag == 3)
+        if (questFlag >= 3)
         {
             QuestManager.Add(mainQuest);
             transitionArea.Toggle(true);
