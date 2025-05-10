@@ -39,6 +39,7 @@ while true
 		Alex: Hmp... I'll talk to him but don't expect too much. That guy seems to be rather... unique.
 		Chief: I know Alex, but, he's not a bad kid.
 		- Aight, I'll talk to him.
+			do CurrentScene.screenMarker.Toggle(false)
 		=> END
 		
 	- Exit
