@@ -28,7 +28,7 @@ metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 [sub_resource type="Resource" id="Resource_7n7ry"]
 script = ExtResource("2_rgcns")
 Type = 3
-Description = "Kill the 2 tikbalang still left on the scene. "
+Description = "Kill the 2 Tikbalang still left on the scene. "
 Enemies = [SubResource("Resource_arrju")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 

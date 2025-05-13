@@ -28,7 +28,7 @@ metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 [sub_resource type="Resource" id="Resource_qeaye"]
 script = ExtResource("2_2bx7x")
 Type = 3
-Description = "Kill 5 Tikbalangs"
+Description = "Kill 5 Tikbalangs."
 Enemies = [SubResource("Resource_e7pso")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
@@ -41,7 +41,7 @@ metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 [sub_resource type="Resource" id="Resource_2bx7x"]
 script = ExtResource("2_2bx7x")
 Type = 3
-Description = "Kill 3 Aswangs"
+Description = "Kill 3 Aswangs."
 Enemies = [SubResource("Resource_tkdir")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 

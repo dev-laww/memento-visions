@@ -74,7 +74,7 @@ metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
 [sub_resource type="Resource" id="Resource_ujrng"]
 script = ExtResource("1_t5eqx")
 Type = 3
-Description = "Kill Aghon, who the Aswangs and Tikbalangs bows their head to."
+Description = "Kill Aghon & Lunaria, who the Aswangs and Tikbalangs bows their head to."
 Enemies = [SubResource("Resource_rscwp"), SubResource("Resource_3gsav")]
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
