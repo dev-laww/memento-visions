@@ -45,6 +45,18 @@ public partial class CentralForest : BaseLevel
 
 
     }
+    
+    public void CompleteQuest(int index)
+    {
+        if (quest == null)
+        {
+            GD.PrintErr("Quest not loaded");
+            return;
+        }
+
+        quest.CompleteObjective(index);
+    }
+
 
     public void StartCinematic()
     {
