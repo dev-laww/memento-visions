@@ -42,7 +42,11 @@ public partial class BossLevel : BaseLevel
             () => { CinematicManager.EndCinematic(); });
         SpawnLunaria();
         QuestManager.QuestUpdated -= OnQuestUpdated;
+
+        if (quest.Id != "quest:engkanto_wrath" || !quest.Objectives[1].Completed) return;
+        screenMarker.Toggle(true);
     }
+
 
     public void StartCutscene()
     {

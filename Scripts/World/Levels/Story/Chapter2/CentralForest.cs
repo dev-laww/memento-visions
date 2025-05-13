@@ -14,6 +14,7 @@ public partial class CentralForest : BaseLevel
     [Node] private Node2D enemy;
     [Node] private StoryTeller storyTeller;
     [Node] private ScreenMarker screenMarker, pageMarker;
+    [Node] private TransitionArea   transitionArea;
     [Node] private AnimationPlayer animationPlayer;
 
     private Quest quest = QuestRegistry.Get("quest:the_missing_anchor");
@@ -30,22 +31,32 @@ public partial class CentralForest : BaseLevel
         base._Ready();
         screenMarker.Toggle(false);
         pageMarker.Toggle(false);
+        transitionArea.Toggle(false);
         ShowDialogue();
         QuestManager.QuestUpdated += OnQuestUpdated;
     }
 
     private void OnQuestUpdated(Quest quest)
     {
-        if (quest.Id == "quest:the_missing_anchor" && quest.Objectives[0].Completed)
+        if (quest.Id == "quest:the_missing_anchor" && quest.Objectives[1].Completed)
         {
             pageMarker.Toggle(true);
+            GD.Print("triggers");
+            QuestManager.QuestUpdated -= OnQuestUpdated;
+
+        }
+        if (quest.Id == "quest:the_missing_anchor" && quest.Objectives[2].Completed)
+        {
+            screenMarker.Toggle(true);
+            transitionArea.Toggle(true);
             GD.Print("triggers");
             QuestManager.QuestUpdated -= OnQuestUpdated;
         }
 
 
     }
-    
+   
+
     public void CompleteQuest(int index)
     {
         if (quest == null)

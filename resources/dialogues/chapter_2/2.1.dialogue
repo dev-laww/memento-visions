@@ -1,6 +1,6 @@
 ~ start
 if CurrentScene.IsWitchInteracted == true
-	Witch: Just be wary of what you do from here on out, Alex..
+	Witch: A force beyond fate, walking the line between myth and miracle.
 	=> END
 ???: Nyahahaha!
 - Who are you?
@@ -10,11 +10,13 @@ if CurrentScene.IsWitchInteracted == true
 Alex: I'm not sure, I received some reports from the Chief about what happened here and went to investigate.
 Alex: It seems like you're the most suspicious around here, wearing a robe and all that around the town, care to explain yourself?
 Witch: Kekekekeke!
-Witch: I only helped the townsfolk drive-away those creatures that wreaked havoc here! If it were not for me, they could have suffered much worse! I already driven most of the creatures here so I think you should do your job now, Alex.
+Witch: I am only helped the townsfolk drive-away those creatures that wreaked havoc here while you weren't here. Shouldn't you be the one handling this?
+Witch: If it were not for me, they could have suffered much worse. Kekekekeke!
+Witch: I already driven most of the creatures here so I think you should do your job now, Alex.
 - You passing me the crumbs?
 - How did you know my name?
-Witch: I know who you are inside and outside, Alex. Just be wary of what you do from here on out. 
-Alex: Wait, what do you mean?
+Witch: I know who you are inside and outside, Alex. You are a force beyond fate, walking the line between myth and miracle. 
+Alex: A force beyond fate? What is that?
 Witch: ...
 do CurrentScene.ToggleWitchMarker(false)
 set CurrentScene.IsWitchInteracted = true

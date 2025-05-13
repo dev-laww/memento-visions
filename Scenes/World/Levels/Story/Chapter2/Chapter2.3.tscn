@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=4 uid="uid://criyou87dacyh"]
+[gd_scene load_steps=107 format=4 uid="uid://criyou87dacyh"]
 
 [ext_resource type="Script" uid="uid://c4ksan4dtstup" path="res://Scripts/World/Levels/Story/Chapter2/CentralForest.cs" id="1_esctv"]
 [ext_resource type="TileSet" uid="uid://bxvuq1ymdiaus" path="res://resources/tilesets/forest.tres" id="2_exmlw"]
@@ -8,15 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://bgwiqgrwaypag" path="res://Scenes/Entities/Enemies/Common/Aswang.tscn" id="5_wltyk"]
 [ext_resource type="PackedScene" uid="uid://bwreypn7kqmpw" path="res://Scenes/Entities/Characters/Player.tscn" id="6_nm76b"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="9_exmlw"]
-[ext_resource type="Resource" uid="uid://bw6fossxbjly1" path="res://resources/quests/chapter_2/the_missing_anchor.tres" id="9_n4v06"]
 [ext_resource type="PackedScene" uid="uid://cf2yu213pnwwr" path="res://Scenes/UI/Common/InteractionUI.tscn" id="10_7sf3k"]
 [ext_resource type="Script" uid="uid://b2qoa6rbhqcq1" path="res://Scripts/Components/Area/DialogueTrigger.cs" id="10_wb4xo"]
+[ext_resource type="Resource" uid="uid://bw6fossxbjly1" path="res://resources/quests/chapter_2/the_missing_anchor.tres" id="11_e7pso"]
 [ext_resource type="PackedScene" uid="uid://d2hrj4ebc2ra6" path="res://Scenes/Entities/Characters/StoryTeller.tscn" id="12_0lbbt"]
 [ext_resource type="Script" uid="uid://davlg2u8drdh4" path="res://Scripts/Components/Area/TransitionArea.cs" id="13_spppi"]
-[ext_resource type="Script" uid="uid://d0dgc1ovlkksc" path="res://Scripts/Data/Quest/KillRequirement.cs" id="16_0lbbt"]
+[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="15_busxo"]
 [ext_resource type="Texture2D" uid="uid://bbaj1lmrgykxu" path="res://assets/effects/poof.png" id="16_e7pso"]
 [ext_resource type="Texture2D" uid="uid://ckj3v8yrowvxb" path="res://assets/tilesets/school.png" id="16_n4v06"]
-[ext_resource type="Script" uid="uid://dpkqc20rlrftv" path="res://Scripts/Data/Quest/QuestObjective.cs" id="16_y42ld"]
 [ext_resource type="PackedScene" uid="uid://q83y6p3ja80q" path="res://Scenes/World/Objects/ScreenMarker.tscn" id="18_y42ld"]
 [ext_resource type="Resource" uid="uid://b36y2bljh3l2m" path="res://resources/dialogues/chapter_2/torn_pages.dialogue" id="19_0lbbt"]
 [ext_resource type="AudioStream" uid="uid://cq5ifkvvn6f00" path="res://assets/audio/music/forest.ogg" id="20_e7pso"]
@@ -380,17 +379,10 @@ scale_curve = SubResource("CurveTexture_j7p5r")
 anim_speed_max = 1.0
 anim_offset_max = 1.0
 
-[sub_resource type="Resource" id="Resource_e7pso"]
-script = ExtResource("16_0lbbt")
-Id = "enemy:tikbalang"
-Amount = 5
-metadata/_custom_type_script = "uid://d0dgc1ovlkksc"
-
-[sub_resource type="Resource" id="Resource_qeaye"]
-script = ExtResource("16_y42ld")
-Type = 3
-Description = "Kill 5 Tikbalangs"
-Enemies = [SubResource("Resource_e7pso")]
+[sub_resource type="Resource" id="Resource_6dk5v"]
+script = ExtResource("15_busxo")
+Type = 2
+Description = "Investigate the torn pages found in the midst of the forest."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t7x0d"]
@@ -769,6 +761,7 @@ navigation_polygon = SubResource("NavigationPolygon_a0gxn")
 position = Vector2(-201, 678)
 
 [node name="TransitionArea" type="Area2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(844, 1011)
 collision_layer = 0
 collision_mask = 4
@@ -784,6 +777,7 @@ shape = SubResource("RectangleShape2D_60ff3")
 unique_name_in_owner = true
 position = Vector2(843, 1006)
 rotation = -1.57254
+HideWhenInBounds = false
 IsRed = false
 
 [node name="QuestTrigger" type="Area2D" parent="."]
@@ -791,7 +785,7 @@ position = Vector2(-24, 675)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("9_exmlw")
-Quest = ExtResource("9_n4v06")
+Quest = ExtResource("11_e7pso")
 Mode = 0
 ShouldInteract = false
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
@@ -831,11 +825,11 @@ position = Vector2(790, 1015)
 collision_layer = 16
 collision_mask = 4
 script = ExtResource("9_exmlw")
-Quest = ExtResource("9_n4v06")
+Quest = ExtResource("11_e7pso")
 Mode = 1
 ShouldInteract = false
-Objective = SubResource("Resource_qeaye")
-ObjectiveIndex = 0
+Objective = SubResource("Resource_6dk5v")
+ObjectiveIndex = 2
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestTrigger2"]

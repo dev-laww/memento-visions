@@ -1,6 +1,6 @@
 ~ start
-Alex: [speed=.1]Hmph... [speed=1]I should've asked the Chief for more information about this case
 Alex: Now where to start...
-Alex: I'll try heading North for now.
+Alex: The Chief said Tikbalangs and Aswangs are running rampant, but I don't see any of them in here, only traces of destructions they left behind.
+Alex: For now, I should start exploring the area first.
 do CurrentScene.ToggleWitchMarker(true)
 => END

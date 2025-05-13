@@ -1,7 +1,11 @@
 ~ start
 if CurrentScene.questFlag >= 3
 	#papapuntahin si alexandro main quest
-	Chief: Investigate something 
+	Chief: Alex! We've got another one! Rampaging Tikbalangs and Aswangs on the outskirts of the city walls! We've got testimonies already that mythical creatures are running rampant but we still lack the evidence as to why they are causing it. 
+	Chief: Could you head over there and see what you can find out?
+	- I've got it.
+	- I'll take care of it.
+	Chief: Thanks! We might be meeting up later since my investigation team will be heading to the outskirts of the city too. Best of luck Alex!
 
 
 if CurrentScene.isChiefInteracted == false
