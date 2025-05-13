@@ -22,6 +22,7 @@ public partial class SmallVille : BaseLevel
     [Node] private ResourcePreloader resourcePreloader;
     public bool IsWitchInteracted = false;
     private Quest quest = QuestRegistry.Get("quest:echoes_of_void");
+    private Quest mainQuest = QuestRegistry.Get("quest:roots_of_the_unseen");
 
     public override void _Notification(int what)
     {
@@ -37,6 +38,7 @@ public partial class SmallVille : BaseLevel
         witchMarker.Toggle(false);
         screenMarker.Toggle(false);
         ShowDialogue();
+        mainQuest.CompleteObjective(0);
 
         QuestManager.QuestUpdated += OnQuestUpdated;
     }
@@ -70,6 +72,7 @@ public partial class SmallVille : BaseLevel
             GameCamera.SetTargetPositionOverride(Vector2.Zero);
             CinematicManager.EndCinematic();
         };
+        mainQuest.CompleteObjective(1);
     }
 
     private void OnQuestUpdated(Quest quest)
