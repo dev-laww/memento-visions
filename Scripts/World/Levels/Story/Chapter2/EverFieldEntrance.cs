@@ -15,6 +15,7 @@ public partial class EverFieldEntrance : BaseLevel
     [Node] private Node2D enemy;
     
     private Quest quest = QuestRegistry.Get("quest:forest_awakening");
+    private Quest mainQuest = QuestRegistry.Get("quest:echoes_of_void");
     
     public override void _Notification(int what)
     {
@@ -30,6 +31,7 @@ public partial class EverFieldEntrance : BaseLevel
         screenMarker.Toggle(false);
         QuestManager.QuestUpdated += OnQuestUpdated;
         ShowDialogue();
+        mainQuest.CompleteObjective(1);
 
     }
 
