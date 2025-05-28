@@ -553,6 +553,7 @@ position = Vector2(66, 364)
 position = Vector2(222, 427)
 
 [node name="ScreenMarker" parent="." instance=ExtResource("18_pom2c")]
+z_index = 2
 position = Vector2(-53, -44)
 rotation = 3.14159
 IsRed = false

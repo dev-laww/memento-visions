@@ -408,7 +408,7 @@ size = Vector2(54, 178)
 [sub_resource type="Resource" id="Resource_djknd"]
 script = ExtResource("14_vimnp")
 Type = 2
-Description = "Follow the trail
+Description = "Follow the Trail.
 "
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
@@ -804,6 +804,7 @@ shape = SubResource("RectangleShape2D_tc47e")
 
 [node name="ScreenMarker" parent="TransitionArea" instance=ExtResource("13_5hi8n")]
 unique_name_in_owner = true
+z_index = 2
 position = Vector2(1237, 783)
 rotation = -1.5708
 IsRed = false

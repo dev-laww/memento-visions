@@ -775,6 +775,7 @@ shape = SubResource("RectangleShape2D_60ff3")
 
 [node name="ScreenMarker" parent="TransitionArea" instance=ExtResource("18_y42ld")]
 unique_name_in_owner = true
+z_index = 2
 position = Vector2(843, 1006)
 rotation = -1.57254
 HideWhenInBounds = false

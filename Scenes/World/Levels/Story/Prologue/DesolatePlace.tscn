@@ -61,7 +61,7 @@ size = Vector2(93, 14)
 [sub_resource type="Resource" id="Resource_tnbyp"]
 script = ExtResource("14_5br0r")
 Type = 2
-Description = "Investigate the Notebook"
+Description = "Investigate the Notebook."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vvniv"]
@@ -70,7 +70,7 @@ radius = 26.4764
 [sub_resource type="Resource" id="Resource_6f01l"]
 script = ExtResource("14_5br0r")
 Type = 2
-Description = "Investigate the Burned wooden chair"
+Description = "Investigate the Burned wooden chair."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hwwpg"]
@@ -82,7 +82,7 @@ size = Vector2(20, 11)
 [sub_resource type="Resource" id="Resource_rxg1s"]
 script = ExtResource("14_5br0r")
 Type = 2
-Description = "Investigate the Photographs"
+Description = "Investigate the Photographs."
 metadata/_custom_type_script = "uid://dpkqc20rlrftv"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5f4dp"]
@@ -219,7 +219,7 @@ position = Vector2(-2, -28)
 
 [node name="ChiefMarker" parent="Chief" instance=ExtResource("9_ykjel")]
 unique_name_in_owner = true
-position = Vector2(204, 131)
+position = Vector2(202, 118)
 HideWhenInBounds = false
 IsRed = false
 
@@ -229,8 +229,11 @@ position = Vector2(52, 117)
 [node name="HeadsUpDisplay" parent="Player" index="2"]
 visible = false
 
+[node name="CollisionShape2D" parent="Player/HurtBox" index="0"]
+visible = false
+
 [node name="Idle" parent="Player/Center" index="0"]
-frame = 1
+frame = 0
 
 [node name="TransitionArea" type="Area2D" parent="."]
 position = Vector2(1608, 695)
