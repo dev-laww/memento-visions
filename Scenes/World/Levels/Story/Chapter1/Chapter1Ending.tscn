@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://decexk5dlixp2"]
+[gd_scene load_steps=34 format=4 uid="uid://decexk5dlixp2"]
 
 [ext_resource type="Script" uid="uid://vtvxgoln0ppg" path="res://Scripts/World/Levels/Story/Chapter1/Chapter1Ending.cs" id="1_pxhlq"]
 [ext_resource type="PackedScene" uid="uid://76j0yx8aju5n" path="res://Scenes/Components/Battle/TelegraphCanvas.tscn" id="2_pxhlq"]
@@ -22,7 +22,8 @@
 [ext_resource type="PackedScene" uid="uid://cubeoadh5861n" path="res://Scenes/Entities/Characters/Lucas.tscn" id="20_cjqe6"]
 [ext_resource type="Script" uid="uid://cd87fvbcydnp5" path="res://Scripts/Components/Area/QuestTrigger.cs" id="21_128oy"]
 [ext_resource type="Resource" uid="uid://bfd8bvsg3sljk" path="res://resources/quests/side_quests/prologue_sidequest/1.tres" id="22_mjyv7"]
-[ext_resource type="Resource" uid="uid://dtjmxt35rabxi" path="res://resources/dialogues/sidequest/sidequest1.0.dialogue" id="23_mjyv7"]
+[ext_resource type="Resource" uid="uid://dtjmxt35rabxi" path="res://resources/dialogues/sidequest/sidequest1.0.dialogue" id="23_urmif"]
+[ext_resource type="Script" uid="uid://grqe710ov3qk" path="res://Scripts/UI/Common/InteractionUI.cs" id="24_xg4fr"]
 
 [sub_resource type="Environment" id="Environment_71mkv"]
 background_mode = 3
@@ -243,8 +244,8 @@ script = ExtResource("21_128oy")
 Quest = ExtResource("22_mjyv7")
 Mode = 0
 ShouldInteract = true
-InteractionLabel = "Talk to Lucas"
-DialogueResource = ExtResource("23_mjyv7")
+InteractionLabel = "Interact"
+DialogueResource = ExtResource("23_urmif")
 metadata/_custom_type_script = "uid://cd87fvbcydnp5"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Lucas/QuestTrigger"]
@@ -253,9 +254,14 @@ shape = SubResource("CircleShape2D_xg4fr")
 debug_color = Color(0.88, 0.525, 0.898, 0.42)
 
 [node name="Node2D" type="Node2D" parent="Lucas/QuestTrigger"]
-position = Vector2(0, -32)
 
-[node name="InteractionUI" parent="Lucas/QuestTrigger/Node2D" instance=ExtResource("11_128oy")]
+[node name="InteractionUI" type="Control" parent="Lucas/QuestTrigger/Node2D" instance=ExtResource("11_128oy")]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -33.0
+offset_bottom = -33.0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("24_xg4fr")
 
 [editable path="BlackSmith/BlackSmithInteraction/Node2D/InteractionUI"]
 [editable path="Witch/WitchInteraction/Node2D/InteractionUI"]
