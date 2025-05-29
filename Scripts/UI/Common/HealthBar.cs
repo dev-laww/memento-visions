@@ -35,6 +35,7 @@ public partial class HealthBar : ProgressBar
 
         statsManager.StatDecreased += OnStatDecreased;
         statsManager.StatIncreased += OnStatIncreased;
+        ColorChange();
     }
 
     private void OnStatIncreased(float increase, StatsType type)
@@ -46,7 +47,11 @@ public partial class HealthBar : ProgressBar
         tween.TweenProperty(this, "value", Value + increase, timer.WaitTime)
             .SetTrans(Tween.TransitionType.Cubic)
             .SetEase(Tween.EaseType.InOut);
-        tween.TweenCallback(Callable.From(() => damageBar.Value = Value));
+        tween.TweenCallback(Callable.From(() =>
+        {
+            damageBar.Value = Value;
+            ColorChange();
+        }));
     }
 
     private void OnStatDecreased(float decrease, StatsType type)
@@ -59,6 +64,8 @@ public partial class HealthBar : ProgressBar
             .SetTrans(Tween.TransitionType.Cubic)
             .SetEase(Tween.EaseType.InOut);
 
+        tween.TweenCallback(Callable.From(ColorChange));
+
         timer.Start();
     }
 
@@ -69,6 +76,25 @@ public partial class HealthBar : ProgressBar
         tween.TweenProperty(damageBar, "value", Value, timer.WaitTime)
             .SetTrans(Tween.TransitionType.Cubic)
             .SetEase(Tween.EaseType.InOut);
+
+        ColorChange();
+    }
+
+    private void ColorChange()
+    {
+        if (MaxValue <= 0) return;
+
+        if (Value >= MaxValue * 0.7f)
+        {
+            SelfModulate = Color.FromHtml("#26E54D");
+        }
+        else if (Value >= MaxValue * 0.3f && Value < MaxValue * 0.7f)
+        {
+            SelfModulate = Color.FromHtml("#FFFFB3");
+        }
+        else
+        {
+            SelfModulate = Color.FromHtml("#E64536");
+        }
     }
 }
-
