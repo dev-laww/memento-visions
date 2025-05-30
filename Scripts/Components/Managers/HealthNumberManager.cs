@@ -93,6 +93,11 @@ public partial class HealthNumberManager : Node
             damage - StatsManager.Defense
         );
 
+        if (attack.Source is Player)
+            floatingText.SetFontSize(8);
+        else
+            floatingText.SetFontSize(16);
+
         floatingText.SetColor(attack.AttackType switch
         {
             Attack.Type.Physical => Colors.White,

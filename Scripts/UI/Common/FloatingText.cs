@@ -10,7 +10,8 @@ public partial class FloatingText : Node2D
     [Node] private CenterContainer centerContainer;
     [Node] private Label label;
 
-    [Signal] public delegate void FinishedEventHandler();
+    [Signal]
+    public delegate void FinishedEventHandler();
 
     private float accumulatedDamage;
 
@@ -32,14 +33,19 @@ public partial class FloatingText : Node2D
         positionTween?.KillIfValid();
 
         tween = CreateTween();
-        tween.TweenProperty(this, "scale", new Vector2(2.5f, 0.8f), 0.05f).SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Sine).From(Vector2.Zero);
-        tween.TweenProperty(this, "scale", new Vector2(0.8f, 2f), 0.1f).SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Sine);
-        tween.TweenProperty(this, "scale", Vector2.One, 0.15f).SetEase(Tween.EaseType.InOut).SetTrans(Tween.TransitionType.Sine);
+        tween.TweenProperty(this, "scale", new Vector2(2.5f, 0.8f), 0.05f).SetEase(Tween.EaseType.InOut)
+            .SetTrans(Tween.TransitionType.Sine).From(Vector2.Zero);
+        tween.TweenProperty(this, "scale", new Vector2(0.8f, 2f), 0.1f).SetEase(Tween.EaseType.InOut)
+            .SetTrans(Tween.TransitionType.Sine);
+        tween.TweenProperty(this, "scale", Vector2.One, 0.15f).SetEase(Tween.EaseType.InOut)
+            .SetTrans(Tween.TransitionType.Sine);
         tween.TweenInterval(Mathf.Max(0f, duration - 1f));
 
         positionTween = CreateTween();
-        positionTween.TweenProperty(this, "global_position", GlobalPosition + (Vector2.Up * 16), 0.3f).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
-        positionTween.TweenProperty(this, "global_position", GlobalPosition + (Vector2.Up * 48), duration - 0.3f).SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Circ);
+        positionTween.TweenProperty(this, "global_position", GlobalPosition + (Vector2.Up * 16), 0.3f)
+            .SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
+        positionTween.TweenProperty(this, "global_position", GlobalPosition + (Vector2.Up * 48), duration - 0.3f)
+            .SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Circ);
 
         positionTween.TweenCallback(Callable.From(OnTweenCompleted));
     }
@@ -47,7 +53,9 @@ public partial class FloatingText : Node2D
     public void AddDamage(float damage)
     {
         accumulatedDamage += damage;
-        var displayValue = accumulatedDamage < 1 ? string.Format("{0:0.00}", accumulatedDamage) : $"{Math.Floor(accumulatedDamage)}";
+        var displayValue = accumulatedDamage < 1
+            ? string.Format("{0:0.00}", accumulatedDamage)
+            : $"{Math.Floor(accumulatedDamage)}";
         SetText(displayValue);
     }
 
@@ -61,8 +69,10 @@ public partial class FloatingText : Node2D
         colorTween?.KillIfValid();
         colorTween = CreateTween();
 
-        colorTween.TweenProperty(label, "self_modulate", color, duration).SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Cubic);
-        colorTween.TweenProperty(label, "self_modulate", originalColor, duration * 2).SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Cubic);
+        colorTween.TweenProperty(label, "self_modulate", color, duration).SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Cubic);
+        colorTween.TweenProperty(label, "self_modulate", originalColor, duration * 2).SetEase(Tween.EaseType.In)
+            .SetTrans(Tween.TransitionType.Cubic);
     }
 
     private void OnTweenCompleted()
@@ -78,5 +88,14 @@ public partial class FloatingText : Node2D
         label.SelfModulate = color;
         originalColor = color;
     }
-}
 
+    public void SetFontSize(int size)
+    {
+        if (label.LabelSettings is LabelSettings settings)
+        {
+            var cloned = (LabelSettings)settings.Duplicate();
+            cloned.FontSize = size;
+            label.LabelSettings = cloned;
+        }
+    }
+}
