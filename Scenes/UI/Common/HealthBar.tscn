@@ -1,12 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dp6ardmi6lci5"]
+[gd_scene load_steps=8 format=3 uid="uid://dp6ardmi6lci5"]
 
+[ext_resource type="Texture2D" uid="uid://dvrjn8fncidqo" path="res://assets/ui/health_indicator.png" id="1_b3htb"]
 [ext_resource type="Script" uid="uid://y5deekl7r83u" path="res://Scripts/UI/Common/HealthBar.cs" id="1_dj1yy"]
 [ext_resource type="Texture2D" uid="uid://dqmp4vm41f5e0" path="res://assets/ui/health_bar.png" id="1_e5vo2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6hco4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b3htb"]
-texture = ExtResource("1_e5vo2")
+texture = ExtResource("1_b3htb")
 texture_margin_left = 2.0
 texture_margin_top = 3.0
 texture_margin_right = 2.0
@@ -45,6 +46,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxTexture_2nisy")

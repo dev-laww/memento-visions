@@ -83,18 +83,19 @@ public partial class HealthBar : ProgressBar
     private void ColorChange()
     {
         if (MaxValue <= 0) return;
+        var fillStyleBox = GetThemeStylebox("fill") as StyleBoxTexture;
 
         if (Value >= MaxValue * 0.7f)
         {
-            SelfModulate = Color.FromHtml("#26E54D");
+            fillStyleBox.RegionRect = new Rect2(0, 16, 86, 8);
         }
         else if (Value >= MaxValue * 0.3f && Value < MaxValue * 0.7f)
         {
-            SelfModulate = Color.FromHtml("#FFFFB3");
+            fillStyleBox.RegionRect = new Rect2(0, 8, 86, 8);
         }
         else
         {
-            SelfModulate = Color.FromHtml("#E64536");
+            fillStyleBox.RegionRect = new Rect2(0, 0, 86, 8);
         }
     }
 }
